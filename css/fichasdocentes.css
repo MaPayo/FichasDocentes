@@ -1,0 +1,19 @@
+h1.web_title {
+    text-align: center;
+    color: #990033;
+    margin: 0.2em 0;
+}
+
+#cabecera {
+    border-bottom: #AAA 2px solid;
+    background-color: #FFF;
+}
+
+#logout {
+    text-align: right;
+}
+
+img {
+    display: block;
+    position: relative;
+}
