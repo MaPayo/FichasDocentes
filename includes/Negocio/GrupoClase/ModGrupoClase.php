@@ -2,7 +2,6 @@
 namespace es\ucm;
 
 class ModGrupoClase{
-
 	private $IdGrupoClase;
 	private $Letra;
 	private $Idioma;
@@ -26,6 +25,7 @@ class ModGrupoClase{
 
     	return $this;
     }
+}
 
     /**
      * @return mixed

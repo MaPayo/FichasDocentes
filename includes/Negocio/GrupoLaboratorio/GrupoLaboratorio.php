@@ -2,7 +2,6 @@
 namespace es\ucm;
 
 class GrupoLaboratorio{
-    
 	private $IdGrupoLab;
 	private $Letra;
 	private $Idioma;
@@ -18,7 +17,7 @@ class GrupoLaboratorio{
     /**
      * @return mixed
      */
-    public function getIdGrupoClase()
+    public function getIdGrupoLab()
     {
     	return $this->IdGrupoLab;
     }
@@ -28,7 +27,7 @@ class GrupoLaboratorio{
      *
      * @return self
      */
-    public function setIdGrupoClase($IdGrupoLab)
+    public function setIdGrupoLab($IdGrupoLab)
     {
     	$this->IdGrupoLab = $IdGrupoLab;
 

@@ -1,7 +1,6 @@
 <?php
 namespace es\ucm;
 class ModCompetenciaAsignatura{
-    
 	private $IdComepetencia;
 	private $Generales;
 	private $GeneralesI;

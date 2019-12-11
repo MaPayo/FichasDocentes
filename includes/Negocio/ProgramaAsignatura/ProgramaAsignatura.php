@@ -2,7 +2,6 @@
 namespace es\ucm;
 
 class ProgramaAsignatura{
-    
 	private $IdPrograma;
 	private $ConocimientosPrevios;
 	private $ConocimientosPreviosI;

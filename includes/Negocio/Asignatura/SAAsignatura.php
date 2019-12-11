@@ -1,6 +1,5 @@
 <?php
 namespace es\ucm;
-
 interface SAAsignatura{
 
     public static function findAsignatura($idAsignatura);

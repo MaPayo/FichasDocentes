@@ -2,18 +2,17 @@
 namespace es\ucm;
 
 class Leyenda{
-    
 	private $IdLeyenda;
 	private $Lectura;
 	private $Escritura;
-	private $Check;
+	private $Confirm;
 	private $EditPerm;
 
-	public function __construct($IdLeyenda,$Lectura,$Escritura,$Check,$EditPerm){
+	public function __construct($IdLeyenda,$Lectura,$Escritura,$Confirm,$EditPerm){
 		$this->IdLeyenda = $IdLeyenda;
 		$this->Lectura = $Lectura;
 		$this->Escritura = $Escritura;
-		$this->Check = $Check;
+		$this->Confirm = $Confirm;
 		$this->EditPerm = $EditPerm;
 	}
 
@@ -80,19 +79,19 @@ class Leyenda{
     /**
      * @return mixed
      */
-    public function getCheck()
+    public function getConfirm()
     {
-    	return $this->Check;
+    	return $this->Confirm;
     }
 
     /**
-     * @param mixed $Check
+     * @param mixed $Confirm
      *
      * @return self
      */
-    public function setCheck($Check)
+    public function setConfirm($Confirm)
     {
-    	$this->Check = $Check;
+    	$this->Confirm = $Confirm;
 
     	return $this;
     }

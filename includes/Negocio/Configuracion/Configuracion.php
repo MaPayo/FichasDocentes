@@ -2,7 +2,6 @@
 namespace es\ucm;
 
 class Configuracion{
-    
 	private $IdConfiguracion;
 	private $ConocimientosPrevios;
 	private $BreveDescripcion;

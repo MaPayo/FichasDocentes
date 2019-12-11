@@ -2,7 +2,6 @@
 namespace es\ucm;
 
 class Grado{
-    
 	private $CodigoGrado;
 	private $NombreGrado;
 	private $HorasEtcs;
@@ -11,7 +10,6 @@ class Grado{
 		$this->CodigoGrado = $CodigoGrado;
 		$this->NombreGrado = $NombreGrado;
 		$this->HorasEtcs = $HorasEtcs;
-		$this->CodigoGrado = $CodigoGrado;
 	}
 
     /**
@@ -52,5 +50,37 @@ class Grado{
     	$this->HorasEtcs = $HorasEtcs;
 
     	return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCodigoGrado()
+    {
+        return $this->CodigoGrado;
+    }
+
+    /**
+     * @param mixed $CodigoGrado
+     *
+     * @return self
+     */
+    public function setCodigoGrado($CodigoGrado)
+    {
+        $this->CodigoGrado = $CodigoGrado;
+
+        return $this;
+    }
+
+    /**
+     * @param mixed $HorasEtcs
+     *
+     * @return self
+     */
+    public function setHorasEtcs($HorasEtcs)
+    {
+        $this->HorasEtcs = $HorasEtcs;
+
+        return $this;
     }
 }

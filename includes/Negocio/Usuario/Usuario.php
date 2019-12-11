@@ -1,9 +1,7 @@
 <?php
-
 namespace es\ucm;
 
 class Usuario{
-    
 	private $Email;
 	private $Password;
 

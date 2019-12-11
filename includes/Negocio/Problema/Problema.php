@@ -2,7 +2,6 @@
 namespace es\ucm;
 
 class Problema{
-    
 	private $IdProblema;
 	private $Creditos;
 	private $Presencial;

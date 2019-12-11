@@ -2,7 +2,6 @@
 namespace es\ucm;
 
 class Bibliografia{
-    
 	private $IdBilbiografia;
 	private $CitasBibliograficas;
 	private $RecursosInternet;

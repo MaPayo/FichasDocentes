@@ -16,15 +16,13 @@ class SAAsignaturaImplements implements SAAsignatura{
         return $asignatura;
     }
 
-    public static function createAsignatura($idAsignatura,$nombreAsignatura,$materia,$modulo,$caracter,$curso,$semestre,$nombreAsignaturaIngles,$creditosMateria,$creditos,$coordinadores,$codigoGrado){
-        $asignatura=new \es\ucm\Asignatura($idAsignatura,$nombreAsignatura,$materia,$modulo,$caracter,$curso,$semestre,$nombreAsignaturaIngles,$creditosMateria,$creditos,$coordinadores,$codigoGrado);
-        $asignatura=$DAOAsignatura->createAsignatura($asignatura);
+    public static function createAsignatura($asignatura){
+         $asignatura=$DAOAsignatura->createAsignatura($asignatura);
         return $asignatura;
     }
 
-    public static function updateAsignatura($idAsignatura,$nombreAsignatura,$materia,$modulo,$caracter,$curso,$semestre,$nombreAsignaturaIngles,$creditosMateria,$creditos,$coordinadores,$codigoGrado){
-        $asignatura=new \es\ucm\Asignatura($idAsignatura,$nombreAsignatura,$materia,$modulo,$caracter,$curso,$semestre,$nombreAsignaturaIngles,$creditosMateria,$creditos,$coordinadores,$codigoGrado);
-        $asignatura=$DAOAsignatura->updateAsignatura($asignatura);
+    public static function updateAsignatura($asignatura){
+        $asignatura=$DAOAsignatura->createAsignatura($asignatura);
         return $asignatura;
     }
 

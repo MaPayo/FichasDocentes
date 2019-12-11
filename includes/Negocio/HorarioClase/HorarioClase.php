@@ -2,7 +2,6 @@
 namespace es\ucm;
 
 class HorarioClase{
-    
 	private $IdHorarioClase;
 	private $Aula;
 	private $Dia;

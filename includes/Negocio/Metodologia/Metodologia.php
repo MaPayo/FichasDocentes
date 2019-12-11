@@ -2,7 +2,6 @@
 namespace es\ucm;
 
 class Metodologia{
-    
 	private $IdMetodologia;
 	private $Metodologia;
 	private $MetodologiaI;

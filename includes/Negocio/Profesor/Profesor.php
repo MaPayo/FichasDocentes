@@ -2,7 +2,6 @@
 namespace es\ucm;
 
 class Profesor{
-
 	private $Email;
 	private $Nombre;
 	private $Departamento;
