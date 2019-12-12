@@ -1,7 +1,7 @@
 <?php
 namespace es\ucm;
 
-interface FactoriesDAO(){
+interface FactoriesDAO{
 
     public static function createDAOAsignatura();
 }

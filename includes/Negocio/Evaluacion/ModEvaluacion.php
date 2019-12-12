@@ -16,7 +16,7 @@ class ModEvaluacion{
 	private $PesoLaboratorio;
 	private $IdModAsignatura;
 
-	plublic function __construct($IdEvaluacion,$RealizacionExamenes,$RealizacionExamenesI,$PesoExamenes,$CalificacionFinal,$CalificacionFinalI,$RealizacionActividades,$RealizacionActividadesI,$PesoActividades,$RealizacionLaboratorio,$RealizacionLaboratorioI,$PesoLaboratorio,$IdModAsignatura){
+	public function __construct($IdEvaluacion,$RealizacionExamenes,$RealizacionExamenesI,$PesoExamenes,$CalificacionFinal,$CalificacionFinalI,$RealizacionActividades,$RealizacionActividadesI,$PesoActividades,$RealizacionLaboratorio,$RealizacionLaboratorioI,$PesoLaboratorio,$IdModAsignatura){
 		$this->IdEvaluacion = $IdEvaluacion;
 		$this->RealizacionExamenes = $RealizacionExamenes;
 		$this->RealizacionExamenesI = $RealizacionExamenesI;

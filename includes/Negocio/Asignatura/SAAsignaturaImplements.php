@@ -6,7 +6,7 @@ class SAAsignaturaImplements implements SAAsignatura{
     private static $DAOAsignatura;
 
     public function __construct(){
-        $factoriesDAO=new \es\ucm\FactoriesDAOImplements();
+        $factoriesDAO=new FactoriesDAOImplements();
         $DAOAsignatura=$factoriesDAO->createDAOAsignatura(); 
     }
     

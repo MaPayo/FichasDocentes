@@ -48,4 +48,4 @@ class DAOModBibliografiaImplements implements DAOModBibliografia{
         $results=$dataSource->executeQuery($sql,$values);
         return $results;
     }
-}bibliografia
+}

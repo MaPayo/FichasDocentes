@@ -1,5 +1,5 @@
 <?php
-namespace es\ucm
+namespace es\ucm;
 
 class ModAsignatura{
     private $IdModAsignatura;

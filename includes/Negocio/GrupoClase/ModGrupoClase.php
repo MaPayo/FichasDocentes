@@ -25,7 +25,7 @@ class ModGrupoClase{
 
     	return $this;
     }
-}
+
 
     /**
      * @return mixed

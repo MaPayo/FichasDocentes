@@ -22,10 +22,8 @@ class GrupoClase{
     public function setIdAsignatura($IdAsignatura)
     {
     	$this->IdAsignatura = $IdAsignatura;
-
-    	return $this;
     }
-}
+
 
     /**
      * @return mixed
@@ -95,15 +93,4 @@ class GrupoClase{
     	return $this->IdAsignatura;
     }
 
-    /**
-     * @param mixed $IdAsignatura
-     *
-     * @return self
-     */
-    public function setIdAsignatura($IdAsignatura)
-    {
-    	$this->IdAsignatura = $IdAsignatura;
-
-    	return $this;
-    }
 }

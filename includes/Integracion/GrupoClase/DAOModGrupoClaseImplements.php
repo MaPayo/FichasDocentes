@@ -22,7 +22,7 @@ class DAOModGrupoClaseImplements implements DAOModGrupoClase{
         $values=array(':idGrupoClase' => $modGrupoClase->getIdGrupoClase(),
             ':letra' => $modGrupoClase->getLetra(),
             ':idioma' => $modGrupoClase->getIdioma(),
-            ':idModAsignatura' => $modGrupoClase->getIdModAsignatura()));
+            ':idModAsignatura' => $modGrupoClase->getIdModAsignatura());
         $results=$dataSource->executeQuery($sql,$values);
         return $results;
 

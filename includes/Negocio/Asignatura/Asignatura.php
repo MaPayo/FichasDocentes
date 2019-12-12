@@ -117,7 +117,7 @@ class Asignatura {
     }
 
     public function setCreditos($Creditos){
-        $this->Creditos$Creditos;
+        $this->Creditos=$Creditos;
     }
 
     public function setCoordinadores($Coordinadores){
