@@ -1,9 +1,7 @@
 <?php
-
 namespace es\ucm;
 
 class Verifica{
-    
 	private $IdVerifica;
 	private $MaximoExamenes;
 	private $MinimoExamenes;

@@ -2,7 +2,6 @@
 namespace es\ucm;
 
 class Permisos{
-    
 	private $IdPermiso;
 	private $Permiso;
 	private $IdAsignatura;

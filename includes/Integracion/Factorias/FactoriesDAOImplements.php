@@ -1,5 +1,4 @@
 <?php
-
 namespace es\ucm;
 
 class FactoriesDAOImplements implements FactoriesDAO{

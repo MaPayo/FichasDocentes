@@ -2,7 +2,6 @@
 namespace es\ucm;
 
 class ModMetodologia{
-    
 	private $IdMetodologia;
 	private $Metodologia;
 	private $MetodologiaI;

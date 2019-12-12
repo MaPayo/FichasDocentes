@@ -2,7 +2,6 @@
 namespace es\ucm;
 
 class ModGrupoLaboratorio{
-    
 	private $IdGrupoLab;
 	private $Letra;
 	private $Idioma;

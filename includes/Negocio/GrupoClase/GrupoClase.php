@@ -2,7 +2,6 @@
 namespace es\ucm;
 
 class GrupoClase{
-    
 	private $IdGrupoClase;
 	private $Letra;
 	private $Idioma;
@@ -14,6 +13,19 @@ class GrupoClase{
 		$this->Idioma = $Idioma;
 		$this->IdAsignatura;
 	}
+
+    /**
+     * @param mixed $IdAsignatura
+     *
+     * @return self
+     */
+    public function setIdAsignatura($IdAsignatura)
+    {
+    	$this->IdAsignatura = $IdAsignatura;
+
+    	return $this;
+    }
+}
 
     /**
      * @return mixed

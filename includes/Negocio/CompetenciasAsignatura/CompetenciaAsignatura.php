@@ -2,8 +2,7 @@
 namespace es\ucm;
 
 class CompetenciaAsignatura{
-    
-	private $IdComepetencia;
+	private $IdCompetencia;
 	private $Generales;
 	private $GeneralesI;
 	private $Especificas;
@@ -14,8 +13,8 @@ class CompetenciaAsignatura{
 	private $ResultadosAprendizajeI;
 	private $IdAsignatura;
 
-	public function __construct($IdComepetencia,$Generales, $GeneralesI,$Especificas,$EspecificasI,$BasicasYTransversales,$BasicasYTransversalesI,$ResultadosAprendizaje,$ResultadosAprendizajeI,$IdAsignatura){
-		$this->IdComepetencia = $IdComepetencia;
+	public function __construct($IdCompetencia,$Generales, $GeneralesI,$Especificas,$EspecificasI,$BasicasYTransversales,$BasicasYTransversalesI,$ResultadosAprendizaje,$ResultadosAprendizajeI,$IdAsignatura){
+		$this->IdCompetencia = $IdCompetencia;
 		$this->Generales = $Generales;
 		$this->GeneralesI = $GeneralesI;
 		$this->Especificas = $Especificas;
@@ -31,9 +30,9 @@ class CompetenciaAsignatura{
     /**
      * @return mixed
      */
-    public function getIdComepetencia()
+    public function getIdCompetencia()
     {
-    	return $this->IdComepetencia;
+    	return $this->IdCompetencia;
     }
 
     /**
@@ -41,9 +40,9 @@ class CompetenciaAsignatura{
      *
      * @return self
      */
-    public function setIdComepetencia($IdComepetencia)
+    public function setIdCompetencia($IdCompetencia)
     {
-    	$this->IdComepetencia = $IdComepetencia;
+    	$this->IdCompetencia = $IdCompetencia;
 
     	return $this;
     }

@@ -2,7 +2,6 @@
 namespace es\ucm;
 
 class ModBibliografia{
-    
 	private $IdBilbiografia;
 	private $CitasBibliograficas;
 	private $RecursosInternet;

@@ -1,8 +1,7 @@
 <?php
-namespace es\ucm;
+namespace es\ucm
 
-class ModAsignatura {
-    
+class ModAsignatura{
     private $IdModAsignatura;
     private $FechaMod;
     private $EmailMod;

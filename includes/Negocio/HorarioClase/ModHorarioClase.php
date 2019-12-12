@@ -2,7 +2,6 @@
 namespace es\ucm;
 
 class ModHorarioClase{
-    
 	private $IdHorarioClase;
 	private $Aula;
 	private $Dia;

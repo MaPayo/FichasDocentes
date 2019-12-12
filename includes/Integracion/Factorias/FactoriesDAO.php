@@ -1,5 +1,4 @@
 <?php
-
 namespace es\ucm;
 
 interface FactoriesDAO(){

@@ -1,9 +1,7 @@
 <?php
-
 namespace es\ucm;
 
 class Teorico{
-    
 	private $IdTeorico;
 	private $Creditos;
 	private $Presencial;

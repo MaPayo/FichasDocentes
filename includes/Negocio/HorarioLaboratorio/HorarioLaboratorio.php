@@ -2,7 +2,6 @@
 namespace es\ucm;
 
 class HorarioLaboratorio{
-    
 	private $IdHorarioLab;
 	private $Laboratorio;
 	private $Dia;

@@ -2,10 +2,8 @@
 namespace es\ucm;
 
 class Administrador{
-    
 	private $email;
-    private $Nombre;
-    
+	private $Nombre;
 	public function __construct($email, $Nombre){
 		$this->email = $email;
 		$this->Nombre = $Nombre;

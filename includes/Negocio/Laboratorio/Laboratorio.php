@@ -2,7 +2,6 @@
 namespace es\ucm;
 
 class Laboratorio{
-    
 	private $IdLaboratorio;
 	private $Creditos;
 	private $Presencial;
