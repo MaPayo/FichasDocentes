@@ -3,6 +3,6 @@ namespace es\ucm;
 
 interface Command{
 
-    public function execute($datos);
+    public function execute($data);
 }
 ?>
