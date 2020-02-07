@@ -1,8 +1,3 @@
-<!-- Cabecera -->
-<?php include("./php.php");
-$info=ok();
-?>
-
 <!DOCTYPE html>
 <html lang="es">
 
@@ -17,25 +12,13 @@ $info=ok();
 
 <body>
     <div class="container-fluid">
-        <header class="row" id="cabecera">
-            <div class="col-sm-4 align-items-sm-end">
-                <img src="../resources/logoucm.png" />
-            </div>
-            <div class="col-lg-6 col-sm-6 col-xs-12">
-                <h1 class="web_title">Fichas Docentes Prueba</h1>
-            </div>
-            <div class="col-sm-2 align-items-sm-end" id="logout">
-                <!--Este apartado se rellenaria con php-->log out de la aplicación</div>
-        </header>
+       <?php
+       require("./cabecera.php");
+       ?>
         <div id="content" class="row">
-            <nav class="nav flex-column col-sm-3" id="fichas">
-               <?php 
-               for($i =0; $i <10;$i++){
-                   echo '<a href="#">'.$info.'</a>';
-               }
-               ?>
-
-            </nav>
+           <?php
+           require("./fichas.php");
+           ?>
             <br clear="both">
             <section id="contenido" class="col-sm-9">
                 <div id="pestannas">

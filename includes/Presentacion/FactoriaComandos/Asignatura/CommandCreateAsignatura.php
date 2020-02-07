@@ -9,7 +9,7 @@ class CommandCreateAsignatura implements Command
 
     public function execute($data){
         $factorySA = new FactorySAImplements();
-        $saAsignatura = $factorySA->SAAsignatura();
+        $saAsignatura = $factorySA->createSAAsignatura();
         $asignatura = $saAsignatura->createAsignatura($data);
         $responseContext = null;
         if($asignatura !=null){

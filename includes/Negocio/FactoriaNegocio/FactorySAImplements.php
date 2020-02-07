@@ -27,6 +27,10 @@ class FactorySAImplements implements FactorySA{
         return new SACompetenciaAsignatura();
     }
 
+    public static function createSAModCompetenciaAsignatura(){
+        return new SAModCompetenciaAsignatura();
+    }
+
     public static function createSAConfiguracion(){
         return new SAConfiguracion();
     }

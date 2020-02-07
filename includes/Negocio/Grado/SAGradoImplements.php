@@ -17,14 +17,12 @@ class SAGradoImplements implements SAGrado{
         return $grado;
     }
 
-    public static function createGrado($codigoGrado,$nombreGrado){
-        $grado=new \es\ucm\Grado($codigoGrado,$nombreGrado);
+    public static function createGrado($grado){
         $grado=$DAOGrado->createGrado($grado);
         return $grado;
     }
 
-    public static function updateGrado($codigoGrado,$nombreGrado){
-        $grado=new \es\ucm\Grado($codigoGrado,$nombreGrado);
+    public static function updateGrado($grado){
         $grado=$DAOGrado->updateGrado($grado);
         return $grado;
     }
