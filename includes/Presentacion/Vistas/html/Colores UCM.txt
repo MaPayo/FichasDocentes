@@ -1,0 +1,6 @@
+Colores UCM
+Titulos: #990033
+Color de fondo: #454545 , #fff, rgb(241, 237, 237), #F1EDED, #2f3a47, #adb6c4
+Color para detalles: #ECECEC
+Bordes: #AAA
+Color fuente: #454545

@@ -8,11 +8,19 @@ class FactorySAImplements implements FactorySA{
     }
     
     public static function createSAAsignatura(){
-        return new SAAsignaturaImplements();
+        return new SAAsignatura();
+    }
+
+    public static function createSAModAsignatura(){
+        return new SAModAsignatura();
     }
 
     public static function createSABibliogafia(){
         return new SABibliografia();
+    }
+
+    public static function createSAModBibliogafia(){
+        return new SAModBibliografia();
     }
 
     public static function createSACompetenciaAsignatura(){
@@ -57,10 +65,6 @@ class FactorySAImplements implements FactorySA{
 
     public static function createSAMetodologia(){
         return new SAMetodologia();
-    }
-
-    public static function createSAModAsignatura(){
-        return new SAModAsignatura();
     }
 
     public static function createSAPermiso(){

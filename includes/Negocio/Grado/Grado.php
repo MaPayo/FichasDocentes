@@ -10,8 +10,8 @@ class Grado{
 		$this->CodigoGrado = $CodigoGrado;
 		$this->NombreGrado = $NombreGrado;
 		$this->HorasEtcs = $HorasEtcs;
-	}
-
+    }
+    
     /**
      * @return mixed
      */

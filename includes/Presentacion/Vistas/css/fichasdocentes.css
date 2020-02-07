@@ -1,3 +1,20 @@
+html{
+	height: 100%;
+	margin: 0 auto;
+}
+
+a{
+	color: #454545;
+	text-decoration: none;
+}
+a:hover{
+	color:#ECECEC;
+	text-decoration: none;
+}
+section{
+padding: 5px 0px 0px 5px !important; 
+}
+
 h1.web_title {
     text-align: center;
     color: #990033;
@@ -5,7 +22,7 @@ h1.web_title {
 }
 
 #cabecera {
-    border-bottom: #AAA 2px solid;
+    border-bottom: #AAA 5px solid;
     background-color: #FFF;
 }
 
@@ -16,4 +33,37 @@ h1.web_title {
 img {
     display: block;
     position: relative;
+}
+
+#fichas{
+	 border-right: #AAA 2px solid;
+	overflow: auto !important;
+}
+
+#pestannas{
+	display: flex;
+	border-bottom: #AAA 2px solid;
+}
+
+#pestannas div{
+	padding: 0.25%;
+	border:#AAA 2px solid;
+	border-bottom: none !important;
+	color:  #454545;
+	background-color: #F1EDED;
+	cursor: pointer !important;
+}
+#validacion{
+	border-right-width: 1px !important;
+}
+#configuracion{
+	border-right-width: 1px !important;
+	border-left-width: 1px !important;
+}
+#permisos{
+	border-left-width: 1px !important;
+}
+#contenido{
+	border-left:#AAA 2px solid;
+	height: 752px;
 }
