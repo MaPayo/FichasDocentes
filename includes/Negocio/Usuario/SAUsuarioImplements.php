@@ -17,14 +17,12 @@ class SAUsuarioImplements implements SAUsuario{
         return $usuario;
     }
 
-    public static function createUsuario($email,$password){
-        $usuario=new \es\ucm\Usuario($email,$password);
+    public static function createUsuario($usuario){
         $usuario=$DAOUsuario->createUsuario($usuario);
         return $usuario;
     }
 
-    public static function updateUsuario($email,$password){
-        $usuario=new \es\ucm\Usuario($email,$password);
+    public static function updateUsuario($usuario){
         $usuario=$DAOUsuario->updateUsuario($usuario);
         return $usuario;
     }

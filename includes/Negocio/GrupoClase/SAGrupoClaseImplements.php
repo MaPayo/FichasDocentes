@@ -17,14 +17,12 @@ class SAGrupoClaseImplements implements SAGrupoClase{
         return $grupoClase;
     }
 
-    public static function createGrupoClase($letra,$idioma,$emailProfesor,$idAsignatura){
-        $grupoClase=new \es\ucm\GrupoClase($letra,$idioma,$emailProfesor,$idAsignatura);
+    public static function createGrupoClase($grupoClase){
         $grupoClase=$DAOGrupoClase->createGrupoClase($grupoClase);
         return $grupoClase;
     }
 
-    public static function updateGrupoClase($letra,$idioma,$emailProfesor,$idAsignatura){
-        $grupoClase=new \es\ucm\GrupoClase($letra,$idioma,$emailProfesor,$idAsignatura);
+    public static function updateGrupoClase($grupoClase){
         $grupoClase=$DAOGrupoClase->updateGrupoClase($grupoClase);
         return $grupoClase;
     }

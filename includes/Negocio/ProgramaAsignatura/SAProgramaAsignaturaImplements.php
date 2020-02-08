@@ -17,14 +17,12 @@ class SAProgramaAsignaturaImplements implements SAProgramaAsignatura{
         return $programaAsignatura;
     }
 
-    public static function createProgramaAsignatura($conocimientosPrevios,$conocimientosPreviosI,$breveDescripcion,$breveDescripcionI,$programaDetallado,$programaDetalladoI,$idAsignatura){
-        $programaAsignatura=new \es\ucm\ProgramaAsignatura($conocimientosPrevios,$conocimientosPreviosI,$breveDescripcion,$breveDescripcionI,$programaDetallado,$programaDetalladoI,$idAsignatura);
+    public static function createProgramaAsignatura($programaAsignatura){
         $programaAsignatura=$DAOProgramaAsignatura->createProgramaAsignatura($programaAsignatura);
         return $programaAsignatura;
     }
 
-    public static function updateProgramaAsignatura($conocimientosPrevios,$conocimientosPreviosI,$breveDescripcion,$breveDescripcionI,$programaDetallado,$programaDetalladoI,$idAsignatura){
-        $programaAsignatura=new \es\ucm\ProgramaAsignatura($conocimientosPrevios,$conocimientosPreviosI,$breveDescripcion,$breveDescripcionI,$programaDetallado,$programaDetalladoI,$idAsignatura);
+    public static function updateProgramaAsignatura($programaAsignatura){
         $programaAsignatura=$DAOProgramaAsignatura->updateProgramaAsignatura($programaAsignatura);
         return $programaAsignatura;
     }

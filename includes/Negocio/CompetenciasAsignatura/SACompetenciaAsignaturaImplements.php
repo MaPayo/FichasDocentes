@@ -17,14 +17,12 @@ class SACompetenciaAsignaturaImplements implements SACompetenciaAsignatura{
         return $competenciaAsignatura;
     }
 
-    public static function createCompetenciaAsignatura($generales,$generalesI,$especificas,$especificasI,$basicasYTransversales,$basicasYTransversalesI,$resultadosAprendizaje,$resultadosAprendizajeI,$idAsignatura){
-        $competenciaAsignatura=new \es\ucm\CompetenciaAsignatura($generales,$generalesI,$especificas,$especificasI,$basicasYTransversales,$basicasYTransversalesI,$resultadosAprendizaje,$resultadosAprendizajeI,$idAsignatura);
+    public static function createCompetenciaAsignatura($competenciaAsignatura){
         $competenciaAsignatura=$DAOCompetenciaAsignatura->createCompetenciaAsignatura($competenciaAsignatura);
         return $competenciaAsignatura;
     }
 
-    public static function updateCompetenciaAsignatura($generales,$generalesI,$especificas,$especificasI,$basicasYTransversales,$basicasYTransversalesI,$resultadosAprendizaje,$resultadosAprendizajeI,$idAsignatura){
-        $competenciaAsignatura=new \es\ucm\CompetenciaAsignatura($generales,$generalesI,$especificas,$especificasI,$basicasYTransversales,$basicasYTransversalesI,$resultadosAprendizaje,$resultadosAprendizajeI,$idAsignatura);
+    public static function updateCompetenciaAsignatura($competenciaAsignatura){
         $competenciaAsignatura=$DAOCompetenciaAsignatura->updateCompetenciaAsignatura($competenciaAsignatura);
         return $competenciaAsignatura;
     }

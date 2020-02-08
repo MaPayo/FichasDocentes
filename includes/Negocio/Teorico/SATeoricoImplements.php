@@ -17,14 +17,12 @@ class SATeoricoImplements implements SATeorico{
         return $teorico;
     }
 
-    public static function createTeorico($creditos,$presencial,$idAsignatura){
-        $teorico=new \es\ucm\Teorico($creditos,$presencial,$idAsignatura);
+    public static function createTeorico($teorico){
         $teorico=$DAOTeorico->createTeorico($teorico);
         return $teorico;
     }
 
-    public static function updateTeorico($creditos,$presencial,$idAsignatura){
-        $teorico=new \es\ucm\Teorico($creditos,$presencial,$idAsignatura);
+    public static function updateTeorico($teorico){
         $teorico=$DAOTeorico->updateTeorico($teorico);
         return $teorico;
     }

@@ -16,14 +16,12 @@ class SAVerificaImplements implements SAVerifica{
         return $verifica;
     }
 
-    public static function createVerifica($maximoExamenes,$minimoExamenes,$maximoActividades,$minimoActividades,$maximoLaboratorio,$minimoLaboratorio,$idAsignatura){
-        $verifica=new \es\ucm\Verifica($maximoExamenes,$minimoExamenes,$maximoActividades,$minimoActividades,$maximoLaboratorio,$minimoLaboratorio,$idAsignatura);
+    public static function createVerifica($verifica){
         $verifica=$DAOVerifica->createVerifica($verifica);
         return $verifica;
     }
 
-    public static function updateVerifica($maximoExamenes,$minimoExamenes,$maximoActividades,$minimoActividades,$maximoLaboratorio,$minimoLaboratorio,$idAsignatura){
-        $verifica=new \es\ucm\Verifica($maximoExamenes,$minimoExamenes,$maximoActividades,$minimoActividades,$maximoLaboratorio,$minimoLaboratorio,$idAsignatura);
+    public static function updateVerifica($verifica){
         $verifica=$DAOVerifica->updateVerifica($verifica);
         return $verifica;
     }

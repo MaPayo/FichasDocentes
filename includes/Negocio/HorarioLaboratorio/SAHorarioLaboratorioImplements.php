@@ -17,14 +17,12 @@ class SAHorarioLaboratorioImplements implements SAHorarioLaboratorio{
         return $horarioLaboratorio;
     }
 
-    public static function createHorarioLaboratorio($laboratorio,$dia,$horaInicio,$horaFin,$idGrupoLab){
-        $horarioLaboratorio=new \es\ucm\HorarioLaboratorio($laboratorio,$dia,$horaInicio,$horaFin,$idGrupoLab);
+    public static function createHorarioLaboratorio($horarioLaboratorio){
         $horarioLaboratorio=$DAOHorarioLaboratorio->createHorarioLaboratorio($horarioLaboratorio);
         return $horarioLaboratorio;
     }
 
-    public static function updateHorarioLaboratorio($laboratorio,$dia,$horaInicio,$horaFin,$idGrupoLab){
-        $horarioLaboratorio=new \es\ucm\HorarioLaboratorio($laboratorio,$dia,$horaInicio,$horaFin,$idGrupoLab);
+    public static function updateHorarioLaboratorio($horarioLaboratorio){
         $horarioLaboratorio=$DAOHorarioLaboratorio->updateHorarioLaboratorio($horarioLaboratorio);
         return $horarioLaboratorio;
     }

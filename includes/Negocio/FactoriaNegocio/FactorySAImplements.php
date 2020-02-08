@@ -4,99 +4,128 @@ namespace es\ucm;
 class FactorySAImplements implements FactorySA{
 
     public static function createSAAdministrador(){
-        return new SAAdministrador();
+        return new SAAdministradorImplements();
     }
     
     public static function createSAAsignatura(){
-        return new SAAsignatura();
+        return new SAAsignaturaImplements();
     }
 
     public static function createSAModAsignatura(){
-        return new SAModAsignatura();
+        return new SAModAsignaturaImplements();
     }
 
     public static function createSABibliogafia(){
-        return new SABibliografia();
+        return new SABibliografiaImplements();
     }
 
     public static function createSAModBibliogafia(){
-        return new SAModBibliografia();
+        return new SAModBibliografiaImplements();
     }
 
     public static function createSACompetenciaAsignatura(){
-        return new SACompetenciaAsignatura();
+        return new SACompetenciaAsignaturaImplements();
     }
 
     public static function createSAModCompetenciaAsignatura(){
-        return new SAModCompetenciaAsignatura();
+        return new SAModCompetenciaAsignaturaImplements();
     }
 
     public static function createSAConfiguracion(){
-        return new SAConfiguracion();
+        return new SAConfiguracionImplements();
     }
 
     public static function createSAEvaluacion(){
-        return new SAEvaluacion();
+        return new SAEvaluacionImplements();
+    }
+
+    public static function createSAModEvaluacion(){
+        return new SAModEvaluacionImplements();
     }
 
     public static function createSAGrado(){
-        return new SAGrado();
+        return new SAGradoImplements();
     }
 
     public static function createSAGrupoClase(){
-        return new SAGrupoClase();
+        return new SAGrupoClaseImplements();
     }
 
+    public static function createSAModGrupoClase(){
+        return new SAModGrupoClaseImplements();
+    }
+
+
     public static function createSAGrupoLaboratorio(){
-        return new SAGrupoLaboratorio();
+        return new SAGrupoLaboratorioImplements();
+    }
+
+    public static function createSAModGrupoLaboratorio(){
+        return new SAModGrupoLaboratorioImplements();
     }
 
     public static function createSAHorarioClase(){
-        return new SAHorarioClase();
+        return new SAHorarioClaseImplements();
+    }
+
+    public static function createSAModHorarioClase(){
+        return new SAModHorarioClaseImplements();
     }
 
     public static function createSAHorarioLaboratorio(){
-        return new SAHorarioLaboratorio();
+        return new SAHorarioLaboratorioImplements();
+    }
+
+    public static function createSAModHorarioLaboratorio(){
+        return new SAModHorarioLaboratorioImplements();
     }
 
     public static function createSALaboratorio(){
-        return new SALaboratorio();
+        return new SALaboratorioImplements();
     }
 
     public static function createSALeyenda(){
-        return new SALeyenda();
+        return new SALeyendaImplements();
     }
 
     public static function createSAMetodologia(){
-        return new SAMetodologia();
+        return new SAMetodologiaImplements();
     }
 
-    public static function createSAPermiso(){
-        return new SAPermiso();
+    public static function createSAModMetodologia(){
+        return new SAModMetodologiaImplements();
+    }
+
+    public static function createSAPermisos(){
+        return new SAPermisosImplements();
     }
 
     public static function createSAProblema(){
-        return new SAProblema();
+        return new SAProblemaImplements();
     }
 
     public static function createSAProfesor(){
-        return new SAProfesor();
+        return new SAProfesorImplements();
     }
 
     public static function createSAProgramaAsignatura(){
-        return new SAProgramaAsignatura();
+        return new SAProgramaAsignaturaImplements();
+    }
+
+    public static function createSAModProgramaAsignatura(){
+        return new SAModProgramaAsignaturaImplements();
     }
 
     public static function createSATeorico(){
-        return new SATeorico();
+        return new SATeoricoImplements();
     }
 
     public static function createSAUsuario(){
-        return new SAUsuario();
+        return new SAUsuarioImplements();
     }
 
     public static function createSAVerifica(){
-        return new SAVerifica();
+        return new SAVerificaImplements();
     }
 
 }

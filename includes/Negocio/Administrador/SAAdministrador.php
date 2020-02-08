@@ -5,9 +5,9 @@ interface SAAdministrador{
 
     public static function findAdministrador($email);
 
-    public static function createAdministrador($email,$nombre);
+    public static function createAdministrador($administrador);
 
-    public static function updateAdministrador($email,$nombre);
+    public static function updateAdministrador($administrador);
     
     public static function deleteAdministrador($email);
 

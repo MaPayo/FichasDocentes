@@ -16,14 +16,12 @@ class SAHorarioClaseImplements implements SAHorarioClase{
         return $horarioClase;
     }
 
-    public static function createHorarioClase($aula,$dia,$horaInicio,$horaFin,$idGrupoClase){
-        $horarioClase=new \es\ucm\HorarioClase($aula,$dia,$horaInicio,$horaFin,$idGrupoClase);
+    public static function createHorarioClase($horarioClase){
         $horarioClase=$DAOHorarioClase->createHorarioClase($horarioClase);
         return $horarioClase;
     }
 
-    public static function updateHorarioClase($aula,$dia,$horaInicio,$horaFin,$idGrupoClase){
-        $horarioClase=new \es\ucm\HorarioClase($aula,$dia,$horaInicio,$horaFin,$idGrupoClase);
+    public static function updateHorarioClase($horarioClase){
         $horarioClase=$DAOHorarioClase->updateHorarioClase($horarioClase);
         return $horarioClase;
     }

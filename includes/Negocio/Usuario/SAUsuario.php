@@ -6,9 +6,9 @@ interface SAUsuario{
 
     public static function findUsuario($email);
 
-    public static function createUsuario($email,$password);
+    public static function createUsuario($usuario);
 
-    public static function updateUsuario($email,$password);
+    public static function updateUsuario($usuario);
     
     public static function deleteUsuario($email);
 

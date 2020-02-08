@@ -11,20 +11,18 @@ class SAPermisosImplements implements SAPermisos{
         $DAOPermisos=$factoriesDAO->createDAOPermiso(); 
     }
     
-    
+    /*Revisar estos dos ids. TOA?????*/
     public static function findPermiso($idAsignatura,$emailProfesor){
         $permiso=$DAOPermisos->findPermiso($idAsignatura,$emailProfesor);
         return $permiso;
     }
 
-    public static function createPermiso($permiso,$idAsignatura,$emailProfesor){
-        $permiso=new \es\ucm\Permiso($permiso,$idAsignatura,$emailProfesor);
+    public static function createPermiso($permiso){
         $permiso=$DAOPermisos->createModAsignatura($permiso);
         return $permiso;
     }
 
-    public static function updatePermiso($permiso,$idAsignatura,$emailProfesor){
-        $permiso=new \es\ucm\Permiso($permiso,$idAsignatura,$emailProfesor);
+    public static function updatePermiso($permiso){
         $permiso=$DAOPermisos->updatePermiso($permiso);
         return $permiso;
     }

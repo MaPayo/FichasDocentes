@@ -17,14 +17,12 @@ class SAProfesorImplements implements SAProfesor{
         return $profesor;
     }
 
-    public static function createProfesor($emailProfesor,$nombre,$departamento,$despacho,$tutoria,$facultad){
-        $profesor=new \es\ucm\Profesor($emailProfesor,$nombre,$departamento,$despacho,$tutoria,$facultad);
+    public static function createProfesor($profesor){
         $profesor=$DAOProfesor->createProfesor($profesor);
         return $profesor;
     }
 
-    public static function updateProfesor($emailProfesor,$nombre,$departamento,$despacho,$tutoria,$facultad){
-        $profesor=new \es\ucm\Profesor($emailProfesor,$nombre,$departamento,$despacho,$tutoria,$facultad);
+    public static function updateProfesor($profesor){
         $profesor=$DAOProfesor->updateProfesor($profesor);
         return $profesor;
     }

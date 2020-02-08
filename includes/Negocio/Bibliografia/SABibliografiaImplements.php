@@ -12,25 +12,23 @@ class SABibliografiaImplements implements SABibliografia{
     }
     
     
-    public static function findBibliografia($idAsignatura){
-        $bibliografia=$DAOBibliografia->findBibliografia($idAsignatura);
+    public static function findBibliografia($idBibliografia){
+        $bibliografia=$DAOBibliografia->findBibliografia($idBibliografia);
         return $bibliografia;
     }
 
-    public static function createBibliografia($citasBibliograficas,$recursosInternet,$idAsignatura){
-        $bibliografia=new \es\ucm\Bibliografia($citasBibliograficas,$recursosInternet,$idAsignatura);
+    public static function createBibliografia($bibliografia){
         $bibliografia=$DAOBibliografia->createBibliografia($bibliografia);
         return $bibliografia;
     }
 
-    public static function updateBibliografia($citasBibliograficas,$recursosInternet,$idAsignatura){
-        $bibliografia=new \es\ucm\Bibliografia($citasBibliograficas,$recursosInternet,$idAsignatura);
+    public static function updateBibliografia($bibliografia){
         $bibliografia=$DAOBibliografia->updateBibliografia($bibliografia);
         return $bibliografia;
     }
 
-    public static function deleteBibliografia($idAsignatura){
-        $bibliografia=$DAOBibliografia->deleteBibliografia($idAsignatura);
+    public static function deleteBibliografia($idBibliografia){
+        $bibliografia=$DAOBibliografia->deleteBibliografia($idBibliografia);
         return $bibliografia;
     }
 

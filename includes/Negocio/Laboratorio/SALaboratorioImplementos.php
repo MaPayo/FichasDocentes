@@ -17,14 +17,12 @@ class SALaboratorioImplements implements SALaboratorio{
         return $laboratorio;
     }
 
-    public static function createLaboratorio($creditos,$presencial,$idAsignatura){
-        $laboratorio=new \es\ucm\Laboratorio($creditos,$presencial,$idAsignatura);
+    public static function createLaboratorio($laboratorio){
         $laboratorio=$DAOLaboratorio->createLaboratorio($laboratorio);
         return $laboratorio;
     }
 
-    public static function updateLaboratorio($creditos,$presencial,$idAsignatura){
-        $laboratorio=new \es\ucm\Laboratorio($creditos,$presencial,$idAsignatura);
+    public static function updateLaboratorio($laboratorio){
         $laboratorio=$DAOLaboratorio->updateLaboratorio($laboratorio);
         return $laboratorio;
     }

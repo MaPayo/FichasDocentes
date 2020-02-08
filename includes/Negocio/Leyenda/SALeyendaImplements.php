@@ -17,14 +17,12 @@ class SALeyendaImplements implements SALeyenda{
         return $leyenda;
     }
 
-    public static function createLeyenda($idLeyenda,$lectura,$escritura,$check,$editPerm){
-        $leyenda=new \es\ucm\Leyenda($idLeyenda,$lectura,$escritura,$check,$editPerm);
+    public static function createLeyenda($leyenda){
         $leyenda=$DAOLeyenda->createLeyenda($leyenda);
         return $leyenda;
     }
 
-    public static function updateLeyenda($idLeyenda,$lectura,$escritura,$check,$editPerm){
-        $leyenda=new \es\ucm\Leyenda($idLeyenda,$lectura,$escritura,$check,$editPerm);
+    public static function updateLeyenda($leyenda){
         $leyenda=$DAOLeyenda->updateLeyenda($leyenda);
         return $leyenda;
     }

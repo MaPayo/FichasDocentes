@@ -17,16 +17,14 @@ class SAModAsignaturaImplements implements SAModAsignatura{
         return $modAsignatura;
     }
 
-    public static function createModAsignatura($idModAsignatura,$fechaMod,$emailMod,$idAsignatura){
-        $modAsignatura=new \es\ucm\ModAsignatura($idModAsignatura,$fechaMod,$emailMod,$idAsignatura);
-        $modAsignatura=$DAOModAsignatura->createModAsignatura($modAsignatura);
-        return $modAsignatura;
+    public static function createModAsignatura($asignatura){
+        $asignatura=$DAOModAsignatura->createModAsignatura($asignatura);
+        return $asignatura;
     }
 
-    public static function updateModAsignatura($idModAsignatura,$fechaMod,$emailMod,$idAsignatura){
-        $modAsignatura=new \es\ucm\ModAsignatura($idModAsignatura,$fechaMod,$emailMod,$idAsignatura);
-        $modAsignatura=$DAOModAsignatura->updateModAsignatura($modAsignatura);
-        return $modAsignatura;
+    public static function updateModAsignatura($asignatura){
+        $asignatura=$DAOModAsignatura->updateModAsignatura($asignatura);
+        return $asignatura;
     }
 
     public static function deleteModAsignatura($idAsignatura){

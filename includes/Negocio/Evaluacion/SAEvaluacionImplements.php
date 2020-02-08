@@ -17,14 +17,12 @@ class SAEvaluacionImplements implements SAEvaluacion{
         return $evaluacion;
     }
 
-    public static function createEvaluacion($realizacionExamenes,$realizacionExamenesI,$pesoExamenes,$calificacionFinal,$calificacionFinalI,$realizacionActividades,$realizacionActividadesI,$pesoActividades,$realizacionLaboratorio,$realizacionLaboratorioI,$pesoLaboratorio,$idAsignatura){
-        $evaluacion=new \es\ucm\Evaluacion($realizacionExamenes,$realizacionExamenesI,$pesoExamenes,$calificacionFinal,$calificacionFinalI,$realizacionActividades,$realizacionActividadesI,$pesoActividades,$realizacionLaboratorio,$realizacionLaboratorioI,$pesoLaboratorio,$idAsignatura);
+    public static function createEvaluacion($evaluacion){
         $evaluacion=$DAOEvaluacion->createEvaluacion($evaluacion);
         return $evaluacion;
     }
 
-    public static function updateEvaluacion($realizacionExamenes,$realizacionExamenesI,$pesoExamenes,$calificacionFinal,$calificacionFinalI,$realizacionActividades,$realizacionActividadesI,$pesoActividades,$realizacionLaboratorio,$realizacionLaboratorioI,$pesoLaboratorio,$idAsignatura){
-        $evaluacion=new \es\ucm\Evaluacion($realizacionExamenes,$realizacionExamenesI,$pesoExamenes,$calificacionFinal,$calificacionFinalI,$realizacionActividades,$realizacionActividadesI,$pesoActividades,$realizacionLaboratorio,$realizacionLaboratorioI,$pesoLaboratorio,$idAsignatura);
+    public static function updateEvaluacion($evaluacion){
         $evaluacion=$DAOEvaluacion->updateEvaluacion($evaluacion);
         return $evaluacion;
     }

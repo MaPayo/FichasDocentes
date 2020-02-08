@@ -17,14 +17,12 @@ class SAGrupoLaboratorioImplements implements SAGrupoLaboratorio{
         return $grupoLaboratorio;
     }
 
-    public static function createGrupoLaboratorio($letra,$idioma,$emailProfesor,$idAsignatura){
-        $grupoLaboratorio=new \es\ucm\GrupoLaboratorio($letra,$idioma,$emailProfesor,$idAsignatura);
+    public static function createGrupoLaboratorio($grupoLaboratorio){
         $grupoLaboratorio=$DAOGrupoLaboratorio->createGrupoLaboratorio($grupoLaboratorio);
         return $grupoLaboratorio;
     }
 
-    public static function updateGrupoLaboratorio($letra,$idioma,$emailProfesor,$idAsignatura){
-        $grupoLaboratorio=new \es\ucm\GrupoLaboratorio($letra,$idioma,$emailProfesor,$idAsignatura);
+    public static function updateGrupoLaboratorio($grupoLaboratorio){
         $grupoLaboratorio=$DAOGrupoLaboratorio->updateGrupoLaboratorio($grupoLaboratorio);
         return $grupoLaboratorio;
     }

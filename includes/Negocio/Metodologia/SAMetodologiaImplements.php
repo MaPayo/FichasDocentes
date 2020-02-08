@@ -17,14 +17,12 @@ class SAMetodologiaImplements implements SAMetodologia{
         return $metodologia;
     }
 
-    public static function createMetodologia($metodologia,$metodologiaI,$idAsignatura){
-        $metodologia=new \es\ucm\Metodologia($metodologia,$metodologiaI,$idAsignatura);
+    public static function createMetodologia($metodologia){
         $metodologia=$DAOMetodologia->createMetodologia($metodologia);
         return $metodologia;
     }
 
-    public static function updateMetodologia($metodologia,$metodologiaI,$idAsignatura){
-        $metodologia=new \es\ucm\Metodologia($metodologia,$metodologiaI,$idAsignatura);
+    public static function updateMetodologia($metodologia){
         $metodologia=$DAOMetodologia->updateMetodologia($metodologia);
         return $metodologia;
     }

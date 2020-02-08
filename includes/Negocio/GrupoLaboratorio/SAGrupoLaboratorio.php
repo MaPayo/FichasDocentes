@@ -6,9 +6,9 @@ interface SAGrupoLaboratorio{
 
     public static function findGrupoLaboratorio($idAsignatura);
 
-    public static function createGrupoLaboratorio($letra,$idioma,$emailProfesor,$idAsignatura);
+    public static function createGrupoLaboratorio($grupoLaboratorio);
 
-    public static function updateGrupoLaboratorio($letra,$idioma,$emailProfesor,$idAsignatura);
+    public static function updateGrupoLaboratorio($grupoLaboratorio);
     
     public static function deleteGrupoLaboratorio($idAsignatura);
 

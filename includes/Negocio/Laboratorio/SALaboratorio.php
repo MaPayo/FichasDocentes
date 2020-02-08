@@ -6,9 +6,9 @@ interface SALaboratorio{
 
     public static function findLaboratorio($idAsignatura);
 
-    public static function createLaboratorio($creditos,$presencial,$idAsignatura);
+    public static function createLaboratorio($laboratorio);
 
-    public static function updateLaboratorio($creditos,$presencial,$idAsignatura);
+    public static function updateLaboratorio($laboratorio);
     
     public static function deleteLaboratorio($idAsignatura);
 

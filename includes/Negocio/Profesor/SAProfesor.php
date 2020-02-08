@@ -6,9 +6,9 @@ interface SAProfesor{
 
     public static function findProfesor($emailProfesor);
 
-    public static function createProfesor($emailProfesor,$nombre,$departamento,$despacho,$tutoria,$facultad);
+    public static function createProfesor($profesor);
 
-    public static function updateProfesor($emailProfesor,$nombre,$departamento,$despacho,$tutoria,$facultad);
+    public static function updateProfesor($profesor);
     
     public static function deleteProfesor($emailProfesor);
 

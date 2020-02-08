@@ -13,18 +13,17 @@ class SAAdministradorImplements implements SAAdministrador{
     
     
     public static function findAdministrador($email){
-        $administrador=$DAOAdministrador->findAdministrador($email);
+        
+        $administrador= $DAOAdministrador->findAdministrador($email);
         return $administrador;
     }
 
-    public static function createAdministrador($email,$nombre){
-        $administrador=new \es\ucm\Administrador($email,$nombre);
+    public static function createAdministrador($administrador){
         $administrador=$DAOAdministrador->createAdministrador($administrador);
         return $administrador;
     }
 
-    public static function updateAdministrador($email,$nombre){
-        $administrador=new \es\ucm\Administrador($email,$nombre);
+    public static function updateAdministrador($administrador){
         $administrador=$DAOAdministrador->updateAdministrador($administrador);
         return $administrador;
     }

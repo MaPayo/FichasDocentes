@@ -6,9 +6,9 @@ interface SAProblema{
 
     public static function findProblema($idAsignatura);
 
-    public static function createProblema($creditos,$presencial,$idAsignatura);
+    public static function createProblema($problema);
 
-    public static function updateProblema($creditos,$presencial,$idAsignatura);
+    public static function updateProblema($problema);
     
     public static function deleteProblema($idAsignatura);
 

@@ -17,14 +17,12 @@ class SAProblemaImplements implements SAProblema{
         return $problema;
     }
 
-    public static function createProblema($creditos,$presencial,$idAsignatura){
-        $problema=new \es\ucm\Problema($creditos,$presencial,$idAsignatura);
+    public static function createProblema($problema){
         $problema=$DAOProblema->createProblema($problema);
         return $problema;
     }
 
-    public static function updateProblema($creditos,$presencial,$idAsignatura){
-        $problema=new \es\ucm\Problema($creditos,$presencial,$idAsignatura);
+    public static function updateProblema($problema){
         $problema=$DAOProblema->updateProblema($problema);
         return $problema;
     }
