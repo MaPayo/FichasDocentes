@@ -9,7 +9,7 @@ class CommandDeleteAdministrador implements Command
 
     public function execute($data){
         $factorySA = new FactorySAImplements();
-        $saAdministrador = $factorySA->deleteSAAdministrador();
+        $saAdministrador = $factorySA->createSAAdministrador();
         $administrador = $saAdministrador->deleteAdministrador($data);
         $responseContext = null;
         if($administrador !=null){

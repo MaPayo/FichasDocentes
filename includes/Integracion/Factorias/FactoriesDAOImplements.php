@@ -7,91 +7,119 @@ class FactoriesDAOImplements implements FactoriesDAO{
 
 	}
     public static function createDAOAsignatura(){
-        return new DAOAsignaturaImplements();
+      return new DAOAsignaturaImplements();
     }
+
     public static function createDAOModAsignatura(){
- return new DAOModAsignaturaImplements();
+      return new DAOModAsignaturaImplements();
     }
+
     public static function createDAOBibliografia(){
- return new DAOBibliografiaImplements();
+      return new DAOBibliografiaImplements();
     }
+
     public static function createDAOModBibliografia(){
- return new DAOModBibliografiaImplements();
+      return new DAOModBibliografiaImplements();
     }
+
     public static function createDAOCompetenciaAsignatura(){
- return new DAOCompetenciaAsignaturaImplements();
+      return new DAOCompetenciaAsignaturaImplements();
     }
+
     public static function createDAOModCompetenciaAsignatura(){
- return new DAOModCompetenciaAsignaturImplements();
+      return new DAOModCompetenciaAsignaturaImplements();
     }
+
     public static function createDAOConfiguracion(){
- return new DAOConfiguracionImplements();
+      return new DAOConfiguracionImplements();
     }
+
     public static function createDAOEvaluacion(){
- return new DAOEvaluacionImplements();
+      return new DAOEvaluacionImplements();
     }
+
     public static function createDAOModEvaluacion(){
- return new DAOModEvaluacionImplements();
+      return new DAOModEvaluacionImplements();
     }
+
     public static function createDAOGrado(){
- return new DAOGradoImplements();
+      return new DAOGradoImplements();
     }
+
     public static function createDAOGrupoClase(){
- return new DAOGrupoClaseImplements();
+      return new DAOGrupoClaseImplements();
     }
+
     public static function createDAOGrupoLaboratorio(){
- return new DAOGrupoLaboratorioImplements();
+      return new DAOGrupoLaboratorioImplements();
     }
+
     public static function createDAOModGrupoLaboratorio(){
- return new DAOModGrupoLaboratorioImplements();
+      return new DAOModGrupoLaboratorioImplements();
     }
+
     public static function createDAOHorarioClase(){
- return new DAOHorarioClaseImplements();
+      return new DAOHorarioClaseImplements();
     }
+
     public static function createDAOModHorarioClase(){
- return new DAOModHorarioClaseImplements();
+      return new DAOModHorarioClaseImplements();
     }
+
     public static function createDAOHorarioLaboratorio(){
- return new DAOHorarioLaboratorioImplements();
+      return new DAOHorarioLaboratorioImplements();
     }
+
     public static function createDAOModHorarioLaboratorio(){
- return new DAOModHorarioLaboratorioImplements();
+      return new DAOModHorarioLaboratorioImplements();
     }
+
     public static function createDAOLaboratorio(){
- return new DAOLaboratorioImplements();
+      return new DAOLaboratorioImplements();
     }
+
     public static function createDAOLeyenda(){
- return new DAOLeyendaImplements();
+      return new DAOLeyendaImplements();
     }
+
     public static function createDAOMetodologia(){
- return new DAOMetodologiaImplements();
-    }Implements()
+      return new DAOMetodologiaImplements();
+    }
+
     public static function createDAOModMetodologia(){
- return new DAOModMetodologiaImplements();
+      return new DAOModMetodologiaImplements();
     }
+
     public static function createDAOPermisos(){
- return new DAOPermisosImplements();
+      return new DAOPermisosImplements();
     }
+
     public static function createDAOProblema(){
- return new DAOProblemaImplements();
+      return new DAOProblemaImplements();
     }
+
     public static function createDAOProfesor(){
- return new DAOProfesorImplements();
+      return new DAOProfesorImplements();
     }
+
     public static function createDAOProgramaAsignatura(){
- return new DAOProgramaAsignaturaImplements();
+      return new DAOProgramaAsignaturaImplements();
     }
+
     public static function createDAOModProgramaAsignatura(){
- return new DAOProgramaAsignaturaImplements();
+      return new DAOProgramaAsignaturaImplements();
     }
+
     public static function createDAOTeorico(){
- return new DAOTeoricoImplements();
+      return new DAOTeoricoImplements();
     }
+
     public static function createDAOUsuario(){
- return new DAOUsuarioImplements();
+      return new DAOUsuarioImplements();
     }
+
     public static function createDAOVerifica(){
- return new DAOVerificaImplements();
+      return new DAOVerificaImplements();
     }
     
 }
