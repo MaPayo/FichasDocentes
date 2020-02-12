@@ -1,37 +1,37 @@
 <?php
 namespace es\ucm;
 
-abstract class FactorySA{
+interface FactorySA{
     
-    abstract public function createSAAdministrador();
-    abstract public function createSAAsignatura();
-    abstract public function createSAModAsignatura();
-    abstract public function createSABibliogafia();
-    abstract public function createSAModBibliogafia();
-    abstract public function createSACompetenciaAsignatura();
-    abstract public function createSAModCompetenciaAsignatura();
-    abstract public function createSAConfiguracion();
-    abstract public function createSAEvaluacion();
-    abstract public function createSAModEvaluacion();
-    abstract public function createSAGrado();
-    abstract public function createSAGrupoClase();
-    abstract public function createSAModGrupoClase();
-    abstract public function createSAGrupoLaboratorio();
-    abstract public function createSAModGrupoLaboratorio();
-    abstract public function createSAHorarioClase();
-    abstract public function createSAModHorarioClase();
-    abstract public function createSAHorarioLaboratorio();
-    abstract public function createSAModHorarioLaboratorio();
-    abstract public function createSALaboratorio();
-    abstract public function createSALeyenda();
-    abstract public function createSAMetodologia();
-    abstract public function createSAModMetodologia();
-    abstract public function createSAPermiso();
-    abstract public function createSAProblema();
-    abstract public function createSAProfesor();
-    abstract public function createSAProgramaAsignatura();
-    abstract public function createSAModProgramaAsignatura();
-    abstract public function createSATeorico();
-    abstract public function createSAUsuario();
-    abstract public function createSAVerifica();
+    public function createSAAdministrador();
+    public function createSAAsignatura();
+    public function createSAModAsignatura();
+    public function createSABibliogafia();
+    public function createSAModBibliogafia();
+    public function createSACompetenciaAsignatura();
+    public function createSAModCompetenciaAsignatura();
+    public function createSAConfiguracion();
+    public function createSAEvaluacion();
+    public function createSAModEvaluacion();
+    public function createSAGrado();
+    public function createSAGrupoClase();
+    public function createSAModGrupoClase();
+    public function createSAGrupoLaboratorio();
+    public function createSAModGrupoLaboratorio();
+    public function createSAHorarioClase();
+    public function createSAModHorarioClase();
+    public function createSAHorarioLaboratorio();
+    public function createSAModHorarioLaboratorio();
+    public function createSALaboratorio();
+    public function createSALeyenda();
+    public function createSAMetodologia();
+    public function createSAModMetodologia();
+    public function createSAPermisos();
+    public function createSAProblema();
+    public function createSAProfesor();
+    public function createSAProgramaAsignatura();
+    public function createSAModProgramaAsignatura();
+    public function createSATeorico();
+    public function createSAUsuario();
+    public function createSAVerifica();
 }

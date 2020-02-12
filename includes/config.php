@@ -8,9 +8,9 @@ define('BD_USER','guiasdoc'); //Nombre de usuario de la BD de la aplicacion
 define('BD_PASS','guiasdoc'); //Password del usuario de la BD de la aplicacion
 define('RAIZ_APP',__DIR__);
 define('RUTA_APP','');
-define('RUTA_IMGS',RUTA_APP.'assets/img/');
-define('RUTA_CSS',RUTA_APP.'assets/css/');
-define('RUTA_JS',RUTA_APP.'assets/js/');
+define('RUTA_IMGS',RUTA_APP.'includes/Presentacion/Vistas/resources/');
+define('RUTA_CSS',RUTA_APP.'includes/Presentacion/Vistas/css/');
+define('RUTA_JS',RUTA_APP.'includes/Presentacion/Vistas/js/');
 define('INSTALADA',true); //Apaga o enciende la aplicacion
 
 /**
@@ -56,3 +56,4 @@ spl_autoload_register(function($class){
  */
 $app=\es\ucm\Aplicacion::getSingleton();
 $app->init(array('host'=>BD_HOST,'bd'=>BD_NAME,'user'=>BD_USER,'pass'=>BD_PASS),RUTA_APP,RAIZ_APP);
+session_start();

@@ -1,8 +1,8 @@
 <?php
 namespace es\ucm;
+require_once('includes/Integracion/Usuario/DAOUsuario.php');
 
 class DAOUsuarioImplements implements DAOUsuario{
-
 
     public static function findUsuario($email){
         $singletonDataSource=new SingletonDataSource();

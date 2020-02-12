@@ -4,12 +4,12 @@ namespace es\ucm;
 
 interface SAPermisos{
 
-    public static function findPermiso($idAsignatura,$emailProfesor);
+    public static function findPermisos($idAsignatura,$emailProfesor);
 
-    public static function createPermiso($permiso);
+    public static function createPermisos($permiso);
 
-    public static function updatePermiso($permiso);
+    public static function updatePermisos($permiso);
     
-    public static function deletePermiso($idAsignatura,$emailProfesor);
+    public static function deletePermisos($idAsignatura,$emailProfesor);
 
 }

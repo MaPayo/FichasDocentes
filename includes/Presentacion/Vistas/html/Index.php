@@ -3,10 +3,10 @@
 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="./bootstrap.css">
-    <link rel="stylesheet" href="./fichasdocentes.css">
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <link rel="stylesheet" href="../css/fichasdocentes.css">
     <!--<script src="./javascript.js" type="text/javascript"></script>-->
-    <script src="./jquery-3.4.1.min.js" type="text/javascript"></script>
+    <script src="../js/jquery-3.4.1.min.js" type="text/javascript"></script>
     <title>Fichas Docentes</title>
 </head>
 

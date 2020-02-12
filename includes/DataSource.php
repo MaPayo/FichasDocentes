@@ -4,6 +4,7 @@
  * Clase que se utiliza para acceder a los diferentes sistemas de bases de datos
  */
 namespace es\ucm;
+
 require_once('config.php');
 
 class DataSource{
@@ -18,10 +19,10 @@ class DataSource{
     public  function __construct(){
         try{
             $this->dsn = "mysql:host=".BD_HOST.";dbname=".BD_NAME."";
-            $this->dbh= new PDO($this->stringConex,BD_USER,BD_PASS);
-            $this->dbh=setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $this->dbh= new \PDO($this->dsn,BD_USER,BD_PASS);
+            //$this->dbh=setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
         }
-        catch(PDOException $e){
+        catch(\PDOException $e){
             echo $e->getMessage();
         }
     }
@@ -33,8 +34,8 @@ class DataSource{
         if(isset($this->dsn)&&isset($this->dbh)&&isset($sql)){
             $query=$this->dbh->prepare($sql);
             $query->execute($values);
-            $results=$query->fetchAll(PDO::FETCH_ASSOC);
-            return results;
+            $results=$query->fetchAll(\PDO::FETCH_ASSOC);
+            return $results;
         }else{
             return -1;
         }

@@ -12,31 +12,37 @@ a:hover{
 	text-decoration: none;
 }
 section{
-padding: 5px 0px 0px 5px !important; 
+	padding: 5px 0px 0px 5px !important; 
 }
 
 h1.web_title {
-    text-align: center;
-    color: #990033;
-    margin: 0.2em 0;
+	text-align: center;
+	color: #990033;
+	margin: 0.2em 0;
+	font-size: calc(1.425rem + 1.7vw);
+}
+h2{
+	font-size: calc(1.325rem + .9vw);
 }
 
 #cabecera {
-    border-bottom: #AAA 5px solid;
-    background-color: #FFF;
+	padding: 1%;
+	border-bottom: #AAA 5px solid;
+	background-color: #FFF;
+	margin-bottom: 2.5%;
 }
 
 #logout {
-    text-align: right;
+	text-align: right;
 }
 
 img {
-    display: block;
-    position: relative;
+	display: block;
+	position: relative;
 }
 
 #fichas{
-	 border-right: #AAA 2px solid;
+	border-right: #AAA 2px solid;
 	overflow: auto !important;
 }
 

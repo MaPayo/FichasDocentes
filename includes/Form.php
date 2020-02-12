@@ -1,6 +1,5 @@
 <?php
- namespace es\ucm;
-
+namespace es\ucm;
 /**
  * Clase de  de gestión de formularios.
  *
@@ -198,7 +197,7 @@ class Form
   private function csrfguard_GenerateToken($formId)
   {
     if ( ! isset($_SESSION) ) {
-      throw new Exception('La sesión del usuario no está definida.');
+      throw new \Exception('La sesión del usuario no está definida.');
     }
     
     if ( function_exists('hash_algos') && in_array('sha512', hash_algos()) ) {
@@ -224,7 +223,7 @@ class Form
   private function csrfguard_ValidateToken($formId, $tokenRecibido)
   {
     if ( ! isset($_SESSION) ) {
-      throw new Exception('La sesión del usuario no está definida.');
+      throw new \Exception('La sesión del usuario no está definida.');
     }
     
     $result = TRUE;

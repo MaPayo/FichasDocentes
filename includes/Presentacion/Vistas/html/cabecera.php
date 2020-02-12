@@ -1,14 +1,22 @@
-<header class="row" id="cabecera">
-            <div class="col-sm-4 align-items-sm-end">
-                <img src="../resources/logoucm.png" />
-            </div>
-            <div class="col-lg-6 col-sm-6 col-xs-12">
-                <h1 class="web_title">Fichas Docentes Prueba</h1>
-            </div>
-            <div class="col-sm-2 align-items-sm-end" id="logout">
-                <?php
-                /**/
-                ?>
-                <a onclick="logout()">logout</a>
-                <!--Este apartado se rellenaria con php-->log out de la aplicación</div>
-        </header>
+<header class="row justify-content-center align-items-center" id="cabecera">
+
+    <div class="col-md-2 col-6" id="logo">
+        <a >     
+            <?php
+            echo '<img class="img-fluid" src="' . RUTA_IMGS . 'ucmtext.png" >';
+            ?> </a>
+        </div>
+
+        <div class="col-md-8 col-11">
+            <h1 class="web_title">Gestión de Fichas Docentes</h1>
+        </div>
+        <div class="col-md-2 col-7" id="logout">
+            <?php
+
+            echo '<a href="logout.php"><button type="button" class="btn btn-outline-danger w-100">Cerrar Sesión</button></a>';
+            ?>
+        </div>
+
+        
+
+    </header>
