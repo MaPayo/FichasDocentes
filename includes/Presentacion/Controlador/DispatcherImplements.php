@@ -2,6 +2,8 @@
 
 namespace es\ucm;
 
+include("Event.php");
+
 class DispatcherImplements extends Dispatcher
 {
 
@@ -13,7 +15,22 @@ public function updateView($responseContext){
 
     switch($event){
 
-        //Eventos a las vistas
+        case CREATE_USUARIO_OK:
+            return $data;
+        case CREATE_USUARIO_FAIL:
+            return $data;
+        case DELETE_USUARIO_OK:
+            return $data;
+        case DELETE_USUARIO_FAIL:
+            return $data;
+        case FIND_USUARIO_OK:
+            return $data;
+        case FIND_USUARIO_FAIL:
+            return $data;
+        case UPDATE_USUARIO_OK:
+            return $data;
+        case UPDATE_USUARIO_FAIL:
+            return $data;
     }
 
 }
