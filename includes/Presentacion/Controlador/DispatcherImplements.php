@@ -2,7 +2,9 @@
 
 namespace es\ucm;
 
-include("Event.php");
+//include("Event.php");
+require_once('includes/Presentacion/FactoriaComandos/Event.php');
+require_once('includes/Presentacion/Controlador/Dispatcher.php');
 
 class DispatcherImplements extends Dispatcher
 {

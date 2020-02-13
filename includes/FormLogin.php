@@ -2,6 +2,7 @@
 namespace es\ucm;
 require_once('includes/Negocio/FactoriaNegocio/FactorySAImplements.php');
 require_once('includes/Presentacion/FactoriaComandos/Usuario/CommandFindUsuario.php');
+require_once('includes/Presentacion/Controlador/ControllerImplements.php');
 
 
 class FormLogin extends Form
@@ -39,10 +40,13 @@ class FormLogin extends Form
 		}
 
 		if (count($erroresFormulario) === 0) {
-			$command=new CommandFindUsuario();
-			$usuario=$command->execute($email);
+			$context=new Context(FIND_USUARIO,$email);
+			$controller=new ControllerImplements();
+			$usuario=$controller->action($context);
+			//$command=new CommandFindUsuario();
+			//$usuario=$command->execute($email);
 			//Para corregir
-			echo $usuario->getEvent();
+			//print_r($usuario);
 			/*if (!$usuario) {
 				$erroresFormulario[] = "El usuario o el password no coinciden";
 			} else {
@@ -56,7 +60,7 @@ class FormLogin extends Form
 			        $erroresFormulario[] = "El usuario o el password no coinciden";
 			    }
 			}*/
-			//$erroresFormulario="indexAcceso.php";
+			$erroresFormulario="indexAcceso.php";
 		}
 
         return $erroresFormulario;
