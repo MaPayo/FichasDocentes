@@ -17,36 +17,39 @@ class FormProgramaAsignatura extends Form
 
 
 		$html = '<div class="form-group">
-					<label for="conocimientosPrevios">Conocimientos previos</label>
-					<textarea class="form-control" id="conocimientosPrevios" rows="3" name="conocimientosPrevios" >' . $conocimientosPrevios . '</textarea>
-				  </div>
+		<label for="conocimientosPrevios">Conocimientos previos</label>
+		<textarea class="form-control" id="conocimientosPrevios" rows="3" name="conocimientosPrevios" >' . $conocimientosPrevios . '</textarea>
+		</div>
 
-				  <div class="form-group">
-					<label for="conocimientosPreviosI">Conocimientos previos (Ingles)</label>
-					<textarea class="form-control" id="conocimientosPreviosI" rows="3" name="conocimientosPreviosI" >' . $conocimientosPreviosI . '</textarea>
-				  </div>
+		<div class="form-group">
+		<label for="conocimientosPreviosI">Conocimientos previos (Ingles)</label>
+		<textarea class="form-control" id="conocimientosPreviosI" rows="3" name="conocimientosPreviosI" >' . $conocimientosPreviosI . '</textarea>
+		</div>
 
-				  <div class="form-group">
-					<label for="breveDescripcion">Breve descripción</label>
-					<textarea class="form-control" id="breveDescripcion" rows="3" name="breveDescripcion" >' . $breveDescripcion . '</textarea>
-				  </div>
+		<div class="form-group">
+		<label for="breveDescripcion">Breve descripción</label>
+		<textarea class="form-control" id="breveDescripcion" rows="3" name="breveDescripcion" >' . $breveDescripcion . '</textarea>
+		</div>
 
-				  <div class="form-group">
-					<label for="breveDescripcionI">Breve descripcion (Ingles)</label>
-					<textarea class="form-control" id="breveDescripcionI" rows="3" name="breveDescripcionI" >' . $breveDescripcionI . '</textarea>
-				  </div>
+		<div class="form-group">
+		<label for="breveDescripcionI">Breve descripcion (Ingles)</label>
+		<textarea class="form-control" id="breveDescripcionI" rows="3" name="breveDescripcionI" >' . $breveDescripcionI . '</textarea>
+		</div>
 
-				  <div class="form-group">
-					<label for="programaDetallado">Programa detallado</label>
-					<textarea class="form-control" id="programaDetallado" rows="3" name="programaDetallado" >' . $programaDetallado . '</textarea>
-				  </div>
+		<div class="form-group">
+		<label for="programaDetallado">Programa detallado</label>
+		<textarea class="form-control" id="programaDetallado" rows="3" name="programaDetallado" >' . $programaDetallado . '</textarea>
+		</div>
 
-				  <div class="form-group">
-					<label for="programaDetalladoI">Programa detallado (Ingles)</label>
-					<textarea class="form-control" id="programaDetalladoI" rows="3" name="programaDetalladoI" >' . $programaDetalladoI . '</textarea>
-				  </div>
-				  
-				  <div class="text-center">';
+		<div class="form-group">
+		<label for="programaDetalladoI">Programa detallado (Ingles)</label>
+		<textarea class="form-control" id="programaDetalladoI" rows="3" name="programaDetalladoI" >' . $programaDetalladoI . '</textarea>
+		</div>
+
+		<div class="text-right">
+		<button type="button" class="btn btn-secondary" id="btn-form" data-dismiss="modal">Cancelar</button>'
+		;
+		;
 		if (isset($datosIniciales['modificar']) && $datosIniciales['modificar'] === "y") {
 			$html .= '<button type="submit" class="btn btn-success" name="modificar">Modificar</button>';
 		} else {

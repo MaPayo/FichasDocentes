@@ -9,11 +9,11 @@ require_once('includes/config.php');
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <?php
     echo '<link href="' . RUTA_CSS . 'estilos.css" rel="stylesheet" type="text/css" media="screen"/>
-                    <link rel="stylesheet" href="' . RUTA_CSS . 'bootstrap.css">
-                    <link rel="stylesheet" href="' . RUTA_CSS . 'fichasdocentes.css">
-            <link rel="shortcut icon" type="image/x-icon" href="' . RUTA_IMGS . 'LogoUniversidad.png">
-            <script type="text/javascript" src="' . RUTA_JS . 'codigo.js"></script>
-            <script src="' . RUTA_JS . 'jquery-3.4.1.min.js" type="text/javascript"></script>';
+    <link rel="stylesheet" href="' . RUTA_CSS . 'bootstrap.css">
+    <link rel="stylesheet" href="' . RUTA_CSS . 'fichasdocentes.css">
+    <link rel="shortcut icon" type="image/x-icon" href="' . RUTA_IMGS . 'LogoUniversidad.png">
+    <script type="text/javascript" src="' . RUTA_JS . 'codigo.js"></script>
+    <script src="' . RUTA_JS . 'jquery-3.4.1.min.js" type="text/javascript"></script>';
     ?>
     <title>Gestion Docente: Panel de control</title>
 </head>
@@ -34,7 +34,7 @@ require_once('includes/config.php');
                             <div class="card">
                                 <div class="card-header" id="headingOne">
                                     <h2 class="mb-0">
-                                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
                                             Fisica
                                         </button>
                                     </h2>
@@ -202,9 +202,6 @@ require_once('includes/config.php');
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h5 class="modal-title" id="exampleModalCenterTitle">Modificar programa asignatura</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
                                             </div>
                                             <div class="modal-body">
                                                 <?php

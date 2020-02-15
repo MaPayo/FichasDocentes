@@ -19,10 +19,14 @@ h1.web_title {
 	text-align: center;
 	color: #990033;
 	margin: 0.2em 0;
-	font-size: calc(1.425rem + 1.7vw);
+	font-size: calc(1.425rem + 1.2vw);
 }
 h2{
-	font-size: calc(1.325rem + .9vw);
+	font-size: calc(1.125rem + .7vw);
+}
+
+h5{
+	font-size: calc(0.9rem + .6vw);
 }
 
 #cabecera {
@@ -72,4 +76,7 @@ img {
 #contenido{
 	border-left:#AAA 2px solid;
 	height: 752px;
+}
+#btn-form{
+	margin: 1% !important;
 }
