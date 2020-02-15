@@ -20,11 +20,11 @@
             <button type="button" class="btn btn-outline-danger" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img class="img-fluid" src="' . RUTA_IMGS . 'profile.png" width="40">
             </button>
             <div class="dropdown-menu dropdown-menu-right">
+
             <a class="dropdown-item" type="button">Configuración</a>
             <a class="dropdown-item" type="button">Permisos</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="logout.php">Cerrar Sesión</a>
-            </div>
             </div>';
 
             
