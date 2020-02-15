@@ -19,10 +19,10 @@ h1.web_title {
 	text-align: center;
 	color: #990033;
 	margin: 0.2em 0;
-	font-size: calc(1.425rem + 1.7vw);
+	font-size: calc(1.425rem + 1.2vw);
 }
 h2{
-	font-size: calc(1.325rem + .9vw);
+	font-size: calc(1.125rem + .7vw);
 }
 
 #cabecera {
