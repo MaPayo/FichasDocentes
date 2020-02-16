@@ -1,6 +1,7 @@
 <?php
 
 namespace es\ucm;
+require_once('SAMetodologia.php');
 
 class SAMetodologiaImplements implements SAMetodologia{
 

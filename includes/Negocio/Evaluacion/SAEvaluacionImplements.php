@@ -1,6 +1,7 @@
 <?php
 
 namespace es\ucm;
+require_once('SAEvaluacion.php');
 
 class SAEvaluacionImplements implements SAEvaluacion{
 

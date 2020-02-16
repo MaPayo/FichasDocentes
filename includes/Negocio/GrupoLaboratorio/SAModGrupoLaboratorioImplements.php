@@ -1,6 +1,7 @@
 <?php
 
 namespace es\ucm;
+require_once('SAModGrupoLaboratorio.php');
 
 class SAModGrupoLaboratorioImplements implements SAModGrupoLaboratorio{
 

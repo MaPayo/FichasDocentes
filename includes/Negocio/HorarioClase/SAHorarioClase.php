@@ -2,7 +2,7 @@
 
 namespace es\ucm;
 
-interface SAGrupoHorarioClase{
+interface SAHorarioClase{
 
     public static function findHorarioClase($idGrupoClase);
 

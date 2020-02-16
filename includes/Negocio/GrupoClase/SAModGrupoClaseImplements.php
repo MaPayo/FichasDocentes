@@ -1,6 +1,7 @@
 <?php
 
 namespace es\ucm;
+require_once('SAModGrupoClase.php');
 
 class SAModGrupoClaseImplements implements SAModGrupoClase{
 

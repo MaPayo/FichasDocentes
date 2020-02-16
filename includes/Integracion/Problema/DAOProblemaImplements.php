@@ -1,14 +1,15 @@
 <?php
 namespace es\ucm;
+require_once('includes/Integracion/Problema/DAOProblema.php');
 
 class DAOProblemaImplements implements DAOProblema{
 
 
-    public static function findProblema($idProblema){
+    public static function findProblema($idAsignatura){
         $singletonDataSource=new SingletonDataSource();
         $dataSource=$singletonDataSource->getInstance();
-        $sql="SELECT * FROM problema WHERE IdProblema = :idProblema";
-        $values=array(':idProblema' => $idProblema);
+        $sql="SELECT * FROM problema WHERE IdAsignatura = :idAsignatura";
+        $values=array(':idAsignatura' => $idAsignatura);
         $results=$dataSource->executeQuery($sql,$values);
         return $results;
 

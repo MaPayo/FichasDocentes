@@ -1,51 +1,61 @@
 <?php
+
 namespace es\ucm;
 
-class DAOLaboratorioImplements implements DAOLaboratorio{
+require_once('includes/Integracion/Laboratorio/DAOLaboratorio.php');
+
+class DAOLaboratorioImplements implements DAOLaboratorio
+{
 
 
-    public static function findLaboratorio($idLaboratorio){
-        $singletonDataSource=new SingletonDataSource();
-        $dataSource=$singletonDataSource->getInstance();
-        $sql="SELECT * FROM laboratorio WHERE IdLaboratorio = :idLaboratorio";
-        $values=array(':idLaboratorio' => $idLaboratorio);
-        $results=$dataSource->executeQuery($sql,$values);
+    public static function findLaboratorio($idAsignatura)
+    {
+        $singletonDataSource = new SingletonDataSource();
+        $dataSource = $singletonDataSource->getInstance();
+        $sql = "SELECT * FROM laboratorio WHERE IdAsignatura = :idAsignatura";
+        $values = array(':idAsignatura' => $idAsignatura);
+        $results = $dataSource->executeQuery($sql, $values);
         return $results;
-
     }
 
-    public static function createLaboratorio($laboratorio){
-        $singletonDataSource=new SingletonDataSource();
-        $dataSource=$singletonDataSource->getInstance();
-        $sql="INSERT INTO laboratorio (IdLaboratorio,Creditos,Presencial,IdAsignatura) 
+    public static function createLaboratorio($laboratorio)
+    {
+        $singletonDataSource = new SingletonDataSource();
+        $dataSource = $singletonDataSource->getInstance();
+        $sql = "INSERT INTO laboratorio (IdLaboratorio,Creditos,Presencial,IdAsignatura) 
         VALUES (:idLaboratorio, :creditos, :presencial, :idAsignatura)";
-        $values=array(':idLaboratorio' => $laboratorio->getIdLaboratorio(),
+        $values = array(
+            ':idLaboratorio' => $laboratorio->getIdLaboratorio(),
             ':creditos' => $laboratorio->getCreditos(),
             ':presencial' => $laboratorio->getPresencial(),
-            ':idAsignatura' => $laboratorio->getIdAsignatura());
-        $results=$dataSource->executeQuery($sql,$values);
-        return $results;
-
-    }
-
-    public static function updateLaboratorio($laboratorio){
-        $singletonDataSource=new SingletonDataSource();
-        $dataSource=$singletonDataSource->getInstance();
-        $sql="UPDATE laboratorio SET IdLaboratorio = :idLaboratorio, Creditos = :creditos,Presencial = :presencial,IdAsignatura = :idAsignatura WHERE IdLaboratorio = :idLaboratorio";
-        $values=array(':idLaboratorio' => $laboratorio->getIdLaboratorio(),
-            ':creditos' => $laboratorio->getCreditos(),
-            ':presencial' => $laboratorio->getPresencial(),
-            ':idAsignatura' => $laboratorio->getIdAsignatura());
-        $results=$dataSource->executeQuery($sql,$values);
+            ':idAsignatura' => $laboratorio->getIdAsignatura()
+        );
+        $results = $dataSource->executeQuery($sql, $values);
         return $results;
     }
 
-    public static function deleteLaboratorio($idLaboratorio){
-        $singletonDataSource=new SingletonDataSource();
-        $dataSource=$singletonDataSource->getInstance();
-        $sql="DELETE FROM laboratorio WHERE IdLaboratorio = :idLaboratorio";
-        $values=array(':idLaboratorio' => $idLaboratorio);
-        $results=$dataSource->executeQuery($sql,$values);
+    public static function updateLaboratorio($laboratorio)
+    {
+        $singletonDataSource = new SingletonDataSource();
+        $dataSource = $singletonDataSource->getInstance();
+        $sql = "UPDATE laboratorio SET IdLaboratorio = :idLaboratorio, Creditos = :creditos,Presencial = :presencial,IdAsignatura = :idAsignatura WHERE IdLaboratorio = :idLaboratorio";
+        $values = array(
+            ':idLaboratorio' => $laboratorio->getIdLaboratorio(),
+            ':creditos' => $laboratorio->getCreditos(),
+            ':presencial' => $laboratorio->getPresencial(),
+            ':idAsignatura' => $laboratorio->getIdAsignatura()
+        );
+        $results = $dataSource->executeQuery($sql, $values);
+        return $results;
+    }
+
+    public static function deleteLaboratorio($idLaboratorio)
+    {
+        $singletonDataSource = new SingletonDataSource();
+        $dataSource = $singletonDataSource->getInstance();
+        $sql = "DELETE FROM laboratorio WHERE IdLaboratorio = :idLaboratorio";
+        $values = array(':idLaboratorio' => $idLaboratorio);
+        $results = $dataSource->executeQuery($sql, $values);
         return $results;
     }
 }

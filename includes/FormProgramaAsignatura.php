@@ -49,11 +49,11 @@ class FormProgramaAsignatura extends Form
 		<div class="text-right">
 		<button type="button" class="btn btn-secondary" id="btn-form" data-dismiss="modal">Cancelar</button>'
 		;
-		;
+
 		if (isset($datosIniciales['modificar']) && $datosIniciales['modificar'] === "y") {
-			$html .= '<button type="submit" class="btn btn-success" name="modificar">Modificar</button>';
+			$html .= '<button type="submit" class="btn btn-success" id="btn-form name="modificar">Modificar</button>';
 		} else {
-			$html .= '<button type="submit" class="btn btn-success" name="registrar">Registrar</button>';
+			$html .= '<button type="submit" class="btn btn-success" id="btn-form name="registrar">Registrar</button>';
 		}
 		$html .= '</div>';
 		return $html;

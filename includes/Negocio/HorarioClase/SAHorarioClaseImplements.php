@@ -1,5 +1,6 @@
 <?php
 namespace es\ucm;
+require_once('SAHorarioClase.php');
 
 class SAHorarioClaseImplements implements SAHorarioClase{
 

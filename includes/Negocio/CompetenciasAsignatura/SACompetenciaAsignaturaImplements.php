@@ -1,6 +1,7 @@
 <?php
 
 namespace es\ucm;
+require_once('SACompetenciaAsignatura.php');
 
 class SACompetenciaAsignaturaImplements implements SACompetenciaAsignatura{
 

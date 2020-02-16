@@ -1,6 +1,7 @@
 <?php
 
 namespace es\ucm;
+require_once('SAModHorarioLaboratorio.php');
 
 class SAModHorarioLaboratorioImplements implements SAModHorarioLaboratorio{
 

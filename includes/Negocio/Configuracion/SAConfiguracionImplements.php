@@ -1,6 +1,7 @@
 <?php
 
 namespace es\ucm;
+require_once('SAConfiguracion.php');
 
 class SAConfiguracionImplements implements SAConfiguracion{
 

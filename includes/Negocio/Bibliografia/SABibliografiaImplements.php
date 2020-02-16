@@ -1,6 +1,7 @@
 <?php
 
 namespace es\ucm;
+require_once('SABibliografia.php');
 
 class SABibliografiaImplements implements SABibliografia{
 

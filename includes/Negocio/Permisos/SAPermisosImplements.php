@@ -1,7 +1,7 @@
 <?php
 
 namespace es\ucm;
-
+require_once('SAPermisos.php');
 class SAPermisosImplements implements SAPermisos{
 
     private static $DAOPermisos;

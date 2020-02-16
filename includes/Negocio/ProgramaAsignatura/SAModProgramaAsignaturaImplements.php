@@ -1,6 +1,7 @@
 <?php
 
 namespace es\ucm;
+require_once('SAModProgramaAsignatura.php');
 
 class SAModProgramaAsignaturaImplements implements SAModProgramaAsignatura{
 

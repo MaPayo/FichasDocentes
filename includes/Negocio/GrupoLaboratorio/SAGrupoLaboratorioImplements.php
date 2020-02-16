@@ -1,6 +1,7 @@
 <?php
 
 namespace es\ucm;
+require_once('SAGrupoLaboratorio.php');
 
 class SAGrupoLaboratorioImplements implements SAGrupoLaboratorio{
 

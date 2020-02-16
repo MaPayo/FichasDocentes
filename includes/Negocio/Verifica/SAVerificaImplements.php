@@ -1,7 +1,7 @@
 <?php
 
 namespace es\ucm;
-
+require_once('SAVerifica.php');
 class SAVerificaImplements implements SAVerifica{
 
     private static $DAOVerifica;

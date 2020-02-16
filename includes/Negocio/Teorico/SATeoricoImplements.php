@@ -1,33 +1,41 @@
 <?php
 
 namespace es\ucm;
+require_once('includes/Negocio/Teorico/SATeorico.php');
+require_once('includes/Negocio/Teorico/Teorico.php');
 
 class SATeoricoImplements implements SATeorico{
-
-    private static $DAOTeorico;
-
-    public function __construct(){
-        $factoriesDAO=new \es\ucm\FactoriesDAOImplements();
-        $DAOTeorico=$factoriesDAO->createDAOTeorico(); 
-    }
-    
     
     public static function findTeorico($idAsignatura){
+        $factoriesDAO=new \es\ucm\FactoriesDAOImplements();
+        $DAOTeorico=$factoriesDAO->createDAOTeorico(); 
         $teorico=$DAOTeorico->findTeorico($idAsignatura);
+        if($teorico && count($teorico)===1){
+            $teorico=new Teorico($teorico[0]['IdTeorico'],
+            $teorico[0]['Creditos'],
+            $teorico[0]['Presencial'],
+            $teorico[0]['IdAsignatura']);
+        }
         return $teorico;
     }
 
     public static function createTeorico($teorico){
+        $factoriesDAO=new \es\ucm\FactoriesDAOImplements();
+        $DAOTeorico=$factoriesDAO->createDAOTeorico(); 
         $teorico=$DAOTeorico->createTeorico($teorico);
         return $teorico;
     }
 
     public static function updateTeorico($teorico){
+        $factoriesDAO=new \es\ucm\FactoriesDAOImplements();
+        $DAOTeorico=$factoriesDAO->createDAOTeorico(); 
         $teorico=$DAOTeorico->updateTeorico($teorico);
         return $teorico;
     }
 
     public static function deleteTeorico($idAsignatura){
+        $factoriesDAO=new \es\ucm\FactoriesDAOImplements();
+        $DAOTeorico=$factoriesDAO->createDAOTeorico(); 
         $teorico=$DAOTeorico->deleteTeorico($idAsignatura);
         return $teorico;
     }

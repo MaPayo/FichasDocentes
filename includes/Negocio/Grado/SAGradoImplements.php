@@ -1,6 +1,7 @@
 <?php
 
 namespace es\ucm;
+require_once('SAGrado.php');
 
 class SAGradoImplements implements SAGrado{
 

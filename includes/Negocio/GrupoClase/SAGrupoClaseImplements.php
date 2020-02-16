@@ -1,6 +1,7 @@
 <?php
 
 namespace es\ucm;
+require_once('SAGrupoClase.php');
 
 class SAGrupoClaseImplements implements SAGrupoClase{
 

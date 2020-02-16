@@ -1,9 +1,29 @@
 <?php
 
 namespace es\ucm;
-require_once('includes/Presentacion/FactoriaComandos/FactoryCommand.php');
 
-//include("Event.php");
+require_once('includes/Presentacion/FactoriaComandos/FactoryCommand.php');
+require_once('includes/Presentacion/FactoriaComandos/Administrador/CommandFindAdministrador.php');
+require_once('includes/Presentacion/FactoriaComandos/Asignatura/CommandFindAsignatura.php');
+require_once('includes/Presentacion/FactoriaComandos/Bibliografia/CommandFindBibliografia.php');
+require_once('includes/Presentacion/FactoriaComandos/CompetenciasAsignatura/CommandFindCompetenciasAsignatura.php');
+require_once('includes/Presentacion/FactoriaComandos/Configuracion/CommandFindConfiguracion.php');
+require_once('includes/Presentacion/FactoriaComandos/Evaluacion/CommandFindEvaluacion.php');
+require_once('includes/Presentacion/FactoriaComandos/Grado/CommandFindGrado.php');
+require_once('includes/Presentacion/FactoriaComandos/GrupoClase/CommandFindGrupoClase.php');
+require_once('includes/Presentacion/FactoriaComandos/GrupoLaboratorio/CommandFindGrupoLaboratorio.php');
+require_once('includes/Presentacion/FactoriaComandos/HorarioClase/CommandFindHorarioClase.php');
+require_once('includes/Presentacion/FactoriaComandos/HorarioLaboratorio/CommandFindHorarioLaboratorio.php');
+require_once('includes/Presentacion/FactoriaComandos/Laboratorio/CommandFindLaboratorio.php');
+require_once('includes/Presentacion/FactoriaComandos/Leyenda/CommandFindLeyenda.php');
+require_once('includes/Presentacion/FactoriaComandos/Metodologia/CommandFindMetodologia.php');
+require_once('includes/Presentacion/FactoriaComandos/Permisos/CommandFindPermisos.php');
+require_once('includes/Presentacion/FactoriaComandos/Problema/CommandFindProblema.php');
+require_once('includes/Presentacion/FactoriaComandos/Profesor/CommandFindProfesor.php');
+require_once('includes/Presentacion/FactoriaComandos/ProgramaAsignatura/CommandFindProgramaAsignatura.php');
+require_once('includes/Presentacion/FactoriaComandos/Teorico/CommandFindTeorico.php');
+require_once('includes/Presentacion/FactoriaComandos/Usuario/CommandFindUsuario.php');
+require_once('includes/Presentacion/FactoriaComandos/Verifica/CommandFindVerifica.php');
 
 class FactoryCommandImplements extends FactoryCommand
 {
@@ -388,4 +408,3 @@ class FactoryCommandImplements extends FactoryCommand
         return $command;
    }
 }
-?>

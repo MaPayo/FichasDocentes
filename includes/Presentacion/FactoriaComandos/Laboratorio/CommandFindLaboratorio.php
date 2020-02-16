@@ -1,7 +1,10 @@
 <?php
 
 namespace es\ucm;
-include "Event.php";
+
+require_once('includes/Presentacion/FactoriaComandos/Event.php');
+require_once('includes/Presentacion/FactoriaComandos/Command.php');
+require_once('includes/Presentacion/Controlador/Context.php');
 
 class CommandFindLaboratorio implements Command
 {

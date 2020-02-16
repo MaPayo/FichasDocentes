@@ -1,14 +1,14 @@
 <?php
 namespace es\ucm;
+require_once('includes/Integracion/Teorico/DAOTeorico.php');
 
 class DAOTeoricoImplements implements DAOTeorico{
 
-
-    public static function findTeorico($idTeorico){
+    public static function findTeorico($idAsignatura){
         $singletonDataSource=new SingletonDataSource();
         $dataSource=$singletonDataSource->getInstance();
-        $sql="SELECT * FROM teorico WHERE IdTeorico = :idTeorico";
-        $values=array(':idTeorico' => $idTeorico);
+        $sql="SELECT * FROM teorico WHERE IdAsignatura = :idAsignatura";
+        $values=array(':idAsignatura' => $idAsignatura);
         $results=$dataSource->executeQuery($sql,$values);
         return $results;
 

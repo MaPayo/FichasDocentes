@@ -15,7 +15,8 @@ class ControllerImplements extends Controller
         if ($command != null) {
             $responseContext = $command->execute($data);
             $dispatcher = new DispatcherImplements;
-            $dispatcher->updateView($responseContext);
+            $result=$dispatcher->updateView($responseContext);
+            return $result;
         }
     }
 }

@@ -1,6 +1,7 @@
 <?php
 
 namespace es\ucm;
+require_once('SALeyenda.php');
 
 class SALeyendaImplements implements SALeyenda{
 

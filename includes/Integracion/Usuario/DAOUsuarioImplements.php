@@ -11,7 +11,6 @@ class DAOUsuarioImplements implements DAOUsuario{
         $values=array(':email' => $email);
         $results=$dataSource->executeQuery($sql,$values);
         return $results;
-
     }
 
     public static function createUsuario($usuario){
@@ -23,7 +22,6 @@ class DAOUsuarioImplements implements DAOUsuario{
             ':password' => $usuario->getPassword());
         $results=$dataSource->executeQuery($sql,$values);
         return $results;
-
     }
 
     public static function updateUsuario($usuario){

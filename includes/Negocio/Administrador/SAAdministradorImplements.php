@@ -1,6 +1,7 @@
 <?php
 
 namespace es\ucm;
+require_once('SAAdministrador.php');
 
 class SAAdministradorImplements implements SAAdministrador{
 

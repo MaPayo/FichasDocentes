@@ -2,7 +2,9 @@
 
 namespace es\ucm;
 
-include "Event.php";
+require_once('includes/Presentacion/FactoriaComandos/Event.php');
+require_once('includes/Presentacion/FactoriaComandos/Command.php');
+require_once('includes/Negocio/FactoriaNegocio/FactorySAImplements.php');
 
 class CommandFindAsignatura implements Command
 {

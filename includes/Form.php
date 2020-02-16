@@ -66,48 +66,48 @@ class Form
      */
     public function gestiona()
     {
-        
-        if ( ! $this->formularioEnviado($_POST) ) {
+
+      if ( ! $this->formularioEnviado($_POST) ) {
         echo $this->generaFormulario();
-        } else {
+      } else {
         // Valida el token CSRF si es necesario (hay un token en la sesión asociada al formulario)
         $tokenRecibido = $_POST['CSRFToken'] ?? FALSE;
         
         if ( ($errores = $this->csrfguard_ValidateToken($this->formId, $tokenRecibido)) !== TRUE ) { 
-            echo $this->generaFormulario($errores, $_POST);
+          echo $this->generaFormulario($errores, $_POST);
         } else  {
-            $result = $this->procesaFormulario($_POST);
-            if ( is_array($result) ) {
+          $result = $this->procesaFormulario($_POST);
+          if ( is_array($result) ) {
                 // Error al procesar el formulario, volvemos a mostrarlo
-                echo $this->generaFormulario($errores, $_POST);
-            } else {
-                header('Location: '.$result);
-            }
+            echo $this->generaFormulario($result, $_POST);
+          } else {
+            header('Location: '.$result);
+          }
         }
-        }  
+      }  
     }
 
     public function gestionaModificacion($datosIniciales)
     {
-        
-        if ( ! $this->formularioEnviado($_POST) ) {
+
+      if ( ! $this->formularioEnviado($_POST) ) {
         echo $this->generaFormulario(array(),$datosIniciales);
-        } else {
+      } else {
         // Valida el token CSRF si es necesario (hay un token en la sesión asociada al formulario)
         $tokenRecibido = $_POST['CSRFToken'] ?? FALSE;
         
         if ( ($errores = $this->csrfguard_ValidateToken($this->formId, $tokenRecibido)) !== TRUE ) { 
-            echo $this->generaFormulario($errores, $_POST);
+          echo $this->generaFormulario($errores, $_POST);
         } else  {
-            $result = $this->procesaFormulario($_POST);
-            if ( is_array($result) ) {
+          $result = $this->procesaFormulario($_POST);
+          if ( is_array($result) ) {
             // Error al procesar el formulario, volvemos a mostrarlo
             echo $this->generaFormulario($result, $_POST);
-            } else {
+          } else {
             header('Location: '.$result);
-            }
+          }
         }
-        }  
+      }  
     }
 
   /**
@@ -182,16 +182,14 @@ class Form
 
   private function generaListaErrores($errores)
   {
-    $html='';
     $numErrores = count($errores);
-    if (  $numErrores == 1 ) {
-      $html .= "<ul><li>".$errores[0]."</li></ul>";
-    } else if ( $numErrores > 1 ) {
-      $html .= "<ul><li>";
-      $html .= implode("</li><li>", $errores);
-      $html .= "</li></ul>";
+    $count = 0;
+    $html='';
+    while ($count < $numErrores) {
+      $html .= '<div class="alert alert-danger" role="alert">'.$errores[0].'</div>';
+      $count++;
+      return $html;
     }
-    return $html;
   }
 
   private function csrfguard_GenerateToken($formId)
@@ -239,7 +237,7 @@ class Form
       $result = array();
       $result[] = 'Formulario no válido';
     }
-      return $result;
+    return $result;
   }
 }
 

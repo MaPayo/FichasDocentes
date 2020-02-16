@@ -4,6 +4,10 @@ namespace es\ucm;
 
 require_once('includes/Integracion/Factorias/FactoriesDAO.php');
 require_once('includes/Integracion/Usuario/DAOUsuarioImplements.php');
+require_once('includes/Integracion/Asignatura/DAOAsignaturaImplements.php');
+require_once('includes/Integracion/Teorico/DAOTeoricoImplements.php');
+require_once('includes/Integracion/Problema/DAOProblemaImplements.php');
+require_once('includes/Integracion/Laboratorio/DAOLaboratorioImplements.php');
 
 class FactoriesDAOImplements implements FactoriesDAO
 {

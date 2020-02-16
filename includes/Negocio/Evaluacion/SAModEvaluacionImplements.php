@@ -1,6 +1,7 @@
 <?php
 
 namespace es\ucm;
+require_once('SAModEvaluacion.php');
 
 class SAModEvaluacionImplements implements SAModEvaluacion{
 

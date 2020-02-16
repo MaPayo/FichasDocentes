@@ -1,5 +1,6 @@
 <?php
 namespace es\ucm;
+require_once('SAModHorarioClase.php');
 
 class SAModHorarioClaseImplements implements SAModHorarioClase{
 

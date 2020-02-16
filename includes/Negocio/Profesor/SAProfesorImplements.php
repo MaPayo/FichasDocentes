@@ -1,6 +1,7 @@
 <?php
 
 namespace es\ucm;
+require_once('SAProfesor.php');
 
 class SAProfesorImplements implements SAProfesor{
 

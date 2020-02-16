@@ -1,7 +1,26 @@
 <?php
 namespace es\ucm;
 require_once('includes/Negocio/FactoriaNegocio/FactorySA.php');
+require_once('includes/Negocio/Administrador/SAAdministradorImplements.php');
+require_once('includes/Negocio/Asignatura/SAAsignaturaImplements.php');
+require_once('includes/Negocio/Bibliografia/SABibliografiaImplements.php');
+require_once('includes/Negocio/CompetenciasAsignatura/SACompetenciaAsignaturaImplements.php');
+require_once('includes/Negocio/Configuracion/SAConfiguracionImplements.php');
+require_once('includes/Negocio/Evaluacion/SAEvaluacionImplements.php');
+require_once('includes/Negocio/Grado/SAGradoImplements.php');
+require_once('includes/Negocio/GrupoClase/SAGrupoClaseImplements.php');
+require_once('includes/Negocio/GrupoLaboratorio/SAGrupoLaboratorioImplements.php');
+require_once('includes/Negocio/HorarioClase/SAHorarioClaseImplements.php');
+require_once('includes/Negocio/Laboratorio/SALaboratorioImplements.php');
+require_once('includes/Negocio/Leyenda/SALeyendaImplements.php');
+require_once('includes/Negocio/Metodologia/SAMetodologiaImplements.php');
+require_once('includes/Negocio/Permisos/SAPermisosImplements.php');
+require_once('includes/Negocio/Problema/SAProblemaImplements.php');
+require_once('includes/Negocio/Profesor/SAProfesorImplements.php');
+require_once('includes/Negocio/ProgramaAsignatura/SAProgramaAsignaturaImplements.php');
+require_once('includes/Negocio/Teorico/SATeoricoImplements.php');
 require_once('includes/Negocio/Usuario/SAUsuarioImplements.php');
+require_once('includes/Negocio/Verifica/SAVerificaImplements.php');
 
 class FactorySAImplements implements FactorySA{
 
