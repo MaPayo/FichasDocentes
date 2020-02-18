@@ -4,6 +4,7 @@ namespace es\ucm;
 
 require_once('includes/Negocio/Laboratorio/SALaboratorio.php');
 require_once('includes/Negocio/Laboratorio/Laboratorio.php');
+require_once('includes/Integracion/Factorias/FactoriesDAOImplements.php');
 
 class SALaboratorioImplements implements SALaboratorio{
     

@@ -1,5 +1,6 @@
 <?php
 namespace es\ucm;
+require_once('includes/Integracion/Metodologia/DAOMetodologia.php');
 
 class DAOMetodologiaImplements implements DAOMetodologia{
 

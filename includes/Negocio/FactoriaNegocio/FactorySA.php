@@ -6,8 +6,8 @@ interface FactorySA{
     public function createSAAdministrador();
     public function createSAAsignatura();
     public function createSAModAsignatura();
-    public function createSABibliogafia();
-    public function createSAModBibliogafia();
+    public function createSABibliografia();
+    public function createSAModBibliografia();
     public function createSACompetenciaAsignatura();
     public function createSAModCompetenciaAsignatura();
     public function createSAConfiguracion();

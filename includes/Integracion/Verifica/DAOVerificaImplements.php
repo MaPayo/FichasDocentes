@@ -1,5 +1,6 @@
 <?php
 namespace es\ucm;
+require_once('includes/Integracion/Verifica/DAOVerifica.php');
 
 class DAOVerificaImplements implements DAOVerifica{
 

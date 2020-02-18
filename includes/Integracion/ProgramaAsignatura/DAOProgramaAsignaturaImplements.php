@@ -1,5 +1,6 @@
 <?php
 namespace es\ucm;
+require_once('includes/Integracion/ProgramaAsignatura/DAOProgramaAsignatura.php');
 
 class DAOProgramaAsignaturaImplements implements DAOProgramaAsignatura{
 

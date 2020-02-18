@@ -1,5 +1,6 @@
 <?php
 namespace es\ucm;
+require_once('includes/Integracion/HorarioLaboratorio/DAOHorarioLaboratorio.php');
 
 class DAOHorarioLaboratorioImplements implements DAOHorarioLaboratorio{
 

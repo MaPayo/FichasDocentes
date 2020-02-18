@@ -36,11 +36,11 @@ class FactorySAImplements implements FactorySA{
         return new SAModAsignaturaImplements();
     }
 
-    public function createSABibliogafia(){
+    public function createSABibliografia(){
         return new SABibliografiaImplements();
     }
 
-    public function createSAModBibliogafia(){
+    public function createSAModBibliografia(){
         return new SAModBibliografiaImplements();
     }
 

@@ -1,5 +1,6 @@
 <?php
 namespace es\ucm;
+require_once('includes/Integracion/Leyenda/DAOLeyenda.php');
 
 class DAOLeyendaImplements implements DAOLeyenda{
 

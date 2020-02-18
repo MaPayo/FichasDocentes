@@ -12,7 +12,6 @@ class SAUsuarioImplements implements SAUsuario{
         $factoriaDAO=new \es\ucm\FactoriesDAOImplements();
         $DAOUsuario=$factoriaDAO->createDAOUsuario();
         $usuario=$DAOUsuario->findUsuario($email);
-        print_r($usuario);
         if($usuario && count($usuario) === 1){
             $usuario= new Usuario($usuario[0]['Email'],$usuario[0]['Password']);
         }

@@ -1,5 +1,6 @@
 <?php
 namespace es\ucm;
+require_once('includes/Integracion/GrupoClase/DAOGrupoClase.php');
 
 class DAOGrupoClaseImplements implements DAOGrupoClase{
 

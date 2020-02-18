@@ -1,5 +1,6 @@
 <?php
 namespace es\ucm;
+require_once('includes/Integracion/HorarioLaboratorio/DAOModHorarioLaboratorio.php');
 
 class DAOModHorarioLaboratorioImplements implements DAOModHorarioLaboratorio{
 

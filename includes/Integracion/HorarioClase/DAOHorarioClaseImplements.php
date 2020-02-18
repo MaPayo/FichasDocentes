@@ -1,5 +1,6 @@
 <?php
 namespace es\ucm;
+require_once('includes/Integracion/HorarioClase/DAOHorarioClase.php');
 
 class DAOHorarioClaseImplements implements DAOHorarioClase{
 

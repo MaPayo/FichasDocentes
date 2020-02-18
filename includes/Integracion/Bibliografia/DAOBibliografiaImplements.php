@@ -1,5 +1,6 @@
 <?php
 namespace es\ucm;
+require_once('includes/Integracion/Bibliografia/DAOBibliografia.php');
 
 class DAOBibliografiaImplements implements DAOBibliografia{
 

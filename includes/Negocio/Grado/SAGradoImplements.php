@@ -1,36 +1,43 @@
 <?php
 
 namespace es\ucm;
-require_once('SAGrado.php');
 
-class SAGradoImplements implements SAGrado{
+require_once('includes/Negocio/Grado/SAGrado.php');
+require_once('includes/Negocio/Grado/Grado.php');
+require_once('includes/Integracion/Factorias/FactoriesDAOImplements.php');
 
-    private static $DAOGrado;
+class SAGradoImplements implements SAGrado
+{
 
-    public function __construct(){
-        $factoriesDAO=new \es\ucm\FactoriesDAOImplements();
-        $DAOGrado=$factoriesDAO->createDAOGrado(); 
-    }
-    
-    
-    public static function findGrado($codigoGrado){
-        $grado=$DAOGrado->findGrado($codigoGrado);
+    public static function findGrado($codigoGrado)
+    {
+        $factoriesDAO = new \es\ucm\FactoriesDAOImplements();
+        $DAOGrado = $factoriesDAO->createDAOGrado();
+        $grado = $DAOGrado->findGrado($codigoGrado);
         return $grado;
     }
 
-    public static function createGrado($grado){
-        $grado=$DAOGrado->createGrado($grado);
+    public static function createGrado($grado)
+    {
+        $factoriesDAO = new \es\ucm\FactoriesDAOImplements();
+        $DAOGrado = $factoriesDAO->createDAOGrado();
+        $grado = $DAOGrado->createGrado($grado);
         return $grado;
     }
 
-    public static function updateGrado($grado){
-        $grado=$DAOGrado->updateGrado($grado);
+    public static function updateGrado($grado)
+    {
+        $factoriesDAO = new \es\ucm\FactoriesDAOImplements();
+        $DAOGrado = $factoriesDAO->createDAOGrado();
+        $grado = $DAOGrado->updateGrado($grado);
         return $grado;
     }
 
-    public static function deleteGrado($codigoGrado){
-        $grado=$DAOGrado->deleteGrado($codigoGrado);
+    public static function deleteGrado($codigoGrado)
+    {
+        $factoriesDAO = new \es\ucm\FactoriesDAOImplements();
+        $DAOGrado = $factoriesDAO->createDAOGrado();
+        $grado = $DAOGrado->deleteGrado($codigoGrado);
         return $grado;
     }
-
 }

@@ -1,5 +1,6 @@
 <?php
 namespace es\ucm;
+require_once('includes/Integracion/HorarioClase/DAOModHorarioClase.php');
 
 class DAOModHorarioClaseImplements implements DAOModHorarioClase{
 

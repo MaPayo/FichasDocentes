@@ -1,5 +1,6 @@
 <?php
 namespace es\ucm;
+require_once('includes/Integracion/Configuracion/DAOConfiguracion.php');
 
 class DAOConfiguracionImplements implements DAOConfiguracion{
 

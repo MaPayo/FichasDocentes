@@ -71,16 +71,4 @@ class Grado{
 
         return $this;
     }
-
-    /**
-     * @param mixed $HorasEtcs
-     *
-     * @return self
-     */
-    public function setHorasEtcs($HorasEtcs)
-    {
-        $this->HorasEtcs = $HorasEtcs;
-
-        return $this;
-    }
 }

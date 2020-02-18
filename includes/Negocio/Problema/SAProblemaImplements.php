@@ -3,6 +3,7 @@
 namespace es\ucm;
 require_once('includes/Negocio/Problema/SAProblema.php');
 require_once('includes/Negocio/Problema/Problema.php');
+require_once('includes/Integracion/Factorias/FactoriesDAOImplements.php');
 
 class SAProblemaImplements implements SAProblema{
     

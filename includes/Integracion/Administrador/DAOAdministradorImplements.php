@@ -1,6 +1,8 @@
 <?php
 namespace es\ucm;
 
+require_once('includes/Integracion/Administrador/DAOAdministrador.php');
+
 class DAOAdministradorImplements implements DAOAdministrador{
     
     

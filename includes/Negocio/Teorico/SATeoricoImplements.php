@@ -3,6 +3,7 @@
 namespace es\ucm;
 require_once('includes/Negocio/Teorico/SATeorico.php');
 require_once('includes/Negocio/Teorico/Teorico.php');
+require_once('includes/Integracion/Factorias/FactoriesDAOImplements.php');
 
 class SATeoricoImplements implements SATeorico{
     

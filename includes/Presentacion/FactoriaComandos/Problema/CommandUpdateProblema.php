@@ -2,7 +2,9 @@
 
 namespace es\ucm;
 
-include "Event.php";
+require_once('includes/Presentacion/FactoriaComandos/Event.php');
+require_once('includes/Presentacion/FactoriaComandos/Command.php');
+require_once('includes/Presentacion/Controlador/Context.php');
 
 class CommandUpdateProblema implements Command
 {
@@ -13,9 +15,9 @@ class CommandUpdateProblema implements Command
         $problema = $saProblema->updateProblema($data);
         $responseContext = null;
         if ($problema) {
-            $responseContext = new Context(UPDATE_PROBLEMAS_OK, $problema);
+            $responseContext = new Context(UPDATE_PROBLEMA_OK, $problema);
         } else {
-            $responseContext = new Context(UPDATE_PROBLEMAS_FAIL, null);
+            $responseContext = new Context(UPDATE_PROBLEMA_FAIL, null);
         }
         return $responseContext;
     }

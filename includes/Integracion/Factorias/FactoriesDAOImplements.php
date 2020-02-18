@@ -3,11 +3,25 @@
 namespace es\ucm;
 
 require_once('includes/Integracion/Factorias/FactoriesDAO.php');
-require_once('includes/Integracion/Usuario/DAOUsuarioImplements.php');
+require_once('includes/Integracion/Administrador/DAOAdministradorImplements.php');
 require_once('includes/Integracion/Asignatura/DAOAsignaturaImplements.php');
-require_once('includes/Integracion/Teorico/DAOTeoricoImplements.php');
-require_once('includes/Integracion/Problema/DAOProblemaImplements.php');
+require_once('includes/Integracion/Bibliografia/DAOBibliografiaImplements.php');
+require_once('includes/Integracion/CompetenciaAsignatura/DAOCompetenciaAsignaturaImplements.php');
+require_once('includes/Integracion/Grado/DAOGradoImplements.php');
+require_once('includes/Integracion/GrupoClase/DAOGrupoClaseImplements.php');
+require_once('includes/Integracion/GrupoLaboratorio/DAOGrupoLaboratorioImplements.php');
+require_once('includes/Integracion/HorarioClase/DAOHorarioClaseImplements.php');
+require_once('includes/Integracion/HorarioLaboratorio/DAOHorarioLaboratorioImplements.php');
 require_once('includes/Integracion/Laboratorio/DAOLaboratorioImplements.php');
+require_once('includes/Integracion/Leyenda/DAOLeyendaImplements.php');
+require_once('includes/Integracion/Metodologia/DAOMetodologiaImplements.php');
+require_once('includes/Integracion/Permisos/DAOPermisosImplements.php');
+require_once('includes/Integracion/Problema/DAOProblemaImplements.php');
+require_once('includes/Integracion/Profesor/DAOProfesorImplements.php');
+require_once('includes/Integracion/ProgramaAsignatura/DAOProgramaAsignaturaImplements.php');
+require_once('includes/Integracion/Teorico/DAOTeoricoImplements.php');
+require_once('includes/Integracion/Usuario/DAOUsuarioImplements.php');
+require_once('includes/Integracion/Verifica/DAOVerificaImplements.php');
 
 class FactoriesDAOImplements implements FactoriesDAO
 {
@@ -69,6 +83,11 @@ class FactoriesDAOImplements implements FactoriesDAO
    public static function createDAOGrupoClase()
    {
       return new DAOGrupoClaseImplements();
+   }
+
+   public static function createDAOModGrupoClase()
+   {
+      return new DAOModGrupoClaseImplements();
    }
 
    public static function createDAOGrupoLaboratorio()
@@ -143,7 +162,7 @@ class FactoriesDAOImplements implements FactoriesDAO
 
    public static function createDAOModProgramaAsignatura()
    {
-      return new DAOProgramaAsignaturaImplements();
+      return new DAOModProgramaAsignaturaImplements();
    }
 
    public static function createDAOTeorico()

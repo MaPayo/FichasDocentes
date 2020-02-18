@@ -1,5 +1,6 @@
 <?php
 namespace es\ucm;
+require_once('includes/Integracion/GrupoLaboratorio/DAOGrupoLaboratorio.php');
 
 class DAOModGrupoLaboratorioImplements implements DAOModGrupoLaboratorio{
 

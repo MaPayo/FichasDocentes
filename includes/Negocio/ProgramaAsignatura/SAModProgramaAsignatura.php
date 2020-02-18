@@ -2,14 +2,14 @@
 
 namespace es\ucm;
 
-interface SAProgramaAsignatura{
+interface SAModProgramaAsignatura{
 
-    public static function findProgramaAsignatura($idAsignatura);
+    public static function findModProgramaAsignatura($idAsignatura);
 
-    public static function createProgramaAsignatura($programaAsignatura);
+    public static function createModProgramaAsignatura($programaAsignatura);
 
-    public static function updateProgramaAsignatura($programaAsignatura);
+    public static function updateModProgramaAsignatura($programaAsignatura);
     
-    public static function deleteProgramaAsignatura($idAsignatura);
+    public static function deleteModProgramaAsignatura($idAsignatura);
 
 }

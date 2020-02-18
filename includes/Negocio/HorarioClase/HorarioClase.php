@@ -9,7 +9,7 @@ class HorarioClase{
 	private $HoraFin;
 	private $IdGrupoClase;
     
-	public function __construct($IdHorarioClase,$Aula,$Dia,$HoraInicio,$HoraFin,$IdGrupoClase,){
+	public function __construct($IdHorarioClase,$Aula,$Dia,$HoraInicio,$HoraFin,$IdGrupoClase){
 		$this->IdHorarioClase = $IdHorarioClase;
 		$this->Aula = $Aula;
 		$this->Dia = $Dia;

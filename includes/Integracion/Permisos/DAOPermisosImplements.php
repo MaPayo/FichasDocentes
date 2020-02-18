@@ -1,5 +1,6 @@
 <?php
 namespace es\ucm;
+require_once('includes/Integracion/Permisos/DAOPermisos.php');
 
 class DAOPermisosImplements implements DAOPermisos{
 

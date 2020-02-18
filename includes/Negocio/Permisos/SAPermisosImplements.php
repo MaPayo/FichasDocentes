@@ -1,35 +1,44 @@
 <?php
 
 namespace es\ucm;
-require_once('SAPermisos.php');
-class SAPermisosImplements implements SAPermisos{
 
-    private static $DAOPermisos;
+require_once('includes/Negocio/Permisos/SAPermisos.php');
+require_once('includes/Negocio/Permisos/Permisos.php');
+require_once('includes/Integracion/Factorias/FactoriesDAOImplements.php');
 
-    public function __construct(){
-        $factoriesDAO=new \es\ucm\FactoriesDAOImplements();
-        $DAOPermisos=$factoriesDAO->createDAOPermisos(); 
-    }
-    
+class SAPermisosImplements implements SAPermisos
+{
+
     /*Revisar estos dos ids. TOA?????*/
-    public static function findPermisos($idAsignatura,$emailProfesor){
-        $permiso=$DAOPermisos->findPermisos($idAsignatura,$emailProfesor);
+    public static function findPermisos($idAsignatura, $emailProfesor)
+    {
+        $factoriesDAO = new \es\ucm\FactoriesDAOImplements();
+        $DAOPermisos = $factoriesDAO->createDAOPermisos();
+        $permiso = $DAOPermisos->findPermisos($idAsignatura, $emailProfesor);
         return $permiso;
     }
 
-    public static function createPermisos($permiso){
-        $permiso=$DAOPermisos->createPermisos($permiso);
+    public static function createPermisos($permiso)
+    {
+        $factoriesDAO = new \es\ucm\FactoriesDAOImplements();
+        $DAOPermisos = $factoriesDAO->createDAOPermisos();
+        $permiso = $DAOPermisos->createPermisos($permiso);
         return $permiso;
     }
 
-    public static function updatePermisos($permiso){
-        $permiso=$DAOPermisos->updatePermisos($permiso);
+    public static function updatePermisos($permiso)
+    {
+        $factoriesDAO = new \es\ucm\FactoriesDAOImplements();
+        $DAOPermisos = $factoriesDAO->createDAOPermisos();
+        $permiso = $DAOPermisos->updatePermisos($permiso);
         return $permiso;
     }
 
-    public static function deletePermisos($idAsignatura,$emailProfesor){
-        $permiso=$DAOPermisos->deletePermisos($idAsignatura,$emailProfesor);
+    public static function deletePermisos($idAsignatura, $emailProfesor)
+    {
+        $factoriesDAO = new \es\ucm\FactoriesDAOImplements();
+        $DAOPermisos = $factoriesDAO->createDAOPermisos();
+        $permiso = $DAOPermisos->deletePermisos($idAsignatura, $emailProfesor);
         return $permiso;
     }
-
 }

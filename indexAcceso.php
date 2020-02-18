@@ -122,9 +122,11 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                     <a class="nav-item nav-link" id="nav-bibliografia-tab" data-toggle="tab" href="#nav-bibliografia" role="tab" aria-controls="nav-bibliografia" aria-selected="false">Bibliografia</a>
                                     <a class="nav-item nav-link" id="nav-grupo-laboratorio-tab" data-toggle="tab" href="#nav-grupo-laboratorio" role="tab" aria-controls="nav-grupo-laboratorio" aria-selected="false">Grupo laboratorio</a>
                                     <a class="nav-item nav-link" id="nav-grupo-clase-tab" data-toggle="tab" href="#nav-grupo-clase" role="tab" aria-controls="nav-grupo-clase" aria-selected="false">Grupo clase</a>
+                                    <a class="nav-item nav-link" id="nav-evaluacion-tab" data-toggle="tab" href="#nav-evaluacion" role="tab" aria-controls="nav-evaluacion" aria-selected="false">Evaluacion</a>
                                 </div>
                             </nav>
                             <div class="tab-content" id="nav-tabContent">
+                                
                                 <!--Pestaña informacion asignatura-->
                                 <div class="tab-pane fade show active" id="nav-info-asignatura" role="tabpanel" aria-labelledby="nav-info-asignatura-tab">
                                     <?php
@@ -223,7 +225,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
 
                                     <div class="card">
                                         <div class="card-body">
-                                            <h5 class="card-title">Programa detallado</h5>
+                                            <h5 class="card-title">Programa detallado (Inglés)</h5>
                                             <p class="card-text">Ejemplo de programa detallado en ingles</p>
                                         </div>
                                     </div>
@@ -249,11 +251,167 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                     </div>
                                 </div>
 
-                                <div class="tab-pane fade" id="nav-comp-asignatura" role="tabpanel" aria-labelledby="nav-comp-asignatura-tab">...</div>
-                                <div class="tab-pane fade" id="nav-metodologia" role="tabpanel" aria-labelledby="nav-metodologia-tab">...</div>
-                                <div class="tab-pane fade" id="nav-bibliografia" role="tabpanel" aria-labelledby="nav-bibliografia-tab">...</div>
+                                <!--Pestaña competencia asignatura-->
+                                <div class="tab-pane fade" id="nav-comp-asignatura" role="tabpanel" aria-labelledby="nav-comp-asignatura-tab">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Generales</h5>
+                                            <p class="card-text">Ejemplo de competencias generales</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Generales (Inglés)</h5>
+                                            <p class="card-text">Ejemplo de competencias generales en ingles</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Especificas</h5>
+                                            <p class="card-text">Ejemplo de competencias especificas</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Especificas (Inglés)</h5>
+                                            <p class="card-text">Ejemplo de competencias especificas en ingles</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Basicas y transversales</h5>
+                                            <p class="card-text">Ejemplo de competencias basicas y transversales</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Basicas y trasversales (Inglés)</h5>
+                                            <p class="card-text">Ejemplo de competencias basicas y trasversales en ingles</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Resultados aprendizaje</h5>
+                                            <p class="card-text">Ejemplo de resultados de aprendizaje</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Resultados aprendizaje (Inglés)</h5>
+                                            <p class="card-text">Ejemplo de resultados de aprendizaje en ingles</p>
+                                        </div>
+                                    </div>
+
+                                    <button type="button" class="btn btn-primary" id="btn-form" data-toggle="modal" data-target="#modal-competencia-asignatura">
+                                        Modificar
+                                    </button>
+
+                                    <div class="modal fade" id="modal-competencia-asignatura" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalCenterTitle">Modificar competencia asignatura</h5>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <?php
+                                                    $access = new es\ucm\FormCompetenciaAsignatura('idCompetenciaAsignatura');
+                                                    $access->gestiona();
+                                                    ?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!--Pestaña metodologia-->
+                                <div class="tab-pane fade" id="nav-metodologia" role="tabpanel" aria-labelledby="nav-metodologia-tab">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Metodologia</h5>
+                                            <p class="card-text">Ejemplo de metodologia</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Metodologia (Inglés)</h5>
+                                            <p class="card-text">Ejemplo de metodologia en ingles</p>
+                                        </div>
+                                    </div>
+
+                                    <button type="button" class="btn btn-primary" id="btn-form" data-toggle="modal" data-target="#modal-metodologia">
+                                        Modificar
+                                    </button>
+
+                                    <div class="modal fade" id="modal-metodologia" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalCenterTitle">Modificar metodologia</h5>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <?php
+                                                    $access = new es\ucm\FormMetodologia('idMetodologia');
+                                                    $access->gestiona();
+                                                    ?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!--Pestaña bibliografia-->
+                                <div class="tab-pane fade" id="nav-bibliografia" role="tabpanel" aria-labelledby="nav-bibliografia-tab">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Citas bibliograficas</h5>
+                                            <p class="card-text">Ejemplo de citas bibliograficas</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Recursos internet</h5>
+                                            <p class="card-text">Ejemplo de recursos internet</p>
+                                        </div>
+                                    </div>
+
+                                    <button type="button" class="btn btn-primary" id="btn-form" data-toggle="modal" data-target="#modal-bibliografia">
+                                        Modificar
+                                    </button>
+
+                                    <div class="modal fade" id="modal-bibliografia" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalCenterTitle">Modificar bibliografia</h5>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <?php
+                                                    $access = new es\ucm\FormBibliografia('idBibliografia');
+                                                    $access->gestiona();
+                                                    ?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!--Pestaña grupo laboratorio-->
                                 <div class="tab-pane fade" id="nav-grupo-laboratorio" role="tabpanel" aria-labelledby="nav-grupo-laboratorio-tab">...</div>
+
+                                <!--Pestaña grupo clase-->
                                 <div class="tab-pane fade" id="nav-grupo-clase" role="tabpanel" aria-labelledby="nav-grupo-clase-tab">...</div>
+
+                                <!--Pestaña evaluacion-->
+                                <div class="tab-pane fade" id="nav-evaluacion" role="tabpanel" aria-labelledby="nav-evaluacion-tab">...</div>
                             </div>
                         </div>
                     </div>

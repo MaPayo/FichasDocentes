@@ -2,33 +2,37 @@
 
 namespace es\ucm;
 
+require_once('includes/Negocio/Bibliografia/SAModBibliografia.php');
+require_once('includes/Negocio/Bibliografia/Bibliografia.php');
+require_once('includes/Integracion/Factorias/FactoriesDAOImplements.php');
+
 class SAModBibliografiaImplements implements SAModBibliografia{
 
-    private static $DAOMOdBibliografia;
-
-    public function __construct(){
+    public static function findModBibliografia($idBibliografia){
         $factoriesDAO=new \es\ucm\FactoriesDAOImplements();
         $DAOBibliografia=$factoriesDAO->createDAOModBibliografia(); 
-    }
-    
-    
-    public static function findModBibliografia($idBibliografia){
-        $bibliografia=$DAOModBibliografia->findModBibliografia($idBibliografia);
+        $bibliografia=$DAOBibliografia->findModBibliografia($idBibliografia);
         return $bibliografia;
     }
 
     public static function createModBibliografia($bibliografia){
-        $bibliografia=$DAOModBibliografia->createModBibliografia($bibliografia);
+        $factoriesDAO=new \es\ucm\FactoriesDAOImplements();
+        $DAOBibliografia=$factoriesDAO->createDAOModBibliografia(); 
+        $bibliografia=$DAOBibliografia->createModBibliografia($bibliografia);
         return $bibliografia;
     }
 
     public static function updateModBibliografia($bibliografia){
-        $bibliografia=$DAOModBibliografia->updateModBibliografia($bibliografia);
+        $factoriesDAO=new \es\ucm\FactoriesDAOImplements();
+        $DAOBibliografia=$factoriesDAO->createDAOModBibliografia(); 
+        $bibliografia=$DAOBibliografia->updateModBibliografia($bibliografia);
         return $bibliografia;
     }
 
     public static function deleteModBibliografia($idBibliografia){
-        $bibliografia=$DAOModBibliografia->deleteModBibliografia($idBibliografia);
+        $factoriesDAO=new \es\ucm\FactoriesDAOImplements();
+        $DAOBibliografia=$factoriesDAO->createDAOModBibliografia(); 
+        $bibliografia=$DAOBibliografia->deleteModBibliografia($idBibliografia);
         return $bibliografia;
     }
 

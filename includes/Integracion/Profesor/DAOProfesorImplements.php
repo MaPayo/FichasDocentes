@@ -1,5 +1,6 @@
 <?php
 namespace es\ucm;
+require_once('includes/Integracion/Profesor/DAOProfesor.php');
 
 class DAOProfesorImplements implements DAOProfesor{
 
