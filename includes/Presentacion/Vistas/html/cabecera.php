@@ -20,7 +20,7 @@
     </button>
     <div class="dropdown-menu dropdown-menu-right">';
 
-    if(isset($_SESSION['login'])){
+    if(isset($_SESSION['login']) && $_SESSION['login'] === true){
      echo'
      <a class="dropdown-item" type="button">Configuración</a>
      <a class="dropdown-item" type="button">Permisos</a>

@@ -25,136 +25,125 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
         <?php
         require_once('includes/Presentacion/Vistas/html/cabecera.php');
         ?>
-        <div class="row margenes">
+        <div class="row justify-content-center align-items-center">
             <?php
             if (isset($_SESSION['login']) && $_SESSION['login'] === true) {
-            ?>
-                <div class="col-md-4">
-                    <div class="card ">
+                ?>
+                <div class="col-md-4 col-12">
+                    <div class="card">
                         <div class="card-header text-center">
                             <h2>Listado de asignaturas por grado</h2>
                         </div>
                         <div class="card-body">
                             <div class="accordion" id="accordionExample">
-                                <div class="card">
-                                    <div class="card-header" id="headingOne">
-                                        <h2 class="mb-0">
-                                            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                Fisica
+                            <?php
+                            //context oportunos, tener array de todos los grados, array de asignaturas del profesor
+
+                            $card ='';
+
+                            foreach($grados as $grado){
+                                $i = 0;
+                                foreach ($asignaturas as $asignatura) {
+                                    if($asignatura->getCodigoGrado() == $grado->getCodigoGrado()){
+                                       if($i==0){
+                                        $card = $card .' <div class="card">
+                                        <div class="card-header" id="heading'.$grado->getCodigoGrado().'">
+                                         <h2 class="mb-0">
+                                            <button class="btn btn-link collapsed text-dark" type="button" data-toggle="collapse" data-target="#collapse'.$grado->getCodigoGrado().'" aria-expanded="false" aria-controls="collapse'.$grado->getCodigoGrado().'">'.$grado->getNombreGrado().'
                                             </button>
                                         </h2>
                                     </div>
 
-                                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                    <div id="collapse'.$grado->getCodigoGrado().'" class="collapse" aria-labelledby="heading'.$grado->getCodigoGrado().'" data-parent="#accordionExample">
                                         <div class="card-body">
-                                            <p>Álgebra</p>
-                                            <p>Cálculo</p>
-                                            <p>Química</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <div class="card-header" id="headingTwo">
-                                        <h2 class="mb-0">
-                                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                                Ingenieria de materiales
-                                            </button>
-                                        </h2>
-                                    </div>
-                                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-                                        <div class="card-body">
-                                            <p>Biología</p>
-                                            <p>Diagramas y transformaciones de fases</p>
-                                            <p>Introduccion a la ingenieria de materiales</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <div class="card-header" id="headingThree">
-                                        <h2 class="mb-0">
-                                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                                Ingenieria electronica de comunicaciones
-                                            </button>
-                                        </h2>
-                                    </div>
-                                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-                                        <div class="card-body">
-                                            <p>Álgebra</p>
-                                            <p>Ampliacion de matematicas</p>
-                                            <p>Informática</p>
-                                        </div>
-                                    </div>
-                                </div>
+                                        <a href="indexAcceso.php&IdAsignatura='.$asignatura->getIdAsignatura().'">'.$asignatura->getNombreAsignatura().'</a>';
+                                        }
+                                        else{
+                                       $card =$card .'<a href="indexAcceso.php&IdAsignatura='.$asignatura->getIdAsignatura().'">'.$asignatura->getNombreAsignatura().'</a>';
+                                        }
+                                    }
+                                    
+                                }
+                                if($i!=0){
+                                    $card =$card .'</div>
+                                         </div>
+                                        </div>';
+                                } 
+                                echo $cardAsignatura;
+                            }
+                            ?>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-8">
-                    <?php
-                    if (isset($_GET['IdAsignatura'])) {
-                        $context = new es\ucm\Context(FIND_ASIGNATURA, htmlspecialchars(trim(strip_tags($_GET['IdAsignatura']))));
-                        $controller = new es\ucm\ControllerImplements();
-                        $asignatura = $controller->action($context);
-                        $context = new es\ucm\Context(FIND_TEORICO, htmlspecialchars(trim(strip_tags($_GET['IdAsignatura']))));
-                        $controller = new es\ucm\ControllerImplements();
-                        $teorico = $controller->action($context);
-                        $context = new es\ucm\Context(FIND_PROBLEMA, htmlspecialchars(trim(strip_tags($_GET['IdAsignatura']))));
-                        $controller = new es\ucm\ControllerImplements();
-                        $problema = $controller->action($context);
-                        $context = new es\ucm\Context(FIND_LABORATORIO, htmlspecialchars(trim(strip_tags($_GET['IdAsignatura']))));
-                        $controller = new es\ucm\ControllerImplements();
-                        $laboratorio = $controller->action($context);
-                    }
-                    ?>
-                    <div class="card ">
-                        <div class="card-header text-center">
-                            <?php
-                            echo '<h2>Informacion docente de la asignatura: ' . $asignatura->getNombreAsignatura() . '</h2>';
-                            ?>
-                        </div>
-                        <div class="card-body">
-                            <nav>
-                                <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                    <a class="nav-item nav-link active" id="nav-info-asignatura-tab" data-toggle="tab" href="#nav-info-asignatura" role="tab" aria-controls="nav-info-asignatura" aria-selected="true">Informacion asignatura</a>
-                                    <a class="nav-item nav-link" id="nav-prog-asignatura-tab" data-toggle="tab" href="#nav-prog-asignatura" role="tab" aria-controls="nav-prog-asignatura" aria-selected="false">Programa asignatura</a>
-                                    <a class="nav-item nav-link" id="nav-comp-asignatura-tab" data-toggle="tab" href="#nav-comp-asignatura" role="tab" aria-controls="nav-comp-asignatura" aria-selected="false">Competencias asignatura</a>
-                                    <a class="nav-item nav-link" id="nav-metodologia-tab" data-toggle="tab" href="#nav-metodologia" role="tab" aria-controls="nav-metodologia" aria-selected="false">Metodologia</a>
-                                    <a class="nav-item nav-link" id="nav-bibliografia-tab" data-toggle="tab" href="#nav-bibliografia" role="tab" aria-controls="nav-bibliografia" aria-selected="false">Bibliografia</a>
-                                    <a class="nav-item nav-link" id="nav-grupo-laboratorio-tab" data-toggle="tab" href="#nav-grupo-laboratorio" role="tab" aria-controls="nav-grupo-laboratorio" aria-selected="false">Grupo laboratorio</a>
-                                    <a class="nav-item nav-link" id="nav-grupo-clase-tab" data-toggle="tab" href="#nav-grupo-clase" role="tab" aria-controls="nav-grupo-clase" aria-selected="false">Grupo clase</a>
-                                    <a class="nav-item nav-link" id="nav-evaluacion-tab" data-toggle="tab" href="#nav-evaluacion" role="tab" aria-controls="nav-evaluacion" aria-selected="false">Evaluacion</a>
-                                </div>
-                            </nav>
-                            <div class="tab-content" id="nav-tabContent">
-                                
-                                <!--Pestaña informacion asignatura-->
-                                <div class="tab-pane fade show active" id="nav-info-asignatura" role="tabpanel" aria-labelledby="nav-info-asignatura-tab">
-                                    <?php
-                                    echo 'Nombre asignatura: ' . $asignatura->getNombreAsignatura() . '<br />
-                                    Nombre asignatura en ingles: ' . $asignatura->getNombreAsignaturaIngles() . '<br />
-                                    Materia: ' . $asignatura->getMateria() . '<br />
-                                    Modulo: ' . $asignatura->getModulo() . '<br />
-                                    Caracter: ' . $asignatura->getCaracter() . '<br />
-                                    Curso: ' . $asignatura->getCurso() . '<br />
-                                    Semestre: ' . $asignatura->getSemestre() . '<br />
-                                    Creditos materia: ' . $asignatura->getCreditosMateria() . '<br />
-                                    Coordinadores: ' . $asignatura->getCoordinadores() . '.<br />';
-                                    ?>
-                                    Reparto de creditos:
-                                    <div class="table-responsible">
-                                        <table class="table table-hover">
-                                            <thead>
-                                                <tr>
-                                                    <th scope="col">#</th>
-                                                    <th scope="col">Créditos</th>
-                                                    <th scope="col">Presencial</th>
-                                                    <th scope="col">Horas totales</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <th scope="row">Teóricos</th>
-                                                    <?php
+
+
+            <div class="col-md-8 col-12">
+                <?php
+                if (isset($_GET['IdAsignatura'])) {
+                    $context = new es\ucm\Context(FIND_ASIGNATURA, htmlspecialchars(trim(strip_tags($_GET['IdAsignatura']))));
+                    $controller = new es\ucm\ControllerImplements();
+                    $asignatura = $controller->action($context);
+                    $context = new es\ucm\Context(FIND_TEORICO, htmlspecialchars(trim(strip_tags($_GET['IdAsignatura']))));
+                    $controller = new es\ucm\ControllerImplements();
+                    $teorico = $controller->action($context);
+                    $context = new es\ucm\Context(FIND_PROBLEMA, htmlspecialchars(trim(strip_tags($_GET['IdAsignatura']))));
+                    $controller = new es\ucm\ControllerImplements();
+                    $problema = $controller->action($context);
+                    $context = new es\ucm\Context(FIND_LABORATORIO, htmlspecialchars(trim(strip_tags($_GET['IdAsignatura']))));
+                    $controller = new es\ucm\ControllerImplements();
+                    $laboratorio = $controller->action($context);
+                }
+                ?>
+                <div class="card ">
+                    <div class="card-header text-center">
+                        <?php
+                        echo '<h2>Informacion docente de la asignatura: ' . $asignatura->getNombreAsignatura() . '</h2>';
+                        ?>
+                    </div>
+                    <div class="card-body">
+                        <nav>
+                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                <a class="nav-item nav-link active" id="nav-info-asignatura-tab" data-toggle="tab" href="#nav-info-asignatura" role="tab" aria-controls="nav-info-asignatura" aria-selected="true">Informacion asignatura</a>
+                                <a class="nav-item nav-link" id="nav-prog-asignatura-tab" data-toggle="tab" href="#nav-prog-asignatura" role="tab" aria-controls="nav-prog-asignatura" aria-selected="false">Programa asignatura</a>
+                                <a class="nav-item nav-link" id="nav-comp-asignatura-tab" data-toggle="tab" href="#nav-comp-asignatura" role="tab" aria-controls="nav-comp-asignatura" aria-selected="false">Competencias asignatura</a>
+                                <a class="nav-item nav-link" id="nav-metodologia-tab" data-toggle="tab" href="#nav-metodologia" role="tab" aria-controls="nav-metodologia" aria-selected="false">Metodologia</a>
+                                <a class="nav-item nav-link" id="nav-bibliografia-tab" data-toggle="tab" href="#nav-bibliografia" role="tab" aria-controls="nav-bibliografia" aria-selected="false">Bibliografia</a>
+                                <a class="nav-item nav-link" id="nav-grupo-laboratorio-tab" data-toggle="tab" href="#nav-grupo-laboratorio" role="tab" aria-controls="nav-grupo-laboratorio" aria-selected="false">Grupo laboratorio</a>
+                                <a class="nav-item nav-link" id="nav-grupo-clase-tab" data-toggle="tab" href="#nav-grupo-clase" role="tab" aria-controls="nav-grupo-clase" aria-selected="false">Grupo clase</a>
+                                <a class="nav-item nav-link" id="nav-evaluacion-tab" data-toggle="tab" href="#nav-evaluacion" role="tab" aria-controls="nav-evaluacion" aria-selected="false">Evaluacion</a>
+                            </div>
+                        </nav>
+                        <div class="tab-content" id="nav-tabContent">
+
+                            <!--Pestaña informacion asignatura-->
+                            <div class="tab-pane fade show active" id="nav-info-asignatura" role="tabpanel" aria-labelledby="nav-info-asignatura-tab">
+                                <?php
+                                echo 'Nombre asignatura: ' . $asignatura->getNombreAsignatura() . '<br />
+                                Nombre asignatura en ingles: ' . $asignatura->getNombreAsignaturaIngles() . '<br />
+                                Materia: ' . $asignatura->getMateria() . '<br />
+                                Modulo: ' . $asignatura->getModulo() . '<br />
+                                Caracter: ' . $asignatura->getCaracter() . '<br />
+                                Curso: ' . $asignatura->getCurso() . '<br />
+                                Semestre: ' . $asignatura->getSemestre() . '<br />
+                                Creditos materia: ' . $asignatura->getCreditosMateria() . '<br />
+                                Coordinadores: ' . $asignatura->getCoordinadores() . '.<br />';
+                                ?>
+                                Reparto de creditos:
+                                <div class="table-responsible">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Créditos</th>
+                                                <th scope="col">Presencial</th>
+                                                <th scope="col">Horas totales</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">Teóricos</th>
+                                                <?php
                                                     $horasTotales = $teorico->getCreditos() * 25 * $teorico->getPresencial(); //corregir
                                                     echo '<td>' . $teorico->getCreditos() . '</td>
                                                     <td>' . $teorico->getPresencial() . '%</td>
@@ -416,7 +405,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                         </div>
                     </div>
                 </div>
-            <?php
+                <?php
             } else {
                 echo '<div class="col-md-3"></div>
                 <div class="col-md-6">

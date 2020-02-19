@@ -82,3 +82,7 @@ img {
 #btn-form{
 	margin: 1% !important;
 }
+
+#main-card{
+	border: 1px solid #2C3E50;
+}

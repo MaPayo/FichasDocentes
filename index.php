@@ -9,10 +9,10 @@ require_once('includes/config.php');
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <?php
     echo '<link href="' . RUTA_CSS . 'estilos.css" rel="stylesheet" type="text/css" media="screen"/>
-            <link rel="stylesheet" href="' . RUTA_CSS . 'bootstrap.css">
-            <link rel="stylesheet" href="' . RUTA_CSS . 'fichasdocentes.css">
-            <link rel="shortcut icon" type="image/x-icon" href="' . RUTA_IMGS . 'LogoUniversidad.png">
-            <script type="text/javascript" src="' . RUTA_JS . 'codigo.js"></script>';
+    <link rel="stylesheet" href="' . RUTA_CSS . 'bootstrap.css">
+    <link rel="stylesheet" href="' . RUTA_CSS . 'fichasdocentes.css">
+    <link rel="shortcut icon" type="image/x-icon" href="' . RUTA_IMGS . 'LogoUniversidad.png">
+    <script type="text/javascript" src="' . RUTA_JS . 'codigo.js"></script>';
     ?>
     <title>Gestion Docente: Inicio</title>
 </head>
@@ -35,9 +35,9 @@ require_once('includes/config.php');
                         ?>
                     </div>
                 </div>
+            </div>
         </div>
-        </div>
-            
+        
     </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

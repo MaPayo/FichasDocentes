@@ -464,7 +464,7 @@ CREATE TABLE `profesor` (
   `Email` varchar(50) NOT NULL,
   `Nombre` varchar(50) NOT NULL,
   `Departamento` varchar(50) NOT NULL,
-  `Despacho` int(8) NOT NULL,
+  `Despacho` int(4) NOT NULL,
   `Tutoria` text NOT NULL,
   `Facultad` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
