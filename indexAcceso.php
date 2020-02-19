@@ -69,7 +69,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                          </div>
                                         </div>';
                                 } 
-                                echo $cardAsignatura;
+                                echo $card;
                             }
                             ?>
                             </div>
