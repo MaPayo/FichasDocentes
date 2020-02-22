@@ -1,6 +1,6 @@
 <?php
 namespace es\ucm;
-require_once('includes/Integracion/CompetenciasAsignatura/DAOModCompetenciaAsignatura.php');
+require_once('includes/Integracion/CompetenciaAsignatura/DAOModCompetenciaAsignatura.php');
 
 class DAOModCompetenciaAsignaturaImplements implements DAOModCompetenciaAsignatura{
     
