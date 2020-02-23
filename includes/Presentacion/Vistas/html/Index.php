@@ -1,117 +1,49 @@
+<?php
+require_once('includes/config.php');
+?>
 <!DOCTYPE html>
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="../css/bootstrap.css">
-    <link rel="stylesheet" href="../css/fichasdocentes.css">
-    <!--<script src="./javascript.js" type="text/javascript"></script>-->
-    <script src="../js/jquery-3.4.1.min.js" type="text/javascript"></script>
-    <title>Fichas Docentes</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <?php
+    echo '<link href="' . RUTA_CSS . 'estilos.css" rel="stylesheet" type="text/css" media="screen"/>
+    <link rel="stylesheet" href="' . RUTA_CSS . 'bootstrap.css">
+    <link rel="stylesheet" href="' . RUTA_CSS . 'fichasdocentes.css">
+    <link rel="shortcut icon" type="image/x-icon" href="' . RUTA_IMGS . 'LogoUniversidad.png">
+    <script type="text/javascript" src="' . RUTA_JS . 'codigo.js"></script>';
+    ?>
+    <title>Gestion Docente: Inicio</title>
 </head>
 
 <body>
     <div class="container-fluid">
-       <?php
-       require("./cabecera.php");
-       ?>
-        <div id="content" class="row">
-           <?php
-           require("./fichas.php");
-           ?>
-            <br clear="both">
-            <section id="contenido" class="col-sm-9">
-                <div id="pestannas">
-                    <div id="validacion">Validación</div>
-                    <div id="configuracion">Configuración</div>
-                    <div id="permisos">Permisos</div>
+        <?php
+        require_once('includes/Presentacion/Vistas/html/cabecera.php');
+        ?>
+        <div class="row justify-content-center align-items-center">
+            <div class="col-md-6 col-12">
+                <div class="card ">
+                    <div class="card-header text-center">
+                        <h2>Acceso a la aplicación</h2>
+                    </div>
+                    <div class="card-body">
+                        <?php
+                        $access = new es\ucm\FormLogin('idLogin');
+                        $access->gestiona();
+                        ?>
+                    </div>
                 </div>
-                <div id="contenido">
-                    <div id="validacion_text">Validación</div>
-                    <div id="configuracion_text">Configuración</div>
-                    <div id="permisos_text">Permisos</div>
-                </div>
-            </section>
+            </div>
         </div>
+        
     </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
-
-<script type="text/javascript">
-    $(document).ready(function() {
-        $("#validacion_text").show();
-        $("#configuracion_text").hide();
-        $("#permisos_text").hide();
-        $("#validacion").css({
-            "background-color": "#454545",
-            "color": "#F1EDED"
-        });
-
-        $("#validacion").click(function() {
-            alert("Has pulsado la pestaña de validacion");
-            $("#validacion_text").show();
-            $("#validacion").css({
-                "background-color": "#454545",
-                "color": "#F1EDED"
-            });
-
-            $("#configuracion_text").hide();
-            $("#configuracion").css({
-                "background-color": "#F1EDED",
-                "color": "#454545"
-            });
-
-            $("#permisos_text").hide();
-            $("#permisos").css({
-                "background-color": "#F1EDED",
-                "color": "#454545"
-            });
-        });
-
-
-        $("#configuracion").click(function() {
-            alert("Has pulsado la pestaña de configuracion");
-            $("#validacion_text").hide();
-            $("#validacion").css({
-                "background-color": "#F1EDED",
-                "color": "#454545"
-            });
-
-            $("#configuracion_text").show();
-            $("#configuracion").css({
-                "background-color": "#454545",
-                "color": "#F1EDED"
-            });
-
-            $("#permisos_text").hide();
-            $("#permisos").css({
-                "background-color": "#F1EDED",
-                "color": "#454545"
-            });
-
-        });
-
-        $("#permisos").click(function() {
-            alert("Has pulsado la pestaña de permisos");
-            $("#validacion_text").hide();
-            $("#validacion").css({
-                "background-color": "#F1EDED",
-                "color": "#454545"
-            });
-
-            $("#configuracion_text").hide();
-            $("#configuracion").css({
-                "background-color": "#F1EDED",
-                "color": "#454545"
-            });
-
-            $("#permisos_text").show();
-            $("#permisos").css({
-                "background-color": "#454545",
-                "color": "#F1EDED"
-            });
-
-        });
-    })
-</script>
 
 </html>

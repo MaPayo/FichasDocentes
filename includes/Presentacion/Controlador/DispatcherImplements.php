@@ -40,6 +40,10 @@ class DispatcherImplements extends Dispatcher
                 return $data;
             case FIND_PROFESOR_FAIL:
                 return $data;
+            case FIND_PERMISOS_OK:
+                return $data;
+            case FIND_PERMISOS_FAIL:
+                return $data;
             case FIND_TEORICO_OK:
                 return $data;
             case FIND_TEORICO_FAIL:

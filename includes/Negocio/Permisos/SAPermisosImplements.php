@@ -9,12 +9,18 @@ require_once('includes/Integracion/Factorias/FactoriesDAOImplements.php');
 class SAPermisosImplements implements SAPermisos
 {
 
-    /*Revisar estos dos ids. TOA?????*/
-    public static function findPermisos($idAsignatura, $emailProfesor)
+    public static function findPermisos($permiso)
     {
         $factoriesDAO = new \es\ucm\FactoriesDAOImplements();
         $DAOPermisos = $factoriesDAO->createDAOPermisos();
-        $permiso = $DAOPermisos->findPermisos($idAsignatura, $emailProfesor);
+        $permiso = $DAOPermisos->findPermisos($permiso); 
+        return $permiso;
+    }
+
+    public static function findPermisosPorProfesor($permiso){
+        $factoriesDAO = new \es\ucm\FactoriesDAOImplements();
+        $DAOPermisos = $factoriesDAO->createDAOPermisos();
+        $permiso = $DAOPermisos->findPermisosPorProfesor($permiso);
         return $permiso;
     }
 
@@ -34,11 +40,13 @@ class SAPermisosImplements implements SAPermisos
         return $permiso;
     }
 
-    public static function deletePermisos($idAsignatura, $emailProfesor)
+    public static function deletePermisos($permiso)
     {
         $factoriesDAO = new \es\ucm\FactoriesDAOImplements();
         $DAOPermisos = $factoriesDAO->createDAOPermisos();
-        $permiso = $DAOPermisos->deletePermisos($idAsignatura, $emailProfesor);
+        $permiso = $DAOPermisos->deletePermisos($permiso);
         return $permiso;
     }
+
+   
 }

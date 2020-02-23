@@ -431,6 +431,11 @@ define("UPDATE_PERMISOS_FAIL",1521);
 define("FIND_PERMISOS",153);
 define("FIND_PERMISOS_OK",1530);
 define("FIND_PERMISOS_FAIL",1531);
+//Find_permisos_por_profesor
+
+define("FIND_PERMISOS_POR_PROFESOR",154);
+define("FIND_PERMISOS_POR_PROFESOR_OK",1540);
+define("FIND_PERMISOS_POR_PROFESOR_FAIL",1541);
 
 //PROBLEMAS
 //Create_problemas

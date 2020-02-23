@@ -5,11 +5,11 @@ require_once('includes/Integracion/Permisos/DAOPermisos.php');
 class DAOPermisosImplements implements DAOPermisos{
 
 
-    public static function findPermisos($idPermiso){
+    public static function findPermisos($permisos){
         $singletonDataSource=new SingletonDataSource();
         $dataSource=$singletonDataSource->getInstance();
         $sql="SELECT * FROM permisos WHERE IdPermiso = :idPermiso";
-        $values=array(':idPermiso' => $idPermiso);
+        $values=array(':idPermiso' => $permisos->idPermiso);
         $results=$dataSource->executeQuery($sql,$values);
         return $results;
 
@@ -46,6 +46,16 @@ class DAOPermisosImplements implements DAOPermisos{
         $dataSource=$singletonDataSource->getInstance();
         $sql="DELETE FROM permisos WHERE IdPermiso = :idPermiso";
         $values=array(':idPermiso' => $idPermiso);
+        $results=$dataSource->executeQuery($sql,$values);
+        return $results;
+    }
+
+
+    public static function findPermisosPorProfesor($permisos){
+        $singletonDataSource=new SingletonDataSource();
+        $dataSource=$singletonDataSource->getInstance();
+        $sql="SELECT * FROM permisos WHERE IdPermiso = :idPermiso";
+        $values=array(':idPermiso' => $permisos->idPermiso);
         $results=$dataSource->executeQuery($sql,$values);
         return $results;
     }

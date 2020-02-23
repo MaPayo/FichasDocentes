@@ -9,4 +9,6 @@ interface DAOPermisos{
     public static function updatePermisos($Permisos);
     
     public static function deletePermisos($idPermisos);
+
+    public static function findPermisosPorProfesor($permisos);
 }

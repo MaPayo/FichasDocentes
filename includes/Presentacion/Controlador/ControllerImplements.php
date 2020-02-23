@@ -15,8 +15,8 @@ class ControllerImplements extends Controller
         if ($command != null) {
             $responseContext = $command->execute($data);
             $dispatcher = new DispatcherImplements;
-            $result=$dispatcher->updateView($responseContext);
-            return $result;
+            $dispatcher->updateView($responseContext);
+            //EL RETURN SE HACE EN EL DISPATCHER, AHI ES DONDE SE CREA LA VARIABLE SESSION
         }
     }
 }
