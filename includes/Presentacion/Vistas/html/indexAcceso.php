@@ -37,8 +37,12 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                         <div class="card-body">
                             <div class="accordion" id="accordionExample">
                             <?php
-                            //context oportunos, tener array de todos los grados, array de asignaturas del profesor
-
+                            //context oportunos para tener array de todos los grados
+                            
+                            foreach ($_SESSION['permisos'] as $tupla) {
+                                $asignaturas[] = $tupla[0];
+                            }
+                                
                             $card ='';
 
                             foreach($grados as $grado){
