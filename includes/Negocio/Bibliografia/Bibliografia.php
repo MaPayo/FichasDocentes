@@ -2,13 +2,13 @@
 namespace es\ucm;
 
 class Bibliografia{
-	private $IdBilbiografia;
+	private $IdBibliografia;
 	private $CitasBibliograficas;
 	private $RecursosInternet;
 	private $IdAsignatura;
 
-	public function __construct($IdBilbiografia,$CitasBibliograficas,$RecursosInternet,$IdAsignatura){
-		$this->IdBilbiografia = $IdBilbiografia;
+	public function __construct($IdBibliografia,$CitasBibliograficas,$RecursosInternet,$IdAsignatura){
+		$this->IdBibliografia = $IdBibliografia;
 		$this->CitasBibliograficas = $CitasBibliograficas;
 		$this->RecursosInternet = $RecursosInternet;
 		$this->IdAsignatura = $IdAsignatura;
@@ -17,19 +17,19 @@ class Bibliografia{
     /**
      * @return mixed
      */
-    public function getIdBilbiografia()
+    public function getIdBibliografia()
     {
-    	return $this->IdBilbiografia;
+    	return $this->IdBibliografia;
     }
 
     /**
-     * @param mixed $IdBilbiografia
+     * @param mixed $IdBibliografia
      *
      * @return self
      */
-    public function setIdBilbiografia($IdBilbiografia)
+    public function setIdBibliografia($IdBibliografia)
     {
-    	$this->IdBilbiografia = $IdBilbiografia;
+    	$this->IdBibliografia = $IdBibliografia;
 
     	return $this;
     }

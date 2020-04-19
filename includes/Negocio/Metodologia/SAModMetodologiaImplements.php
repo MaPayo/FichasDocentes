@@ -8,31 +8,39 @@ require_once('includes/Integracion/Factorias/FactoriesDAOImplements.php');
 
 class SAModMetodologiaImplements implements SAModMetodologia{
     
-    public static function findModMetodologia($idAsignatura){
+    public static function findModMetodologia($idModAsignatura){
         $factoriesDAO=new \es\ucm\FactoriesDAOImplements();
         $DAOModMetodologia=$factoriesDAO->createDAOModMetodologia(); 
-        $metodologia=$DAOModMetodologia->findModMetodologia($idAsignatura);
+        $metodologia=$DAOModMetodologia->findModMetodologia($idModAsignatura);
+        if ($metodologia && count($metodologia) === 1) {
+            $metodologia = new Metodologia(
+                $metodologia[0]['IdMetodologia'],
+                $metodologia[0]['Metodologia'],
+                $metodologia[0]['Metodologiai'],
+                $metodologia[0]['IdModAsignatura']
+            );
+        }
         return $metodologia;
     }
 
-    public static function createModMetodologia($metodologia){
+    public static function createModMetodologia($modMetodologia){
         $factoriesDAO=new \es\ucm\FactoriesDAOImplements();
         $DAOModMetodologia=$factoriesDAO->createDAOModMetodologia(); 
-        $metodologia=$DAOModMetodologia->createModMetodologia($metodologia);
+        $metodologia=$DAOModMetodologia->createModMetodologia($modMetodologia);
         return $metodologia;
     }
 
-    public static function updateModMetodologia($metodologia){
+    public static function updateModMetodologia($modMetodologia){
         $factoriesDAO=new \es\ucm\FactoriesDAOImplements();
         $DAOModMetodologia=$factoriesDAO->createDAOModMetodologia(); 
-        $metodologia=$DAOModMetodologia->updateModMetodologia($metodologia);
+        $metodologia=$DAOModMetodologia->updateModMetodologia($modMetodologia);
         return $metodologia;
     }
 
-    public static function deleteModMetodologia($idAsignatura){
+    public static function deleteModMetodologia($idModAsignatura){
         $factoriesDAO=new \es\ucm\FactoriesDAOImplements();
         $DAOModMetodologia=$factoriesDAO->createDAOModMetodologia(); 
-        $metodologia=$DAOModMetodologia->deleteModMetodologia($idAsignatura);
+        $metodologia=$DAOModMetodologia->deleteModMetodologia($idModAsignatura);
         return $metodologia;
     }
 

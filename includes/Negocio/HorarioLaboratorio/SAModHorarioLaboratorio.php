@@ -4,7 +4,9 @@ namespace es\ucm;
 
 interface SAModHorarioLaboratorio{
 
-    public static function findModHorarioLaboratorio($idGrupoLab);
+    public static function listModHorarioLaboratorio($idGrupoLab);
+
+    public static function findModHorarioLaboratorio($idHorarioLab);
 
     public static function createModHorarioLaboratorio($horarioLaboratorio);
 

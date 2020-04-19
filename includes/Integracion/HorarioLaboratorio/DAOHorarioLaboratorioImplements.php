@@ -5,11 +5,21 @@ require_once('includes/Integracion/HorarioLaboratorio/DAOHorarioLaboratorio.php'
 class DAOHorarioLaboratorioImplements implements DAOHorarioLaboratorio{
 
 
-    public static function findHorarioLaboratorio($idHorarioLab){
+    public static function listHorarioLaboratorio($idGrupoLaboratorio){
         $singletonDataSource=new SingletonDataSource();
         $dataSource=$singletonDataSource->getInstance();
-        $sql="SELECT * FROM horarioLaboratorio WHERE IdHorarioLab = :idHorarioLab";
-        $values=array(':idHorarioLab' => $idHorarioLab);
+        $sql="SELECT * FROM horarioLaboratorio WHERE IdGrupoLab = :idGrupoLaboratorio";
+        $values=array(':idGrupoLaboratorio' => $idGrupoLaboratorio);
+        $results=$dataSource->executeQuery($sql,$values);
+        return $results;
+
+    }
+
+    public static function findHorarioLaboratorio($idHorarioLaboratorio){
+        $singletonDataSource=new SingletonDataSource();
+        $dataSource=$singletonDataSource->getInstance();
+        $sql="SELECT * FROM horarioLaboratorio WHERE IdHorarioLab = :idHorarioLaboratorio";
+        $values=array(':idHorarioLaboratorio' => $idHorarioLaboratorio);
         $results=$dataSource->executeQuery($sql,$values);
         return $results;
 
@@ -26,7 +36,7 @@ class DAOHorarioLaboratorioImplements implements DAOHorarioLaboratorio{
             ':horaInicio' => $horarioLaboratorio->getHoraInicio(),
             ':horaFin' => $horarioLaboratorio->getHoraFin(),
             ':idGrupoLab' => $horarioLaboratorio->getIdGrupoLab());
-        $results=$dataSource->executeQuery($sql,$values);
+        $results=$dataSource->executeInsertUpdateDelete($sql,$values);
         return $results;
 
     }
@@ -41,16 +51,16 @@ class DAOHorarioLaboratorioImplements implements DAOHorarioLaboratorio{
             ':horaInicio' => $horarioLaboratorio->getHoraInicio(),
             ':horaFin' => $horarioLaboratorio->getHoraFin(),
             ':idGrupoLab' => $horarioLaboratorio->getIdGrupoLab());
-        $results=$dataSource->executeQuery($sql,$values);
+        $results=$dataSource->executeInsertUpdateDelete($sql,$values);
         return $results;
     }
 
-    public static function deleteHorarioLaboratorio($idHorarioLab){
+    public static function deleteHorarioLaboratorio($idHorarioLaboratorio){
         $singletonDataSource=new SingletonDataSource();
         $dataSource=$singletonDataSource->getInstance();
-        $sql="DELETE FROM horarioLaboratorio WHERE IdHorarioLab = :idHorarioLab";
-        $values=array(':idHorarioLab' => $idHorarioLab);
-        $results=$dataSource->executeQuery($sql,$values);
+        $sql="DELETE FROM horarioLaboratorio WHERE IdHorarioLab = :idHorarioLaboratorio";
+        $values=array(':idHorarioLaboratorio' => $idHorarioLaboratorio);
+        $results=$dataSource->executeInsertUpdateDelete($sql,$values);
         return $results;
     }
 }

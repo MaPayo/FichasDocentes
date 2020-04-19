@@ -4,12 +4,14 @@ namespace es\ucm;
 
 interface SAGrupoClase{
 
-    public static function findGrupoClase($idAsignatura);
+    public static function listGrupoClase($idAsignatura);
+
+    public static function findGrupoClase($idGrupoClase);
 
     public static function createGrupoClase($grupoClase);
 
     public static function updateGrupoClase($grupoClase);
     
-    public static function deleteGrupoClase($idAsignatura);
+    public static function deleteGrupoClase($idGrupoClase);
 
 }

@@ -2,45 +2,52 @@
 
 namespace es\ucm;
 
-require_once('includes/Negocio/CompetenciaAsignatura/SAModCompetenciaAsignatura.php');
-require_once('includes/Negocio/CompetenciaAsignatura/CompetenciaAsignatura.php');
+require_once('includes/Negocio/CompetenciasAsignatura/SAModCompetenciaAsignatura.php');
+require_once('includes/Negocio/CompetenciasAsignatura/CompetenciaAsignatura.php');
 require_once('includes/Integracion/Factorias/FactoriesDAOImplements.php');
 
 class SAModCompetenciaAsignaturaImplements implements SAModCompetenciaAsignatura{
-
-    private static $DAOModCompetenciaAsignatura;
-
-    public function __construct(){
-        $factoriesDAO=new \es\ucm\FactoriesDAOImplements();
-        $DAOModCompetenciaAsignatura=$factoriesDAO->createDAOModCompetenciaAsignatura(); 
-    }
     
     
-    public static function findModCompetenciaAsignatura($idAsignatura){
+    public static function findModCompetenciaAsignatura($idModAsignatura){
         $factoriesDAO=new \es\ucm\FactoriesDAOImplements();
         $DAOModCompetenciaAsignatura=$factoriesDAO->createDAOModCompetenciaAsignatura();
-        $competenciaAsignatura=$DAOModCompetenciaAsignatura->findModCompetenciaAsignatura($idAsignatura);
+        $competenciaAsignatura=$DAOModCompetenciaAsignatura->findModCompetenciaAsignatura($idModAsignatura);
+        if ($competenciaAsignatura && count($competenciaAsignatura) === 1) {
+            $competenciaAsignatura = new CompetenciaAsignatura(
+                $competenciaAsignatura[0]['IdCompetencia'],
+                $competenciaAsignatura[0]['Generales'],
+                $competenciaAsignatura[0]['Generalesi'],
+                $competenciaAsignatura[0]['Especificas'],
+                $competenciaAsignatura[0]['Especificasi'],
+                $competenciaAsignatura[0]['BasicasYTransversales'],
+                $competenciaAsignatura[0]['BasicasYTransversalesi'],
+                $competenciaAsignatura[0]['ResultadosAprendizaje'],
+                $competenciaAsignatura[0]['ResultadosAprendizajei'],
+                $competenciaAsignatura[0]['IdModAsignatura']
+            );
+        }
         return $competenciaAsignatura;
     }
 
-    public static function createCompetenciaAsignatura($competenciaAsignatura){
+    public static function createModCompetenciaAsignatura($modCompetenciaAsignatura){
         $factoriesDAO=new \es\ucm\FactoriesDAOImplements();
         $DAOModCompetenciaAsignatura=$factoriesDAO->createDAOModCompetenciaAsignatura();
-        $competenciaAsignatura=$DAOModCompetenciaAsignatura->createModCompetenciaAsignatura($competenciaAsignatura);
+        $competenciaAsignatura=$DAOModCompetenciaAsignatura->createModCompetenciaAsignatura($modCompetenciaAsignatura);
         return $competenciaAsignatura;
     }
 
-    public static function updateModCompetenciaAsignatura($competenciaAsignatura){
+    public static function updateModCompetenciaAsignatura($modCompetenciaAsignatura){
         $factoriesDAO=new \es\ucm\FactoriesDAOImplements();
         $DAOModCompetenciaAsignatura=$factoriesDAO->createDAOModCompetenciaAsignatura();
-        $competenciaAsignatura=$DAOModCompetenciaAsignatura->updateModCompetenciaAsignatura($competenciaAsignatura);
+        $competenciaAsignatura=$DAOModCompetenciaAsignatura->updateModCompetenciaAsignatura($modCompetenciaAsignatura);
         return $competenciaAsignatura;
     }
 
-    public static function deleteModCompetenciaAsignatura($idAsignatura){
+    public static function deleteModCompetenciaAsignatura($idModAsignatura){
         $factoriesDAO=new \es\ucm\FactoriesDAOImplements();
         $DAOModCompetenciaAsignatura=$factoriesDAO->createDAOModCompetenciaAsignatura();
-        $competenciaAsignatura=$DAOModCompetenciaAsignatura->deleteModCompetenciaAsignatura($idAsignatura);
+        $competenciaAsignatura=$DAOModCompetenciaAsignatura->deleteModCompetenciaAsignatura($idModAsignatura);
         return $competenciaAsignatura;
     }
 

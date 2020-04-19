@@ -5,6 +5,16 @@ require_once('includes/Integracion/HorarioClase/DAOModHorarioClase.php');
 class DAOModHorarioClaseImplements implements DAOModHorarioClase{
 
 
+    public static function listModHorarioClase($idGrupoClase){
+        $singletonDataSource=new SingletonDataSource();
+        $dataSource=$singletonDataSource->getInstance();
+        $sql="SELECT * FROM modHorarioClase WHERE IdGrupoClase = :idGrupoClase";
+        $values=array(':idGrupoClase' => $idGrupoClase);
+        $results=$dataSource->executeQuery($sql,$values);
+        return $results;
+
+    }
+
     public static function findModHorarioClase($idHorarioClase){
         $singletonDataSource=new SingletonDataSource();
         $dataSource=$singletonDataSource->getInstance();
@@ -26,7 +36,7 @@ class DAOModHorarioClaseImplements implements DAOModHorarioClase{
             ':horaInicio' => $modHorarioClase->getHoraInicio(),
             ':horaFin' => $modHorarioClase->getHoraFin(),
             ':idGrupoClase' => $modHorarioClase->getIdGrupoClase());
-        $results=$dataSource->executeQuery($sql,$values);
+        $results=$dataSource->executeInsertUpdateDelete($sql,$values);
         return $results;
 
     }
@@ -41,7 +51,7 @@ class DAOModHorarioClaseImplements implements DAOModHorarioClase{
             ':horaInicio' => $modHorarioClase->getHoraInicio(),
             ':horaFin' => $modHorarioClase->getHoraFin(),
             ':idGrupoClase' => $modHorarioClase->getIdGrupoClase());
-        $results=$dataSource->executeQuery($sql,$values);
+        $results=$dataSource->executeInsertUpdateDelete($sql,$values);
         return $results;
     }
 
@@ -50,7 +60,7 @@ class DAOModHorarioClaseImplements implements DAOModHorarioClase{
         $dataSource=$singletonDataSource->getInstance();
         $sql="DELETE FROM modHorarioClase WHERE IdHorarioClase = :idHorarioClase";
         $values=array(':idHorarioClase' => $idHorarioClase);
-        $results=$dataSource->executeQuery($sql,$values);
+        $results=$dataSource->executeInsertUpdateDelete($sql,$values);
         return $results;
     }
 }

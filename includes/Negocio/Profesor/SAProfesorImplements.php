@@ -12,6 +12,14 @@ class SAProfesorImplements implements SAProfesor{
         $factoriesDAO=new \es\ucm\FactoriesDAOImplements();
         $DAOProfesor=$factoriesDAO->createDAOProfesor(); 
         $profesor=$DAOProfesor->findProfesor($emailProfesor);
+        if($profesor && count($profesor) === 1){
+            $profesor=new Profesor($profesor[0]['Email'],
+            $profesor[0]['Nombre'],
+            $profesor[0]['Departamento'],
+            $profesor[0]['Despacho'],
+            $profesor[0]['Tutoria'],
+            $profesor[0]['Facultad']);
+        }
         return $profesor;
     }
 

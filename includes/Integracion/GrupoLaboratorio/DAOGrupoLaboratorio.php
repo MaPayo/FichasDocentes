@@ -1,12 +1,16 @@
 <?php
+
 namespace es\ucm;
 
-interface DAOGrupoLaboratorio{
+interface DAOGrupoLaboratorio
+{
+    public static function listGrupoLaboratorio($idAsignatura);
+
     public static function findGrupoLaboratorio($idGrupoLaboratorio);
 
-    public static function createGrupoLaboratorio($GrupoLaboratorio);
+    public static function createGrupoLaboratorio($grupoLaboratorio);
 
-    public static function updateGrupoLaboratorio($GrupoLaboratorio);
-    
+    public static function updateGrupoLaboratorio($grupoLaboratorio);
+
     public static function deleteGrupoLaboratorio($idGrupoLaboratorio);
 }

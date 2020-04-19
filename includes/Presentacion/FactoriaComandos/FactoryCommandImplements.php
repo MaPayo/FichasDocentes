@@ -3,26 +3,154 @@
 namespace es\ucm;
 
 require_once('includes/Presentacion/FactoriaComandos/FactoryCommand.php');
+
+require_once('includes/Presentacion/FactoriaComandos/Administrador/CommandCreateAdministrador.php');
+require_once('includes/Presentacion/FactoriaComandos/Administrador/CommandDeleteAdministrador.php');
 require_once('includes/Presentacion/FactoriaComandos/Administrador/CommandFindAdministrador.php');
+require_once('includes/Presentacion/FactoriaComandos/Administrador/CommandUpdateAdministrador.php');
+
+require_once('includes/Presentacion/FactoriaComandos/Asignatura/CommandCreateAsignatura.php');
+require_once('includes/Presentacion/FactoriaComandos/Asignatura/CommandDeleteAsignatura.php');
 require_once('includes/Presentacion/FactoriaComandos/Asignatura/CommandFindAsignatura.php');
+require_once('includes/Presentacion/FactoriaComandos/Asignatura/CommandUpdateAsignatura.php');
+require_once('includes/Presentacion/FactoriaComandos/Asignatura/CommandCreateModAsignatura.php');
+require_once('includes/Presentacion/FactoriaComandos/Asignatura/CommandDeleteModAsignatura.php');
+require_once('includes/Presentacion/FactoriaComandos/Asignatura/CommandFindModAsignatura.php');
+require_once('includes/Presentacion/FactoriaComandos/Asignatura/CommandUpdateModAsignatura.php');
+
+require_once('includes/Presentacion/FactoriaComandos/Bibliografia/CommandCreateBibliografia.php');
+require_once('includes/Presentacion/FactoriaComandos/Bibliografia/CommandDeleteBibliografia.php');
 require_once('includes/Presentacion/FactoriaComandos/Bibliografia/CommandFindBibliografia.php');
+require_once('includes/Presentacion/FactoriaComandos/Bibliografia/CommandUpdateBibliografia.php');
+require_once('includes/Presentacion/FactoriaComandos/Bibliografia/CommandCreateModBibliografia.php');
+require_once('includes/Presentacion/FactoriaComandos/Bibliografia/CommandDeleteModBibliografia.php');
+require_once('includes/Presentacion/FactoriaComandos/Bibliografia/CommandFindModBibliografia.php');
+require_once('includes/Presentacion/FactoriaComandos/Bibliografia/CommandUpdateModBibliografia.php');
+
+require_once('includes/Presentacion/FactoriaComandos/CompetenciasAsignatura/CommandCreateCompetenciasAsignatura.php');
+require_once('includes/Presentacion/FactoriaComandos/CompetenciasAsignatura/CommandDeleteCompetenciasAsignatura.php');
 require_once('includes/Presentacion/FactoriaComandos/CompetenciasAsignatura/CommandFindCompetenciasAsignatura.php');
+require_once('includes/Presentacion/FactoriaComandos/CompetenciasAsignatura/CommandUpdateCompetenciasAsignatura.php');
+require_once('includes/Presentacion/FactoriaComandos/CompetenciasAsignatura/CommandCreateModCompetenciasAsignatura.php');
+require_once('includes/Presentacion/FactoriaComandos/CompetenciasAsignatura/CommandDeleteModCompetenciasAsignatura.php');
+require_once('includes/Presentacion/FactoriaComandos/CompetenciasAsignatura/CommandFindModCompetenciasAsignatura.php');
+require_once('includes/Presentacion/FactoriaComandos/CompetenciasAsignatura/CommandUpdateModCompetenciasAsignatura.php');
+
+require_once('includes/Presentacion/FactoriaComandos/Configuracion/CommandCreateConfiguracion.php');
+require_once('includes/Presentacion/FactoriaComandos/Configuracion/CommandDeleteConfiguracion.php');
 require_once('includes/Presentacion/FactoriaComandos/Configuracion/CommandFindConfiguracion.php');
+require_once('includes/Presentacion/FactoriaComandos/Configuracion/CommandUpdateConfiguracion.php');
+
+require_once('includes/Presentacion/FactoriaComandos/Evaluacion/CommandCreateEvaluacion.php');
+require_once('includes/Presentacion/FactoriaComandos/Evaluacion/CommandDeleteEvaluacion.php');
 require_once('includes/Presentacion/FactoriaComandos/Evaluacion/CommandFindEvaluacion.php');
+require_once('includes/Presentacion/FactoriaComandos/Evaluacion/CommandUpdateEvaluacion.php');
+require_once('includes/Presentacion/FactoriaComandos/Evaluacion/CommandCreateModEvaluacion.php');
+require_once('includes/Presentacion/FactoriaComandos/Evaluacion/CommandDeleteModEvaluacion.php');
+require_once('includes/Presentacion/FactoriaComandos/Evaluacion/CommandFindModEvaluacion.php');
+require_once('includes/Presentacion/FactoriaComandos/Evaluacion/CommandUpdateModEvaluacion.php');
+
+require_once('includes/Presentacion/FactoriaComandos/Grado/CommandCreateGrado.php');
+require_once('includes/Presentacion/FactoriaComandos/Grado/CommandDeleteGrado.php');
 require_once('includes/Presentacion/FactoriaComandos/Grado/CommandFindGrado.php');
+require_once('includes/Presentacion/FactoriaComandos/Grado/CommandListGrado.php');
+require_once('includes/Presentacion/FactoriaComandos/Grado/CommandUpdateGrado.php');
+
+require_once('includes/Presentacion/FactoriaComandos/GrupoClase/CommandCreateGrupoClase.php');
+require_once('includes/Presentacion/FactoriaComandos/GrupoClase/CommandDeleteGrupoClase.php');
 require_once('includes/Presentacion/FactoriaComandos/GrupoClase/CommandFindGrupoClase.php');
+require_once('includes/Presentacion/FactoriaComandos/GrupoClase/CommandListGrupoClase.php');
+require_once('includes/Presentacion/FactoriaComandos/GrupoClase/CommandUpdateGrupoClase.php');
+require_once('includes/Presentacion/FactoriaComandos/GrupoClase/CommandCreateModGrupoClase.php');
+require_once('includes/Presentacion/FactoriaComandos/GrupoClase/CommandDeleteModGrupoClase.php');
+require_once('includes/Presentacion/FactoriaComandos/GrupoClase/CommandFindModGrupoClase.php');
+require_once('includes/Presentacion/FactoriaComandos/GrupoClase/CommandListModGrupoClase.php');
+require_once('includes/Presentacion/FactoriaComandos/GrupoClase/CommandUpdateModGrupoClase.php');
+
+require_once('includes/Presentacion/FactoriaComandos/GrupoClaseProfesor/CommandCreateGrupoClaseProfesor.php');
+require_once('includes/Presentacion/FactoriaComandos/GrupoClaseProfesor/CommandDeleteGrupoClaseProfesor.php');
+require_once('includes/Presentacion/FactoriaComandos/GrupoClaseProfesor/CommandFindGrupoClaseProfesor.php');
+require_once('includes/Presentacion/FactoriaComandos/GrupoClaseProfesor/CommandListGrupoClaseProfesor.php');
+require_once('includes/Presentacion/FactoriaComandos/GrupoClaseProfesor/CommandUpdateGrupoClaseProfesor.php');
+require_once('includes/Presentacion/FactoriaComandos/GrupoClaseProfesor/CommandCreateModGrupoClaseProfesor.php');
+require_once('includes/Presentacion/FactoriaComandos/GrupoClaseProfesor/CommandDeleteModGrupoClaseProfesor.php');
+require_once('includes/Presentacion/FactoriaComandos/GrupoClaseProfesor/CommandFindModGrupoClaseProfesor.php');
+require_once('includes/Presentacion/FactoriaComandos/GrupoClaseProfesor/CommandListModGrupoClaseProfesor.php');
+require_once('includes/Presentacion/FactoriaComandos/GrupoClaseProfesor/CommandUpdateModGrupoClaseProfesor.php');
+
+require_once('includes/Presentacion/FactoriaComandos/GrupoLaboratorio/CommandCreateGrupoLaboratorio.php');
+require_once('includes/Presentacion/FactoriaComandos/GrupoLaboratorio/CommandDeleteGrupoLaboratorio.php');
 require_once('includes/Presentacion/FactoriaComandos/GrupoLaboratorio/CommandFindGrupoLaboratorio.php');
+require_once('includes/Presentacion/FactoriaComandos/GrupoLaboratorio/CommandListGrupoLaboratorio.php');
+require_once('includes/Presentacion/FactoriaComandos/GrupoLaboratorio/CommandUpdateGrupoLaboratorio.php');
+require_once('includes/Presentacion/FactoriaComandos/GrupoLaboratorio/CommandCreateModGrupoLaboratorio.php');
+require_once('includes/Presentacion/FactoriaComandos/GrupoLaboratorio/CommandDeleteModGrupoLaboratorio.php');
+require_once('includes/Presentacion/FactoriaComandos/GrupoLaboratorio/CommandFindModGrupoLaboratorio.php');
+require_once('includes/Presentacion/FactoriaComandos/GrupoLaboratorio/CommandListModGrupoLaboratorio.php');
+require_once('includes/Presentacion/FactoriaComandos/GrupoLaboratorio/CommandUpdateModGrupoLaboratorio.php');
+
+require_once('includes/Presentacion/FactoriaComandos/GrupoLaboratorioProfesor/CommandCreateGrupoLaboratorioProfesor.php');
+require_once('includes/Presentacion/FactoriaComandos/GrupoLaboratorioProfesor/CommandDeleteGrupoLaboratorioProfesor.php');
+require_once('includes/Presentacion/FactoriaComandos/GrupoLaboratorioProfesor/CommandFindGrupoLaboratorioProfesor.php');
+require_once('includes/Presentacion/FactoriaComandos/GrupoLaboratorioProfesor/CommandListGrupoLaboratorioProfesor.php');
+require_once('includes/Presentacion/FactoriaComandos/GrupoLaboratorioProfesor/CommandUpdateGrupoLaboratorioProfesor.php');
+require_once('includes/Presentacion/FactoriaComandos/GrupoLaboratorioProfesor/CommandCreateModGrupoLaboratorioProfesor.php');
+require_once('includes/Presentacion/FactoriaComandos/GrupoLaboratorioProfesor/CommandDeleteModGrupoLaboratorioProfesor.php');
+require_once('includes/Presentacion/FactoriaComandos/GrupoLaboratorioProfesor/CommandFindModGrupoLaboratorioProfesor.php');
+require_once('includes/Presentacion/FactoriaComandos/GrupoLaboratorioProfesor/CommandListModGrupoLaboratorioProfesor.php');
+require_once('includes/Presentacion/FactoriaComandos/GrupoLaboratorioProfesor/CommandUpdateModGrupoLaboratorioProfesor.php');
+
+require_once('includes/Presentacion/FactoriaComandos/HorarioClase/CommandCreateHorarioClase.php');
+require_once('includes/Presentacion/FactoriaComandos/HorarioClase/CommandDeleteHorarioClase.php');
 require_once('includes/Presentacion/FactoriaComandos/HorarioClase/CommandFindHorarioClase.php');
+require_once('includes/Presentacion/FactoriaComandos/HorarioClase/CommandListHorarioClase.php');
+require_once('includes/Presentacion/FactoriaComandos/HorarioClase/CommandUpdateHorarioClase.php');
+require_once('includes/Presentacion/FactoriaComandos/HorarioClase/CommandCreateModHorarioClase.php');
+require_once('includes/Presentacion/FactoriaComandos/HorarioClase/CommandDeleteModHorarioClase.php');
+require_once('includes/Presentacion/FactoriaComandos/HorarioClase/CommandFindModHorarioClase.php');
+require_once('includes/Presentacion/FactoriaComandos/HorarioClase/CommandListModHorarioClase.php');
+require_once('includes/Presentacion/FactoriaComandos/HorarioClase/CommandUpdateModHorarioClase.php');
+
+require_once('includes/Presentacion/FactoriaComandos/HorarioLaboratorio/CommandCreateHorarioLaboratorio.php');
+require_once('includes/Presentacion/FactoriaComandos/HorarioLaboratorio/CommandDeleteHorarioLaboratorio.php');
 require_once('includes/Presentacion/FactoriaComandos/HorarioLaboratorio/CommandFindHorarioLaboratorio.php');
+require_once('includes/Presentacion/FactoriaComandos/HorarioLaboratorio/CommandListHorarioLaboratorio.php');
+require_once('includes/Presentacion/FactoriaComandos/HorarioLaboratorio/CommandUpdateHorarioLaboratorio.php');
+require_once('includes/Presentacion/FactoriaComandos/HorarioLaboratorio/CommandCreateModHorarioLaboratorio.php');
+require_once('includes/Presentacion/FactoriaComandos/HorarioLaboratorio/CommandDeleteModHorarioLaboratorio.php');
+require_once('includes/Presentacion/FactoriaComandos/HorarioLaboratorio/CommandFindModHorarioLaboratorio.php');
+require_once('includes/Presentacion/FactoriaComandos/HorarioLaboratorio/CommandListModHorarioLaboratorio.php');
+require_once('includes/Presentacion/FactoriaComandos/HorarioLaboratorio/CommandUpdateModHorarioLaboratorio.php');
+
 require_once('includes/Presentacion/FactoriaComandos/Laboratorio/CommandFindLaboratorio.php');
+
 require_once('includes/Presentacion/FactoriaComandos/Leyenda/CommandFindLeyenda.php');
+
+require_once('includes/Presentacion/FactoriaComandos/Materia/CommandFindMateria.php');
+
 require_once('includes/Presentacion/FactoriaComandos/Metodologia/CommandFindMetodologia.php');
+require_once('includes/Presentacion/FactoriaComandos/Metodologia/CommandFindModMetodologia.php');
+require_once('includes/Presentacion/FactoriaComandos/Metodologia/CommandCreateModMetodologia.php');
+require_once('includes/Presentacion/FactoriaComandos/Metodologia/CommandUpdateModMetodologia.php');
+
+require_once('includes/Presentacion/FactoriaComandos/Modulo/CommandFindModulo.php');
+
 require_once('includes/Presentacion/FactoriaComandos/Permisos/CommandFindPermisos.php');
+require_once('includes/Presentacion/FactoriaComandos/Permisos/CommandFindPermisosPorProfesor.php');
+
 require_once('includes/Presentacion/FactoriaComandos/Problema/CommandFindProblema.php');
+
 require_once('includes/Presentacion/FactoriaComandos/Profesor/CommandFindProfesor.php');
+
 require_once('includes/Presentacion/FactoriaComandos/ProgramaAsignatura/CommandFindProgramaAsignatura.php');
+require_once('includes/Presentacion/FactoriaComandos/ProgramaAsignatura/CommandFindModProgramaAsignatura.php');
+require_once('includes/Presentacion/FactoriaComandos/ProgramaAsignatura/CommandCreateModProgramaAsignatura.php');
+require_once('includes/Presentacion/FactoriaComandos/ProgramaAsignatura/CommandUpdateModProgramaAsignatura.php');
+
 require_once('includes/Presentacion/FactoriaComandos/Teorico/CommandFindTeorico.php');
+
 require_once('includes/Presentacion/FactoriaComandos/Usuario/CommandFindUsuario.php');
+
 require_once('includes/Presentacion/FactoriaComandos/Verifica/CommandFindVerifica.php');
 
 class FactoryCommandImplements extends FactoryCommand
@@ -62,16 +190,16 @@ class FactoryCommandImplements extends FactoryCommand
             case DELETE_MODASIGNATURA:
                 $command = new CommandDeleteModAsignatura();
                 break;
-           /* case UPDATE_MODASIGNATURA:
+            case UPDATE_MODASIGNATURA:
                 $command = new CommandUpdateModAsignatura();
                 break;
             case FIND_MODASIGNATURA:
                 $command = new CommandFindModAsignatura();
-                break;*/
+                break;
             case CREATE_BIBLIOGRAFIA:
                 $command = new CommandCreateBibliografia();
                 break;
-            /*case DELETE_BIBLIOGRAFIA:
+            case DELETE_BIBLIOGRAFIA:
                 $command = new CommandDeleteBibliografia();
                 break;
             case UPDATE_BIBLIOGRAFIA:
@@ -164,6 +292,9 @@ class FactoryCommandImplements extends FactoryCommand
             case FIND_GRADO:
                 $command = new CommandFindGrado();
                 break;
+            case LIST_GRADO:
+                $command = new CommandListGrado();
+                break;
             case CREATE_GRUPO_CLASE:
                 $command = new CommandCreateGrupoClase();
                 break;
@@ -175,6 +306,9 @@ class FactoryCommandImplements extends FactoryCommand
                 break;
             case FIND_GRUPO_CLASE:
                 $command = new CommandFindGrupoClase();
+                break;
+            case LIST_GRUPO_CLASE:
+                $command = new CommandListGrupoClase();
                 break;
             case CREATE_MODGRUPO_CLASE:
                 $command = new CommandCreateModGrupoClase();
@@ -188,6 +322,9 @@ class FactoryCommandImplements extends FactoryCommand
             case FIND_MODGRUPO_CLASE:
                 $command = new CommandFindModGrupoClase();
                 break;
+            case LIST_MODGRUPO_CLASE:
+                $command = new CommandListModGrupoClase();
+                break;
             case CREATE_GRUPO_LABORATORIO:
                 $command = new CommandCreateGrupoLaboratorio();
                 break;
@@ -199,6 +336,9 @@ class FactoryCommandImplements extends FactoryCommand
                 break;
             case FIND_GRUPO_LABORATORIO:
                 $command = new CommandFindGrupoLaboratorio();
+                break;
+            case LIST_GRUPO_LABORATORIO:
+                $command = new CommandListGrupoLaboratorio();
                 break;
             case CREATE_MODGRUPO_LABORATORIO:
                 $command = new CommandCreateModGrupoLaboratorio();
@@ -212,6 +352,69 @@ class FactoryCommandImplements extends FactoryCommand
             case FIND_MODGRUPO_LABORATORIO:
                 $command = new CommandFindModGrupoLaboratorio();
                 break;
+            case LIST_MODGRUPO_LABORATORIO:
+                $command = new CommandListModGrupoLaboratorio();
+                break;
+                case CREATE_GRUPO_CLASE_PROFESOR:
+                $command = new CommandCreateGrupoClaseProfesor();
+                break;
+            case DELETE_GRUPO_CLASE_PROFESOR:
+                $command = new CommandDeleteGrupoClaseProfesor();
+                break;
+            case UPDATE_GRUPO_CLASE_PROFESOR:
+                $command = new CommandUpdateGrupoClaseProfesor();
+                break;
+            case FIND_GRUPO_CLASE_PROFESOR:
+                $command = new CommandFindGrupoClaseProfesor();
+                break;
+            case LIST_GRUPO_CLASE_PROFESOR:
+                $command = new CommandListGrupoClaseProfesor();
+                break;
+            case CREATE_MODGRUPO_CLASE_PROFESOR:
+                $command = new CommandCreateModGrupoClaseProfesor();
+                break;
+            case DELETE_MODGRUPO_CLASE_PROFESOR:
+                $command = new CommandDeleteModGrupoClaseProfesor();
+                break;
+            case UPDATE_MODGRUPO_CLASE_PROFESOR:
+                $command = new CommandUpdateModGrupoClaseProfesor();
+                break;
+            case FIND_MODGRUPO_CLASE_PROFESOR:
+                $command = new CommandFindModGrupoClaseProfesor();
+                break;
+            case LIST_MODGRUPO_CLASE_PROFESOR:
+                $command = new CommandListModGrupoClaseProfesor();
+                break;
+            case CREATE_GRUPO_LABORATORIO_PROFESOR:
+                $command = new CommandCreateGrupoLaboratorioProfesor();
+                break;
+            case DELETE_GRUPO_LABORATORIO_PROFESOR:
+                $command = new CommandDeleteGrupoLaboratorioProfesor();
+                break;
+            case UPDATE_GRUPO_LABORATORIO_PROFESOR:
+                $command = new CommandUpdateGrupoLaboratorioProfesor();
+                break;
+            case FIND_GRUPO_LABORATORIO_PROFESOR:
+                $command = new CommandFindGrupoLaboratorioProfesor();
+                break;
+            case LIST_GRUPO_LABORATORIO_PROFESOR:
+                $command = new CommandListGrupoLaboratorioProfesor();
+                break;
+            case CREATE_MODGRUPO_LABORATORIO_PROFESOR:
+                $command = new CommandCreateModGrupoLaboratorioProfesor();
+                break;
+            case DELETE_MODGRUPO_LABORATORIO_PROFESOR:
+                $command = new CommandDeleteModGrupoLaboratorioProfesor();
+                break;
+            case UPDATE_MODGRUPO_LABORATORIO_PROFESOR:
+                $command = new CommandUpdateModGrupoLaboratorioProfesor();
+                break;
+            case FIND_MODGRUPO_LABORATORIO_PROFESOR:
+                $command = new CommandFindModGrupoLaboratorioProfesor();
+                break;
+            case LIST_MODGRUPO_LABORATORIO_PROFESOR:
+                $command = new CommandListModGrupoLaboratorioProfesor();
+                break;
             case CREATE_HORARIO_CLASE:
                 $command = new CommandCreateHorarioClase();
                 break;
@@ -223,6 +426,9 @@ class FactoryCommandImplements extends FactoryCommand
                 break;
             case FIND_HORARIO_CLASE:
                 $command = new CommandFindHorarioClase();
+                break;
+            case LIST_HORARIO_CLASE:
+                $command = new CommandListHorarioClase();
                 break;
             case CREATE_MODHORARIO_CLASE:
                 $command = new CommandCreateModHorarioClase();
@@ -236,6 +442,9 @@ class FactoryCommandImplements extends FactoryCommand
             case FIND_MODHORARIO_CLASE:
                 $command = new CommandFindModHorarioClase();
                 break;
+            case LIST_MODHORARIO_CLASE:
+                $command = new CommandListModHorarioClase();
+                break;
             case CREATE_HORARIO_LABORATORIO:
                 $command = new CommandCreateHorarioLaboratorio();
                 break;
@@ -248,6 +457,9 @@ class FactoryCommandImplements extends FactoryCommand
             case FIND_HORARIO_LABORATORIO:
                 $command = new CommandFindHorarioLaboratorio();
                 break;
+            case LIST_HORARIO_LABORATORIO:
+                $command = new CommandListHorarioLaboratorio();
+                break;
             case CREATE_MODHORARIO_LABORATORIO:
                 $command = new CommandCreateModHorarioLaboratorio();
                 break;
@@ -259,16 +471,19 @@ class FactoryCommandImplements extends FactoryCommand
                 break;
             case FIND_MODHORARIO_LABORATORIO:
                 $command = new CommandFindModHorarioLaboratorio();
-                break;*/
+                break;
+            case LIST_MODHORARIO_LABORATORIO:
+                $command = new CommandListModHorarioLaboratorio();
+                break;
             case CREATE_LABORATORIO:
                 $command = new CommandCreateLaboratorio();
                 break;
             case DELETE_LABORATORIO:
                 $command = new CommandDeleteLaboratorio();
                 break;
-            /*case UPDATE_LABORATORIO:
+            case UPDATE_LABORATORIO:
                 $command = new CommandUpdateLaboratorio();
-                break;*/
+                break;
             case FIND_LABORATORIO:
                 $command = new CommandFindLaboratorio();
                 break;
@@ -283,6 +498,18 @@ class FactoryCommandImplements extends FactoryCommand
                 break;
             case FIND_LEYENDA:
                 $command = new CommandFindLeyenda();
+                break;
+            case CREATE_MATERIA:
+                $command = new CommandCreateMateria();
+                break;
+            case DELETE_MATERIA:
+                $command = new CommandDeleteMateria();
+                break;
+            case UPDATE_MATERIA:
+                $command = new CommandUpdateMateria();
+                break;
+            case FIND_MATERIA:
+                $command = new CommandFindMateria();
                 break;
             case CREATE_METODOLOGIA:
                 $command = new CommandCreateMetodologia();
@@ -308,6 +535,18 @@ class FactoryCommandImplements extends FactoryCommand
             case FIND_MODMETODOLOGIA:
                 $command = new CommandFindModMetodologia();
                 break;
+            case CREATE_MODULO:
+                $command = new CommandCreateModulo();
+                break;
+            case DELETE_MODULO:
+                $command = new CommandDeleteModulo();
+                break;
+            case UPDATE_MODULO:
+                $command = new CommandUpdateModulo();
+                break;
+            case FIND_MODULO:
+                $command = new CommandFindModulo();
+                break;
             case CREATE_PERMISOS:
                 $command = new CommandCreatePermisos();
                 break;
@@ -319,6 +558,9 @@ class FactoryCommandImplements extends FactoryCommand
                 break;
             case FIND_PERMISOS:
                 $command = new CommandFindPermisos();
+                break;
+            case FIND_PERMISOS_POR_PROFESOR:
+                $command = new CommandFindPermisosPorProfesor();
                 break;
             case CREATE_PROBLEMA:
                 $command = new CommandCreateProblema();
@@ -404,7 +646,7 @@ class FactoryCommandImplements extends FactoryCommand
             case FIND_VERIFICA:
                 $command = new CommandFindVerifica();
                 break;
-            }
+        }
         return $command;
-   }
+    }
 }

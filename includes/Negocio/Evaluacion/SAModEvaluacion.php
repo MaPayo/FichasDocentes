@@ -3,12 +3,12 @@ namespace es\ucm;
 
 interface SAModEvaluacion{
 
-    public static function findModEvaluacion($idAsignatura);
+    public static function findModEvaluacion($idModAsignatura);
 
-    public static function createModEvaluacion($evaluacion);
+    public static function createModEvaluacion($modEvaluacion);
 
-    public static function updateModEvaluacion($evaluacion);
+    public static function updateModEvaluacion($modEvaluacion);
     
-    public static function deleteModEvaluacion($idAsignatura);
+    public static function deleteModEvaluacion($idModAsignatura);
 
 }

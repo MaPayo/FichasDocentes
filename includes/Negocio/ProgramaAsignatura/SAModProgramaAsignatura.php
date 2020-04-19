@@ -4,12 +4,12 @@ namespace es\ucm;
 
 interface SAModProgramaAsignatura{
 
-    public static function findModProgramaAsignatura($idAsignatura);
+    public static function findModProgramaAsignatura($idModAsignatura);
 
-    public static function createModProgramaAsignatura($programaAsignatura);
+    public static function createModProgramaAsignatura($modProgramaAsignatura);
 
-    public static function updateModProgramaAsignatura($programaAsignatura);
+    public static function updateModProgramaAsignatura($modProgramaAsignatura);
     
-    public static function deleteModProgramaAsignatura($idAsignatura);
+    public static function deleteModProgramaAsignatura($idModAsignatura);
 
 }

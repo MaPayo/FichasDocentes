@@ -11,6 +11,20 @@ class SACompetenciaAsignaturaImplements implements SACompetenciaAsignatura{
         $factoriesDAO=new \es\ucm\FactoriesDAOImplements();
         $DAOCompetenciaAsignatura=$factoriesDAO->createDAOCompetenciaAsignatura(); 
         $competenciaAsignatura=$DAOCompetenciaAsignatura->findCompetenciaAsignatura($idAsignatura);
+        if ($competenciaAsignatura && count($competenciaAsignatura) === 1) {
+            $competenciaAsignatura = new CompetenciaAsignatura(
+                $competenciaAsignatura[0]['IdCompetencia'],
+                $competenciaAsignatura[0]['Generales'],
+                $competenciaAsignatura[0]['Generalesi'],
+                $competenciaAsignatura[0]['Especificas'],
+                $competenciaAsignatura[0]['Especificasi'],
+                $competenciaAsignatura[0]['BasicasYTransversales'],
+                $competenciaAsignatura[0]['BasicasYTransversalesi'],
+                $competenciaAsignatura[0]['ResultadosAprendizaje'],
+                $competenciaAsignatura[0]['ResultadosAprendizajei'],
+                $competenciaAsignatura[0]['IdAsignatura']
+            );
+        }
         return $competenciaAsignatura;
     }
 

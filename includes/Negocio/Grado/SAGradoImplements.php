@@ -40,4 +40,18 @@ class SAGradoImplements implements SAGrado
         $grado = $DAOGrado->deleteGrado($codigoGrado);
         return $grado;
     }
+
+    public static function listGrado()
+    {
+        $factoriesDAO = new \es\ucm\FactoriesDAOImplements();
+        $DAOGrado = $factoriesDAO->createDAOGrado();
+        $grados = $DAOGrado->listGrado();
+        $arrayGrados = array();
+        if($grados){
+            foreach ($grados as $grado) {
+              $arrayGrados[] = new Grado($grado['CodigoGrado'], $grado['NombreGrado'], $grado['HorasEcts']);
+            }
+        }
+        return $arrayGrados;
+    }
 }

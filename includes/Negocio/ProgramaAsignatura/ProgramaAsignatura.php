@@ -11,7 +11,7 @@ class ProgramaAsignatura{
 	private $ProgramaDetalladoI;
 	private $IdAsignatura;
 
-	public function __construct(){
+	public function __construct($IdPrograma,$ConocimientosPrevios,$ConocimientosPreviosI,$BreveDescripcion,$BreveDescripcionI,$ProgramaDetallado,$ProgramaDetalladoI,$IdAsignatura){
 		$this->IdPrograma = $IdPrograma;
 		$this->ConocimientosPrevios = $ConocimientosPrevios;
 		$this->ConocimientosPreviosI = $ConocimientosPreviosI;

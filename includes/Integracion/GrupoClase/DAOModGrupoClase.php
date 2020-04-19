@@ -2,11 +2,13 @@
 namespace es\ucm;
 
 interface DAOModGrupoClase{
-    public static function findModGrupoClase($idModGrupoClase);
+    public static function listModGrupoClase($idModAsignatura);
 
-    public static function createModGrupoClase($ModGrupoClase);
+    public static function findModGrupoClase($idGrupoClase);
 
-    public static function updateModGrupoClase($ModGrupoClase);
+    public static function createModGrupoClase($modGrupoClase);
+
+    public static function updateModGrupoClase($modGrupoClase);
     
-    public static function deleteModGrupoClase($idModGrupoClase);
+    public static function deleteModGrupoClase($idGrupoClase);
 }

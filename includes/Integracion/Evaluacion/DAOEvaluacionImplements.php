@@ -5,11 +5,11 @@ require_once('includes/Integracion/Evaluacion/DAOEvaluacion.php');
 class DAOEvaluacionImplements implements DAOEvaluacion{
 
 
-    public static function findEvaluacion($idEvaluacion){
+    public static function findEvaluacion($idAsignatura){
         $singletonDataSource=new SingletonDataSource();
         $dataSource=$singletonDataSource->getInstance();
-        $sql="SELECT * FROM evaluacion WHERE IdEvaluacion = :idEvaluacion";
-        $values=array(':idEvaluacion' => $idEvaluacion);
+        $sql="SELECT * FROM evaluacion WHERE IdAsignatura = :idAsignatura";
+        $values=array(':idAsignatura' => $idAsignatura);
         $results=$dataSource->executeQuery($sql,$values);
         return $results;
 
@@ -33,7 +33,7 @@ class DAOEvaluacionImplements implements DAOEvaluacion{
             ':realizacionLaboratorio' => $evaluacion->getRealizacionLaboratorioI(),
             ':pesoLaboratorio' => $evaluacion->getPesolaboratorio(),
             ':idAsignatura' => $evaluacion->getIdAsignatura());
-        $results=$dataSource->executeQuery($sql,$values);
+        $results=$dataSource->executeInsertUpdateDelete($sql,$values);
         return $results;
 
     }
@@ -55,16 +55,16 @@ class DAOEvaluacionImplements implements DAOEvaluacion{
             ':realizacionLaboratorio' => $evaluacion->getRealizacionLaboratorioI(),
             ':pesoLaboratorio' => $evaluacion->getPesolaboratorio(),
             ':idAsignatura' => $evaluacion->getIdAsignatura());
-        $results=$dataSource->executeQuery($sql,$values);
+        $results=$dataSource->executeInsertUpdateDelete($sql,$values);
         return $results;
     }
 
-    public static function deleteEvaluacion($idEvaluacion){
+    public static function deleteEvaluacion($idAsignatura){
         $singletonDataSource=new SingletonDataSource();
         $dataSource=$singletonDataSource->getInstance();
-        $sql="DELETE FROM evaluacion WHERE IdEvaluacion = :idEvaluacion";
-        $values=array(':idEvaluacion' => $idEvaluacion);
-        $results=$dataSource->executeQuery($sql,$values);
+        $sql="DELETE FROM evaluacion WHERE IdAsignatura = :idAsignatura";
+        $values=array(':idAsignatura' => $idAsignatura);
+        $results=$dataSource->executeInsertUpdateDelete($sql,$values);
         return $results;
     }
 }

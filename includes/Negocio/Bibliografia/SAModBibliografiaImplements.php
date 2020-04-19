@@ -8,10 +8,18 @@ require_once('includes/Integracion/Factorias/FactoriesDAOImplements.php');
 
 class SAModBibliografiaImplements implements SAModBibliografia{
 
-    public static function findModBibliografia($idBibliografia){
+    public static function findModBibliografia($idModAsignatura){
         $factoriesDAO=new \es\ucm\FactoriesDAOImplements();
         $DAOBibliografia=$factoriesDAO->createDAOModBibliografia(); 
-        $bibliografia=$DAOBibliografia->findModBibliografia($idBibliografia);
+        $bibliografia=$DAOBibliografia->findModBibliografia($idModAsignatura);
+        if ($bibliografia && count($bibliografia) === 1) {
+            $bibliografia = new Bibliografia(
+                $bibliografia[0]['IdBibliografia'],
+                $bibliografia[0]['CitasBibliograficas'],
+                $bibliografia[0]['RecursosInternet'],
+                $bibliografia[0]['IdModAsignatura']
+            );
+        }
         return $bibliografia;
     }
 
@@ -29,10 +37,10 @@ class SAModBibliografiaImplements implements SAModBibliografia{
         return $bibliografia;
     }
 
-    public static function deleteModBibliografia($idBibliografia){
+    public static function deleteModBibliografia($idModAsignatura){
         $factoriesDAO=new \es\ucm\FactoriesDAOImplements();
         $DAOBibliografia=$factoriesDAO->createDAOModBibliografia(); 
-        $bibliografia=$DAOBibliografia->deleteModBibliografia($idBibliografia);
+        $bibliografia=$DAOBibliografia->deleteModBibliografia($idModAsignatura);
         return $bibliografia;
     }
 

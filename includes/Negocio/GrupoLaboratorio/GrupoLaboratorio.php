@@ -5,13 +5,13 @@ class GrupoLaboratorio{
 	private $IdGrupoLab;
 	private $Letra;
 	private $Idioma;
-	private $IdAsignatura;
+    private $IdAsignatura;
 
 	public function __construct($IdGrupoLab,$Letra,$Idioma,$IdAsignatura){
 		$this->IdGrupoLab = $IdGrupoLab;
 		$this->Letra = $Letra;
 		$this->Idioma = $Idioma;
-		$this->IdAsignatura = $IdAsignatura;
+        $this->IdAsignatura = $IdAsignatura;
 	}
 
     /**

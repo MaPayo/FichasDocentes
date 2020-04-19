@@ -2,11 +2,13 @@
 namespace es\ucm;
 
 interface DAOModHorarioClase{
-    public static function findModHorarioClase($idModHorarioClase);
+    public static function listModHorarioClase($idGrupoClase);
 
-    public static function createModHorarioClase($ModHorarioClase);
+    public static function findModHorarioClase($idHorarioClase);
 
-    public static function updateModHorarioClase($ModHorarioClase);
+    public static function createModHorarioClase($modHorarioClase);
+
+    public static function updateModHorarioClase($modHorarioClase);
     
-    public static function deleteModHorarioClase($idModHorarioClase);
+    public static function deleteModHorarioClase($idHorarioClase);
 }

@@ -17,9 +17,9 @@ class CommandCreateModBibliografia implements Command
         $bibliografia = $saBibliografia->createModBibliografia($data);
         $responseContext = null;
         if ($bibliografia != null) {
-            $responseContext = new Context(CREATE_ASIGNATURA_OK, $bibliografia);
+            $responseContext = new Context(CREATE_MODBIBLIOGRAFIA_OK, $bibliografia);
         } else {
-            $responseContext = new Context(CREATE_ASIGNATURA_FAIL, null);
+            $responseContext = new Context(CREATE_MODBIBLIOGRAFIA_FAIL, null);
         }
         return $responseContext;
     }

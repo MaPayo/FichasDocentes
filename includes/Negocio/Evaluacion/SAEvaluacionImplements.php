@@ -13,6 +13,23 @@ class SAEvaluacionImplements implements SAEvaluacion
         $factoriesDAO = new \es\ucm\FactoriesDAOImplements();
         $DAOEvaluacion = $factoriesDAO->createDAOEvaluacion();
         $evaluacion = $DAOEvaluacion->findEvaluacion($idAsignatura);
+        if ($evaluacion && count($evaluacion) === 1) {
+            $evaluacion = new Evaluacion(
+                $evaluacion[0]['IdEvaluacion'],
+                $evaluacion[0]['RealizacionExamenes'],
+                $evaluacion[0]['RealizacionExamenesi'],
+                $evaluacion[0]['PesoExamenes'],
+                $evaluacion[0]['CalificacionFinal'],
+                $evaluacion[0]['CalificacionFinali'],
+                $evaluacion[0]['RealizacionActividades'],
+                $evaluacion[0]['RealizacionActividadesi'],
+                $evaluacion[0]['PesoActividades'],
+                $evaluacion[0]['RealizacionLaboratorio'],
+                $evaluacion[0]['RealizacionLaboratorioi'],
+                $evaluacion[0]['PesoLaboratorio'],
+                $evaluacion[0]['IdAsignatura']
+            );
+        }
         return $evaluacion;
     }
 

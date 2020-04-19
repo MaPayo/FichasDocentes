@@ -11,4 +11,6 @@ interface SAGrado{
     
     public static function deleteGrado($codigoGrado);
 
+    public static function listGrado();
+
 }

@@ -24,7 +24,7 @@ class DAOModAsignaturaImplements implements DAOModAsignatura{
             ':fechaMod' => $modAsignatura->getFechaMod(),
             ':emailMod' => $modAsignatura->getEmailMod(),
             ':idAsignatura' => $modAsignatura->getIdAsignatura());
-        $results=$dataSource->executeQuery($sql,$values);
+        $results=$dataSource->executeInsertUpdateDelete($sql,$values);
         return $results;
 
     }
@@ -37,7 +37,7 @@ class DAOModAsignaturaImplements implements DAOModAsignatura{
             ':fechaMod' => $modAsignatura->getFechaMod(),
             ':emailMod' => $modAsignatura->getEmailMod(),
             ':idAsignatura' => $modAsignatura->getIdAsignatura());
-        $results=$dataSource->executeQuery($sql,$values);
+        $results=$dataSource->executeInsertUpdateDelete($sql,$values);
         return $results;
     }
 
@@ -46,7 +46,7 @@ class DAOModAsignaturaImplements implements DAOModAsignatura{
         $dataSource=$singletonDataSource->getInstance();
         $sql="DELETE FROM modAsignatura WHERE IdModAsignatura = :idModAsignatura";
         $values=array(':idModAsignatura' => $idModAsignatura);
-        $results=$dataSource->executeQuery($sql,$values);
+        $results=$dataSource->executeInsertUpdateDelete($sql,$values);
         return $results;
     }
 }

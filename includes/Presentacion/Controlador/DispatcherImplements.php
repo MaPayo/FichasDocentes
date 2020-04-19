@@ -28,6 +28,10 @@ class DispatcherImplements extends Dispatcher
                 return $data;
             case FIND_GRADO_FAIL:
                 return $data;
+            case LIST_GRADO_OK;
+                return $data;
+            case LIST_GRADO_FAIL;
+                return $data;
             case FIND_LABORATORIO_OK:
                 return $data;
             case FIND_LABORATORIO_FAIL:
@@ -36,13 +40,9 @@ class DispatcherImplements extends Dispatcher
                 return $data;
             case FIND_PROBLEMA_FAIL:
                 return $data;
-            case FIND_PROFESOR_OK:
+            case FIND_PERMISOS_POR_PROFESOR_OK:
                 return $data;
-            case FIND_PROFESOR_FAIL:
-                return $data;
-            case FIND_PERMISOS_OK:
-                return $data;
-            case FIND_PERMISOS_FAIL:
+            case FIND_PERMISOS_POR_PROFESOR_FAIL:
                 return $data;
             case FIND_TEORICO_OK:
                 return $data;
@@ -64,6 +64,8 @@ class DispatcherImplements extends Dispatcher
                 return $data;
             case UPDATE_USUARIO_FAIL:
                 return $data;
+            default:
+                return $responseContext;
         }
     }
 }

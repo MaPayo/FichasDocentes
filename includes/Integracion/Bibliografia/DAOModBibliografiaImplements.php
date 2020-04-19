@@ -5,11 +5,11 @@ require_once('includes/Integracion/Bibliografia/DAOModBibliografia.php');
 class DAOModBibliografiaImplements implements DAOModBibliografia{
 
 
-    public static function findModBibliografia($idBibliografia){
+    public static function findModBibliografia($idModAsignatura){
         $singletonDataSource=new SingletonDataSource();
         $dataSource=$singletonDataSource->getInstance();
-        $sql="SELECT * FROM modBibliografia WHERE IdBibliografia = :idBibliografia";
-        $values=array(':idBibliografia' => $idBibliografia);
+        $sql="SELECT * FROM modBibliografia WHERE IdModAsignatura = :idModAsignatura";
+        $values=array(':idModAsignatura' => $idModAsignatura);
         $results=$dataSource->executeQuery($sql,$values);
         return $results;
 
@@ -23,8 +23,8 @@ class DAOModBibliografiaImplements implements DAOModBibliografia{
         $values=array(':idBibliografia' => $modBibliografia->getIdBibliografia(),
             ':citasBibliograficas' => $modBibliografia->getCitasBibliograficas(),
             ':recursosInternet' => $modBibliografia->getRecursosInternet(),
-            ':idModAsignatura' => $modBibliografia->getIdModAsignatura());
-        $results=$dataSource->executeQuery($sql,$values);
+            ':idModAsignatura' => $modBibliografia->getIdAsignatura());
+        $results=$dataSource->executeInsertUpdateDelete($sql,$values);
         return $results;
 
     }
@@ -36,17 +36,17 @@ class DAOModBibliografiaImplements implements DAOModBibliografia{
         $values=array(':idBibliografia' => $modBibliografia->getIdBibliografia(),
             ':citasBibliograficas' => $modBibliografia->getCitasBibliograficas(),
             ':recursosInternet' => $modBibliografia->getRecursosInternet(),
-            ':idModAsignatura' => $modBibliografia->getIdModAsignatura());
-        $results=$dataSource->executeQuery($sql,$values);
+            ':idModAsignatura' => $modBibliografia->getIdAsignatura());
+        $results=$dataSource->executeInsertUpdateDelete($sql,$values);
         return $results;
     }
 
-    public static function deleteModBibliografia($idBibliografia){
+    public static function deleteModBibliografia($idModAsignatura){
         $singletonDataSource=new SingletonDataSource();
         $dataSource=$singletonDataSource->getInstance();
-        $sql="DELETE FROM modBibliografia WHERE IdBibliografia = :idBibliografia";
-        $values=array(':idBibliografia' => $idBibliografia);
-        $results=$dataSource->executeQuery($sql,$values);
+        $sql="DELETE FROM modBibliografia WHERE IdModAsignatura = :idModAsignatura";
+        $values=array(':idModAsignatura' => $idModAsignatura);
+        $results=$dataSource->executeInsertUpdateDelete($sql,$values);
         return $results;
     }
 }

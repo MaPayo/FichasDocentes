@@ -23,7 +23,7 @@ class DAOAdministradorImplements implements DAOAdministrador{
         VALUES (:email, :nombre)";
         $values=array(':email' => $administrador->getEmail(),
         ':nombre' => $administrador->getNombre());
-        $results=$dataSource->executeQuery($sql,$values);
+        $results=$dataSource->executeInsertUpdateDelete($sql,$values);
         return $results;
 
     }
@@ -34,7 +34,7 @@ class DAOAdministradorImplements implements DAOAdministrador{
         $sql="UPDATE Administrador SET Email = :email, Nombre = :nombre WHERE Email = :email";
         $values=array(':email' => $administrador->getEmail(),
         ':nombre' => $administrador->getNombre());
-        $results=$dataSource->executeQuery($sql,$values);
+        $results=$dataSource->executeInsertUpdateDelete($sql,$values);
         return $results;
     }
 
@@ -43,7 +43,7 @@ class DAOAdministradorImplements implements DAOAdministrador{
         $dataSource=$singletonDataSource->getInstance();
         $sql="DELETE FROM Administrador WHERE Email = :email";
         $values=array(':email' => $email);
-        $results=$dataSource->executeQuery($sql,$values);
+        $results=$dataSource->executeInsertUpdateDelete($sql,$values);
         return $results;
     }
 }

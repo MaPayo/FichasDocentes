@@ -50,13 +50,13 @@ class DataSource{
      **/
     public function ejecutarConsulta($sql="",$values=array())
     {
-        if( $this->stringConex != NULL && $this->conexion != NULL)
+        if( $this->dsn != NULL && $this->dbh != NULL)
         {
             if($sql != "")
             {
-                $consulta = $this->conexion->prepare($sql);
+                $consulta = $this->dbh->prepare($sql);
                 $consulta->execute($values);
-                $tabla_datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
+                $tabla_datos = $consulta->fetchAll(\PDO::FETCH_ASSOC);
                 //Muestra los errores de la BBD (depuracion) QUITAR!!!!!
                 $arr = $consulta->errorInfo();
                 //print_r($arr);
@@ -69,24 +69,24 @@ class DataSource{
     /**
      * Nos permite obtener un entero con el numero de tablas actualizadas
      **/
-    public function ejecutarActualizacion($sql="",$values= array())
+    public function executeInsertUpdateDelete($sql="",$values= array())
     {
-        if( $this->stringConex != NULL && $this->conexion != NULL)
+        if( $this->dsn != NULL && $this->dbh != NULL)
         {
             if($sql != "")
             {
-                $consulta = $this->conexion->prepare($sql);
+                $consulta = $this->dbh->prepare($sql);
                 $consulta->execute($values);
                 $num_tablas_afect = $consulta->rowCount();
                 //Muestra los errores de la BBD (depuracion) QUITAR!!!!!
                 $arr = $consulta->errorInfo();
-                // print_r($arr);
+                print_r($arr);
                 return $num_tablas_afect;
             }
         }
         else
         {
-            return 0;
+            return -1;
         }
     }
 }

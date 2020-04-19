@@ -7,10 +7,18 @@ require_once('includes/Integracion/Factorias/FactoriesDAOImplements.php');
 
 class SABibliografiaImplements implements SABibliografia{
     
-    public static function findBibliografia($idBibliografia){
+    public static function findBibliografia($idAsignatura){
         $factoriesDAO=new \es\ucm\FactoriesDAOImplements();
         $DAOBibliografia=$factoriesDAO->createDAOBibliografia();
-        $bibliografia=$DAOBibliografia->findBibliografia($idBibliografia);
+        $bibliografia=$DAOBibliografia->findBibliografia($idAsignatura);
+        if ($bibliografia && count($bibliografia) === 1) {
+            $bibliografia = new Bibliografia(
+                $bibliografia[0]['IdBibliografia'],
+                $bibliografia[0]['CitasBibliograficas'],
+                $bibliografia[0]['RecursosInternet'],
+                $bibliografia[0]['IdAsignatura']
+            );
+        }
         return $bibliografia;
     }
 
@@ -28,10 +36,10 @@ class SABibliografiaImplements implements SABibliografia{
         return $bibliografia;
     }
 
-    public static function deleteBibliografia($idBibliografia){
+    public static function deleteBibliografia($idAsignatura){
         $factoriesDAO=new \es\ucm\FactoriesDAOImplements();
         $DAOBibliografia=$factoriesDAO->createDAOBibliografia();
-        $bibliografia=$DAOBibliografia->deleteBibliografia($idBibliografia);
+        $bibliografia=$DAOBibliografia->deleteBibliografia($idAsignatura);
         return $bibliografia;
     }
 

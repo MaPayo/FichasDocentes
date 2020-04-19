@@ -2,11 +2,11 @@
 namespace es\ucm;
 
 interface DAOVerifica{
-    public static function findVerifica($idVerifica);
+    public static function findVerifica($idAsignatura);
 
-    public static function createVerifica($Verifica);
+    public static function createVerifica($verifica);
 
-    public static function updateVerifica($Verifica);
+    public static function updateVerifica($verifica);
     
-    public static function deleteVerifica($idVerifica);
+    public static function deleteVerifica($idAsignatura);
 }

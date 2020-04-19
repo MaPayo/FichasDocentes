@@ -2,13 +2,13 @@
 namespace es\ucm;
 
 interface DAOPermisos{
-    public static function findPermisos($idPermisos);
+    public static function findPermisos($idAsignatura);
 
-    public static function createPermisos($Permisos);
+    public static function createPermisos($permisos);
 
-    public static function updatePermisos($Permisos);
+    public static function updatePermisos($permisos);
     
     public static function deletePermisos($idPermisos);
 
-    public static function findPermisosPorProfesor($permisos);
+    public static function findPermisosPorProfesor($emailProfesor);
 }

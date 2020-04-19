@@ -9,7 +9,7 @@
   </div>
 
   <div class="col-md-8 col-9">
-   <a href="index.php"><h1 class="web_title">Gestión de Fichas Docentes</h1></a> 
+   <h1 class="web_title">Gestión de Fichas Docentes</h1> 
  </div>
  <div class="col-md-2 col-3" id="logout">
   <div class="btn-group">
@@ -22,7 +22,7 @@
 
     if(isset($_SESSION['login']) && $_SESSION['login'] === true){
      echo'
-     <a class="dropdown-item" type="button">Configuración</a>
+     <a class="dropdown-item" href="configuracion>Configuración</a>
      <a class="dropdown-item" type="button">Permisos</a>
      <div class="dropdown-divider"></div>
      <a class="dropdown-item" href="logout.php">Cerrar Sesión</a>
