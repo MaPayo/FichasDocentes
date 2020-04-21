@@ -1,10 +1,11 @@
 <?php
-
 namespace es\ucm;
+require_once('../../vendor/autoload.php');
+
 
 require_once('includes/Negocio/Configuracion/SAConversion.php');
 require_once('includes/Negocio/Configuracion/Conversion.php');
-require_once('vendor/autoload.php');
+
 require_once('includes/Integracion/Factorias/FactoriesDAOImplements.php');
 
 class SAConversionImplements implements SAConversion{
@@ -193,7 +194,7 @@ class SAConversionImplements implements SAConversion{
                 return $markdown;
         }
 
-        public static function getProfesores($conversion){
+        public function getProfesores($conversion){
             $factoriesDAO=new \es\ucm\FactoriesDAOImplements();
             $DAO=$factoriesDAO->createDAOProfesor(); 
             $result=$DAO->findProfesor($conversion->getIDAsignatura());
@@ -201,10 +202,28 @@ class SAConversionImplements implements SAConversion{
             $SAMD = $factoriesDAO->createSAMarkdown();
             $markdown = $SAMD->conversionGrado($result);
             if($conversion->getHTML()){
-                return convertMarkdownToHTML($markdown);
+                return $this->convertMarkdownToHTML($markdown);
             }
             else 
                 return $markdown;
+        }
+
+        public function getAll($conversion){
+            $md = '';
+            $md = $this->getGrado($conversion);
+            $md += $this->getAsignatura($conversion);
+            $md += $this->getMateria($conversion);
+            $md += $this->getModulo($conversion);
+            $md += $this->getTeorico($conversion);
+            $md += $this->getProblema($conversion);
+            $md += $this->getLaboratorio($conversion);
+            $md += $this->getCoordinador($conversion);
+            $md += $this->getCompetencias($conversion);
+            $md += $this->getBibliografia($conversion);
+            $md += $this->getMetodologia($conversion);
+            $md += $this->getEvaluacion($conversion);            
+            $md += $this->getProfesores($conversion);
+            return $md;
         }
 
 
