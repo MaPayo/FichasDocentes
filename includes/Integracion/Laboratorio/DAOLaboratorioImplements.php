@@ -30,7 +30,7 @@ class DAOLaboratorioImplements implements DAOLaboratorio
             ':presencial' => $laboratorio->getPresencial(),
             ':idAsignatura' => $laboratorio->getIdAsignatura()
         );
-        $results = $dataSource->executeQuery($sql, $values);
+        $results = $dataSource->executeInsertUpdateDelete($sql, $values);
         return $results;
     }
 
@@ -45,17 +45,17 @@ class DAOLaboratorioImplements implements DAOLaboratorio
             ':presencial' => $laboratorio->getPresencial(),
             ':idAsignatura' => $laboratorio->getIdAsignatura()
         );
-        $results = $dataSource->executeQuery($sql, $values);
+        $results = $dataSource->executeInsertUpdateDelete($sql, $values);
         return $results;
     }
 
-    public static function deleteLaboratorio($idLaboratorio)
+    public static function deleteLaboratorio($idAsignatura)
     {
         $singletonDataSource = new SingletonDataSource();
         $dataSource = $singletonDataSource->getInstance();
-        $sql = "DELETE FROM laboratorio WHERE IdLaboratorio = :idLaboratorio";
-        $values = array(':idLaboratorio' => $idLaboratorio);
-        $results = $dataSource->executeQuery($sql, $values);
+        $sql = "DELETE FROM laboratorio WHERE IdAsignatura = :idAsignatura";
+        $values = array(':idAsignatura' => $idAsignatura);
+        $results = $dataSource->executeInsertUpdateDelete($sql, $values);
         return $results;
     }
 }

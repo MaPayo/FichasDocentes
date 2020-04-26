@@ -3,12 +3,12 @@ namespace es\ucm;
 
 interface SAModCompetenciaAsignatura{
 
-    public static function findModCompetenciaAsignatura($idAsignatura);
+    public static function findModCompetenciaAsignatura($idModAsignatura);
 
-    public static function createModCompetenciaAsignatura($competenciaAsignatura);
+    public static function createModCompetenciaAsignatura($modCompetenciaAsignatura);
 
-    public static function updateModCompetenciaAsignatura($competenciaAsignatura);
+    public static function updateModCompetenciaAsignatura($modCompetenciaAsignatura);
     
-    public static function deleteModCompetenciaAsignatura($idAsignatura);
+    public static function deleteModCompetenciaAsignatura($idModAsignatura);
 
 }

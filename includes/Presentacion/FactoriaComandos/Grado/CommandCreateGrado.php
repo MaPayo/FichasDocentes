@@ -6,7 +6,7 @@ require_once('includes/Presentacion/FactoriaComandos/Event.php');
 require_once('includes/Presentacion/FactoriaComandos/Command.php');
 require_once('includes/Presentacion/Controlador/Context.php');
 
-class CommandCreateteGrado implements Command
+class CommandCreateGrado implements Command
 {
 
 

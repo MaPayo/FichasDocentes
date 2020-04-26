@@ -5,11 +5,11 @@ require_once('includes/Integracion/ProgramaAsignatura/DAOModProgramaAsignatura.p
 class DAOModProgramaAsignaturaImplements implements DAOModProgramaAsignatura{
 
 
-    public static function findModProgramaAsignatura($idPrograma){
+    public static function findModProgramaAsignatura($idModAsignatura){
         $singletonDataSource=new SingletonDataSource();
         $dataSource=$singletonDataSource->getInstance();
-        $sql="SELECT * FROM modProgramaAsignatura WHERE IdPrograma = :idPrograma";
-        $values=array(':idPrograma' => $idPrograma);
+        $sql="SELECT * FROM modProgramaAsignatura WHERE IdModAsignatura = :idModAsignatura";
+        $values=array(':idModAsignatura' => $idModAsignatura);
         $results=$dataSource->executeQuery($sql,$values);
         return $results;
 
@@ -18,17 +18,16 @@ class DAOModProgramaAsignaturaImplements implements DAOModProgramaAsignatura{
     public static function createModProgramaAsignatura($modProgramaAsignatura){
         $singletonDataSource=new SingletonDataSource();
         $dataSource=$singletonDataSource->getInstance();
-        $sql="INSERT INTO modProgramaAsignatura (IdPrograma,ConocimientosPrevios,BreveDescripcion,ProgramaDetallado,ConocimientosPreviosI,BreveDescripcionI,ProgramaDetalladoI,IdModAsignatura) 
-        VALUES (:idPrograma, :conocimientosPrevios, :breveDescripcion, :programaDetallado, :conocimientosPreviosI, :breveDescripcionI, :programaDetalladoI, :idModAsignatura)";
-        $values=array(':idPrograma' => $modProgramaAsignatura->getIdPrograma(),
-            ':conocimientosPrevios' => $modProgramaAsignatura->getConocimientosPrevios(),
+        $sql="INSERT INTO modProgramaAsignatura (ConocimientosPrevios,BreveDescripcion,ProgramaDetallado,ConocimientosPreviosI,BreveDescripcionI,ProgramaDetalladoI,IdModAsignatura) 
+        VALUES (:conocimientosPrevios, :breveDescripcion, :programaDetallado, :conocimientosPreviosI, :breveDescripcionI, :programaDetalladoI, :idModAsignatura)";
+        $values=array(':conocimientosPrevios' => $modProgramaAsignatura->getConocimientosPrevios(),
             ':breveDescripcion' => $modProgramaAsignatura->getBreveDescripcion(),
             ':programaDetallado' => $modProgramaAsignatura->getProgramaDetallado(),
             ':conocimientosPreviosI' => $modProgramaAsignatura->getConocimientosPreviosI(),
             ':breveDescripcionI' => $modProgramaAsignatura->getBreveDescripcionI(),
             ':programaDetalladoI' => $modProgramaAsignatura->getProgramaDetalladoI(),
-            ':idModAsignatura' => $modProgramaAsignatura->getIdModAsignatura());
-        $results=$dataSource->executeQuery($sql,$values);
+            ':idModAsignatura' => $modProgramaAsignatura->getIdAsignatura());
+        $results=$dataSource->executeInsertUpdateDelete($sql,$values);
         return $results;
 
     }
@@ -44,17 +43,17 @@ class DAOModProgramaAsignaturaImplements implements DAOModProgramaAsignatura{
             ':conocimientosPreviosI' => $modProgramaAsignatura->getConocimientosPreviosI(),
             ':breveDescripcionI' => $modProgramaAsignatura->getBreveDescripcionI(),
             ':programaDetalladoI' => $modProgramaAsignatura->getProgramaDetalladoI(),
-            ':idModAsignatura' => $modProgramaAsignatura->getIdModAsignatura());
-        $results=$dataSource->executeQuery($sql,$values);
+            ':idModAsignatura' => $modProgramaAsignatura->getIdAsignatura());
+        $results=$dataSource->executeInsertUpdateDelete($sql,$values);
         return $results;
     }
 
-    public static function deleteModProgramaAsignatura($idPrograma){
+    public static function deleteModProgramaAsignatura($idModAsignatura){
         $singletonDataSource=new SingletonDataSource();
         $dataSource=$singletonDataSource->getInstance();
-        $sql="DELETE FROM modProgramaAsignatura WHERE IdPrograma = :idPrograma";
-        $values=array(':idPrograma' => $idPrograma);
-        $results=$dataSource->executeQuery($sql,$values);
+        $sql="DELETE FROM modProgramaAsignatura WHERE IdModAsignatura = :idModAsignatura";
+        $values=array(':idModAsignatura' => $idModAsignatura);
+        $results=$dataSource->executeInsertUpdateDelete($sql,$values);
         return $results;
     }
 }

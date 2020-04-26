@@ -9,19 +9,32 @@ require_once('includes/Integracion/Factorias/FactoriesDAOImplements.php');
 class SAPermisosImplements implements SAPermisos
 {
 
-    public static function findPermisos($permiso)
+    public static function findPermisos($idAsignatura)
     {
+        $arrayPermisos = array();
         $factoriesDAO = new \es\ucm\FactoriesDAOImplements();
         $DAOPermisos = $factoriesDAO->createDAOPermisos();
-        $permiso = $DAOPermisos->findPermisos($permiso); 
-        return $permiso;
+        $permisos = $DAOPermisos->findPermisos($idAsignatura);
+        if ($permisos) {
+            foreach ($permisos as $permiso) {
+                $arrayPermisos[] = new Permisos($permiso['IdPermiso'], $permiso['PermisoPrograma'], $permiso['PermisoCompetencias'], $permiso['PermisoMetodologia'], $permiso['PermisoBibliografia'], $permiso['PermisoGrupoLaboratorio'], $permiso['PermisoGrupoClase'], $permiso['PermisoEvaluacion'], $permiso['IdAsignatura'], $permiso['EmailProfesor']);
+            }
+        }
+        return $arrayPermisos;
     }
 
-    public static function findPermisosPorProfesor($permiso){
+    public static function findPermisosPorProfesor($emailProfesor)
+    {
+        $arrayPermisos = array();
         $factoriesDAO = new \es\ucm\FactoriesDAOImplements();
         $DAOPermisos = $factoriesDAO->createDAOPermisos();
-        $permiso = $DAOPermisos->findPermisosPorProfesor($permiso);
-        return $permiso;
+        $permisos = $DAOPermisos->findPermisosPorProfesor($emailProfesor);
+        if ($permisos) {
+            foreach ($permisos as $permiso) {
+                $arrayPermisos[] = new Permisos($permiso['IdPermiso'], $permiso['PermisoPrograma'], $permiso['PermisoCompetencias'], $permiso['PermisoMetodologia'], $permiso['PermisoBibliografia'], $permiso['PermisoGrupoLaboratorio'], $permiso['PermisoGrupoClase'], $permiso['PermisoEvaluacion'], $permiso['IdAsignatura'], $permiso['EmailProfesor']);
+            }
+        }
+        return $arrayPermisos;
     }
 
     public static function createPermisos($permiso)
@@ -47,6 +60,4 @@ class SAPermisosImplements implements SAPermisos
         $permiso = $DAOPermisos->deletePermisos($permiso);
         return $permiso;
     }
-
-   
 }

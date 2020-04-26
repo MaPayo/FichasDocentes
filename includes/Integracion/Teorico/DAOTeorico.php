@@ -4,9 +4,9 @@ namespace es\ucm;
 interface DAOTeorico{
     public static function findTeorico($idAsignatura);
 
-    public static function createTeorico($Teorico);
+    public static function createTeorico($teorico);
 
-    public static function updateTeorico($Teorico);
+    public static function updateTeorico($teorico);
     
     public static function deleteTeorico($idAsignatura);
 }

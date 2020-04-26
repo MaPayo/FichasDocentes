@@ -8,18 +8,14 @@ class Profesor{
 	private $Despacho;
 	private $Tutoria;
 	private $Facultad;
-    private $IdGrupoLab;
-    private $IdGrupoClase;
 
-	public function __construct($Email,$Nombre,$Departamento,$Despacho,$Tutoria,$Facultad,$IdGrupoLab,$IdGrupoClase){
+	public function __construct($Email,$Nombre,$Departamento,$Despacho,$Tutoria,$Facultad){
 		$this->Email = $Email;
 		$this->Nombre = $Nombre;
 		$this->Departamento = $Departamento;
 		$this->Despacho = $Despacho;
 		$this->Tutoria = $Tutoria;
 		$this->Facultad = $Facultad;
-        $this->IdGrupoLab = $IdGrupoLab;
-        $this->IdGrupoClase = $IdGrupoClase;
 	}
 
     /**
@@ -140,45 +136,5 @@ class Profesor{
     	$this->Facultad = $Facultad;
 
     	return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getIdGrupoLab()
-    {
-        return $this->IdGrupoLab;
-    }
-
-    /**
-     * @param mixed $IdGrupoLab
-     *
-     * @return self
-     */
-    public function setIdGrupoLab($IdGrupoLab)
-    {
-        $this->IdGrupoLab = $IdGrupoLab;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getIdGrupoClase()
-    {
-        return $this->IdGrupoClase;
-    }
-
-    /**
-     * @param mixed $IdGrupoClase
-     *
-     * @return self
-     */
-    public function setIdGrupoClase($IdGrupoClase)
-    {
-        $this->IdGrupoClase = $IdGrupoClase;
-
-        return $this;
     }
 }

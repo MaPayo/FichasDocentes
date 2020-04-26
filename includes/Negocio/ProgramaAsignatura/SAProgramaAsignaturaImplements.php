@@ -7,19 +7,24 @@ require_once('includes/Negocio/ProgramaAsignatura/ProgramaAsignatura.php');
 require_once('includes/Integracion/Factorias/FactoriesDAOImplements.php');
 
 class SAProgramaAsignaturaImplements implements SAProgramaAsignatura{
-
-    private static $DAOProgramaAsignatura;
-
-    public function __construct(){
-        $factoriesDAO=new \es\ucm\FactoriesDAOImplements();
-        $DAOProgramaAsignatura=$factoriesDAO->createDAOProgramaAsignatura(); 
-    }
     
     
     public static function findProgramaAsignatura($idAsignatura){
         $factoriesDAO=new \es\ucm\FactoriesDAOImplements();
         $DAOProgramaAsignatura=$factoriesDAO->createDAOProgramaAsignatura();
         $programaAsignatura=$DAOProgramaAsignatura->findProgramaAsignatura($idAsignatura);
+        if ($programaAsignatura && count($programaAsignatura) === 1) {
+            $programaAsignatura = new ProgramaAsignatura(
+                $programaAsignatura[0]['IdPrograma'],
+                $programaAsignatura[0]['ConocimientosPrevios'],
+                $programaAsignatura[0]['ConocimientosPreviosi'],
+                $programaAsignatura[0]['BreveDescripcion'],
+                $programaAsignatura[0]['BreveDescripcioni'],
+                $programaAsignatura[0]['ProgramaDetallado'],
+                $programaAsignatura[0]['ProgramaDetalladoi'],
+                $programaAsignatura[0]['IdAsignatura']
+            );
+        }
         return $programaAsignatura;
     }
 

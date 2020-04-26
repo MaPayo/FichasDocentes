@@ -24,7 +24,7 @@ class DAOProblemaImplements implements DAOProblema{
             ':creditos' => $problema->getCreditos(),
             ':presencial' => $problema->getPresencial(),
             ':idAsignatura' => $problema->getIdAsignatura());
-        $results=$dataSource->executeQuery($sql,$values);
+        $results=$dataSource->executeInsertUpdateDelete($sql,$values);
         return $results;
 
     }
@@ -37,16 +37,16 @@ class DAOProblemaImplements implements DAOProblema{
             ':creditos' => $problema->getCreditos(),
             ':presencial' => $problema->getPresencial(),
             ':idAsignatura' => $problema->getIdAsignatura());
-        $results=$dataSource->executeQuery($sql,$values);
+        $results=$dataSource->executeInsertUpdateDelete($sql,$values);
         return $results;
     }
 
-    public static function deleteProblema($idProblema){
+    public static function deleteProblema($idAsignatura){
         $singletonDataSource=new SingletonDataSource();
         $dataSource=$singletonDataSource->getInstance();
-        $sql="DELETE FROM problema WHERE IdProblema = :idProblema";
-        $values=array(':idProblema' => $idProblema);
-        $results=$dataSource->executeQuery($sql,$values);
+        $sql="DELETE FROM problema WHERE IdAsignatura = :idAsignatura";
+        $values=array(':idAsignatura' => $idAsignatura);
+        $results=$dataSource->executeInsertUpdateDelete($sql,$values);
         return $results;
     }
 }

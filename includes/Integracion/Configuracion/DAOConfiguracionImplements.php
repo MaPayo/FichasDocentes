@@ -5,11 +5,11 @@ require_once('includes/Integracion/Configuracion/DAOConfiguracion.php');
 class DAOConfiguracionImplements implements DAOConfiguracion{
 
 
-    public static function findConfiguracion($idConfiguracion){
+    public static function findConfiguracion($idAsignatura){
         $singletonDataSource=new SingletonDataSource();
         $dataSource=$singletonDataSource->getInstance();
-        $sql="SELECT * FROM configuracion WHERE IdConfiguracion = :idConfiguracion";
-        $values=array(':idConfiguracion' => $idConfiguracion);
+        $sql="SELECT * FROM configuracion WHERE IdAsignatura = :idAsignatura";
+        $values=array(':idAsignatura' => $idAsignatura);
         $results=$dataSource->executeQuery($sql,$values);
         return $results;
 
@@ -36,7 +36,7 @@ class DAOConfiguracionImplements implements DAOConfiguracion{
             ':realizacionActividades' => $configuracion->getRealizacionActividades(),
             ':realizacionLaboratorio' => $configuracion->getRealizacionLaboratorio(),
             ':idAsignatura' => $configuracion->getIdAsignatura());
-        $results=$dataSource->executeQuery($sql,$values);
+        $results=$dataSource->executeInsertUpdateDelete($sql,$values);
         return $results;
 
     }
@@ -61,16 +61,16 @@ class DAOConfiguracionImplements implements DAOConfiguracion{
             ':realizacionActividades' => $configuracion->getRealizacionActividades(),
             ':realizacionLaboratorio' => $configuracion->getRealizacionLaboratorio(),
             ':idAsignatura' => $configuracion->getIdAsignatura());
-        $results=$dataSource->executeQuery($sql,$values);
+        $results=$dataSource->executeInsertUpdateDelete($sql,$values);
         return $results;
     }
 
-    public static function deleteConfiguracion($idConfiguracion){
+    public static function deleteConfiguracion($idAsignatura){
         $singletonDataSource=new SingletonDataSource();
         $dataSource=$singletonDataSource->getInstance();
-        $sql="DELETE FROM configuracion WHERE IdConfiguracion = :idConfiguracion";
-        $values=array(':idConfiguracion' => $idConfiguracion);
-        $results=$dataSource->executeQuery($sql,$values);
+        $sql="DELETE FROM configuracion WHERE IdAsignatura = :idAsignatura";
+        $values=array(':idAsignatura' => $idAsignatura);
+        $results=$dataSource->executeInsertUpdateDelete($sql,$values);
         return $results;
     }
 }

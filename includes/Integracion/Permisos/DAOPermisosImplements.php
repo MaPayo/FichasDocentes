@@ -5,11 +5,11 @@ require_once('includes/Integracion/Permisos/DAOPermisos.php');
 class DAOPermisosImplements implements DAOPermisos{
 
 
-    public static function findPermisos($permisos){
+    public static function findPermisos($idAsignatura){
         $singletonDataSource=new SingletonDataSource();
         $dataSource=$singletonDataSource->getInstance();
-        $sql="SELECT * FROM permisos WHERE IdPermiso = :idPermiso";
-        $values=array(':idPermiso' => $permisos->idPermiso);
+        $sql="SELECT * FROM permisos WHERE IdAsignatura = :idAsignatura";
+        $values=array(':idAsignatura' => $idAsignatura);
         $results=$dataSource->executeQuery($sql,$values);
         return $results;
 
@@ -18,13 +18,19 @@ class DAOPermisosImplements implements DAOPermisos{
     public static function createPermisos($permisos){
         $singletonDataSource=new SingletonDataSource();
         $dataSource=$singletonDataSource->getInstance();
-        $sql="INSERT INTO permisos (IdPermiso,Permiso,IdAsignatura,EmailProfesor) 
-        VALUES (:idPermiso, :permiso, :idAsignatura, :emailProfesor)";
+        $sql="INSERT INTO permisos (IdPermiso,PermisoPrograma,PermisoCompetencias,PermisoMetodologia,PermisoBibliografia,PermisoGrupoLaboratorio,PermisoGrupoClase,PermisoEvaluacion,IdAsignatura,EmailProfesor) 
+        VALUES (:idPermiso, :permisoPrograma, :permisoCompetencias, :permisoMetodologia, :permisoBibliografia, :permisoGrupoLaboratorio, :permisoGrupoClase, :permisoEvaluacion, :idAsignatura, :emailProfesor)";
         $values=array(':idPermiso' => $permisos->getIdPermiso(),
-            ':permiso' => $permisos->getPermiso(),
-            ':idAsignatura' => $permisos->getIdAsignatura(),
-            ':emailProfesor' => $permisos->getEmailProfesor());
-        $results=$dataSource->executeQuery($sql,$values);
+        ':permisoPrograma' => $permisos->getPermisoPrograma(),
+        ':permisoCompetencias' => $permisos->getPermisoCompetencias(),
+        ':permisoMetodologia' => $permisos->getPermisoMetodologia(),
+        ':permisoBibliografia'=> $permisos->getPermisoBibliografia(),
+        ':permisoGrupoLaboratorio'=> $permisos->getPermisoGrupoLaboratorio(),
+        ':permisoGrupoClase' => $permisos->getPermisoGrupoClase(),
+        ':permisoEvaluacion'=> $permisos->getPermisoEvaluacion(),
+        ':idAsignatura' => $permisos->getIdAsignatura(),
+        ':emailProfesor' => $permisos->getEmailProfesor());
+        $results=$dataSource->executeInsertUpdateDelete($sql,$values);
         return $results;
 
     }
@@ -32,12 +38,18 @@ class DAOPermisosImplements implements DAOPermisos{
     public static function updatePermisos($permisos){
         $singletonDataSource=new SingletonDataSource();
         $dataSource=$singletonDataSource->getInstance();
-        $sql="UPDATE permisos SET IdPermiso = :idPermiso, Permiso = :permiso,IdAsignatura = :idAsignatura,EmailProfesor = :emailProfesor WHERE IdPermiso = :idPermiso";
+        $sql="UPDATE permisos SET IdPermiso = :idPermiso, PermisoPrograma = :permisoPrograma, PermisoCompetencias = :permisoCompetencias, PermisoMetodologia = :permisoMetodologia, PermisoBibliografia = :permisoBibliografia,PermisoGrupoLaboratorio = :permisoGrupoLaboratorio, PermisoGrupoClase = :permisoGrupoClase,PermisoEvaluacion = :permisoEvaluacion,IdAsignatura = :idAsignatura, EmailProfesor = :emailProfesor WHERE IdPermiso = :idPermiso";
         $values=array(':idPermiso' => $permisos->getIdPermiso(),
-            ':permiso' => $permisos->getPermiso(),
-            ':idAsignatura' => $permisos->getIdAsignatura(),
-            ':emailProfesor' => $permisos->getEmailProfesor());
-        $results=$dataSource->executeQuery($sql,$values);
+        ':permisoPrograma' => $permisos->getPermisoPrograma(),
+        ':permisoCompetencias' => $permisos->getPermisoCompetencias(),
+        ':permisoMetodologia' => $permisos->getPermisoMetodologia(),
+        ':permisoBibliografia'=> $permisos->getPermisoBibliografia(),
+        ':permisoGrupoLaboratorio'=> $permisos->getPermisoGrupoLaboratorio(),
+        ':permisoGrupoClase' => $permisos->getPermisoGrupoClase(),
+        ':permisoEvaluacion'=> $permisos->getPermisoEvaluacion(),
+        ':idAsignatura' => $permisos->getIdAsignatura(),
+        ':emailProfesor' => $permisos->getEmailProfesor());
+        $results=$dataSource->executeInsertUpdateDelete($sql,$values);
         return $results;
     }
 
@@ -46,16 +58,16 @@ class DAOPermisosImplements implements DAOPermisos{
         $dataSource=$singletonDataSource->getInstance();
         $sql="DELETE FROM permisos WHERE IdPermiso = :idPermiso";
         $values=array(':idPermiso' => $idPermiso);
-        $results=$dataSource->executeQuery($sql,$values);
+        $results=$dataSource->executeInsertUpdateDelete($sql,$values);
         return $results;
     }
 
 
-    public static function findPermisosPorProfesor($permisos){
+    public static function findPermisosPorProfesor($emailProfesor){
         $singletonDataSource=new SingletonDataSource();
         $dataSource=$singletonDataSource->getInstance();
-        $sql="SELECT * FROM permisos WHERE IdPermiso = :idPermiso";
-        $values=array(':idPermiso' => $permisos->idPermiso);
+        $sql="SELECT * FROM permisos WHERE EmailProfesor = :emailProfesor";
+        $values=array(':emailProfesor' => $emailProfesor);
         $results=$dataSource->executeQuery($sql,$values);
         return $results;
     }

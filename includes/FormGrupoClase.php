@@ -1,0 +1,98 @@
+<?php
+
+namespace es\ucm;
+
+require_once('includes/Presentacion/Controlador/Context.php');
+require_once('includes/Presentacion/Controlador/ControllerImplements.php');
+require_once('includes/Negocio/GrupoClase/ModGrupoClase.php');
+require_once('includes/Negocio/Asignatura/ModAsignatura.php');
+
+class FormGrupoClase extends Form
+{
+
+	protected function generaCamposFormulario($datosIniciales)
+	{
+		$idGrupoClase = isset($datosIniciales['idGrupoClase']) ? $datosIniciales['idGrupoClase'] : null;
+		$letra = isset($datosIniciales['letra']) ? $datosIniciales['letra'] : null;
+		$idioma = isset($datosIniciales['idioma']) ? $datosIniciales['idioma'] : null;
+		$idAsignatura = isset($datosIniciales['idAsignatura']) ? $datosIniciales['idAsignatura'] : null;
+
+		$html = '<input type="hidden" name="idGrupoClase" value="' . $idGrupoClase . '" required />
+		<input type="hidden" name="idAsignatura" value="' . $idAsignatura . '" required />
+		<div class="form-group">
+		<label for="letra">Letra</label>
+		<input type="text" class="form-control" id="letra"  name="letra" value="' . $letra . '" />
+		</div>
+
+		<div class="form-group">
+		<label for="idioma">Idioma</label>
+		<input type="text" class="form-control" id="idioma"  name="idioma" value="' . $idioma . '" />
+		</div>
+
+		<div class="text-right">
+		<a href="indexAcceso.php?IdAsignatura=' . $idAsignatura . '#nav-grupo-clase">
+            <button type="button" class="btn btn-secondary" id="btn-form">
+                Cancelar
+            </button>
+        </a>
+
+		<button type="submit" class="btn btn-success" id="btn-form" name="registrar">Guardar</button>
+		</div>';
+		return $html;
+	}
+
+	protected function procesaFormulario($datos)
+	{
+
+		$erroresFormulario = array();
+
+		$letra = isset($datos['letra']) ? $datos['letra'] : null;
+		$letra = self::clean($letra);
+		if (empty($letra)) {
+			$erroresFormulario[] = "No has introducido la letra.";
+		}
+
+		$idioma = isset($datos['idioma']) ? $datos['idioma'] : null;
+		$idioma = self::clean($idioma);
+		if (empty($idioma)) {
+			$erroresFormulario[] = "No has introducido el idioma.";
+		}
+
+
+		if (count($erroresFormulario) === 0) {
+			$controller = new ControllerImplements();
+			$context = new Context(FIND_MODGRUPO_CLASE, $datos['idGrupoClase']);
+			$contextGrupoClase = $controller->action($context);
+
+			if ($contextGrupoClase->getEvent() === FIND_MODGRUPO_CLASE_OK) {
+
+				$grupoClase = new ModGrupoClase($datos['idGrupoClase'], $letra, $idioma, $datos['idAsignatura']);
+				$context = new Context(UPDATE_MODGRUPO_CLASE, $grupoClase);
+				$contextGrupoClase = $controller->action($context);
+
+				if ($contextGrupoClase->getEvent() === UPDATE_MODGRUPO_CLASE_OK) {
+					$modAsignatura = new ModAsignatura($datos['idAsignatura'], date("Y-m-d H:i:s"), $_SESSION['idUsuario'], $datos['idAsignatura']);
+					$context = new Context(UPDATE_MODASIGNATURA, $modAsignatura);
+					$contextModAsignatura = $controller->action($context);
+					$erroresFormulario = "indexAcceso.php?IdAsignatura=" . $datos['idAsignatura'] . "&modificado=y#nav-grupo-clase";
+				} elseif ($contextGrupoClase->getEvent() === UPDATE_MODGRUPO_CLASE_FAIL) {
+					$erroresFormulario[] = "No se ha podido modificar el grupo.";
+				}
+			} elseif ($contextGrupoClase->getEvent() === FIND_MODGRUPO_CLASE_FAIL) {
+
+				$grupoClase = new ModGrupoClase(null, $letra, $idioma, $datos['idAsignatura']);
+				$context = new Context(CREATE_MODGRUPO_CLASE, $grupoClase);
+				$contextGrupoClase = $controller->action($context);
+				if ($contextGrupoClase->getEvent() === CREATE_MODGRUPO_CLASE_OK) {
+					$modAsignatura = new ModAsignatura($datos['idAsignatura'], date("Y-m-d H:i:s"), $_SESSION['idUsuario'], $datos['idAsignatura']);
+					$context = new Context(UPDATE_MODASIGNATURA, $modAsignatura);
+					$contextModAsignatura = $controller->action($context);
+					$erroresFormulario = "indexAcceso.php?IdAsignatura=" . $datos['idAsignatura'] . "&anadido=y#nav-grupo-clase";
+				} elseif ($contextGrupoClase->getEvent() === CREATE_MODGRUPO_CLASE_FAIL) {
+					$erroresFormulario[] = "No se ha podido crear el grupo.";
+				}
+			}
+		}
+		return $erroresFormulario;
+	}
+}

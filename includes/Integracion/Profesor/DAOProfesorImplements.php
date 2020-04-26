@@ -26,7 +26,7 @@ class DAOProfesorImplements implements DAOProfesor{
             ':despacho' => $profesor->getDespacho(),
             ':tutoria' => $profesor->getTutoria(),
             ':facultad' => $profesor->getFacultad());
-        $results=$dataSource->executeQuery($sql,$values);
+        $results=$dataSource->executeInsertUpdateDelete($sql,$values);
         return $results;
 
     }
@@ -41,7 +41,7 @@ class DAOProfesorImplements implements DAOProfesor{
             ':despacho' => $profesor->getDespacho(),
             ':tutoria' => $profesor->getTutoria(),
             ':facultad' => $profesor->getFacultad());
-        $results=$dataSource->executeQuery($sql,$values);
+        $results=$dataSource->executeInsertUpdateDelete($sql,$values);
         return $results;
     }
 
@@ -50,7 +50,7 @@ class DAOProfesorImplements implements DAOProfesor{
         $dataSource=$singletonDataSource->getInstance();
         $sql="DELETE FROM profesor WHERE Email = :email";
         $values=array(':email' => $email);
-        $results=$dataSource->executeQuery($sql,$values);
+        $results=$dataSource->executeInsertUpdateDelete($sql,$values);
         return $results;
     }
 }

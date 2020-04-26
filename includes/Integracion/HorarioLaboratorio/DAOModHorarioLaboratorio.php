@@ -2,11 +2,13 @@
 namespace es\ucm;
 
 interface DAOModHorarioLaboratorio{
-    public static function findModHorarioLaboratorio($idModHorarioLaboratorio);
+    public static function listModHorarioLaboratorio($idGrupoLaboratorio);
 
-    public static function createModHorarioLaboratorio($ModHorarioLaboratorio);
+    public static function findModHorarioLaboratorio($idHorarioLaboratorio);
 
-    public static function updateModHorarioLaboratorio($ModHorarioLaboratorio);
+    public static function createModHorarioLaboratorio($modHorarioLaboratorio);
+
+    public static function updateModHorarioLaboratorio($modHorarioLaboratorio);
     
-    public static function deleteModHorarioLaboratorio($idModHorarioLaboratorio);
+    public static function deleteModHorarioLaboratorio($idHorarioLaboratorio);
 }

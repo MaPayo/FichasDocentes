@@ -5,11 +5,11 @@ require_once('includes/Integracion/Metodologia/DAOModMetodologia.php');
 class DAOModMetodologiaImplements implements DAOModMetodologia{
 
 
-    public static function findModMetodologia($idMetodologia){
+    public static function findModMetodologia($idModAsignatura){
         $singletonDataSource=new SingletonDataSource();
         $dataSource=$singletonDataSource->getInstance();
-        $sql="SELECT * FROM modMetodologia WHERE IdMetodologia = :idMetodologia";
-        $values=array(':idMetodologia' => $idMetodologia);
+        $sql="SELECT * FROM modMetodologia WHERE IdModAsignatura = :idModAsignatura";
+        $values=array(':idModAsignatura' => $idModAsignatura);
         $results=$dataSource->executeQuery($sql,$values);
         return $results;
 
@@ -18,13 +18,13 @@ class DAOModMetodologiaImplements implements DAOModMetodologia{
     public static function createModMetodologia($modMetodologia){
         $singletonDataSource=new SingletonDataSource();
         $dataSource=$singletonDataSource->getInstance();
-        $sql="INSERT INTO modMetodologia (IdMetodologia,ModMetodologia,ModMetodologiaI,IdModAsignatura) 
-        VALUES (:idMetodologia, :modMetodologia, :modMetodologiaI, :idModAsignatura)";
+        $sql="INSERT INTO modMetodologia (IdMetodologia,Metodologia,MetodologiaI,IdModAsignatura) 
+        VALUES (:idMetodologia, :Metodologia, :MetodologiaI, :idModAsignatura)";
         $values=array(':idMetodologia' => $modMetodologia->getIdMetodologia(),
-            ':modMetodologia' => $modMetodologia->getModMetodologia(),
-            ':modMetodologiaI' => $modMetodologia->getModMetodologiaI(),
-            ':idModAsignatura' => $modMetodologia->getIdModAsignatura());
-        $results=$dataSource->executeQuery($sql,$values);
+            ':Metodologia' => $modMetodologia->getMetodologia(),
+            ':MetodologiaI' => $modMetodologia->getMetodologiaI(),
+            ':idModAsignatura' => $modMetodologia->getIdAsignatura());
+        $results=$dataSource->executeInsertUpdateDelete($sql,$values);
         return $results;
 
     }
@@ -32,21 +32,21 @@ class DAOModMetodologiaImplements implements DAOModMetodologia{
     public static function updateModMetodologia($modMetodologia){
         $singletonDataSource=new SingletonDataSource();
         $dataSource=$singletonDataSource->getInstance();
-        $sql="UPDATE modMetodologia SET IdMetodologia = :idMetodologia, ModMetodologia = :modMetodologia,ModMetodologiaI = :modMetodologiaI,IdModAsignatura = :idModAsignatura WHERE IdMetodologia = :idMetodologia";
+        $sql="UPDATE modMetodologia SET IdMetodologia = :idMetodologia, Metodologia = :Metodologia,MetodologiaI = :MetodologiaI,IdModAsignatura = :idModAsignatura WHERE IdMetodologia = :idMetodologia";
         $values=array(':idMetodologia' => $modMetodologia->getIdMetodologia(),
-            ':modMetodologia' => $modMetodologia->getModMetodologia(),
-            ':modMetodologiaI' => $modMetodologia->getModMetodologiaI(),
-            ':idModAsignatura' => $modMetodologia->getIdModAsignatura());
-        $results=$dataSource->executeQuery($sql,$values);
+            ':Metodologia' => $modMetodologia->getMetodologia(),
+            ':MetodologiaI' => $modMetodologia->getMetodologiaI(),
+            ':idModAsignatura' => $modMetodologia->getIdAsignatura());
+        $results=$dataSource->executeInsertUpdateDelete($sql,$values);
         return $results;
     }
 
-    public static function deleteModMetodologia($idMetodologia){
+    public static function deleteModMetodologia($idModAsignatura){
         $singletonDataSource=new SingletonDataSource();
         $dataSource=$singletonDataSource->getInstance();
-        $sql="DELETE FROM modMetodologia WHERE IdMetodologia = :idMetodologia";
-        $values=array(':idMetodologia' => $idMetodologia);
-        $results=$dataSource->executeQuery($sql,$values);
+        $sql="DELETE FROM modMetodologia WHERE IdModAsignatura = :idModAsignatura";
+        $values=array(':idModAsignatura' => $idModAsignatura);
+        $results=$dataSource->executeInsertUpdateDelete($sql,$values);
         return $results;
     }
 }

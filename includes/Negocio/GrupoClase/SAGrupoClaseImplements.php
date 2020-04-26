@@ -9,20 +9,33 @@ require_once('includes/Integracion/Factorias/FactoriesDAOImplements.php');
 class SAGrupoClaseImplements implements SAGrupoClase
 {
 
-    private static $DAOGrupoClase;
-
-    public function __construct()
+    public static function listGrupoClase($idAsignatura)
     {
+        $arrayGrupoClase = array();
         $factoriesDAO = new \es\ucm\FactoriesDAOImplements();
         $DAOGrupoClase = $factoriesDAO->createDAOGrupoClase();
+        $grupoClase = $DAOGrupoClase->listGrupoClase($idAsignatura);
+        if ($grupoClase && count($grupoClase) > 0) {
+            foreach ($grupoClase as $grupo) {
+                $arrayGrupoClase[] = new GrupoClase($grupo['IdGrupoClase'], $grupo['Letra'], $grupo['Idioma'], $grupo['IdAsignatura']);
+            }
+        }
+        return $arrayGrupoClase;
     }
 
-
-    public static function findGrupoClase($idAsignatura)
+    public static function findGrupoClase($idGrupoClase)
     {
         $factoriesDAO = new \es\ucm\FactoriesDAOImplements();
         $DAOGrupoClase = $factoriesDAO->createDAOGrupoClase();
-        $grupoClase = $DAOGrupoClase->findGrupoClase($idAsignatura);
+        $grupoClase = $DAOGrupoClase->findGrupoClase($idGrupoClase);
+        if ($grupoClase && count($grupoClase) === 1) {
+            $grupoClase = new GrupoClase(
+                $grupoClase[0]['IdGrupoClase'],
+                $grupoClase[0]['Letra'],
+                $grupoClase[0]['Idioma'],
+                $grupoClase[0]['IdAsignatura']
+            );
+        }
         return $grupoClase;
     }
 
@@ -42,11 +55,11 @@ class SAGrupoClaseImplements implements SAGrupoClase
         return $grupoClase;
     }
 
-    public static function deleteGrupoClase($idAsignatura)
+    public static function deleteGrupoClase($idGrupoClase)
     {
         $factoriesDAO = new \es\ucm\FactoriesDAOImplements();
         $DAOGrupoClase = $factoriesDAO->createDAOGrupoClase();
-        $grupoClase = $DAOGrupoClase->deleteGrupoClase($idAsignatura);
+        $grupoClase = $DAOGrupoClase->deleteGrupoClase($idGrupoClase);
         return $grupoClase;
     }
 }

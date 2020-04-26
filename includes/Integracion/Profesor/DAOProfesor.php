@@ -2,11 +2,11 @@
 namespace es\ucm;
 
 interface DAOProfesor{
-    public static function findProfesor($idProfesor);
+    public static function findProfesor($email);
 
-    public static function createProfesor($Profesor);
+    public static function createProfesor($profesor);
 
-    public static function updateProfesor($Profesor);
+    public static function updateProfesor($profesor);
     
-    public static function deleteProfesor($idProfesor);
+    public static function deleteProfesor($email);
 }

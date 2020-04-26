@@ -4,12 +4,14 @@ namespace es\ucm;
 
 interface SAGrupoLaboratorio{
 
-    public static function findGrupoLaboratorio($idAsignatura);
+    public static function listGrupoLaboratorio($idAsignatura);
+
+    public static function findGrupoLaboratorio($idGrupoLaboratorio);
 
     public static function createGrupoLaboratorio($grupoLaboratorio);
 
     public static function updateGrupoLaboratorio($grupoLaboratorio);
     
-    public static function deleteGrupoLaboratorio($idAsignatura);
+    public static function deleteGrupoLaboratorio($idGrupoLaboratorio);
 
 }

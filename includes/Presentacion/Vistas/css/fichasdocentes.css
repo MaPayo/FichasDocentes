@@ -37,6 +37,11 @@ h5{
 	margin-bottom: 2.5%;
 }
 
+#nav-asignatura{
+
+	padding-bottom: 1.25% !important;
+}
+
 #logout {
 	text-align: right;
 }
@@ -80,9 +85,11 @@ img {
 }
 
 #btn-form{
-	margin: 1% !important;
+	margin-top: 1.5% !important;
+	margin-left: 1% !important;
 }
 
 #main-card{
 	border: 1px solid #2C3E50;
 }
+

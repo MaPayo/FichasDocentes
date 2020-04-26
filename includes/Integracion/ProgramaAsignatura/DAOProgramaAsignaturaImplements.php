@@ -5,11 +5,11 @@ require_once('includes/Integracion/ProgramaAsignatura/DAOProgramaAsignatura.php'
 class DAOProgramaAsignaturaImplements implements DAOProgramaAsignatura{
 
 
-    public static function findProgramaAsignatura($idPrograma){
+    public static function findProgramaAsignatura($idAsignatura){
         $singletonDataSource=new SingletonDataSource();
         $dataSource=$singletonDataSource->getInstance();
-        $sql="SELECT * FROM programaAsignatura WHERE IdPrograma = :idPrograma";
-        $values=array(':idPrograma' => $idPrograma);
+        $sql="SELECT * FROM programaAsignatura WHERE IdAsignatura = :idAsignatura";
+        $values=array(':idAsignatura' => $idAsignatura);
         $results=$dataSource->executeQuery($sql,$values);
         return $results;
 
@@ -28,7 +28,7 @@ class DAOProgramaAsignaturaImplements implements DAOProgramaAsignatura{
             ':breveDescripcionI' => $programaAsignatura->getBreveDescripcionI(),
             ':programaDetalladoI' => $programaAsignatura->getProgramaDetalladoI(),
             ':idAsignatura' => $programaAsignatura->getIdAsignatura());
-        $results=$dataSource->executeQuery($sql,$values);
+        $results=$dataSource->executeInsertUpdateDelete($sql,$values);
         return $results;
 
     }
@@ -45,16 +45,16 @@ class DAOProgramaAsignaturaImplements implements DAOProgramaAsignatura{
             ':breveDescripcionI' => $programaAsignatura->getBreveDescripcionI(),
             ':programaDetalladoI' => $programaAsignatura->getProgramaDetalladoI(),
             ':idAsignatura' => $programaAsignatura->getIdAsignatura());
-        $results=$dataSource->executeQuery($sql,$values);
+        $results=$dataSource->executeInsertUpdateDelete($sql,$values);
         return $results;
     }
 
-    public static function deleteProgramaAsignatura($idPrograma){
+    public static function deleteProgramaAsignatura($idAsignatura){
         $singletonDataSource=new SingletonDataSource();
         $dataSource=$singletonDataSource->getInstance();
-        $sql="DELETE FROM programaAsignatura WHERE IdPrograma = :idPrograma";
-        $values=array(':idPrograma' => $idPrograma);
-        $results=$dataSource->executeQuery($sql,$values);
+        $sql="DELETE FROM programaAsignatura WHERE IdAsignatura = :idAsignatura";
+        $values=array(':idAsignatura' => $idAsignatura);
+        $results=$dataSource->executeInsertUpdateDelete($sql,$values);
         return $results;
     }
 }

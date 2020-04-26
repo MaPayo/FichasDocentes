@@ -1,49 +1,52 @@
 <?php
+
 namespace es\ucm;
-class ModCompetenciaAsignatura{
-	private $IdComepetencia;
-	private $Generales;
-	private $GeneralesI;
-	private $Especificas;
-	private $EspecificasI;
-	private $BasicasYTransversales;
-	private $BasicasYTransversalesI;
-	private $ResultadosAprendizaje;
-	private $ResultadosAprendizajeI;
-	private $IdModAsignatura;
 
-	public function __construct($IdComepetencia,$Generales, $GeneralesI,$Especificas,$EspecificasI,$BasicasYTransversales,$BasicasYTransversalesI,$ResultadosAprendizaje,$ResultadosAprendizajeI,$IdModAsignatura){
-		$this->IdComepetencia = $IdComepetencia;
-		$this->Generales = $Generales;
-		$this->GeneralesI = $GeneralesI;
-		$this->Especificas = $Especificas;
-		$this->EspecificasI = $EspecificasI;
-		$this->BasicasYTransversales = $BasicasYTransversales;
-		$this->BasicasYTransversalesI = $BasicasYTransversalesI;
-		$this->ResultadosAprendizaje = $ResultadosAprendizaje;
-		$this->ResultadosAprendizajeI = $ResultadosAprendizajeI;
-		$this->IdModAsignatura = $IdModAsignatura;
+class ModCompetenciaAsignatura
+{
+    private $IdCompetencia;
+    private $Generales;
+    private $GeneralesI;
+    private $Especificas;
+    private $EspecificasI;
+    private $BasicasYTransversales;
+    private $BasicasYTransversalesI;
+    private $ResultadosAprendizaje;
+    private $ResultadosAprendizajeI;
+    private $IdModAsignatura;
 
-	}
+    public function __construct($IdCompetencia, $Generales, $GeneralesI, $Especificas, $EspecificasI, $BasicasYTransversales, $BasicasYTransversalesI, $ResultadosAprendizaje, $ResultadosAprendizajeI, $IdModAsignatura)
+    {
+        $this->IdCompetencia = $IdCompetencia;
+        $this->Generales = $Generales;
+        $this->GeneralesI = $GeneralesI;
+        $this->Especificas = $Especificas;
+        $this->EspecificasI = $EspecificasI;
+        $this->BasicasYTransversales = $BasicasYTransversales;
+        $this->BasicasYTransversalesI = $BasicasYTransversalesI;
+        $this->ResultadosAprendizaje = $ResultadosAprendizaje;
+        $this->ResultadosAprendizajeI = $ResultadosAprendizajeI;
+        $this->IdModAsignatura = $IdModAsignatura;
+    }
 
     /**
      * @return mixed
      */
-    public function getIdComepetencia()
+    public function getIdCompetencia()
     {
-    	return $this->IdComepetencia;
+        return $this->IdCompetencia;
     }
 
     /**
-     * @param mixed $IdComepetencia
+     * @param mixed $IdCompetencia
      *
      * @return self
      */
-    public function setIdComepetencia($IdComepetencia)
+    public function setIdCompetencia($IdCompetencia)
     {
-    	$this->IdComepetencia = $IdComepetencia;
+        $this->IdCompetencia = $IdCompetencia;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -51,7 +54,7 @@ class ModCompetenciaAsignatura{
      */
     public function getGenerales()
     {
-    	return $this->Generales;
+        return $this->Generales;
     }
 
     /**
@@ -61,9 +64,9 @@ class ModCompetenciaAsignatura{
      */
     public function setGenerales($Generales)
     {
-    	$this->Generales = $Generales;
+        $this->Generales = $Generales;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -71,7 +74,7 @@ class ModCompetenciaAsignatura{
      */
     public function getGeneralesI()
     {
-    	return $this->GeneralesI;
+        return $this->GeneralesI;
     }
 
     /**
@@ -81,9 +84,9 @@ class ModCompetenciaAsignatura{
      */
     public function setGeneralesI($GeneralesI)
     {
-    	$this->GeneralesI = $GeneralesI;
+        $this->GeneralesI = $GeneralesI;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -91,7 +94,7 @@ class ModCompetenciaAsignatura{
      */
     public function getEspecificas()
     {
-    	return $this->Especificas;
+        return $this->Especificas;
     }
 
     /**
@@ -101,9 +104,9 @@ class ModCompetenciaAsignatura{
      */
     public function setEspecificas($Especificas)
     {
-    	$this->Especificas = $Especificas;
+        $this->Especificas = $Especificas;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -111,7 +114,7 @@ class ModCompetenciaAsignatura{
      */
     public function getEspecificasI()
     {
-    	return $this->EspecificasI;
+        return $this->EspecificasI;
     }
 
     /**
@@ -121,9 +124,9 @@ class ModCompetenciaAsignatura{
      */
     public function setEspecificasI($EspecificasI)
     {
-    	$this->EspecificasI = $EspecificasI;
+        $this->EspecificasI = $EspecificasI;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -131,7 +134,7 @@ class ModCompetenciaAsignatura{
      */
     public function getBasicasYTransversales()
     {
-    	return $this->BasicasYTransversales;
+        return $this->BasicasYTransversales;
     }
 
     /**
@@ -141,9 +144,9 @@ class ModCompetenciaAsignatura{
      */
     public function setBasicasYTransversales($BasicasYTransversales)
     {
-    	$this->BasicasYTransversales = $BasicasYTransversales;
+        $this->BasicasYTransversales = $BasicasYTransversales;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -151,7 +154,7 @@ class ModCompetenciaAsignatura{
      */
     public function getBasicasYTransversalesI()
     {
-    	return $this->BasicasYTransversalesI;
+        return $this->BasicasYTransversalesI;
     }
 
     /**
@@ -161,9 +164,9 @@ class ModCompetenciaAsignatura{
      */
     public function setBasicasYTransversalesI($BasicasYTransversalesI)
     {
-    	$this->BasicasYTransversalesI = $BasicasYTransversalesI;
+        $this->BasicasYTransversalesI = $BasicasYTransversalesI;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -171,7 +174,7 @@ class ModCompetenciaAsignatura{
      */
     public function getResultadosAprendizaje()
     {
-    	return $this->ResultadosAprendizaje;
+        return $this->ResultadosAprendizaje;
     }
 
     /**
@@ -181,9 +184,9 @@ class ModCompetenciaAsignatura{
      */
     public function setResultadosAprendizaje($ResultadosAprendizaje)
     {
-    	$this->ResultadosAprendizaje = $ResultadosAprendizaje;
+        $this->ResultadosAprendizaje = $ResultadosAprendizaje;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -191,7 +194,7 @@ class ModCompetenciaAsignatura{
      */
     public function getResultadosAprendizajeI()
     {
-    	return $this->ResultadosAprendizajeI;
+        return $this->ResultadosAprendizajeI;
     }
 
     /**
@@ -201,9 +204,9 @@ class ModCompetenciaAsignatura{
      */
     public function setResultadosAprendizajeI($ResultadosAprendizajeI)
     {
-    	$this->ResultadosAprendizajeI = $ResultadosAprendizajeI;
+        $this->ResultadosAprendizajeI = $ResultadosAprendizajeI;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -211,7 +214,7 @@ class ModCompetenciaAsignatura{
      */
     public function getIdModAsignatura()
     {
-    	return $this->IdModAsignatura;
+        return $this->IdModAsignatura;
     }
 
     /**
@@ -221,8 +224,8 @@ class ModCompetenciaAsignatura{
      */
     public function setIdModAsignatura($IdModAsignatura)
     {
-    	$this->IdModAsignatura = $IdModAsignatura;
+        $this->IdModAsignatura = $IdModAsignatura;
 
-    	return $this;
+        return $this;
     }
 }

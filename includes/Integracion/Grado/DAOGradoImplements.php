@@ -18,12 +18,12 @@ class DAOGradoImplements implements DAOGrado{
     public static function createGrado($grado){
         $singletonDataSource=new SingletonDataSource();
         $dataSource=$singletonDataSource->getInstance();
-        $sql="INSERT INTO grado (CodigoGrado,NombreGrado,HorasEtcs) 
-        VALUES (:codigoGrado, :nombreGrado, :horasEtcs)";
+        $sql="INSERT INTO grado (CodigoGrado,NombreGrado,HorasEcts) 
+        VALUES (:codigoGrado, :nombreGrado, :horasEcts)";
         $values=array(':codigoGrado' => $grado->getCodigoGrado(),
             ':nombreGrado' => $grado->getNombreGrado(),
-            ':horasEtcs' => $grado->getHorasEtcs());
-        $results=$dataSource->executeQuery($sql,$values);
+            ':horasEcts' => $grado->getHorasEcts());
+        $results=$dataSource->executeInsertUpdateDelete($sql,$values);
         return $results;
 
     }
@@ -31,11 +31,11 @@ class DAOGradoImplements implements DAOGrado{
     public static function updateGrado($grado){
         $singletonDataSource=new SingletonDataSource();
         $dataSource=$singletonDataSource->getInstance();
-        $sql="UPDATE grado SET CodigoGrado = :codigoGrado, NombreGrado = :nombreGrado,HorasEtcs = :horasEtcs WHERE CodigoGrado = :codigoGrado";
+        $sql="UPDATE grado SET CodigoGrado = :codigoGrado, NombreGrado = :nombreGrado,HorasEcts = :horasEcts WHERE CodigoGrado = :codigoGrado";
         $values=array(':codigoGrado' => $grado->getCodigoGrado(),
             ':nombreGrado' => $grado->getNombreGrado(),
-            ':horasEtcs' => $grado->getHorasEtcs());
-        $results=$dataSource->executeQuery($sql,$values);
+            ':horasEcts' => $grado->getHorasEcts());
+        $results=$dataSource->executeInsertUpdateDelete($sql,$values);
         return $results;
     }
 
@@ -44,7 +44,16 @@ class DAOGradoImplements implements DAOGrado{
         $dataSource=$singletonDataSource->getInstance();
         $sql="DELETE FROM grado WHERE CodigoGrado = :codigoGrado";
         $values=array(':codigoGrado' => $codigoGrado);
-        $results=$dataSource->executeQuery($sql,$values);
+        $results=$dataSource->executeInsertUpdateDelete($sql,$values);
+        return $results;
+    }
+
+    public static function listGrado(){
+        $singletonDataSource=new SingletonDataSource();
+        $dataSource=$singletonDataSource->getInstance();
+        $sql="SELECT * FROM grado";
+        $values =array();
+        $results=$dataSource->executeQuery($sql, $values);
         return $results;
     }
 }

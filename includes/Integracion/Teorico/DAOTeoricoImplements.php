@@ -23,7 +23,7 @@ class DAOTeoricoImplements implements DAOTeorico{
             ':creditos' => $teorico->getCreditos(),
             ':presencial' => $teorico->getPresencial(),
             ':idAsignatura' => $teorico->getIdAsignatura());
-        $results=$dataSource->executeQuery($sql,$values);
+        $results=$dataSource->executeInsertUpdateDelete($sql,$values);
         return $results;
 
     }
@@ -36,15 +36,15 @@ class DAOTeoricoImplements implements DAOTeorico{
             ':creditos' => $teorico->getCreditos(),
             ':presencial' => $teorico->getPresencial(),
             ':idAsignatura' => $teorico->getIdAsignatura());
-        $results=$dataSource->executeQuery($sql,$values);
+        $results=$dataSource->executeInsertUpdateDelete($sql,$values);
         return $results;
     }
 
-    public static function deleteTeorico($idTeorico){
+    public static function deleteTeorico($idAsignatura){
         $singletonDataSource=new SingletonDataSource();
         $dataSource=$singletonDataSource->getInstance();
-        $sql="DELETE FROM teorico WHERE IdTeorico = :idTeorico";
-        $values=array(':idTeorico' => $idTeorico);
+        $sql="DELETE FROM teorico WHERE IdAsignatura = :idAsignatura";
+        $values=array(':idAsignatura' => $idAsignatura);
         $results=$dataSource->executeQuery($sql,$values);
         return $results;
     }

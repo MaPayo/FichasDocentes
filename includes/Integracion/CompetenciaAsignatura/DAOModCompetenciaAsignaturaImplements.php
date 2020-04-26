@@ -5,11 +5,11 @@ require_once('includes/Integracion/CompetenciaAsignatura/DAOModCompetenciaAsigna
 class DAOModCompetenciaAsignaturaImplements implements DAOModCompetenciaAsignatura{
     
     
-    public static function findModCompetenciaAsignatura($idCompetencia){
+    public static function findModCompetenciaAsignatura($idModAsignatura){
         $singletonDataSource=new SingletonDataSource();
         $dataSource=$singletonDataSource->getInstance();
-        $sql="SELECT * FROM modCompetenciaAsignatura WHERE IdCompetencia = :idCompetencia";
-        $values=array(':idCompetencia' => $idCompetencia);
+        $sql="SELECT * FROM modCompetenciaAsignatura WHERE IdModAsignatura = :idModAsignatura";
+        $values=array(':idModAsignatura' => $idModAsignatura);
         $results=$dataSource->executeQuery($sql,$values);
         return $results;
 
@@ -25,12 +25,12 @@ class DAOModCompetenciaAsignaturaImplements implements DAOModCompetenciaAsignatu
         ':generalesI' => $modCompetenciaAsignatura->getGeneralesI(),
         ':especificas' => $modCompetenciaAsignatura->getEspecificas(),
         ':especificasI' => $modCompetenciaAsignatura->getEspecificasI(),
-        ':basicasYTransversales' => $modCompetenciaAsignatura->getCBasicasYTransversales(),
+        ':basicasYTransversales' => $modCompetenciaAsignatura->getBasicasYTransversales(),
         ':basicasYTransversalesI' => $modCompetenciaAsignatura->getBasicasYTransversalesI(),
         ':resultadosAprendizaje' => $modCompetenciaAsignatura->getResultadosAprendizaje(),
         ':resultadosAprendizajeI' => $modCompetenciaAsignatura->getResultadosAprendizajeI(),
         ':idModAsignatura' => $modCompetenciaAsignatura->getIdModAsignatura());
-        $results=$dataSource->executeQuery($sql,$values);
+        $results=$dataSource->executeInsertUpdateDelete($sql,$values);
         return $results;
 
     }
@@ -44,21 +44,21 @@ class DAOModCompetenciaAsignaturaImplements implements DAOModCompetenciaAsignatu
         ':generalesI' => $modCompetenciaAsignatura->getGeneralesI(),
         ':especificas' => $modCompetenciaAsignatura->getEspecificas(),
         ':especificasI' => $modCompetenciaAsignatura->getEspecificasI(),
-        ':basicasYTransversales' => $modCompetenciaAsignatura->getCBasicasYTransversales(),
+        ':basicasYTransversales' => $modCompetenciaAsignatura->getBasicasYTransversales(),
         ':basicasYTransversalesI' => $modCompetenciaAsignatura->getBasicasYTransversalesI(),
         ':resultadosAprendizaje' => $modCompetenciaAsignatura->getResultadosAprendizaje(),
         ':resultadosAprendizajeI' => $modCompetenciaAsignatura->getResultadosAprendizajeI(),
         ':idModAsignatura' => $modCompetenciaAsignatura->getIdModAsignatura());
-        $results=$dataSource->executeQuery($sql,$values);
+        $results=$dataSource->executeInsertUpdateDelete($sql,$values);
         return $results;
     }
 
-    public static function deleteModCompetenciaAsignatura($idCompetencia){
+    public static function deleteModCompetenciaAsignatura($idModAsignatura){
         $singletonDataSource=new SingletonDataSource();
         $dataSource=$singletonDataSource->getInstance();
-        $sql="DELETE FROM modCompetenciaAsignatura WHERE IdCompetencia = :idCompetencia";
-        $values=array(':idCompetencia' => $idCompetencia);
-        $results=$dataSource->executeQuery($sql,$values);
+        $sql="DELETE FROM modCompetenciaAsignatura WHERE IdModAsignatura = :idModAsignatura";
+        $values=array(':idModAsignatura' => $idModAsignatura);
+        $results=$dataSource->executeInsertUpdateDelete($sql,$values);
         return $results;
     }
 }

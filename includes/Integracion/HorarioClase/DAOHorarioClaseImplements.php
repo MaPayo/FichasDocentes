@@ -5,6 +5,16 @@ require_once('includes/Integracion/HorarioClase/DAOHorarioClase.php');
 class DAOHorarioClaseImplements implements DAOHorarioClase{
 
 
+    public static function listHorarioClase($idGrupoClase){
+        $singletonDataSource=new SingletonDataSource();
+        $dataSource=$singletonDataSource->getInstance();
+        $sql="SELECT * FROM horarioClase WHERE IdGrupoClase = :idGrupoClase";
+        $values=array(':idGrupoClase' => $idGrupoClase);
+        $results=$dataSource->executeQuery($sql,$values);
+        return $results;
+
+    }
+
     public static function findHorarioClase($idHorarioClase){
         $singletonDataSource=new SingletonDataSource();
         $dataSource=$singletonDataSource->getInstance();
@@ -26,7 +36,7 @@ class DAOHorarioClaseImplements implements DAOHorarioClase{
             ':horaInicio' => $horarioClase->getHoraInicio(),
             ':horaFin' => $horarioClase->getHoraFin(),
             ':idGrupoClase' => $horarioClase->getIdGrupoClase());
-        $results=$dataSource->executeQuery($sql,$values);
+        $results=$dataSource->executeInsertUpdateDelete($sql,$values);
         return $results;
 
     }
@@ -41,7 +51,7 @@ class DAOHorarioClaseImplements implements DAOHorarioClase{
             ':horaInicio' => $horarioClase->getHoraInicio(),
             ':horaFin' => $horarioClase->getHoraFin(),
             ':idGrupoClase' => $horarioClase->getIdGrupoClase());
-        $results=$dataSource->executeQuery($sql,$values);
+        $results=$dataSource->executeInsertUpdateDelete($sql,$values);
         return $results;
     }
 
@@ -50,7 +60,7 @@ class DAOHorarioClaseImplements implements DAOHorarioClase{
         $dataSource=$singletonDataSource->getInstance();
         $sql="DELETE FROM horarioClase WHERE IdHorarioClase = :idHorarioClase";
         $values=array(':idHorarioClase' => $idHorarioClase);
-        $results=$dataSource->executeQuery($sql,$values);
+        $results=$dataSource->executeInsertUpdateDelete($sql,$values);
         return $results;
     }
 }

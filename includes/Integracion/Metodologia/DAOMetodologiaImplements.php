@@ -5,11 +5,11 @@ require_once('includes/Integracion/Metodologia/DAOMetodologia.php');
 class DAOMetodologiaImplements implements DAOMetodologia{
 
 
-    public static function findMetodologia($idMetodologia){
+    public static function findMetodologia($idAsignatura){
         $singletonDataSource=new SingletonDataSource();
         $dataSource=$singletonDataSource->getInstance();
-        $sql="SELECT * FROM metodologia WHERE IdMetodologia = :idMetodologia";
-        $values=array(':idMetodologia' => $idMetodologia);
+        $sql="SELECT * FROM metodologia WHERE IdAsignatura = :idAsignatura";
+        $values=array(':idAsignatura' => $idAsignatura);
         $results=$dataSource->executeQuery($sql,$values);
         return $results;
 
@@ -24,7 +24,7 @@ class DAOMetodologiaImplements implements DAOMetodologia{
             ':metodologia' => $metodologia->getMetodologia(),
             ':metodologiaI' => $metodologia->getMetodologiaI(),
             ':idAsignatura' => $metodologia->getIdAsignatura());
-        $results=$dataSource->executeQuery($sql,$values);
+        $results=$dataSource->executeInsertUpdateDelete($sql,$values);
         return $results;
 
     }
@@ -37,16 +37,16 @@ class DAOMetodologiaImplements implements DAOMetodologia{
             ':metodologia' => $metodologia->getMetodologia(),
             ':metodologiaI' => $metodologia->getMetodologiaI(),
             ':idAsignatura' => $metodologia->getIdAsignatura());
-        $results=$dataSource->executeQuery($sql,$values);
+        $results=$dataSource->executeInsertUpdateDelete($sql,$values);
         return $results;
     }
 
-    public static function deleteMetodologia($idMetodologia){
+    public static function deleteMetodologia($idAsignatura){
         $singletonDataSource=new SingletonDataSource();
         $dataSource=$singletonDataSource->getInstance();
-        $sql="DELETE FROM metodologia WHERE IdMetodologia = :idMetodologia";
-        $values=array(':idMetodologia' => $idMetodologia);
-        $results=$dataSource->executeQuery($sql,$values);
+        $sql="DELETE FROM metodologia WHERE IdAsignatura = :idAsignatura";
+        $values=array(':idAsignatura' => $idAsignatura);
+        $results=$dataSource->executeInsertUpdateDelete($sql,$values);
         return $results;
     }
 }

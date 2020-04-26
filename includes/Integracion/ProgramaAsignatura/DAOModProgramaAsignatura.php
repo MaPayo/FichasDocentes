@@ -2,11 +2,11 @@
 namespace es\ucm;
 
 interface DAOModProgramaAsignatura{
-    public static function findModProgramaAsignatura($idModProgramaAsignatura);
+    public static function findModProgramaAsignatura($idModAsignatura);
 
-    public static function createModProgramaAsignatura($ModProgramaAsignatura);
+    public static function createModProgramaAsignatura($modProgramaAsignatura);
 
-    public static function updateModProgramaAsignatura($ModProgramaAsignatura);
+    public static function updateModProgramaAsignatura($modProgramaAsignatura);
     
-    public static function deleteModProgramaAsignatura($idModProgramaAsignatura);
+    public static function deleteModProgramaAsignatura($idModAsignatura);
 }

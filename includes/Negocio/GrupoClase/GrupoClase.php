@@ -5,13 +5,13 @@ class GrupoClase{
 	private $IdGrupoClase;
 	private $Letra;
 	private $Idioma;
-	private $IdAsignatura;
+    private $IdAsignatura;
 
 	public function __construct($IdGrupoClase,$Letra,$Idioma,$IdAsignatura){
 		$this->IdGrupoClase = $IdGrupoClase;
 		$this->Letra = $Letra;
 		$this->Idioma = $Idioma;
-		$this->IdAsignatura;
+        $this->IdAsignatura=$IdAsignatura;
 	}
 
     /**

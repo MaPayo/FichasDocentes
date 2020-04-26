@@ -5,14 +5,13 @@ require_once('includes/Integracion/CompetenciaAsignatura/DAOCompetenciaAsignatur
 class DAOCompetenciaAsignaturaImplements implements DAOCompetenciaAsignatura{
     
     
-    public static function findCompetenciaAsignatura($idCompetencia){
+    public static function findCompetenciaAsignatura($idAsignatura){
         $singletonDataSource=new SingletonDataSource();
         $dataSource=$singletonDataSource->getInstance();
-        $sql="SELECT * FROM competenciaAsignatura WHERE IdCompetencia = :idCompetencia";
-        $values=array(':idCompetencia' => $idCompetencia);
+        $sql="SELECT * FROM competenciaAsignatura WHERE IdAsignatura = :idAsignatura";
+        $values=array(':idAsignatura' => $idAsignatura);
         $results=$dataSource->executeQuery($sql,$values);
         return $results;
-
     }
 
     public static function createCompetenciaAsignatura($competenciaAsignatura){
@@ -30,7 +29,7 @@ class DAOCompetenciaAsignaturaImplements implements DAOCompetenciaAsignatura{
         ':resultadosAprendizaje' => $competenciaAsignatura->getResultadosAprendizaje(),
         ':resultadosAprendizajeI' => $competenciaAsignatura->getResultadosAprendizajeI(),
         ':idAsignatura' => $competenciaAsignatura->getIdAsignatura());
-        $results=$dataSource->executeQuery($sql,$values);
+        $results=$dataSource->executeInsertUpdateDelete($sql,$values);
         return $results;
 
     }
@@ -49,16 +48,16 @@ class DAOCompetenciaAsignaturaImplements implements DAOCompetenciaAsignatura{
         ':resultadosAprendizaje' => $competenciaAsignatura->getResultadosAprendizaje(),
         ':resultadosAprendizajeI' => $competenciaAsignatura->getResultadosAprendizajeI(),
         ':idAsignatura' => $competenciaAsignatura->getIdAsignatura());
-        $results=$dataSource->executeQuery($sql,$values);
+        $results=$dataSource->executeInsertUpdateDelete($sql,$values);
         return $results;
     }
 
-    public static function deleteCompetenciaAsignatura($idCompetencia){
+    public static function deleteCompetenciaAsignatura($idAsignatura){
         $singletonDataSource=new SingletonDataSource();
         $dataSource=$singletonDataSource->getInstance();
-        $sql="DELETE FROM competenciaAsignatura WHERE IdCompetencia = :idCompetencia";
-        $values=array(':idCompetencia' => $idCompetencia);
-        $results=$dataSource->executeQuery($sql,$values);
+        $sql="DELETE FROM competenciaAsignatura WHERE IdAsignatura = :idAsignatura";
+        $values=array(':idAsignatura' => $idAsignatura);
+        $results=$dataSource->executeInsertUpdateDelete($sql,$values);
         return $results;
     }
 }

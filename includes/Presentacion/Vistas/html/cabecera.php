@@ -9,7 +9,7 @@
   </div>
 
   <div class="col-md-8 col-9">
-   <a href="index.php"><h1 class="web_title">Gestión de Fichas Docentes</h1></a> 
+   <h1 class="web_title">Gestión de Fichas Docentes</h1> 
  </div>
  <div class="col-md-2 col-3" id="logout">
   <div class="btn-group">

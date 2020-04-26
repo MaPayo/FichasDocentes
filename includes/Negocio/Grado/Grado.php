@@ -4,12 +4,12 @@ namespace es\ucm;
 class Grado{
 	private $CodigoGrado;
 	private $NombreGrado;
-	private $HorasEtcs;
+	private $HorasEcts;
 
-	public function __construct($CodigoGrado,$NombreGrado,$HorasEtcs){
+	public function __construct($CodigoGrado,$NombreGrado,$HorasEcts){
 		$this->CodigoGrado = $CodigoGrado;
 		$this->NombreGrado = $NombreGrado;
-		$this->HorasEtcs = $HorasEtcs;
+		$this->HorasEcts = $HorasEcts;
     }
     
     /**
@@ -35,9 +35,9 @@ class Grado{
     /**
      * @return mixed
      */
-    public function getHorasEtcs()
+    public function getHorasEcts()
     {
-    	return $this->HorasEtcs;
+    	return $this->HorasEcts;
     }
 
     /**
@@ -45,9 +45,9 @@ class Grado{
      *
      * @return self
      */
-    public function setHorasEtcs($HorasEtcs)
+    public function setHorasEcts($HorasEcts)
     {
-    	$this->HorasEtcs = $HorasEtcs;
+    	$this->HorasEcts = $HorasEcts;
 
     	return $this;
     }

@@ -17,7 +17,7 @@ class ModGrupoLaboratorio{
     /**
      * @return mixed
      */
-    public function getIdGrupoClase()
+    public function getIdGrupoLab()
     {
     	return $this->IdGrupoLab;
     }
@@ -27,7 +27,7 @@ class ModGrupoLaboratorio{
      *
      * @return self
      */
-    public function setIdGrupoClase($IdGrupoLab)
+    public function setIdGrupoLab($IdGrupoLab)
     {
     	$this->IdGrupoLab = $IdGrupoLab;
 
