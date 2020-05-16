@@ -11,7 +11,7 @@ class ModGrupoClase{
 		$this->IdGrupoClase = $IdGrupoClase;
 		$this->Letra = $Letra;
 		$this->Idioma = $Idioma;
-		$this->IdModAsignatura;
+		$this->IdModAsignatura=$IdModAsignatura;
 	}
 
     /**

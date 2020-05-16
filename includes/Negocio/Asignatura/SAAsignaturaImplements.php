@@ -29,13 +29,6 @@ class SAAsignaturaImplements implements SAAsignatura
         return $asignatura;
     }
 
-    public static function findAllAsignaturas(){
-        $factoriesDAO = new FactoriesDAOImplements();
-        $DAOAsignatura = $factoriesDAO->createDAOAsignatura();
-        $asignaturas= $DAOAsignatura->findAllAsignaturas();
-        return $asignaturas;
-    }
-
     public static function createAsignatura($asignatura)
     {
         $factoriesDAO = new FactoriesDAOImplements();

@@ -13,14 +13,13 @@ class Configuracion{
 	private $Metodologia;
 	private $CitasBibliograficas;
 	private $RecursosInternet;
-	private $GrupoLaboratorio;
 	private $RealizacionExamenes;
 	private $CalificacionFinal;
 	private $RealizacionActividades;
 	private $RealizacionLaboratorio;
-	private $IdAsignatura;
+	private $IdAsignatura;  
 
-	public function __construct($IdConfiguracion,$ConocimientosPrevios,$BreveDescripcion,$ProgramaDetallado,$ComGenerales,$ComEspecificas,$ComBasicas,$ResultadosAprendizaje,$Metodologia,$CitasBibliograficas,$RecursosInternet,$GrupoLaboratorio,$RealizacionExamenes,$CalificacionFinal,$RealizacionActividades,$RealizacionLaboratorio,$IdAsignatura){
+	public function __construct($IdConfiguracion,$ConocimientosPrevios,$BreveDescripcion,$ProgramaDetallado,$ComGenerales,$ComEspecificas,$ComBasicas,$ResultadosAprendizaje,$Metodologia,$CitasBibliograficas,$RecursosInternet,$RealizacionExamenes,$CalificacionFinal,$RealizacionActividades,$RealizacionLaboratorio,$IdAsignatura){
 
 		$this->IdConfiguracion = $IdConfiguracion;
 		$this->ConocimientosPrevios = $ConocimientosPrevios;
@@ -33,7 +32,6 @@ class Configuracion{
 		$this->Metodologia = $Metodologia;
 		$this->CitasBibliograficas = $CitasBibliograficas;
 		$this->RecursosInternet = $RecursosInternet;
-		$this->GrupoLaboratorio = $GrupoLaboratorio;
 		$this->RealizacionExamenes = $RealizacionExamenes;
 		$this->CalificacionFinal = $CalificacionFinal;
 		$this->RealizacionActividades = $RealizacionActividades;
@@ -261,25 +259,6 @@ class Configuracion{
     	return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getGrupoLaboratorio()
-    {
-    	return $this->GrupoLaboratorio;
-    }
-
-    /**
-     * @param mixed $GrupoLaboratorio
-     *
-     * @return self
-     */
-    public function setGrupoLaboratorio($GrupoLaboratorio)
-    {
-    	$this->GrupoLaboratorio = $GrupoLaboratorio;
-
-    	return $this;
-    }
 
     /**
      * @return mixed

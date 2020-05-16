@@ -14,7 +14,7 @@ class CommandFindModGrupoLaboratorioProfesor implements Command
     {
         $factorySA = new FactorySAImplements();
         $saGrupoLaboratorioProfesor = $factorySA->createSAModGrupoLaboratorioProfesor();
-        $grupoLaboratorioProfesor = $saGrupoLaboratorioProfesor->findModGrupoLaboratorioProfesor($data);
+        $grupoLaboratorioProfesor = $saGrupoLaboratorioProfesor->findModGrupoLaboratorioProfesor($data['idGrupoLaboratorio'],$data['emailProfesor']);
         $responseContext = null;
         if ($grupoLaboratorioProfesor) {
             $responseContext = new Context(FIND_MODGRUPO_LABORATORIO_PROFESOR_OK, $grupoLaboratorioProfesor);

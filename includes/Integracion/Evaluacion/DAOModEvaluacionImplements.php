@@ -32,7 +32,7 @@ class DAOModEvaluacionImplements implements DAOModEvaluacion{
             ':realizacionLaboratorio' => $modEvaluacion->getRealizacionLaboratorio(),
             ':realizacionLaboratorioI' => $modEvaluacion->getRealizacionLaboratorioI(),
             ':pesoLaboratorio' => $modEvaluacion->getPesolaboratorio(),
-            ':idModAsignatura' => $modEvaluacion->getIdAsignatura());
+            ':idModAsignatura' => $modEvaluacion->getIdModAsignatura());
         $results=$dataSource->executeInsertUpdateDelete($sql,$values);
         return $results;
 
@@ -54,7 +54,7 @@ class DAOModEvaluacionImplements implements DAOModEvaluacion{
             ':realizacionLaboratorio' => $modEvaluacion->getRealizacionLaboratorio(),
             ':realizacionLaboratorioI' => $modEvaluacion->getRealizacionLaboratorioI(),
             ':pesoLaboratorio' => $modEvaluacion->getPesolaboratorio(),
-            ':idModAsignatura' => $modEvaluacion->getIdAsignatura());
+            ':idModAsignatura' => $modEvaluacion->getIdModAsignatura());
         $results=$dataSource->executeInsertUpdateDelete($sql,$values);
         return $results;
     }

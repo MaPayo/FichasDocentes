@@ -5,6 +5,7 @@ namespace es\ucm;
 require_once('includes/Presentacion/Controlador/Context.php');
 require_once('includes/Presentacion/Controlador/ControllerImplements.php');
 require_once('includes/Negocio/Asignatura/ModAsignatura.php');
+require_once('includes/Negocio/Bibliografia/ModBibliografia.php');
 
 class FormBibliografia extends Form
 {
@@ -22,25 +23,30 @@ class FormBibliografia extends Form
 
 		$html = '<input type="hidden" name="idBibliografia" value="' . $idBibliografia . '" required />
 		<input type="hidden" name="idAsignatura" value="' . $idAsignatura . '" required />';
-
-		$html .= '<div class="form-group">
-		<label for="citasBibliograficas">Citas bibliograficas</label>
-		<textarea class="form-control" id="citasBibliograficas" rows="3" name="citasBibliograficas" >' . $citasBibliograficas . '</textarea>
-		</div>';
-
-		$html .= '<div class="form-group">
-		<label for="recursosInternet">Recursos internet</label>
-		<textarea class="form-control" id="recursosInternet" rows="3" name="recursosInternet" >' . $recursosInternet . '</textarea>
-		</div>';
-
+		if ($contextConfiguacion->getEvent() === FIND_CONFIGURACION_OK){
+			
+			if ($contextConfiguacion->getData()->getCitasBibliograficas() == 1) {
+				$html .= '<div class="form-group">
+				<label for="citasBibliograficas">Citas Bibliográficas</label>
+				<textarea class="form-control" id="citasBibliograficas" rows="3" name="citasBibliograficas" >' . $citasBibliograficas . '</textarea>
+				</div>';
+			}
+			if ($contextConfiguacion->getData()->getRecursosInternet() == 1) {
+				$html .= '<div class="form-group">
+				<label for="recursosInternet">Recursos de Internet</label>
+				<textarea class="form-control" id="recursosInternet" rows="3" name="recursosInternet" >' . $recursosInternet . '</textarea>
+				</div>';
+			}
+		}
+		
 		$html .= '<div class="text-right">
-		<a href="indexAcceso.php?IdAsignatura=' . $idAsignatura . '">
-            <button type="button" class="btn btn-secondary" id="btn-form">
-                Cancelar
-            </button>
-        </a>
+		<a href="indexAcceso.php?IdAsignatura=' . $idAsignatura . '#nav-bibliografia">
+		<button type="button" class="btn btn-secondary" id="btn-form">
+		Cancelar
+		</button>
+		</a>
 
-		<button type="submit" class="btn btn-success" id="btn-form name="registrar">Guardar</button>
+		<button type="submit" class="btn btn-success" id="btn-form" name="registrar">Guardar</button>
 		</div>';
 		return $html;
 	}
@@ -53,31 +59,33 @@ class FormBibliografia extends Form
 		$context = new Context(FIND_CONFIGURACION, $datos['idAsignatura']);
 		$contextConfiguacion = $controller->action($context);
 
-		$citasBibliograficas = isset($datos['citasBibliograficas']) ? $datos['citasBibliograficas'] : null;
-		if ($contextConfiguacion->getEvent() === FIND_CONFIGURACION_OK && $contextConfiguacion->getData()->getCitasBibliograficas() == 1) {
-			$citasBibliograficas = self::clean($citasBibliograficas);
-			if (empty($citasBibliograficas)) {
-				$erroresFormulario[] = "No has introducido las citas bibliograficas.";
+		$citasBibliograficas = isset($datos['citasBibliograficas']) ? $datos['citasBibliograficas'] : '';
+		$recursosInternet = isset($datos['recursosInternet']) ? $datos['recursosInternet'] : '';
+
+		if ($contextConfiguacion->getEvent() === FIND_CONFIGURACION_OK) {
+
+			if($contextConfiguacion->getData()->getCitasBibliograficas() == 1){
+				$citasBibliograficas = self::clean($citasBibliograficas);
+				if (empty($citasBibliograficas)) {
+					$erroresFormulario[] = "No has introducido las citas bibliográficas.";
+				}
+			}
+
+			if ($contextConfiguacion->getData()->getRecursosInternet() == 1) {
+				$recursosInternet = self::clean($recursosInternet);
+				if (empty($recursosInternet)) {
+					$erroresFormulario[] = "No has introducido los recursos en internet.";
+				}
 			}
 		}
-
-		$recursosInternet = isset($datos['recursosInternet']) ? $datos['recursosInternet'] : null;
-		if ($contextConfiguacion->getEvent() === FIND_CONFIGURACION_OK && $contextConfiguacion->getData()->getRecursosInternet() == 1) {
-			$recursosInternet = self::clean($recursosInternet);
-			if (empty($recursosInternet)) {
-				$erroresFormulario[] = "No has introducido los recursos en internet.";
-			}
-		}
-
-
+		
 		if (count($erroresFormulario) === 0) {
-			$controller = new ControllerImplements();
 			$context = new Context(FIND_MODBIBLIOGRAFIA, $datos['idAsignatura']);
 			$contextBibliografia = $controller->action($context);
 
 			if ($contextBibliografia->getEvent() === FIND_MODBIBLIOGRAFIA_OK) {
 
-				$bibliografia = new Bibliografia($datos['idBibliografia'], $citasBibliograficas, $recursosInternet, $datos['idAsignatura']);
+				$bibliografia = new ModBibliografia($contextBibliografia->getData()->getIdBibliografia(), $citasBibliograficas, $recursosInternet, $datos['idAsignatura']);
 				$context = new Context(UPDATE_MODBIBLIOGRAFIA, $bibliografia);
 				$contextBibliografia = $controller->action($context);
 
@@ -86,13 +94,13 @@ class FormBibliografia extends Form
 					$modAsignatura = new ModAsignatura($datos['idAsignatura'], date("Y-m-d H:i:s"), $_SESSION['idUsuario'], $datos['idAsignatura']);
 					$context = new Context(UPDATE_MODASIGNATURA, $modAsignatura);
 					$contextModAsignatura = $controller->action($context);
-					$erroresFormulario = "indexAcceso.php?IdAsignatura=" . $datos['idAsignatura'] . "&modificado=y";
+					$erroresFormulario = "indexAcceso.php?IdAsignatura=" . $datos['idAsignatura'] . "&modificado=y#nav-bibliografia";
 				} elseif ($contextBibliografia->getEvent() === UPDATE_MODBIBLIOGRAFIA_FAIL) {
 					$erroresFormulario[] = "No se ha podido modificar la bibliografía.";
 				}
 			} elseif ($contextBibliografia->getEvent() === FIND_MODBIBLIOGRAFIA_FAIL) {
 
-				$bibliografia = new Bibliografia(null, $citasBibliograficas, $recursosInternet, $datos['idAsignatura']);
+				$bibliografia = new ModBibliografia(null, $citasBibliograficas, $recursosInternet, $datos['idAsignatura']);
 				$context = new Context(CREATE_MODBIBLIOGRAFIA, $bibliografia);
 				$contextBibliografia = $controller->action($context);
 
@@ -101,7 +109,7 @@ class FormBibliografia extends Form
 					$modAsignatura = new ModAsignatura($datos['idAsignatura'], date("Y-m-d H:i:s"), $_SESSION['idUsuario'], $datos['idAsignatura']);
 					$context = new Context(UPDATE_MODASIGNATURA, $modAsignatura);
 					$contextModAsignatura = $controller->action($context);
-					$erroresFormulario = "indexAcceso.php?IdAsignatura=" . $datos['idAsignatura'] . "&anadido=y";
+					$erroresFormulario = "indexAcceso.php?IdAsignatura=" . $datos['idAsignatura'] . "&anadido=y#nav-bibliografia";
 				} elseif ($contextBibliografia->getEvent() === CREATE_MODBIBLIOGRAFIA_FAIL) {
 					$erroresFormulario[] = "No se ha podido crear la bibliografia.";
 				}

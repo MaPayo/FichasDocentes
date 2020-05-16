@@ -14,7 +14,7 @@ class CommandDeleteGrupoClaseProfesor implements Command
     {
         $factorySA = new FactorySAImplements();
         $saGrupoClaseProfesor = $factorySA->createSAGrupoClaseProfesor();
-        $grupoClaseProfesor = $saGrupoClaseProfesor->deleteGrupoClaseProfesor($data);
+        $grupoClaseProfesor = $saGrupoClaseProfesor->deleteGrupoClaseProfesor($data['idGrupoClase'],$data['emailProfesor']);
         $responseContext = null;
         if ($grupoClaseProfesor) {
             $responseContext = new Context(DELETE_GRUPO_CLASE_PROFESOR_OK, $grupoClaseProfesor);

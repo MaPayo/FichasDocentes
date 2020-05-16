@@ -4,6 +4,8 @@ namespace es\ucm;
 
 require_once('includes/Presentacion/Controlador/Context.php');
 require_once('includes/Presentacion/Controlador/ControllerImplements.php');
+require_once('includes/Negocio/GrupoLaboratorio/ModGrupoLaboratorio.php');
+require_once('includes/Negocio/Asignatura/ModAsignatura.php');
 
 class FormGrupoLaboratorio extends Form
 {
@@ -14,7 +16,6 @@ class FormGrupoLaboratorio extends Form
 		$letra = isset($datosIniciales['letra']) ? $datosIniciales['letra'] : null;
 		$idioma = isset($datosIniciales['idioma']) ? $datosIniciales['idioma'] : null;
 		$idAsignatura = isset($datosIniciales['idAsignatura']) ? $datosIniciales['idAsignatura'] : null;
-		$emailProfesor = isset($datosIniciales['emailProfesor']) ? $datosIniciales['emailProfesor'] : null;
 
 		$html = '<input type="hidden" name="idGrupoLaboratorio" value="' . $idGrupoLaboratorio . '" required />
 		<input type="hidden" name="idAsignatura" value="' . $idAsignatura . '" required />
@@ -28,34 +29,14 @@ class FormGrupoLaboratorio extends Form
 		<input type="text" class="form-control" id="idioma"  name="idioma" value="' . $idioma . '" />
 		</div>
 
-		<div class="form-group">
-			<label for="emailProfesor">Profesor</label>
-			<select class="form-control" id="emailProfesor" name="emailProfesor" >';
-		$controller = new ControllerImplements();
-		$context = new Context(FIND_PERMISOS, $idAsignatura);
-		$contextPermisos = $controller->action($context);
-		if ($contextPermisos->getEvent() === FIND_PERMISOS_OK) {
-			foreach ($contextPermisos->getData() as $permiso) {
-				$context = new Context(FIND_PROFESOR, $permiso->getEmailProfesor());
-				$contextProfesor = $controller->action($context);
-				if ($contextProfesor->getData()->getEmail() == $emailProfesor) {
-					$html .= '<option value="' . $contextProfesor->getData()->getEmail() . '" selected >' . $contextProfesor->getData()->getNombre() . '</option>';
-				} else {
-					$html .= '<option value="' . $contextProfesor->getData()->getEmail() . '">' . $contextProfesor->getData()->getNombre() . '</option>';
-				}
-			}
-		}
-		$html .= '	</select>
-		</div>
-
 		<div class="text-right">
-		<a href="indexAcceso.php?IdAsignatura=' . $idAsignatura . '">
+		<a href="indexAcceso.php?IdAsignatura=' . $idAsignatura . '#nav-grupo-laboratorio">
             <button type="button" class="btn btn-secondary" id="btn-form">
                 Cancelar
             </button>
         </a>
 
-		<button type="submit" class="btn btn-success" id="btn-form name="registrar">Guardar</button>
+		<button type="submit" class="btn btn-success" id="btn-form" name="registrar">Guardar</button>
 		</div>';
 		return $html;
 	}
@@ -77,12 +58,6 @@ class FormGrupoLaboratorio extends Form
 			$erroresFormulario[] = "No has introducido el idioma.";
 		}
 
-		$emailProfesor = isset($datos['emailProfesor']) ? $datos['emailProfesor'] : null;
-		$emailProfesor = self::clean($emailProfesor);
-		if (empty($emailProfesor)) {
-			$erroresFormulario[] = "No has seleccionado el profesor.";
-		}
-
 
 		if (count($erroresFormulario) === 0) {
 			$controller = new ControllerImplements();
@@ -91,22 +66,28 @@ class FormGrupoLaboratorio extends Form
 
 			if ($contextGrupoLaboratorio->getEvent() === FIND_MODGRUPO_LABORATORIO_OK) {
 
-				$grupoLaboratorio = new GrupoLaboratorio($datos['idGrupoLaboratorio'], $letra, $idioma, $datos['idAsignatura'], $emailProfesor);
+				$grupoLaboratorio = new ModGrupoLaboratorio($datos['idGrupoLaboratorio'], $letra, $idioma, $datos['idAsignatura']);
 				$context = new Context(UPDATE_MODGRUPO_LABORATORIO, $grupoLaboratorio);
 				$contextGrupoLaboratorio = $controller->action($context);
 
 				if ($contextGrupoLaboratorio->getEvent() === UPDATE_MODGRUPO_LABORATORIO_OK) {
-					$erroresFormulario = "indexAcceso.php?IdAsignatura=" . $datos['idAsignatura'] . "&modificado=y";
+					$modAsignatura = new ModAsignatura($datos['idAsignatura'], date("Y-m-d H:i:s"), $_SESSION['idUsuario'], $datos['idAsignatura']);
+					$context = new Context(UPDATE_MODASIGNATURA, $modAsignatura);
+					$contextModAsignatura = $controller->action($context);
+					$erroresFormulario = "indexAcceso.php?IdAsignatura=" . $datos['idAsignatura'] . "&modificado=y#nav-grupo-laboratorio";
 				} elseif ($contextGrupoLaboratorio->getEvent() === UPDATE_MODGRUPO_LABORATORIO_FAIL) {
 					$erroresFormulario[] = "No se ha podido modificar el grupo.";
 				}
 			} elseif ($contextGrupoLaboratorio->getEvent() === FIND_MODGRUPO_LABORATORIO_FAIL) {
 
-				$grupoLaboratorio = new GrupoLaboratorio(null, $letra, $idioma, $datos['idAsignatura'], $emailProfesor);
+				$grupoLaboratorio = new ModGrupoLaboratorio(null, $letra, $idioma, $datos['idAsignatura']);
 				$context = new Context(CREATE_MODGRUPO_LABORATORIO, $grupoLaboratorio);
 				$contextGrupoLaboratorio = $controller->action($context);
 				if ($contextGrupoLaboratorio->getEvent() === CREATE_MODGRUPO_LABORATORIO_OK) {
-					$erroresFormulario = "indexAcceso.php?IdAsignatura=" . $datos['idAsignatura'] . "&anadido=y";
+					$modAsignatura = new ModAsignatura($datos['idAsignatura'], date("Y-m-d H:i:s"), $_SESSION['idUsuario'], $datos['idAsignatura']);
+					$context = new Context(UPDATE_MODASIGNATURA, $modAsignatura);
+					$contextModAsignatura = $controller->action($context);
+					$erroresFormulario = "indexAcceso.php?IdAsignatura=" . $datos['idAsignatura'] . "&anadido=y#nav-grupo-laboratorio";
 				} elseif ($contextGrupoLaboratorio->getEvent() === CREATE_MODGRUPO_LABORATORIO_FAIL) {
 					$erroresFormulario[] = "No se ha podido crear el grupo.";
 				}

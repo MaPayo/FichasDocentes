@@ -15,15 +15,6 @@ class DAOAsignaturaImplements implements DAOAsignatura{
 
     }
 
-    public static function findAllAsignaturas(){
-        $singletonDataSource=new SingletonDataSource();
-        $dataSource=$singletonDataSource->getInstance();
-        $sql="SELECT * FROM asignatura";
-        $results=$dataSource->executeQuery($sql, null);
-        return $results;
-
-    }
-
     public static function createAsignatura($asignatura){
         $singletonDataSource=new SingletonDataSource();
         $dataSource=$singletonDataSource->getInstance();

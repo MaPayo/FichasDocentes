@@ -45,21 +45,25 @@ class FormLogin extends Form
 			$context = new Context(FIND_USUARIO, $email);
 			$controller = new ControllerImplements();
 			$usuario = $controller->action($context);
-			if (!$usuario) {						
+			var_dump($usuario->getEvent());
+			if ($usuario->getEvent() === FIND_USUARIO_FAIL) {						
 				$erroresFormulario[] = "El email o la contraseña no coinciden";
 			} else {
-				if ($usuario->getPassword() === $password) {
+				if ($usuario->getData()->getPassword() === $password) {
 					$_SESSION['login'] = true;
-					$_SESSION['idUsuario'] = $usuario->getEmail();
+					$_SESSION['idUsuario'] = $usuario->getData()->getEmail();
 					$context = new Context(FIND_PERMISOS_POR_PROFESOR, $email);
 					$controller = new ControllerImplements();
 					$permisos = $controller->action($context);
-					//$_SESSION['permisos'] = $permisos;
-					foreach ($permisos as $permiso) {
-					$_SESSION['permisos'][$permiso->getIdAsignatura()] = serialize($permiso);
+					if($permisos->getEvent() === FIND_PERMISOS_POR_PROFESOR_FAIL){
+						$erroresFormulario[] = "El profesor no tiene ningún permiso";
 					}
-					$erroresFormulario = 'indexAcceso.php?IdAsignatura='.$permisos[0]->getIdAsignatura();
-					//$erroresFormulario = 'indexAcceso.php';
+					else{
+						foreach ($permisos->getData() as $permiso) {
+							$_SESSION['permisos'][$permiso->getIdAsignatura()] = serialize($permiso);
+						}
+						$erroresFormulario = 'indexAcceso.php?IdAsignatura='.$permisos->getData()[0]->getIdAsignatura();
+					}
 				} else {
 					$erroresFormulario[] = "El email o la contraseña no coinciden";
 				}

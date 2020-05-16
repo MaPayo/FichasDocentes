@@ -27,9 +27,18 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
         require_once('includes/Presentacion/Vistas/html/cabecera.php');
         ?>
         <div class="row justify-content-center align-items-center">
-            <?php
+           <?php
             if (isset($_SESSION['login']) && $_SESSION['login'] === true) {
-            ?>
+
+                if((isset($_GET['IdAsignatura']) && isset($_GET['IdGrupoLaboratorio'])) || (isset($_GET['IdAsignatura']) && isset($_GET['IdHorarioLaboratorio']))){
+
+                    if(isset($_SESSION['permisos'][$_GET['IdAsignatura']]) && unserialize($_SESSION['permisos'][$_GET['IdAsignatura']])->getPermisoGrupoLaboratorio() >= 6){
+                     $controller = new es\ucm\ControllerImplements();
+                     $context = new es\ucm\Context(FIND_CONFIGURACION, htmlspecialchars(trim(strip_tags($_GET['IdAsignatura']))));
+                     $contextConfiguacion = $controller->action($context);
+
+                     if($contextConfiguacion->getEvent() === FIND_CONFIGURACION_OK && $contextConfiguacion->getData()->getGrupoLaboratorio() == 1){
+                        ?>
                 <div class="col-md-6 col-12">
                     <div class="card ">
                         <div class="card-header text-center">
@@ -38,7 +47,6 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                         <div class="card-body">
                             <?php
                             $access = new es\ucm\FormHorarioLaboratorio('idHorarioLaboratorio');
-                            $controller = new es\ucm\ControllerImplements();
                             $datosIniciales = array();
                             if (isset($_GET['IdHorarioLaboratorio'])) {
                                 $context = new es\ucm\Context(FIND_MODHORARIO_LABORATORIO, htmlspecialchars(trim(strip_tags($_GET['IdHorarioLaboratorio']))));
@@ -63,16 +71,47 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                     </div>
                 </div>
             <?php
-            } else {
-                echo '
-                <div class="col-md-6 col-12">
-                <div class="alert alert-danger" role="alert">
-                <h2 class="card-title text-center">ACCESO DENEGADO</h2>
-                <h5 class="text-center">Inicia sesión con un usuario que pueda acceder a este contenido</h5>
-                </div>
-                </div>';
-            }
-            ?>
+                }
+                else{
+                   echo '
+                   <div class="col-md-6 col-12">
+                   <div class="alert alert-danger" role="alert">
+                   <h2 class="card-title text-center">ACCESO DENEGADO</h2>
+                   <h5 class="text-center">La asignatura seleccionada no ha sido creada correctamente o no contiene este apartado. Contacta con el administrador</h5>
+                   </div>
+                   </div>';
+               }
+           }
+           else{
+               echo '
+               <div class="col-md-6 col-12">
+               <div class="alert alert-danger" role="alert">
+               <h2 class="card-title text-center">ACCESO DENEGADO</h2>
+               <h5 class="text-center">No tienes permisos suficientes para esta apartado</h5>
+               </div>
+               </div>';
+           }
+       }
+       else {
+        echo '
+        <div class="col-md-6 col-12">
+        <div class="alert alert-danger" role="alert">
+        <h2 class="card-title text-center">ACCESO DENEGADO</h2>
+        <h5 class="text-center">No se ha podido obtener la asignatura</h5>
+        </div>
+        </div>';
+    }
+}
+else {
+    echo '
+    <div class="col-md-6 col-12">
+    <div class="alert alert-danger" role="alert">
+    <h2 class="card-title text-center">ACCESO DENEGADO</h2>
+    <h5 class="text-center">Inicia sesión con un usuario que pueda acceder a este contenido</h5>
+    </div>
+    </div>';
+}
+?>
         </div>
     </div>
     <!-- Optional JavaScript -->

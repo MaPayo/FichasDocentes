@@ -29,57 +29,83 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
         <div class="row justify-content-center align-items-center">
             <?php
             if (isset($_SESSION['login']) && $_SESSION['login'] === true) {
-            ?>
-                <div class="col-md-6 col-12">
-                    <div class="card ">
-                        <div class="card-header text-center">
-                            <h2>Crear/Modificar borrador horario clase</h2>
+
+                if((isset($_GET['IdAsignatura']) && isset($_GET['IdGrupoClase'])) || (isset($_GET['IdAsignatura']) && isset($_GET['IdHorarioClase']))){
+
+                    if(isset($_SESSION['permisos'][$_GET['IdAsignatura']]) && unserialize($_SESSION['permisos'][$_GET['IdAsignatura']])->getPermisoGrupoclase() >= 6){
+
+                        ?>
+                        <div class="col-md-6 col-12">
+                            <div class="card ">
+                                <div class="card-header text-center">
+                                    <h2>Crear/Modificar borrador horario clase</h2>
+                                </div>
+                                <div class="card-body">
+                                    <?php
+                                    $controller = new es\ucm\ControllerImplements();
+                                    $access = new es\ucm\FormHorarioClase('idHorarioClase');
+                                    $datosIniciales = array();
+                                    if (isset($_GET['IdHorarioClase'])) {
+                                        $context = new es\ucm\Context(FIND_MODHORARIO_CLASE, htmlspecialchars(trim(strip_tags($_GET['IdHorarioClase']))));
+                                        $contextHorarioClase = $controller->action($context);
+                                        if ($contextHorarioClase->getEvent() === FIND_MODHORARIO_CLASE_OK) {
+                                            $datosIniciales['idHorarioClase'] = $contextHorarioClase->getData()->getIdHorarioClase();
+                                            $datosIniciales['aula'] = $contextHorarioClase->getData()->getAula();
+                                            $datosIniciales['dia'] = $contextHorarioClase->getData()->getDia();
+                                            $datosIniciales['horaInicio'] = $contextHorarioClase->getData()->getHoraInicio();
+                                            $datosIniciales['horaFin'] = $contextHorarioClase->getData()->getHoraFin();
+                                            $datosIniciales['idGrupoClase'] = $contextHorarioClase->getData()->getIdGrupoClase();
+                                            $datosIniciales['idAsignatura'] =  htmlspecialchars(trim(strip_tags($_GET['IdAsignatura'])));
+                                            $access->gestionaModificacion($datosIniciales);
+                                        }
+                                    } elseif (isset($_GET['IdGrupoClase'])) {
+                                        $datosIniciales['idAsignatura'] =  htmlspecialchars(trim(strip_tags($_GET['IdAsignatura'])));
+                                        $datosIniciales['idGrupoClase'] =  htmlspecialchars(trim(strip_tags($_GET['IdGrupoClase'])));
+                                        $access->gestionaModificacion($datosIniciales);
+                                    }
+                                    ?>
+                                </div>
+                            </div>
                         </div>
-                        <div class="card-body">
-                            <?php
-                            $access = new es\ucm\FormHorarioClase('idHorarioClase');
-                            $controller = new es\ucm\ControllerImplements();
-                            $datosIniciales = array();
-                            if (isset($_GET['IdHorarioClase'])) {
-                                $context = new es\ucm\Context(FIND_MODHORARIO_CLASE, htmlspecialchars(trim(strip_tags($_GET['IdHorarioClase']))));
-                                $contextHorarioClase = $controller->action($context);
-                                if ($contextHorarioClase->getEvent() === FIND_MODHORARIO_CLASE_OK) {
-                                    $datosIniciales['idHorarioClase'] = $contextHorarioClase->getData()->getIdHorarioClase();
-                                    $datosIniciales['aula'] = $contextHorarioClase->getData()->getAula();
-                                    $datosIniciales['dia'] = $contextHorarioClase->getData()->getDia();
-                                    $datosIniciales['horaInicio'] = $contextHorarioClase->getData()->getHoraInicio();
-                                    $datosIniciales['horaFin'] = $contextHorarioClase->getData()->getHoraFin();
-                                    $datosIniciales['idGrupoClase'] = $contextHorarioClase->getData()->getIdGrupoClase();
-                                    $datosIniciales['idAsignatura'] =  htmlspecialchars(trim(strip_tags($_GET['IdAsignatura'])));
-                                    $access->gestionaModificacion($datosIniciales);
-                                }
-                            } elseif (isset($_GET['IdGrupoClase'])) {
-                                $datosIniciales['idAsignatura'] =  htmlspecialchars(trim(strip_tags($_GET['IdAsignatura'])));
-                                $datosIniciales['idGrupoClase'] =  htmlspecialchars(trim(strip_tags($_GET['IdGrupoClase'])));
-                                $access->gestionaModificacion($datosIniciales);
-                            }
-                            ?>
-                        </div>
-                    </div>
-                </div>
-            <?php
-            } else {
+                        <?php
+                    }
+                    else{
+                     echo '
+                     <div class="col-md-6 col-12">
+                     <div class="alert alert-danger" role="alert">
+                     <h2 class="card-title text-center">ACCESO DENEGADO</h2>
+                     <h5 class="text-center">No tienes permisos suficientes para esta apartado</h5>
+                     </div>
+                     </div>';
+                 }
+             }
+             else {
                 echo '
                 <div class="col-md-6 col-12">
                 <div class="alert alert-danger" role="alert">
                 <h2 class="card-title text-center">ACCESO DENEGADO</h2>
-                <h5 class="text-center">Inicia sesión con un usuario que pueda acceder a este contenido</h5>
+                <h5 class="text-center">No se ha podido obtener la asignatura o el horario</h5>
                 </div>
                 </div>';
             }
-            ?>
-        </div>
+        }
+        else {
+            echo '
+            <div class="col-md-6 col-12">
+            <div class="alert alert-danger" role="alert">
+            <h2 class="card-title text-center">ACCESO DENEGADO</h2>
+            <h5 class="text-center">Inicia sesión con un usuario que pueda acceder a este contenido</h5>
+            </div>
+            </div>';
+        }
+        ?>
     </div>
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</div>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 
 </html>

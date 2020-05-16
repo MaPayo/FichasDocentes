@@ -18,7 +18,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
     <script src="' . RUTA_JS . 'jquery-3.4.1.min.js" type="text/javascript"></script>
     <script src="' . RUTA_JS . 'tinymce.min.js"></script>';
     ?>
-    <title>Gestion Docente: Grupo Clase</title>
+    <title>Gestion Docente: Grupo Clase Profesor</title>
 </head>
 
 <body>
@@ -30,34 +30,22 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
          <?php
          if (isset($_SESSION['login']) && $_SESSION['login'] === true) {
 
-            if(isset($_GET['IdAsignatura']) || (isset($_GET['IdGrupoClase']) && isset($_GET['IdAsignatura']))){
+            if(isset($_GET['IdGrupoClase']) && isset($_GET['IdAsignatura'])){
 
                 if(isset($_SESSION['permisos'][$_GET['IdAsignatura']]) && unserialize($_SESSION['permisos'][$_GET['IdAsignatura']])->getPermisoGrupoClase() >= 6){
                     ?>
                     <div class="col-md-6 col-12">
                         <div class="card ">
                             <div class="card-header text-center">
-                                <h2>Crear/Modificar borrador grupo clase</h2>
+                                <h2>Añadir profesor a grupo clase</h2>
                             </div>
                             <div class="card-body">
                                 <?php 
-                                $access = new es\ucm\FormGrupoClase('idGrupoClase');
-                                $controller = new es\ucm\ControllerImplements();
+                                $access = new es\ucm\FormGrupoClaseProfesor('idGrupoClaseProfesor');
                                 $datosIniciales = array();
-                                if (isset($_GET['IdGrupoClase'])) {
-                                    $context = new es\ucm\Context(FIND_MODGRUPO_CLASE, htmlspecialchars(trim(strip_tags($_GET['IdGrupoClase']))));
-                                    $contextModGrupoClase = $controller->action($context);
-                                    if ($contextModGrupoClase->getEvent() === FIND_MODGRUPO_CLASE_OK) {
-                                        $datosIniciales['idGrupoClase'] = $contextModGrupoClase->getData()->getIdGrupoClase();
-                                        $datosIniciales['letra'] = $contextModGrupoClase->getData()->getLetra();
-                                        $datosIniciales['idioma'] = $contextModGrupoClase->getData()->getIdioma();
-                                        $datosIniciales['idAsignatura'] = $contextModGrupoClase->getData()->getIdAsignatura();
-                                        $access->gestionaModificacion($datosIniciales);
-                                    }
-                                } elseif (isset($_GET['IdAsignatura'])) {
-                                    $datosIniciales['idAsignatura'] = htmlspecialchars(trim(strip_tags($_GET['IdAsignatura'])));
-                                    $access->gestionaModificacion($datosIniciales);
-                                }
+                                $datosIniciales['idGrupoClase'] = htmlspecialchars(trim(strip_tags($_GET['IdGrupoClase'])));
+                                $datosIniciales['idAsignatura'] = htmlspecialchars(trim(strip_tags($_GET['IdAsignatura'])));
+                                $access->gestionaModificacion($datosIniciales);
                                 ?>
                             </div>
                         </div>

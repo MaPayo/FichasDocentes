@@ -18,7 +18,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
   <script src="' . RUTA_JS . 'jquery-3.4.1.min.js" type="text/javascript"></script>
   <script src="' . RUTA_JS . 'tinymce.min.js"></script>';
   ?>
-  <title>Gestion Docente: Bibliografia</title>
+  <title>Gestion Docente: Configuración</title>
 </head>
 
 <body>
@@ -29,69 +29,59 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
     <div class="row justify-content-center align-items-center">
       <?php
       if (isset($_SESSION['login']) && $_SESSION['login'] === true) {
-
-        if(isset($_GET['IdAsignatura']) || isset($_GET['IdModAsignatura'])){
-          if(isset($_GET['IdAsignatura'])){
-            $name ='IdAsignatura';
+        if(isset($_GET['idAsignatura'])){
+            $name ='idAsignatura';
           }
-          else{
-            $name = 'IdModAsignatura';
+          if(isset($_GET['emailProfesor'])){
+            $email = 'emailProfesor';
           }
-
-          if(isset($_SESSION['permisos'][$_GET[$name]]) && unserialize($_SESSION['permisos'][$_GET[$name]])->getPermisoBibliografia() >= 6){
-           $controller = new es\ucm\ControllerImplements();
-           $context = new es\ucm\Context(FIND_CONFIGURACION, htmlspecialchars(trim(strip_tags($_GET[$name]))));
-           $contextConfiguacion = $controller->action($context);
-
-           if($contextConfiguacion->getEvent() === FIND_CONFIGURACION_OK && ($contextConfiguacion->getData()->getCitasBibliograficas() == 1 || $contextConfiguacion->getData()->getRecursosInternet() == 1)){
+          $controller = new es\ucm\ControllerImplements();
+          $context = new es\ucm\Context(FIND_PERMISOS, htmlspecialchars(trim(strip_tags($_GET[$name]))));
+          $permisos = $controller->action($context);
+          $context = new es\ucm\Context(FIND_PROFESOR, htmlspecialchars(trim(strip_tags($_GET[$email]))));
+          $profesor = $controller->action($context);
+          $permisoss = null;
+           if($permisos->getEvent() === FIND_PERMISOS_OK){
+             foreach($permisos->getData() as $permiso){
+              if($permiso->getEmailProfesor() === htmlspecialchars(trim(strip_tags($_GET[$email]))))
+              {
+              $permisoss = $permiso;
+             break;
+              }
+             }
+             var_dump($permisoss);
             ?>
             <div class="col-md-6 col-12">
               <div class="card">
                 <div class="card-header text-center">
-                  <h2>Crear/Modificar borrador bibliografía</h2>
+                  <h2>Modificar Permisos</h2>
                 </div>
                 <div class="card-body">
                   <?php
-                  $access = new es\ucm\FormBibliografia('idBibliografia');
+                  $access = new es\ucm\FormPermisos('idPermisos');
                   $datosIniciales= array();
 
-                  if(isset($_GET['IdAsignatura'])){
-                    $context = new es\ucm\Context(FIND_BIBLIOGRAFIA, htmlspecialchars(trim(strip_tags($_GET[$name]))));
-                  }else{
-                    $context = new es\ucm\Context(FIND_MODBIBLIOGRAFIA, htmlspecialchars(trim(strip_tags($_GET[$name]))));
-                  }
-                  $contextBibliografia = $controller->action($context);
+                  $datosIniciales['IdPermiso'] = $permisoss->getIdPermiso();
+		         $datosIniciales['PermisoPrograma'] = $permisoss->getPermisoPrograma();
+		          $datosIniciales['PermisoCompetencias'] = $permisoss->getPermisoCompetencias();
+		          $datosIniciales['PermisoMetodologia'] = $permisoss->getPermisoMetodologia();
+		          $datosIniciales['PermisoBibliografia'] = $permisoss->getPermisoBibliografia();
+		          $datosIniciales['PermisoGrupoLaboratorio'] = $permisoss->getPermisoGrupoLaboratorio();
+		          $datosIniciales['PermisoGrupoClase']= $permisoss->getPermisoGrupoClase();
+		          $datosIniciales['PermisoEvaluacion'] = $permisoss->getPermisoEvaluacion();
+		          $datosIniciales['IdAsignatura'] = $permisoss->getIdAsignatura();
+		          $datosIniciales['EmailProfesor'] = $permisoss->getEmailProfesor();
+	                 
+                  $access->gestionaModificacion($datosIniciales);
+           } //Find ok
                   
-                  if($contextBibliografia->getEvent() === FIND_BIBLIOGRAFIA_OK || FIND_MODBIBLIOGRAFIA_OK){
-                    if($contextBibliografia->getEvent() === FIND_MODBIBLIOGRAFIA_OK){
-                      $datosIniciales['idBibliografia']=$contextBibliografia->getData()->getIdBibliografia();
-                    }
-                    $datosIniciales['citasBibliograficas']=$contextBibliografia->getData()->getCitasBibliograficas();
-                    $datosIniciales['recursosInternet']=$contextBibliografia->getData()->getRecursosInternet();
-                    $datosIniciales['idAsignatura']=$contextBibliografia->getData()->getIdAsignatura();
-                    $access->gestionaModificacion($datosIniciales);
-                  }
-                  else{
-                    $datosIniciales['idAsignatura']=$_GET[$name];
-                    $access->gestionaModificacion($datosIniciales); 
-                  } 
                   ?>
                 </div>
               </div>
             </div>
             <?php
-          }
-          else{
-           echo '
-           <div class="col-md-6 col-12">
-           <div class="alert alert-danger" role="alert">
-           <h2 class="card-title text-center">ACCESO DENEGADO</h2>
-           <h5 class="text-center">La asignatura seleccionada no ha sido creada correctamente o no contiene este apartado. Contacta con el administrador</h5>
-           </div>
-           </div>';
-         }
-       }
-       else{
+          //permisos
+      /* else{
          echo '
          <div class="col-md-6 col-12">
          <div class="alert alert-danger" role="alert">
@@ -99,18 +89,8 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
          <h5 class="text-center">No tienes permisos suficientes para esta apartado</h5>
          </div>
          </div>';
-       }
-     }
-     else {
-      echo '
-      <div class="col-md-6 col-12">
-      <div class="alert alert-danger" role="alert">
-      <h2 class="card-title text-center">ACCESO DENEGADO</h2>
-      <h5 class="text-center">No se ha podido obtener la asignatura</h5>
-      </div>
-      </div>';
-    }
-  }
+       }*/
+}
   else {
     echo '
     <div class="col-md-6 col-12">

@@ -18,8 +18,8 @@ class DAOConfiguracionImplements implements DAOConfiguracion{
     public static function createConfiguracion($configuracion){
         $singletonDataSource=new SingletonDataSource();
         $dataSource=$singletonDataSource->getInstance();
-        $sql="INSERT INTO configuracion (IdConfiguracion,ConocimientosPrevios,BreveDescripcion,ProgramaDetallado,ComGenerales,ComEspecificas,ComBasicas,ResultadosAprendizaje,Metodologia,CitasBibliograficas,RecursosInternet,GrupoLaboratorio,RealizacionExamenes,CalificacionFinal,RealizacionActividades,RealizacionLaboratorio,IdAsignatura) 
-        VALUES (:idConfiguracion, :conocimientosPrevios, :breveDescripcion, :programaDetallado, :comGenerales, :comEspecificas, :comBasicas, :resultadosAprendizaje, :metodologia, :citasBibliograficas, :recursosInternet, :grupoLaboratorio, :realizacionExamenes, :calificacionFinal, :realizacionActividades, :realizacionLaboratorio, :idAsignatura)";
+        $sql="INSERT INTO configuracion (IdConfiguracion,ConocimientosPrevios,BreveDescripcion,ProgramaDetallado,ComGenerales,ComEspecificas,ComBasicas,ResultadosAprendizaje,Metodologia,CitasBibliograficas,RecursosInternet,RealizacionExamenes,CalificacionFinal,RealizacionActividades,RealizacionLaboratorio,IdAsignatura) 
+        VALUES (:idConfiguracion, :conocimientosPrevios, :breveDescripcion, :programaDetallado, :comGenerales, :comEspecificas, :comBasicas, :resultadosAprendizaje, :metodologia, :citasBibliograficas, :recursosInternet, :realizacionExamenes, :calificacionFinal, :realizacionActividades, :realizacionLaboratorio, :idAsignatura)";
         $values=array(':idConfiguracion' => $configuracion->getIdConfiguracion(),
             ':conocimientosPrevios' => $configuracion->getConocimientosPrevios(),
             ':breveDescripcion' => $configuracion->getBreveDescripcion(),
@@ -44,7 +44,7 @@ class DAOConfiguracionImplements implements DAOConfiguracion{
     public static function updateConfiguracion($configuracion){
         $singletonDataSource=new SingletonDataSource();
         $dataSource=$singletonDataSource->getInstance();
-        $sql="UPDATE configuracion SET IdConfiguracion = :idConfiguracion, ConocimientosPrevios = :conocimientosPrevios,BreveDescripcion = :breveDescripcion,ProgramaDetallado = :programaDetallado,ComGenerales = :comGenerales,ComEspecificas = :comEspecificas,ComBasicas = :comBasicas,ResultadosAprendizaje = :resultadosAprendizaje,Metodologia = :metodologia,CitasBibliograficas = :citasBibliograficas,RecursosInternet = :recursosInternet,GrupoLaboratorio = :grupoLaboratorio,RealizacionExamenes = :realizacionExamenes,CalificacionFinal = :calificacionFinal,RealizacionActividades = :realizacionActividades,RealizacionLaboratorio = :realizacionLaboratorio,IdAsignatura = :idAsignatura WHERE IdConfiguracion = :idConfiguracion";
+        $sql="UPDATE configuracion SET IdConfiguracion = :idConfiguracion, ConocimientosPrevios = :conocimientosPrevios,BreveDescripcion = :breveDescripcion,ProgramaDetallado = :programaDetallado,ComGenerales = :comGenerales,ComEspecificas = :comEspecificas,ComBasicas = :comBasicas,ResultadosAprendizaje = :resultadosAprendizaje,Metodologia = :metodologia,CitasBibliograficas = :citasBibliograficas,RecursosInternet = :recursosInternet,RealizacionExamenes = :realizacionExamenes,CalificacionFinal = :calificacionFinal,RealizacionActividades = :realizacionActividades,RealizacionLaboratorio = :realizacionLaboratorio,IdAsignatura = :idAsignatura WHERE IdConfiguracion = :idConfiguracion";
         $values=array(':idConfiguracion' => $configuracion->getIdConfiguracion(),
             ':conocimientosPrevios' => $configuracion->getConocimientosPrevios(),
             ':breveDescripcion' => $configuracion->getBreveDescripcion(),

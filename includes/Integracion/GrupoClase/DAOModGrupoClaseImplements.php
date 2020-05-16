@@ -38,7 +38,7 @@ class DAOModGrupoClaseImplements implements DAOModGrupoClase
             ':idGrupoClase' => $modGrupoClase->getIdGrupoClase(),
             ':letra' => $modGrupoClase->getLetra(),
             ':idioma' => $modGrupoClase->getIdioma(),
-            ':idModAsignatura' => $modGrupoClase->getIdAsignatura()
+            ':idModAsignatura' => $modGrupoClase->getIdModAsignatura()
         );
         $results = $dataSource->executeInsertUpdateDelete($sql, $values);
         return $results;
@@ -53,7 +53,7 @@ class DAOModGrupoClaseImplements implements DAOModGrupoClase
             ':idGrupoClase' => $modGrupoClase->getIdGrupoClase(),
             ':letra' => $modGrupoClase->getLetra(),
             ':idioma' => $modGrupoClase->getIdioma(),
-            ':idModAsignatura' => $modGrupoClase->getIdAsignatura()
+            ':idModAsignatura' => $modGrupoClase->getIdModAsignatura()
         );
         $results = $dataSource->executeInsertUpdateDelete($sql, $values);
         return $results;

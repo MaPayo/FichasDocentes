@@ -18,7 +18,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
     <script src="' . RUTA_JS . 'jquery-3.4.1.min.js" type="text/javascript"></script>
     <script src="' . RUTA_JS . 'tinymce.min.js"></script>';
     ?>
-    <title>Gestion Docente: Grupo Laboratorio</title>
+    <title>Gestion Docente: Grupo Laboratorio Profesor</title>
 </head>
 
 <body>
@@ -27,88 +27,73 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
         require_once('includes/Presentacion/Vistas/html/cabecera.php');
         ?>
         <div class="row justify-content-center align-items-center">
-           <?php
+            <?php
             if (isset($_SESSION['login']) && $_SESSION['login'] === true) {
 
-                if(isset($_GET['IdAsignatura']) || (isset($_GET['IdGrupoLaboratorio']) && isset($_GET['IdAsignatura']))){
+                if (isset($_GET['IdGrupoLaboratorio']) && isset($_GET['IdAsignatura'])) {
 
-                    if(isset($_SESSION['permisos'][$_GET['IdAsignatura']]) && unserialize($_SESSION['permisos'][$_GET['IdAsignatura']])->getPermisoGrupoLaboratorio() >= 6){
-                     $controller = new es\ucm\ControllerImplements();
-                     $context = new es\ucm\Context(FIND_CONFIGURACION, htmlspecialchars(trim(strip_tags($_GET['IdAsignatura']))));
-                     $contextConfiguacion = $controller->action($context);
+                    if (isset($_SESSION['permisos'][$_GET['IdAsignatura']]) && unserialize($_SESSION['permisos'][$_GET['IdAsignatura']])->getPermisoGrupoLaboratorio() >= 6) {
+                        $controller = new es\ucm\ControllerImplements();
+                        $context = new es\ucm\Context(FIND_CONFIGURACION, htmlspecialchars(trim(strip_tags($_GET['IdAsignatura']))));
+                        $contextConfiguacion = $controller->action($context);
 
-                     if($contextConfiguacion->getEvent() === FIND_CONFIGURACION_OK && $contextConfiguacion->getData()->getGrupoLaboratorio() == 1){
-                        ?>
-                <div class="col-md-6 col-12">
-                    <div class="card ">
-                        <div class="card-header text-center">
-                            <h2>Crear/Modificar borrador grupo laboratorio</h2>
-                        </div>
-                        <div class="card-body">
-                            <?php 
-                            $access = new es\ucm\FormGrupoLaboratorio('idGrupoLaboratorio');
-                            $datosIniciales = array();
+                        if ($contextConfiguacion->getEvent() === FIND_CONFIGURACION_OK && $contextConfiguacion->getData()->getGrupoLaboratorio() == 1) {
+            ?>
+                            <div class="col-md-6 col-12">
+                                <div class="card ">
+                                    <div class="card-header text-center">
+                                        <h2>Añadir profesor a grupo laboratorio</h2>
+                                    </div>
+                                    <div class="card-body">
+                                        <?php
+                                        $access = new es\ucm\FormGrupoLaboratorioProfesor('idGrupoLaboratorioProfesor');
+                                        $datosIniciales = array();
+                                        $datosIniciales['idGrupoLaboratorio'] = htmlspecialchars(trim(strip_tags($_GET['IdGrupoLaboratorio'])));
+                                        $datosIniciales['idAsignatura'] = htmlspecialchars(trim(strip_tags($_GET['IdAsignatura'])));
+                                        $access->gestionaModificacion($datosIniciales);
 
-                            if (isset($_GET['IdGrupoLaboratorio'])) {
-                                $context = new es\ucm\Context(FIND_MODGRUPO_LABORATORIO, htmlspecialchars(trim(strip_tags($_GET['IdGrupoLaboratorio']))));
-                                $contextModGrupoLaboratorio = $controller->action($context);
-                                if ($contextModGrupoLaboratorio->getEvent() === FIND_MODGRUPO_LABORATORIO_OK) {
-                                    $datosIniciales['idGrupoLaboratorio'] = $contextModGrupoLaboratorio->getData()->getIdGrupoLab();
-                                    $datosIniciales['letra'] = $contextModGrupoLaboratorio->getData()->getLetra();
-                                    $datosIniciales['idioma'] = $contextModGrupoLaboratorio->getData()->getIdioma();
-                                    $datosIniciales['idAsignatura'] = $contextModGrupoLaboratorio->getData()->getIdAsignatura();
-                                    $access->gestionaModificacion($datosIniciales);
-                                }
-                            } elseif (isset($_GET['IdAsignatura'])) {
-                                $datosIniciales['idAsignatura'] = htmlspecialchars(trim(strip_tags($_GET['IdAsignatura'])));
-                                $access->gestionaModificacion($datosIniciales);
-                            }
-                            ?>
-                        </div>
-                    </div>
-                </div>
+                                        ?>
+                                    </div>
+                                </div>
+                            </div>
             <?php
-                }
-                else{
-                   echo '
+                        } else {
+                            echo '
                    <div class="col-md-6 col-12">
                    <div class="alert alert-danger" role="alert">
                    <h2 class="card-title text-center">ACCESO DENEGADO</h2>
                    <h5 class="text-center">La asignatura seleccionada no ha sido creada correctamente o no contiene este apartado. Contacta con el administrador</h5>
                    </div>
                    </div>';
-               }
-           }
-           else{
-               echo '
+                        }
+                    } else {
+                        echo '
                <div class="col-md-6 col-12">
                <div class="alert alert-danger" role="alert">
                <h2 class="card-title text-center">ACCESO DENEGADO</h2>
                <h5 class="text-center">No tienes permisos suficientes para esta apartado</h5>
                </div>
                </div>';
-           }
-       }
-       else {
-        echo '
+                    }
+                } else {
+                    echo '
         <div class="col-md-6 col-12">
         <div class="alert alert-danger" role="alert">
         <h2 class="card-title text-center">ACCESO DENEGADO</h2>
         <h5 class="text-center">No se ha podido obtener la asignatura</h5>
         </div>
         </div>';
-    }
-}
-else {
-    echo '
+                }
+            } else {
+                echo '
     <div class="col-md-6 col-12">
     <div class="alert alert-danger" role="alert">
     <h2 class="card-title text-center">ACCESO DENEGADO</h2>
     <h5 class="text-center">Inicia sesión con un usuario que pueda acceder a este contenido</h5>
     </div>
     </div>';
-}
-?>
+            }
+            ?>
         </div>
     </div>
     <!-- Optional JavaScript -->

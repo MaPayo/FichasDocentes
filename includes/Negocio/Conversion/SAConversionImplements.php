@@ -9,14 +9,12 @@ require_once('includes/Negocio/Configuracion/Conversion.php');
 require_once('includes/Integracion/Factorias/FactoriesDAOImplements.php');
 
 class SAConversionImplements implements SAConversion{
-
-        
-
 	private $pandoc;
 
 	public function __construct(){
+        $dompdf = new \Dompdf\Dompdf();
 	
-		$this->pandoc = new Pandoc\Pandoc();
+		$this->pandoc = new \Pandoc\Pandoc();
     }
     
         public static function getGrado($conversion)
@@ -48,7 +46,6 @@ class SAConversionImplements implements SAConversion{
             else 
                 return $markdown;
         }
-        
 
         public static function getMateria($conversion)
         {
@@ -122,6 +119,7 @@ class SAConversionImplements implements SAConversion{
                 return $markdown;
 
         }
+
         public static function getCoordinador($conversion){
             $factoriesDAO=new \es\ucm\FactoriesDAOImplements();
             $DAO=$factoriesDAO->createDAOProfesor(); 
@@ -136,6 +134,7 @@ class SAConversionImplements implements SAConversion{
                 return $markdown;
 
         }
+
         public static function getCompetencias($conversion){
             $factoriesDAO=new \es\ucm\FactoriesDAOImplements();
             $DAO=$factoriesDAO->createDAOCompetenciaAsignatura(); 
@@ -166,6 +165,7 @@ class SAConversionImplements implements SAConversion{
                 return $markdown;
 
         }
+
         public static function getMetodologia($conversion){
             $factoriesDAO=new \es\ucm\FactoriesDAOImplements();
             $DAO=$factoriesDAO->createDAOMetodologia(); 
@@ -179,7 +179,8 @@ class SAConversionImplements implements SAConversion{
             else 
                 return $markdown;
 
-        } 
+        }
+
         public static function getEvaluacion($conversion){
             $factoriesDAO=new \es\ucm\FactoriesDAOImplements();
             $DAO=$factoriesDAO->createDAOEvaluacion(); 
@@ -225,10 +226,6 @@ class SAConversionImplements implements SAConversion{
             $md += $this->getProfesores($conversion);
             return $md;
         }
-
-
-
-
 
         public function convertMarkdownToHTML($markdown) {
             $html = '';

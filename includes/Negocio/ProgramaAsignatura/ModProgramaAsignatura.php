@@ -1,33 +1,36 @@
 <?php
+
 namespace es\ucm;
 
-class ModProgramaAsignatura{
-	private $IdPrograma;
-	private $ConocimientosPrevios;
-	private $ConocimientosPreviosI;
-	private $BreveDescripcion;
-	private $BreveDescripcionI;
-	private $ProgramaDetallado;
-	private $ProgramaDetalladoI;
-	private $IdModAsignatura;
+class ModProgramaAsignatura
+{
+    private $IdPrograma;
+    private $ConocimientosPrevios;
+    private $ConocimientosPreviosI;
+    private $BreveDescripcion;
+    private $BreveDescripcionI;
+    private $ProgramaDetallado;
+    private $ProgramaDetalladoI;
+    private $IdModAsignatura;
 
-	public function __construct(){
-		$this->IdPrograma = $IdPrograma;
-		$this->ConocimientosPrevios = $ConocimientosPrevios;
-		$this->ConocimientosPreviosI = $ConocimientosPreviosI;
-		$this->BreveDescripcion = $BreveDescripcion;
-		$this->BreveDescripcionI = $BreveDescripcionI;
-		$this->ProgramaDetallado = $ProgramaDetallado;
-		$this->ProgramaDetalladoI = $ProgramaDetalladoI;
-		$this->IdModAsignatura = $IdModAsignatura;
-	}
+    public function __construct($IdPrograma, $ConocimientosPrevios, $ConocimientosPreviosI, $BreveDescripcion, $BreveDescripcionI, $ProgramaDetallado, $ProgramaDetalladoI, $IdModAsignatura)
+    {
+        $this->IdPrograma = $IdPrograma;
+        $this->ConocimientosPrevios = $ConocimientosPrevios;
+        $this->ConocimientosPreviosI = $ConocimientosPreviosI;
+        $this->BreveDescripcion = $BreveDescripcion;
+        $this->BreveDescripcionI = $BreveDescripcionI;
+        $this->ProgramaDetallado = $ProgramaDetallado;
+        $this->ProgramaDetalladoI = $ProgramaDetalladoI;
+        $this->IdModAsignatura = $IdModAsignatura;
+    }
 
     /**
      * @return mixed
      */
     public function getIdPrograma()
     {
-    	return $this->IdPrograma;
+        return $this->IdPrograma;
     }
 
     /**
@@ -37,9 +40,9 @@ class ModProgramaAsignatura{
      */
     public function setIdPrograma($IdPrograma)
     {
-    	$this->IdPrograma = $IdPrograma;
+        $this->IdPrograma = $IdPrograma;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -47,7 +50,7 @@ class ModProgramaAsignatura{
      */
     public function getConocimientosPrevios()
     {
-    	return $this->ConocimientosPrevios;
+        return $this->ConocimientosPrevios;
     }
 
     /**
@@ -57,9 +60,9 @@ class ModProgramaAsignatura{
      */
     public function setConocimientosPrevios($ConocimientosPrevios)
     {
-    	$this->ConocimientosPrevios = $ConocimientosPrevios;
+        $this->ConocimientosPrevios = $ConocimientosPrevios;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -67,7 +70,7 @@ class ModProgramaAsignatura{
      */
     public function getConocimientosPreviosI()
     {
-    	return $this->ConocimientosPreviosI;
+        return $this->ConocimientosPreviosI;
     }
 
     /**
@@ -77,9 +80,9 @@ class ModProgramaAsignatura{
      */
     public function setConocimientosPreviosI($ConocimientosPreviosI)
     {
-    	$this->ConocimientosPreviosI = $ConocimientosPreviosI;
+        $this->ConocimientosPreviosI = $ConocimientosPreviosI;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -87,7 +90,7 @@ class ModProgramaAsignatura{
      */
     public function getBreveDescripcion()
     {
-    	return $this->BreveDescripcion;
+        return $this->BreveDescripcion;
     }
 
     /**
@@ -97,9 +100,9 @@ class ModProgramaAsignatura{
      */
     public function setBreveDescripcion($BreveDescripcion)
     {
-    	$this->BreveDescripcion = $BreveDescripcion;
+        $this->BreveDescripcion = $BreveDescripcion;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -107,7 +110,7 @@ class ModProgramaAsignatura{
      */
     public function getBreveDescripcionI()
     {
-    	return $this->BreveDescripcionI;
+        return $this->BreveDescripcionI;
     }
 
     /**
@@ -117,9 +120,9 @@ class ModProgramaAsignatura{
      */
     public function setBreveDescripcionI($BreveDescripcionI)
     {
-    	$this->BreveDescripcionI = $BreveDescripcionI;
+        $this->BreveDescripcionI = $BreveDescripcionI;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -127,7 +130,7 @@ class ModProgramaAsignatura{
      */
     public function getProgramaDetallado()
     {
-    	return $this->ProgramaDetallado;
+        return $this->ProgramaDetallado;
     }
 
     /**
@@ -137,9 +140,9 @@ class ModProgramaAsignatura{
      */
     public function setProgramaDetallado($ProgramaDetallado)
     {
-    	$this->ProgramaDetallado = $ProgramaDetallado;
+        $this->ProgramaDetallado = $ProgramaDetallado;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -147,7 +150,7 @@ class ModProgramaAsignatura{
      */
     public function getProgramaDetalladoI()
     {
-    	return $this->ProgramaDetalladoI;
+        return $this->ProgramaDetalladoI;
     }
 
     /**
@@ -157,9 +160,9 @@ class ModProgramaAsignatura{
      */
     public function setProgramaDetalladoI($ProgramaDetalladoI)
     {
-    	$this->ProgramaDetalladoI = $ProgramaDetalladoI;
+        $this->ProgramaDetalladoI = $ProgramaDetalladoI;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -167,7 +170,7 @@ class ModProgramaAsignatura{
      */
     public function getIdAsignatura()
     {
-    	return $this->IdModAsignatura;
+        return $this->IdModAsignatura;
     }
 
     /**
@@ -177,8 +180,8 @@ class ModProgramaAsignatura{
      */
     public function setIdAsignatura($IdModAsignatura)
     {
-    	$this->IdModAsignatura = $IdModAsignatura;
+        $this->IdModAsignatura = $IdModAsignatura;
 
-    	return $this;
+        return $this;
     }
 }

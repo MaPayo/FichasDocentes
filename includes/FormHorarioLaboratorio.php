@@ -4,6 +4,8 @@ namespace es\ucm;
 
 require_once('includes/Presentacion/Controlador/Context.php');
 require_once('includes/Presentacion/Controlador/ControllerImplements.php');
+require_once('includes/Negocio/HorarioLaboratorio/ModHorarioLaboratorio.php');
+require_once('includes/Negocio/Asignatura/ModAsignatura.php');
 
 class FormHorarioLaboratorio extends Form
 {
@@ -51,13 +53,13 @@ class FormHorarioLaboratorio extends Form
 		</div>
 
 		<div class="text-right">
-		<a href="indexAcceso.php?IdAsignatura=' . $idAsignatura . '">
+		<a href="indexAcceso.php?IdAsignatura=' . $idAsignatura . '#nav-grupo-laboratorio">
             <button type="button" class="btn btn-secondary" id="btn-form">
                 Cancelar
             </button>
         </a>
 
-		<button type="submit" class="btn btn-success" id="btn-form name="registrar">Guardar</button>
+		<button type="submit" class="btn btn-success" id="btn-form" name="registrar">Guardar</button>
 		</div>';
 		return $html;
 	}
@@ -99,22 +101,28 @@ class FormHorarioLaboratorio extends Form
 
 			if ($contextHorarioLaboratorio->getEvent() === FIND_MODHORARIO_LABORATORIO_OK) {
 
-				$horarioLaboratorio = new HorarioLaboratorio($datos['idHorarioLaboratorio'], $laboratorio, $dia, $horaInicio, $horaFin, $datos['idGrupoLaboratorio']);
+				$horarioLaboratorio = new ModHorarioLaboratorio($datos['idHorarioLaboratorio'], $laboratorio, $dia, $horaInicio, $horaFin, $datos['idGrupoLaboratorio']);
 				$context = new Context(UPDATE_MODHORARIO_LABORATORIO, $horarioLaboratorio);
 				$contextHorarioLaboratorio = $controller->action($context);
 
 				if ($contextHorarioLaboratorio->getEvent() === UPDATE_MODHORARIO_LABORATORIO_OK) {
-					$erroresFormulario = "indexAcceso.php?IdAsignatura=" . $datos['idAsignatura'] . "&modificado=y";
+					$modAsignatura = new ModAsignatura($datos['idAsignatura'], date("Y-m-d H:i:s"), $_SESSION['idUsuario'], $datos['idAsignatura']);
+					$context = new Context(UPDATE_MODASIGNATURA, $modAsignatura);
+					$contextModAsignatura = $controller->action($context);
+					$erroresFormulario = "indexAcceso.php?IdAsignatura=" . $datos['idAsignatura'] . "&modificado=y#nav-grupo-laboratorio";
 				} elseif ($contextHorarioLaboratorio->getEvent() === UPDATE_MODHORARIO_LABORATORIO_FAIL) {
 					$erroresFormulario[] = "No se ha podido modificar el horario.";
 				}
 			} elseif ($contextHorarioLaboratorio->getEvent() === FIND_MODHORARIO_LABORATORIO_FAIL) {
 
-				$horarioLaboratorio = new HorarioLaboratorio(null,  $laboratorio, $dia, $horaInicio, $horaFin, $datos['idGrupoLaboratorio']);
+				$horarioLaboratorio = new ModHorarioLaboratorio(null,  $laboratorio, $dia, $horaInicio, $horaFin, $datos['idGrupoLaboratorio']);
 				$context = new Context(CREATE_MODHORARIO_LABORATORIO, $horarioLaboratorio);
 				$contextHorarioLaboratorio = $controller->action($context);
 				if ($contextHorarioLaboratorio->getEvent() === CREATE_MODHORARIO_LABORATORIO_OK) {
-					$erroresFormulario = "indexAcceso.php?IdAsignatura=" . $datos['idAsignatura'] . "&anadido=y";
+					$modAsignatura = new ModAsignatura($datos['idAsignatura'], date("Y-m-d H:i:s"), $_SESSION['idUsuario'], $datos['idAsignatura']);
+					$context = new Context(UPDATE_MODASIGNATURA, $modAsignatura);
+					$contextModAsignatura = $controller->action($context);
+					$erroresFormulario = "indexAcceso.php?IdAsignatura=" . $datos['idAsignatura'] . "&anadido=y#nav-grupo-laboratorio";
 				} elseif ($contextHorarioLaboratorio->getEvent() === CREATE_MODHORARIO_LABORATORIO_FAIL) {
 					$erroresFormulario[] = "No se ha podido crear el horario.";
 				}

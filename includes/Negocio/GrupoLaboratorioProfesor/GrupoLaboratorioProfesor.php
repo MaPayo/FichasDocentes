@@ -1,31 +1,33 @@
 <?php
+
 namespace es\ucm;
 
-class GrupoLaboratorioProfesor{
-	private $IdGrupoClase;
+class GrupoLaboratorioProfesor
+{
+    private $IdGrupoLab;
     private $EmailProfesor;
-
-    public function __construct($IdGrupoClase,$EmailProfesor){
-      $this->IdGrupoClase = $IdGrupoClase;
-      $this->EmailProfesor=$EmailProfesor;
-  }
+    public function __construct($IdGrupoLaboratorio, $EmailProfesor)
+    {
+        $this->IdGrupoLab = $IdGrupoLaboratorio;
+        $this->EmailProfesor = $EmailProfesor;
+    }
 
     /**
      * @return mixed
      */
-    public function getIdGrupoClase()
+    public function getIdGrupoLab()
     {
-        return $this->IdGrupoClase;
+        return $this->IdGrupoLab;
     }
 
     /**
-     * @param mixed $IdGrupoClase
+     * @param mixed $IdGrupoLab
      *
      * @return self
      */
-    public function setIdGrupoClase($IdGrupoClase)
+    public function setIdGrupoLab($IdGrupoLaboratorio)
     {
-        $this->IdGrupoClase = $IdGrupoClase;
+        $this->IdGrupoLab = $IdGrupoLaboratorio;
 
         return $this;
     }

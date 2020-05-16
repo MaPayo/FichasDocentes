@@ -38,7 +38,7 @@ class DAOModGrupoLaboratorioImplements implements DAOModGrupoLaboratorio
             ':idGrupoLab' => $modGrupoLaboratorio->getIdGrupoLab(),
             ':letra' => $modGrupoLaboratorio->getLetra(),
             ':idioma' => $modGrupoLaboratorio->getIdioma(),
-            ':idModAsignatura' => $modGrupoLaboratorio->getIdAsignatura()
+            ':idModAsignatura' => $modGrupoLaboratorio->getIdModAsignatura()
         );
         $results = $dataSource->executeInsertUpdateDelete($sql, $values);
         return $results;
@@ -53,7 +53,7 @@ class DAOModGrupoLaboratorioImplements implements DAOModGrupoLaboratorio
             ':idGrupoLab' => $modGrupoLaboratorio->getIdGrupoLab(),
             ':letra' => $modGrupoLaboratorio->getLetra(),
             ':idioma' => $modGrupoLaboratorio->getIdioma(),
-            ':idModAsignatura' => $modGrupoLaboratorio->getIdAsignatura()
+            ':idModAsignatura' => $modGrupoLaboratorio->getIdModAsignatura()
         );
         $results = $dataSource->executeInsertUpdateDelete($sql, $values);
         return $results;

@@ -25,7 +25,6 @@ class SAConfiguracionImplements implements SAConfiguracion{
                 $configuracion[0]['Metodologia'],
                 $configuracion[0]['CitasBibliograficas'],
                 $configuracion[0]['RecursosInternet'],
-                $configuracion[0]['GrupoLaboratorio'],
                 $configuracion[0]['RealizacionExamenes'],
                 $configuracion[0]['CalificacionFinal'],
                 $configuracion[0]['RealizacionActividades'],

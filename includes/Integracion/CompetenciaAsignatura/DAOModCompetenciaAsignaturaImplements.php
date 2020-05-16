@@ -29,7 +29,7 @@ class DAOModCompetenciaAsignaturaImplements implements DAOModCompetenciaAsignatu
         ':basicasYTransversalesI' => $modCompetenciaAsignatura->getBasicasYTransversalesI(),
         ':resultadosAprendizaje' => $modCompetenciaAsignatura->getResultadosAprendizaje(),
         ':resultadosAprendizajeI' => $modCompetenciaAsignatura->getResultadosAprendizajeI(),
-        ':idModAsignatura' => $modCompetenciaAsignatura->getIdAsignatura());
+        ':idModAsignatura' => $modCompetenciaAsignatura->getIdModAsignatura());
         $results=$dataSource->executeInsertUpdateDelete($sql,$values);
         return $results;
 
@@ -48,7 +48,7 @@ class DAOModCompetenciaAsignaturaImplements implements DAOModCompetenciaAsignatu
         ':basicasYTransversalesI' => $modCompetenciaAsignatura->getBasicasYTransversalesI(),
         ':resultadosAprendizaje' => $modCompetenciaAsignatura->getResultadosAprendizaje(),
         ':resultadosAprendizajeI' => $modCompetenciaAsignatura->getResultadosAprendizajeI(),
-        ':idModAsignatura' => $modCompetenciaAsignatura->getIdAsignatura());
+        ':idModAsignatura' => $modCompetenciaAsignatura->getIdModAsignatura());
         $results=$dataSource->executeInsertUpdateDelete($sql,$values);
         return $results;
     }

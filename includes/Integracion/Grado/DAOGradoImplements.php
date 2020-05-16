@@ -53,7 +53,7 @@ class DAOGradoImplements implements DAOGrado{
         $dataSource=$singletonDataSource->getInstance();
         $sql="SELECT * FROM grado";
         $values =array();
-        $results=$dataSource->executeQuery($sql, $values);//-----------mirar
+        $results=$dataSource->executeQuery($sql, $values);
         return $results;
     }
 }

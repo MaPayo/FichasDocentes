@@ -124,8 +124,6 @@ require_once('includes/Presentacion/FactoriaComandos/HorarioLaboratorio/CommandU
 
 require_once('includes/Presentacion/FactoriaComandos/Laboratorio/CommandFindLaboratorio.php');
 
-require_once('includes/Presentacion/FactoriaComandos/Leyenda/CommandFindLeyenda.php');
-
 require_once('includes/Presentacion/FactoriaComandos/Materia/CommandFindMateria.php');
 
 require_once('includes/Presentacion/FactoriaComandos/Metodologia/CommandFindMetodologia.php');
@@ -152,6 +150,8 @@ require_once('includes/Presentacion/FactoriaComandos/Teorico/CommandFindTeorico.
 require_once('includes/Presentacion/FactoriaComandos/Usuario/CommandFindUsuario.php');
 
 require_once('includes/Presentacion/FactoriaComandos/Verifica/CommandFindVerifica.php');
+
+require_once('includes/Presentacion/FactoriaComandos/Comparacion/CommandComparacion.php');
 
 class FactoryCommandImplements extends FactoryCommand
 {
@@ -646,6 +646,8 @@ class FactoryCommandImplements extends FactoryCommand
             case FIND_VERIFICA:
                 $command = new CommandFindVerifica();
                 break;
+            case COMPARACION:
+                $command= new CommandComparacion();
         }
         return $command;
     }

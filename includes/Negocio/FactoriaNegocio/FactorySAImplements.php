@@ -39,6 +39,7 @@ require_once('includes/Negocio/ProgramaAsignatura/SAModProgramaAsignaturaImpleme
 require_once('includes/Negocio/Teorico/SATeoricoImplements.php');
 require_once('includes/Negocio/Usuario/SAUsuarioImplements.php');
 require_once('includes/Negocio/Verifica/SAVerificaImplements.php');
+require_once('includes/Negocio/Comparacion/SAComparacionImplements.php');
 
 class FactorySAImplements implements FactorySA
 {
@@ -163,7 +164,10 @@ class FactorySAImplements implements FactorySA
         return new SALaboratorioImplements();
     }
 
-   
+    public function createSAComparacion()
+    {
+        return new SAComparacionImplements();
+    }
     public function createSAMateria()
     {
         return new SAMateriaImplements();

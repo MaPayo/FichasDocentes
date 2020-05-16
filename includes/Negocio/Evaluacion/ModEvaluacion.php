@@ -1,43 +1,46 @@
 <?php
+
 namespace es\ucm;
 
-class ModEvaluacion{
-	private $IdEvaluacion;
-	private $RealizacionExamenes;
-	private $RealizacionExamenesI;
-	private $PesoExamenes;
-	private $CalificacionFinal;
-	private $CalificacionFinalI;
-	private $RealizacionActividades;
-	private $RealizacionActividadesI;
-	private $PesoActividades;
-	private $RealizacionLaboratorio;
-	private $RealizacionLaboratorioI;
-	private $PesoLaboratorio;
-	private $IdModAsignatura;
+class ModEvaluacion
+{
+    private $IdEvaluacion;
+    private $RealizacionExamenes;
+    private $RealizacionExamenesI;
+    private $PesoExamenes;
+    private $CalificacionFinal;
+    private $CalificacionFinalI;
+    private $RealizacionActividades;
+    private $RealizacionActividadesI;
+    private $PesoActividades;
+    private $RealizacionLaboratorio;
+    private $RealizacionLaboratorioI;
+    private $PesoLaboratorio;
+    private $IdModAsignatura;
 
-	public function __construct($IdEvaluacion,$RealizacionExamenes,$RealizacionExamenesI,$PesoExamenes,$CalificacionFinal,$CalificacionFinalI,$RealizacionActividades,$RealizacionActividadesI,$PesoActividades,$RealizacionLaboratorio,$RealizacionLaboratorioI,$PesoLaboratorio,$IdModAsignatura){
-		$this->IdEvaluacion = $IdEvaluacion;
-		$this->RealizacionExamenes = $RealizacionExamenes;
-		$this->RealizacionExamenesI = $RealizacionExamenesI;
-		$this->PesoExamenes = $PesoExamenes;
-		$this->CalificacionFinal = $CalificacionFinal;
-		$this->CalificacionFinalI = $CalificacionFinalI;
-		$this->RealizacionActividades = $RealizacionActividades;
-		$this->RealizacionActividadesI = $RealizacionActividadesI;
-		$this->PesoActividades = $PesoActividades;
-		$this->RealizacionLaboratorio = $RealizacionLaboratorio;
-		$this->RealizacionLaboratorioI = $RealizacionLaboratorioI;
-		$this->PesoLaboratorio = $PesoLaboratorio;
-		$this->IdModAsignatura = $IdModAsignatura;
-	}
+    public function __construct($IdEvaluacion, $RealizacionExamenes, $RealizacionExamenesI, $PesoExamenes, $CalificacionFinal, $CalificacionFinalI, $RealizacionActividades, $RealizacionActividadesI, $PesoActividades, $RealizacionLaboratorio, $RealizacionLaboratorioI, $PesoLaboratorio, $IdModAsignatura)
+    {
+        $this->IdEvaluacion = $IdEvaluacion;
+        $this->RealizacionExamenes = $RealizacionExamenes;
+        $this->RealizacionExamenesI = $RealizacionExamenesI;
+        $this->PesoExamenes = $PesoExamenes;
+        $this->CalificacionFinal = $CalificacionFinal;
+        $this->CalificacionFinalI = $CalificacionFinalI;
+        $this->RealizacionActividades = $RealizacionActividades;
+        $this->RealizacionActividadesI = $RealizacionActividadesI;
+        $this->PesoActividades = $PesoActividades;
+        $this->RealizacionLaboratorio = $RealizacionLaboratorio;
+        $this->RealizacionLaboratorioI = $RealizacionLaboratorioI;
+        $this->PesoLaboratorio = $PesoLaboratorio;
+        $this->IdModAsignatura = $IdModAsignatura;
+    }
 
     /**
      * @return mixed
      */
     public function getIdEvaluacion()
     {
-    	return $this->IdEvaluacion;
+        return $this->IdEvaluacion;
     }
 
     /**
@@ -47,9 +50,9 @@ class ModEvaluacion{
      */
     public function setIdEvaluacion($IdEvaluacion)
     {
-    	$this->IdEvaluacion = $IdEvaluacion;
+        $this->IdEvaluacion = $IdEvaluacion;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -57,7 +60,7 @@ class ModEvaluacion{
      */
     public function getRealizacionExamenes()
     {
-    	return $this->RealizacionExamenes;
+        return $this->RealizacionExamenes;
     }
 
     /**
@@ -67,9 +70,9 @@ class ModEvaluacion{
      */
     public function setRealizacionExamenes($RealizacionExamenes)
     {
-    	$this->RealizacionExamenes = $RealizacionExamenes;
+        $this->RealizacionExamenes = $RealizacionExamenes;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -77,7 +80,7 @@ class ModEvaluacion{
      */
     public function getRealizacionExamenesI()
     {
-    	return $this->RealizacionExamenesI;
+        return $this->RealizacionExamenesI;
     }
 
     /**
@@ -87,9 +90,9 @@ class ModEvaluacion{
      */
     public function setRealizacionExamenesI($RealizacionExamenesI)
     {
-    	$this->RealizacionExamenesI = $RealizacionExamenesI;
+        $this->RealizacionExamenesI = $RealizacionExamenesI;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -97,7 +100,7 @@ class ModEvaluacion{
      */
     public function getPesoExamenes()
     {
-    	return $this->PesoExamenes;
+        return $this->PesoExamenes;
     }
 
     /**
@@ -107,9 +110,9 @@ class ModEvaluacion{
      */
     public function setPesoExamenes($PesoExamenes)
     {
-    	$this->PesoExamenes = $PesoExamenes;
+        $this->PesoExamenes = $PesoExamenes;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -117,7 +120,7 @@ class ModEvaluacion{
      */
     public function getCalificacionFinal()
     {
-    	return $this->CalificacionFinal;
+        return $this->CalificacionFinal;
     }
 
     /**
@@ -127,9 +130,9 @@ class ModEvaluacion{
      */
     public function setCalificacionFinal($CalificacionFinal)
     {
-    	$this->CalificacionFinal = $CalificacionFinal;
+        $this->CalificacionFinal = $CalificacionFinal;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -137,7 +140,7 @@ class ModEvaluacion{
      */
     public function getCalificacionFinalI()
     {
-    	return $this->CalificacionFinalI;
+        return $this->CalificacionFinalI;
     }
 
     /**
@@ -147,9 +150,9 @@ class ModEvaluacion{
      */
     public function setCalificacionFinalI($CalificacionFinalI)
     {
-    	$this->CalificacionFinalI = $CalificacionFinalI;
+        $this->CalificacionFinalI = $CalificacionFinalI;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -157,7 +160,7 @@ class ModEvaluacion{
      */
     public function getRealizacionActividades()
     {
-    	return $this->RealizacionActividades;
+        return $this->RealizacionActividades;
     }
 
     /**
@@ -167,9 +170,9 @@ class ModEvaluacion{
      */
     public function setRealizacionActividades($RealizacionActividades)
     {
-    	$this->RealizacionActividades = $RealizacionActividades;
+        $this->RealizacionActividades = $RealizacionActividades;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -177,7 +180,7 @@ class ModEvaluacion{
      */
     public function getRealizacionActividadesI()
     {
-    	return $this->RealizacionActividadesI;
+        return $this->RealizacionActividadesI;
     }
 
     /**
@@ -187,9 +190,9 @@ class ModEvaluacion{
      */
     public function setRealizacionActividadesI($RealizacionActividadesI)
     {
-    	$this->RealizacionActividadesI = $RealizacionActividadesI;
+        $this->RealizacionActividadesI = $RealizacionActividadesI;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -197,7 +200,7 @@ class ModEvaluacion{
      */
     public function getPesoActividades()
     {
-    	return $this->PesoActividades;
+        return $this->PesoActividades;
     }
 
     /**
@@ -207,9 +210,9 @@ class ModEvaluacion{
      */
     public function setPesoActividades($PesoActividades)
     {
-    	$this->PesoActividades = $PesoActividades;
+        $this->PesoActividades = $PesoActividades;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -217,7 +220,7 @@ class ModEvaluacion{
      */
     public function getRealizacionLaboratorio()
     {
-    	return $this->RealizacionLaboratorio;
+        return $this->RealizacionLaboratorio;
     }
 
     /**
@@ -227,9 +230,9 @@ class ModEvaluacion{
      */
     public function setRealizacionLaboratorio($RealizacionLaboratorio)
     {
-    	$this->RealizacionLaboratorio = $RealizacionLaboratorio;
+        $this->RealizacionLaboratorio = $RealizacionLaboratorio;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -237,7 +240,7 @@ class ModEvaluacion{
      */
     public function getRealizacionLaboratorioI()
     {
-    	return $this->RealizacionLaboratorioI;
+        return $this->RealizacionLaboratorioI;
     }
 
     /**
@@ -247,9 +250,9 @@ class ModEvaluacion{
      */
     public function setRealizacionLaboratorioI($RealizacionLaboratorioI)
     {
-    	$this->RealizacionLaboratorioI = $RealizacionLaboratorioI;
+        $this->RealizacionLaboratorioI = $RealizacionLaboratorioI;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -257,7 +260,7 @@ class ModEvaluacion{
      */
     public function getPesoLaboratorio()
     {
-    	return $this->PesoLaboratorio;
+        return $this->PesoLaboratorio;
     }
 
     /**
@@ -267,9 +270,9 @@ class ModEvaluacion{
      */
     public function setPesoLaboratorio($PesoLaboratorio)
     {
-    	$this->PesoLaboratorio = $PesoLaboratorio;
+        $this->PesoLaboratorio = $PesoLaboratorio;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -277,7 +280,7 @@ class ModEvaluacion{
      */
     public function getIdModAsignatura()
     {
-    	return $this->IdModAsignatura;
+        return $this->IdModAsignatura;
     }
 
     /**
@@ -287,8 +290,8 @@ class ModEvaluacion{
      */
     public function setIdModAsignatura($IdModAsignatura)
     {
-    	$this->IdModAsignatura = $IdModAsignatura;
+        $this->IdModAsignatura = $IdModAsignatura;
 
-    	return $this;
+        return $this;
     }
 }

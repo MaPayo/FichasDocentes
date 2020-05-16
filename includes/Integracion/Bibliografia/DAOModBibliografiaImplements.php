@@ -23,7 +23,7 @@ class DAOModBibliografiaImplements implements DAOModBibliografia{
         $values=array(':idBibliografia' => $modBibliografia->getIdBibliografia(),
             ':citasBibliograficas' => $modBibliografia->getCitasBibliograficas(),
             ':recursosInternet' => $modBibliografia->getRecursosInternet(),
-            ':idModAsignatura' => $modBibliografia->getIdAsignatura());
+            ':idModAsignatura' => $modBibliografia->getIdModAsignatura());
         $results=$dataSource->executeInsertUpdateDelete($sql,$values);
         return $results;
 
@@ -36,7 +36,7 @@ class DAOModBibliografiaImplements implements DAOModBibliografia{
         $values=array(':idBibliografia' => $modBibliografia->getIdBibliografia(),
             ':citasBibliograficas' => $modBibliografia->getCitasBibliograficas(),
             ':recursosInternet' => $modBibliografia->getRecursosInternet(),
-            ':idModAsignatura' => $modBibliografia->getIdAsignatura());
+            ':idModAsignatura' => $modBibliografia->getIdModAsignatura());
         $results=$dataSource->executeInsertUpdateDelete($sql,$values);
         return $results;
     }
