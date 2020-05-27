@@ -8,7 +8,7 @@ class DAOCompetenciaAsignaturaImplements implements DAOCompetenciaAsignatura{
     public static function findCompetenciaAsignatura($idAsignatura){
         $singletonDataSource=new SingletonDataSource();
         $dataSource=$singletonDataSource->getInstance();
-        $sql="SELECT * FROM competenciaAsignatura WHERE IdAsignatura = :idAsignatura";
+        $sql="SELECT * FROM competenciaasignatura WHERE IdAsignatura = :idAsignatura";
         $values=array(':idAsignatura' => $idAsignatura);
         $results=$dataSource->executeQuery($sql,$values);
         return $results;
@@ -17,7 +17,7 @@ class DAOCompetenciaAsignaturaImplements implements DAOCompetenciaAsignatura{
     public static function createCompetenciaAsignatura($competenciaAsignatura){
         $singletonDataSource=new SingletonDataSource();
         $dataSource=$singletonDataSource->getInstance();
-        $sql="INSERT INTO competenciaAsignatura (IdCompetencia,Generales,GeneralesI,Especificas,EspecificasI,BasicasYTransversales,BasicasYTransversalesI,ResultadosAprendizaje,ResultadosAprendizajeI,IdAsignatura) 
+        $sql="INSERT INTO competenciaasignatura (IdCompetencia,Generales,GeneralesI,Especificas,EspecificasI,BasicasYTransversales,BasicasYTransversalesI,ResultadosAprendizaje,ResultadosAprendizajeI,IdAsignatura) 
         VALUES (:idCompetencia, :generales, :generalesI, :especificas, :especificasI, :basicasYTransversales, :basicasYTransversalesI, :resultadosAprendizaje, :resultadosAprendizajeI, :idAsignatura)";
         $values=array(':idCompetencia' => $competenciaAsignatura->getIdCompetencia(),
         ':generales' => $competenciaAsignatura->getGenerales(),
@@ -37,7 +37,7 @@ class DAOCompetenciaAsignaturaImplements implements DAOCompetenciaAsignatura{
     public static function updateCompetenciaAsignatura($competenciaAsignatura){
         $singletonDataSource=new SingletonDataSource();
         $dataSource=$singletonDataSource->getInstance();
-        $sql="UPDATE competenciaAsignatura SET IdCompetencia = :idCompetencia, Generales = :generales, GeneralesI = :generalesI, Especificas = :especificas, EspecificasI = :especificasI, BasicasYTransversales = :basicasYTransversales, BasicasYTransversalesI = :basicasYTransversalesI, ResultadosAprendizaje = :resultadosAprendizaje, ResultadosAprendizajeI = :resultadosAprendizajeI, IdAsignatura = :idAsignatura WHERE IdCompetencia = :idCompetencia";
+        $sql="UPDATE competenciaasignatura SET IdCompetencia = :idCompetencia, Generales = :generales, GeneralesI = :generalesI, Especificas = :especificas, EspecificasI = :especificasI, BasicasYTransversales = :basicasYTransversales, BasicasYTransversalesI = :basicasYTransversalesI, ResultadosAprendizaje = :resultadosAprendizaje, ResultadosAprendizajeI = :resultadosAprendizajeI, IdAsignatura = :idAsignatura WHERE IdCompetencia = :idCompetencia";
          $values=array(':idCompetencia' => $competenciaAsignatura->getIdCompetencia(),
         ':generales' => $competenciaAsignatura->getGenerales(),
         ':generalesI' => $competenciaAsignatura->getGeneralesI(),
@@ -55,7 +55,7 @@ class DAOCompetenciaAsignaturaImplements implements DAOCompetenciaAsignatura{
     public static function deleteCompetenciaAsignatura($idAsignatura){
         $singletonDataSource=new SingletonDataSource();
         $dataSource=$singletonDataSource->getInstance();
-        $sql="DELETE FROM competenciaAsignatura WHERE IdAsignatura = :idAsignatura";
+        $sql="DELETE FROM competenciaasignatura WHERE IdAsignatura = :idAsignatura";
         $values=array(':idAsignatura' => $idAsignatura);
         $results=$dataSource->executeInsertUpdateDelete($sql,$values);
         return $results;

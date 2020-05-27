@@ -22,8 +22,9 @@
 
     if(isset($_SESSION['login']) && $_SESSION['login'] === true){
      echo'
-     <a class="dropdown-item" type="button">Configuración</a>
-     <a class="dropdown-item" type="button">Permisos</a>
+     <a class="dropdown-item disabled" type="button">Configuración</a>
+     <a class="dropdown-item disabled" type="button">Permisos</a>
+     <a class="dropdown-item" href="guia_uso.pdf">Ayuda</a>
      <div class="dropdown-divider"></div>
      <a class="dropdown-item" href="logout.php">Cerrar Sesión</a>
      ';

@@ -8,7 +8,7 @@ class DAOModHorarioClaseImplements implements DAOModHorarioClase{
     public static function listModHorarioClase($idGrupoClase){
         $singletonDataSource=new SingletonDataSource();
         $dataSource=$singletonDataSource->getInstance();
-        $sql="SELECT * FROM modHorarioClase WHERE IdGrupoClase = :idGrupoClase";
+        $sql="SELECT * FROM modhorarioclase WHERE IdGrupoClase = :idGrupoClase";
         $values=array(':idGrupoClase' => $idGrupoClase);
         $results=$dataSource->executeQuery($sql,$values);
         return $results;
@@ -18,7 +18,7 @@ class DAOModHorarioClaseImplements implements DAOModHorarioClase{
     public static function findModHorarioClase($idHorarioClase){
         $singletonDataSource=new SingletonDataSource();
         $dataSource=$singletonDataSource->getInstance();
-        $sql="SELECT * FROM modHorarioClase WHERE IdHorarioClase = :idHorarioClase";
+        $sql="SELECT * FROM modhorarioclase WHERE IdHorarioClase = :idHorarioClase";
         $values=array(':idHorarioClase' => $idHorarioClase);
         $results=$dataSource->executeQuery($sql,$values);
         return $results;
@@ -28,7 +28,7 @@ class DAOModHorarioClaseImplements implements DAOModHorarioClase{
     public static function createModHorarioClase($modHorarioClase){
         $singletonDataSource=new SingletonDataSource();
         $dataSource=$singletonDataSource->getInstance();
-        $sql="INSERT INTO modHorarioClase (IdHorarioClase,Aula,Dia,HoraInicio,HoraFin,IdGrupoClase) 
+        $sql="INSERT INTO modhorarioclase (IdHorarioClase,Aula,Dia,HoraInicio,HoraFin,IdGrupoClase) 
         VALUES (:idHorarioClase, :aula, :dia, :horaInicio, :horaFin, :idGrupoClase)";
         $values=array(':idHorarioClase' => $modHorarioClase->getIdHorarioClase(),
             ':aula' => $modHorarioClase->getAula(),
@@ -44,7 +44,7 @@ class DAOModHorarioClaseImplements implements DAOModHorarioClase{
     public static function updateModHorarioClase($modHorarioClase){
         $singletonDataSource=new SingletonDataSource();
         $dataSource=$singletonDataSource->getInstance();
-        $sql="UPDATE modHorarioClase SET IdHorarioClase = :idHorarioClase, Aula = :aula,Dia = :dia,HoraInicio = :horaInicio,HoraFin = :horaFin,IdGrupoClase = :idGrupoClase WHERE IdHorarioClase = :idHorarioClase";
+        $sql="UPDATE modhorarioclase SET IdHorarioClase = :idHorarioClase, Aula = :aula,Dia = :dia,HoraInicio = :horaInicio,HoraFin = :horaFin,IdGrupoClase = :idGrupoClase WHERE IdHorarioClase = :idHorarioClase";
         $values=array(':idHorarioClase' => $modHorarioClase->getIdHorarioClase(),
             ':aula' => $modHorarioClase->getAula(),
             ':dia' => $modHorarioClase->getDia(),
@@ -58,7 +58,7 @@ class DAOModHorarioClaseImplements implements DAOModHorarioClase{
     public static function deleteModHorarioClase($idHorarioClase){
         $singletonDataSource=new SingletonDataSource();
         $dataSource=$singletonDataSource->getInstance();
-        $sql="DELETE FROM modHorarioClase WHERE IdHorarioClase = :idHorarioClase";
+        $sql="DELETE FROM modhorarioclase WHERE IdHorarioClase = :idHorarioClase";
         $values=array(':idHorarioClase' => $idHorarioClase);
         $results=$dataSource->executeInsertUpdateDelete($sql,$values);
         return $results;

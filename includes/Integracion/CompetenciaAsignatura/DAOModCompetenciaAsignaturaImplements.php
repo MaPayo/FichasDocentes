@@ -8,7 +8,7 @@ class DAOModCompetenciaAsignaturaImplements implements DAOModCompetenciaAsignatu
     public static function findModCompetenciaAsignatura($idModAsignatura){
         $singletonDataSource=new SingletonDataSource();
         $dataSource=$singletonDataSource->getInstance();
-        $sql="SELECT * FROM modCompetenciaAsignatura WHERE IdModAsignatura = :idModAsignatura";
+        $sql="SELECT * FROM modcompetenciaasignatura WHERE IdModAsignatura = :idModAsignatura";
         $values=array(':idModAsignatura' => $idModAsignatura);
         $results=$dataSource->executeQuery($sql,$values);
         return $results;
@@ -18,7 +18,7 @@ class DAOModCompetenciaAsignaturaImplements implements DAOModCompetenciaAsignatu
     public static function createModCompetenciaAsignatura($modCompetenciaAsignatura){
         $singletonDataSource=new SingletonDataSource();
         $dataSource=$singletonDataSource->getInstance();
-        $sql="INSERT INTO modCompetenciaAsignatura (IdCompetencia,Generales,GeneralesI,Especificas,EspecificasI,BasicasYTransversales,BasicasYTransversalesI,ResultadosAprendizaje,ResultadosAprendizajeI,IdModAsignatura) 
+        $sql="INSERT INTO modcompetenciaasignatura (IdCompetencia,Generales,GeneralesI,Especificas,EspecificasI,BasicasYTransversales,BasicasYTransversalesI,ResultadosAprendizaje,ResultadosAprendizajeI,IdModAsignatura) 
         VALUES (:idCompetencia, :generales, :generalesI, :especificas, :especificasI, :basicasYTransversales, :basicasYTransversalesI, :resultadosAprendizaje, :resultadosAprendizajeI, :idModAsignatura)";
         $values=array(':idCompetencia' => $modCompetenciaAsignatura->getIdCompetencia(),
         ':generales' => $modCompetenciaAsignatura->getGenerales(),
@@ -38,7 +38,7 @@ class DAOModCompetenciaAsignaturaImplements implements DAOModCompetenciaAsignatu
     public static function updateModCompetenciaAsignatura($modCompetenciaAsignatura){
         $singletonDataSource=new SingletonDataSource();
         $dataSource=$singletonDataSource->getInstance();
-        $sql="UPDATE modCompetenciaAsignatura SET IdCompetencia = :idCompetencia, Generales = :generales, GeneralesI = :generalesI, Especificas = :especificas, EspecificasI = :especificasI, BasicasYTransversales = :basicasYTransversales, BasicasYTransversalesI = :basicasYTransversalesI, ResultadosAprendizaje = :resultadosAprendizaje, ResultadosAprendizajeI = :resultadosAprendizajeI, IdModAsignatura = :idModAsignatura WHERE IdCompetencia = :idCompetencia";
+        $sql="UPDATE modcompetenciaasignatura SET IdCompetencia = :idCompetencia, Generales = :generales, GeneralesI = :generalesI, Especificas = :especificas, EspecificasI = :especificasI, BasicasYTransversales = :basicasYTransversales, BasicasYTransversalesI = :basicasYTransversalesI, ResultadosAprendizaje = :resultadosAprendizaje, ResultadosAprendizajeI = :resultadosAprendizajeI, IdModAsignatura = :idModAsignatura WHERE IdCompetencia = :idCompetencia";
          $values=array(':idCompetencia' => $modCompetenciaAsignatura->getIdCompetencia(),
         ':generales' => $modCompetenciaAsignatura->getGenerales(),
         ':generalesI' => $modCompetenciaAsignatura->getGeneralesI(),
@@ -56,7 +56,7 @@ class DAOModCompetenciaAsignaturaImplements implements DAOModCompetenciaAsignatu
     public static function deleteModCompetenciaAsignatura($idModAsignatura){
         $singletonDataSource=new SingletonDataSource();
         $dataSource=$singletonDataSource->getInstance();
-        $sql="DELETE FROM modCompetenciaAsignatura WHERE IdModAsignatura = :idModAsignatura";
+        $sql="DELETE FROM modcompetenciaasignatura WHERE IdModAsignatura = :idModAsignatura";
         $values=array(':idModAsignatura' => $idModAsignatura);
         $results=$dataSource->executeInsertUpdateDelete($sql,$values);
         return $results;

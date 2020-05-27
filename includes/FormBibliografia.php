@@ -28,13 +28,13 @@ class FormBibliografia extends Form
 			if ($contextConfiguacion->getData()->getCitasBibliograficas() == 1) {
 				$html .= '<div class="form-group">
 				<label for="citasBibliograficas">Citas Bibliográficas</label>
-				<textarea class="form-control" id="citasBibliograficas" rows="3" name="citasBibliograficas" >' . $citasBibliograficas . '</textarea>
+				<textarea class="form-control" id="_citasBibliograficas" rows="10" name="citasBibliograficas" >' . $citasBibliograficas . '</textarea>
 				</div>';
 			}
 			if ($contextConfiguacion->getData()->getRecursosInternet() == 1) {
 				$html .= '<div class="form-group">
 				<label for="recursosInternet">Recursos de Internet</label>
-				<textarea class="form-control" id="recursosInternet" rows="3" name="recursosInternet" >' . $recursosInternet . '</textarea>
+				<textarea class="form-control" id="_recursosInternet" rows="10" name="recursosInternet" >' . $recursosInternet . '</textarea>
 				</div>';
 			}
 		}

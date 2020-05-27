@@ -8,7 +8,7 @@ class DAOModAsignaturaImplements implements DAOModAsignatura{
     public static function findModAsignatura($idModAsignatura){
         $singletonDataSource=new SingletonDataSource();
         $dataSource=$singletonDataSource->getInstance();
-        $sql="SELECT * FROM modAsignatura WHERE IdModAsignatura = :idModAsignatura";
+        $sql="SELECT * FROM modasignatura WHERE IdModAsignatura = :idModAsignatura";
         $values=array(':idModAsignatura' => $idModAsignatura);
         $results=$dataSource->executeQuery($sql,$values);
         return $results;
@@ -18,7 +18,7 @@ class DAOModAsignaturaImplements implements DAOModAsignatura{
     public static function createModAsignatura($modAsignatura){
         $singletonDataSource=new SingletonDataSource();
         $dataSource=$singletonDataSource->getInstance();
-        $sql="INSERT INTO modAsignatura (IdModAsignatura,FechaMod,EmailMod,IdAsignatura) 
+        $sql="INSERT INTO modasignatura (IdModAsignatura,FechaMod,EmailMod,IdAsignatura) 
         VALUES (:idModAsignatura, :fechaMod, :emailMod, :idAsignatura)";
         $values=array(':idModAsignatura' => $modAsignatura->getIdModAsignatura(),
             ':fechaMod' => $modAsignatura->getFechaMod(),
@@ -32,7 +32,7 @@ class DAOModAsignaturaImplements implements DAOModAsignatura{
     public static function updateModAsignatura($modAsignatura){
         $singletonDataSource=new SingletonDataSource();
         $dataSource=$singletonDataSource->getInstance();
-        $sql="UPDATE modAsignatura SET IdModAsignatura = :idModAsignatura, FechaMod = :fechaMod,EmailMod = :emailMod,IdAsignatura = :idAsignatura WHERE IdModAsignatura = :idModAsignatura";
+        $sql="UPDATE modasignatura SET IdModAsignatura = :idModAsignatura, FechaMod = :fechaMod,EmailMod = :emailMod,IdAsignatura = :idAsignatura WHERE IdModAsignatura = :idModAsignatura";
         $values=array(':idModAsignatura' => $modAsignatura->getIdModAsignatura(),
             ':fechaMod' => $modAsignatura->getFechaMod(),
             ':emailMod' => $modAsignatura->getEmailMod(),
@@ -44,7 +44,7 @@ class DAOModAsignaturaImplements implements DAOModAsignatura{
     public static function deleteModAsignatura($idModAsignatura){
         $singletonDataSource=new SingletonDataSource();
         $dataSource=$singletonDataSource->getInstance();
-        $sql="DELETE FROM modAsignatura WHERE IdModAsignatura = :idModAsignatura";
+        $sql="DELETE FROM modasignatura WHERE IdModAsignatura = :idModAsignatura";
         $values=array(':idModAsignatura' => $idModAsignatura);
         $results=$dataSource->executeInsertUpdateDelete($sql,$values);
         return $results;
