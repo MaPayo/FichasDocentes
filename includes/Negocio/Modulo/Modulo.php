@@ -6,13 +6,14 @@ class Modulo
 {
     private $idModulo;
     private $nombreModulo;
-    private $caracter;
+    private $creditosModulo;
     private $codigoGrado;
-    public function __construct($IdModulo, $NombreModulo,$Caracter,$CodigoGrado)
+
+    public function __construct($IdModulo, $NombreModulo,$CreditosModulo,$CodigoGrado)
     {
         $this->idModulo = $IdModulo;
         $this->nombreModulo = $NombreModulo;
-        $this->caracter = $Caracter;
+        $this->creditosModulo = $CreditosModulo;
         $this->codigoGrado = $CodigoGrado;
     }
 
@@ -60,19 +61,19 @@ class Modulo
     /**
      * @return mixed
      */
-    public function getCaracter()
+    public function getCreditosModulo()
     {
-        return $this->caracter;
+        return $this->creditosModulo;
     }
 
     /**
-     * @param mixed $caracter
+     * @param mixed $creditosModulo
      *
      * @return self
      */
-    public function setCaracter($Caracter)
+    public function setCreditosModulo($CreditosModulo)
     {
-        $this->caracter = $Caracter;
+        $this->creditosModulo = $CreditosModulo;
 
         return $this;
     }
@@ -82,7 +83,7 @@ class Modulo
      */
     public function getCodigoGrado()
     {
-        return $this->idCodigoGrado;
+        return $this->codigoGrado;
     }
 
     /**

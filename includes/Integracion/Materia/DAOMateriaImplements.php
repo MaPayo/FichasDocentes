@@ -19,10 +19,11 @@ class DAOMateriaImplements implements DAOMateria{
     public static function createMateria($Materia){
         $singletonDataSource=new SingletonDataSource();
         $dataSource=$singletonDataSource->getInstance();
-        $sql="INSERT INTO materia (IdMateria, NombreMateria, CreditosMateria, IdModulo) 
-        VALUES (:idMateria, :nombreMateria, :creditosMateria, :idModulo)";
+        $sql="INSERT INTO materia (IdMateria, NombreMateria, Caracter, CreditosMateria, IdModulo) 
+        VALUES (:idMateria, :nombreMateria, :caracter, :creditosMateria, :idModulo)";
         $values=array(':idMateria' => $Materia->getIdMateria(),
         ':nombreMateria' => $Materia->getNombreMateria(),
+        ':caracter' => $Materia->getCaracter(),
         ':creditosMateria' => $Materia->getCreditosMateria(),
         ':idModulo' => $Materia->getIdModulo());
         $results=$dataSource->executeInsertUpdateDelete($sql,$values);
@@ -33,9 +34,10 @@ class DAOMateriaImplements implements DAOMateria{
     public static function updateMateria($Materia){
         $singletonDataSource=new SingletonDataSource();
         $dataSource=$singletonDataSource->getInstance();
-        $sql="UPDATE materia SET IdMateria = :idMateria, NombreMateria = :nombreMateria, CreditosMateria = :creditosMateria, IdModulo = :idModulo WHERE IdMateria = :idMateria";
+        $sql="UPDATE materia SET IdMateria = :idMateria, NombreMateria = :nombreMateria, Caracter = :caracter, CreditosMateria = :creditosMateria, IdModulo = :idModulo WHERE IdMateria = :idMateria";
         $values=array(':idMateria' => $Materia->getIdMateria(),
         ':nombreMateria' => $Materia->getNombreMateria(),
+        ':caracter' => $Materia->getCaracter(),
         ':creditosMateria' => $Materia->getCreditosMateria(),
         ':idModulo' => $Materia->getIdModulo());
         $results=$dataSource->executeInsertUpdateDelete($sql,$values);

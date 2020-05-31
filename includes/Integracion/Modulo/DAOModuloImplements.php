@@ -19,11 +19,11 @@ class DAOModuloImplements implements DAOModulo{
     public static function createModulo($Modulo){
         $singletonDataSource=new SingletonDataSource();
         $dataSource=$singletonDataSource->getInstance();
-        $sql="INSERT INTO modulo (IdModulo, NombreModulo, Caracter, CodigoGrado) 
-        VALUES (:idModulo, :nombreModulo, :caracter, :codigoGrado)";
+        $sql="INSERT INTO modulo (IdModulo, NombreModulo, CreditosModulo, CodigoGrado) 
+        VALUES (:idModulo, :nombreModulo, :creditosModulo, :codigoGrado)";
         $values=array(':idModulo' => $Modulo->getIdModulo(),
         ':nombreModulo' => $Modulo->getNombreModulo(),
-        ':caracter' => $Modulo->getCaracter(),
+        ':creditosModulo' => $Modulo->getCreditosModulo(),
         ':codigoGrado' => $Modulo->getCodigoGrado());
         $results=$dataSource->executeInsertUpdateDelete($sql,$values);
         return $results;
@@ -33,10 +33,10 @@ class DAOModuloImplements implements DAOModulo{
     public static function updateModulo($Modulo){
         $singletonDataSource=new SingletonDataSource();
         $dataSource=$singletonDataSource->getInstance();
-        $sql="UPDATE modulo SET IdModulo = :idModulo, NombreModulo = :nombreModulo, Caracter = :caracter, CodigoGrado = :codigoGrado WHERE IdModulo = :idModulo";
+        $sql="UPDATE modulo SET IdModulo = :idModulo, NombreModulo = :nombreModulo, CreditosModulo = :creditosModulo, CodigoGrado = :codigoGrado WHERE IdModulo = :idModulo";
         $values=array(':idModulo' => $Modulo->getIdModulo(),
         ':nombreModulo' => $Modulo->getNombreModulo(),
-        ':caracter' => $Modulo->getCaracter(),
+        ':creditosModulo' => $Modulo->getCreditosModulo(),
         ':codigoGrado' => $Modulo->getCodigoGrado());
         $results=$dataSource->executeInsertUpdateDelete($sql,$values);
         return $results;
