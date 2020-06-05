@@ -26,54 +26,73 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
     <?php
     require_once('includes/Presentacion/Vistas/html/cabecera.php');
     ?>
-    <div class="row justify-content-center align-items-center">
+    <div class="row justify-content-center align-items-center"> 
+      
       <?php
       if (isset($_SESSION['login']) && $_SESSION['login'] === true) {
+       
         if(isset($_GET['idAsignatura'])){
             $name ='idAsignatura';
           }
           if(isset($_GET['emailProfesor'])){
             $email = 'emailProfesor';
           }
+          $comparacion = array('email' => htmlspecialchars(trim(strip_tags($_GET[$email]))), 
+          'asignatura'=>htmlspecialchars(trim(strip_tags($_GET[$name]))));
           $controller = new es\ucm\ControllerImplements();
-          $context = new es\ucm\Context(FIND_PERMISOS, htmlspecialchars(trim(strip_tags($_GET[$name]))));
+          $context = new es\ucm\Context(FIND_PERMISOS_POR_PROFESOR_Y_ASIGNATURA,$comparacion );
           $permisos = $controller->action($context);
           $context = new es\ucm\Context(FIND_PROFESOR, htmlspecialchars(trim(strip_tags($_GET[$email]))));
           $profesor = $controller->action($context);
-          $permisoss = null;
-           if($permisos->getEvent() === FIND_PERMISOS_OK){
-             foreach($permisos->getData() as $permiso){
-              if($permiso->getEmailProfesor() === htmlspecialchars(trim(strip_tags($_GET[$email]))))
-              {
-              $permisoss = $permiso;
-             break;
+          var_dump($permisos->getData());
+          
+           if($permisos->getEvent() === FIND_PERMISOS_POR_PROFESOR_Y_ASIGNATURA_OK){
+                ?>
+                <div class="col-md-6 col-12">
+                  <div class="card">
+                    <div class="card-header text-center">
+                      <h2>Modificar Permisos de <?php echo $profesor->getData()->getNombre();?></h2>
+                    </div>
+                    <div class="card-body">
+                      <?php
+                      $access = new es\ucm\FormPermisos('idPermisos');
+                      $datosIniciales= array();
+    
+                  $datosIniciales['IdPermiso'] = $permisos->getData()[0]->getIdPermiso();
+                  $datosIniciales['PermisoPrograma'] = $permisos->getData()[0]->getPermisoPrograma();
+                  $datosIniciales['PermisoCompetencias'] = $permisos->getData()[0]->getPermisoCompetencias();
+                  $datosIniciales['PermisoMetodologia'] = $permisos->getData()[0]->getPermisoMetodologia();
+                  $datosIniciales['PermisoBibliografia'] = $permisos->getData()[0]->getPermisoBibliografia();
+                  $datosIniciales['PermisoGrupoLaboratorio'] = $permisos->getData()[0]->getPermisoGrupoLaboratorio();
+                  $datosIniciales['PermisoGrupoClase']= $permisos->getData()[0]->getPermisoGrupoClase();
+                  $datosIniciales['PermisoEvaluacion'] = $permisos->getData()[0]->getPermisoEvaluacion();
+                  $datosIniciales['IdAsignatura'] = $permisos->getData()[0]->getIdAsignatura();
+                  $datosIniciales['EmailProfesor'] = $permisos->getData()[0]->getEmailProfesor();
+                       
+                  $access->gestionaModificacion($datosIniciales);
+              
               }
-             }
-             var_dump($permisoss);
-            ?>
-            <div class="col-md-6 col-12">
+              else{
+                ?> <div class="col-md-6 col-12">
               <div class="card">
                 <div class="card-header text-center">
-                  <h2>Modificar Permisos</h2>
+                  <h2>Crear permisos de <?php echo $profesor->getData()->getNombre();?></h2>
                 </div>
                 <div class="card-body">
                   <?php
                   $access = new es\ucm\FormPermisos('idPermisos');
                   $datosIniciales= array();
-
-                  $datosIniciales['IdPermiso'] = $permisoss->getIdPermiso();
-		         $datosIniciales['PermisoPrograma'] = $permisoss->getPermisoPrograma();
-		          $datosIniciales['PermisoCompetencias'] = $permisoss->getPermisoCompetencias();
-		          $datosIniciales['PermisoMetodologia'] = $permisoss->getPermisoMetodologia();
-		          $datosIniciales['PermisoBibliografia'] = $permisoss->getPermisoBibliografia();
-		          $datosIniciales['PermisoGrupoLaboratorio'] = $permisoss->getPermisoGrupoLaboratorio();
-		          $datosIniciales['PermisoGrupoClase']= $permisoss->getPermisoGrupoClase();
-		          $datosIniciales['PermisoEvaluacion'] = $permisoss->getPermisoEvaluacion();
-		          $datosIniciales['IdAsignatura'] = $permisoss->getIdAsignatura();
-		          $datosIniciales['EmailProfesor'] = $permisoss->getEmailProfesor();
-	                 
+                 
+              $datosIniciales['IdPermiso'] = null;
+		          $datosIniciales['IdAsignatura'] = htmlspecialchars(trim(strip_tags($_GET[$name])));
+		          $datosIniciales['EmailProfesor'] =htmlspecialchars(trim(strip_tags($_GET[$email])));
+              
                   $access->gestionaModificacion($datosIniciales);
-           } //Find ok
+              
+             }
+            
+           
+           
                   
                   ?>
                 </div>

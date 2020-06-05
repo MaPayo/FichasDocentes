@@ -12,7 +12,7 @@ class DAOGrupoClaseProfesorImplements implements DAOGrupoClaseProfesor
     {
         $singletonDataSource = new SingletonDataSource();
         $dataSource = $singletonDataSource->getInstance();
-        $sql = "SELECT * FROM grupoClaseProfesor WHERE IdGrupoClase = :idGrupoClase";
+        $sql = "SELECT * FROM grupoclaseprofesor WHERE IdGrupoClase = :idGrupoClase";
         $values = array(':idGrupoClase' => $idGrupoClase);
         $results = $dataSource->executeQuery($sql, $values);
         return $results;
@@ -22,7 +22,7 @@ class DAOGrupoClaseProfesorImplements implements DAOGrupoClaseProfesor
     {
         $singletonDataSource = new SingletonDataSource();
         $dataSource = $singletonDataSource->getInstance();
-        $sql = "SELECT * FROM grupoClaseProfesor WHERE IdGrupoClase = :idGrupoClase AND EmailProfesor = :emailProfesor";
+        $sql = "SELECT * FROM grupoclaseprofesor WHERE IdGrupoClase = :idGrupoClase AND EmailProfesor = :emailProfesor";
         $values = array(
             ':idGrupoClase' => $idGrupoClase,
             ':emailProfesor' => $emailProfesor
@@ -35,7 +35,7 @@ class DAOGrupoClaseProfesorImplements implements DAOGrupoClaseProfesor
     {
         $singletonDataSource = new SingletonDataSource();
         $dataSource = $singletonDataSource->getInstance();
-        $sql = "INSERT INTO grupoClaseProfesor (IdGrupoClase,EmailProfesor) 
+        $sql = "INSERT INTO grupoclaseprofesor (IdGrupoClase,EmailProfesor) 
         VALUES (:idGrupoClase, :emailProfesor)";
         $values = array(
             ':idGrupoClase' => $grupoClaseProfesor->getIdGrupoClase(),
@@ -49,7 +49,7 @@ class DAOGrupoClaseProfesorImplements implements DAOGrupoClaseProfesor
     {
         $singletonDataSource = new SingletonDataSource();
         $dataSource = $singletonDataSource->getInstance();
-        $sql = "UPDATE grupoClaseProfesor SET IdGrupoClase = :idGrupoClase, EmailProfesor = :emailProfesor WHERE IdGrupoClase = :idGrupoClase AND EmailProfesor = :emailProfesor";
+        $sql = "UPDATE grupoclaseprofesor SET IdGrupoClase = :idGrupoClase, EmailProfesor = :emailProfesor WHERE IdGrupoClase = :idGrupoClase AND EmailProfesor = :emailProfesor";
         $values = array(
             ':idGrupoClase' => $grupoClaseProfesor->getIdGrupoClase(),
             ':emailProfesor' => $grupoClaseProfesor->getEmailProfesor()
@@ -62,7 +62,7 @@ class DAOGrupoClaseProfesorImplements implements DAOGrupoClaseProfesor
     {
         $singletonDataSource = new SingletonDataSource();
         $dataSource = $singletonDataSource->getInstance();
-        $sql = "DELETE FROM grupoClaseProfesor WHERE IdGrupoClase = :idGrupoClase AND EmailProfesor = :emailProfesor";
+        $sql = "DELETE FROM grupoclaseprofesor WHERE IdGrupoClase = :idGrupoClase AND EmailProfesor = :emailProfesor";
         $values = array(
             ':idGrupoClase' => $idGrupoClase,
             ':emailProfesor' =>$emailProfesor

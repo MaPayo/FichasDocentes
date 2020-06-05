@@ -12,7 +12,7 @@ class DAOModGrupoClaseImplements implements DAOModGrupoClase
     {
         $singletonDataSource = new SingletonDataSource();
         $dataSource = $singletonDataSource->getInstance();
-        $sql = "SELECT * FROM modGrupoClase WHERE IdModAsignatura = :idModAsignatura";
+        $sql = "SELECT * FROM modgrupoclase WHERE IdModAsignatura = :idModAsignatura";
         $values = array(':idModAsignatura' => $idModAsignatura);
         $results = $dataSource->executeQuery($sql, $values);
         return $results;
@@ -22,7 +22,7 @@ class DAOModGrupoClaseImplements implements DAOModGrupoClase
     {
         $singletonDataSource = new SingletonDataSource();
         $dataSource = $singletonDataSource->getInstance();
-        $sql = "SELECT * FROM modGrupoClase WHERE IdGrupoClase = :idGrupoClase";
+        $sql = "SELECT * FROM modgrupoclase WHERE IdGrupoClase = :idGrupoClase";
         $values = array(':idGrupoClase' => $idGrupoClase);
         $results = $dataSource->executeQuery($sql, $values);
         return $results;
@@ -32,7 +32,7 @@ class DAOModGrupoClaseImplements implements DAOModGrupoClase
     {
         $singletonDataSource = new SingletonDataSource();
         $dataSource = $singletonDataSource->getInstance();
-        $sql = "INSERT INTO modGrupoClase (IdGrupoClase,Letra,Idioma,IdModAsignatura) 
+        $sql = "INSERT INTO modgrupoclase (IdGrupoClase,Letra,Idioma,IdModAsignatura) 
         VALUES (:idGrupoClase, :letra, :idioma, :idModAsignatura)";
         $values = array(
             ':idGrupoClase' => $modGrupoClase->getIdGrupoClase(),
@@ -48,7 +48,7 @@ class DAOModGrupoClaseImplements implements DAOModGrupoClase
     {
         $singletonDataSource = new SingletonDataSource();
         $dataSource = $singletonDataSource->getInstance();
-        $sql = "UPDATE modGrupoClase SET IdGrupoClase = :idGrupoClase, Letra = :letra,Idioma = :idioma,IdModAsignatura = :idModAsignatura WHERE IdGrupoClase = :idGrupoClase";
+        $sql = "UPDATE modgrupoclase SET IdGrupoClase = :idGrupoClase, Letra = :letra,Idioma = :idioma,IdModAsignatura = :idModAsignatura WHERE IdGrupoClase = :idGrupoClase";
         $values = array(
             ':idGrupoClase' => $modGrupoClase->getIdGrupoClase(),
             ':letra' => $modGrupoClase->getLetra(),
@@ -63,7 +63,7 @@ class DAOModGrupoClaseImplements implements DAOModGrupoClase
     {
         $singletonDataSource = new SingletonDataSource();
         $dataSource = $singletonDataSource->getInstance();
-        $sql = "DELETE FROM modGrupoClase WHERE IdGrupoClase = :idGrupoClase";
+        $sql = "DELETE FROM modgrupoclase WHERE IdGrupoClase = :idGrupoClase";
         $values = array(':idGrupoClase' => $idGrupoClase);
         $results = $dataSource->executeInsertUpdateDelete($sql, $values);
         return $results;

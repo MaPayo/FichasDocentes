@@ -9,34 +9,289 @@ require_once('includes/Negocio/Configuracion/Configuracion.php');
 class FormPermisos extends Form
 {
 
-	protected function generaCamposFormulario($datosIniciales)
-	{
+    protected function generaCamposFormulario($datosIniciales)
+    {
 
-		var_dump($datosIniciales);
-        
-		$IdPermiso = $datosIniciales['IdPermiso'];
-    
-        $email=$datosIniciales['EmailProfesor'];
+        if($datosIniciales['IdPermiso'] !== null){
+        $IdPermiso = $datosIniciales['IdPermiso'];
+
+        $email = $datosIniciales['EmailProfesor'];
         $IdAsignatura = $datosIniciales['IdAsignatura'];
-        
-        
-		$controller = new ControllerImplements();
-		$context = new Context(FIND_PERMISOS, $IdAsignatura);
+
+
+        $controller = new ControllerImplements();
+        $context = new Context(FIND_PERMISOS, $IdAsignatura);
         $contextPermisos = $controller->action($context);
 
-		$html = '<input type="hidden" name="IdPermiso" value="' . $IdPermiso . '" required />
-		<input type="hidden" name="IdAsignatura" value="' . $IdAsignatura . '" required />';
+        $html = '<input type="hidden" name="IdPermiso" value="' . $IdPermiso . '" required />
+        <input type="hidden" name="IdAsignatura" value="' . $IdAsignatura . '" required />
+        
+        <input type="hidden" name="EmailProfesor" value="' . $email . '" required />';
         //Buscamos los permisos del profesor en concreto
-
-        foreach($contextPermisos->getData() as $permiso){
-            if($permiso->getEmailProfesor() === $email){
-                echo "Hola, voy a ser el formulario";
+        if ($contextPermisos->getEvent() === FIND_PERMISOS_OK)
+            foreach ($contextPermisos->getData() as $permiso) {
+                if ($permiso->getEmailProfesor() === $email) {
+                    $html .= '<div class="table-responsive text-center">
+                <table class="table table-sm table-hover table-borderless">
+                    <thead>
+                        <tr> 
+                            <th scope="col"> </th>
+                            <th scope="col">Escritura</th>
+                            <th scope="col">Modificación</th>
+                            <th scope="col">Administración</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th scope="row">Permisos Programa</th>';
+                    if ($permiso->getPermisoPrograma() === '7') {
+                        $html .= '<td><input type="checkbox" checked name="PermisoProgramaE"></td>
+                            <td><input type="checkbox" checked name="PermisoProgramaM"></td>
+                            <td><input type="checkbox" checked name="PermisoProgramaA"></td>';
+                    } elseif ($permiso->getPermisoPrograma() === '6') {
+                        $html .= '<td><input type="checkbox" checked name="PermisoProgramaE"></td>
+                            <td><input type="checkbox" checked name="PermisoProgramaM"></td>
+                            <td><input type="checkbox" name="PermisoProgramaA"></td>';
+                    } elseif ($permiso->getPermisoPrograma() === '5') {
+                        $html .= '<td><input type="checkbox" checked name="PermisoProgramaE"></td>
+                            <td><input type="checkbox"  name="PermisoProgramaM"></td>
+                            <td><input type="checkbox" checked name="PermisoProgramaA"></td>';
+                    } elseif ($permiso->getPermisoPrograma() === '4') {
+                        $html .= '<td><input type="checkbox" checked name="PermisoProgramaE"></td>
+                            <td><input type="checkbox"  name="PermisoProgramaM"></td>
+                            <td><input type="checkbox"  name="PermisoProgramaA"></td>';
+                    } elseif ($permiso->getPermisoPrograma() === '3') {
+                        $html .= '<td><input type="checkbox"  name="PermisoProgramaE"></td>
+                            <td><input type="checkbox" checked name="PermisoProgramaM"></td>
+                            <td><input type="checkbox"  checked name="PermisoProgramaA"></td>';
+                    } elseif ($permiso->getPermisoPrograma() === '2') {
+                        $html .= '<td><input type="checkbox" checked name="PermisoProgramaE"></td>
+                            <td><input type="checkbox" checked name="PermisoProgramaM"></td>
+                            <td><input type="checkbox"  name="PermisoProgramaA"></td>';
+                    } elseif ($permiso->getPermisoPrograma() === '1') {
+                        $html .= '<td><input type="checkbox"  name="PermisoProgramaE"></td>
+                            <td><input type="checkbox"  name="PermisoProgramaM"></td>
+                            <td><input type="checkbox" checked name="PermisoProgramaA"></td>';
+                    } elseif ($permiso->getPermisoPrograma() === '0') {
+                        $html .= '<td><input type="checkbox"  name="PermisoProgramaE"></td>
+                            <td><input type="checkbox"  name="PermisoProgramaM"></td>
+                            <td><input type="checkbox"  name="PermisoProgramaA"></td>';
+                    }
+                    $html .= '</tr> <tr>
+                      <th scope="row">Permisos Competencias</th>';
+                    if ($permiso->getPermisoCompetencias() === '7') {
+                        $html .= '<td><input type="checkbox" checked name="PermisoCompetenciasE"></td>
+                        <td><input type="checkbox" checked name="PermisoCompetenciasM"></td>
+                        <td><input type="checkbox" checked name="PermisoCompetenciasA"></td>';
+                    } elseif ($permiso->getPermisoCompetencias() === '6') {
+                        $html .= '<td><input type="checkbox" checked name="PermisoCompetenciasE"></td>
+                        <td><input type="checkbox" checked name="PermisoCompetenciasM"></td>
+                        <td><input type="checkbox" name="PermisoCompetenciasA"></td>';
+                    } elseif ($permiso->getPermisoCompetencias() === '5') {
+                        $html .= '<td><input type="checkbox" checked name="PermisoCompetenciasE"></td>
+                        <td><input type="checkbox"  name="PermisCompetenciasaM"></td>
+                        <td><input type="checkbox" checked name="PermisoCompetenciasA"></td>';
+                    } elseif ($permiso->getPermisoCompetencias() === '4') {
+                        $html .= '<td><input type="checkbox" checked name="PermisoCompetenciasE"></td>
+                        <td><input type="checkbox"  name="PermisoCompetenciasM"></td>
+                        <td><input type="checkbox"  name="PermisoCompetenciasA"></td>';
+                    } elseif ($permiso->getPermisoCompetencias() === '3') {
+                        $html .= '<td><input type="checkbox"  name="PermisoCompetenciasE"></td>
+                        <td><input type="checkbox" checked name="PermisoCompetenciasM"></td>
+                        <td><input type="checkbox"  checked name="PermisoCompetenciasA"></td>';
+                    } elseif ($permiso->getPermisoCompetencias() === '2') {
+                        $html .= '<td><input type="checkbox" checked name="PermisoCompetenciasE"></td>
+                        <td><input type="checkbox" checked name="PermisoCompetenciasM"></td>
+                        <td><input type="checkbox"  name="PermisoCompetenciasA"></td>';
+                    } elseif ($permiso->getPermisoCompetencias() === '1') {
+                        $html .= '<td><input type="checkbox"  name="PermisoCompetenciasE"></td>
+                        <td><input type="checkbox"  name="PermisoCompetenciasM"></td>
+                        <td><input type="checkbox" checked name="PermisoCompetenciasA"></td>';
+                    } elseif ($permiso->getPermisoCompetencias() === '0') {
+                        $html .= '<td><input type="checkbox"  name="PermisoCompetenciasE"></td>
+                        <td><input type="checkbox"  name="PermisoCompetenciasM"></td>
+                        <td><input type="checkbox"  name="PermisoCompetenciasA"></td>';
+                    }
+                    $html .= '</tr> <tr>
+                  <th scope="row">Permisos Metodología</th>';
+                    if ($permiso->getPermisoMetodologia() === '7') {
+                        $html .= '<td><input type="checkbox" checked name="PermisoMetodologiaE"></td>
+                    <td><input type="checkbox" checked name="PermisoMetodologiaM"></td>
+                    <td><input type="checkbox" checked name="PermisoMetodologiaA"></td>';
+                    } elseif ($permiso->getPermisoMetodologia() === '6') {
+                        $html .= '<td><input type="checkbox" checked name="PermisoMetodologiaE"></td>
+                    <td><input type="checkbox" checked name="PermisoMetodologiaM"></td>
+                    <td><input type="checkbox" name="PermisoMetodologiaA"></td>';
+                    } elseif ($permiso->getPermisoMetodologia() === '5') {
+                        $html .= '<td><input type="checkbox" checked name="PermisoMetodologiaE"></td>
+                    <td><input type="checkbox"  name="PermisoMetodologiaM"></td>
+                    <td><input type="checkbox" checked name="PermisoMetodologiaA"></td>';
+                    } elseif ($permiso->getPermisoMetodologia() === '4') {
+                        $html .= '<td><input type="checkbox" checked name="PermisoMetodologiaE"></td>
+                    <td><input type="checkbox"  name="PermisoMetodologiaM"></td>
+                    <td><input type="checkbox"  name="PermisoMetodologiaA"></td>';
+                    } elseif ($permiso->getPermisoMetodologia() === '3') {
+                        $html .= '<td><input type="checkbox"  name="PermisoMetodologiaE"></td>
+                    <td><input type="checkbox" checked name="PermisoMetodologiaM"></td>
+                    <td><input type="checkbox"  checked name="PermisoMetodologiaA"></td>';
+                    } elseif ($permiso->getPermisoMetodologia() === '2') {
+                        $html .= '<td><input type="checkbox" checked name="PermisoMetodologiaE"></td>
+                    <td><input type="checkbox" checked name="PermisoMetodologiaM"></td>
+                    <td><input type="checkbox"  name="PermisoMetodologiaA"></td>';
+                    } elseif ($permiso->getPermisoMetodologia() === '1') {
+                        $html .= '<td><input type="checkbox"  name="PermisoMetodologiaE"></td>
+                    <td><input type="checkbox"  name="PermisoMetodologiaM"></td>
+                    <td><input type="checkbox" checked name="PermisoMetodologiaA"></td>';
+                    } elseif ($permiso->getPermisoMetodologia() === '0') {
+                        $html .= '<td><input type="checkbox"  name="PermisoMetodologiaE"></td>
+                    <td><input type="checkbox"  name="PermisoMetodologiaM"></td>
+                    <td><input type="checkbox"  name="PermisoMetodologiaA"></td>';
+                    }
+                    $html .= '</tr> <tr>
+              <th scope="row">Permisos Bibliografía</th>';
+                    if ($permiso->getPermisoBibliografia() === '7') {
+                        $html .= '<td><input type="checkbox" checked name="PermisoBibliografiaE"></td>
+                <td><input type="checkbox" checked name="PermisoBibliografiaM"></td>
+                <td><input type="checkbox" checked name="PermisoBibliografiaA"></td>';
+                    } elseif ($permiso->getPermisoBibliografia() === '6') {
+                        $html .= '<td><input type="checkbox" checked name="PermisoBibliografiaE"></td>
+                <td><input type="checkbox" checked name="PermisoBibliografiaM"></td>
+                <td><input type="checkbox" name="PermisoBibliografiaA"></td>';
+                    } elseif ($permiso->getPermisoBibliografia() === '5') {
+                        $html .= '<td><input type="checkbox" checked name="PermisoBibliografiaE"></td>
+                <td><input type="checkbox"  name="PermisoBibliografiaM"></td>
+                <td><input type="checkbox" checked name="PermisoBibliografiaA"></td>';
+                    } elseif ($permiso->getPermisoBibliografia() === '4') {
+                        $html .= '<td><input type="checkbox" checked name="PermisoBibliografiaE"></td>
+                <td><input type="checkbox"  name="PermisoBibliografiaM"></td>
+                <td><input type="checkbox"  name="PermisoBibliografiaA"></td>';
+                    } elseif ($permiso->getPermisoBibliografia() === '3') {
+                        $html .= '<td><input type="checkbox"  name="PermisoBibliografiaE"></td>
+                <td><input type="checkbox" checked name="PermisoBibliografiaM"></td>
+                <td><input type="checkbox"  checked name="PermisoBibliografiaA"></td>';
+                    } elseif ($permiso->getPermisoBibliografia() === '2') {
+                        $html .= '<td><input type="checkbox" checked name="PermisoBibliografiaE"></td>
+                <td><input type="checkbox" checked name="PermisoBibliografiaM"></td>
+                <td><input type="checkbox"  name="PermisoBibliografiaA"></td>';
+                    } elseif ($permiso->getPermisoBibliografia() === '1') {
+                        $html .= '<td><input type="checkbox"  name="PermisoBibliografiaE"></td>
+                <td><input type="checkbox"  name="PermisoBibliografiaM"></td>
+                <td><input type="checkbox" checked name="PermisoBibliografiaA"></td>';
+                    } elseif ($permiso->getPermisoBibliografia() === '0') {
+                        $html .= '<td><input type="checkbox"  name="PermisoBibliografiaE"></td>
+                <td><input type="checkbox"  name="PermisoBibliografiaM"></td>
+                <td><input type="checkbox"  name="PermisoBibliografiaA"></td>';
+                    }
+                    $html .= '</tr> <tr>
+          <th scope="row">Permisos Grupo Laboratorio</th>';
+                    if ($permiso->getPermisoGrupoLaboratorio() === '7') {
+                        $html .= '<td><input type="checkbox" checked name="PermisoGrupoLaboratorioE"></td>
+            <td><input type="checkbox" checked name="PermisoGrupoLaboratorioM"></td>
+            <td><input type="checkbox" checked name="PermisoGrupoLaboratorioA"></td>';
+                    } elseif ($permiso->getPermisoGrupoLaboratorio() === '6') {
+                        $html .= '<td><input type="checkbox" checked name="PermisoGrupoLaboratorioE"></td>
+            <td><input type="checkbox" checked name="PermisGrupoLaboratorioaM"></td>
+            <td><input type="checkbox" name="PermisoGrupoLaboratorioA"></td>';
+                    } elseif ($permiso->getPermisoGrupoLaboratorio() === '5') {
+                        $html .= '<td><input type="checkbox" checked name="PermisoGrupoLaboratorioE"></td>
+            <td><input type="checkbox"  name="PermisoGrupoLaboratorioM"></td>
+            <td><input type="checkbox" checked name="PermisoGrupoLaboratorioA"></td>';
+                    } elseif ($permiso->getPermisoGrupoLaboratorio() === '4') {
+                        $html .= '<td><input type="checkbox" checked name="PermisoGrupoLaboratorioE"></td>
+            <td><input type="checkbox"  name="PermisoGrupoLaboratorioM"></td>
+            <td><input type="checkbox"  name="PermisoGrupoLaboratorioA"></td>';
+                    } elseif ($permiso->getPermisoGrupoLaboratorio() === '3') {
+                        $html .= '<td><input type="checkbox"  name="PermisoGrupoLaboratorioE"></td>
+            <td><input type="checkbox" checked name="PermisoGrupoLaboratorioM"></td>
+            <td><input type="checkbox"  checked name="PermisoGrupoLaboratorioA"></td>';
+                    } elseif ($permiso->getPermisoGrupoLaboratorio() === '2') {
+                        $html .= '<td><input type="checkbox" checked name="PermisoGrupoLaboratorioE"></td>
+            <td><input type="checkbox" checked name="PermisoGrupoLaboratorioM"></td>
+            <td><input type="checkbox"  name="PermisoGrupoLaboratorioA"></td>';
+                    } elseif ($permiso->getPermisoGrupoLaboratorio() === '1') {
+                        $html .= '<td><input type="checkbox"  name="PermisoGrupoLaboratorioE"></td>
+            <td><input type="checkbox"  name="PermisoGrupoLaboratorioM"></td>
+            <td><input type="checkbox" checked name="PermisoGrupoLaboratorioA"></td>';
+                    } elseif ($permiso->getPermisoGrupoLaboratorio() === '0') {
+                        $html .= '<td><input type="checkbox"  name="PermisoGrupoLaboratorioE"></td>
+            <td><input type="checkbox"  name="PermisoGrupoLaboratorioM"></td>
+            <td><input type="checkbox"  name="PermisoGrupoLaboratorioA"></td>';
+                    }
+                    $html .= '</tr> <tr>
+      <th scope="row">Permisos Grupo Clase</th>';
+                    if ($permiso->getPermisoGrupoClase() === '7') {
+                        $html .= '<td><input type="checkbox" checked name="PermisoGrupoClaseE"></td>
+        <td><input type="checkbox" checked name="PermisoGrupoClaseM"></td>
+        <td><input type="checkbox" checked name="PermisoGrupoClaseA"></td>';
+                    } elseif ($permiso->getPermisoGrupoClase() === '6') {
+                        $html .= '<td><input type="checkbox" checked name="PermisoGrupoClaseE"></td>
+        <td><input type="checkbox" checked name="PermisoGrupoClaseM"></td>
+        <td><input type="checkbox" name="PermisoGrupoClaseA"></td>';
+                    } elseif ($permiso->getPermisoGrupoClase() === '5') {
+                        $html .= '<td><input type="checkbox" checked name="PermisoGrupoClaseE"></td>
+        <td><input type="checkbox"  name="PermisoGrupoClaseM"></td>
+        <td><input type="checkbox" checked name="PermisoGrupoClaseA"></td>';
+                    } elseif ($permiso->getPermisoGrupoClase() === '4') {
+                        $html .= '<td><input type="checkbox" checked name="PermisoGrupoClaseE"></td>
+        <td><input type="checkbox"  name="PermisoGrupoClaseM"></td>
+        <td><input type="checkbox"  name="PermisoGrupoClaseA"></td>';
+                    } elseif ($permiso->getPermisoGrupoClase() === '3') {
+                        $html .= '<td><input type="checkbox"  name="PermisoGrupoClaseE"></td>
+        <td><input type="checkbox" checked name="PermisoGrupoClaseM"></td>
+        <td><input type="checkbox"  checked name="PermisoGrupoClaseA"></td>';
+                    } elseif ($permiso->getPermisoGrupoClase() === '2') {
+                        $html .= '<td><input type="checkbox" checked name="PermisoGrupoClaseE"></td>
+        <td><input type="checkbox" checked name="PermisoGrupoClaseM"></td>
+        <td><input type="checkbox"  name="PermisoGrupoClaseA"></td>';
+                    } elseif ($permiso->getPermisoGrupoClase() === '1') {
+                        $html .= '<td><input type="checkbox"  name="PermisoGrupoClaseE"></td>
+        <td><input type="checkbox"  name="PermisoGrupoClaseM"></td>
+        <td><input type="checkbox" checked name="PermisoGrupoClaseA"></td>';
+                    } elseif ($permiso->getPermisoGrupoClase() === '0') {
+                        $html .= '<td><input type="checkbox"  name="PermisoGrupoClaseE"></td>
+        <td><input type="checkbox"  name="PermisoGrupoClaseM"></td>
+        <td><input type="checkbox"  name="PermisoGrupoClaseA"></td>';
+                    }
+                    $html .= '</tr> <tr>
+  <th scope="row">Permisos Evaluación</th>';
+                    if ($permiso->getPermisoEvaluacion() === '7') {
+                        $html .= '<td><input type="checkbox" checked name="PermisoEvaluacionE"></td>
+    <td><input type="checkbox" checked name="PermisoEvaluacionM"></td>
+    <td><input type="checkbox" checked name="PermisoEvaluacionA"></td>';
+                    } elseif ($permiso->getPermisoEvaluacion() === '6') {
+                        $html .= '<td><input type="checkbox" checked name="PermisoEvaluacionE"></td>
+    <td><input type="checkbox" checked name="PermisoEvaluacionM"></td>
+    <td><input type="checkbox" name="PermisoEvaluacionA"></td>';
+                    } elseif ($permiso->getPermisoEvaluacion() === '5') {
+                        $html .= '<td><input type="checkbox" checked name="PermisoEvaluacionE"></td>
+    <td><input type="checkbox"  name="PermisoEvaluacionM"></td>
+    <td><input type="checkbox" checked name="PermisoEvaluacionA"></td>';
+                    } elseif ($permiso->getPermisoEvaluacion() === '4') {
+                        $html .= '<td><input type="checkbox" checked name="PermisoEvaluacionE"></td>
+    <td><input type="checkbox"  name="PermisoEvaluacionM"></td>
+    <td><input type="checkbox"  name="PermisoEvaluacionA"></td>';
+                    } elseif ($permiso->getPermisoEvaluacion() === '3') {
+                        $html .= '<td><input type="checkbox"  name="PermisoEvaluacionE"></td>
+    <td><input type="checkbox" checked name="PermisoEvaluacionM"></td>
+    <td><input type="checkbox"  checked name="PermisoEvaluacionA"></td>';
+                    } elseif ($permiso->getPermisoEvaluacion() === '2') {
+                        $html .= '<td><input type="checkbox" checked name="PermisoEvaluacionE"></td>
+    <td><input type="checkbox" checked name="PermisoEvaluacionM"></td>
+    <td><input type="checkbox"  name="PermisoEvaluacionA"></td>';
+                    } elseif ($permiso->getPermisoEvaluacion() === '1') {
+                        $html .= '<td><input type="checkbox"  name="PermisoEvaluacionE"></td>
+    <td><input type="checkbox"  name="PermisoEvaluacionM"></td>
+    <td><input type="checkbox" checked name="PermisoEvaluacionA"></td>';
+                    } elseif ($permiso->getPermisoEvaluacion() === '0') {
+                        $html .= '<td><input type="checkbox"  name="PermisoEvaluacionE"></td>
+    <td><input type="checkbox"  name="PermisoEvaluacionM"></td>
+    <td><input type="checkbox"  name="PermisoEvaluacionA"></td>';
+                    }
+                    $html .= '</tr>';
+                }
             }
-        }
-
-       
-
-		$html .= '<div class="text-right">
+        
+        $html .= '<div class="text-right">
 		<a href="indexAcceso.php?IdAsignatura=' . $IdAsignatura . '#nav-configuracion">
 		<button type="button" class="btn btn-secondary" id="btn-form">
 		Cancelar
@@ -44,69 +299,170 @@ class FormPermisos extends Form
 		</a>
 
 		<button type="submit" class="btn btn-success" id="btn-form" name="registrar">Guardar</button>
-		</div>';
-		return $html;
-	}
-
-	protected function procesaFormulario( $datos)
-	{
- 
-		$erroresFormulario = array();
-		$controller = new ControllerImplements();
-		$context = new Context(FIND_CONFIGURACION, $datos['IdAsignatura']);
-		$contextConfiguracion = $controller->action($context);
+        </div>';
+    }else{
+        $email = $datosIniciales['EmailProfesor'];
+        $IdAsignatura = $datosIniciales['IdAsignatura'];
 
 
-		$IdConfiguracion = $datos['IdConfiguracion'] ;
-		$ConocimientosPrevios = isset($datos['ConocimientosPrevios'])? 1:0;
-		$BreveDescripcion = isset($datos['BreveDescripcion'])? 1:0;
-		$ProgramaDetallado = isset($datos['ProgramaDetallado'])? 1:0;
-		$ComGenerales = isset($datos['ComGenerales'])? 1:0;
-		$ComEspecificas = isset($datos['ComEspecificas'])? 1:0;
-		$ComBasicas = isset($datos['ComBasicas'])? 1:0;
-		$ResultadosAprendizaje = isset($datos['ResultadosAprendizaje'])? 1:0;
-		$Metodologia = isset($datos['Metodologia'])? 1:0;
-		$CitasBibliograficas = isset($datos['CitasBibliograficas'])? 1:0;
-		$RecursosInternet = isset($datos['RecursosInternet'])? 1:0;
-		$RealizacionExamenes = isset($datos['RealizacionExamenes'])? 1:0;
-		$CalificacionFinal =isset($datos['CalificacionFinal'])? 1:0;
-		$RealizacionActividades = isset($datos['RealizacionActividades'])? 1:0;
-		$RealizacionLaboratorio = isset($datos['RealizacionLaboratorio'])? 1:0;
-		
-	
+        $html = '<input type="hidden" name="IdAsignatura" value="' . $IdAsignatura . '" required />
+        
+        <input type="hidden" name="EmailProfesor" value="' . $email . '" required />';
+        $html .= '<div class="table-responsive text-center">
+        <table class="table table-sm table-hover table-borderless">
+            <thead>
+                <tr> 
+                    <th scope="col"> </th>
+                    <th scope="col">Escritura</th>
+                    <th scope="col">Modificación</th>
+                    <th scope="col">Administración</th>
+                </tr>
+            </thead>
+            <tbody>
+            <tr>
+            <th scope="row">Permisos Programa</th>
+    <td><input type="checkbox"  name="PermisoProgramaE"></td>
+    <td><input type="checkbox"  name="PermisoProgramaM"></td>
+    <td><input type="checkbox"  name="PermisoProgramaA"></td>';
 
+    $html .= '</tr> <tr>
+<th scope="row">Permisos Competencias</th>';
+$html .= '<td><input type="checkbox"  name="PermisoCompetenciasE"></td>
+    <td><input type="checkbox"  name="PermisoCompetenciasM"></td>
+    <td><input type="checkbox"  name="PermisoCompetenciasA"></td>';
 
-		$context = new Context(FIND_CONFIGURACION, $datos['IdAsignatura']);
-		$contextConfiguracion = $controller->action($context);
-		
-		if($contextConfiguracion->getEvent() === FIND_CONFIGURACION_OK){
+$html .= '</tr> <tr>
+<th scope="row">Permisos Metodología</th>';
+$html .= '<td><input type="checkbox"  name="PermisoMetodologiaE"></td>
+        <td><input type="checkbox"  name="PermisoMetodologiaM"></td>
+        <td><input type="checkbox"  name="PermisoMetodologiaA"></td>';
 
-			$configuracion = new Configuracion($IdConfiguracion, 
-			$ConocimientosPrevios, 
-			$BreveDescripcion, 
-			$ProgramaDetallado, 
-			$ComGenerales, 
-			$ComEspecificas, 
-			$ComBasicas, 
-			$ResultadosAprendizaje, 
-			$Metodologia, 
-			$CitasBibliograficas, 
-			$RecursosInternet, 
-			$RealizacionExamenes, 
-			$CalificacionFinal,
-			$RealizacionActividades,
-			$RealizacionLaboratorio,
-			$datos['IdAsignatura']);
+$html .= '</tr> <tr>
+  <th scope="row">Permisos Bibliografía</th>';
+$html .= '<td><input type="checkbox"  name="PermisoBibliografiaE"></td>
+    <td><input type="checkbox"  name="PermisoBibliografiaM"></td>
+    <td><input type="checkbox"  name="PermisoBibliografiaA"></td>';
 
-			$context = new Context(UPDATE_CONFIGURACION, $configuracion);
-			$contextConfiguracion = $controller->action($context);
+$html .= '</tr> <tr>
+<th scope="row">Permisos Grupo Laboratorio</th>';
+$html .= '<td><input type="checkbox"  name="PermisoGrupoLaboratorioE"></td>
+<td><input type="checkbox"  name="PermisoGrupoLaboratorioM"></td>
+<td><input type="checkbox"  name="PermisoGrupoLaboratorioA"></td>';
 
-			if($contextConfiguracion->getEvent() === UPDATE_CONFIGURACION_OK){
-				$erroresFormulario = "indexAcceso.php?IdAsignatura=" . $datos['IdAsignatura'] . "&modificado=y#nav-configuracion";
-			}elseif ($contextConfiguracion->getEvent() === UPDATE_CONFIGURACION_FAIL) {
-				$erroresFormulario[] = "No se ha podido modificar la evaluación.";
-			}
-		}
-		return $erroresFormulario;
-	}
+$html .= '</tr> <tr>
+<th scope="row">Permisos Grupo Clase</th>';
+$html .= '<td><input type="checkbox"  name="PermisoGrupoClaseE"></td>
+    <td><input type="checkbox"  name="PermisoGrupoClaseM"></td>
+    <td><input type="checkbox"  name="PermisoGrupoClaseA"></td>';
+
+$html .= '</tr> <tr>
+<th scope="row">Permisos Evaluación</th>';
+$html .= '<td><input type="checkbox"  name="PermisoEvaluacionE"></td>
+    <td><input type="checkbox"  name="PermisoEvaluacionM"></td>
+    <td><input type="checkbox"  name="PermisoEvaluacionA"></td>';
+$html .= '</tr>';
+$html .= '<div class="text-right">
+		<a href="indexAcceso.php?IdAsignatura=' . $IdAsignatura . '#nav-configuracion">
+		<button type="button" class="btn btn-secondary" id="btn-form">
+		Cancelar
+		</button>
+		</a>
+
+		<button type="submit" class="btn btn-success" id="btn-form" name="registrar">Guardar</button>
+        </div>';
+
+    }
+        return $html;
+    }
+
+    protected function procesaFormulario($datos)
+    {
+
+        $erroresFormulario = array();
+        $controller = new ControllerImplements();
+        $context = new Context(FIND_CONFIGURACION, $datos['IdAsignatura']);
+        $contextConfiguracion = $controller->action($context);
+
+        $IdPermiso = isset($datos['IdPermiso'])? $datos['IdPermiso']: null;
+        $PermisoProgramaE = isset($datos['PermisoProgramaE']) ? 1 : 0;
+        $PermisoProgramaM = isset($datos['PermisoProgramaM']) ? 2 : 0;;
+        $PermisoProgramaA = isset($datos['PermisoProgramaA']) ? 4 : 0;;
+        $PermisoPrograma = $PermisoProgramaE + $PermisoProgramaM + $PermisoProgramaA;
+        $PermisoCompetenciasE = isset($datos['PermisoCompetenciasE']) ? 1 : 0;
+        $PermisoCompetenciasM = isset($datos['PermisoCompetenciasM']) ? 2 : 0;;
+        $PermisoCompetenciasA = isset($datos['PermisoCompetenciasA']) ? 4 : 0;;
+        $PermisoCompetencias = $PermisoCompetenciasE + $PermisoCompetenciasM + $PermisoCompetenciasA;
+        $PermisoMetodologiaE = isset($datos['PermisoMetodologiaE']) ? 1 : 0;
+        $PermisoMetodologiaM = isset($datos['PermisoMetodologiaM']) ? 2 : 0;;
+        $PermisoMetodologiaA = isset($datos['PermisoMetodologiaA']) ? 4 : 0;;
+        $PermisoMetodologia = $PermisoMetodologiaE + $PermisoMetodologiaM + $PermisoMetodologiaA;
+        $PermisoBibliografiaE = isset($datos['PermisoBibliografiaE']) ? 1 : 0;
+        $PermisoBibliografiaM = isset($datos['PermisoBibliografiaM']) ? 2 : 0;;
+        $PermisoBibliografiaA = isset($datos['PermisoBibliografiaA']) ? 4 : 0;;
+        $PermisoBibliografia = $PermisoBibliografiaE + $PermisoBibliografiaM + $PermisoBibliografiaA;
+        $PermisoGrupoLaboratorioE = isset($datos['PermisoGrupoLaboratorioE']) ? 1 : 0;
+        $PermisoGrupoLaboratorioM = isset($datos['PermisoGrupoLaboratorioM']) ? 2 : 0;;
+        $PermisoGrupoLaboratorioA = isset($datos['PermisoGrupoLaboratorioA']) ? 4 : 0;;
+        $PermisoGrupoLaboratorio = $PermisoGrupoLaboratorioE + $PermisoGrupoLaboratorioM + $PermisoGrupoLaboratorioA;
+        $PermisoGrupoClaseE = isset($datos['PermisoGrupoClaseE']) ? 1 : 0;
+        $PermisoGrupoClaseM = isset($datos['PermisoGrupoClaseM']) ? 2 : 0;;
+        $PermisoGrupoClaseA = isset($datos['PermisoGrupoClaseA']) ? 4 : 0;;
+        $PermisoGrupoClase = $PermisoGrupoClaseE + $PermisoGrupoClaseM + $PermisoGrupoClaseA;
+        $PermisoEvaluacionE = isset($datos['PermisoEvaluacionE']) ? 1 : 0;
+        $PermisoEvaluacionM = isset($datos['PermisoEvaluacionM']) ? 2 : 0;;
+        $PermisoEvaluacionA = isset($datos['PermisoEvaluacionA']) ? 4 : 0;;
+        $PermisoEvaluacion = $PermisoEvaluacionE + $PermisoEvaluacionM + $PermisoEvaluacionA;
+        $IdAsignatura = $datos['IdAsignatura'];
+        $EmailProfesor = $datos['EmailProfesor'];
+
+        $context = new Context(FIND_PERMISOS_POR_PROFESOR, $datos['IdAsignatura']);
+        $contextConfiguracion = $controller->action($context);
+
+        if ($contextConfiguracion->getEvent() === FIND_PERMISOS_POR_PROFESOR_OK) {
+
+            $permisos = new Permisos(
+                $IdPermiso,
+                $PermisoPrograma,
+                $PermisoCompetencias,
+                $PermisoMetodologia,
+                $PermisoBibliografia,
+                $PermisoGrupoLaboratorio,
+                $PermisoGrupoClase,
+                $PermisoEvaluacion,
+                $IdAsignatura,
+                $EmailProfesor
+            );
+
+            $context = new Context(UPDATE_PERMISOS, $permisos);
+            $contextConfiguracion = $controller->action($context);
+
+            if ($contextConfiguracion->getEvent() === UPDATE_PERMISOS_OK) {
+                $erroresFormulario = "indexAcceso.php?IdAsignatura=" . $datos['IdAsignatura'] . "&modificado=y#nav-configuracion";
+            } elseif ($contextConfiguracion->getEvent() === UPDATE_PERMISOS_FAIL) {
+                $erroresFormulario[] = "No se ha podido modificar los permisos.";
+            }
+        } else {
+            $permisos = new Permisos(
+                $IdPermiso,
+                $PermisoPrograma,
+                $PermisoCompetencias,
+                $PermisoMetodologia,
+                $PermisoBibliografia,
+                $PermisoGrupoLaboratorio,
+                $PermisoGrupoClase,
+                $PermisoEvaluacion,
+                $IdAsignatura,
+                $EmailProfesor
+            );
+            $context = new Context(CREATE_PERMISOS, $permisos);
+            $contextConfiguracion = $controller->action($context);
+
+            if ($contextConfiguracion->getEvent() === CREATE_PERMISOS_OK) {
+                $erroresFormulario = "indexAcceso.php?IdAsignatura=" . $datos['IdAsignatura'] . "&creado=y#nav-configuracion";
+            } elseif ($contextConfiguracion->getEvent() === CREATE_PERMISOS_FAIL) {
+                $erroresFormulario[] = "No se han podido crear los permisos.";
+            }
+        }
+        return $erroresFormulario;
+    }
 }

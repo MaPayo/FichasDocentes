@@ -40,7 +40,7 @@ require_once('includes/Negocio/Teorico/SATeoricoImplements.php');
 require_once('includes/Negocio/Usuario/SAUsuarioImplements.php');
 require_once('includes/Negocio/Verifica/SAVerificaImplements.php');
 require_once('includes/Negocio/Comparacion/SAComparacionImplements.php');
-
+//require_once('includes/Negocio/Conversion/SAConversionImplements.php');
 class FactorySAImplements implements FactorySA
 {
 
@@ -224,4 +224,9 @@ class FactorySAImplements implements FactorySA
     {
         return new SAVerificaImplements();
     }
+
+    /*public function createSAConversion()
+    {
+        return new SAConversionImplements();
+    }*/
 }

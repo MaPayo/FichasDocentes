@@ -8,7 +8,7 @@ class DAOModMetodologiaImplements implements DAOModMetodologia{
     public static function findModMetodologia($idModAsignatura){
         $singletonDataSource=new SingletonDataSource();
         $dataSource=$singletonDataSource->getInstance();
-        $sql="SELECT * FROM modMetodologia WHERE IdModAsignatura = :idModAsignatura";
+        $sql="SELECT * FROM modmetodologia WHERE IdModAsignatura = :idModAsignatura";
         $values=array(':idModAsignatura' => $idModAsignatura);
         $results=$dataSource->executeQuery($sql,$values);
         return $results;
@@ -18,7 +18,7 @@ class DAOModMetodologiaImplements implements DAOModMetodologia{
     public static function createModMetodologia($modMetodologia){
         $singletonDataSource=new SingletonDataSource();
         $dataSource=$singletonDataSource->getInstance();
-        $sql="INSERT INTO modMetodologia (IdMetodologia,Metodologia,MetodologiaI,IdModAsignatura) 
+        $sql="INSERT INTO modmetodologia (IdMetodologia,Metodologia,MetodologiaI,IdModAsignatura) 
         VALUES (:idMetodologia, :Metodologia, :MetodologiaI, :idModAsignatura)";
         $values=array(':idMetodologia' => $modMetodologia->getIdMetodologia(),
             ':Metodologia' => $modMetodologia->getMetodologia(),
@@ -32,7 +32,7 @@ class DAOModMetodologiaImplements implements DAOModMetodologia{
     public static function updateModMetodologia($modMetodologia){
         $singletonDataSource=new SingletonDataSource();
         $dataSource=$singletonDataSource->getInstance();
-        $sql="UPDATE modMetodologia SET IdMetodologia = :idMetodologia, Metodologia = :Metodologia,MetodologiaI = :MetodologiaI,IdModAsignatura = :idModAsignatura WHERE IdMetodologia = :idMetodologia";
+        $sql="UPDATE modmetodologia SET IdMetodologia = :idMetodologia, Metodologia = :Metodologia,MetodologiaI = :MetodologiaI,IdModAsignatura = :idModAsignatura WHERE IdMetodologia = :idMetodologia";
         $values=array(':idMetodologia' => $modMetodologia->getIdMetodologia(),
             ':Metodologia' => $modMetodologia->getMetodologia(),
             ':MetodologiaI' => $modMetodologia->getMetodologiaI(),
@@ -44,7 +44,7 @@ class DAOModMetodologiaImplements implements DAOModMetodologia{
     public static function deleteModMetodologia($idModAsignatura){
         $singletonDataSource=new SingletonDataSource();
         $dataSource=$singletonDataSource->getInstance();
-        $sql="DELETE FROM modMetodologia WHERE IdModAsignatura = :idModAsignatura";
+        $sql="DELETE FROM modmetodologia WHERE IdModAsignatura = :idModAsignatura";
         $values=array(':idModAsignatura' => $idModAsignatura);
         $results=$dataSource->executeInsertUpdateDelete($sql,$values);
         return $results;

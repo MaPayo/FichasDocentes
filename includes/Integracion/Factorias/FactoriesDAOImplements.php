@@ -163,6 +163,11 @@ class FactoriesDAOImplements implements FactoriesDAO
       return new DAOLaboratorioImplements();
    }
 
+   public static function createDAOLeyenda()
+   {
+      return new DAOLeyendaImplements();
+   }
+
    public static function createDAOMateria()
    {
       return new DAOMateriaImplements();

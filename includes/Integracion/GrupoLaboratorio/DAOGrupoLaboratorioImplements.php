@@ -12,7 +12,7 @@ class DAOGrupoLaboratorioImplements implements DAOGrupoLaboratorio
     {
         $singletonDataSource = new SingletonDataSource();
         $dataSource = $singletonDataSource->getInstance();
-        $sql = "SELECT * FROM grupoLaboratorio WHERE IdAsignatura = :idAsignatura";
+        $sql = "SELECT * FROM grupolaboratorio WHERE IdAsignatura = :idAsignatura";
         $values = array(':idAsignatura' => $idAsignatura);
         $results = $dataSource->executeQuery($sql, $values);
         return $results;
@@ -22,7 +22,7 @@ class DAOGrupoLaboratorioImplements implements DAOGrupoLaboratorio
     {
         $singletonDataSource = new SingletonDataSource();
         $dataSource = $singletonDataSource->getInstance();
-        $sql = "SELECT * FROM grupoLaboratorio WHERE IdGrupoLab = :idGrupoLab";
+        $sql = "SELECT * FROM grupolaboratorio WHERE IdGrupoLab = :idGrupoLab";
         $values = array(':idGrupoLab' => $idGrupoLaboratorio);
         $results = $dataSource->executeQuery($sql, $values);
         return $results;
@@ -32,7 +32,7 @@ class DAOGrupoLaboratorioImplements implements DAOGrupoLaboratorio
     {
         $singletonDataSource = new SingletonDataSource();
         $dataSource = $singletonDataSource->getInstance();
-        $sql = "INSERT INTO grupoLaboratorio (IdGrupoLab,Letra,Idioma,IdAsignatura) 
+        $sql = "INSERT INTO grupolaboratorio (IdGrupoLab,Letra,Idioma,IdAsignatura) 
         VALUES (:idGrupoLab, :letra, :idioma, :idAsignatura, )";
         $values = array(
             ':idGrupoLab' => $grupoLaboratorio->getIdGrupoLab(),
@@ -48,7 +48,7 @@ class DAOGrupoLaboratorioImplements implements DAOGrupoLaboratorio
     {
         $singletonDataSource = new SingletonDataSource();
         $dataSource = $singletonDataSource->getInstance();
-        $sql = "UPDATE grupoLaboratorio SET IdGrupoLab = :idGrupoLab, Letra = :letra,Idioma = :idioma,IdAsignatura = :idAsignatura WHERE IdGrupoLab = :idGrupoLab";
+        $sql = "UPDATE grupolaboratorio SET IdGrupoLab = :idGrupoLab, Letra = :letra,Idioma = :idioma,IdAsignatura = :idAsignatura WHERE IdGrupoLab = :idGrupoLab";
         $values = array(
             ':idGrupoLab' => $grupoLaboratorio->getIdGrupoLab(),
             ':letra' => $grupoLaboratorio->getLetra(),
@@ -63,7 +63,7 @@ class DAOGrupoLaboratorioImplements implements DAOGrupoLaboratorio
     {
         $singletonDataSource = new SingletonDataSource();
         $dataSource = $singletonDataSource->getInstance();
-        $sql = "DELETE FROM grupoLaboratorio WHERE IdGrupoLab = :idGrupoLab";
+        $sql = "DELETE FROM grupolaboratorio WHERE IdGrupoLab = :idGrupoLab";
         $values = array(':idGrupoLab' => $idGrupoLaboratorio);
         $results = $dataSource->executeInsertUpdateDelete($sql, $values);
         return $results;

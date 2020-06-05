@@ -134,7 +134,13 @@ require_once('includes/Presentacion/FactoriaComandos/Metodologia/CommandUpdateMo
 require_once('includes/Presentacion/FactoriaComandos/Modulo/CommandFindModulo.php');
 
 require_once('includes/Presentacion/FactoriaComandos/Permisos/CommandFindPermisos.php');
+require_once('includes/Presentacion/FactoriaComandos/Permisos/CommandDeletePermisos.php');
+require_once('includes/Presentacion/FactoriaComandos/Permisos/CommandCreatePermisos.php');
+
+require_once('includes/Presentacion/FactoriaComandos/Permisos/CommandUpdatePermisos.php');
 require_once('includes/Presentacion/FactoriaComandos/Permisos/CommandFindPermisosPorProfesor.php');
+
+require_once('includes/Presentacion/FactoriaComandos/Permisos/CommandFindPermisosPorProfesorYAsignatura.php');
 
 require_once('includes/Presentacion/FactoriaComandos/Problema/CommandFindProblema.php');
 
@@ -152,6 +158,7 @@ require_once('includes/Presentacion/FactoriaComandos/Usuario/CommandFindUsuario.
 require_once('includes/Presentacion/FactoriaComandos/Verifica/CommandFindVerifica.php');
 
 require_once('includes/Presentacion/FactoriaComandos/Comparacion/CommandComparacion.php');
+require_once('includes/Presentacion/FactoriaComandos/Conversion/CommandConvertMarkdownToHTML.php');
 
 class FactoryCommandImplements extends FactoryCommand
 {
@@ -556,12 +563,21 @@ class FactoryCommandImplements extends FactoryCommand
             case UPDATE_PERMISOS:
                 $command = new CommandUpdatePermisos();
                 break;
+                case CREATE_PERMISOS:
+                $command = new CommandCreatePermisos();
+                break;
             case FIND_PERMISOS:
                 $command = new CommandFindPermisos();
+                break;
+            case DELETE_PERMISOS:
+                $command = new CommandDeletePermisos();
                 break;
             case FIND_PERMISOS_POR_PROFESOR:
                 $command = new CommandFindPermisosPorProfesor();
                 break;
+                case FIND_PERMISOS_POR_PROFESOR_Y_ASIGNATURA:
+                    $command = new CommandFindPermisosPorProfesorYAsignatura();
+                    break;
             case CREATE_PROBLEMA:
                 $command = new CommandCreateProblema();
                 break;
@@ -631,6 +647,9 @@ class FactoryCommandImplements extends FactoryCommand
             case UPDATE_USUARIO:
                 $command = new CommandUpdateUsuario();
                 break;
+            /*case CONVERSION_HTML:
+                $command = new CommandConvertMarkdownToHTML();
+                break;*/
             case FIND_USUARIO:
                 $command = new CommandFindUsuario();
                 break;
@@ -648,6 +667,8 @@ class FactoryCommandImplements extends FactoryCommand
                 break;
             case COMPARACION:
                 $command= new CommandComparacion();
+                break;
+           
         }
         return $command;
     }

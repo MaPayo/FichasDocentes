@@ -12,7 +12,7 @@ class DAOGrupoClaseImplements implements DAOGrupoClase
     {
         $singletonDataSource = new SingletonDataSource();
         $dataSource = $singletonDataSource->getInstance();
-        $sql = "SELECT * FROM grupoClase WHERE IdAsignatura = :idAsignatura";
+        $sql = "SELECT * FROM grupoclase WHERE IdAsignatura = :idAsignatura";
         $values = array(':idAsignatura' => $idAsignatura);
         $results = $dataSource->executeQuery($sql, $values);
         return $results;
@@ -22,7 +22,7 @@ class DAOGrupoClaseImplements implements DAOGrupoClase
     {
         $singletonDataSource = new SingletonDataSource();
         $dataSource = $singletonDataSource->getInstance();
-        $sql = "SELECT * FROM grupoClase WHERE IdGrupoClase = :idGrupoClase";
+        $sql = "SELECT * FROM grupoclase WHERE IdGrupoClase = :idGrupoClase";
         $values = array(':idGrupoClase' => $idGrupoClase);
         $results = $dataSource->executeQuery($sql, $values);
         return $results;
@@ -32,7 +32,7 @@ class DAOGrupoClaseImplements implements DAOGrupoClase
     {
         $singletonDataSource = new SingletonDataSource();
         $dataSource = $singletonDataSource->getInstance();
-        $sql = "INSERT INTO grupoClase (IdGrupoClase,Letra,Idioma,IdAsignatura) 
+        $sql = "INSERT INTO grupoclase (IdGrupoClase,Letra,Idioma,IdAsignatura) 
         VALUES (:idGrupoClase, :letra, :idioma, :idAsignatura)";
         $values = array(
             ':idGrupoClase' => $grupoClase->getIdGrupoClase(),
@@ -48,7 +48,7 @@ class DAOGrupoClaseImplements implements DAOGrupoClase
     {
         $singletonDataSource = new SingletonDataSource();
         $dataSource = $singletonDataSource->getInstance();
-        $sql = "UPDATE grupoClase SET IdGrupoClase = :idGrupoClase, Letra = :letra,Idioma = :idioma,IdAsignatura = :idAsignatura WHERE IdGrupoClase = :idGrupoClase";
+        $sql = "UPDATE grupoclase SET IdGrupoClase = :idGrupoClase, Letra = :letra,Idioma = :idioma,IdAsignatura = :idAsignatura WHERE IdGrupoClase = :idGrupoClase";
         $values = array(
             ':idGrupoClase' => $grupoClase->getIdGrupoClase(),
             ':letra' => $grupoClase->getLetra(),
@@ -63,7 +63,7 @@ class DAOGrupoClaseImplements implements DAOGrupoClase
     {
         $singletonDataSource = new SingletonDataSource();
         $dataSource = $singletonDataSource->getInstance();
-        $sql = "DELETE FROM grupoClase WHERE IdGrupoClase = :idGrupoClase";
+        $sql = "DELETE FROM grupoclase WHERE IdGrupoClase = :idGrupoClase";
         $values = array(':idGrupoClase' => $idGrupoClase);
         $results = $dataSource->executeInsertUpdateDelete($sql, $values);
         return $results;

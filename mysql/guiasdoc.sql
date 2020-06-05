@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.1
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 26-04-2020 a las 13:43:23
--- Versión del servidor: 10.4.8-MariaDB
--- Versión de PHP: 7.3.10
+-- Servidor: localhost
+-- Tiempo de generación: 31-05-2020 a las 11:35:15
+-- Versión del servidor: 10.3.17-MariaDB-0+deb10u1
+-- Versión de PHP: 7.3.9-1~deb10u1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -14,7 +14,7 @@ SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTSa=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
@@ -27,15 +27,33 @@ USE `guiasdoc`;
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `administrador`
+--
+
+CREATE TABLE `administrador` (
+  `Email` varchar(50) NOT NULL,
+  `Nombre` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `administrador`
+--
+
+INSERT INTO `administrador` (`Email`, `Nombre`) VALUES
+('admin1@ucm.es', 'admin1');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `asignatura`
 --
 
 CREATE TABLE `asignatura` (
   `IdAsignatura` int(6) NOT NULL,
-  `NombreAsignatura` varchar(50) NOT NULL,
+  `NombreAsignatura` varchar(100) NOT NULL,
   `Curso` int(1) NOT NULL,
   `Semestre` int(1) NOT NULL,
-  `NombreAsignaturaIngles` varchar(50) DEFAULT NULL,
+  `NombreAsignaturaIngles` varchar(100) DEFAULT NULL,
   `Creditos` float NOT NULL,
   `Coordinadores` varchar(50) NOT NULL,
   `IdMateria` int(6) NOT NULL
@@ -46,14 +64,32 @@ CREATE TABLE `asignatura` (
 --
 
 INSERT INTO `asignatura` (`IdAsignatura`, `NombreAsignatura`, `Curso`, `Semestre`, `NombreAsignaturaIngles`, `Creditos`, `Coordinadores`, `IdMateria`) VALUES
-(804560, 'Física I', 1, 1, 'Physics I', 9, 'rafahern@ucm.es', 60087611),
-(804561, 'Física II', 1, 1, 'Physics II', 9, 'coordinadorF2@ucm.es', 60087611),
-(804562, 'Cálculo', 1, 1, 'Calculation', 9, 'mjrplaza@fis.ucm.es', 60087613),
-(804563, 'Álgebra', 1, 2, 'Algebra', 9, 'magflechoso@ucm.es', 60087613),
-(804564, 'Ampliación de Matemáticas', 1, 2, 'Mathematics expansion', 6, 'coordinadorAM@ucm.es', 60087613),
-(804566, 'Informática', 1, 1, 'Computing', 6, 'jgarcia@ucm.es', 60087612),
-(804567, 'Circuitos Digitales', 1, 1, 'Digital circuits', 6, 'jluimana@ucm.es', 60087612),
-(804575, 'Análisis de Circuitos', 1, 2, 'rt', 6, 'esas@ucm.es', 60087611);
+(800490, 'Fundamentos de física', 1, 1, 'Physics fundamentals I', 9, 'cdiazque@ucm.es', 80811),
+(800491, 'Fundamentos de física II', 1, 2, 'Physics fundamentals II', 9, 'acasmor@fis.ucm.es', 80811),
+(800492, 'Matemáticas', 1, 1, 'Mathematics', 9, 'jusanz@ucm.es', 80812),
+(800493, 'Cálculo', 1, 2, 'Calculus', 7.5, 'lsntnfp@ucm.es', 80812),
+(800494, 'Álgebra', 1, 2, 'Algebra', 7.5, 'p.tempesta@fis.ucm.es', 80812),
+(800495, 'Química', 1, 1, 'Chemistry', 6, 'iredondo@quim.ucm.es', 80813),
+(800496, 'Laboratorio de computación científica', 1, 1, 'Scientific computer laboratory', 6, 'mguijarro@ucm.es', 80814),
+(800497, 'Laboratorio de física I', 1, 2, 'Physics laboratory I', 6, 'jlcontreras@fis.ucm.es', 80811),
+(804500, 'Física I', 1, 1, NULL, 6, 'jdelrio@ucm.es', 88711),
+(804501, 'Física II', 1, 2, NULL, 6, 'lsanchez@fis.ucm.es', 88711),
+(804502, 'Quimica I', 1, 1, NULL, 6, 'sgmartin@quim.ucm.es', 88712),
+(804503, 'Química II', 1, 2, NULL, 6, 'sfilippo@ucm.es', 88712),
+(804505, 'Matemáticas I', 1, 1, NULL, 6, 'fybruno@ucm.es', 88713),
+(804506, 'Matemáticas II', 1, 2, NULL, 6, 'a.malyshev@fis.ucm.es', 88713),
+(804507, 'Métodos informaticos para la ingeniería', 1, 2, NULL, 6, 'faccion@ucm.es', 88715),
+(804510, 'Introducción a la ingeniería de materiales', 1, 1, NULL, 6, 'mlblazquez@quim.ucm.es', 88721),
+(804511, 'Diagramas y transformaciones de fases', 1, 2, NULL, 6, 'gsalazar@quim.ucm.es', 88721),
+(804543, 'Biología', 1, 1, NULL, 6, 'mjfeito@ucm.es', 88714),
+(804560, '## Física I', 1, 1, 'Physics I', 9, 'rafahern@ucm.es', 89011),
+(804561, 'Física II', 1, 1, 'Physics II', 9, 'coordinadorF2@ucm.es', 89011),
+(804562, 'Cálculo', 1, 1, 'Calculation', 9, 'mjrplaza@fis.ucm.es', 89013),
+(804563, 'Álgebra', 1, 2, 'Algebra', 9, 'magflechoso@ucm.es', 89013),
+(804564, 'Ampliación de Matemáticas', 1, 2, 'Mathematics expansion', 6, 'coordinadorAM@ucm.es', 89013),
+(804566, 'Informática', 1, 1, 'Computing', 6, 'jgarcia@ucm.es', 89012),
+(804567, 'Circuitos Digitales', 1, 1, 'Digital circuits', 6, 'jluimana@ucm.es', 89012),
+(804575, 'Análisis de Circuitos', 1, 2, 'rt', 6, 'esas@ucm.es', 89011);
 
 -- --------------------------------------------------------
 
@@ -133,6 +169,7 @@ CREATE TABLE `configuracion` (
   `Metodologia` int(1) NOT NULL,
   `CitasBibliograficas` int(1) NOT NULL,
   `RecursosInternet` int(1) NOT NULL,
+  `GrupoLaboratorio` int(1) NOT NULL,
   `RealizacionExamenes` int(1) NOT NULL,
   `CalificacionFinal` int(1) NOT NULL,
   `RealizacionActividades` int(1) NOT NULL,
@@ -144,15 +181,15 @@ CREATE TABLE `configuracion` (
 -- Volcado de datos para la tabla `configuracion`
 --
 
-INSERT INTO `configuracion` (`IdConfiguracion`, `ConocimientosPrevios`, `BreveDescripcion`, `ProgramaDetallado`, `ComGenerales`, `ComEspecificas`, `ComBasicas`, `ResultadosAprendizaje`, `Metodologia`, `CitasBibliograficas`, `RecursosInternet`,  `RealizacionExamenes`, `CalificacionFinal`, `RealizacionActividades`, `RealizacionLaboratorio`, `IdAsignatura`) VALUES
-(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 804564),
-(2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 804566),
-(3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 804562),
-(4, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 804560),
-(5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 804567),
-(6, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 804561),
-(7, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 804563),
-(8, 0, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 804575);
+INSERT INTO `configuracion` (`IdConfiguracion`, `ConocimientosPrevios`, `BreveDescripcion`, `ProgramaDetallado`, `ComGenerales`, `ComEspecificas`, `ComBasicas`, `ResultadosAprendizaje`, `Metodologia`, `CitasBibliograficas`, `RecursosInternet`, `GrupoLaboratorio`, `RealizacionExamenes`, `CalificacionFinal`, `RealizacionActividades`, `RealizacionLaboratorio`, `IdAsignatura`) VALUES
+(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 804564),
+(2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 804566),
+(3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 804562),
+(4, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 804560),
+(5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 804567),
+(6, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 804561),
+(7, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 804563),
+(8, 0, 1, 1, 1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 804575);
 
 -- --------------------------------------------------------
 
@@ -197,7 +234,7 @@ INSERT INTO `evaluacion` (`IdEvaluacion`, `RealizacionExamenes`, `RealizacionExa
 --
 
 CREATE TABLE `grado` (
-  `CodigoGrado` int(6) NOT NULL,
+  `CodigoGrado` int(4) NOT NULL,
   `NombreGrado` varchar(50) NOT NULL,
   `HorasEcts` int(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -207,7 +244,9 @@ CREATE TABLE `grado` (
 --
 
 INSERT INTO `grado` (`CodigoGrado`, `NombreGrado`, `HorasEcts`) VALUES
-(600876, 'Ingeniería Electrónica de Comunicaciones', 26);
+(808, 'Grado en física', 26),
+(887, 'Grado en ingeniería de materiales', 26),
+(890, 'Ingeniería Electrónica de Comunicaciones', 26);
 
 -- --------------------------------------------------------
 
@@ -359,7 +398,25 @@ INSERT INTO `laboratorio` (`IdLaboratorio`, `Creditos`, `Presencial`, `IdAsignat
 (7, 1, 70, 804567),
 (8, 1.5, 70, 804561),
 (9, 0, 0, 804563),
-(10, 1, 70, 804575);
+(10, 1, 70, 804575),
+(11, 0, 0, 800490),
+(12, 0, 0, 800492),
+(13, 0, 0, 800495),
+(14, 5, 60, 800496),
+(15, 1, 9, 800491),
+(16, 0, 0, 800493),
+(17, 0, 0, 800494),
+(18, 0, 0, 800497),
+(19, 1, 15, 804500),
+(20, 0, 0, 804502),
+(21, 0, 0, 804505),
+(22, 1.5, 21, 804543),
+(23, 0, 0, 804510),
+(24, 1, 15, 804501),
+(25, 2, 14, 804503),
+(26, 0, 0, 804506),
+(27, 4, 56, 804507),
+(28, 1.5, 21, 804511);
 
 -- --------------------------------------------------------
 
@@ -368,31 +425,68 @@ INSERT INTO `laboratorio` (`IdLaboratorio`, `Creditos`, `Presencial`, `IdAsignat
 --
 
 CREATE TABLE `materia` (
-  `IdMateria` int(8) NOT NULL,
-  `NombreMateria` varchar(50) NOT NULL,
+  `IdMateria` int(6) NOT NULL,
+  `NombreMateria` varchar(100) NOT NULL,
+  `Caracter` varchar(50) NOT NULL,
   `CreditosMateria` float NOT NULL,
-  `IdModulo` int(6) NOT NULL
+  `IdModulo` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `materia`
 --
 
-INSERT INTO `materia` (`IdMateria`, `NombreMateria`, `CreditosMateria`, `IdModulo`) VALUES
-(60087611, 'Física', 24, 6008761),
-(60087612, 'Informática', 12, 6008761),
-(60087613, 'Matemáticas', 24, 6008761),
-(60087621, 'Fundamentos Físicos de la Electrónica', 6, 6008762),
-(60087622, 'Electromagnetismo', 13.5, 6008762),
-(60087623, 'Sistemas Lineales y Control', 13.5, 6008762),
-(60087624, 'Empresa', 6, 6008762),
-(60087631, 'Radiofrecuencia', 13.5, 6008763),
-(60087632, 'Electrónica', 28.5, 6008763),
-(60087641, 'Sistemas', 27, 6008764),
-(60087642, 'Redes', 19.5, 6008764),
-(60087651, 'Sistemas de Comunicación', 22.5, 6008765),
-(60087661, 'Créditos Optativos', 18, 6008766),
-(60087671, 'Trabajo Fin de Grado', 12, 6008767);
+INSERT INTO `materia` (`IdMateria`, `NombreMateria`, `Caracter`, `CreditosMateria`, `IdModulo`) VALUES
+(80811, 'Física', 'Obligatorio', 24, 8081),
+(80812, 'Matemáticas', 'Obligatorio', 24, 8081),
+(80813, 'Química', 'Obligatorio', 6, 8081),
+(80814, 'Informática', 'Obligatorio', 6, 8081),
+(80821, 'Física clásica', 'Obligatorio', 34.5, 8082),
+(80822, 'Física cuántica y estadística', 'Obligatorio', 30, 8082),
+(80823, 'Métodos matemáticos de la física', 'Obligatorio', 12, 8082),
+(80824, 'Laboratorio de física', 'Obligatorio', 13.5, 8082),
+(80831, 'Obligatoria de física fundamental', 'Obligatorio de itinerario', 30, 8083),
+(80832, 'Astrofísica y cosmología ', 'Optativo', 30, 8083),
+(80833, 'Estructura de la materia', 'Optativo', 30, 8083),
+(80834, 'Física teórica', 'Optativo', 30, 8083),
+(80841, 'Obligatoria de física aplicada', 'Obligatorio de itinerario', 30, 8084),
+(80842, 'Electrónica y procesos físicos', 'Optativo', 36, 8084),
+(80843, 'Física de materiales', 'Optativo', 24, 8084),
+(80844, 'Física de la atmósfera y de la tierra', 'Optativo', 30, 8084),
+(80851, 'Formación transversal', 'Optativo', 36, 8085),
+(80852, 'Prácticas', 'Optativo', 6, 8085),
+(80861, 'Trabajo fin de grado', 'Obligatorio', 6, 8086),
+(88711, 'Física', 'Formación básica', 19, 8871),
+(88712, 'Química', 'Formación básica', 12, 8871),
+(88713, 'Matemáticas', 'Formación básica', 17, 8871),
+(88714, 'Biología', 'Formación básica', 6, 8871),
+(88715, 'Informática', 'Formación básica', 6, 8871),
+(88721, 'Estructura, descripción y caracterización de los materiales', 'Obligatorio', 23, 8872),
+(88731, 'Comportamiento mecánico', 'Obligatorio', 18, 8873),
+(88732, 'Comportamiento electrónico, térmico, óptico y magnético', 'Obligatorio', 12, 8873),
+(88733, 'Ingeniería de superficies', 'Obligatorio', 6, 8873),
+(88734, 'Modelización y simulacion de materiales', 'Obligatorio', 5, 8873),
+(88735, 'Comportamiento químico y biológico', 'Obligatorio', 18, 8873),
+(88741, 'Materiales estructurales', 'Obligatorio', 32, 8874),
+(88742, 'Materiales funcionales', 'Obligatorio', 18, 8874),
+(88743, 'Obtencion, procesado y reciclado de materiales', 'Obligatorio', 18, 8873),
+(88751, 'Economia y gestión de proyectos', 'Obligatorio', 8, 8875),
+(88752, 'Asignaturas optativas', 'Optativo', 10, 8875),
+(88761, 'Trabajo fin de grado', 'Trabajo fin de carrera', 12, 8876),
+(89011, 'Física', 'Formación básica', 24, 8901),
+(89012, 'Informática', 'Formación básica', 12, 8901),
+(89013, 'Matemáticas', 'Formación básica', 24, 8901),
+(89021, 'Fundamentos Físicos de la Electrónica', 'Obligatorio', 6, 8902),
+(89022, 'Electromagnetismo', 'Obligatorio', 13.5, 8902),
+(89023, 'Sistemas Lineales y Control', 'Obligatorio', 13.5, 8902),
+(89024, 'Empresa', 'Obligatorio', 6, 8902),
+(89031, 'Radiofrecuencia', 'Obligatorio', 13.5, 8903),
+(89032, 'Electrónica', 'Obligatorio', 28.5, 8903),
+(89041, 'Sistemas', 'Obligatorio', 27, 8904),
+(89042, 'Redes', 'Obligatorio', 19.5, 8904),
+(89051, 'Sistemas de Comunicación', 'Obligatorio', 22.5, 8905),
+(89061, 'Créditos Optativos', 'Optativo', 18, 8906),
+(89071, 'Trabajo Fin de Grado', 'Trabajo fin de carrera', 12, 8907);
 
 -- --------------------------------------------------------
 
@@ -443,8 +537,8 @@ INSERT INTO `modasignatura` (`IdModAsignatura`, `FechaMod`, `EmailMod`, `IdAsign
 (804561, '2020-03-31 00:00:00', 'jusanz02@ucm.es', 804561),
 (804562, '2020-03-31 00:00:00', 'mjrplaza@fis.ucm.es', 804562),
 (804563, '2020-03-31 00:00:00', 'magflechoso@ucm.es', 804563),
-(804564, '2020-04-26 13:34:48', 'coordinadorAM@ucm.es', 804564),
-(804566, '2020-04-26 13:42:15', 'igarcia@ucm.es', 804566),
+(804564, '2020-05-18 18:50:54', 'coordinadorAM@ucm.es', 804564),
+(804566, '2020-05-12 18:02:03', 'igarcia@ucm.es', 804566),
 (804567, '2020-03-31 00:00:00', 'jluimana@ucm.es', 804567),
 (804575, '2020-04-23 20:03:55', 'esas@ucm.es', 804575);
 
@@ -460,13 +554,6 @@ CREATE TABLE `modbibliografia` (
   `RecursosInternet` text NOT NULL,
   `IdModAsignatura` int(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `modbibliografia`
---
-
-INSERT INTO `modbibliografia` (`IdBibliografia`, `CitasBibliograficas`, `RecursosInternet`, `IdModAsignatura`) VALUES
-(8, 'Prueba 2', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.', 804564);
 
 -- --------------------------------------------------------
 
@@ -486,13 +573,6 @@ CREATE TABLE `modcompetenciaasignatura` (
   `ResultadosAprendizajei` text NOT NULL,
   `IdModAsignatura` int(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `modcompetenciaasignatura`
---
-
-INSERT INTO `modcompetenciaasignatura` (`IdCompetencia`, `Generales`, `Generalesi`, `Especificas`, `Especificasi`, `BasicasYTransversales`, `BasicasYTransversalesi`, `ResultadosAprendizaje`, `ResultadosAprendizajei`, `IdModAsignatura`) VALUES
-(5, 'Prueba 2', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.', 804564);
 
 -- --------------------------------------------------------
 
@@ -516,13 +596,6 @@ CREATE TABLE `modevaluacion` (
   `IdModAsignatura` int(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Volcado de datos para la tabla `modevaluacion`
---
-
-INSERT INTO `modevaluacion` (`IdEvaluacion`, `RealizacionExamenes`, `RealizacionExamenesi`, `PesoExamenes`, `CalificacionFinal`, `CalificacionFinali`, `RealizacionActividades`, `RealizacionActividadesi`, `PesoActividades`, `RealizacionLaboratorio`, `RealizacionLaboratorioi`, `PesoLaboratorio`, `IdModAsignatura`) VALUES
-(8, 'Prueba 2', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.', 80, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.', 20, '', '', 0, 804564);
-
 -- --------------------------------------------------------
 
 --
@@ -536,13 +609,6 @@ CREATE TABLE `modgrupoclase` (
   `IdModAsignatura` int(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Volcado de datos para la tabla `modgrupoclase`
---
-
-INSERT INTO `modgrupoclase` (`IdGrupoClase`, `Letra`, `Idioma`, `IdModAsignatura`) VALUES
-(9, 'A', 'Ingles', 804564);
-
 -- --------------------------------------------------------
 
 --
@@ -553,13 +619,6 @@ CREATE TABLE `modgrupoclaseprofesor` (
   `EmailProfesor` varchar(50) CHARACTER SET utf8mb4 NOT NULL,
   `IdGrupoClase` int(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Volcado de datos para la tabla `modgrupoclaseprofesor`
---
-
-INSERT INTO `modgrupoclaseprofesor` (`EmailProfesor`, `IdGrupoClase`) VALUES
-('coordinadorAM@ucm.es', 9);
 
 -- --------------------------------------------------------
 
@@ -574,13 +633,6 @@ CREATE TABLE `modgrupolaboratorio` (
   `IdModAsignatura` int(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Volcado de datos para la tabla `modgrupolaboratorio`
---
-
-INSERT INTO `modgrupolaboratorio` (`IdGrupoLab`, `Letra`, `Idioma`, `IdModAsignatura`) VALUES
-(5, 'M12', 'Español', 804566);
-
 -- --------------------------------------------------------
 
 --
@@ -591,13 +643,6 @@ CREATE TABLE `modgrupolaboratorioprofesor` (
   `IdGrupoLab` int(6) NOT NULL,
   `EmailProfesor` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `modgrupolaboratorioprofesor`
---
-
-INSERT INTO `modgrupolaboratorioprofesor` (`IdGrupoLab`, `EmailProfesor`) VALUES
-(5, 'virginia@fdi.ucm.es');
 
 -- --------------------------------------------------------
 
@@ -614,13 +659,6 @@ CREATE TABLE `modhorarioclase` (
   `IdGrupoClase` int(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Volcado de datos para la tabla `modhorarioclase`
---
-
-INSERT INTO `modhorarioclase` (`IdHorarioClase`, `Aula`, `Dia`, `HoraInicio`, `HoraFin`, `IdGrupoClase`) VALUES
-(6, '1', 'L', '09:00', '12:00', 9);
-
 -- --------------------------------------------------------
 
 --
@@ -636,13 +674,6 @@ CREATE TABLE `modhorariolaboratorio` (
   `IdGrupoLab` int(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Volcado de datos para la tabla `modhorariolaboratorio`
---
-
-INSERT INTO `modhorariolaboratorio` (`IdHorarioLab`, `Laboratorio`, `Dia`, `HoraInicio`, `HoraFin`, `IdGrupoLab`) VALUES
-(3, 'Aula de informatica (15)', 'L', '09:00', '11:00', 5);
-
 -- --------------------------------------------------------
 
 --
@@ -655,13 +686,6 @@ CREATE TABLE `modmetodologia` (
   `Metodologiai` text NOT NULL,
   `IdModAsignatura` int(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `modmetodologia`
---
-
-INSERT INTO `modmetodologia` (`IdMetodologia`, `Metodologia`, `Metodologiai`, `IdModAsignatura`) VALUES
-(5, 'Prueba 2', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.', 804564);
 
 -- --------------------------------------------------------
 
@@ -680,13 +704,6 @@ CREATE TABLE `modprogramaasignatura` (
   `IdModAsignatura` int(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Volcado de datos para la tabla `modprogramaasignatura`
---
-
-INSERT INTO `modprogramaasignatura` (`IdPrograma`, `ConocimientosPrevios`, `ConocimientosPreviosi`, `BreveDescripcion`, `BreveDescripcioni`, `ProgramaDetallado`, `ProgramaDetalladoi`, `IdModAsignatura`) VALUES
-(8, 'Prueba 2', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.', 804564);
-
 -- --------------------------------------------------------
 
 --
@@ -694,24 +711,36 @@ INSERT INTO `modprogramaasignatura` (`IdPrograma`, `ConocimientosPrevios`, `Cono
 --
 
 CREATE TABLE `modulo` (
-  `IdModulo` int(7) NOT NULL,
-  `NombreModulo` varchar(50) NOT NULL,
-  `Caracter` varchar(50) NOT NULL,
-  `CodigoGrado` int(6) NOT NULL
+  `IdModulo` int(5) NOT NULL,
+  `NombreModulo` varchar(100) NOT NULL,
+  `CreditosModulo` float NOT NULL,
+  `CodigoGrado` int(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `modulo`
 --
 
-INSERT INTO `modulo` (`IdModulo`, `NombreModulo`, `Caracter`, `CodigoGrado`) VALUES
-(6008761, 'Formación Básica', 'Formación Básica', 600876),
-(6008762, 'Fundamental', 'Obligatorio', 600876),
-(6008763, 'Electrónica y Electromagnetismo', 'Obligatorio', 600876),
-(6008764, 'Sistemas y Redes', 'Obligatorio', 600876),
-(6008765, 'Comunicaciones', 'Obligatorio', 600876),
-(6008766, 'Avanzado', 'Optativo', 600876),
-(6008767, 'Trabajo Fin de Grado', 'Trabajo Fin de Carrera', 600876);
+INSERT INTO `modulo` (`IdModulo`, `NombreModulo`, `CreditosModulo`, `CodigoGrado`) VALUES
+(8081, 'Formacion básica obligatoria', 60, 808),
+(8082, 'Formación general', 90, 808),
+(8083, 'Física fundamental', 30, 808),
+(8084, 'Física aplicada', 30, 808),
+(8085, 'Transversal', 36, 808),
+(8086, 'Trabajo fin de grado', 6, 808),
+(8871, 'Formación básica', 60, 887),
+(8872, 'Fundamentos de la ciencia de materiales', 23, 887),
+(8873, 'Comportamiento de materiales', 59, 887),
+(8874, 'Ciencia y tecnología de materiales', 68, 887),
+(8875, 'Avanzado', 18, 887),
+(8876, 'Trabajo fin de grado', 12, 887),
+(8901, 'Formación Básica', 60, 890),
+(8902, 'Fundamental', 39, 890),
+(8903, 'Electrónica y Electromagnetismo', 42, 890),
+(8904, 'Sistemas y Redes', 46.5, 890),
+(8905, 'Comunicaciones', 22.5, 890),
+(8906, 'Avanzado', 18, 890),
+(8907, 'Trabajo Fin de Grado', 12, 890);
 
 -- --------------------------------------------------------
 
@@ -749,7 +778,10 @@ INSERT INTO `permisos` (`IdPermiso`, `PermisoPrograma`, `PermisoCompetencias`, `
 (14, 7, 7, 7, 7, 7, 7, 7, 804561, 'coordinadorF2@ucm.es'),
 (15, 4, 4, 4, 4, 7, 4, 7, 804561, 'jusanz02@ucm.es'),
 (16, 7, 7, 7, 7, 7, 7, 7, 804563, 'magflechoso@ucm.es'),
-(17, 7, 7, 7, 7, 7, 7, 7, 804575, 'esas@ucm.es');
+(17, 7, 7, 7, 7, 7, 7, 7, 804575, 'esas@ucm.es'),
+(19, 4, 4, 4, 6, 0, 4, 6, 804562, 'coordinadorAM@ucm.es'),
+(20, 4, 4, 4, 6, 0, 4, 6, 804563, 'coordinadorAM@ucm.es'),
+(21, 4, 4, 4, 6, 6, 4, 6, 804566, 'virginia@fdi.ucm.es');
 
 -- --------------------------------------------------------
 
@@ -776,7 +808,25 @@ INSERT INTO `problema` (`IdProblema`, `Creditos`, `Presencial`, `IdAsignatura`) 
 (8, 2.5, 40, 804561),
 (9, 3, 40, 804563),
 (10, 2, 40, 804564),
-(11, 1, 40, 804575);
+(11, 1, 40, 804575),
+(20, 4.5, 45, 800490),
+(21, 5, 50, 800492),
+(22, 3, 30, 800495),
+(23, 0, 0, 800496),
+(24, 4, 40, 800491),
+(25, 3, 30, 800493),
+(26, 3, 30, 800494),
+(27, 5, 55, 800497),
+(28, 1.5, 15, 804500),
+(29, 1.5, 15, 804502),
+(30, 3, 30, 804505),
+(31, 1, 10, 804543),
+(32, 1, 10, 804510),
+(33, 1.5, 15, 804501),
+(34, 1.5, 15, 804503),
+(35, 3, 30, 804506),
+(36, 0, 0, 804507),
+(37, 1, 10, 804511);
 
 -- --------------------------------------------------------
 
@@ -879,7 +929,25 @@ INSERT INTO `teorico` (`IdTeorico`, `Creditos`, `Presencial`, `IdAsignatura`) VA
 (7, 5, 33, 804561),
 (8, 6, 33, 804563),
 (9, 4, 33, 804564),
-(10, 4, 33, 804575);
+(10, 4, 33, 804575),
+(11, 4.5, 37.5, 800490),
+(12, 4, 33.5, 800492),
+(13, 3, 25, 800495),
+(14, 1, 10, 800496),
+(15, 4, 33.5, 800491),
+(16, 4.5, 37.5, 800493),
+(17, 4.5, 37.5, 800494),
+(18, 1, 2, 800497),
+(19, 3.5, 35, 804500),
+(20, 1.5, 15, 804502),
+(21, 3, 30, 804505),
+(22, 3.5, 35, 804543),
+(23, 5, 50, 804510),
+(24, 3.5, 35, 804501),
+(25, 2.5, 35, 804503),
+(26, 3, 30, 804506),
+(27, 2, 20, 804507),
+(28, 3.5, 35, 804511);
 
 -- --------------------------------------------------------
 
@@ -897,6 +965,7 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`Email`, `Password`) VALUES
+('admin1@ucm.es', 'admin1'),
 ('avioque@ucm.es', 'avioque@ucm.es'),
 ('beperez03@ucm.es', 'beperez03'),
 ('coordinadorAM@ucm.es', 'coordinadorAM'),
@@ -953,6 +1022,12 @@ INSERT INTO `verifica` (`IdVerifica`, `MaximoExamenes`, `MinimoExamenes`, `Maxim
 --
 -- Índices para tablas volcadas
 --
+
+--
+-- Indices de la tabla `administrador`
+--
+ALTER TABLE `administrador`
+  ADD PRIMARY KEY (`Email`);
 
 --
 -- Indices de la tabla `asignatura`
@@ -1257,7 +1332,7 @@ ALTER TABLE `horariolaboratorio`
 -- AUTO_INCREMENT de la tabla `laboratorio`
 --
 ALTER TABLE `laboratorio`
-  MODIFY `IdLaboratorio` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `IdLaboratorio` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT de la tabla `metodologia`
@@ -1269,67 +1344,67 @@ ALTER TABLE `metodologia`
 -- AUTO_INCREMENT de la tabla `modbibliografia`
 --
 ALTER TABLE `modbibliografia`
-  MODIFY `IdBibliografia` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `IdBibliografia` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `modcompetenciaasignatura`
 --
 ALTER TABLE `modcompetenciaasignatura`
-  MODIFY `IdCompetencia` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `IdCompetencia` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `modevaluacion`
 --
 ALTER TABLE `modevaluacion`
-  MODIFY `IdEvaluacion` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `IdEvaluacion` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `modgrupoclase`
 --
 ALTER TABLE `modgrupoclase`
-  MODIFY `IdGrupoClase` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `IdGrupoClase` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `modgrupolaboratorio`
 --
 ALTER TABLE `modgrupolaboratorio`
-  MODIFY `IdGrupoLab` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `IdGrupoLab` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `modhorarioclase`
 --
 ALTER TABLE `modhorarioclase`
-  MODIFY `IdHorarioClase` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `IdHorarioClase` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `modhorariolaboratorio`
 --
 ALTER TABLE `modhorariolaboratorio`
-  MODIFY `IdHorarioLab` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `IdHorarioLab` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `modmetodologia`
 --
 ALTER TABLE `modmetodologia`
-  MODIFY `IdMetodologia` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `IdMetodologia` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `modprogramaasignatura`
 --
 ALTER TABLE `modprogramaasignatura`
-  MODIFY `IdPrograma` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `IdPrograma` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `permisos`
 --
 ALTER TABLE `permisos`
-  MODIFY `IdPermiso` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `IdPermiso` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de la tabla `problema`
 --
 ALTER TABLE `problema`
-  MODIFY `IdProblema` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `IdProblema` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT de la tabla `programaasignatura`
@@ -1341,7 +1416,7 @@ ALTER TABLE `programaasignatura`
 -- AUTO_INCREMENT de la tabla `teorico`
 --
 ALTER TABLE `teorico`
-  MODIFY `IdTeorico` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `IdTeorico` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT de la tabla `verifica`

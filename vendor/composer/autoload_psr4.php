@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'es\\ucm\\' => array($baseDir . '/TFG'),
     'Symfony\\Component\\Process\\' => array($vendorDir . '/symfony/process'),
     'Svg\\' => array($vendorDir . '/phenx/php-svg-lib/src/Svg'),
     'FontLib\\' => array($vendorDir . '/phenx/php-font-lib/src/FontLib'),

@@ -14,4 +14,6 @@ interface SAPermisos{
 
     public static function findPermisosPorProfesor($emailProfesor);
 
+    public static function findPermisosPorProfesorYAsignatura($emailProfesor, $idAsignatura);
+
 }

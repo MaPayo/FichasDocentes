@@ -8,7 +8,7 @@ class DAOProgramaAsignaturaImplements implements DAOProgramaAsignatura{
     public static function findProgramaAsignatura($idAsignatura){
         $singletonDataSource=new SingletonDataSource();
         $dataSource=$singletonDataSource->getInstance();
-        $sql="SELECT * FROM programaAsignatura WHERE IdAsignatura = :idAsignatura";
+        $sql="SELECT * FROM programaasignatura WHERE IdAsignatura = :idAsignatura";
         $values=array(':idAsignatura' => $idAsignatura);
         $results=$dataSource->executeQuery($sql,$values);
         return $results;
@@ -18,7 +18,7 @@ class DAOProgramaAsignaturaImplements implements DAOProgramaAsignatura{
     public static function createProgramaAsignatura($programaAsignatura){
         $singletonDataSource=new SingletonDataSource();
         $dataSource=$singletonDataSource->getInstance();
-        $sql="INSERT INTO programaAsignatura (IdPrograma,ConocimientosPrevios,BreveDescripcion,ProgramaDetallado,ConocimientosPreviosI,BreveDescripcionI,ProgramaDetalladoI,IdAsignatura) 
+        $sql="INSERT INTO programaasignatura (IdPrograma,ConocimientosPrevios,BreveDescripcion,ProgramaDetallado,ConocimientosPreviosI,BreveDescripcionI,ProgramaDetalladoI,IdAsignatura) 
         VALUES (:idPrograma, :conocimientosPrevios, :breveDescripcion, :programaDetallado, :conocimientosPreviosI, :breveDescripcionI, :programaDetalladoI, :idAsignatura)";
         $values=array(':idPrograma' => $programaAsignatura->getIdPrograma(),
             ':conocimientosPrevios' => $programaAsignatura->getConocimientosPrevios(),
@@ -36,7 +36,7 @@ class DAOProgramaAsignaturaImplements implements DAOProgramaAsignatura{
     public static function updateProgramaAsignatura($programaAsignatura){
         $singletonDataSource=new SingletonDataSource();
         $dataSource=$singletonDataSource->getInstance();
-        $sql="UPDATE programaAsignatura SET IdPrograma = :idPrograma, ConocimientosPrevios = :conocimientosPrevios,BreveDescripcion = :breveDescripcion,ProgramaDetallado = :programaDetallado,ConocimientosPreviosI = :conocimientosPreviosI,BreveDescripcionI = :breveDescripcionI,ProgramaDetalladoI = :programaDetalladoI,IdAsignatura = :idAsignatura WHERE IdPrograma = :idPrograma";
+        $sql="UPDATE programaasignatura SET IdPrograma = :idPrograma, ConocimientosPrevios = :conocimientosPrevios,BreveDescripcion = :breveDescripcion,ProgramaDetallado = :programaDetallado,ConocimientosPreviosI = :conocimientosPreviosI,BreveDescripcionI = :breveDescripcionI,ProgramaDetalladoI = :programaDetalladoI,IdAsignatura = :idAsignatura WHERE IdPrograma = :idPrograma";
         $values=array(':idPrograma' => $programaAsignatura->getIdPrograma(),
             ':conocimientosPrevios' => $programaAsignatura->getConocimientosPrevios(),
             ':breveDescripcion' => $programaAsignatura->getBreveDescripcion(),
@@ -52,7 +52,7 @@ class DAOProgramaAsignaturaImplements implements DAOProgramaAsignatura{
     public static function deleteProgramaAsignatura($idAsignatura){
         $singletonDataSource=new SingletonDataSource();
         $dataSource=$singletonDataSource->getInstance();
-        $sql="DELETE FROM programaAsignatura WHERE IdAsignatura = :idAsignatura";
+        $sql="DELETE FROM programaasignatura WHERE IdAsignatura = :idAsignatura";
         $values=array(':idAsignatura' => $idAsignatura);
         $results=$dataSource->executeInsertUpdateDelete($sql,$values);
         return $results;

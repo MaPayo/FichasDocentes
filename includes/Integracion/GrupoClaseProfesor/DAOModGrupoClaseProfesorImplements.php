@@ -12,7 +12,7 @@ class DAOModGrupoClaseProfesorImplements implements DAOModGrupoClaseProfesor
     {
         $singletonDataSource = new SingletonDataSource();
         $dataSource = $singletonDataSource->getInstance();
-        $sql = "SELECT * FROM modGrupoClaseProfesor WHERE IdGrupoClase = :idGrupoClase";
+        $sql = "SELECT * FROM modgrupoclaseprofesor WHERE IdGrupoClase = :idGrupoClase";
         $values = array(':idGrupoClase' => $idGrupoClase);
         $results = $dataSource->executeQuery($sql, $values);
         return $results;
@@ -22,7 +22,7 @@ class DAOModGrupoClaseProfesorImplements implements DAOModGrupoClaseProfesor
     {
         $singletonDataSource = new SingletonDataSource();
         $dataSource = $singletonDataSource->getInstance();
-        $sql = "SELECT * FROM modGrupoClaseProfesor WHERE IdGrupoClase = :idGrupoClase AND EmailProfesor = :emailProfesor";
+        $sql = "SELECT * FROM modgrupoclaseprofesor WHERE IdGrupoClase = :idGrupoClase AND EmailProfesor = :emailProfesor";
         $values = array(
             ':idGrupoClase' => $idGrupoClase,
             ':emailProfesor' => $emailProfesor
@@ -35,7 +35,7 @@ class DAOModGrupoClaseProfesorImplements implements DAOModGrupoClaseProfesor
     {
         $singletonDataSource = new SingletonDataSource();
         $dataSource = $singletonDataSource->getInstance();
-        $sql = "INSERT INTO modGrupoClaseProfesor (IdGrupoClase,EmailProfesor) 
+        $sql = "INSERT INTO modgrupoclaseprofesor (IdGrupoClase,EmailProfesor) 
         VALUES (:idGrupoClase, :emailProfesor)";
         $values = array(
             ':idGrupoClase' => $modGrupoClaseProfesor->getIdGrupoClase(),
@@ -49,7 +49,7 @@ class DAOModGrupoClaseProfesorImplements implements DAOModGrupoClaseProfesor
     {
         $singletonDataSource = new SingletonDataSource();
         $dataSource = $singletonDataSource->getInstance();
-        $sql = "UPDATE modGrupoClaseProfesor SET IdGrupoClase = :idGrupoClase, EmailProfesor = :emailProfesor WHERE IdGrupoClase = :idGrupoClase AND EmailProfesor = :emailProfesor";
+        $sql = "UPDATE modgrupoclaseprofesor SET IdGrupoClase = :idGrupoClase, EmailProfesor = :emailProfesor WHERE IdGrupoClase = :idGrupoClase AND EmailProfesor = :emailProfesor";
         $values = array(
             ':idGrupoClase' => $modGrupoClaseProfesor->getIdGrupoClase(),
             ':emailProfesor' => $modGrupoClaseProfesor->getEmailProfesor()
@@ -62,7 +62,7 @@ class DAOModGrupoClaseProfesorImplements implements DAOModGrupoClaseProfesor
     {
         $singletonDataSource = new SingletonDataSource();
         $dataSource = $singletonDataSource->getInstance();
-        $sql = "DELETE FROM modGrupoClaseProfesor WHERE IdGrupoClase = :idGrupoClase AND EmailProfesor = :emailProfesor";
+        $sql = "DELETE FROM modgrupoclaseprofesor WHERE IdGrupoClase = :idGrupoClase AND EmailProfesor = :emailProfesor";
         $values = array(
             ':idGrupoClase' => $idGrupoClase,
             ':emailProfesor' =>$emailProfesor

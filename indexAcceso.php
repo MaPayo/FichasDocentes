@@ -204,6 +204,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                         <?php if(strpos($asignatura->getData()->getCoordinadores(),$_SESSION['idUsuario'])!==false){?>
                                             <a class="nav-item nav-link" id="nav-coordinacion-tab" data-toggle="tab" href="#nav-coordinacion" role="tab" aria-controls="nav-coordinacion" aria-selected="false">Coordinación</a>
                                         <?php }?>
+                                        
                                     </nav>
 
                                     <div class="tab-content" id="nav-tabContent">
@@ -329,9 +330,15 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                             <div class="card">
                                                                 <div class="card-header" id="headingTwo">
                                                                     <h2 class="mb-0">
-                                                                        <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                                                            Conocimientos previos (Inglés)
-                                                                        </button>
+                                                                    <?php if($contextComparacion->getData()['conocimientosPreviosI'] && unserialize($_SESSION['permisos'][$asignatura->getData()->getIdAsignatura()])->getPermisoPrograma() >= 4){?>
+                                                                    <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseTwo">
+                                                                        Conocimientos previos (Inglés)
+                                                                    </button>
+                                                                    <?php } else{?>
+                                                                        <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseTwo">
+                                                                        Conocimientos previos (Inglés)
+                                                                    </button>
+                                                                    <?php } ?>
                                                                     </h2>
                                                                 </div>
                                                                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
@@ -343,9 +350,12 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                                 <h5 class="card-title">Borrador</h5>
                                                                                 <p class="card-text">
                                                                                     <?php
-                                                                                    if ($contextModPrograma->getEvent() === FIND_MODPROGRAMA_ASIGNATURA_OK) {
-                                                                                        echo $contextModPrograma->getData()->getConocimientosPreviosI();
-                                                                                    }
+                                                                                  if ($contextModPrograma->getEvent() === FIND_MODPROGRAMA_ASIGNATURA_OK) {
+                                                                                    if($contextComparacion->getData()['conocimientosPreviosI'])
+                                                                                    echo '<b style="font-size: 18px">'.$contextModPrograma->getData()->getConocimientosPreviosI().'</b>';
+                                                                                    else
+                                                                                    echo $contextModPrograma->getData()->getConocimientosPreviosI();
+                                                                                }
                                                                                     ?>
                                                                                 </p>
                                                                             </div>
@@ -374,7 +384,9 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                         <div class="card">
                                                             <div class="card-header" id="headingThree">
                                                                 <h2 class="mb-0">
-                                                               <?php if($contextComparacion->getData()['BreveDescripcion'] && unserialize($_SESSION['permisos'][$asignatura->getData()->getIdAsignatura()])->getPermisoPrograma() >= 4){?>
+                                                                    
+                                                               <?php
+                                                               if($contextComparacion->getData()['BreveDescripcion'] && unserialize($_SESSION['permisos'][$asignatura->getData()->getIdAsignatura()])->getPermisoPrograma() >= 4){?>
                                                                     <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                                                                         Breve descripción
                                                                     </button>
@@ -425,9 +437,15 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                             <div class="card">
                                                                 <div class="card-header" id="headingFour">
                                                                     <h2 class="mb-0">
-                                                                        <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                                                                            Breve descripción (Inglés)
-                                                                        </button>
+                                                                    <?php if($contextComparacion->getData()['BreveDescripcionI'] && unserialize($_SESSION['permisos'][$asignatura->getData()->getIdAsignatura()])->getPermisoPrograma() >= 4){?>
+                                                                    <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                                                        Breve descripción (Inglés)
+                                                                    </button>
+                                                               <?php } else{?>
+                                                                <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                                                        Breve descripción (Inglés)
+                                                                    </button>
+                                                               <?php }?>
                                                                     </h2>
                                                                 </div>
                                                                 <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
@@ -438,9 +456,12 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                                 <h5 class="card-title">Borrador</h5>
                                                                                 <p class="card-text">
                                                                                     <?php
-                                                                                    if ($contextModPrograma->getEvent() === FIND_MODPROGRAMA_ASIGNATURA_OK) {
-                                                                                        echo $contextModPrograma->getData()->getBreveDescripcionI();
-                                                                                    }
+                                                                                  if ($contextModPrograma->getEvent() === FIND_MODPROGRAMA_ASIGNATURA_OK) {
+                                                                                      if($contextComparacion->getData()['BreveDescripcionI'])
+                                                                                      echo '<b style="font-size: 18px">'.$contextModPrograma->getData()->getBreveDescripcionI().'</b>';
+                                                                                      else
+                                                                                      echo $contextModPrograma->getData()->getBreveDescripcionI();
+                                                                                  }
                                                                                     ?>
                                                                                 </p>
                                                                             </div>
@@ -469,7 +490,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                             <div class="card-header" id="headingFive">
                                                                 <h2 class="mb-0">
                                                                 <?php if($contextComparacion->getData()['ProgramaDetallado'] && unserialize($_SESSION['permisos'][$asignatura->getData()->getIdAsignatura()])->getPermisoPrograma() >= 4){?>
-                                                                    <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                                    <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
                                                                         Programa detallado
                                                                     </button>
                                                                 <?php } else {?>
@@ -519,9 +540,15 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                             <div class="card">
                                                                 <div class="card-header" id="headingSix">
                                                                     <h2 class="mb-0">
-                                                                        <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
-                                                                            Programa detallado (Inglés)
-                                                                        </button>
+                                                                    <?php if($contextComparacion->getData()['ProgramaDetalladoI'] && unserialize($_SESSION['permisos'][$asignatura->getData()->getIdAsignatura()])->getPermisoPrograma() >= 4){?>
+                                                                    <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseSix" aria-expanded="true" aria-controls="collapseSix">
+                                                                        Programa detallado (Inglés)
+                                                                    </button>
+                                                                <?php } else {?>
+                                                                    <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                                                                        Programa detallado (Inglés)
+                                                                    </button>
+                                                                <?php }?>
                                                                     </h2>
                                                                 </div>
                                                                 <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionExample">
@@ -531,11 +558,14 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                             <div class="card-body">
                                                                                 <h5 class="card-title">Borrador</h5>
                                                                                 <p class="card-text">
-                                                                                    <?php
-                                                                                    if ($contextModPrograma->getEvent() === FIND_MODPROGRAMA_ASIGNATURA_OK) {
-                                                                                        echo $contextModPrograma->getData()->getProgramaDetalladoI();
-                                                                                    }
-                                                                                    ?>
+                                                                                <?php
+                                                                                if ($contextModPrograma->getEvent() === FIND_MODPROGRAMA_ASIGNATURA_OK) {
+                                                                                    if($contextComparacion->getData()['ProgramaDetalladoI'])
+                                                                                        echo '<b style="font-size: 18px">'.$contextModPrograma->getData()->getProgramaDetalladoI().'</b>';
+                                                                                    else
+                                                                                    echo $contextModPrograma->getData()->getProgramaDetalladoI();
+                                                                                }
+                                                                                ?>
                                                                                 </p>
                                                                             </div>
                                                                         </div>
@@ -640,9 +670,15 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                             <div class="card">
                                                                 <div class="card-header" id="headingTwo">
                                                                     <h2 class="mb-0">
-                                                                        <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                                                            Generales (Inglés)
-                                                                        </button>
+                                                                    <?php if($contextComparacion->getData()['ComGeneralesI'] && unserialize($_SESSION['permisos'][$asignatura->getData()->getIdAsignatura()])->getPermisoCompetencias() >= 4){?>
+                                                                    <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                                                                        Generales (Inglés)
+                                                                    </button>
+                                                                <?php } else {?>
+                                                                    <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                                                                        Generales (Inglés)
+                                                                    </button>
+                                                                <?php }?>
                                                                     </h2>
                                                                 </div>
                                                                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
@@ -652,11 +688,14 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                             <div class="card-body">
                                                                                 <h5 class="card-title">Borrador</h5>
                                                                                 <p class="card-text">
-                                                                                    <?php
-                                                                                    if ($contextModCompetencias->getEvent() === FIND_MODCOMPETENCIAS_ASIGNATURA_OK) {
-                                                                                        echo $contextModCompetencias->getData()->getGeneralesI();
-                                                                                    }
-                                                                                    ?>
+                                                                                <?php
+                                                                                if ($contextModCompetencias->getEvent() === FIND_MODCOMPETENCIAS_ASIGNATURA_OK) {
+                                                                                     if($contextComparacion->getData()['ComGeneralesI'])
+                                                                                    echo '<b style="font-size: 18px">'.$contextModCompetencias->getData()->getGeneralesI().'</b>';
+                                                                                    else
+                                                                                    echo $contextModCompetencias->getData()->getGeneralesI();
+                                                                                }
+                                                                                ?>
                                                                                 </p>
                                                                             </div>
                                                                         </div>
@@ -685,7 +724,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                             <div class="card-header" id="headingThree">
                                                                 <h2 class="mb-0">
                                                                 <?php if($contextComparacion->getData()['ComEspecificas'] && unserialize($_SESSION['permisos'][$asignatura->getData()->getIdAsignatura()])->getPermisoCompetencias() >= 4){?>
-                                                                    <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                                    <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
                                                                         Específicas
                                                                     </button>
                                                                 <?php } else {?>
@@ -735,9 +774,15 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                             <div class="card">
                                                                 <div class="card-header" id="headingFour">
                                                                     <h2 class="mb-0">
-                                                                        <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                                                                            Específica (Inglés)
-                                                                        </button>
+                                                                    <?php if($contextComparacion->getData()['ComEspecificasI'] && unserialize($_SESSION['permisos'][$asignatura->getData()->getIdAsignatura()])->getPermisoCompetencias() >= 4){?>
+                                                                    <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+                                                                        Específicas (Inglés)
+                                                                    </button>
+                                                                <?php } else {?>
+                                                                    <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                                                        Específicas (Inglés)
+                                                                    </button>
+                                                                <?php } ?>
                                                                     </h2>
                                                                 </div>
                                                                 <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
@@ -747,11 +792,14 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                             <div class="card-body">
                                                                                 <h5 class="card-title">Borrador</h5>
                                                                                 <p class="card-text">
-                                                                                    <?php
-                                                                                    if ($contextModCompetencias->getEvent() === FIND_MODCOMPETENCIAS_ASIGNATURA_OK) {
-                                                                                        echo $contextModCompetencias->getData()->getEspecificasI();
-                                                                                    }
-                                                                                    ?>
+                                                                                <?php
+                                                                                if ($contextModCompetencias->getEvent() === FIND_MODCOMPETENCIAS_ASIGNATURA_OK) {
+                                                                                    if($contextComparacion->getData()['ComEspecificasI'])
+                                                                                    echo '<b style="font-size: 18px">'.$contextModCompetencias->getData()->getEspecificasI().'</b>';
+                                                                                    else
+                                                                                    echo $contextModCompetencias->getData()->getEspecificasI();
+                                                                                }
+                                                                                ?>
                                                                                 </p>
                                                                             </div>
                                                                         </div>
@@ -780,7 +828,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                             <div class="card-header" id="headingFive">
                                                                 <h2 class="mb-0">
                                                                 <?php if($contextComparacion->getData()['ComBasicas'] && unserialize($_SESSION['permisos'][$asignatura->getData()->getIdAsignatura()])->getPermisoCompetencias() >= 4){?>
-                                                                    <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                                    <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
                                                                         Básicas y transversales
                                                                     </button>
                                                                 <?php } else {?>
@@ -830,9 +878,15 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                             <div class="card">
                                                                 <div class="card-header" id="headingSix">
                                                                     <h2 class="mb-0">
-                                                                        <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
-                                                                            Básicas y transversales (Inglés)
-                                                                        </button>
+                                                                    <?php if($contextComparacion->getData()['ComBasicasI'] && unserialize($_SESSION['permisos'][$asignatura->getData()->getIdAsignatura()])->getPermisoCompetencias() >= 4){?>
+                                                                    <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseSix" aria-expanded="true" aria-controls="collapseSix">
+                                                                        Básicas y transversales(Inglés)
+                                                                    </button>
+                                                                <?php } else {?>
+                                                                    <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                                                                        Básicas y transversales (Inglés)
+                                                                    </button>
+                                                                <?php } ?>
                                                                     </h2>
                                                                 </div>
                                                                 <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionExample">
@@ -843,9 +897,12 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                                 <h5 class="card-title">Borrador</h5>
                                                                                 <p class="card-text">
                                                                                     <?php
-                                                                                    if ($contextModCompetencias->getEvent() === FIND_MODCOMPETENCIAS_ASIGNATURA_OK) {
-                                                                                        echo $contextModCompetencias->getData()->getBasicasYTransversalesI();
-                                                                                    }
+                                                                                   if ($contextModCompetencias->getEvent() === FIND_MODCOMPETENCIAS_ASIGNATURA_OK) {
+                                                                                    if($contextComparacion->getData()['ComBasicasI'])
+                                                                                    echo '<b style="font-size: 18px">'.$contextModCompetencias->getData()->getBasicasYTransversalesI().'</b>';
+                                                                                    else
+                                                                                    echo $contextModCompetencias->getData()->getBasicasYTransversalesI();
+                                                                                }
                                                                                     ?>
                                                                                 </p>
                                                                             </div>
@@ -875,7 +932,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                             <div class="card-header" id="headingSeven">
                                                                 <h2 class="mb-0">
                                                                 <?php if($contextComparacion->getData()['ResultadosAprendizaje'] && unserialize($_SESSION['permisos'][$asignatura->getData()->getIdAsignatura()])->getPermisoCompetencias() >= 4){?>
-                                                                    <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                                    <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="true" aria-controls="collapseSeven">
                                                                         Resultados de aprendizaje
                                                                     </button>
                                                                 <?php } else {?>
@@ -926,9 +983,16 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                             <div class="card">
                                                                 <div class="card-header" id="headingEight">
                                                                     <h2 class="mb-0">
-                                                                        <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
-                                                                            Resultados de aprendizaje (Inglés)
-                                                                        </button>
+                                                                    <?php if($contextComparacion->getData()['ResultadosAprendizajeI'] && unserialize($_SESSION['permisos'][$asignatura->getData()->getIdAsignatura()])->getPermisoCompetencias() >= 4){?>
+                                                                    <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseEight" aria-expanded="true" aria-controls="collapseEight">
+                                                                        Resultados de aprendizaje (Inglés)
+                                                                    </button>
+                                                                <?php } else {?>
+																
+                                                                    <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
+                                                                        Resultados de aprendizaje (Inglés)
+                                                                    </button>
+                                                                <?php } ?>
                                                                     </h2>
                                                                 </div>
                                                                 <div id="collapseEight" class="collapse" aria-labelledby="headingEight" data-parent="#accordionExample">
@@ -938,11 +1002,14 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                             <div class="card-body">
                                                                                 <h5 class="card-title">Borrador</h5>
                                                                                 <p class="card-text">
-                                                                                    <?php
-                                                                                    if ($contextModCompetencias->getEvent() === FIND_MODCOMPETENCIAS_ASIGNATURA_OK) {
-                                                                                        echo $contextModCompetencias->getData()->getResultadosAprendizajeI();
-                                                                                    }
-                                                                                    ?>
+                                                                                <?php
+                                                                                if ($contextModCompetencias->getEvent() === FIND_MODCOMPETENCIAS_ASIGNATURA_OK) {
+                                                                                    if($contextComparacion->getData()['ResultadosAprendizajeI'])
+                                                                                    echo '<b style="font-size: 18px">'.$contextModCompetencias->getData()->getResultadosAprendizajeI().'</b>';
+                                                                                    else
+                                                                                    echo $contextModCompetencias->getData()->getResultadosAprendizajeI();
+                                                                                }
+                                                                                ?>
                                                                                 </p>
                                                                             </div>
                                                                         </div>
@@ -1047,9 +1114,15 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                         <div class="card">
                                                             <div class="card-header" id="headingTwo">
                                                                 <h2 class="mb-0">
-                                                                    <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                                                <?php if($contextComparacion->getData()['MetodologiaI'] && unserialize($_SESSION['permisos'][$asignatura->getData()->getIdAsignatura()])->getPermisoMetodologia() >= 4){?>
+                                                                    <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
                                                                         Metodología (Inglés)
                                                                     </button>
+                                                                <?php } else {?>
+                                                                <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                                                                    Metodología (Inglés)
+                                                                </button>
+                                                                <?php } ?>
                                                                 </h2>
                                                             </div>
                                                             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
@@ -1059,11 +1132,14 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                         <div class="card-body">
                                                                             <h5 class="card-title">Borrador</h5>
                                                                             <p class="card-text">
-                                                                                <?php
-                                                                                if ($contextModMetodologia->getEvent() === FIND_MODMETODOLOGIA_OK) {
-                                                                                    echo $contextModMetodologia->getData()->getMetodologiaI();
-                                                                                }
-                                                                                ?>
+                                                                            <?php
+                                                                            if ($contextModMetodologia->getEvent() === FIND_MODMETODOLOGIA_OK) {
+                                                                                if($contextComparacion->getData()['MetodologiaI'])
+                                                                                echo '<b style="font-size: 18px">'.$contextModMetodoloa->getData()->getMetodologiaI().'</b>';
+                                                                                else
+                                                                                echo $contextModMetodologia->getData()->getMetodologiaI();
+                                                                            }
+                                                                            ?>
                                                                             </p>
                                                                         </div>
                                                                     </div>
@@ -1171,7 +1247,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                             <div class="card-header" id="headingTwo">
                                                                 <h2 class="mb-0">
                                                                 <?php if($contextComparacion->getData()['RecursosInternet'] && unserialize($_SESSION['permisos'][$asignatura->getData()->getIdAsignatura()])->getPermisoBibliografia() >= 4){?>
-                                                                    <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                                    <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
                                                                         Recursos en internet
                                                                     </button>
                                                                 <?php } else {?>
@@ -1702,11 +1778,15 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                         <?php if (!is_null($asignatura->getData()->getNombreAsignaturaIngles())) { ?>
                                                             <div class="card">
                                                                 <div class="card-header" id="headingTwo">
-                                                                    <h2 class="mb-0">
-                                                                        <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                                                            Realización exámenes (Inglés)
-                                                                        </button>
-                                                                    </h2>
+                                                                <?php if($contextComparacion->getData()['RealizacionExamenesI'] && unserialize($_SESSION['permisos'][$asignatura->getData()->getIdAsignatura()])->getPermisoEvaluacion() >= 4){?>
+                                                                    <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                                                                        Realización exámenes (Inglés)
+                                                                    </button>
+                                                                <?php } else {?>
+                                                                    <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                                                                        Realización exámenes(Inglés)
+                                                                    </button>
+                                                                <?php } ?>
                                                                 </div>
                                                                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionEvaluacion">
                                                                     <div class="card-body">
@@ -1715,11 +1795,14 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                             <div class="card-body">
                                                                                 <h5 class="card-title">Borrador</h5>
                                                                                 <p class="card-text">
-                                                                                    <?php
-                                                                                    if ($contextModEvaluacion->getEvent() === FIND_MODEVALUACION_OK) {
-                                                                                        echo $contextModEvaluacion->getData()->getRealizacionExamenesI();
-                                                                                    }
-                                                                                    ?>
+                                                                                <?php
+                                                                                if ($contextModEvaluacion->getEvent() === FIND_MODEVALUACION_OK) {
+                                                                                    if($contextComparacion->getData()['RealizacionExamenesI'])
+                                                                                    echo '<b style="font-size: 18px">'.$contextModEvaluacion->getData()->getRealizacionExamenesI().'</b>';
+                                                                                    else
+                                                                                    echo $contextModEvaluacion->getData()->getRealizacionExamenesI();
+                                                                                }
+                                                                                ?>
                                                                                 </p>
                                                                             </div>
                                                                         </div>
@@ -1748,7 +1831,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                             <div class="card-header" id="headingThree">
                                                                 <h2 class="mb-0">
                                                                 <?php if($contextComparacion->getData()['CalificacionFinal'] && unserialize($_SESSION['permisos'][$asignatura->getData()->getIdAsignatura()])->getPermisoEvaluacion() >= 4){?>
-                                                                    <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                                    <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
                                                                         Calificación final
                                                                     </button>
                                                                 <?php } else {?>
@@ -1798,9 +1881,15 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                             <div class="card">
                                                                 <div class="card-header" id="headingFour">
                                                                     <h2 class="mb-0">
-                                                                        <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                                                                            Calificación final (Inglés)
-                                                                        </button>
+                                                                    <?php if($contextComparacion->getData()['CalificacionFinalI'] && unserialize($_SESSION['permisos'][$asignatura->getData()->getIdAsignatura()])->getPermisoEvaluacion() >= 4){?>
+                                                                    <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+                                                                        Calificación final (Inglés)
+                                                                    </button>
+                                                                <?php } else {?>
+                                                                    <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                                                        Calificación final (Inglés)
+                                                                    </button>
+                                                                <?php }?>
                                                                     </h2>
                                                                 </div>
                                                                 <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionEvaluacion">
@@ -1810,11 +1899,14 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                             <div class="card-body">
                                                                                 <h5 class="card-title">Borrador</h5>
                                                                                 <p class="card-text">
-                                                                                    <?php
-                                                                                    if ($contextModEvaluacion->getEvent() === FIND_MODEVALUACION_OK) {
-                                                                                        echo $contextModEvaluacion->getData()->getCalificacionFinalI();
-                                                                                    }
-                                                                                    ?>
+                                                                                <?php
+                                                                                if ($contextModEvaluacion->getEvent() === FIND_MODEVALUACION_OK) {
+                                                                                    if($contextComparacion->getData()['CalificacionFinalI'])
+                                                                                    echo '<b style="font-size: 18px">'.$contextModEvaluacion->getData()->getCalificacionFinalI().'</b>';
+                                                                                    else
+                                                                                    echo $contextModEvaluacion->getData()->getCalificacionFinalI();
+                                                                                }
+                                                                                ?>
                                                                                 </p>
                                                                             </div>
                                                                         </div>
@@ -1843,7 +1935,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                             <div class="card-header" id="headingFive">
                                                                 <h2 class="mb-0">
                                                                 <?php if($contextComparacion->getData()['RealizacionActividades'] && unserialize($_SESSION['permisos'][$asignatura->getData()->getIdAsignatura()])->getPermisoEvaluacion() >= 4){?>
-                                                                    <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                                    <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
                                                                         Realización actividades
                                                                     </button>
                                                                 <?php } else {?>
@@ -1907,23 +1999,32 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                             <div class="card">
                                                                 <div class="card-header" id="headingSix">
                                                                     <h2 class="mb-0">
-                                                                        <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
-                                                                            Realización actividades (Inglés)
-                                                                        </button>
+                                                                    <?php if($contextComparacion->getData()['RealizacionActividadesI'] && unserialize($_SESSION['permisos'][$asignatura->getData()->getIdAsignatura()])->getPermisoEvaluacion() >= 4){?>
+                                                                    <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseSix" aria-expanded="true" aria-controls="collapseSix">
+                                                                        Realización actividades (Inglés)
+                                                                    </button>
+                                                                <?php } else {?>
+                                                                    <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                                                                        Realización actividades (Inglés)
+                                                                    </button>
+                                                                <?php } ?>
                                                                     </h2>
                                                                 </div>
                                                                 <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionEvaluacion">
                                                                     <div class="card-body">
-                                                        <?php if (unserialize($_SESSION['permisos'][$asignatura->getData()->getIdAsignatura()])->getPermisoEvaluacion() >= 4) { ?>
+                                                        <?php if (unserialize($_SESSION['permisos'][$asignatura->getData()->getIdAsignatura()])->getPermisoEvaluacion() >= 4) { ?>2
                                                                         <div class="card">
                                                                             <div class="card-body">
                                                                                 <h5 class="card-title">Borrador</h5>
                                                                                 <p class="card-text">
-                                                                                    <?php
-                                                                                    if ($contextModEvaluacion->getEvent() === FIND_MODEVALUACION_OK) {
-                                                                                        echo $contextModEvaluacion->getData()->getRealizacionActividadesI();
-                                                                                    }
-                                                                                    ?>
+                                                                                <?php
+                                                                                if ($contextModEvaluacion->getEvent() === FIND_MODEVALUACION_OK) {
+                                                                                    if($contextComparacion->getData()['RealizacionActividadesI'])
+                                                                                    echo '<b style="font-size: 18px">'.$contextModEvaluacion->getData()->getRealizacionActividadesI().'</b>';
+                                                                                    else
+                                                                                    echo $contextModEvaluacion->getData()->getRealizacionActividadesI();
+                                                                                }
+                                                                                ?>
                                                                                 </p>
                                                                             </div>
                                                                         </div>
@@ -1952,7 +2053,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                             <div class="card-header" id="headingSeven">
                                                                 <h2 class="mb-0">
                                                                 <?php if($contextComparacion->getData()['RealizacionLaboratorio'] && unserialize($_SESSION['permisos'][$asignatura->getData()->getIdAsignatura()])->getPermisoEvaluacion() >= 4){?>
-                                                                    <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                                    <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="true" aria-controls="collapseSeven">
                                                                         Realización Laboratorio
                                                                     </button>
                                                                 <?php } else {?>
@@ -2016,9 +2117,15 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                             <div class="card">
                                                                 <div class="card-header" id="headingEight">
                                                                     <h2 class="mb-0">
-                                                                        <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
-                                                                            Realización laboratorio (Inglés)
-                                                                        </button>
+                                                                    <?php if($contextComparacion->getData()['RealizacionLaboratorioI'] && unserialize($_SESSION['permisos'][$asignatura->getData()->getIdAsignatura()])->getPermisoEvaluacion() >= 4){?>
+                                                                    <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseEight" aria-expanded="true" aria-controls="collapseEight">
+                                                                        Realización Laboratorio (Inglés)
+                                                                    </button>
+                                                                <?php } else {?>
+                                                                    <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
+                                                                        Realización laboratorio (Inglés)
+                                                                    </button>
+                                                                <?php }?>
                                                                     </h2>
                                                                 </div>
                                                                 <div id="collapseEight" class="collapse" aria-labelledby="headingEight" data-parent="#accordionEvaluacion">
@@ -2029,11 +2136,14 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                                 <div class="card-body">
                                                                                     <h5 class="card-title">Borrador</h5>
                                                                                     <p class="card-text">
-                                                                                        <?php
-                                                                                        if ($contextModEvaluacion->getEvent() === FIND_MODEVALUACION_OK) {
-                                                                                            echo $contextModEvaluacion->getData()->getRealizacionLaboratorioI();
-                                                                                        }
-                                                                                        ?>
+                                                                                    <?php
+                                                                                if ($contextModEvaluacion->getEvent() === FIND_MODEVALUACION_OK) {
+                                                                                    if($contextComparacion->getData()['RealizacionLaboratorioI'])
+                                                                                    echo '<b style="font-size: 18px">'.$contextModEvaluacion->getData()->getRealizacionLaboratorioI().'</b>';
+                                                                                    else
+                                                                                    echo $contextModEvaluacion->getData()->getRealizacionLaboratorioI();
+                                                                                }
+                                                                                ?>
                                                                                     </p>
                                                                                 </div>
                                                                             </div>
@@ -2079,14 +2189,14 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                         <?php if(strpos($asignatura->getData()->getCoordinadores(),$_SESSION['idUsuario'])!==false){?>
                                             <div class="tab-pane fade" id="nav-coordinacion" role="tabpanel" aria-labelledby="nav-coordinacion-tab">
                                                 <div class="accordion" id="accordionCoordinacion">
-                                                <div class="card-header" id="headingEight">
+                                                <div class="card-header" id="headingOne">
                                                     <h2 class="mb-0">
-                                                        <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
+                                                        <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
                                                               Configuración
                                                         </button>
                                                                     </h2>
                                                                 </div>
-                                                                <div id="collapseEight" class="collapse" aria-labelledby="headingEight" data-parent="#accordionEvaluacion">
+                                                                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionEvaluacion">
                                                                     <div class="card-body">
                                                                         <div class="card">
                                                                              <div class="card">
@@ -2097,7 +2207,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                                             echo '<p>✔️<b>Conocimientos Previos</b></p>';
                                                                                             
                                                                                         }
-                                                                                        else{
+                                                                                         else{
                                                                                             echo '<p>❌Conocimientos Previos</p>';
                                                                                         }
                                                                                         
@@ -2109,13 +2219,6 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                                             echo '<p>❌Breve Descripción</p>';
                                                                                         }
 
-                                                                                        if($contextConfiguracion->getData()->getConocimientosPrevios()){
-                                                                                            echo '<p>✔️<b>Conocimientos Previos</b></p>';
-                                                                                                    
-                                                                                        }
-                                                                                        else{
-                                                                                            echo '<p>❌Conocimientos Previos</p>';
-                                                                                        }
 
                                                                                         if($contextConfiguracion->getData()->getProgramaDetallado()){
                                                                                             echo '<p>✔️<b>Programa Detallado</b></p>';
@@ -2226,16 +2329,198 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                     </div>
                                                                 </div>
                                                                                   
-                                                </div>
+                                                
                                                 <!--Permisos-->
-                                                <div class="card-header" id="headingSeven">
+                                                <div class="card-header" id="headingTwo">
                                                     <h2 class="mb-0">
-                                                        <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+                                                        <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                                                               Permisos
                                                         </button>
                                                          </h2>
                                                                 </div>
-                                                                <div id="collapseSeven" class="collapse" aria-labelledby="headingSeven" data-parent="#accordionCoordinacion">
+                                                                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionCoordinacion">
+                                                                    <div class="card-body">
+                                                                        <div class="card">
+                                                                             <div class="card">
+                                                                                <div class="card-body">
+                                                                                <?php 
+
+                                                                                $context = new es\ucm\Context(FIND_PERMISOS, $asignatura->getData()->getIdAsignatura());
+                                                                                $permisos= $controller->action($context);
+                                                                                foreach ($permisos->getData() as $permiso){
+                                                                                    $context = new es\ucm\Context(FIND_PROFESOR, $permiso->getEmailProfesor());
+                                                                                    $profesor = $controller->action($context);
+                                                                                    echo '<div><h5>'.$profesor->getData()->getNombre().'</h5>
+                                                                                <a href="permisos.php?emailProfesor='.$permiso->getEmailProfesor().'&idAsignatura='.$permiso->getIdAsignatura().'">
+                                                                                <button type="button" class="btn btn-primary" id="btn-form">
+                                                                                Modificar Permisos
+                                                                                </button>
+                                                                                </a></div>';
+                                                                                echo '<div class="table-responsive text-center">
+                                                                                <table class="table table-sm table-hover table-borderless">
+                                                                                    <thead>
+                                                                                        <tr>
+                                                                                        <th scope="col">Programa</th>
+                                                                                            <th scope="col">Competencias</th>
+                                                                                            <th scope="col">Metodología</th>
+                                                                                            <th scope="col">Bibliografía</th>
+                                                                                            <th scope="col">Grupo Laboratorio</th>
+                                                                                            <th scope="col">Grupo Clase</th>
+                                                                                            <th scope="col">Evaluación</th>
+                                                                                        </tr>
+                                                                                    </thead> <tbody><tr scope="row">';
+                                                                                    if($permiso->getPermisoPrograma() === '0'){
+                                                                                        echo '<td>❌</td>';
+                                                                                    }elseif($permiso->getPermisoPrograma() === '1'){
+                                                                                        echo '<td>Administración</td>';
+                                                                                    }elseif($permiso->getPermisoPrograma() === '2'){
+                                                                                        echo '<td>Modificación</td>';
+                                                                                    }elseif($permiso->getPermisoPrograma() === '3'){
+                                                                                        echo '<td>Administración y Modificación </td>';
+                                                                                    }elseif($permiso->getPermisoPrograma() === '4'){
+                                                                                        echo '<td>Lectura</td>';
+                                                                                    }elseif($permiso->getPermisoPrograma() === '5'){
+                                                                                        echo '<td>Lectura y Administración</td>';
+                                                                                    }elseif($permiso->getPermisoPrograma() === '6'){
+                                                                                        echo '<td>Lectura y Modificacion</td>';
+                                                                                    }elseif($permiso->getPermisoPrograma() === '7'){
+                                                                                        echo '<td>Todos</td>';
+                                                                                    }
+                                                                                    if($permiso->getPermisoCompetencias() === '0'){
+                                                                                        echo '<td>❌</td>';
+                                                                                    }elseif($permiso->getPermisoCompetencias() === '1'){
+                                                                                        echo '<td>Administración</td>';
+                                                                                    }elseif($permiso->getPermisoCompetencias() === '2'){
+                                                                                        echo '<td>Modificación</td>';
+                                                                                    }elseif($permiso->getPermisoCompetencias() === '3'){
+                                                                                        echo '<td>Administración y Modificación </td>';
+                                                                                    }elseif($permiso->getPermisoCompetencias() === '4'){
+                                                                                        echo '<td>Lectura</td>';
+                                                                                    }elseif($permiso->getPermisoCompetencias() === '5'){
+                                                                                        echo '<td>Lectura y Administración</td>';
+                                                                                    }elseif($permiso->getPermisoCompetencias() === '6'){
+                                                                                        echo '<td>Lectura y Modificacion</td>';
+                                                                                    }elseif($permiso->getPermisoCompetencias() === '7'){
+                                                                                        echo '<td>Todos</td>';
+                                                                                    }
+                                                                                    if($permiso->getPermisoMetodologia() === '0'){
+                                                                                        echo '<td>❌</td>';
+                                                                                    }elseif($permiso->getPermisoMetodologia() === '1'){
+                                                                                        echo '<td>Administración</td>';
+                                                                                    }elseif($permiso->getPermisoMetodologia() === '2'){
+                                                                                        echo '<td>Modificación</td>';
+                                                                                    }elseif($permiso->getPermisoMetodologia() === '3'){
+                                                                                        echo '<td>Administración y Modificación </td>';
+                                                                                    }elseif($permiso->getPermisoMetodologia() === '4'){
+                                                                                        echo '<td>Lectura</td>';
+                                                                                    }elseif($permiso->getPermisoMetodologia() === '5'){
+                                                                                        echo '<td>Lectura y Administración</td>';
+                                                                                    }elseif($permiso->getPermisoMetodologia() === '6'){
+                                                                                        echo '<td>Lectura y Modificacion</td>';
+                                                                                    }elseif($permiso->getPermisoMetodologia() === '7'){
+                                                                                        echo '<td>Todos</td>';
+                                                                                    }
+                                                                                    if($permiso->getPermisoBibliografia() === '0'){
+                                                                                        echo '<td>❌</td>';
+                                                                                    }elseif($permiso->getPermisoBibliografia() === '1'){
+                                                                                        echo '<td>Administración</td>';
+                                                                                    }elseif($permiso->getPermisoBibliografia() === '2'){
+                                                                                        echo '<td>Modificación</td>';
+                                                                                    }elseif($permiso->getPermisoBibliografia() === '3'){
+                                                                                        echo '<td>Administración y Modificación </td>';
+                                                                                    }elseif($permiso->getPermisoBibliografia() === '4'){
+                                                                                        echo '<td>Lectura</td>';
+                                                                                    }elseif($permiso->getPermisoBibliografia() === '5'){
+                                                                                        echo '<td>Lectura y Administración</td>';
+                                                                                    }elseif($permiso->getPermisoBibliografia() === '6'){
+                                                                                        echo '<td>Lectura y Modificacion</td>';
+                                                                                    }elseif($permiso->getPermisoBibliografia() === '7'){
+                                                                                        echo '<td>Todos</td>';
+                                                                                    }
+                                                                                    if($permiso->getPermisoGrupoLaboratorio() === '0'){
+                                                                                        echo '<td>❌</td>';
+                                                                                    }elseif($permiso->getPermisoGrupoLaboratorio() === '1'){
+                                                                                        echo '<td>Administración</td>';
+                                                                                    }elseif($permiso->getPermisoGrupoLaboratorio() === '2'){
+                                                                                        echo '<td>Modificación</td>';
+                                                                                    }elseif($permiso->getPermisoGrupoLaboratorio() === '3'){
+                                                                                        echo '<td>Administración y Modificación </td>';
+                                                                                    }elseif($permiso->getPermisoGrupoLaboratorio() === '4'){
+                                                                                        echo '<td>Lectura</td>';
+                                                                                    }elseif($permiso->getPermisoGrupoLaboratorio() === '5'){
+                                                                                        echo '<td>Lectura y Administración</td>';
+                                                                                    }elseif($permiso->getPermisoGrupoLaboratorio() === '6'){
+                                                                                        echo '<td>Lectura y Modificacion</td>';
+                                                                                    }elseif($permiso->getPermisoGrupoLaboratorio() === '7'){
+                                                                                        echo '<td>Todos</td>';
+                                                                                    }
+                                                                                    if($permiso->getPermisoGrupoClase() === '0'){
+                                                                                        echo '<td>❌</td>';
+                                                                                    }elseif($permiso->getPermisoGrupoClase() === '1'){
+                                                                                        echo '<td>Administración</td>';
+                                                                                    }elseif($permiso->getPermisoGrupoClase() === '2'){
+                                                                                        echo '<td>Modificación</td>';
+                                                                                    }elseif($permiso->getPermisoGrupoClase() === '3'){
+                                                                                        echo '<td>Administración y Modificación </td>';
+                                                                                    }elseif($permiso->getPermisoGrupoClase() === '4'){
+                                                                                        echo '<td>Lectura</td>';
+                                                                                    }elseif($permiso->getPermisoGrupoClase() === '5'){
+                                                                                        echo '<td>Lectura y Administración</td>';
+                                                                                    }elseif($permiso->getPermisoGrupoClase() === '6'){
+                                                                                        echo '<td>Lectura y Modificacion</td>';
+                                                                                    }elseif($permiso->getPermisoGrupoClase() === '7'){
+                                                                                        echo '<td>Todos</td>';
+                                                                                    }
+                                                                                    if($permiso->getPermisoEvaluacion() === '0'){
+                                                                                        echo '<td>❌</td>';
+                                                                                    }elseif($permiso->getPermisoEvaluacion() === '1'){
+                                                                                        echo '<td>Administración</td>';
+                                                                                    }elseif($permiso->getPermisoEvaluacion() === '2'){
+                                                                                        echo '<td>Modificación</td>';
+                                                                                    }elseif($permiso->getPermisoEvaluacion() === '3'){
+                                                                                        echo '<td>Administración y Modificación </td>';
+                                                                                    }elseif($permiso->getPermisoEvaluacion() === '4'){
+                                                                                        echo '<td>Lectura</td>';
+                                                                                    }elseif($permiso->getPermisoEvaluacion() === '5'){
+                                                                                        echo '<td>Lectura y Administración</td>';
+                                                                                    }elseif($permiso->getPermisoEvaluacion() === '6'){
+                                                                                        echo '<td>Lectura y Modificacion</td>';
+                                                                                    }elseif($permiso->getPermisoEvaluacion() === '7'){
+                                                                                        echo '<td>Todos</td>';
+                                                                                    }
+                                                                                    
+                                                                                    
+                                                                                    echo'</tr>                                                                     }
+                                                                                      
+                                                                                   </tbody>
+                                                                                   </table>
+                                                                                   </div>';
+                                                                                }?>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+
+
+
+
+
+
+                                                                    <!--getionprofesores-->
+                                                
+                                                
+                                                
+                                                
+                                                    <div class="card-header" id="headingThree">
+                                                    <h2 class="mb-0">
+                                                        <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                                              Gestión Profesores
+                                                        </button>
+                                                         </h2>
+                                                                </div>
+                                                                <div id="collapseThree" class="collapse" aria-labelledby="headingS" data-parent="#accordionCoordinacion">
                                                                     <div class="card-body">
                                                                         <div class="card">
                                                                              <div class="card">
@@ -2244,113 +2529,57 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
 
                                                                     $context = new es\ucm\Context(FIND_PERMISOS, $asignatura->getData()->getIdAsignatura());
                                                                     $permisos= $controller->action($context);
+                                                                
+                                                                    echo '<div><h5>Profesores de la asignatura '.$asignatura->getData()->getNombreAsignatura().'</h5>
+                                                                    <a href="addProfesor.php?idAsignatura='.$permiso->getIdAsignatura().'">
+                                                                            <button type="button" class="btn btn-primary" id="btn-form">
+                                                                                Añadir Profesor
+                                                                            </button>
+                                                                        </a>
+                                                                    </div>';
                                                                     foreach ($permisos->getData() as $permiso){
                                                                     $context = new es\ucm\Context(FIND_PROFESOR, $permiso->getEmailProfesor());
                                                                     $profesor = $controller->action($context);
-                                                                            echo '<div><h5>'.$profesor->getData()->getNombre().'</h5>
-                                                                            <a href="permisos.php?emailProfesor='.$permiso->getEmailProfesor().'&idAsignatura='.$permiso->getIdAsignatura().'">
-                                                                            <button type="button" class="btn btn-primary" id="btn-form">
-                                                                                Modificar Permisos
+                                                                    echo'<p>'.$profesor->getData()->getNombre().' - '.$permiso->getEmailProfesor().'
+                                                                    <a href="eliminarProfesor.php?emailProfesor='.$permiso->getEmailProfesor().'&idAsignatura='.$permiso->getIdAsignatura().'">
+                                                                            <button type="button" class="btn btn-danger" id="btn-form">
+                                                                                -
                                                                             </button>
-                                                                        </a></div>';
-                                                                            echo '<div class="table-responsive text-center">
-                                                                            <table class="table table-sm table-hover table-borderless">
-                                                                                <thead>
-                                                                                    <tr>
-                                                                                        <th scope="col">Programa</th>
-                                                                                        <th scope="col">Competencias</th>
-                                                                                        <th scope="col">Metodología</th>
-                                                                                        <th scope="col">Bibliografía</th>
-                                                                                        <th scope="col">Grupo Laboratorio</th>
-                                                                                        <th scope="col">Grupo Clase</th>
-                                                                                        <th scope="col">Evaluación</th>
-                                                                                    </tr>
-                                                                                </thead>
-                                                                                <tbody>';
-                                                                                echo '<tr scope="row">';
-                                                                                if($permiso->getPermisoPrograma() === '0'){
-                                                                                    echo '<td>❌</td>';
-                                                                                }elseif($permiso->getPermisoPrograma() === '4'){
-                                                                                    echo '<td>Lectura</td>';
-                                                                                }elseif($permiso->getPermisoPrograma() === '6'){
-                                                                                    echo '<td>Modificacion</td>';
-                                                                                }elseif($permiso->getPermisoPrograma() === '7'){
-                                                                                    echo '<td>Administrador</td>';
-                                                                                }
-                                                                                if($permiso->getPermisoCompetencias() === '0'){
-                                                                                    echo '<td>❌</td>';
-                                                                                }elseif($permiso->getPermisoCompetencias() === '4'){
-                                                                                    echo '<td>Lectura</td>';
-                                                                                }elseif($permiso->getPermisoCompetencias() === '6'){
-                                                                                    echo '<td>Modificacion</td>';
-                                                                                }elseif($permiso->getPermisoCompetencias() === '7'){
-                                                                                    echo '<td>Administrador</td>';
-                                                                                }
-                                                                                if($permiso->getPermisoMetodologia() === '0'){
-                                                                                    echo '<td>❌</td>';
-                                                                                }elseif($permiso->getPermisoMetodologia() === '4'){
-                                                                                    echo '<td>Lectura</td>';
-                                                                                }elseif($permiso->getPermisoMetodologia() === '6'){
-                                                                                    echo '<td>Modificacion</td>';
-                                                                                }elseif($permiso->getPermisoMetodologia() === '7'){
-                                                                                    echo '<td>Administrador</td>';
-                                                                                }
-                                                                                if($permiso->getPermisoBibliografia() === '0'){
-                                                                                    echo '<td>❌</td>';
-                                                                                }elseif($permiso->getPermisoBibliografia() === '4'){
-                                                                                    echo '<td>Lectura</td>';
-                                                                                }elseif($permiso->getPermisoBibliografia() === '6'){
-                                                                                    echo '<td>Modificacion</td>';
-                                                                                }elseif($permiso->getPermisoBibliografia() === '7'){
-                                                                                    echo '<td>Administrador</td>';
-                                                                                }
-                                                                                if($permiso->getPermisoGrupoLaboratorio() === '0'){
-                                                                                    echo '<td>❌</td>';
-                                                                                }elseif($permiso->getPermisoGrupoLaboratorio() === '4'){
-                                                                                    echo '<td>Lectura</td>';
-                                                                                }elseif($permiso->getPermisoGrupoLaboratorio() === '6'){
-                                                                                    echo '<td>Modificacion</td>';
-                                                                                }elseif($permiso->getPermisoGrupoLaboratorio() === '7'){
-                                                                                    echo '<td>Administrador</td>';
-                                                                                }
-                                                                                if($permiso->getPermisoGrupoClase() === '0'){
-                                                                                    echo '<td>❌</td>';
-                                                                                }elseif($permiso->getPermisoGrupoClase() === '4'){
-                                                                                    echo '<td>Lectura</td>';
-                                                                                }elseif($permiso->getPermisoGrupoClase() === '6'){
-                                                                                    echo '<td>Modificacion</td>';
-                                                                                }elseif($permiso->getPermisoGrupoClase() === '7'){
-                                                                                    echo '<td>Administrador</td>';
-                                                                                }
-                                                                                if($permiso->getPermisoEvaluacion() === '0'){
-                                                                                    echo '<td>❌</td>';
-                                                                                }elseif($permiso->getPermisoEvaluacion() === '4'){
-                                                                                    echo '<td>Lectura</td>';
-                                                                                }elseif($permiso->getPermisoEvaluacion() === '6'){
-                                                                                    echo '<td>Modificacion</td>';
-                                                                                }elseif($permiso->getPermisoEvaluacion() === '7'){
-                                                                                    echo '<td>Administrador</td>';
-                                                                                }
-                                                                                
-                                                                                
-                                                                                echo'</tr>';                                                                      }
+                                                                        </a></p>';
+                                                                    
+                                                                
+                                                                }
                                                                                     ?>
-                                                                               </tbody>
-                                                                            </table>
-                                                                            </div>
-                                                                   
+                                                                            
+                                                                        
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                                  
+                                                                
+                                                                         
                                                 </div>
-                                                  
+                                                                </div>
+                                                                
+                                                                         
+                                                </div>
+                                                
+                                                
+                                            
+                                               <!-- <div class="text-right">
+                                                <a href="verificacion.php?idAsignatura=<?php echo $asignatura->getData()->getIdAsignatura(); ?>">
+                                                    <button type="button" class="btn btn-suscess" id="btn-form">
+                                                    Validar datos
+                                                    </button>
+                                                    </a>
+                                                </div>  -->
                                             </div>
-                                                                                        
-                                    <?php }?>
+                                          
+                                                                                                             
+                                                    </div>
+                                            <?php }?>
                                     </div>
                                   
                                 </div>

@@ -18,9 +18,9 @@ class DAOPermisosImplements implements DAOPermisos{
     public static function createPermisos($permisos){
         $singletonDataSource=new SingletonDataSource();
         $dataSource=$singletonDataSource->getInstance();
-        $sql="INSERT INTO permisos (IdPermiso,PermisoPrograma,PermisoCompetencias,PermisoMetodologia,PermisoBibliografia,PermisoGrupoLaboratorio,PermisoGrupoClase,PermisoEvaluacion,IdAsignatura,EmailProfesor) 
-        VALUES (:idPermiso, :permisoPrograma, :permisoCompetencias, :permisoMetodologia, :permisoBibliografia, :permisoGrupoLaboratorio, :permisoGrupoClase, :permisoEvaluacion, :idAsignatura, :emailProfesor)";
-        $values=array(':idPermiso' => $permisos->getIdPermiso(),
+        $sql="INSERT INTO permisos (PermisoPrograma,PermisoCompetencias,PermisoMetodologia,PermisoBibliografia,PermisoGrupoLaboratorio,PermisoGrupoClase,PermisoEvaluacion,IdAsignatura,EmailProfesor) 
+        VALUES ( :permisoPrograma, :permisoCompetencias, :permisoMetodologia, :permisoBibliografia, :permisoGrupoLaboratorio, :permisoGrupoClase, :permisoEvaluacion, :idAsignatura, :emailProfesor)";
+        $values=array(
         ':permisoPrograma' => $permisos->getPermisoPrograma(),
         ':permisoCompetencias' => $permisos->getPermisoCompetencias(),
         ':permisoMetodologia' => $permisos->getPermisoMetodologia(),
@@ -68,6 +68,15 @@ class DAOPermisosImplements implements DAOPermisos{
         $dataSource=$singletonDataSource->getInstance();
         $sql="SELECT * FROM permisos WHERE EmailProfesor = :emailProfesor";
         $values=array(':emailProfesor' => $emailProfesor);
+        $results=$dataSource->executeQuery($sql,$values);
+        return $results;
+    }
+
+    public static function findPermisosPorProfesorYAsignatura($emailProfesor, $idAsignatura){
+        $singletonDataSource=new SingletonDataSource();
+        $dataSource=$singletonDataSource->getInstance();
+        $sql="SELECT * FROM permisos WHERE EmailProfesor = :emailProfesor AND IdAsignatura = :idAsignatura";
+        $values=array(':emailProfesor' => $emailProfesor, ':idAsignatura' => $idAsignatura);
         $results=$dataSource->executeQuery($sql,$values);
         return $results;
     }

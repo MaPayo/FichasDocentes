@@ -3,5 +3,14 @@
     "require": {
         "ryakad/pandoc-php": "^1.0",
         "dompdf/dompdf": "^0.8.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "es\\ucm\\": "TFG"
+        }
+
+    },
+    "config": {
+        "optimize-autoloader": true
     }
 }

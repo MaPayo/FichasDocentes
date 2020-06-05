@@ -14,6 +14,7 @@ class FormConfiguracion extends Form
 		$IdConfiguracion = $datosIniciales['IdConfiguracion'];
 	
         $IdAsignatura = $datosIniciales['IdAsignatura'];
+       
         
         
 		$controller = new ControllerImplements();
@@ -22,7 +23,7 @@ class FormConfiguracion extends Form
         
 
 		$html = '<input type="hidden" name="IdConfiguracion" value="' . $IdConfiguracion . '" required />
-		<input type="hidden" name="IdAsignatura" value="' . $IdAsignatura . '" required />';
+        <input type="hidden" name="IdAsignatura" value="' . $IdAsignatura . '" required />';
         
 
         if($contextConfiguracion->getData()->getConocimientosPrevios()){
@@ -158,6 +159,8 @@ class FormConfiguracion extends Form
 		$contextConfiguracion = $controller->action($context);
 
 
+        
+
 		$IdConfiguracion = $datos['IdConfiguracion'] ;
 		$ConocimientosPrevios = isset($datos['ConocimientosPrevios'])? 1:0;
 		$BreveDescripcion = isset($datos['BreveDescripcion'])? 1:0;
@@ -205,7 +208,7 @@ class FormConfiguracion extends Form
 			if($contextConfiguracion->getEvent() === UPDATE_CONFIGURACION_OK){
 				$erroresFormulario = "indexAcceso.php?IdAsignatura=" . $datos['IdAsignatura'] . "&modificado=y#nav-configuracion";
 			}elseif ($contextConfiguracion->getEvent() === UPDATE_CONFIGURACION_FAIL) {
-				$erroresFormulario[] = "No se ha podido modificar la evaluación.";
+				$erroresFormulario[] = "No se ha podido modificar la configuración.";
 			}
 		}
 		return $erroresFormulario;

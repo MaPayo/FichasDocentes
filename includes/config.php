@@ -11,6 +11,7 @@ define('RUTA_APP','');
 define('RUTA_IMGS',RUTA_APP.'includes/Presentacion/Vistas/resources/');
 define('RUTA_CSS',RUTA_APP.'includes/Presentacion/Vistas/css/');
 define('RUTA_JS',RUTA_APP.'includes/Presentacion/Vistas/js/');
+define('RUTA_AUTOLOAD',RUTA_APP, 'vendor/');
 define('INSTALADA',true); //Apaga o enciende la aplicacion
 
 /**
