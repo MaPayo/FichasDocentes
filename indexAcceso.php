@@ -2378,11 +2378,11 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                                     }elseif($permiso->getPermisoPrograma() === '3'){
                                                                                         echo '<td>Administración y Modificación </td>';
                                                                                     }elseif($permiso->getPermisoPrograma() === '4'){
-                                                                                        echo '<td>Lectura</td>';
+                                                                                        echo '<td>Escritura</td>';
                                                                                     }elseif($permiso->getPermisoPrograma() === '5'){
-                                                                                        echo '<td>Lectura y Administración</td>';
+                                                                                        echo '<td>Escritura y Administración</td>';
                                                                                     }elseif($permiso->getPermisoPrograma() === '6'){
-                                                                                        echo '<td>Lectura y Modificacion</td>';
+                                                                                        echo '<td>Escritura y Modificacion</td>';
                                                                                     }elseif($permiso->getPermisoPrograma() === '7'){
                                                                                         echo '<td>Todos</td>';
                                                                                     }
@@ -2395,11 +2395,11 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                                     }elseif($permiso->getPermisoCompetencias() === '3'){
                                                                                         echo '<td>Administración y Modificación </td>';
                                                                                     }elseif($permiso->getPermisoCompetencias() === '4'){
-                                                                                        echo '<td>Lectura</td>';
+                                                                                        echo '<td>Escritura</td>';
                                                                                     }elseif($permiso->getPermisoCompetencias() === '5'){
-                                                                                        echo '<td>Lectura y Administración</td>';
+                                                                                        echo '<td>Escritura y Administración</td>';
                                                                                     }elseif($permiso->getPermisoCompetencias() === '6'){
-                                                                                        echo '<td>Lectura y Modificacion</td>';
+                                                                                        echo '<td>Escritura y Modificacion</td>';
                                                                                     }elseif($permiso->getPermisoCompetencias() === '7'){
                                                                                         echo '<td>Todos</td>';
                                                                                     }
@@ -2412,11 +2412,11 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                                     }elseif($permiso->getPermisoMetodologia() === '3'){
                                                                                         echo '<td>Administración y Modificación </td>';
                                                                                     }elseif($permiso->getPermisoMetodologia() === '4'){
-                                                                                        echo '<td>Lectura</td>';
+                                                                                        echo '<td>Escritura</td>';
                                                                                     }elseif($permiso->getPermisoMetodologia() === '5'){
-                                                                                        echo '<td>Lectura y Administración</td>';
+                                                                                        echo '<td>Escritura y Administración</td>';
                                                                                     }elseif($permiso->getPermisoMetodologia() === '6'){
-                                                                                        echo '<td>Lectura y Modificacion</td>';
+                                                                                        echo '<td>Escritura y Modificacion</td>';
                                                                                     }elseif($permiso->getPermisoMetodologia() === '7'){
                                                                                         echo '<td>Todos</td>';
                                                                                     }
@@ -2429,11 +2429,11 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                                     }elseif($permiso->getPermisoBibliografia() === '3'){
                                                                                         echo '<td>Administración y Modificación </td>';
                                                                                     }elseif($permiso->getPermisoBibliografia() === '4'){
-                                                                                        echo '<td>Lectura</td>';
+                                                                                        echo '<td>Escritura</td>';
                                                                                     }elseif($permiso->getPermisoBibliografia() === '5'){
-                                                                                        echo '<td>Lectura y Administración</td>';
+                                                                                        echo '<td>Escritura y Administración</td>';
                                                                                     }elseif($permiso->getPermisoBibliografia() === '6'){
-                                                                                        echo '<td>Lectura y Modificacion</td>';
+                                                                                        echo '<td>Escritura y Modificacion</td>';
                                                                                     }elseif($permiso->getPermisoBibliografia() === '7'){
                                                                                         echo '<td>Todos</td>';
                                                                                     }
@@ -2446,11 +2446,11 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                                     }elseif($permiso->getPermisoGrupoLaboratorio() === '3'){
                                                                                         echo '<td>Administración y Modificación </td>';
                                                                                     }elseif($permiso->getPermisoGrupoLaboratorio() === '4'){
-                                                                                        echo '<td>Lectura</td>';
+                                                                                        echo '<td>Escritura</td>';
                                                                                     }elseif($permiso->getPermisoGrupoLaboratorio() === '5'){
-                                                                                        echo '<td>Lectura y Administración</td>';
+                                                                                        echo '<td>Escritura y Administración</td>';
                                                                                     }elseif($permiso->getPermisoGrupoLaboratorio() === '6'){
-                                                                                        echo '<td>Lectura y Modificacion</td>';
+                                                                                        echo '<td>Escritura y Modificacion</td>';
                                                                                     }elseif($permiso->getPermisoGrupoLaboratorio() === '7'){
                                                                                         echo '<td>Todos</td>';
                                                                                     }
@@ -2463,11 +2463,11 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                                     }elseif($permiso->getPermisoGrupoClase() === '3'){
                                                                                         echo '<td>Administración y Modificación </td>';
                                                                                     }elseif($permiso->getPermisoGrupoClase() === '4'){
-                                                                                        echo '<td>Lectura</td>';
+                                                                                        echo '<td>Escritura</td>';
                                                                                     }elseif($permiso->getPermisoGrupoClase() === '5'){
-                                                                                        echo '<td>Lectura y Administración</td>';
+                                                                                        echo '<td>Escritura y Administración</td>';
                                                                                     }elseif($permiso->getPermisoGrupoClase() === '6'){
-                                                                                        echo '<td>Lectura y Modificacion</td>';
+                                                                                        echo '<td>Escritura y Modificacion</td>';
                                                                                     }elseif($permiso->getPermisoGrupoClase() === '7'){
                                                                                         echo '<td>Todos</td>';
                                                                                     }
@@ -2480,11 +2480,11 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                                     }elseif($permiso->getPermisoEvaluacion() === '3'){
                                                                                         echo '<td>Administración y Modificación </td>';
                                                                                     }elseif($permiso->getPermisoEvaluacion() === '4'){
-                                                                                        echo '<td>Lectura</td>';
+                                                                                        echo '<td>Escritura</td>';
                                                                                     }elseif($permiso->getPermisoEvaluacion() === '5'){
-                                                                                        echo '<td>Lectura y Administración</td>';
+                                                                                        echo '<td>Escritura y Administración</td>';
                                                                                     }elseif($permiso->getPermisoEvaluacion() === '6'){
-                                                                                        echo '<td>Lectura y Modificacion</td>';
+                                                                                        echo '<td>Escritura y Modificacion</td>';
                                                                                     }elseif($permiso->getPermisoEvaluacion() === '7'){
                                                                                         echo '<td>Todos</td>';
                                                                                     }

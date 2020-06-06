@@ -49,7 +49,7 @@ class SAComparacionImplements implements SAComparacion
         
 
         if ($configuracion->getConocimientosPrevios() === '1') {
-            if(!empty($modAsignatura)){
+            if(empty($modAsignatura)=== false){
             $n = $asignatura->getConocimientosPrevios();
             $modn = $modAsignatura->getConocimientosPrevios();
 
@@ -74,7 +74,7 @@ class SAComparacionImplements implements SAComparacion
             }}
         } 
         if($configuracion->getBreveDescripcion() === '1'){
-            if(!empty($modAsignatura)){
+            if(empty($modAsignatura)=== false){
             $n =  $asignatura->getBreveDescripcion();
             $modn = $modAsignatura->getBreveDescripcion();
 
@@ -94,7 +94,7 @@ class SAComparacionImplements implements SAComparacion
         }
         }
         if($configuracion->getProgramaDetallado() === '1'){
-            if(!empty($modAsignatura)){
+            if(empty($modAsignatura)=== false){
             $n =  $asignatura->getProgramaDetallado();
             $modn = $modAsignatura->getProgramaDetallado();
 
@@ -120,7 +120,7 @@ class SAComparacionImplements implements SAComparacion
 
    
         if($configuracion->getComGenerales() === '1'){
-            if(!empty($modAsignatura)){
+            if(empty($modAsignatura)=== false){
             $n =  $asignatura->getGenerales();
             $modn = $modAsignatura->getGenerales();
 
@@ -142,7 +142,7 @@ class SAComparacionImplements implements SAComparacion
         }
         
         if($configuracion->getComEspecificas() === '1'){
-            if(!empty($modAsignatura)){
+            if(empty($modAsignatura)=== false){
             $n =  $asignatura->getEspecificas();
             $modn = $modAsignatura->getEspecificas();
 
@@ -162,7 +162,7 @@ class SAComparacionImplements implements SAComparacion
         }
         }
         if($configuracion->getComBasicas() === '1'){
-            if(!empty($modAsignatura)){
+            if(empty($modAsignatura)=== false){
             $n =  $asignatura->getBasicasYTransversales();
             $modn = $modAsignatura->getBasicasYTransversales();
 
@@ -183,7 +183,7 @@ class SAComparacionImplements implements SAComparacion
         }
         }
         if($configuracion->getResultadosAprendizaje() === '1'){
-            if(!empty($modAsignatura)){
+            if(empty($modAsignatura)=== false){
             $n =  $asignatura->getResultadosAprendizaje();
             $modn = $modAsignatura->getResultadosAprendizaje();
 
@@ -208,7 +208,7 @@ class SAComparacionImplements implements SAComparacion
         $modAsignatura = $DAOPM->findModMetodologia($idAsignatura);
 
         if($configuracion->getMetodologia() === '1'){
-            if(!empty($modAsignatura)){
+            if(empty($modAsignatura)=== false){
             $n =  $asignatura->getMetodologia();
             $modn = $modAsignatura->getMetodologia();
           
@@ -235,7 +235,7 @@ class SAComparacionImplements implements SAComparacion
         $modAsignatura = $DAOPM->findModBibliografia($idAsignatura);
 
         if($configuracion->getCitasBibliograficas() === '1'){
-            if(!empty($modAsignatura)){
+            if(empty($modAsignatura)=== false){
             $n =  $asignatura->getCitasBibliograficas();
             $modn = $modAsignatura->getCitasBibliograficas();
 
@@ -246,7 +246,7 @@ class SAComparacionImplements implements SAComparacion
             }}
         }
         if($configuracion->getRecursosInternet() === '1'){
-            if(!empty($modAsignatura)){
+            if(empty($modAsignatura)=== false){
             $n =  $asignatura->getRecursosInternet();
             $modn = $modAsignatura->getRecursosInternet();
 
@@ -260,16 +260,18 @@ class SAComparacionImplements implements SAComparacion
         $DAOPM = $factoriesDAO->createSAModEvaluacion();
         $asignatura = $DAOP->findEvaluacion($idAsignatura);
         $modAsignatura = $DAOPM->findModEvaluacion($idAsignatura);
+    
+        if($configuracion->getRealizacionExamenes() === '1'){ 
+            if(empty($modAsignatura)=== false){
       
-        if($configuracion->getRealizacionExamenes() === '1'){ if(!empty($modAsignatura)){
             $n =  $asignatura->getRealizacionExamenes();
             $modn = $modAsignatura->getRealizacionExamenes();
-
+                
             $n = explode(" ", $n);
             $modn = explode(" ", $modn);
             if(sizeof($n) !== sizeof($modn)){
                 $comparacion["RealizacionExamenes"] = true;
-            }} 
+            }
             $n =  $asignatura->getRealizacionExamenesI();
             $modn = $modAsignatura->getRealizacionExamenesI();
 
@@ -279,8 +281,9 @@ class SAComparacionImplements implements SAComparacion
                 $comparacion["RealizacionExamenesI"] = true;
             }
         }
+        }
         if($configuracion->getCalificacionFinal() === '1'){
-            if(!empty($modAsignatura)){
+            if(empty($modAsignatura)=== false){
             $n =  $asignatura->getCalificacionFinal();
             $modn = $modAsignatura->getCalificacionFinal();
 
@@ -299,7 +302,7 @@ class SAComparacionImplements implements SAComparacion
             }}
         }
         if($configuracion->getRealizacionActividades() === '1'){
-            if(!empty($modAsignatura)){
+            if(empty($modAsignatura)=== false){
             $n =  $asignatura->getRealizacionActividades();
             $modn = $modAsignatura->getRealizacionActividades();
 
@@ -318,7 +321,7 @@ class SAComparacionImplements implements SAComparacion
             }}
         }
         if($configuracion->getRealizacionLaboratorio() === '1'){
-            if(!empty($modAsignatura)){
+            if(empty($modAsignatura)=== false){
             $n =  $asignatura->getRealizacionLaboratorio();
             $modn = $modAsignatura->getRealizacionLaboratorio();
 
