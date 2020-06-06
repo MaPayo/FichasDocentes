@@ -331,11 +331,11 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                 <div class="card-header" id="headingTwo">
                                                                     <h2 class="mb-0">
                                                                     <?php if($contextComparacion->getData()['conocimientosPreviosI'] && unserialize($_SESSION['permisos'][$asignatura->getData()->getIdAsignatura()])->getPermisoPrograma() >= 4){?>
-                                                                    <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseTwo">
+                                                                    <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
                                                                         Conocimientos previos (Inglés)
                                                                     </button>
                                                                     <?php } else{?>
-                                                                        <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseTwo">
+                                                                        <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
                                                                         Conocimientos previos (Inglés)
                                                                     </button>
                                                                     <?php } ?>
