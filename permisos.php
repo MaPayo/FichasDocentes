@@ -44,7 +44,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
           $permisos = $controller->action($context);
           $context = new es\ucm\Context(FIND_PROFESOR, htmlspecialchars(trim(strip_tags($_GET[$email]))));
           $profesor = $controller->action($context);
-          var_dump($permisos->getData());
+  
           
            if($permisos->getEvent() === FIND_PERMISOS_POR_PROFESOR_Y_ASIGNATURA_OK){
                 ?>
