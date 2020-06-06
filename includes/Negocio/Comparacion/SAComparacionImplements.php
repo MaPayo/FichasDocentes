@@ -48,7 +48,7 @@ class SAComparacionImplements implements SAComparacion
 
 
         if ($configuracion->getConocimientosPrevios() === '1') {
-            
+            if(sizeof($modAsignatura) !== 0){
             $n = $asignatura->getConocimientosPrevios();
             $modn = $modAsignatura->getConocimientosPrevios();
 
@@ -70,9 +70,10 @@ class SAComparacionImplements implements SAComparacion
             //Comprobamos si son iguales
             if(sizeof($n) !== sizeof($modn)){
                 $comparacion["conocimientosPreviosI"] = true;
-            }
+            }}
         } 
         if($configuracion->getBreveDescripcion() === '1'){
+            if(sizeof($modAsignatura) !== 0){
             $n =  $asignatura->getBreveDescripcion();
             $modn = $modAsignatura->getBreveDescripcion();
 
@@ -90,7 +91,9 @@ class SAComparacionImplements implements SAComparacion
                 $comparacion["BreveDescripcionI"] = true;
             }
         }
+        }
         if($configuracion->getProgramaDetallado() === '1'){
+            if(sizeof($modAsignatura) !== 0){
             $n =  $asignatura->getProgramaDetallado();
             $modn = $modAsignatura->getProgramaDetallado();
 
@@ -107,6 +110,7 @@ class SAComparacionImplements implements SAComparacion
             if(sizeof($n) !== sizeof($modn)){
                 $comparacion["ProgramaDetalladoI"] = true;
             }
+        }
         }
         $DAOP = $factoriesDAO->createSACompetenciaAsignatura();
         $DAOPM = $factoriesDAO->createSAModCompetenciaAsignatura();
@@ -205,7 +209,7 @@ class SAComparacionImplements implements SAComparacion
         $modAsignatura = $DAOPM->findModMetodologia($idAsignatura);
 
         if($configuracion->getMetodologia() === '1'){
-         
+            if(sizeof($modAsignatura) !== 0){
             $n =  $asignatura->getMetodologia();
             $modn = $modAsignatura->getMetodologia();
           
@@ -224,6 +228,7 @@ class SAComparacionImplements implements SAComparacion
             if(sizeof($n) !== sizeof($modn)){
                 $comparacion["MetodologiaI"] = true;
             }
+        }
         }
         $DAOP = $factoriesDAO->createSABibliografia();
         $DAOPM = $factoriesDAO->createSAModBibliografia();
