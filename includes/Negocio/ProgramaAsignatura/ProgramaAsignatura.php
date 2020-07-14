@@ -1,33 +1,48 @@
 <?php
+
 namespace es\ucm;
 
-class ProgramaAsignatura{
-	private $IdPrograma;
-	private $ConocimientosPrevios;
-	private $ConocimientosPreviosI;
-	private $BreveDescripcion;
-	private $BreveDescripcionI;
-	private $ProgramaDetallado;
-	private $ProgramaDetalladoI;
-	private $IdAsignatura;
+class ProgramaAsignatura
+{
+    private $IdPrograma;
+    private $ConocimientosPrevios;
+    private $ConocimientosPreviosI;
+    private $BreveDescripcion;
+    private $BreveDescripcionI;
+    private $ProgramaTeorico;
+    private $ProgramaTeoricoI;
+    private $ProgramaSeminarios;
+    private $ProgramaSeminariosI;
+    private $ProgramaLaboratorio;
+    private $ProgramaLaboratorioI;
+    private $Influencia;
+    private $InfluenciaI;
+    private $IdAsignatura;
 
-	public function __construct($IdPrograma,$ConocimientosPrevios,$ConocimientosPreviosI,$BreveDescripcion,$BreveDescripcionI,$ProgramaDetallado,$ProgramaDetalladoI,$IdAsignatura){
-		$this->IdPrograma = $IdPrograma;
-		$this->ConocimientosPrevios = $ConocimientosPrevios;
-		$this->ConocimientosPreviosI = $ConocimientosPreviosI;
-		$this->BreveDescripcion = $BreveDescripcion;
-		$this->BreveDescripcionI = $BreveDescripcionI;
-		$this->ProgramaDetallado = $ProgramaDetallado;
-		$this->ProgramaDetalladoI = $ProgramaDetalladoI;
-		$this->IdAsignatura = $IdAsignatura;
-	}
+    public function __construct($IdPrograma, $ConocimientosPrevios, $ConocimientosPreviosI, $BreveDescripcion, $BreveDescripcionI, $ProgramaTeorico, $ProgramaTeoricoI, $ProgramaSeminarios, $ProgramaSeminariosI, $ProgramaLaboratorio, $ProgramaLaboratorioI, $Influencia, $InfluenciaI, $IdAsignatura)
+    {
+        $this->IdPrograma = $IdPrograma;
+        $this->ConocimientosPrevios = $ConocimientosPrevios;
+        $this->ConocimientosPreviosI = $ConocimientosPreviosI;
+        $this->BreveDescripcion = $BreveDescripcion;
+        $this->BreveDescripcionI = $BreveDescripcionI;
+        $this->ProgramaTeorico = $ProgramaTeorico;
+        $this->ProgramaTeoricoI = $ProgramaTeoricoI;
+        $this->ProgramaSeminarios = $ProgramaSeminarios;
+        $this->ProgramaSeminariosI = $ProgramaSeminariosI;
+        $this->ProgramaLaboratorio = $ProgramaLaboratorio;
+        $this->ProgramaLaboratorioI = $ProgramaLaboratorioI;
+        $this->Influencia = $Influencia;
+        $this->InfluenciaI = $InfluenciaI;
+        $this->IdAsignatura = $IdAsignatura;
+    }
 
     /**
      * @return mixed
      */
     public function getIdPrograma()
     {
-    	return $this->IdPrograma;
+        return $this->IdPrograma;
     }
 
     /**
@@ -37,9 +52,9 @@ class ProgramaAsignatura{
      */
     public function setIdPrograma($IdPrograma)
     {
-    	$this->IdPrograma = $IdPrograma;
+        $this->IdPrograma = $IdPrograma;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -47,7 +62,7 @@ class ProgramaAsignatura{
      */
     public function getConocimientosPrevios()
     {
-    	return $this->ConocimientosPrevios;
+        return $this->ConocimientosPrevios;
     }
 
     /**
@@ -57,9 +72,9 @@ class ProgramaAsignatura{
      */
     public function setConocimientosPrevios($ConocimientosPrevios)
     {
-    	$this->ConocimientosPrevios = $ConocimientosPrevios;
+        $this->ConocimientosPrevios = $ConocimientosPrevios;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -67,7 +82,7 @@ class ProgramaAsignatura{
      */
     public function getConocimientosPreviosI()
     {
-    	return $this->ConocimientosPreviosI;
+        return $this->ConocimientosPreviosI;
     }
 
     /**
@@ -77,9 +92,9 @@ class ProgramaAsignatura{
      */
     public function setConocimientosPreviosI($ConocimientosPreviosI)
     {
-    	$this->ConocimientosPreviosI = $ConocimientosPreviosI;
+        $this->ConocimientosPreviosI = $ConocimientosPreviosI;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -87,7 +102,7 @@ class ProgramaAsignatura{
      */
     public function getBreveDescripcion()
     {
-    	return $this->BreveDescripcion;
+        return $this->BreveDescripcion;
     }
 
     /**
@@ -97,9 +112,9 @@ class ProgramaAsignatura{
      */
     public function setBreveDescripcion($BreveDescripcion)
     {
-    	$this->BreveDescripcion = $BreveDescripcion;
+        $this->BreveDescripcion = $BreveDescripcion;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -107,7 +122,7 @@ class ProgramaAsignatura{
      */
     public function getBreveDescripcionI()
     {
-    	return $this->BreveDescripcionI;
+        return $this->BreveDescripcionI;
     }
 
     /**
@@ -117,49 +132,169 @@ class ProgramaAsignatura{
      */
     public function setBreveDescripcionI($BreveDescripcionI)
     {
-    	$this->BreveDescripcionI = $BreveDescripcionI;
+        $this->BreveDescripcionI = $BreveDescripcionI;
 
-    	return $this;
+        return $this;
     }
 
     /**
      * @return mixed
      */
-    public function getProgramaDetallado()
+    public function getProgramaTeorico()
     {
-    	return $this->ProgramaDetallado;
+        return $this->ProgramaTeorico;
     }
 
     /**
-     * @param mixed $ProgramaDetallado
+     * @param mixed $ProgramaTeorico
      *
      * @return self
      */
-    public function setProgramaDetallado($ProgramaDetallado)
+    public function setProgramaTeorico($ProgramaTeorico)
     {
-    	$this->ProgramaDetallado = $ProgramaDetallado;
+        $this->ProgramaTeorico = $ProgramaTeorico;
 
-    	return $this;
+        return $this;
     }
 
     /**
      * @return mixed
      */
-    public function getProgramaDetalladoI()
+    public function getProgramaTeoricoI()
     {
-    	return $this->ProgramaDetalladoI;
+        return $this->ProgramaTeoricoI;
     }
 
     /**
-     * @param mixed $ProgramaDetalladoI
+     * @param mixed $ProgramaTeoricoI
      *
      * @return self
      */
-    public function setProgramaDetalladoI($ProgramaDetalladoI)
+    public function setProgramaTeoricoI($ProgramaTeoricoI)
     {
-    	$this->ProgramaDetalladoI = $ProgramaDetalladoI;
+        $this->ProgramaTeoricoI = $ProgramaTeoricoI;
 
-    	return $this;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getProgramaSeminarios()
+    {
+        return $this->ProgramaSeminarios;
+    }
+
+    /**
+     * @param mixed $ProgramaSeminarios
+     *
+     * @return self
+     */
+    public function setProgramaSeminarios($ProgramaSeminarios)
+    {
+        $this->ProgramaSeminarios = $ProgramaSeminarios;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getProgramaSeminariosI()
+    {
+        return $this->ProgramaSeminariosI;
+    }
+
+    /**
+     * @param mixed $ProgramaSeminariosI
+     *
+     * @return self
+     */
+    public function setProgramaSeminariosI($ProgramaSeminariosI)
+    {
+        $this->ProgramaSeminariosI = $ProgramaSeminariosI;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getProgramaLaboratorio()
+    {
+        return $this->ProgramaLaboratorio;
+    }
+
+    /**
+     * @param mixed $ProgramaLaboratorio
+     *
+     * @return self
+     */
+    public function setProgramaLaboratorio($ProgramaLaboratorio)
+    {
+        $this->ProgramaLaboratorio = $ProgramaLaboratorio;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getProgramaLaboratorioI()
+    {
+        return $this->ProgramaLaboratorioI;
+    }
+
+    /**
+     * @param mixed $ProgramaLaboratorioI
+     *
+     * @return self
+     */
+    public function setProgramaLaboratorioI($ProgramaLaboratorioI)
+    {
+        $this->ProgramaLaboratorioI = $ProgramaLaboratorioI;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getInfluencia()
+    {
+        return $this->Influencia;
+    }
+
+    /**
+     * @param mixed $Influencia
+     *
+     * @return self
+     */
+    public function setInfluencia($Influencia)
+    {
+        $this->Influencia = $Influencia;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getInfluenciaI()
+    {
+        return $this->InfluenciaI;
+    }
+
+    /**
+     * @param mixed $InfluenciaI
+     *
+     * @return self
+     */
+    public function setInfluenciaI($InfluenciaI)
+    {
+        $this->InfluenciaI = $InfluenciaI;
+
+        return $this;
     }
 
     /**
@@ -167,7 +302,7 @@ class ProgramaAsignatura{
      */
     public function getIdAsignatura()
     {
-    	return $this->IdAsignatura;
+        return $this->IdAsignatura;
     }
 
     /**
@@ -177,8 +312,8 @@ class ProgramaAsignatura{
      */
     public function setIdAsignatura($IdAsignatura)
     {
-    	$this->IdAsignatura = $IdAsignatura;
+        $this->IdAsignatura = $IdAsignatura;
 
-    	return $this;
+        return $this;
     }
 }

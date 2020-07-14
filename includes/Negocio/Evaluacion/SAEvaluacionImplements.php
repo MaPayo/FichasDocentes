@@ -19,14 +19,16 @@ class SAEvaluacionImplements implements SAEvaluacion
                 $evaluacion[0]['RealizacionExamenes'],
                 $evaluacion[0]['RealizacionExamenesi'],
                 $evaluacion[0]['PesoExamenes'],
-                $evaluacion[0]['CalificacionFinal'],
-                $evaluacion[0]['CalificacionFinali'],
                 $evaluacion[0]['RealizacionActividades'],
                 $evaluacion[0]['RealizacionActividadesi'],
                 $evaluacion[0]['PesoActividades'],
                 $evaluacion[0]['RealizacionLaboratorio'],
                 $evaluacion[0]['RealizacionLaboratorioi'],
                 $evaluacion[0]['PesoLaboratorio'],
+                $evaluacion[0]['CalificacionFinalO'],
+                $evaluacion[0]['CalificacionFinalOi'],
+                $evaluacion[0]['CalificacionFinalE'],
+                $evaluacion[0]['CalificacionFinalEi'],
                 $evaluacion[0]['IdAsignatura']
             );
         }

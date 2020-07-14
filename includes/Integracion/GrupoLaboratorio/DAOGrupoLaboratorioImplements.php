@@ -6,8 +6,6 @@ require_once('includes/Integracion/GrupoLaboratorio/DAOGrupoLaboratorio.php');
 
 class DAOGrupoLaboratorioImplements implements DAOGrupoLaboratorio
 {
-
-
     public static function listGrupoLaboratorio($idAsignatura)
     {
         $singletonDataSource = new SingletonDataSource();

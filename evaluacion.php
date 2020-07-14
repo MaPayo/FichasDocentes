@@ -10,8 +10,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <?php
-    echo '<link href="' . RUTA_CSS . 'estilos.css" rel="stylesheet" type="text/css" media="screen"/>
-    <link rel="stylesheet" href="' . RUTA_CSS . 'bootstrap.css">
+    echo '<link rel="stylesheet" href="' . RUTA_CSS . 'bootstrap.css">
     <link rel="stylesheet" href="' . RUTA_CSS . 'fichasdocentes.css">
     <link rel="shortcut icon" type="image/x-icon" href="' . RUTA_IMGS . 'LogoUniversidad.png">
     <script type="text/javascript" src="' . RUTA_JS . 'codigo.js"></script>
@@ -70,15 +69,17 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                         $datosIniciales['realizacionExamenes']=$contextEvaluacion->getData()->getRealizacionExamenes();
                                         $datosIniciales['realizacionExamenesI']=$contextEvaluacion->getData()->getRealizacionExamenesI();
                                         $datosIniciales['pesoExamenes']=$contextEvaluacion->getData()->getPesoExamenes();
-                                        $datosIniciales['calificacionFinal']=$contextEvaluacion->getData()->getCalificacionFinal();
-                                        $datosIniciales['calificacionFinalI']=$contextEvaluacion->getData()->getCalificacionFinalI();
                                         $datosIniciales['realizacionActividades']=$contextEvaluacion->getData()->getRealizacionActividades();
                                         $datosIniciales['realizacionActividadesI']=$contextEvaluacion->getData()->getRealizacionActividadesI();
                                         $datosIniciales['pesoActividades']=$contextEvaluacion->getData()->getPesoActividades();
                                         $datosIniciales['realizacionLaboratorio']=$contextEvaluacion->getData()->getRealizacionLaboratorio();
                                         $datosIniciales['realizacionLaboratorioI']=$contextEvaluacion->getData()->getRealizacionLaboratorioI();
                                         $datosIniciales['pesoLaboratorio']=$contextEvaluacion->getData()->getPesoLaboratorio();
-                                        $datosIniciales['idAsignatura']=$contextEvaluacion->getData()->getIdAsignatura();
+                                        $datosIniciales['calificacionFinalO']=$contextEvaluacion->getData()->getCalificacionFinalO();
+                                        $datosIniciales['calificacionFinalOI']=$contextEvaluacion->getData()->getCalificacionFinalOI();
+                                        $datosIniciales['calificacionFinalE']=$contextEvaluacion->getData()->getCalificacionFinalE();
+                                        $datosIniciales['calificacionFinalEI']=$contextEvaluacion->getData()->getCalificacionFinalEI();
+                                        $datosIniciales['idAsignatura']=$_GET[$name];
                                         $access->gestionaModificacion($datosIniciales);
                                     }
                                     else{

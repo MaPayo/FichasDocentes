@@ -13,30 +13,55 @@ class FormGrupoLaboratorioProfesor extends Form
 	protected function generaCamposFormulario($datosIniciales)
 	{
 		$idGrupoLaboratorio = isset($datosIniciales['idGrupoLaboratorio']) ? $datosIniciales['idGrupoLaboratorio'] : null;
+		$sesiones=isset($datosIniciales['sesiones']) ? $datosIniciales['sesiones'] : null;
+		$fechas=isset($datosIniciales['fechas']) ? $datosIniciales['fechas'] : null;
+		$horas=isset($datosIniciales['horas']) ? $datosIniciales['horas'] : null;
 		$emailProfesor = isset($datosIniciales['emailProfesor']) ? $datosIniciales['emailProfesor'] : null;
 		$idAsignatura = isset($datosIniciales['idAsignatura']) ? $datosIniciales['idAsignatura'] : null;
 
 		$html = '<input type="hidden" name="idGrupoLaboratorio" value="' . $idGrupoLaboratorio . '" required />
-		<input type="hidden" name="idAsignatura" value="' . $idAsignatura . '" required />
+		<input type="hidden" name="idAsignatura" value="' . $idAsignatura . '" required />';
 
-		<div class="form-group">
+		if(isset($emailProfesor)){
+			$html.='<div class="form-group">
+			<label for="emailProfesor">Profesor</label>
+			<input class="form-control" type="text" id="emailProfesor" name="emailProfesor" value="' . $emailProfesor. '" readonly="readonly" />
+			</div>';
+		}else{
+			$html.='<div class="form-group">
 			<label for="emailProfesor">Profesor</label>
 			<select class="form-control" id="emailProfesor" name="emailProfesor" >';
-		$controller = new ControllerImplements();
-		$context = new Context(FIND_PERMISOS, $idAsignatura);
-		$contextPermisos = $controller->action($context);
-		if ($contextPermisos->getEvent() === FIND_PERMISOS_OK) {
-			foreach ($contextPermisos->getData() as $permiso) {
-				$context = new Context(FIND_PROFESOR, $permiso->getEmailProfesor());
-				$contextProfesor = $controller->action($context);
-				if ($contextProfesor->getData()->getEmail() == $emailProfesor) {
-					$html .= '<option value="' . $contextProfesor->getData()->getEmail() . '" selected >' . $contextProfesor->getData()->getNombre() . '</option>';
-				} else {
-					$html .= '<option value="' . $contextProfesor->getData()->getEmail() . '">' . $contextProfesor->getData()->getNombre() . '</option>';
+			$controller = new ControllerImplements();
+			$context = new Context(FIND_PERMISOS, $idAsignatura);
+			$contextPermisos = $controller->action($context);
+			if ($contextPermisos->getEvent() === FIND_PERMISOS_OK) {
+				foreach ($contextPermisos->getData() as $permiso) {
+					$context = new Context(FIND_PROFESOR, $permiso->getEmailProfesor());
+					$contextProfesor = $controller->action($context);
+					if ($contextProfesor->getData()->getEmail() == $emailProfesor) {
+						$html .= '<option value="' . $contextProfesor->getData()->getEmail() . '" selected >' . $contextProfesor->getData()->getNombre() . '</option>';
+					} else {
+						$html .= '<option value="' . $contextProfesor->getData()->getEmail() . '">' . $contextProfesor->getData()->getNombre() . '</option>';
+					}
 				}
 			}
+			$html .= '</select>
+			</div>';
 		}
-		$html .= '	</select>
+		$html.='
+		<div class="form-group">
+			<label for="sesiones">Sesiones</label>
+			<input class="form-control" type="text" id="sesiones" name="sesiones" value="' . $sesiones. '" />
+		</div>
+
+		<div class="form-group">
+			<label for="tipo">Fechas</label>
+			<input class="form-control" type="text" id="fechas" name="fechas" value="' . $fechas. '" />
+		</div>
+
+		<div class="form-group">
+			<label for="horas">Horas</label>
+			<input class="form-control" type="text" id="horas" name="horas" value="' . $horas. '" />
 		</div>
 
 		<div class="text-right">
@@ -62,6 +87,24 @@ class FormGrupoLaboratorioProfesor extends Form
 			$erroresFormulario[] = "No has introducido al profesor.";
 		}
 
+		$sesiones = isset($datos['sesiones']) ? $datos['sesiones'] : null;
+		$sesiones = self::clean($sesiones);
+		if (empty($sesiones)) {
+			$erroresFormulario[] = "No has introducido las sesiones.";
+		}
+
+		$fechas = isset($datos['fechas']) ? $datos['fechas'] : null;
+		$fechas = self::clean($fechas);
+		if (empty($fechas)) {
+			$erroresFormulario[] = "No has introducido las fechas.";
+		}
+
+		$horas = isset($datos['horas']) ? $datos['horas'] : null;
+		$horas = self::clean($horas);
+		if (empty($horas)) {
+			$erroresFormulario[] = "No has introducido las horas.";
+		}
+
 		if (count($erroresFormulario) === 0) {
 			$controller = new ControllerImplements();
 			$arrayGrupoLaboratorioProfesor=array();
@@ -71,10 +114,22 @@ class FormGrupoLaboratorioProfesor extends Form
 			$contextGrupoLaboratorio = $controller->action($context);
 
 			if ($contextGrupoLaboratorio->getEvent() === FIND_MODGRUPO_LABORATORIO_PROFESOR_OK) {
-				$erroresFormulario[] = "El profesor ya se encuentra registrado en el grupo.";
+
+				$grupoLaboratorioProfesor = new ModGrupoLaboratorioProfesor($datos['idGrupoLaboratorio'],$sesiones, $fechas, $horas, $emailProfesor);
+				$context = new Context(UPDATE_MODGRUPO_LABORATORIO_PROFESOR, $grupoLaboratorioProfesor);
+				$contextGrupoLaboratorio = $controller->action($context);
+				if ($contextGrupoLaboratorio->getEvent() === UPDATE_MODGRUPO_LABORATORIO_PROFESOR_OK) {
+					$modAsignatura = new ModAsignatura($datos['idAsignatura'], date("Y-m-d H:i:s"), $_SESSION['idUsuario'], $datos['idAsignatura']);
+					$context = new Context(UPDATE_MODASIGNATURA, $modAsignatura);
+					$contextModAsignatura = $controller->action($context);
+					$erroresFormulario = "indexAcceso.php?IdAsignatura=" . $datos['idAsignatura'] . "&modificado=y#nav-grupo-laboratorio";
+				} elseif ($contextGrupoLaboratorio->getEvent() === UPDATE_MODGRUPO_LABORATORIO_PROFESOR_FAIL) {
+					$erroresFormulario[] = "No se ha podido modificar al profesor en el grupo.";
+				}
+
 			} elseif ($contextGrupoLaboratorio->getEvent() === FIND_MODGRUPO_LABORATORIO_PROFESOR_FAIL) {
 
-				$grupoLaboratorioProfesor = new ModGrupoLaboratorioProfesor($datos['idGrupoLaboratorio'], $emailProfesor);
+				$grupoLaboratorioProfesor = new ModGrupoLaboratorioProfesor($datos['idGrupoLaboratorio'],$sesiones, $fechas, $horas, $emailProfesor);
 				$context = new Context(CREATE_MODGRUPO_LABORATORIO_PROFESOR, $grupoLaboratorioProfesor);
 				$contextGrupoLaboratorio = $controller->action($context);
 				if ($contextGrupoLaboratorio->getEvent() === CREATE_MODGRUPO_LABORATORIO_PROFESOR_OK) {

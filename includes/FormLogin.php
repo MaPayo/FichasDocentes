@@ -45,6 +45,7 @@ class FormLogin extends Form
 			$context = new Context(FIND_USUARIO, $email);
 			$controller = new ControllerImplements();
 			$usuario = $controller->action($context);
+			var_dump($usuario->getEvent());
 			if ($usuario->getEvent() === FIND_USUARIO_FAIL) {						
 				$erroresFormulario[] = "El email o la contraseña no coinciden";
 			} else {

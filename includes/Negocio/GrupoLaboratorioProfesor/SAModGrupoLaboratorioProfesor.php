@@ -2,7 +2,8 @@
 
 namespace es\ucm;
 
-interface SAModGrupoLaboratorioProfesor{
+interface SAModGrupoLaboratorioProfesor
+{
 	public static function listModGrupoLaboratorioProfesor($idGrupoLab);
 
 	public static function findModGrupoLaboratorioProfesor($idModGrupoLab, $emailProfesor);

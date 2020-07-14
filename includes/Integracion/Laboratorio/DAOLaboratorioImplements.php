@@ -6,8 +6,6 @@ require_once('includes/Integracion/Laboratorio/DAOLaboratorio.php');
 
 class DAOLaboratorioImplements implements DAOLaboratorio
 {
-
-
     public static function findLaboratorio($idAsignatura)
     {
         $singletonDataSource = new SingletonDataSource();

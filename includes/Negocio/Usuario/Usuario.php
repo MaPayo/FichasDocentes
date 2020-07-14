@@ -1,21 +1,24 @@
 <?php
+
 namespace es\ucm;
 
-class Usuario{
-	private $Email;
-	private $Password;
+class Usuario
+{
+    private $Email;
+    private $Password;
 
-	public function __construct($Email,$Password){
-		$this->Email = $Email;
-		$this->Password = $Password;
-	}
+    public function __construct($Email, $Password)
+    {
+        $this->Email = $Email;
+        $this->Password = $Password;
+    }
 
     /**
      * @return mixed
      */
     public function getEmail()
     {
-    	return $this->Email;
+        return $this->Email;
     }
 
     /**
@@ -25,9 +28,9 @@ class Usuario{
      */
     public function setEmail($Email)
     {
-    	$this->Email = $Email;
+        $this->Email = $Email;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -35,7 +38,7 @@ class Usuario{
      */
     public function getPassword()
     {
-    	return $this->Password;
+        return $this->Password;
     }
 
     /**
@@ -45,8 +48,8 @@ class Usuario{
      */
     public function setPassword($Password)
     {
-    	$this->Password = $Password;
+        $this->Password = $Password;
 
-    	return $this;
+        return $this;
     }
 }

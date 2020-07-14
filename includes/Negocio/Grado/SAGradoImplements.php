@@ -14,6 +14,15 @@ class SAGradoImplements implements SAGrado
         $factoriesDAO = new \es\ucm\FactoriesDAOImplements();
         $DAOGrado = $factoriesDAO->createDAOGrado();
         $grado = $DAOGrado->findGrado($codigoGrado);
+        if ($grado && count($grado) === 1) {
+            $grado = new Grado(
+                $grado[0]['CodigoGrado'],
+                $grado[0]['NombreGrado'],
+                $grado[0]['Coordinador'],
+                $grado[0]['HorasEcts'],
+                $grado[0]['AnyoAcademico']
+            );
+        }
         return $grado;
     }
 
@@ -47,9 +56,9 @@ class SAGradoImplements implements SAGrado
         $DAOGrado = $factoriesDAO->createDAOGrado();
         $grados = $DAOGrado->listGrado();
         $arrayGrados = array();
-        if($grados){
+        if ($grados) {
             foreach ($grados as $grado) {
-              $arrayGrados[] = new Grado($grado['CodigoGrado'], $grado['NombreGrado'], $grado['HorasEcts']);
+                $arrayGrados[] = new Grado($grado['CodigoGrado'], $grado['NombreGrado'], $grado['Coordinador'], $grado['HorasEcts'], $grado['AnyoAcademico']);
             }
         }
         return $arrayGrados;

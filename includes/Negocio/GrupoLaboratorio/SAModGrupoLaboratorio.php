@@ -2,7 +2,8 @@
 
 namespace es\ucm;
 
-interface SAModGrupoLaboratorio{
+interface SAModGrupoLaboratorio
+{
 
     public static function listModGrupoLaboratorio($idModAsignatura);
 
@@ -11,7 +12,6 @@ interface SAModGrupoLaboratorio{
     public static function createModGrupoLaboratorio($grupoLaboratorio);
 
     public static function updateModGrupoLaboratorio($grupoLaboratorio);
-    
-    public static function deleteModGrupoLaboratorio($idGrupoLaboratorio);
 
+    public static function deleteModGrupoLaboratorio($idGrupoLaboratorio);
 }

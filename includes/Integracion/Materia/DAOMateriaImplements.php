@@ -1,55 +1,73 @@
 <?php
+
 namespace es\ucm;
 
 require_once('includes/Integracion/Materia/DAOMateria.php');
 
-class DAOMateriaImplements implements DAOMateria{
-    
-    
-    public static function findMateria($idMateria){
-        $singletonDataSource=new SingletonDataSource();
-        $dataSource=$singletonDataSource->getInstance();
-        $sql="SELECT * FROM materia WHERE IdMateria = :idMateria";
-        $values=array(':idMateria' => $idMateria);
-        $results=$dataSource->executeQuery($sql,$values);
-        return $results;
+class DAOMateriaImplements implements DAOMateria
+{
 
+
+    public static function findMateria($idMateria)
+    {
+        $singletonDataSource = new SingletonDataSource();
+        $dataSource = $singletonDataSource->getInstance();
+        $sql = "SELECT * FROM materia WHERE IdMateria = :idMateria";
+        $values = array(':idMateria' => $idMateria);
+        $results = $dataSource->executeQuery($sql, $values);
+        return $results;
     }
 
-    public static function createMateria($Materia){
-        $singletonDataSource=new SingletonDataSource();
-        $dataSource=$singletonDataSource->getInstance();
-        $sql="INSERT INTO materia (IdMateria, NombreMateria, Caracter, CreditosMateria, IdModulo) 
+    public static function createMateria($Materia)
+    {
+        $singletonDataSource = new SingletonDataSource();
+        $dataSource = $singletonDataSource->getInstance();
+        $sql = "INSERT INTO materia (IdMateria, NombreMateria, Caracter, CreditosMateria, IdModulo) 
         VALUES (:idMateria, :nombreMateria, :caracter, :creditosMateria, :idModulo)";
-        $values=array(':idMateria' => $Materia->getIdMateria(),
-        ':nombreMateria' => $Materia->getNombreMateria(),
-        ':caracter' => $Materia->getCaracter(),
-        ':creditosMateria' => $Materia->getCreditosMateria(),
-        ':idModulo' => $Materia->getIdModulo());
-        $results=$dataSource->executeInsertUpdateDelete($sql,$values);
-        return $results;
-
-    }
-
-    public static function updateMateria($Materia){
-        $singletonDataSource=new SingletonDataSource();
-        $dataSource=$singletonDataSource->getInstance();
-        $sql="UPDATE materia SET IdMateria = :idMateria, NombreMateria = :nombreMateria, Caracter = :caracter, CreditosMateria = :creditosMateria, IdModulo = :idModulo WHERE IdMateria = :idMateria";
-        $values=array(':idMateria' => $Materia->getIdMateria(),
-        ':nombreMateria' => $Materia->getNombreMateria(),
-        ':caracter' => $Materia->getCaracter(),
-        ':creditosMateria' => $Materia->getCreditosMateria(),
-        ':idModulo' => $Materia->getIdModulo());
-        $results=$dataSource->executeInsertUpdateDelete($sql,$values);
+        $values = array(
+            ':idMateria' => $Materia->getIdMateria(),
+            ':nombreMateria' => $Materia->getNombreMateria(),
+            ':caracter' => $Materia->getCaracter(),
+            ':creditosMateria' => $Materia->getCreditosMateria(),
+            ':idModulo' => $Materia->getIdModulo()
+        );
+        $results = $dataSource->executeInsertUpdateDelete($sql, $values);
         return $results;
     }
 
-    public static function deleteMateria($idMateria){
-        $singletonDataSource=new SingletonDataSource();
-        $dataSource=$singletonDataSource->getInstance();
-        $sql="DELETE FROM materia WHERE IdMateria = :idMateria";
-        $values=array(':idMateria' => $idMateria);
-        $results=$dataSource->executeInsertUpdateDelete($sql,$values);
+    public static function updateMateria($Materia)
+    {
+        $singletonDataSource = new SingletonDataSource();
+        $dataSource = $singletonDataSource->getInstance();
+        $sql = "UPDATE materia SET IdMateria = :idMateria, NombreMateria = :nombreMateria, Caracter = :caracter, CreditosMateria = :creditosMateria, IdModulo = :idModulo WHERE IdMateria = :idMateria";
+        $values = array(
+            ':idMateria' => $Materia->getIdMateria(),
+            ':nombreMateria' => $Materia->getNombreMateria(),
+            ':caracter' => $Materia->getCaracter(),
+            ':creditosMateria' => $Materia->getCreditosMateria(),
+            ':idModulo' => $Materia->getIdModulo()
+        );
+        $results = $dataSource->executeInsertUpdateDelete($sql, $values);
+        return $results;
+    }
+
+    public static function deleteMateria($idMateria)
+    {
+        $singletonDataSource = new SingletonDataSource();
+        $dataSource = $singletonDataSource->getInstance();
+        $sql = "DELETE FROM materia WHERE IdMateria = :idMateria";
+        $values = array(':idMateria' => $idMateria);
+        $results = $dataSource->executeInsertUpdateDelete($sql, $values);
+        return $results;
+    }
+
+    public static function listMateria($idModulo)
+    {
+        $singletonDataSource = new SingletonDataSource();
+        $dataSource = $singletonDataSource->getInstance();
+        $sql = "SELECT * FROM materia WHERE IdModulo = :idModulo";
+        $values = array(':idModulo' => $idModulo);
+        $results = $dataSource->executeQuery($sql, $values);
         return $results;
     }
 }

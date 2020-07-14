@@ -6,8 +6,6 @@ require_once('includes/Integracion/GrupoClaseProfesor/DAOGrupoClaseProfesor.php'
 
 class DAOGrupoClaseProfesorImplements implements DAOGrupoClaseProfesor
 {
-
-
     public static function listGrupoClaseProfesor($idGrupoClase)
     {
         $singletonDataSource = new SingletonDataSource();
@@ -35,10 +33,13 @@ class DAOGrupoClaseProfesorImplements implements DAOGrupoClaseProfesor
     {
         $singletonDataSource = new SingletonDataSource();
         $dataSource = $singletonDataSource->getInstance();
-        $sql = "INSERT INTO grupoclaseprofesor (IdGrupoClase,EmailProfesor) 
-        VALUES (:idGrupoClase, :emailProfesor)";
+        $sql = "INSERT INTO grupoclaseprofesor (IdGrupoClase,Tipo,Fechas,Horas,EmailProfesor) 
+        VALUES (:idGrupoClase, :tipo, :fechas, :horas, :emailProfesor)";
         $values = array(
             ':idGrupoClase' => $grupoClaseProfesor->getIdGrupoClase(),
+            ':tipo' => $grupoClaseProfesor->getTipo(),
+            ':fechas' => $grupoClaseProfesor->getFechas(),
+            ':horas' => $grupoClaseProfesor->getHoras(),
             ':emailProfesor' => $grupoClaseProfesor->getEmailProfesor()
         );
         $results = $dataSource->executeInsertUpdateDelete($sql, $values);
@@ -49,9 +50,12 @@ class DAOGrupoClaseProfesorImplements implements DAOGrupoClaseProfesor
     {
         $singletonDataSource = new SingletonDataSource();
         $dataSource = $singletonDataSource->getInstance();
-        $sql = "UPDATE grupoclaseprofesor SET IdGrupoClase = :idGrupoClase, EmailProfesor = :emailProfesor WHERE IdGrupoClase = :idGrupoClase AND EmailProfesor = :emailProfesor";
+        $sql = "UPDATE grupoclaseprofesor SET IdGrupoClase = :idGrupoClase, Tipo = :tipo, Fechas = :fechas, Horas = :horas, EmailProfesor = :emailProfesor WHERE IdGrupoClase = :idGrupoClase AND EmailProfesor = :emailProfesor";
         $values = array(
             ':idGrupoClase' => $grupoClaseProfesor->getIdGrupoClase(),
+            ':tipo' => $grupoClaseProfesor->getTipo(),
+            ':fechas' => $grupoClaseProfesor->getFechas(),
+            ':horas' => $grupoClaseProfesor->getHoras(),
             ':emailProfesor' => $grupoClaseProfesor->getEmailProfesor()
         );
         $results = $dataSource->executeInsertUpdateDelete($sql, $values);
@@ -65,7 +69,7 @@ class DAOGrupoClaseProfesorImplements implements DAOGrupoClaseProfesor
         $sql = "DELETE FROM grupoclaseprofesor WHERE IdGrupoClase = :idGrupoClase AND EmailProfesor = :emailProfesor";
         $values = array(
             ':idGrupoClase' => $idGrupoClase,
-            ':emailProfesor' =>$emailProfesor
+            ':emailProfesor' => $emailProfesor
         );
         $results = $dataSource->executeInsertUpdateDelete($sql, $values);
         return $results;

@@ -6,8 +6,6 @@ require_once('includes/Integracion/GrupoClaseProfesor/DAOModGrupoClaseProfesor.p
 
 class DAOModGrupoClaseProfesorImplements implements DAOModGrupoClaseProfesor
 {
-
-
     public static function listModGrupoClaseProfesor($idGrupoClase)
     {
         $singletonDataSource = new SingletonDataSource();
@@ -35,10 +33,13 @@ class DAOModGrupoClaseProfesorImplements implements DAOModGrupoClaseProfesor
     {
         $singletonDataSource = new SingletonDataSource();
         $dataSource = $singletonDataSource->getInstance();
-        $sql = "INSERT INTO modgrupoclaseprofesor (IdGrupoClase,EmailProfesor) 
-        VALUES (:idGrupoClase, :emailProfesor)";
+        $sql = "INSERT INTO modgrupoclaseprofesor (IdGrupoClase,Tipo,Fechas,Horas,EmailProfesor) 
+        VALUES (:idGrupoClase, :tipo, :fechas, :horas, :emailProfesor)";
         $values = array(
             ':idGrupoClase' => $modGrupoClaseProfesor->getIdGrupoClase(),
+            ':tipo' => $modGrupoClaseProfesor->getTipo(),
+            ':fechas' => $modGrupoClaseProfesor->getFechas(),
+            ':horas' => $modGrupoClaseProfesor->getHoras(),
             ':emailProfesor' => $modGrupoClaseProfesor->getEmailProfesor()
         );
         $results = $dataSource->executeInsertUpdateDelete($sql, $values);
@@ -49,9 +50,12 @@ class DAOModGrupoClaseProfesorImplements implements DAOModGrupoClaseProfesor
     {
         $singletonDataSource = new SingletonDataSource();
         $dataSource = $singletonDataSource->getInstance();
-        $sql = "UPDATE modgrupoclaseprofesor SET IdGrupoClase = :idGrupoClase, EmailProfesor = :emailProfesor WHERE IdGrupoClase = :idGrupoClase AND EmailProfesor = :emailProfesor";
+        $sql = "UPDATE modgrupoclaseprofesor SET IdGrupoClase = :idGrupoClase, Tipo = :tipo, Fechas = :fechas, Horas = :horas, EmailProfesor = :emailProfesor WHERE IdGrupoClase = :idGrupoClase AND EmailProfesor = :emailProfesor";
         $values = array(
             ':idGrupoClase' => $modGrupoClaseProfesor->getIdGrupoClase(),
+            ':tipo' => $modGrupoClaseProfesor->getTipo(),
+            ':fechas' => $modGrupoClaseProfesor->getFechas(),
+            ':horas' => $modGrupoClaseProfesor->getHoras(),
             ':emailProfesor' => $modGrupoClaseProfesor->getEmailProfesor()
         );
         $results = $dataSource->executeInsertUpdateDelete($sql, $values);
@@ -65,7 +69,7 @@ class DAOModGrupoClaseProfesorImplements implements DAOModGrupoClaseProfesor
         $sql = "DELETE FROM modgrupoclaseprofesor WHERE IdGrupoClase = :idGrupoClase AND EmailProfesor = :emailProfesor";
         $values = array(
             ':idGrupoClase' => $idGrupoClase,
-            ':emailProfesor' =>$emailProfesor
+            ':emailProfesor' => $emailProfesor
         );
         $results = $dataSource->executeInsertUpdateDelete($sql, $values);
         return $results;

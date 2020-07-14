@@ -1,18 +1,21 @@
 <?php
+
 namespace es\ucm;
 
-class GrupoClase{
-	private $IdGrupoClase;
-	private $Letra;
-	private $Idioma;
+class GrupoClase
+{
+    private $IdGrupoClase;
+    private $Letra;
+    private $Idioma;
     private $IdAsignatura;
 
-	public function __construct($IdGrupoClase,$Letra,$Idioma,$IdAsignatura){
-		$this->IdGrupoClase = $IdGrupoClase;
-		$this->Letra = $Letra;
-		$this->Idioma = $Idioma;
-        $this->IdAsignatura=$IdAsignatura;
-	}
+    public function __construct($IdGrupoClase, $Letra, $Idioma, $IdAsignatura)
+    {
+        $this->IdGrupoClase = $IdGrupoClase;
+        $this->Letra = $Letra;
+        $this->Idioma = $Idioma;
+        $this->IdAsignatura = $IdAsignatura;
+    }
 
     /**
      * @param mixed $IdAsignatura
@@ -21,7 +24,7 @@ class GrupoClase{
      */
     public function setIdAsignatura($IdAsignatura)
     {
-    	$this->IdAsignatura = $IdAsignatura;
+        $this->IdAsignatura = $IdAsignatura;
     }
 
 
@@ -30,7 +33,7 @@ class GrupoClase{
      */
     public function getIdGrupoClase()
     {
-    	return $this->IdGrupoClase;
+        return $this->IdGrupoClase;
     }
 
     /**
@@ -40,9 +43,9 @@ class GrupoClase{
      */
     public function setIdGrupoClase($IdGrupoClase)
     {
-    	$this->IdGrupoClase = $IdGrupoClase;
+        $this->IdGrupoClase = $IdGrupoClase;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -50,7 +53,7 @@ class GrupoClase{
      */
     public function getLetra()
     {
-    	return $this->Letra;
+        return $this->Letra;
     }
 
     /**
@@ -60,9 +63,9 @@ class GrupoClase{
      */
     public function setLetra($Letra)
     {
-    	$this->Letra = $Letra;
+        $this->Letra = $Letra;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -70,7 +73,7 @@ class GrupoClase{
      */
     public function getIdioma()
     {
-    	return $this->Idioma;
+        return $this->Idioma;
     }
 
     /**
@@ -80,9 +83,9 @@ class GrupoClase{
      */
     public function setIdioma($Idioma)
     {
-    	$this->Idioma = $Idioma;
+        $this->Idioma = $Idioma;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -90,7 +93,6 @@ class GrupoClase{
      */
     public function getIdAsignatura()
     {
-    	return $this->IdAsignatura;
+        return $this->IdAsignatura;
     }
-
 }

@@ -13,6 +13,7 @@ require_once('includes/Negocio/CompetenciasAsignatura/SAModCompetenciaAsignatura
 require_once('includes/Negocio/Configuracion/SAConfiguracionImplements.php');
 require_once('includes/Negocio/Evaluacion/SAEvaluacionImplements.php');
 require_once('includes/Negocio/Evaluacion/SAModEvaluacionImplements.php');
+require_once('includes/Negocio/Examenes/SAExamenesImplements.php');
 require_once('includes/Negocio/Grado/SAGradoImplements.php');
 require_once('includes/Negocio/GrupoClase/SAGrupoClaseImplements.php');
 require_once('includes/Negocio/GrupoClase/SAModGrupoClaseImplements.php');
@@ -39,7 +40,8 @@ require_once('includes/Negocio/ProgramaAsignatura/SAModProgramaAsignaturaImpleme
 require_once('includes/Negocio/Teorico/SATeoricoImplements.php');
 require_once('includes/Negocio/Usuario/SAUsuarioImplements.php');
 require_once('includes/Negocio/Verifica/SAVerificaImplements.php');
-
+require_once('includes/Negocio/Comparacion/SAComparacionImplements.php');
+//require_once('includes/Negocio/Conversion/SAConversionImplements.php');
 class FactorySAImplements implements FactorySA
 {
 
@@ -91,6 +93,11 @@ class FactorySAImplements implements FactorySA
     public function createSAModEvaluacion()
     {
         return new SAModEvaluacionImplements();
+    }
+
+    public function createSAExamenes()
+    {
+        return new SAExamenesImplements();
     }
 
     public function createSAGrado()
@@ -163,9 +170,9 @@ class FactorySAImplements implements FactorySA
         return new SALaboratorioImplements();
     }
 
-    public function createSALeyenda()
+    public function createSAComparacion()
     {
-        return new SALeyendaImplements();
+        return new SAComparacionImplements();
     }
     public function createSAMateria()
     {
@@ -223,4 +230,9 @@ class FactorySAImplements implements FactorySA
     {
         return new SAVerificaImplements();
     }
+
+    /*public function createSAConversion()
+    {
+        return new SAConversionImplements();
+    }*/
 }

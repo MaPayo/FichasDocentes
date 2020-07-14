@@ -6,8 +6,6 @@ require_once('includes/Integracion/GrupoClase/DAOGrupoClase.php');
 
 class DAOGrupoClaseImplements implements DAOGrupoClase
 {
-
-
     public static function listGrupoClase($idAsignatura)
     {
         $singletonDataSource = new SingletonDataSource();

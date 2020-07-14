@@ -50,6 +50,11 @@ require_once('includes/Presentacion/FactoriaComandos/Evaluacion/CommandDeleteMod
 require_once('includes/Presentacion/FactoriaComandos/Evaluacion/CommandFindModEvaluacion.php');
 require_once('includes/Presentacion/FactoriaComandos/Evaluacion/CommandUpdateModEvaluacion.php');
 
+require_once('includes/Presentacion/FactoriaComandos/Examenes/CommandCreateExamenes.php');
+require_once('includes/Presentacion/FactoriaComandos/Examenes/CommandDeleteExamenes.php');
+require_once('includes/Presentacion/FactoriaComandos/Examenes/CommandFindExamenes.php');
+require_once('includes/Presentacion/FactoriaComandos/Examenes/CommandUpdateExamenes.php');
+
 require_once('includes/Presentacion/FactoriaComandos/Grado/CommandCreateGrado.php');
 require_once('includes/Presentacion/FactoriaComandos/Grado/CommandDeleteGrado.php');
 require_once('includes/Presentacion/FactoriaComandos/Grado/CommandFindGrado.php');
@@ -129,12 +134,19 @@ require_once('includes/Presentacion/FactoriaComandos/Materia/CommandFindMateria.
 require_once('includes/Presentacion/FactoriaComandos/Metodologia/CommandFindMetodologia.php');
 require_once('includes/Presentacion/FactoriaComandos/Metodologia/CommandFindModMetodologia.php');
 require_once('includes/Presentacion/FactoriaComandos/Metodologia/CommandCreateModMetodologia.php');
+require_once('includes/Presentacion/FactoriaComandos/Metodologia/CommandDeleteModMetodologia.php');
 require_once('includes/Presentacion/FactoriaComandos/Metodologia/CommandUpdateModMetodologia.php');
 
 require_once('includes/Presentacion/FactoriaComandos/Modulo/CommandFindModulo.php');
 
 require_once('includes/Presentacion/FactoriaComandos/Permisos/CommandFindPermisos.php');
+require_once('includes/Presentacion/FactoriaComandos/Permisos/CommandDeletePermisos.php');
+require_once('includes/Presentacion/FactoriaComandos/Permisos/CommandCreatePermisos.php');
+
+require_once('includes/Presentacion/FactoriaComandos/Permisos/CommandUpdatePermisos.php');
 require_once('includes/Presentacion/FactoriaComandos/Permisos/CommandFindPermisosPorProfesor.php');
+
+require_once('includes/Presentacion/FactoriaComandos/Permisos/CommandFindPermisosPorProfesorYAsignatura.php');
 
 require_once('includes/Presentacion/FactoriaComandos/Problema/CommandFindProblema.php');
 
@@ -143,6 +155,7 @@ require_once('includes/Presentacion/FactoriaComandos/Profesor/CommandFindProfeso
 require_once('includes/Presentacion/FactoriaComandos/ProgramaAsignatura/CommandFindProgramaAsignatura.php');
 require_once('includes/Presentacion/FactoriaComandos/ProgramaAsignatura/CommandFindModProgramaAsignatura.php');
 require_once('includes/Presentacion/FactoriaComandos/ProgramaAsignatura/CommandCreateModProgramaAsignatura.php');
+require_once('includes/Presentacion/FactoriaComandos/ProgramaAsignatura/CommandDeleteModProgramaAsignatura.php');
 require_once('includes/Presentacion/FactoriaComandos/ProgramaAsignatura/CommandUpdateModProgramaAsignatura.php');
 
 require_once('includes/Presentacion/FactoriaComandos/Teorico/CommandFindTeorico.php');
@@ -150,6 +163,9 @@ require_once('includes/Presentacion/FactoriaComandos/Teorico/CommandFindTeorico.
 require_once('includes/Presentacion/FactoriaComandos/Usuario/CommandFindUsuario.php');
 
 require_once('includes/Presentacion/FactoriaComandos/Verifica/CommandFindVerifica.php');
+
+require_once('includes/Presentacion/FactoriaComandos/Comparacion/CommandComparacion.php');
+require_once('includes/Presentacion/FactoriaComandos/Conversion/CommandConvertMarkdownToHTML.php');
 
 class FactoryCommandImplements extends FactoryCommand
 {
@@ -170,6 +186,9 @@ class FactoryCommandImplements extends FactoryCommand
             case FIND_ADMINISTRADOR:
                 $command = new CommandFindAdministrador();
                 break;
+            case LIST_ADMINISTRADOR:
+                $command = new CommandListAdministrador();
+                break;
             case CREATE_ASIGNATURA:
                 $command = new CommandCreateAsignatura();
                 break;
@@ -181,6 +200,9 @@ class FactoryCommandImplements extends FactoryCommand
                 break;
             case FIND_ASIGNATURA:
                 $command = new CommandFindAsignatura();
+                break;
+            case LIST_ASIGNATURA:
+                $command = new CommandListAsignatura();
                 break;
             case CREATE_MODASIGNATURA:
                 $command = new CommandCreateModAsignatura();
@@ -278,6 +300,18 @@ class FactoryCommandImplements extends FactoryCommand
             case FIND_MODEVALUACION:
                 $command = new CommandFindModEvaluacion();
                 break;
+            case CREATE_EXAMENES:
+                $command = new CommandCreateExamenes();
+                break;
+            case DELETE_EXAMENES:
+                $command = new CommandDeleteExamenes();
+                break;
+            case UPDATE_EXAMENES:
+                $command = new CommandUpdateExamenes();
+                break;
+            case FIND_EXAMENES:
+                $command = new CommandFindExamenes();
+                break;
             case CREATE_GRADO:
                 $command = new CommandCreateGrado();
                 break;
@@ -353,7 +387,7 @@ class FactoryCommandImplements extends FactoryCommand
             case LIST_MODGRUPO_LABORATORIO:
                 $command = new CommandListModGrupoLaboratorio();
                 break;
-                case CREATE_GRUPO_CLASE_PROFESOR:
+            case CREATE_GRUPO_CLASE_PROFESOR:
                 $command = new CommandCreateGrupoClaseProfesor();
                 break;
             case DELETE_GRUPO_CLASE_PROFESOR:
@@ -509,6 +543,9 @@ class FactoryCommandImplements extends FactoryCommand
             case FIND_MATERIA:
                 $command = new CommandFindMateria();
                 break;
+            case LIST_MATERIA:
+                $command = new CommandListMateria();
+                break;
             case CREATE_METODOLOGIA:
                 $command = new CommandCreateMetodologia();
                 break;
@@ -545,6 +582,9 @@ class FactoryCommandImplements extends FactoryCommand
             case FIND_MODULO:
                 $command = new CommandFindModulo();
                 break;
+            case LIST_MODULO:
+                $command = new CommandListModulo();
+                break;
             case CREATE_PERMISOS:
                 $command = new CommandCreatePermisos();
                 break;
@@ -554,11 +594,20 @@ class FactoryCommandImplements extends FactoryCommand
             case UPDATE_PERMISOS:
                 $command = new CommandUpdatePermisos();
                 break;
+            case CREATE_PERMISOS:
+                $command = new CommandCreatePermisos();
+                break;
             case FIND_PERMISOS:
                 $command = new CommandFindPermisos();
                 break;
+            case DELETE_PERMISOS:
+                $command = new CommandDeletePermisos();
+                break;
             case FIND_PERMISOS_POR_PROFESOR:
                 $command = new CommandFindPermisosPorProfesor();
+                break;
+            case FIND_PERMISOS_POR_PROFESOR_Y_ASIGNATURA:
+                $command = new CommandFindPermisosPorProfesorYAsignatura();
                 break;
             case CREATE_PROBLEMA:
                 $command = new CommandCreateProblema();
@@ -629,6 +678,9 @@ class FactoryCommandImplements extends FactoryCommand
             case UPDATE_USUARIO:
                 $command = new CommandUpdateUsuario();
                 break;
+                /*case CONVERSION_HTML:
+                $command = new CommandConvertMarkdownToHTML();
+                break;*/
             case FIND_USUARIO:
                 $command = new CommandFindUsuario();
                 break;
@@ -643,6 +695,9 @@ class FactoryCommandImplements extends FactoryCommand
                 break;
             case FIND_VERIFICA:
                 $command = new CommandFindVerifica();
+                break;
+            case COMPARACION:
+                $command = new CommandComparacion();
                 break;
         }
         return $command;

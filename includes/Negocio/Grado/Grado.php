@@ -1,23 +1,30 @@
 <?php
+
 namespace es\ucm;
 
-class Grado{
-	private $CodigoGrado;
-	private $NombreGrado;
-	private $HorasEcts;
+class Grado
+{
+    private $CodigoGrado;
+    private $NombreGrado;
+    private $Coordinador;
+    private $HorasEcts;
+    private $AnyoAcademico;
 
-	public function __construct($CodigoGrado,$NombreGrado,$HorasEcts){
-		$this->CodigoGrado = $CodigoGrado;
-		$this->NombreGrado = $NombreGrado;
-		$this->HorasEcts = $HorasEcts;
+    public function __construct($CodigoGrado, $NombreGrado, $Coordinador, $HorasEcts, $AnyoAcademico)
+    {
+        $this->CodigoGrado = $CodigoGrado;
+        $this->NombreGrado = $NombreGrado;
+        $this->Coordinador = $Coordinador;
+        $this->HorasEcts = $HorasEcts;
+        $this->AnyoAcademico = $AnyoAcademico;
     }
-    
+
     /**
      * @return mixed
      */
     public function getNombreGrado()
     {
-    	return $this->NombreGrado;
+        return $this->NombreGrado;
     }
 
     /**
@@ -27,9 +34,29 @@ class Grado{
      */
     public function setNombreGrado($NombreGrado)
     {
-    	$this->NombreGrado = $NombreGrado;
+        $this->NombreGrado = $NombreGrado;
 
-    	return $this;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCoordinador()
+    {
+        return $this->Coordinador;
+    }
+
+    /**
+     * @param mixed $Coordinador
+     *
+     * @return self
+     */
+    public function setCoordinador($Coordinador)
+    {
+        $this->Coordinador = $Coordinador;
+
+        return $this;
     }
 
     /**
@@ -37,7 +64,7 @@ class Grado{
      */
     public function getHorasEcts()
     {
-    	return $this->HorasEcts;
+        return $this->HorasEcts;
     }
 
     /**
@@ -47,9 +74,29 @@ class Grado{
      */
     public function setHorasEcts($HorasEcts)
     {
-    	$this->HorasEcts = $HorasEcts;
+        $this->HorasEcts = $HorasEcts;
 
-    	return $this;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAnyoAcademico()
+    {
+        return $this->AnyoAcademico;
+    }
+
+    /**
+     * @param mixed $AnyoAcademico
+     *
+     * @return self
+     */
+    public function setAnyoAcademico($AnyoAcademico)
+    {
+        $this->AnyoAcademico = $AnyoAcademico;
+
+        return $this;
     }
 
     /**

@@ -1,52 +1,71 @@
 <?php
+
 namespace es\ucm;
 
-class Configuracion{
-	private $IdConfiguracion;
-	private $ConocimientosPrevios;
-	private $BreveDescripcion;
-	private $ProgramaDetallado;
-	private $ComGenerales;
-	private $ComEspecificas;
-	private $ComBasicas;
-	private $ResultadosAprendizaje;
-	private $Metodologia;
-	private $CitasBibliograficas;
-	private $RecursosInternet;
-	private $GrupoLaboratorio;
-	private $RealizacionExamenes;
-	private $CalificacionFinal;
-	private $RealizacionActividades;
-	private $RealizacionLaboratorio;
-	private $IdAsignatura;
+class Configuracion
+{
+    private $IdConfiguracion;
+    private $ConocimientosPrevios;
+    private $BreveDescripcion;
+    private $ProgramaTeorico;
+    private $ProgramaSeminarios;
+    private $ProgramaLaboratorio;
+    private $Influencia;
+    private $ComGenerales;
+    private $ComEspecificas;
+    private $ComBasicas;
+    private $ResultadosAprendizaje;
+    private $Metodologia;
+    private $CitasBibliograficas;
+    private $RecursosInternet;
+    private $GrupoLaboratorio;
+    private $RealizacionExamenes;
+    private $RealizacionActividades;
+    private $RealizacionLaboratorio;
+    private $CalificacionFinalO;
+    private $CalificacionFinalE;
+    private $Parcial;
+    private $Laboratorio;
+    private $Final;
+    private $Extraordinario;
+    private $IdAsignatura;
 
-	public function __construct($IdConfiguracion,$ConocimientosPrevios,$BreveDescripcion,$ProgramaDetallado,$ComGenerales,$ComEspecificas,$ComBasicas,$ResultadosAprendizaje,$Metodologia,$CitasBibliograficas,$RecursosInternet,$GrupoLaboratorio,$RealizacionExamenes,$CalificacionFinal,$RealizacionActividades,$RealizacionLaboratorio,$IdAsignatura){
+    public function __construct($IdConfiguracion, $ConocimientosPrevios, $BreveDescripcion, $ProgramaTeorico, $ProgramaSeminarios, $ProgramaLaboratorio, $Influencia, $ComGenerales, $ComEspecificas, $ComBasicas, $ResultadosAprendizaje, $Metodologia, $CitasBibliograficas, $RecursosInternet, $GrupoLaboratorio, $RealizacionExamenes, $RealizacionActividades, $RealizacionLaboratorio, $CalificacionFinalO, $CalificacionFinalE, $Parcial, $Laboratorio, $Final, $Extraordinario, $IdAsignatura)
+    {
 
-		$this->IdConfiguracion = $IdConfiguracion;
-		$this->ConocimientosPrevios = $ConocimientosPrevios;
-		$this->BreveDescripcion = $BreveDescripcion;
-		$this->ProgramaDetallado = $ProgramaDetallado;
-		$this->ComGenerales = $ComGenerales;
-		$this->ComEspecificas = $ComEspecificas;
-		$this->ComBasicas = $ComBasicas;
-		$this->ResultadosAprendizaje = $ResultadosAprendizaje;
-		$this->Metodologia = $Metodologia;
-		$this->CitasBibliograficas = $CitasBibliograficas;
-		$this->RecursosInternet = $RecursosInternet;
-		$this->GrupoLaboratorio = $GrupoLaboratorio;
-		$this->RealizacionExamenes = $RealizacionExamenes;
-		$this->CalificacionFinal = $CalificacionFinal;
-		$this->RealizacionActividades = $RealizacionActividades;
-		$this->RealizacionLaboratorio = $RealizacionLaboratorio;
-		$this->IdAsignatura = $IdAsignatura;
-	}
+        $this->IdConfiguracion = $IdConfiguracion;
+        $this->ConocimientosPrevios = $ConocimientosPrevios;
+        $this->BreveDescripcion = $BreveDescripcion;
+        $this->ProgramaTeorico = $ProgramaTeorico;
+        $this->ProgramaSeminarios = $ProgramaSeminarios;
+        $this->ProgramaLaboratorio = $ProgramaLaboratorio;
+        $this->Influencia = $Influencia;
+        $this->ComGenerales = $ComGenerales;
+        $this->ComEspecificas = $ComEspecificas;
+        $this->ComBasicas = $ComBasicas;
+        $this->ResultadosAprendizaje = $ResultadosAprendizaje;
+        $this->Metodologia = $Metodologia;
+        $this->CitasBibliograficas = $CitasBibliograficas;
+        $this->RecursosInternet = $RecursosInternet;
+        $this->GrupoLaboratorio=$GrupoLaboratorio;
+        $this->RealizacionExamenes = $RealizacionExamenes;
+        $this->RealizacionActividades = $RealizacionActividades;
+        $this->RealizacionLaboratorio = $RealizacionLaboratorio;
+        $this->CalificacionFinalO = $CalificacionFinalO;
+        $this->CalificacionFinalE = $CalificacionFinalE;
+        $this->Parcial = $Parcial;
+        $this->Laboratorio = $Laboratorio;
+        $this->Final = $Final;
+        $this->Extraordinario = $Extraordinario;
+        $this->IdAsignatura = $IdAsignatura;
+    }
 
     /**
      * @return mixed
      */
     public function getIdConfiguracion()
     {
-    	return $this->IdConfiguracion;
+        return $this->IdConfiguracion;
     }
 
     /**
@@ -56,9 +75,9 @@ class Configuracion{
      */
     public function setIdConfiguracion($IdConfiguracion)
     {
-    	$this->IdConfiguracion = $IdConfiguracion;
+        $this->IdConfiguracion = $IdConfiguracion;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -66,7 +85,7 @@ class Configuracion{
      */
     public function getConocimientosPrevios()
     {
-    	return $this->ConocimientosPrevios;
+        return $this->ConocimientosPrevios;
     }
 
     /**
@@ -76,9 +95,9 @@ class Configuracion{
      */
     public function setConocimientosPrevios($ConocimientosPrevios)
     {
-    	$this->ConocimientosPrevios = $ConocimientosPrevios;
+        $this->ConocimientosPrevios = $ConocimientosPrevios;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -86,7 +105,7 @@ class Configuracion{
      */
     public function getBreveDescripcion()
     {
-    	return $this->BreveDescripcion;
+        return $this->BreveDescripcion;
     }
 
     /**
@@ -96,29 +115,89 @@ class Configuracion{
      */
     public function setBreveDescripcion($BreveDescripcion)
     {
-    	$this->BreveDescripcion = $BreveDescripcion;
+        $this->BreveDescripcion = $BreveDescripcion;
 
-    	return $this;
+        return $this;
     }
 
     /**
      * @return mixed
      */
-    public function getProgramaDetallado()
+    public function getProgramaTeorico()
     {
-    	return $this->ProgramaDetallado;
+        return $this->ProgramaTeorico;
     }
 
     /**
-     * @param mixed $ProgramaDetallado
+     * @param mixed $ProgramaTeorico
      *
      * @return self
      */
-    public function setProgramaDetallado($ProgramaDetallado)
+    public function setProgramaTeorico($ProgramaTeorico)
     {
-    	$this->ProgramaDetallado = $ProgramaDetallado;
+        $this->ProgramaTeorico = $ProgramaTeorico;
 
-    	return $this;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getProgramaSeminarios()
+    {
+        return $this->ProgramaSeminarios;
+    }
+
+    /**
+     * @param mixed $ProgramaSeminarios
+     *
+     * @return self
+     */
+    public function setProgramaSeminarios($ProgramaSeminarios)
+    {
+        $this->ProgramaSeminarios = $ProgramaSeminarios;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getProgramaLaboratorio()
+    {
+        return $this->ProgramaLaboratorio;
+    }
+
+    /**
+     * @param mixed $ProgramaLaboratorio
+     *
+     * @return self
+     */
+    public function setProgramaLaboratorio($ProgramaLaboratorio)
+    {
+        $this->ProgramaLaboratorio = $ProgramaLaboratorio;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getInfluencia()
+    {
+        return $this->Influencia;
+    }
+
+    /**
+     * @param mixed $Influencia
+     *
+     * @return self
+     */
+    public function setInfluencia($Influencia)
+    {
+        $this->Influencia = $Influencia;
+
+        return $this;
     }
 
     /**
@@ -126,7 +205,7 @@ class Configuracion{
      */
     public function getComGenerales()
     {
-    	return $this->ComGenerales;
+        return $this->ComGenerales;
     }
 
     /**
@@ -136,9 +215,9 @@ class Configuracion{
      */
     public function setComGenerales($ComGenerales)
     {
-    	$this->ComGenerales = $ComGenerales;
+        $this->ComGenerales = $ComGenerales;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -146,7 +225,7 @@ class Configuracion{
      */
     public function getComEspecificas()
     {
-    	return $this->ComEspecificas;
+        return $this->ComEspecificas;
     }
 
     /**
@@ -156,9 +235,9 @@ class Configuracion{
      */
     public function setComEspecificas($ComEspecificas)
     {
-    	$this->ComEspecificas = $ComEspecificas;
+        $this->ComEspecificas = $ComEspecificas;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -166,7 +245,7 @@ class Configuracion{
      */
     public function getComBasicas()
     {
-    	return $this->ComBasicas;
+        return $this->ComBasicas;
     }
 
     /**
@@ -176,9 +255,9 @@ class Configuracion{
      */
     public function setComBasicas($ComBasicas)
     {
-    	$this->ComBasicas = $ComBasicas;
+        $this->ComBasicas = $ComBasicas;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -186,7 +265,7 @@ class Configuracion{
      */
     public function getResultadosAprendizaje()
     {
-    	return $this->ResultadosAprendizaje;
+        return $this->ResultadosAprendizaje;
     }
 
     /**
@@ -196,9 +275,9 @@ class Configuracion{
      */
     public function setResultadosAprendizaje($ResultadosAprendizaje)
     {
-    	$this->ResultadosAprendizaje = $ResultadosAprendizaje;
+        $this->ResultadosAprendizaje = $ResultadosAprendizaje;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -206,7 +285,7 @@ class Configuracion{
      */
     public function getMetodologia()
     {
-    	return $this->Metodologia;
+        return $this->Metodologia;
     }
 
     /**
@@ -216,9 +295,9 @@ class Configuracion{
      */
     public function setMetodologia($Metodologia)
     {
-    	$this->Metodologia = $Metodologia;
+        $this->Metodologia = $Metodologia;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -226,7 +305,7 @@ class Configuracion{
      */
     public function getCitasBibliograficas()
     {
-    	return $this->CitasBibliograficas;
+        return $this->CitasBibliograficas;
     }
 
     /**
@@ -236,9 +315,9 @@ class Configuracion{
      */
     public function setCitasBibliograficas($CitasBibliograficas)
     {
-    	$this->CitasBibliograficas = $CitasBibliograficas;
+        $this->CitasBibliograficas = $CitasBibliograficas;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -246,7 +325,7 @@ class Configuracion{
      */
     public function getRecursosInternet()
     {
-    	return $this->RecursosInternet;
+        return $this->RecursosInternet;
     }
 
     /**
@@ -256,9 +335,9 @@ class Configuracion{
      */
     public function setRecursosInternet($RecursosInternet)
     {
-    	$this->RecursosInternet = $RecursosInternet;
+        $this->RecursosInternet = $RecursosInternet;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -266,7 +345,7 @@ class Configuracion{
      */
     public function getGrupoLaboratorio()
     {
-    	return $this->GrupoLaboratorio;
+        return $this->GrupoLaboratorio;
     }
 
     /**
@@ -276,9 +355,9 @@ class Configuracion{
      */
     public function setGrupoLaboratorio($GrupoLaboratorio)
     {
-    	$this->GrupoLaboratorio = $GrupoLaboratorio;
+        $this->GrupoLaboratorio = $GrupoLaboratorio;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -286,7 +365,7 @@ class Configuracion{
      */
     public function getRealizacionExamenes()
     {
-    	return $this->RealizacionExamenes;
+        return $this->RealizacionExamenes;
     }
 
     /**
@@ -296,29 +375,9 @@ class Configuracion{
      */
     public function setRealizacionExamenes($RealizacionExamenes)
     {
-    	$this->RealizacionExamenes = $RealizacionExamenes;
+        $this->RealizacionExamenes = $RealizacionExamenes;
 
-    	return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getCalificacionFinal()
-    {
-    	return $this->CalificacionFinal;
-    }
-
-    /**
-     * @param mixed $CalificacionFinal
-     *
-     * @return self
-     */
-    public function setCalificacionFinal($CalificacionFinal)
-    {
-    	$this->CalificacionFinal = $CalificacionFinal;
-
-    	return $this;
+        return $this;
     }
 
     /**
@@ -326,7 +385,7 @@ class Configuracion{
      */
     public function getRealizacionActividades()
     {
-    	return $this->RealizacionActividades;
+        return $this->RealizacionActividades;
     }
 
     /**
@@ -336,9 +395,9 @@ class Configuracion{
      */
     public function setRealizacionActividades($RealizacionActividades)
     {
-    	$this->RealizacionActividades = $RealizacionActividades;
+        $this->RealizacionActividades = $RealizacionActividades;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -346,7 +405,7 @@ class Configuracion{
      */
     public function getRealizacionLaboratorio()
     {
-    	return $this->RealizacionLaboratorio;
+        return $this->RealizacionLaboratorio;
     }
 
     /**
@@ -356,9 +415,128 @@ class Configuracion{
      */
     public function setRealizacionLaboratorio($RealizacionLaboratorio)
     {
-    	$this->RealizacionLaboratorio = $RealizacionLaboratorio;
+        $this->RealizacionLaboratorio = $RealizacionLaboratorio;
 
-    	return $this;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCalificacionFinalO()
+    {
+        return $this->CalificacionFinalO;
+    }
+
+    /**
+     * @param mixed $CalificacionFinalO
+     *
+     * @return self
+     */
+    public function setCalificacionFinalO($CalificacionFinalO)
+    {
+        $this->CalificacionFinalO = $CalificacionFinalO;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCalificacionFinalE()
+    {
+        return $this->CalificacionFinalE;
+    }
+
+    /**
+     * @param mixed $CalificacionFinalE
+     *
+     * @return self
+     */
+    public function setCalificacionFinalE($CalificacionFinalE)
+    {
+        $this->CalificacionFinalE = $CalificacionFinalE;
+
+        return $this;
+    }
+    /**
+     * @return mixed
+     */
+    public function getParcial()
+    {
+        return $this->Parcial;
+    }
+
+    /**
+     * @param mixed $Parcial
+     *
+     * @return self
+     */
+    public function setParcial($Parcial)
+    {
+        $this->Parcial = $Parcial;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLaboratorio()
+    {
+        return $this->Laboratorio;
+    }
+
+    /**
+     * @param mixed $Laboratorio
+     *
+     * @return self
+     */
+    public function setLaboratorio($Laboratorio)
+    {
+        $this->Laboratorio = $Laboratorio;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFinal()
+    {
+        return $this->Final;
+    }
+
+    /**
+     * @param mixed $Final
+     *
+     * @return self
+     */
+    public function setFinal($Final)
+    {
+        $this->Final = $Final;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getExtraordinario()
+    {
+        return $this->Extraordinario;
+    }
+
+    /**
+     * @param mixed $Extraordinario
+     *
+     * @return self
+     */
+    public function setExtraordinario($Extraordinario)
+    {
+        $this->Extraordinario = $Extraordinario;
+
+        return $this;
     }
 
     /**
@@ -366,7 +544,7 @@ class Configuracion{
      */
     public function getIdAsignatura()
     {
-    	return $this->IdAsignatura;
+        return $this->IdAsignatura;
     }
 
     /**
@@ -376,8 +554,8 @@ class Configuracion{
      */
     public function setIdAsignatura($IdAsignatura)
     {
-    	$this->IdAsignatura = $IdAsignatura;
+        $this->IdAsignatura = $IdAsignatura;
 
-    	return $this;
+        return $this;
     }
 }

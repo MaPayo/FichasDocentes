@@ -1,18 +1,21 @@
 <?php
+
 namespace es\ucm;
 
-class ModGrupoClase{
-	private $IdGrupoClase;
-	private $Letra;
-	private $Idioma;
-	private $IdModAsignatura;
+class ModGrupoClase
+{
+    private $IdGrupoClase;
+    private $Letra;
+    private $Idioma;
+    private $IdModAsignatura;
 
-	public function __construct($IdGrupoClase,$Letra,$Idioma,$IdModAsignatura){
-		$this->IdGrupoClase = $IdGrupoClase;
-		$this->Letra = $Letra;
-		$this->Idioma = $Idioma;
-		$this->IdModAsignatura=$IdModAsignatura;
-	}
+    public function __construct($IdGrupoClase, $Letra, $Idioma, $IdModAsignatura)
+    {
+        $this->IdGrupoClase = $IdGrupoClase;
+        $this->Letra = $Letra;
+        $this->Idioma = $Idioma;
+        $this->IdModAsignatura = $IdModAsignatura;
+    }
 
     /**
      * @param mixed $IdModAsignatura
@@ -21,9 +24,9 @@ class ModGrupoClase{
      */
     public function setIdAsignatura($IdModAsignatura)
     {
-    	$this->IdModAsignatura = $IdModAsignatura;
+        $this->IdModAsignatura = $IdModAsignatura;
 
-    	return $this;
+        return $this;
     }
 
 
@@ -32,7 +35,7 @@ class ModGrupoClase{
      */
     public function getIdGrupoClase()
     {
-    	return $this->IdGrupoClase;
+        return $this->IdGrupoClase;
     }
 
     /**
@@ -42,9 +45,9 @@ class ModGrupoClase{
      */
     public function setIdGrupoClase($IdGrupoClase)
     {
-    	$this->IdGrupoClase = $IdGrupoClase;
+        $this->IdGrupoClase = $IdGrupoClase;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -52,7 +55,7 @@ class ModGrupoClase{
      */
     public function getLetra()
     {
-    	return $this->Letra;
+        return $this->Letra;
     }
 
     /**
@@ -62,9 +65,9 @@ class ModGrupoClase{
      */
     public function setLetra($Letra)
     {
-    	$this->Letra = $Letra;
+        $this->Letra = $Letra;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -72,7 +75,7 @@ class ModGrupoClase{
      */
     public function getIdioma()
     {
-    	return $this->Idioma;
+        return $this->Idioma;
     }
 
     /**
@@ -82,9 +85,9 @@ class ModGrupoClase{
      */
     public function setIdioma($Idioma)
     {
-    	$this->Idioma = $Idioma;
+        $this->Idioma = $Idioma;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -92,7 +95,7 @@ class ModGrupoClase{
      */
     public function getIdModAsignatura()
     {
-    	return $this->IdModAsignatura;
+        return $this->IdModAsignatura;
     }
 
     /**
@@ -102,8 +105,8 @@ class ModGrupoClase{
      */
     public function setIdModAsignatura($IdModAsignatura)
     {
-    	$this->IdModAsignatura = $IdModAsignatura;
+        $this->IdModAsignatura = $IdModAsignatura;
 
-    	return $this;
+        return $this;
     }
 }

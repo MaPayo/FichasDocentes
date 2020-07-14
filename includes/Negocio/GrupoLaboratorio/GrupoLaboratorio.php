@@ -1,25 +1,28 @@
 <?php
+
 namespace es\ucm;
 
-class GrupoLaboratorio{
-	private $IdGrupoLab;
-	private $Letra;
-	private $Idioma;
+class GrupoLaboratorio
+{
+    private $IdGrupoLab;
+    private $Letra;
+    private $Idioma;
     private $IdAsignatura;
 
-	public function __construct($IdGrupoLab,$Letra,$Idioma,$IdAsignatura){
-		$this->IdGrupoLab = $IdGrupoLab;
-		$this->Letra = $Letra;
-		$this->Idioma = $Idioma;
+    public function __construct($IdGrupoLab, $Letra, $Idioma, $IdAsignatura)
+    {
+        $this->IdGrupoLab = $IdGrupoLab;
+        $this->Letra = $Letra;
+        $this->Idioma = $Idioma;
         $this->IdAsignatura = $IdAsignatura;
-	}
+    }
 
     /**
      * @return mixed
      */
     public function getIdGrupoLab()
     {
-    	return $this->IdGrupoLab;
+        return $this->IdGrupoLab;
     }
 
     /**
@@ -29,9 +32,9 @@ class GrupoLaboratorio{
      */
     public function setIdGrupoLab($IdGrupoLab)
     {
-    	$this->IdGrupoLab = $IdGrupoLab;
+        $this->IdGrupoLab = $IdGrupoLab;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -39,7 +42,7 @@ class GrupoLaboratorio{
      */
     public function getLetra()
     {
-    	return $this->Letra;
+        return $this->Letra;
     }
 
     /**
@@ -49,9 +52,9 @@ class GrupoLaboratorio{
      */
     public function setLetra($Letra)
     {
-    	$this->Letra = $Letra;
+        $this->Letra = $Letra;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -59,7 +62,7 @@ class GrupoLaboratorio{
      */
     public function getIdioma()
     {
-    	return $this->Idioma;
+        return $this->Idioma;
     }
 
     /**
@@ -69,9 +72,9 @@ class GrupoLaboratorio{
      */
     public function setIdioma($Idioma)
     {
-    	$this->Idioma = $Idioma;
+        $this->Idioma = $Idioma;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -79,7 +82,7 @@ class GrupoLaboratorio{
      */
     public function getIdAsignatura()
     {
-    	return $this->IdAsignatura;
+        return $this->IdAsignatura;
     }
 
     /**
@@ -89,8 +92,8 @@ class GrupoLaboratorio{
      */
     public function setIdAsignatura($IdAsignatura)
     {
-    	$this->IdAsignatura = $IdAsignatura;
+        $this->IdAsignatura = $IdAsignatura;
 
-    	return $this;
+        return $this;
     }
 }

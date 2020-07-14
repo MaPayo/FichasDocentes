@@ -1,29 +1,32 @@
 <?php
+
 namespace es\ucm;
 
-class Profesor{
-	private $Email;
-	private $Nombre;
-	private $Departamento;
-	private $Despacho;
-	private $Tutoria;
-	private $Facultad;
+class Profesor
+{
+    private $Email;
+    private $Nombre;
+    private $Departamento;
+    private $Despacho;
+    private $Tutoria;
+    private $Facultad;
 
-	public function __construct($Email,$Nombre,$Departamento,$Despacho,$Tutoria,$Facultad){
-		$this->Email = $Email;
-		$this->Nombre = $Nombre;
-		$this->Departamento = $Departamento;
-		$this->Despacho = $Despacho;
-		$this->Tutoria = $Tutoria;
-		$this->Facultad = $Facultad;
-	}
+    public function __construct($Email, $Nombre, $Departamento, $Despacho, $Tutoria, $Facultad)
+    {
+        $this->Email = $Email;
+        $this->Nombre = $Nombre;
+        $this->Departamento = $Departamento;
+        $this->Despacho = $Despacho;
+        $this->Tutoria = $Tutoria;
+        $this->Facultad = $Facultad;
+    }
 
     /**
      * @return mixed
      */
     public function getEmail()
     {
-    	return $this->Email;
+        return $this->Email;
     }
 
     /**
@@ -33,9 +36,9 @@ class Profesor{
      */
     public function setEmail($Email)
     {
-    	$this->Email = $Email;
+        $this->Email = $Email;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -43,7 +46,7 @@ class Profesor{
      */
     public function getNombre()
     {
-    	return $this->Nombre;
+        return $this->Nombre;
     }
 
     /**
@@ -53,9 +56,9 @@ class Profesor{
      */
     public function setNombre($Nombre)
     {
-    	$this->Nombre = $Nombre;
+        $this->Nombre = $Nombre;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -63,7 +66,7 @@ class Profesor{
      */
     public function getDepartamento()
     {
-    	return $this->Departamento;
+        return $this->Departamento;
     }
 
     /**
@@ -73,9 +76,9 @@ class Profesor{
      */
     public function setDepartamento($Departamento)
     {
-    	$this->Departamento = $Departamento;
+        $this->Departamento = $Departamento;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -83,7 +86,7 @@ class Profesor{
      */
     public function getDespacho()
     {
-    	return $this->Despacho;
+        return $this->Despacho;
     }
 
     /**
@@ -93,9 +96,9 @@ class Profesor{
      */
     public function setDespacho($Despacho)
     {
-    	$this->Despacho = $Despacho;
+        $this->Despacho = $Despacho;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -103,7 +106,7 @@ class Profesor{
      */
     public function getTutoria()
     {
-    	return $this->Tutoria;
+        return $this->Tutoria;
     }
 
     /**
@@ -113,9 +116,9 @@ class Profesor{
      */
     public function setTutoria($Tutoria)
     {
-    	$this->Tutoria = $Tutoria;
+        $this->Tutoria = $Tutoria;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -123,7 +126,7 @@ class Profesor{
      */
     public function getFacultad()
     {
-    	return $this->Facultad;
+        return $this->Facultad;
     }
 
     /**
@@ -133,8 +136,8 @@ class Profesor{
      */
     public function setFacultad($Facultad)
     {
-    	$this->Facultad = $Facultad;
+        $this->Facultad = $Facultad;
 
-    	return $this;
+        return $this;
     }
 }

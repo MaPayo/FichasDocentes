@@ -17,7 +17,13 @@ class SAGrupoClaseProfesorImplements implements SAGrupoClaseProfesor
         $grupoClaseProfesor = $DAOGrupoClaseProfesor->listGrupoClaseProfesor($idGrupoClase);
         if ($grupoClaseProfesor && count($grupoClaseProfesor) > 0) {
             foreach ($grupoClaseProfesor as $grupo) {
-                $arrayGrupoClaseProfesor[] = new GrupoClaseProfesor($grupo['IdGrupoClase'], $grupo['EmailProfesor']);
+                $arrayGrupoClaseProfesor[] = new GrupoClaseProfesor(
+                    $grupo['IdGrupoClase'],
+                    $grupo['Tipo'],
+                    $grupo['Fechas'],
+                    $grupo['Horas'],
+                    $grupo['EmailProfesor']
+                );
             }
         }
         return $arrayGrupoClaseProfesor;
@@ -31,6 +37,9 @@ class SAGrupoClaseProfesorImplements implements SAGrupoClaseProfesor
         if ($grupoClaseProfesor && count($grupoClaseProfesor) === 1) {
             $grupoClaseProfesor = new GrupoClaseProfesor(
                 $grupoClaseProfesor[0]['IdGrupoClase'],
+                $grupoClaseProfesor[0]['Tipo'],
+                $grupoClaseProfesor[0]['Fechas'],
+                $grupoClaseProfesor[0]['Horas'],
                 $grupoClaseProfesor[0]['EmailProfesor']
             );
         }

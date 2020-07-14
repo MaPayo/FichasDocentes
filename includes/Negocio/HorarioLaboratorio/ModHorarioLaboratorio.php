@@ -1,29 +1,32 @@
 <?php
+
 namespace es\ucm;
 
-class ModHorarioLaboratorio{
-	private $IdHorarioLab;
-	private $Laboratorio;
-	private $Dia;
-	private $HoraInicio;
-	private $HoraFin;
+class ModHorarioLaboratorio
+{
+    private $IdHorarioLab;
+    private $Laboratorio;
+    private $Dia;
+    private $HoraInicio;
+    private $HoraFin;
     private $IdGrupoLab;
 
-	public function __construct($IdHorarioLab,$Laboratorio,$Dia,$HoraInicio,$HoraFin,$IdGrupoLab){
-		$this->IdHorarioLab = $IdHorarioLab;
-		$this->Laboratorio = $Laboratorio;
-		$this->Dia = $Dia;
-		$this->HoraInicio = $HoraInicio;
-		$this->HoraFin = $HoraFin;
+    public function __construct($IdHorarioLab, $Laboratorio, $Dia, $HoraInicio, $HoraFin, $IdGrupoLab)
+    {
+        $this->IdHorarioLab = $IdHorarioLab;
+        $this->Laboratorio = $Laboratorio;
+        $this->Dia = $Dia;
+        $this->HoraInicio = $HoraInicio;
+        $this->HoraFin = $HoraFin;
         $this->IdGrupoLab = $IdGrupoLab;
-	}
+    }
 
     /**
      * @return mixed
      */
     public function getIdHorarioLab()
     {
-    	return $this->IdHorarioLab;
+        return $this->IdHorarioLab;
     }
 
     /**
@@ -33,9 +36,9 @@ class ModHorarioLaboratorio{
      */
     public function setIdHorarioLab($IdHorarioLab)
     {
-    	$this->IdHorarioLab = $IdHorarioLab;
+        $this->IdHorarioLab = $IdHorarioLab;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -43,7 +46,7 @@ class ModHorarioLaboratorio{
      */
     public function getLaboratorio()
     {
-    	return $this->Laboratorio;
+        return $this->Laboratorio;
     }
 
     /**
@@ -53,9 +56,9 @@ class ModHorarioLaboratorio{
      */
     public function setLaboratorio($Laboratorio)
     {
-    	$this->Laboratorio = $Laboratorio;
+        $this->Laboratorio = $Laboratorio;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -63,7 +66,7 @@ class ModHorarioLaboratorio{
      */
     public function getDia()
     {
-    	return $this->Dia;
+        return $this->Dia;
     }
 
     /**
@@ -73,9 +76,9 @@ class ModHorarioLaboratorio{
      */
     public function setDia($Dia)
     {
-    	$this->Dia = $Dia;
+        $this->Dia = $Dia;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -83,7 +86,7 @@ class ModHorarioLaboratorio{
      */
     public function getHoraInicio()
     {
-    	return $this->HoraInicio;
+        return $this->HoraInicio;
     }
 
     /**
@@ -93,9 +96,9 @@ class ModHorarioLaboratorio{
      */
     public function setHoraInicio($HoraInicio)
     {
-    	$this->HoraInicio = $HoraInicio;
+        $this->HoraInicio = $HoraInicio;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -103,7 +106,7 @@ class ModHorarioLaboratorio{
      */
     public function getHoraFin()
     {
-    	return $this->HoraFin;
+        return $this->HoraFin;
     }
 
     /**
@@ -113,9 +116,9 @@ class ModHorarioLaboratorio{
      */
     public function setHoraFin($HoraFin)
     {
-    	$this->HoraFin = $HoraFin;
+        $this->HoraFin = $HoraFin;
 
-    	return $this;
+        return $this;
     }
 
     /**

@@ -17,7 +17,13 @@ class SAGrupoLaboratorioProfesorImplements implements SAGrupoLaboratorioProfesor
         $grupoLaboratorioProfesor = $DAOGrupoLaboratorioProfesor->listGrupoLaboratorioProfesor($idGrupoLab);
         if ($grupoLaboratorioProfesor && count($grupoLaboratorioProfesor) > 0) {
             foreach ($grupoLaboratorioProfesor as $grupo) {
-                $arrayGrupoLaboratorioProfesor[] = new GrupoLaboratorioProfesor($grupo['IdGrupoLab'], $grupo['EmailProfesor']);
+                $arrayGrupoLaboratorioProfesor[] = new GrupoLaboratorioProfesor(
+                    $grupo['IdGrupoLab'],
+                    $grupo['Sesiones'],
+                    $grupo['Fechas'],
+                    $grupo['Horas'],
+                    $grupo['EmailProfesor']
+                );
             }
         }
         return $arrayGrupoLaboratorioProfesor;
@@ -31,6 +37,9 @@ class SAGrupoLaboratorioProfesorImplements implements SAGrupoLaboratorioProfesor
         if ($grupoLaboratorioProfesor && count($grupoLaboratorioProfesor) === 1) {
             $grupoLaboratorioProfesor = new GrupoLaboratorioProfesor(
                 $grupoLaboratorioProfesor[0]['IdGrupoLab'],
+                $grupoLaboratorioProfesor[0]['Tipo'],
+                $grupoLaboratorioProfesor[0]['Fechas'],
+                $grupoLaboratorioProfesor[0]['Horas'],
                 $grupoLaboratorioProfesor[0]['EmailProfesor']
             );
         }

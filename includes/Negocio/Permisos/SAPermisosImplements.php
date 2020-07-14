@@ -36,6 +36,19 @@ class SAPermisosImplements implements SAPermisos
         }
         return $arrayPermisos;
     }
+    public static function findPermisosPorProfesorYAsignatura($emailProfesor, $idAsignatura)
+    {
+        $arrayPermisos = array();
+        $factoriesDAO = new \es\ucm\FactoriesDAOImplements();
+        $DAOPermisos = $factoriesDAO->createDAOPermisos();
+        $permisos = $DAOPermisos->findPermisosPorProfesorYAsignatura($emailProfesor, $idAsignatura);
+        if ($permisos) {
+            foreach ($permisos as $permiso) {
+                $arrayPermisos[] = new Permisos($permiso['IdPermiso'], $permiso['PermisoPrograma'], $permiso['PermisoCompetencias'], $permiso['PermisoMetodologia'], $permiso['PermisoBibliografia'], $permiso['PermisoGrupoLaboratorio'], $permiso['PermisoGrupoClase'], $permiso['PermisoEvaluacion'], $permiso['IdAsignatura'], $permiso['EmailProfesor']);
+            }
+        }
+        return $arrayPermisos;
+    }
 
     public static function createPermisos($permiso)
     {

@@ -1,0 +1,17 @@
+{
+  "name": "ondrs/pandoc-php",
+  "type": "library",
+  "description": "PHP pandoc",
+  "keywords": ["pandoc", "wrapper"],
+  "license": ["MIT"],
+  "require": {
+    "php": ">=5.4.0",
+    "symfony/process": "^2.5.3|^3.0"
+  },
+  "require-dev": {
+    "nette/tester": "1.7.0"
+  },
+  "autoload": {
+    "classmap": ["src/"]
+  }
+}

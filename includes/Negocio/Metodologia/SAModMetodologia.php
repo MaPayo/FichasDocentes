@@ -2,14 +2,14 @@
 
 namespace es\ucm;
 
-interface SAModMetodologia{
+interface SAModMetodologia
+{
 
     public static function findModMetodologia($idModAsignatura);
 
     public static function createModMetodologia($modMetodologia);
 
     public static function updateModMetodologia($modMetodologia);
-    
-    public static function deleteModMetodologia($idModAsignatura);
 
+    public static function deleteModMetodologia($idModAsignatura);
 }

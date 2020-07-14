@@ -6,8 +6,6 @@ require_once('includes/Integracion/GrupoLaboratorioProfesor/DAOModGrupoLaborator
 
 class DAOModGrupoLaboratorioProfesorImplements implements DAOModGrupoLaboratorioProfesor
 {
-
-
     public static function listModGrupoLaboratorioProfesor($idGrupoLab)
     {
         $singletonDataSource = new SingletonDataSource();
@@ -35,10 +33,13 @@ class DAOModGrupoLaboratorioProfesorImplements implements DAOModGrupoLaboratorio
     {
         $singletonDataSource = new SingletonDataSource();
         $dataSource = $singletonDataSource->getInstance();
-        $sql = "INSERT INTO modgrupolaboratorioprofesor (IdGrupoLab,EmailProfesor) 
-        VALUES (:idGrupoLab, :emailProfesor)";
+        $sql = "INSERT INTO modgrupolaboratorioprofesor (IdGrupoLab,Sesiones,Fechas,Horas,EmailProfesor) 
+        VALUES (:idGrupoLab, :sesiones, :fechas, :horas, :emailProfesor)";
         $values = array(
             ':idGrupoLab' => $modGrupoLaboratorioProfesor->getIdGrupoLab(),
+            ':sesiones' => $modGrupoLaboratorioProfesor->getSesiones(),
+            ':fechas' => $modGrupoLaboratorioProfesor->getFechas(),
+            ':horas' => $modGrupoLaboratorioProfesor->getHoras(),
             ':emailProfesor' => $modGrupoLaboratorioProfesor->getEmailProfesor()
         );
         $results = $dataSource->executeInsertUpdateDelete($sql, $values);
@@ -49,9 +50,17 @@ class DAOModGrupoLaboratorioProfesorImplements implements DAOModGrupoLaboratorio
     {
         $singletonDataSource = new SingletonDataSource();
         $dataSource = $singletonDataSource->getInstance();
-        $sql = "UPDATE modgrupolaboratorioprofesor SET IdGrupoLab = :idGrupoLab, EmailProfesor = :emailProfesor WHERE IdGrupoLab = :idGrupoLab AND EmailProfesor = :emailProfesor";
+        $sql = "UPDATE modgrupolaboratorioprofesor SET IdGrupoLab = :idGrupoLab,
+         Sesiones = :sesiones,
+          Fechas = :fechas,
+           Horas = :horas,
+            EmailProfesor = :emailProfesor
+             WHERE IdGrupoLab = :idGrupoLab AND EmailProfesor = :emailProfesor";
         $values = array(
             ':idGrupoLab' => $modGrupoLaboratorioProfesor->getIdGrupoLab(),
+            ':sesiones' => $modGrupoLaboratorioProfesor->getSesiones(),
+            ':fechas' => $modGrupoLaboratorioProfesor->getFechas(),
+            ':horas' => $modGrupoLaboratorioProfesor->getHoras(),
             ':emailProfesor' => $modGrupoLaboratorioProfesor->getEmailProfesor()
         );
         $results = $dataSource->executeInsertUpdateDelete($sql, $values);

@@ -1,25 +1,28 @@
 <?php
+
 namespace es\ucm;
 
-class ModGrupoLaboratorio{
-	private $IdGrupoLab;
-	private $Letra;
-	private $Idioma;
-	private $IdModAsignatura;
+class ModGrupoLaboratorio
+{
+    private $IdGrupoLab;
+    private $Letra;
+    private $Idioma;
+    private $IdModAsignatura;
 
-	public function __construct($IdGrupoLab,$Letra,$Idioma,$IdModAsignatura){
-		$this->IdGrupoLab = $IdGrupoLab;
-		$this->Letra = $Letra;
-		$this->Idioma = $Idioma;
-		$this->IdModAsignatura = $IdModAsignatura;
-	}
+    public function __construct($IdGrupoLab, $Letra, $Idioma, $IdModAsignatura)
+    {
+        $this->IdGrupoLab = $IdGrupoLab;
+        $this->Letra = $Letra;
+        $this->Idioma = $Idioma;
+        $this->IdModAsignatura = $IdModAsignatura;
+    }
 
     /**
      * @return mixed
      */
     public function getIdGrupoLab()
     {
-    	return $this->IdGrupoLab;
+        return $this->IdGrupoLab;
     }
 
     /**
@@ -29,9 +32,9 @@ class ModGrupoLaboratorio{
      */
     public function setIdGrupoLab($IdGrupoLab)
     {
-    	$this->IdGrupoLab = $IdGrupoLab;
+        $this->IdGrupoLab = $IdGrupoLab;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -39,7 +42,7 @@ class ModGrupoLaboratorio{
      */
     public function getLetra()
     {
-    	return $this->Letra;
+        return $this->Letra;
     }
 
     /**
@@ -49,9 +52,9 @@ class ModGrupoLaboratorio{
      */
     public function setLetra($Letra)
     {
-    	$this->Letra = $Letra;
+        $this->Letra = $Letra;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -59,7 +62,7 @@ class ModGrupoLaboratorio{
      */
     public function getIdioma()
     {
-    	return $this->Idioma;
+        return $this->Idioma;
     }
 
     /**
@@ -69,9 +72,9 @@ class ModGrupoLaboratorio{
      */
     public function setIdioma($Idioma)
     {
-    	$this->Idioma = $Idioma;
+        $this->Idioma = $Idioma;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -79,7 +82,7 @@ class ModGrupoLaboratorio{
      */
     public function getIdModAsignatura()
     {
-    	return $this->IdModAsignatura;
+        return $this->IdModAsignatura;
     }
 
     /**
@@ -89,8 +92,8 @@ class ModGrupoLaboratorio{
      */
     public function setIdModAsignatura($IdModAsignatura)
     {
-    	$this->IdModAsignatura = $IdModAsignatura;
+        $this->IdModAsignatura = $IdModAsignatura;
 
-    	return $this;
+        return $this;
     }
 }

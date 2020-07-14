@@ -1,7 +1,9 @@
 <?php
+
 namespace es\ucm;
 
-interface DAOModGrupoLaboratorio{
+interface DAOModGrupoLaboratorio
+{
     public static function listModGrupoLaboratorio($idModAsignatura);
 
     public static function findModGrupoLaboratorio($idGrupoLaboratorio);
@@ -9,6 +11,6 @@ interface DAOModGrupoLaboratorio{
     public static function createModGrupoLaboratorio($modGrupoLaboratorio);
 
     public static function updateModGrupoLaboratorio($modGrupoLaboratorio);
-    
+
     public static function deleteModGrupoLaboratorio($idGrupoLaboratorio);
 }

@@ -14,7 +14,7 @@ class CommandFindGrupoClaseProfesor implements Command
     {
         $factorySA = new FactorySAImplements();
         $saGrupoClaseProfesor = $factorySA->createSAGrupoClaseProfesor();
-        $grupoClaseProfesor = $saGrupoClaseProfesor->findGrupoClaseProfesor($data['idGrupoClase'],$data['emailProfesor']);
+        $grupoClaseProfesor = $saGrupoClaseProfesor->findGrupoClaseProfesor($data['idGrupoClase'], $data['emailProfesor']);
         $responseContext = null;
         if ($grupoClaseProfesor) {
             $responseContext = new Context(FIND_GRUPO_CLASE_PROFESOR_OK, $grupoClaseProfesor);

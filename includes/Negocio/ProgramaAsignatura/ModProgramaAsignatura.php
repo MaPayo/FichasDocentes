@@ -9,19 +9,31 @@ class ModProgramaAsignatura
     private $ConocimientosPreviosI;
     private $BreveDescripcion;
     private $BreveDescripcionI;
-    private $ProgramaDetallado;
-    private $ProgramaDetalladoI;
+    private $ProgramaTeorico;
+    private $ProgramaTeoricoI;
+    private $ProgramaSeminarios;
+    private $ProgramaSeminariosI;
+    private $ProgramaLaboratorio;
+    private $ProgramaLaboratorioI;
+    private $Influencia;
+    private $InfluenciaI;
     private $IdModAsignatura;
 
-    public function __construct($IdPrograma, $ConocimientosPrevios, $ConocimientosPreviosI, $BreveDescripcion, $BreveDescripcionI, $ProgramaDetallado, $ProgramaDetalladoI, $IdModAsignatura)
+    public function __construct($IdPrograma, $ConocimientosPrevios, $ConocimientosPreviosI, $BreveDescripcion, $BreveDescripcionI, $ProgramaTeorico, $ProgramaTeoricoI, $ProgramaSeminarios, $ProgramaSeminariosI, $ProgramaLaboratorio, $ProgramaLaboratorioI, $Influencia, $InfluenciaI, $IdModAsignatura)
     {
         $this->IdPrograma = $IdPrograma;
         $this->ConocimientosPrevios = $ConocimientosPrevios;
         $this->ConocimientosPreviosI = $ConocimientosPreviosI;
         $this->BreveDescripcion = $BreveDescripcion;
         $this->BreveDescripcionI = $BreveDescripcionI;
-        $this->ProgramaDetallado = $ProgramaDetallado;
-        $this->ProgramaDetalladoI = $ProgramaDetalladoI;
+        $this->ProgramaTeorico = $ProgramaTeorico;
+        $this->ProgramaTeoricoI = $ProgramaTeoricoI;
+        $this->ProgramaSeminarios = $ProgramaSeminarios;
+        $this->ProgramaSeminariosI = $ProgramaSeminariosI;
+        $this->ProgramaLaboratorio = $ProgramaLaboratorio;
+        $this->ProgramaLaboratorioI = $ProgramaLaboratorioI;
+        $this->Influencia = $Influencia;
+        $this->InfluenciaI = $InfluenciaI;
         $this->IdModAsignatura = $IdModAsignatura;
     }
 
@@ -128,19 +140,19 @@ class ModProgramaAsignatura
     /**
      * @return mixed
      */
-    public function getProgramaDetallado()
+    public function getProgramaTeorico()
     {
-        return $this->ProgramaDetallado;
+        return $this->ProgramaTeorico;
     }
 
     /**
-     * @param mixed $ProgramaDetallado
+     * @param mixed $ProgramaTeorico
      *
      * @return self
      */
-    public function setProgramaDetallado($ProgramaDetallado)
+    public function setProgramaTeorico($ProgramaTeorico)
     {
-        $this->ProgramaDetallado = $ProgramaDetallado;
+        $this->ProgramaTeorico = $ProgramaTeorico;
 
         return $this;
     }
@@ -148,19 +160,139 @@ class ModProgramaAsignatura
     /**
      * @return mixed
      */
-    public function getProgramaDetalladoI()
+    public function getProgramaTeoricoI()
     {
-        return $this->ProgramaDetalladoI;
+        return $this->ProgramaTeoricoI;
     }
 
     /**
-     * @param mixed $ProgramaDetalladoI
+     * @param mixed $ProgramaTeoricoI
      *
      * @return self
      */
-    public function setProgramaDetalladoI($ProgramaDetalladoI)
+    public function setProgramaTeoricoI($ProgramaTeoricoI)
     {
-        $this->ProgramaDetalladoI = $ProgramaDetalladoI;
+        $this->ProgramaTeoricoI = $ProgramaTeoricoI;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getProgramaSeminarios()
+    {
+        return $this->ProgramaSeminarios;
+    }
+
+    /**
+     * @param mixed $ProgramaSeminarios
+     *
+     * @return self
+     */
+    public function setProgramaSeminarios($ProgramaSeminarios)
+    {
+        $this->ProgramaSeminarios = $ProgramaSeminarios;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getProgramaSeminariosI()
+    {
+        return $this->ProgramaSeminariosI;
+    }
+
+    /**
+     * @param mixed $ProgramaSeminariosI
+     *
+     * @return self
+     */
+    public function setProgramaSeminariosI($ProgramaSeminariosI)
+    {
+        $this->ProgramaSeminariosI = $ProgramaSeminariosI;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getProgramaLaboratorio()
+    {
+        return $this->ProgramaLaboratorio;
+    }
+
+    /**
+     * @param mixed $ProgramaLaboratorio
+     *
+     * @return self
+     */
+    public function setProgramaLaboratorio($ProgramaLaboratorio)
+    {
+        $this->ProgramaLaboratorio = $ProgramaLaboratorio;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getProgramaLaboratorioI()
+    {
+        return $this->ProgramaLaboratorioI;
+    }
+
+    /**
+     * @param mixed $ProgramaLaboratorioI
+     *
+     * @return self
+     */
+    public function setProgramaLaboratorioI($ProgramaLaboratorioI)
+    {
+        $this->ProgramaLaboratorioI = $ProgramaLaboratorioI;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getInfluencia()
+    {
+        return $this->Influencia;
+    }
+
+    /**
+     * @param mixed $Influencia
+     *
+     * @return self
+     */
+    public function setInfluencia($Influencia)
+    {
+        $this->Influencia = $Influencia;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getInfluenciaI()
+    {
+        return $this->InfluenciaI;
+    }
+
+    /**
+     * @param mixed $InfluenciaI
+     *
+     * @return self
+     */
+    public function setInfluenciaI($InfluenciaI)
+    {
+        $this->InfluenciaI = $InfluenciaI;
 
         return $this;
     }

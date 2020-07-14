@@ -1,13 +1,16 @@
 <?php
+
 namespace es\ucm;
 
-class ModAsignatura{
+class ModAsignatura
+{
     private $IdModAsignatura;
     private $FechaMod;
     private $EmailMod;
     private $IdAsignatura;
 
-    public function __construct($IdModAsignatura,$FechaMod,$EmailMod,$IdAsignatura){
+    public function __construct($IdModAsignatura, $FechaMod, $EmailMod, $IdAsignatura)
+    {
         $this->IdModAsignatura = $IdModAsignatura;
         $this->FechaMod = $FechaMod;
         $this->EmailMod = $EmailMod;
