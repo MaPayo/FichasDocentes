@@ -13,6 +13,7 @@ class DAOAsignaturaImplements implements DAOAsignatura{
         $results=$dataSource->executeQuery($sql,$values);
         return $results;
 
+<<<<<<< Updated upstream
     }
 
     public static function createAsignatura($asignatura){
@@ -29,6 +30,48 @@ class DAOAsignaturaImplements implements DAOAsignatura{
         ':coordinadores' => $asignatura->getCoordinadores(),
         ':idMateria' => $asignatura->getIdMateria());
         $results=$dataSource->executeInsertUpdateDelete($sql,$values);
+=======
+    public static function createAsignatura($asignatura)
+    {
+        $singletonDataSource = new SingletonDataSource();
+        $dataSource = $singletonDataSource->getInstance();
+        $sql = "INSERT INTO asignatura (IdAsignatura,NombreAsignatura,Abreviatura,Curso,Semestre,NombreAsignaturaIngles,Creditos,CoordinadorAsignatura,Estado,IdMateria) 
+        VALUES (:idAsignatura, :nombreAsignatura, :abreviatura, :curso, :semestre,:nombreAsignaturaIngles,:creditos,:coordinadorAsignatura, :estado,:idMateria)";
+        $values = array(
+            ':idAsignatura' => $asignatura->getIdAsignatura(),
+            ':nombreAsignatura' => $asignatura->getNombreAsignatura(),
+            ':abreviatura' => $asignatura->getAbreviatura(),
+            ':curso' => $asignatura->getCurso(),
+            ':semestre' => $asignatura->getSemestre(),
+            ':nombreAsignaturaIngles' => $asignatura->getNombreAsignaturaIngles(),
+            ':creditos' => $asignatura->getCreditos(),
+            ':coordinadorAsignatura' => $asignatura->getCoordinadorAsignatura(),
+            ':estado' => $asignatura->getEstado(),
+            ':idMateria' => $asignatura->getIdMateria()
+        );
+        $results = $dataSource->executeInsertUpdateDelete($sql, $values);
+        return $results;
+    }
+
+    public static function updateAsignatura($asignatura)
+    {
+        $singletonDataSource = new SingletonDataSource();
+        $dataSource = $singletonDataSource->getInstance();
+        $sql = "UPDATE asignatura SET IdAsignatura = :idAsignatura, NombreAsignatura = :nombreAsignatura, Abreviatura = :abreviatura, Curso = :curso, Semestre = :semestre, NombreAsignaturaIngles = :nombreAsignaturaIngles, Creditos = :creditos, CoordinadorAsignatura = :coordinadorAsignatura, Estado = :estado, IdMateria = :idMateria WHERE IdAsignatura = :idAsignatura";
+        $values = array(
+            ':idAsignatura' => $asignatura->getIdAsignatura(),
+            ':nombreAsignatura' => $asignatura->getNombreAsignatura(),
+            ':abreviatura' => $asignatura->getAbreviatura(),
+            ':curso' => $asignatura->getCurso(),
+            ':semestre' => $asignatura->getSemestre(),
+            ':nombreAsignaturaIngles' => $asignatura->getNombreAsignaturaIngles(),
+            ':creditos' => $asignatura->getCreditos(),
+            ':coordinadorAsignatura' => $asignatura->getCoordinadorAsignatura(),
+            ':estado' => $asignatura->getEstado(),
+            ':idMateria' => $asignatura->getIdMateria()
+        );
+        $results = $dataSource->executeInsertUpdateDelete($sql, $values);
+>>>>>>> Stashed changes
         return $results;
 
     }

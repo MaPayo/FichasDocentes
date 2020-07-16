@@ -9,19 +9,40 @@ class ModProgramaAsignatura
     private $ConocimientosPreviosI;
     private $BreveDescripcion;
     private $BreveDescripcionI;
+<<<<<<< Updated upstream
     private $ProgramaDetallado;
     private $ProgramaDetalladoI;
     private $IdModAsignatura;
 
     public function __construct($IdPrograma, $ConocimientosPrevios, $ConocimientosPreviosI, $BreveDescripcion, $BreveDescripcionI, $ProgramaDetallado, $ProgramaDetalladoI, $IdModAsignatura)
+=======
+    private $ProgramaTeorico;
+    private $ProgramaTeoricoI;
+    private $ProgramaSeminarios;
+    private $ProgramaSeminariosI;
+    private $ProgramaLaboratorio;
+    private $ProgramaLaboratorioI;
+    private $IdModAsignatura;
+
+    public function __construct($IdPrograma, $ConocimientosPrevios, $ConocimientosPreviosI, $BreveDescripcion, $BreveDescripcionI, $ProgramaTeorico, $ProgramaTeoricoI, $ProgramaSeminarios, $ProgramaSeminariosI, $ProgramaLaboratorio, $ProgramaLaboratorioI,$IdModAsignatura)
+>>>>>>> Stashed changes
     {
         $this->IdPrograma = $IdPrograma;
         $this->ConocimientosPrevios = $ConocimientosPrevios;
         $this->ConocimientosPreviosI = $ConocimientosPreviosI;
         $this->BreveDescripcion = $BreveDescripcion;
         $this->BreveDescripcionI = $BreveDescripcionI;
+<<<<<<< Updated upstream
         $this->ProgramaDetallado = $ProgramaDetallado;
         $this->ProgramaDetalladoI = $ProgramaDetalladoI;
+=======
+        $this->ProgramaTeorico = $ProgramaTeorico;
+        $this->ProgramaTeoricoI = $ProgramaTeoricoI;
+        $this->ProgramaSeminarios = $ProgramaSeminarios;
+        $this->ProgramaSeminariosI = $ProgramaSeminariosI;
+        $this->ProgramaLaboratorio = $ProgramaLaboratorio;
+        $this->ProgramaLaboratorioI = $ProgramaLaboratorioI;
+>>>>>>> Stashed changes
         $this->IdModAsignatura = $IdModAsignatura;
     }
 
@@ -160,7 +181,91 @@ class ModProgramaAsignatura
      */
     public function setProgramaDetalladoI($ProgramaDetalladoI)
     {
+<<<<<<< Updated upstream
         $this->ProgramaDetalladoI = $ProgramaDetalladoI;
+=======
+        $this->ProgramaTeoricoI = $ProgramaTeoricoI;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getProgramaSeminarios()
+    {
+        return $this->ProgramaSeminarios;
+    }
+
+    /**
+     * @param mixed $ProgramaSeminarios
+     *
+     * @return self
+     */
+    public function setProgramaSeminarios($ProgramaSeminarios)
+    {
+        $this->ProgramaSeminarios = $ProgramaSeminarios;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getProgramaSeminariosI()
+    {
+        return $this->ProgramaSeminariosI;
+    }
+
+    /**
+     * @param mixed $ProgramaSeminariosI
+     *
+     * @return self
+     */
+    public function setProgramaSeminariosI($ProgramaSeminariosI)
+    {
+        $this->ProgramaSeminariosI = $ProgramaSeminariosI;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getProgramaLaboratorio()
+    {
+        return $this->ProgramaLaboratorio;
+    }
+
+    /**
+     * @param mixed $ProgramaLaboratorio
+     *
+     * @return self
+     */
+    public function setProgramaLaboratorio($ProgramaLaboratorio)
+    {
+        $this->ProgramaLaboratorio = $ProgramaLaboratorio;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getProgramaLaboratorioI()
+    {
+        return $this->ProgramaLaboratorioI;
+    }
+
+    /**
+     * @param mixed $ProgramaLaboratorioI
+     *
+     * @return self
+     */
+    public function setProgramaLaboratorioI($ProgramaLaboratorioI)
+    {
+        $this->ProgramaLaboratorioI = $ProgramaLaboratorioI;
+>>>>>>> Stashed changes
 
         return $this;
     }

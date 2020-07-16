@@ -22,7 +22,12 @@ class SAAsignaturaImplements implements SAAsignatura
                 $asignatura[0]['Semestre'],
                 $asignatura[0]['NombreAsignaturaIngles'],
                 $asignatura[0]['Creditos'],
+<<<<<<< Updated upstream
                 $asignatura[0]['Coordinadores'],
+=======
+                $asignatura[0]['CoordinadorAsignatura'],
+                $asignatura[0]['Estado'],
+>>>>>>> Stashed changes
                 $asignatura[0]['IdMateria']
             );
         }
@@ -52,4 +57,32 @@ class SAAsignaturaImplements implements SAAsignatura
         $asignatura = $DAOAsignatura->deleteAsignatura($idAsignatura);
         return $asignatura;
     }
+<<<<<<< Updated upstream
+=======
+
+    public static function listAsignatura($idMateria)
+    {
+        $factoriesDAO = new \es\ucm\FactoriesDAOImplements();
+        $DAOAsignatura = $factoriesDAO->createDAOAsignatura();
+        $asignaturas = $DAOAsignatura->listAsignatura($idMateria);
+        $arrayAsignaturas = array();
+        if ($asignaturas) {
+            foreach ($asignaturas as $asignatura) {
+                $arrayAsignaturas[] = new Asignatura(
+                    $asignatura['IdAsignatura'],
+                    $asignatura['NombreAsignatura'],
+                    $asignatura['Abreviatura'],
+                    $asignatura['Curso'],
+                    $asignatura['Semestre'],
+                    $asignatura['NombreAsignaturaIngles'],
+                    $asignatura['Creditos'],
+                    $asignatura['CoordinadorAsignatura'],
+                    $asignatura['Estado'],
+                    $asignatura['IdMateria']
+                );
+            }
+        }
+        return $arrayAsignaturas;
+    }
+>>>>>>> Stashed changes
 }

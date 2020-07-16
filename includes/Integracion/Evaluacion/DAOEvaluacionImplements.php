@@ -15,12 +15,23 @@ class DAOEvaluacionImplements implements DAOEvaluacion{
 
     }
 
+<<<<<<< Updated upstream
     public static function createEvaluacion($evaluacion){
         $singletonDataSource=new SingletonDataSource();
         $dataSource=$singletonDataSource->getInstance();
         $sql="INSERT INTO evaluacion (IdEvaluacion,RealizacionExamenes,RealizacionExamenesI,PesoExamenes,CalificacionFinal,CalificacionFinalI,RealizacionActividades,RealizacionActividadesI,PesoActividades,RealizacionLaboratorio,RealizacionLaboratorioI,PesoLaboratorio,IdAsignatura) 
         VALUES (:idEvaluacion, :realizacionExamenes, :realizacionExamenesI, :pesoExamenes, :calificacionFinal, :calificacionFinalI, :realizacionActividades, :realizacionActividadesI, :pesoActividades, :realizacionLaboratorio, :realizacionLaboratorioI, :pesoLaboratorio, :idAsignatura)";
         $values=array(':idEvaluacion' => $evaluacion->getIdEvaluacion(),
+=======
+    public static function createEvaluacion($evaluacion)
+    {
+        $singletonDataSource = new SingletonDataSource();
+        $dataSource = $singletonDataSource->getInstance();
+        $sql = "INSERT INTO evaluacion (IdEvaluacion,RealizacionExamenes,RealizacionExamenesi,PesoExamenes,RealizacionActividades,RealizacionActividadesi,PesoActividades,RealizacionLaboratorio,RealizacionLaboratorioi,PesoLaboratorio,CalificacionFinal,CalificacionFinali,IdAsignatura) 
+        VALUES (:idEvaluacion, :realizacionExamenes, :realizacionExamenesI, :pesoExamenes, :realizacionActividades, :realizacionActividadesI, :pesoActividades, :realizacionLaboratorio, :realizacionLaboratorioI, :pesoLaboratorio, :calificacionFinal, :calificacionFinalI, :idAsignatura)";
+        $values = array(
+            ':idEvaluacion' => $evaluacion->getIdEvaluacion(),
+>>>>>>> Stashed changes
             ':realizacionExamenes' => $evaluacion->getRealizacionExamenes(),
             ':realizacionExamenesI' => $evaluacion->getRealizacionExamenesI(),
             ':pesoExamenes' => $evaluacion->getPesoExamenes(),
@@ -32,17 +43,35 @@ class DAOEvaluacionImplements implements DAOEvaluacion{
             ':realizacionLaboratorio' => $evaluacion->getRealizacionLaboratorio(),
             ':realizacionLaboratorio' => $evaluacion->getRealizacionLaboratorioI(),
             ':pesoLaboratorio' => $evaluacion->getPesolaboratorio(),
+<<<<<<< Updated upstream
             ':idAsignatura' => $evaluacion->getIdAsignatura());
         $results=$dataSource->executeInsertUpdateDelete($sql,$values);
+=======
+            ':calificacionFinal' => $evaluacion->getCalificacionFinal(),
+            ':calificacionFinalI' => $evaluacion->getCalificacionFinalI(),
+            ':idAsignatura' => $evaluacion->getIdAsignatura()
+        );
+        $results = $dataSource->executeInsertUpdateDelete($sql, $values);
+>>>>>>> Stashed changes
         return $results;
 
     }
 
+<<<<<<< Updated upstream
     public static function updateEvaluacion($evaluacion){
         $singletonDataSource=new SingletonDataSource();
         $dataSource=$singletonDataSource->getInstance();
         $sql="UPDATE evaluacion SET IdEvaluacion = :idEvaluacion, RealizacionExamenes = :realizacionExamenes,RealizacionExamenesI = :realizacionExamenesI, PesoExamenes = :pesoExamenes,CalificacionFinal = :calificacionFinal,CalificacionFinalI = :calificacionFinalI,RealizacionActividades = :realizacionActividades,RealizacionActividadesI = :realizacionActividadesI,PesoActividades = :pesoActividades,RealizacionLaboratorio = :RealizacionLaboratorio,RealizacionLaboratorioI = :realizacionLaboratorioI,PesoLaboratorio = :pesoLaboratorio,IdAsignatura = :idAsignatura WHERE IdEvaluacion = :idEvaluacion";
         $values=array(':idEvaluacion' => $evaluacion->getIdEvaluacion(),
+=======
+    public static function updateEvaluacion($evaluacion)
+    {
+        $singletonDataSource = new SingletonDataSource();
+        $dataSource = $singletonDataSource->getInstance();
+        $sql = "UPDATE evaluacion SET IdEvaluacion = :idEvaluacion, RealizacionExamenes = :realizacionExamenes,RealizacionExamenesi = :realizacionExamenesI, PesoExamenes = :pesoExamenes,RealizacionActividades = :realizacionActividades,RealizacionActividadesi = :realizacionActividadesI,PesoActividades = :pesoActividades,RealizacionLaboratorio = :RealizacionLaboratorio,RealizacionLaboratorioi = :realizacionLaboratorioI,PesoLaboratorio = :pesoLaboratorio,CalificacionFinal = :calificacionFinal,CalificacionFinali = :calificacionFinali,IdAsignatura = :idAsignatura WHERE IdAsignatura = :idAsignatura";
+        $values = array(
+            ':idEvaluacion' => $evaluacion->getIdEvaluacion(),
+>>>>>>> Stashed changes
             ':realizacionExamenes' => $evaluacion->getRealizacionExamenes(),
             ':realizacionExamenesI' => $evaluacion->getRealizacionExamenesI(),
             ':pesoExamenes' => $evaluacion->getPesoExamenes(),
@@ -54,8 +83,16 @@ class DAOEvaluacionImplements implements DAOEvaluacion{
             ':realizacionLaboratorio' => $evaluacion->getRealizacionLaboratorio(),
             ':realizacionLaboratorio' => $evaluacion->getRealizacionLaboratorioI(),
             ':pesoLaboratorio' => $evaluacion->getPesolaboratorio(),
+<<<<<<< Updated upstream
             ':idAsignatura' => $evaluacion->getIdAsignatura());
         $results=$dataSource->executeInsertUpdateDelete($sql,$values);
+=======
+            ':calificacionFinal' => $evaluacion->getCalificacionFinal(),
+            ':calificacionFinalI' => $evaluacion->getCalificacionFinalI(),
+            ':idAsignatura' => $evaluacion->getIdAsignatura()
+        );
+        $results = $dataSource->executeInsertUpdateDelete($sql, $values);
+>>>>>>> Stashed changes
         return $results;
     }
 

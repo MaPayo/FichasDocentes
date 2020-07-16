@@ -1,6 +1,7 @@
 <?php
 namespace es\ucm;
 
+<<<<<<< Updated upstream
 class Evaluacion{
 	private $IdEvaluacion;
 	private $RealizacionExamenes;
@@ -31,6 +32,40 @@ class Evaluacion{
 		$this->PesoLaboratorio = $PesoLaboratorio;
 		$this->IdAsignatura = $IdAsignatura;
 	}
+=======
+class Evaluacion
+{
+    private $IdEvaluacion;
+    private $RealizacionExamenes;
+    private $RealizacionExamenesI;
+    private $PesoExamenes;
+    private $RealizacionActividades;
+    private $RealizacionActividadesI;
+    private $PesoActividades;
+    private $RealizacionLaboratorio;
+    private $RealizacionLaboratorioI;
+    private $PesoLaboratorio;
+    private $CalificacionFinal;
+    private $CalificacionFinalI;
+    private $IdAsignatura;
+
+    public function __construct($IdEvaluacion, $RealizacionExamenes, $RealizacionExamenesI, $PesoExamenes, $RealizacionActividades, $RealizacionActividadesI, $PesoActividades, $RealizacionLaboratorio, $RealizacionLaboratorioI, $PesoLaboratorio, $CalificacionFinal, $CalificacionFinalI, $IdAsignatura)
+    {
+        $this->IdEvaluacion = $IdEvaluacion;
+        $this->RealizacionExamenes = $RealizacionExamenes;
+        $this->RealizacionExamenesI = $RealizacionExamenesI;
+        $this->PesoExamenes = $PesoExamenes;
+        $this->RealizacionActividades = $RealizacionActividades;
+        $this->RealizacionActividadesI = $RealizacionActividadesI;
+        $this->PesoActividades = $PesoActividades;
+        $this->RealizacionLaboratorio = $RealizacionLaboratorio;
+        $this->RealizacionLaboratorioI = $RealizacionLaboratorioI;
+        $this->PesoLaboratorio = $PesoLaboratorio;
+        $this->CalificacionFinal = $CalificacionFinal;
+        $this->CalificacionFinalI = $CalificacionFinalI;
+        $this->IdAsignatura = $IdAsignatura;
+    }
+>>>>>>> Stashed changes
 
     /**
      * @return mixed
@@ -195,6 +230,7 @@ class Evaluacion{
     /**
      * @return mixed
      */
+<<<<<<< Updated upstream
     public function getPesoActividades()
     {
     	return $this->PesoActividades;
@@ -208,6 +244,21 @@ class Evaluacion{
     public function setPesoActividades($PesoActividades)
     {
     	$this->PesoActividades = $PesoActividades;
+=======
+    public function getCalificacionFinal()
+    {
+        return $this->CalificacionFinal;
+    }
+
+    /**
+     * @param mixed $CalificacionFinal
+     *
+     * @return self
+     */
+    public function setCalificacionFinal($CalificacionFinal)
+    {
+        $this->CalificacionFinal = $CalificacionFinal;
+>>>>>>> Stashed changes
 
     	return $this;
     }
@@ -215,6 +266,7 @@ class Evaluacion{
     /**
      * @return mixed
      */
+<<<<<<< Updated upstream
     public function getRealizacionLaboratorio()
     {
     	return $this->RealizacionLaboratorio;
@@ -228,10 +280,26 @@ class Evaluacion{
     public function setRealizacionLaboratorio($RealizacionLaboratorio)
     {
     	$this->RealizacionLaboratorio = $RealizacionLaboratorio;
+=======
+    public function getCalificacionFinalI()
+    {
+        return $this->CalificacionFinalI;
+    }
+
+    /**
+     * @param mixed $CalificacionFinalI
+     *
+     * @return self
+     */
+    public function setCalificacionFinalI($CalificacionFinalI)
+    {
+        $this->CalificacionFinalI = $CalificacionFinalI;
+>>>>>>> Stashed changes
 
     	return $this;
     }
 
+<<<<<<< Updated upstream
     /**
      * @return mixed
      */
@@ -271,6 +339,8 @@ class Evaluacion{
 
     	return $this;
     }
+=======
+>>>>>>> Stashed changes
 
     /**
      * @return mixed

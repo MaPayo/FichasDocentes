@@ -35,10 +35,19 @@ class DAOGrupoClaseProfesorImplements implements DAOGrupoClaseProfesor
     {
         $singletonDataSource = new SingletonDataSource();
         $dataSource = $singletonDataSource->getInstance();
+<<<<<<< Updated upstream
         $sql = "INSERT INTO grupoclaseprofesor (IdGrupoClase,EmailProfesor) 
         VALUES (:idGrupoClase, :emailProfesor)";
         $values = array(
             ':idGrupoClase' => $grupoClaseProfesor->getIdGrupoClase(),
+=======
+        $sql = "INSERT INTO grupoclaseprofesor (IdGrupoClase,Tipo,Fechas,EmailProfesor) 
+        VALUES (:idGrupoClase, :tipo, :fechas, :emailProfesor)";
+        $values = array(
+            ':idGrupoClase' => $grupoClaseProfesor->getIdGrupoClase(),
+            ':tipo' => $grupoClaseProfesor->getTipo(),
+            ':fechas' => $grupoClaseProfesor->getFechas(),
+>>>>>>> Stashed changes
             ':emailProfesor' => $grupoClaseProfesor->getEmailProfesor()
         );
         $results = $dataSource->executeInsertUpdateDelete($sql, $values);
@@ -49,9 +58,17 @@ class DAOGrupoClaseProfesorImplements implements DAOGrupoClaseProfesor
     {
         $singletonDataSource = new SingletonDataSource();
         $dataSource = $singletonDataSource->getInstance();
+<<<<<<< Updated upstream
         $sql = "UPDATE grupoclaseprofesor SET IdGrupoClase = :idGrupoClase, EmailProfesor = :emailProfesor WHERE IdGrupoClase = :idGrupoClase AND EmailProfesor = :emailProfesor";
         $values = array(
             ':idGrupoClase' => $grupoClaseProfesor->getIdGrupoClase(),
+=======
+        $sql = "UPDATE grupoclaseprofesor SET IdGrupoClase = :idGrupoClase, Tipo = :tipo, Fechas = :fechas,EmailProfesor = :emailProfesor WHERE IdGrupoClase = :idGrupoClase AND EmailProfesor = :emailProfesor";
+        $values = array(
+            ':idGrupoClase' => $grupoClaseProfesor->getIdGrupoClase(),
+            ':tipo' => $grupoClaseProfesor->getTipo(),
+            ':fechas' => $grupoClaseProfesor->getFechas(),
+>>>>>>> Stashed changes
             ':emailProfesor' => $grupoClaseProfesor->getEmailProfesor()
         );
         $results = $dataSource->executeInsertUpdateDelete($sql, $values);

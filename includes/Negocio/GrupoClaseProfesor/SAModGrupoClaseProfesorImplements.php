@@ -17,7 +17,16 @@ class SAModGrupoClaseProfesorImplements implements SAModGrupoClaseProfesor
         $modGrupoClaseProfesor = $DAOModGrupoClaseProfesor->listModGrupoClaseProfesor($idGrupoClase);
         if ($modGrupoClaseProfesor && count($modGrupoClaseProfesor) > 0) {
             foreach ($modGrupoClaseProfesor as $grupo) {
+<<<<<<< Updated upstream
                 $arrayModGrupoClaseProfesor[] = new ModGrupoClaseProfesor($grupo['IdGrupoClase'], $grupo['EmailProfesor']);
+=======
+                $arrayModGrupoClaseProfesor[] = new ModGrupoClaseProfesor(
+                    $grupo['IdGrupoClase'],
+                    $grupo['Tipo'],
+                    $grupo['Fechas'],
+                    $grupo['EmailProfesor']
+                );
+>>>>>>> Stashed changes
             }
         }
         return $arrayModGrupoClaseProfesor;
@@ -31,6 +40,11 @@ class SAModGrupoClaseProfesorImplements implements SAModGrupoClaseProfesor
         if ($modGrupoClaseProfesor && count($modGrupoClaseProfesor) === 1) {
             $modGrupoClaseProfesor = new ModGrupoClaseProfesor(
                 $modGrupoClaseProfesor[0]['IdGrupoClase'],
+<<<<<<< Updated upstream
+=======
+                $modGrupoClaseProfesor[0]['Tipo'],
+                $modGrupoClaseProfesor[0]['Fechas'],
+>>>>>>> Stashed changes
                 $modGrupoClaseProfesor[0]['EmailProfesor']
             );
         }

@@ -20,8 +20,17 @@ class SAProgramaAsignaturaImplements implements SAProgramaAsignatura{
                 $programaAsignatura[0]['ConocimientosPreviosi'],
                 $programaAsignatura[0]['BreveDescripcion'],
                 $programaAsignatura[0]['BreveDescripcioni'],
+<<<<<<< Updated upstream
                 $programaAsignatura[0]['ProgramaDetallado'],
                 $programaAsignatura[0]['ProgramaDetalladoi'],
+=======
+                $programaAsignatura[0]['ProgramaTeorico'],
+                $programaAsignatura[0]['ProgramaTeoricoi'],
+                $programaAsignatura[0]['ProgramaSeminarios'],
+                $programaAsignatura[0]['ProgramaSeminariosi'],
+                $programaAsignatura[0]['ProgramaLaboratorio'],
+                $programaAsignatura[0]['ProgramaLaboratorioi'],
+>>>>>>> Stashed changes
                 $programaAsignatura[0]['IdAsignatura']
             );
         }
