@@ -9,10 +9,18 @@ class Asignatura {
     private $Semestre;
     private $NombreAsignaturaIngles;
     private $Creditos;
+<<<<<<< Updated upstream
     private $Coordinadores;
     private $IdMateria;
 
     public function __construct($IdAsignatura,$NombreAsignatura,$Curso,$Semestre,$NombreAsignaturaIngles,$Creditos,$Coordinadores,$IdMateria)
+=======
+    private $CoordinadorAsignatura;
+    private $Estado;
+    private $IdMateria;
+
+    public function __construct($IdAsignatura, $NombreAsignatura, $Abreviatura, $Curso, $Semestre, $NombreAsignaturaIngles, $Creditos, $CoordinadorAsignatura, $Estado, $IdMateria)
+>>>>>>> Stashed changes
     {
         $this->IdAsignatura = $IdAsignatura;
         $this->NombreAsignatura = $NombreAsignatura;
@@ -20,7 +28,12 @@ class Asignatura {
         $this->Semestre = $Semestre;
         $this->NombreAsignaturaIngles = $NombreAsignaturaIngles;
         $this->Creditos = $Creditos;
+<<<<<<< Updated upstream
         $this->Coordinadores = $Coordinadores;
+=======
+        $this->CoordinadorAsignatura = $CoordinadorAsignatura;
+        $this->Estado = $Estado;
+>>>>>>> Stashed changes
         $this->IdMateria = $IdMateria;
     }
 
@@ -48,8 +61,19 @@ class Asignatura {
         return $this->Creditos;
     }
 
+<<<<<<< Updated upstream
     public function getCoordinadores(){
         return $this->Coordinadores;
+=======
+    public function getCoordinadorAsignatura()
+    {
+        return $this->CoordinadorAsignatura;
+    }
+
+    public function getEstado()
+    {
+        return $this->Estado;
+>>>>>>> Stashed changes
     }
 
     public function getIdMateria(){
@@ -84,8 +108,24 @@ class Asignatura {
         $this->Coordinadores=$Coordinadores;
     }
 
+<<<<<<< Updated upstream
     public function setIdMateria($IdMateria){
         $this->IdMateria=$IdMateria;
+=======
+    public function setCoordinadorAsignatura($CoordinadorAsignatura)
+    {
+        $this->CoordinadorAsignatura = $CoordinadorAsignatura;
+    }
+
+    public function setEstado($Estado)
+    {
+        $this->Estado = $Estado;
+    }
+
+    public function setIdMateria($IdMateria)
+    {
+        $this->IdMateria = $IdMateria;
+>>>>>>> Stashed changes
     }
 }
 

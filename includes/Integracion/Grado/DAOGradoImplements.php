@@ -18,10 +18,18 @@ class DAOGradoImplements implements DAOGrado{
     public static function createGrado($grado){
         $singletonDataSource=new SingletonDataSource();
         $dataSource=$singletonDataSource->getInstance();
+<<<<<<< Updated upstream
         $sql="INSERT INTO grado (CodigoGrado,NombreGrado,HorasEcts) 
         VALUES (:codigoGrado, :nombreGrado, :horasEcts)";
         $values=array(':codigoGrado' => $grado->getCodigoGrado(),
             ':nombreGrado' => $grado->getNombreGrado(),
+=======
+        $sql="INSERT INTO grado (CodigoGrado,NombreGrado,CoordinadorGrado,HorasEcts) 
+        VALUES (:codigoGrado, :nombreGrado, :coordinadorGrado, :horasEcts)";
+        $values=array(':codigoGrado' => $grado->getCodigoGrado(),
+            ':nombreGrado' => $grado->getNombreGrado(),
+            ':coordinadorGrado' => $grado->getCoordinadorGrado(),
+>>>>>>> Stashed changes
             ':horasEcts' => $grado->getHorasEcts());
         $results=$dataSource->executeInsertUpdateDelete($sql,$values);
         return $results;
@@ -31,9 +39,16 @@ class DAOGradoImplements implements DAOGrado{
     public static function updateGrado($grado){
         $singletonDataSource=new SingletonDataSource();
         $dataSource=$singletonDataSource->getInstance();
+<<<<<<< Updated upstream
         $sql="UPDATE grado SET CodigoGrado = :codigoGrado, NombreGrado = :nombreGrado,HorasEcts = :horasEcts WHERE CodigoGrado = :codigoGrado";
         $values=array(':codigoGrado' => $grado->getCodigoGrado(),
             ':nombreGrado' => $grado->getNombreGrado(),
+=======
+        $sql="UPDATE grado SET CodigoGrado = :codigoGrado, NombreGrado = :nombreGrado,CoordinadorGrado = :coordinadorGrado,HorasEcts = :horasEcts WHERE CodigoGrado = :codigoGrado";
+        $values=array(':codigoGrado' => $grado->getCodigoGrado(),
+            ':nombreGrado' => $grado->getNombreGrado(),
+            ':coordinadorGrado' => $grado->getCoordinadorGrado(),
+>>>>>>> Stashed changes
             ':horasEcts' => $grado->getHorasEcts());
         $results=$dataSource->executeInsertUpdateDelete($sql,$values);
         return $results;

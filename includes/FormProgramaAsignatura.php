@@ -18,8 +18,17 @@ class FormProgramaAsignatura extends Form
 		$conocimientosPreviosI = isset($datosIniciales['conocimientosPreviosI']) ? $datosIniciales['conocimientosPreviosI'] : null;
 		$breveDescripcion = isset($datosIniciales['breveDescripcion']) ? $datosIniciales['breveDescripcion'] : null;
 		$breveDescripcionI = isset($datosIniciales['breveDescripcionI']) ? $datosIniciales['breveDescripcionI'] : null;
+<<<<<<< Updated upstream
 		$programaDetallado = isset($datosIniciales['programaDetallado']) ? $datosIniciales['programaDetallado'] : null;
 		$programaDetalladoI = isset($datosIniciales['programaDetalladoI']) ? $datosIniciales['programaDetalladoI'] : null;
+=======
+		$programaTeorico = isset($datosIniciales['programaTeorico']) ? $datosIniciales['programaTeorico'] : null;
+		$programaTeoricoI = isset($datosIniciales['programaTeoricoI']) ? $datosIniciales['programaTeoricoI'] : null;
+		$programaSeminarios = isset($datosIniciales['programaSeminarios']) ? $datosIniciales['programaSeminarios'] : null;
+		$programaSeminariosI = isset($datosIniciales['programaSeminariosI']) ? $datosIniciales['programaSeminariosI'] : null;
+		$programaLaboratorio = isset($datosIniciales['programaLaboratorio']) ? $datosIniciales['programaLaboratorio'] : null;
+		$programaLaboratorioI = isset($datosIniciales['programaLaboratorioI']) ? $datosIniciales['programaLaboratorioI'] : null;
+>>>>>>> Stashed changes
 		$idAsignatura = isset($datosIniciales['idAsignatura']) ? $datosIniciales['idAsignatura'] : null;
 
 		$controller = new ControllerImplements();
@@ -69,8 +78,41 @@ class FormProgramaAsignatura extends Form
 
 				if(!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())){
 					$html .= '<div class="form-group">
+<<<<<<< Updated upstream
 					<label for="programaDetalladoI">Programa detallado (Ingles)</label>
 					<textarea class="form-control" id="programaDetalladoI" rows="3" name="programaDetalladoI" >' . $programaDetalladoI . '</textarea>
+=======
+					<label for="programaTeoricoI">Programa teorico (Ingles)</label>
+					<textarea class="form-control" id="programaTeoricoI" rows="3" name="programaTeoricoI" >' . $programaTeoricoI . '</textarea>
+					</div>';
+				}
+			}
+
+			if ($contextConfiguacion->getData()->getProgramaSeminarios() == 1) {
+				$html .= '<div class="form-group">
+				<label for="programaSeminarios">Programa seminarios</label>
+				<textarea class="form-control" id="programaTeorico" rows="3" name="programaSeminarios" >' . $programaSeminarios . '</textarea>
+				</div>';
+
+				if(!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())){
+					$html .= '<div class="form-group">
+					<label for="programaSeminariosI">Programa seminarios (Ingles)</label>
+					<textarea class="form-control" id="programaSeminariosI" rows="3" name="programaSeminariosI" >' . $programaSeminariosI . '</textarea>
+					</div>';
+				}
+			}
+
+			if ($contextConfiguacion->getData()->getProgramaLaboratorio() == 1) {
+				$html .= '<div class="form-group">
+				<label for="programaLaboratorio">Programa laboratorio</label>
+				<textarea class="form-control" id="programaLaboratorio" rows="3" name="programaLaboratorio" >' . $programaLaboratorio . '</textarea>
+				</div>';
+
+				if(!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())){
+					$html .= '<div class="form-group">
+					<label for="programaLaboratorioI">Programa laboratorio (Ingles)</label>
+					<textarea class="form-control" id="programaLaboratorioI" rows="3" name="programaLaboratorioI" >' . $programaLaboratorioI . '</textarea>
+>>>>>>> Stashed changes
 					</div>';
 				}
 			}
@@ -103,8 +145,17 @@ class FormProgramaAsignatura extends Form
 		$conocimientosPreviosI = isset($datos['conocimientosPreviosI']) ? $datos['conocimientosPreviosI'] : '';
 		$breveDescripcion = isset($datos['breveDescripcion']) ? $datos['breveDescripcion'] : '';
 		$breveDescripcionI = isset($datos['breveDescripcionI']) ? $datos['breveDescripcionI'] : '';
+<<<<<<< Updated upstream
 		$programaDetallado = isset($datos['programaDetallado']) ? $datos['programaDetallado'] : '';
 		$programaDetalladoI = isset($datos['programaDetalladoI']) ? $datos['programaDetalladoI'] : '';
+=======
+		$programaTeorico = isset($datos['programaTeorico']) ? $datos['programaTeorico'] : '';
+		$programaTeoricoI = isset($datos['programaTeoricoI']) ? $datos['programaTeoricoI'] : '';
+		$programaSeminarios = isset($datos['programaSeminarios']) ? $datos['programaSeminarios'] : '';
+		$programaSeminariosI = isset($datos['programaSeminariosI']) ? $datos['programaSeminariosI'] : '';
+		$programaLaboratorio = isset($datos['programaLaboratorio']) ? $datos['programaLaboratorio'] : '';
+		$programaLaboratorioI = isset($datos['programaLaboratorioI']) ? $datos['programaLaboratorioI'] : '';
+>>>>>>> Stashed changes
 
 		if ($contextConfiguacion->getEvent() === FIND_CONFIGURACION_OK){
 
@@ -136,6 +187,7 @@ class FormProgramaAsignatura extends Form
 				}
 			}
 
+<<<<<<< Updated upstream
 			if ($contextConfiguacion->getData()->getProgramaDetallado() == 1) {
 				$programaDetallado = self::clean($programaDetallado);
 				if (empty($programaDetallado)) {
@@ -146,6 +198,46 @@ class FormProgramaAsignatura extends Form
 					$programaDetalladoI = self::clean($programaDetalladoI);
 					if (empty($programaDetalladoI)) {
 						$erroresFormulario[] = "No has introducido el programa detallado en ingles";
+=======
+			if ($contextConfiguacion->getData()->getProgramaTeorico() == 1) {
+				$programaTeorico = self::clean($programaTeorico);
+				if (empty($programaTeorico)) {
+					$erroresFormulario[] = "No has introducido el programa teorico";
+				}
+
+				if(!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())){
+					$programaTeoricoI = self::clean($programaTeoricoI);
+					if (empty($programaTeoricoI)) {
+						$erroresFormulario[] = "No has introducido el programa teorico en ingles";
+					}
+				}
+			}
+
+			if ($contextConfiguacion->getData()->getProgramaSeminarios() == 1) {
+				$programaSeminarios = self::clean($programaSeminarios);
+				if (empty($programaSeminarios)) {
+					$erroresFormulario[] = "No has introducido el programa seminarios";
+				}
+
+				if(!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())){
+					$programaSeminariosI = self::clean($programaSeminariosI);
+					if (empty($programaSeminariosI)) {
+						$erroresFormulario[] = "No has introducido el programa seminarios en ingles";
+					}
+				}
+			}
+
+			if ($contextConfiguacion->getData()->getProgramaLaboratorio() == 1) {
+				$programaLaboratorio = self::clean($programaLaboratorio);
+				if (empty($programaLaboratorio)) {
+					$erroresFormulario[] = "No has introducido el programa laboratorio";
+				}
+
+				if(!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())){
+					$programaLaboratorioI = self::clean($programaLaboratorioI);
+					if (empty($programaLaboratorioI)) {
+						$erroresFormulario[] = "No has introducido el programa laboratorio en ingles";
+>>>>>>> Stashed changes
 					}
 				}
 			}
@@ -159,7 +251,11 @@ class FormProgramaAsignatura extends Form
 
 			if ($contextPrograma->getEvent() === FIND_MODPROGRAMA_ASIGNATURA_OK) {
 
+<<<<<<< Updated upstream
 				$programa = new ModProgramaAsignatura($contextPrograma->getData()->getIdPrograma(), $conocimientosPrevios, $conocimientosPreviosI, $breveDescripcion, $breveDescripcionI, $programaDetallado, $programaDetalladoI, $datos['idAsignatura']);
+=======
+				$programa = new ModProgramaAsignatura($contextPrograma->getData()->getIdPrograma(), $conocimientosPrevios, $conocimientosPreviosI, $breveDescripcion, $breveDescripcionI, $programaTeorico, $programaTeoricoI, $programaSeminarios, $programaSeminariosI, $programaLaboratorio, $programaLaboratorioI, $datos['idAsignatura']);
+>>>>>>> Stashed changes
 				$context = new Context(UPDATE_MODPROGRAMA_ASIGNATURA, $programa);
 				$contextPrograma = $controller->action($context);
 
@@ -174,7 +270,11 @@ class FormProgramaAsignatura extends Form
 				}
 			} elseif ($contextPrograma->getEvent() === FIND_MODPROGRAMA_ASIGNATURA_FAIL) {
 
+<<<<<<< Updated upstream
 				$programa = new ModProgramaAsignatura(null, $conocimientosPrevios, $conocimientosPreviosI, $breveDescripcion, $breveDescripcionI, $programaDetallado, $programaDetalladoI, $datos['idAsignatura']);
+=======
+				$programa = new ModProgramaAsignatura(null, $conocimientosPrevios, $conocimientosPreviosI, $breveDescripcion, $breveDescripcionI, $programaTeorico, $programaTeoricoI, $programaSeminarios, $programaSeminariosI, $programaLaboratorio, $programaLaboratorioI, $datos['idAsignatura']);
+>>>>>>> Stashed changes
 				$context = new Context(CREATE_MODPROGRAMA_ASIGNATURA, $programa);
 				$contextPrograma = $controller->action($context);
 

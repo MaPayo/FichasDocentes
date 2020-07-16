@@ -45,9 +45,30 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                         <h2>Añadir profesor a grupo laboratorio</h2>
                                     </div>
                                     <div class="card-body">
+<<<<<<< Updated upstream
                                         <?php
                                         $access = new es\ucm\FormGrupoLaboratorioProfesor('idGrupoLaboratorioProfesor');
                                         $datosIniciales = array();
+=======
+                                    <?php
+                                    $access = new es\ucm\FormGrupoLaboratorioProfesor('idGrupoLaboratorioProfesor');
+                                    $controller = new es\ucm\ControllerImplements();
+                                    $datosIniciales = array();
+                                    if (isset($_GET['IdGrupoLaboratorio']) && isset($_GET['EmailProfesor'])) {
+                                        $arrayGrupoLaboratorioProfesor = array();
+                                        $arrayGrupoLaboratorioProfesor['idGrupoLaboratorio'] = htmlspecialchars(trim(strip_tags($_GET['IdGrupoLaboratorio'])));
+                                        $arrayGrupoLaboratorioProfesor['emailProfesor'] = htmlspecialchars(trim(strip_tags($_GET['EmailProfesor'])));
+                                        $context = new es\ucm\Context(FIND_MODGRUPO_LABORATORIO_PROFESOR, $arrayGrupoLaboratorioProfesor);
+                                        $contextGrupoLaboratorioProfesor = $controller->action($context);
+                                        if ($contextGrupoLaboratorioProfesor->getEvent() === FIND_MODGRUPO_LABORATORIO_PROFESOR_OK) {
+                                            $datosIniciales['idGrupoLaboratorio'] = $contextGrupoLaboratorioProfesor->getData()->getIdGrupoLab();
+                                            $datosIniciales['fechas'] = $contextGrupoLaboratorioProfesor->getData()->getFechas();
+                                            $datosIniciales['emailProfesor'] = $contextGrupoLaboratorioProfesor->getData()->getEmailProfesor();
+                                            $datosIniciales['idAsignatura'] = htmlspecialchars(trim(strip_tags($_GET['IdAsignatura'])));
+                                            $access->gestionaModificacion($datosIniciales);
+                                        }
+                                    } elseif (isset($_GET['IdGrupoLaboratorio'])) {
+>>>>>>> Stashed changes
                                         $datosIniciales['idGrupoLaboratorio'] = htmlspecialchars(trim(strip_tags($_GET['IdGrupoLaboratorio'])));
                                         $datosIniciales['idAsignatura'] = htmlspecialchars(trim(strip_tags($_GET['IdAsignatura'])));
                                         $access->gestionaModificacion($datosIniciales);

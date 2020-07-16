@@ -62,9 +62,31 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                     }
                                     $contextPrograma = $controller->action($context);
 
+<<<<<<< Updated upstream
                                     if ($contextPrograma->getEvent() === FIND_PROGRAMA_ASIGNATURA_OK || FIND_MODPROGRAMA_ASIGNATURA_OK) {
                                         if ($contextPrograma->getEvent() === FIND_MODPROGRAMA_ASIGNATURA_OK) {
                                             $datosIniciales['idPrograma'] = $contextPrograma->getData()->getIdPrograma();
+=======
+                                        if ($contextPrograma->getEvent() === FIND_PROGRAMA_ASIGNATURA_OK || FIND_MODPROGRAMA_ASIGNATURA_OK) {
+                                            if ($contextPrograma->getEvent() === FIND_MODPROGRAMA_ASIGNATURA_OK) {
+                                                $datosIniciales['idPrograma'] = $contextPrograma->getData()->getIdPrograma();
+                                            }
+                                            $datosIniciales['conocimientosPrevios'] = $contextPrograma->getData()->getConocimientosPrevios();
+                                            $datosIniciales['conocimientosPreviosI'] = $contextPrograma->getData()->getConocimientosPreviosI();
+                                            $datosIniciales['breveDescripcion'] = $contextPrograma->getData()->getBreveDescripcion();
+                                            $datosIniciales['breveDescripcionI'] = $contextPrograma->getData()->getBreveDescripcionI();
+                                            $datosIniciales['programaTeorico'] = $contextPrograma->getData()->getProgramaTeorico();
+                                            $datosIniciales['programaTeoricoI'] = $contextPrograma->getData()->getProgramaTeoricoI();
+                                            $datosIniciales['programaSeminarios'] = $contextPrograma->getData()->getProgramaSeminarios();
+                                            $datosIniciales['programaSeminariosI'] = $contextPrograma->getData()->getProgramaSeminariosI();
+                                            $datosIniciales['programaLaboratorio'] = $contextPrograma->getData()->getProgramaLaboratorio();
+                                            $datosIniciales['programaLaboratorioI'] = $contextPrograma->getData()->getProgramaLaboratorioI();
+                                            $datosIniciales['idAsignatura'] = $_GET[$name];
+                                            $access->gestionaModificacion($datosIniciales);
+                                        } else {
+                                            $datosIniciales['idAsignatura'] = $_GET[$name];
+                                            $access->gestionaModificacion($datosIniciales);
+>>>>>>> Stashed changes
                                         }
                                         $datosIniciales['conocimientosPrevios'] = $contextPrograma->getData()->getConocimientosPrevios();
                                         $datosIniciales['conocimientosPreviosI'] = $contextPrograma->getData()->getConocimientosPreviosI();

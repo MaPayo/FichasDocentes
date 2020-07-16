@@ -35,10 +35,18 @@ class DAOGrupoLaboratorioProfesorImplements implements DAOGrupoLaboratorioProfes
     {
         $singletonDataSource = new SingletonDataSource();
         $dataSource = $singletonDataSource->getInstance();
+<<<<<<< Updated upstream
         $sql = "INSERT INTO grupolaboratorioprofesor (IdGrupoLab,EmailProfesor) 
         VALUES (:idGrupoLab, :emailProfesor)";
         $values = array(
             ':idGrupoLab' => $grupoLaboratorioProfesor->getIdGrupoLab(),
+=======
+        $sql = "INSERT INTO grupolaboratorioprofesor (IdGrupoLab,Fechas,EmailProfesor) 
+        VALUES (:idGrupoLab, :fechas, :emailProfesor)";
+        $values = array(
+            ':idGrupoLab' => $grupoLaboratorioProfesor->getIdGrupoLab(),
+            ':fechas' => $grupoLaboratorioProfesor->getFechas(),
+>>>>>>> Stashed changes
             ':emailProfesor' => $grupoLaboratorioProfesor->getEmailProfesor()
         );
         $results = $dataSource->executeInsertUpdateDelete($sql, $values);
@@ -49,9 +57,16 @@ class DAOGrupoLaboratorioProfesorImplements implements DAOGrupoLaboratorioProfes
     {
         $singletonDataSource = new SingletonDataSource();
         $dataSource = $singletonDataSource->getInstance();
+<<<<<<< Updated upstream
         $sql = "UPDATE grupolaboratorioprofesor SET IdGrupoLab = :idGrupoLab, EmailProfesor = :emailProfesor WHERE IdGrupoLab = :idGrupoLab AND EmailProfesor = :emailProfesor";
         $values = array(
             ':idGrupoLab' => $grupoLaboratorioProfesor->getIdGrupoLab(),
+=======
+        $sql = "UPDATE grupolaboratorioprofesor SET IdGrupoLab = :idGrupoLab, Fechas = :fechas, EmailProfesor = :emailProfesor WHERE IdGrupoLab = :idGrupoLab AND EmailProfesor = :emailProfesor";
+        $values = array(
+            ':idGrupoLab' => $grupoLaboratorioProfesor->getIdGrupoLab(),
+            ':fechas' => $grupoLaboratorioProfesor->getFechas(),
+>>>>>>> Stashed changes
             ':emailProfesor' => $grupoLaboratorioProfesor->getEmailProfesor()
         );
         $results = $dataSource->executeInsertUpdateDelete($sql, $values);

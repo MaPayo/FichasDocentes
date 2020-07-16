@@ -15,6 +15,7 @@ class DAOConfiguracionImplements implements DAOConfiguracion{
 
     }
 
+<<<<<<< Updated upstream
     public static function createConfiguracion($configuracion){
         $singletonDataSource=new SingletonDataSource();
         $dataSource=$singletonDataSource->getInstance();
@@ -24,6 +25,21 @@ class DAOConfiguracionImplements implements DAOConfiguracion{
             ':conocimientosPrevios' => $configuracion->getConocimientosPrevios(),
             ':breveDescripcion' => $configuracion->getBreveDescripcion(),
             ':programaDetallado' => $configuracion->getProgramaDetallado(),
+=======
+    public static function createConfiguracion($configuracion)
+    {
+        $singletonDataSource = new SingletonDataSource();
+        $dataSource = $singletonDataSource->getInstance();
+        $sql = "INSERT INTO configuracion (IdConfiguracion,ConocimientosPrevios,BreveDescripcion,ProgramaTeorico,ProgramaSeminarios,ProgramaLaboratorio,ComGenerales,ComEspecificas,ComBasicas,ResultadosAprendizaje,Metodologia,CitasBibliograficas,RecursosInternet,GrupoLaboratorio,RealizacionExamenes,RealizacionActividades,RealizacionLaboratorio,CalificacionFinal,IdAsignatura) 
+        VALUES (:idConfiguracion, :conocimientosPrevios, :breveDescripcion, :programaTeorico, :programaSeminarios, :programaLaboratorio, :comGenerales, :comEspecificas, :comBasicas, :resultadosAprendizaje, :metodologia, :citasBibliograficas, :recursosInternet, :grupoLaboratorio, :realizacionExamenes, :realizacionActividades, :realizacionLaboratorio, :calificacionFinal, :idAsignatura)";
+        $values = array(
+            ':idConfiguracion' => $configuracion->getIdConfiguracion(),
+            ':conocimientosPrevios' => $configuracion->getConocimientosPrevios(),
+            ':breveDescripcion' => $configuracion->getBreveDescripcion(),
+            ':programaTeorico' => $configuracion->getProgramaTeorico(),
+            ':programaSeminarios' => $configuracion->getProgramaSeminarios(),
+            ':programaLaboratorio' => $configuracion->getProgramaLaboratorio(),
+>>>>>>> Stashed changes
             ':comGenerales' => $configuracion->getComGenerales(),
             ':comEspecificas' => $configuracion->getComEspecificas(),
             ':comBasicas' => $configuracion->getComBasicas(),
@@ -35,12 +51,20 @@ class DAOConfiguracionImplements implements DAOConfiguracion{
             ':calificacionFinal' => $configuracion->getCalificacionFinal(),
             ':realizacionActividades' => $configuracion->getRealizacionActividades(),
             ':realizacionLaboratorio' => $configuracion->getRealizacionLaboratorio(),
+<<<<<<< Updated upstream
             ':idAsignatura' => $configuracion->getIdAsignatura());
         $results=$dataSource->executeInsertUpdateDelete($sql,$values);
+=======
+            ':calificacionFinal' => $configuracion->getCalificacionFinal(),
+            ':idAsignatura' => $configuracion->getIdAsignatura()
+        );
+        $results = $dataSource->executeInsertUpdateDelete($sql, $values);
+>>>>>>> Stashed changes
         return $results;
 
     }
 
+<<<<<<< Updated upstream
     public static function updateConfiguracion($configuracion){
         $singletonDataSource=new SingletonDataSource();
         $dataSource=$singletonDataSource->getInstance();
@@ -49,6 +73,20 @@ class DAOConfiguracionImplements implements DAOConfiguracion{
             ':conocimientosPrevios' => $configuracion->getConocimientosPrevios(),
             ':breveDescripcion' => $configuracion->getBreveDescripcion(),
             ':programaDetallado' => $configuracion->getProgramaDetallado(),
+=======
+    public static function updateConfiguracion($configuracion)
+    {
+        $singletonDataSource = new SingletonDataSource();
+        $dataSource = $singletonDataSource->getInstance();
+        $sql = "UPDATE configuracion SET IdConfiguracion = :idConfiguracion, ConocimientosPrevios = :conocimientosPrevios,BreveDescripcion = :breveDescripcion,ProgramaTeorico = :programaTeorico,ProgramaSeminarios = :programaSeminarios,ProgramaLaboratorio = :programaLaboratorio,ComGenerales = :comGenerales,ComEspecificas = :comEspecificas,ComBasicas = :comBasicas,ResultadosAprendizaje = :resultadosAprendizaje,Metodologia = :metodologia,CitasBibliograficas = :citasBibliograficas,RecursosInternet = :recursosInternet, GrupoLaboratorio=:grupoLaboratorio, RealizacionExamenes = :realizacionExamenes,RealizacionActividades = :realizacionActividades,RealizacionLaboratorio = :realizacionLaboratorio,CalificacionFinal = :calificacionFinal,IdAsignatura = :idAsignatura WHERE IdAsignatura = :idAsignatura";
+        $values = array(
+            ':idConfiguracion' => $configuracion->getIdConfiguracion(),
+            ':conocimientosPrevios' => $configuracion->getConocimientosPrevios(),
+            ':breveDescripcion' => $configuracion->getBreveDescripcion(),
+            ':programaTeorico' => $configuracion->getProgramaTeorico(),
+            ':programaSeminarios' => $configuracion->getProgramaSeminarios(),
+            ':programaLaboratorio' => $configuracion->getProgramaLaboratorio(),
+>>>>>>> Stashed changes
             ':comGenerales' => $configuracion->getComGenerales(),
             ':comEspecificas' => $configuracion->getComEspecificas(),
             ':comBasicas' => $configuracion->getComBasicas(),
@@ -60,8 +98,15 @@ class DAOConfiguracionImplements implements DAOConfiguracion{
             ':calificacionFinal' => $configuracion->getCalificacionFinal(),
             ':realizacionActividades' => $configuracion->getRealizacionActividades(),
             ':realizacionLaboratorio' => $configuracion->getRealizacionLaboratorio(),
+<<<<<<< Updated upstream
             ':idAsignatura' => $configuracion->getIdAsignatura());
         $results=$dataSource->executeInsertUpdateDelete($sql,$values);
+=======
+            ':calificacionFinal' => $configuracion->getCalificacionFinal(),
+            ':idAsignatura' => $configuracion->getIdAsignatura()
+        );
+        $results = $dataSource->executeInsertUpdateDelete($sql, $values);
+>>>>>>> Stashed changes
         return $results;
     }
 

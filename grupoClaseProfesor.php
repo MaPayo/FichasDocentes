@@ -32,6 +32,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
 
             if(isset($_GET['IdGrupoClase']) && isset($_GET['IdAsignatura'])){
 
+<<<<<<< Updated upstream
                 if(isset($_SESSION['permisos'][$_GET['IdAsignatura']]) && unserialize($_SESSION['permisos'][$_GET['IdAsignatura']])->getPermisoGrupoClase() >= 6){
                     ?>
                     <div class="col-md-6 col-12">
@@ -47,6 +48,41 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                 $datosIniciales['idAsignatura'] = htmlspecialchars(trim(strip_tags($_GET['IdAsignatura'])));
                                 $access->gestionaModificacion($datosIniciales);
                                 ?>
+=======
+                    if (isset($_SESSION['permisos'][$_GET['IdAsignatura']]) && unserialize($_SESSION['permisos'][$_GET['IdAsignatura']])->getPermisoGrupoClase() >= 6) {
+            ?>
+                        <div class="col-md-6 col-12">
+                            <div class="card ">
+                                <div class="card-header text-center">
+                                    <h2>Añadir profesor a grupo clase</h2>
+                                </div>
+                                <div class="card-body">
+                                    <?php
+                                    $access = new es\ucm\FormGrupoClaseProfesor('idGrupoClaseProfesor');
+                                    $controller = new es\ucm\ControllerImplements();
+                                    $datosIniciales = array();
+                                    if (isset($_GET['IdGrupoClase']) && isset($_GET['EmailProfesor'])) {
+                                        $arrayGrupoClaseProfesor = array();
+                                        $arrayGrupoClaseProfesor['idGrupoClase'] = htmlspecialchars(trim(strip_tags($_GET['IdGrupoClase'])));
+                                        $arrayGrupoClaseProfesor['emailProfesor'] = htmlspecialchars(trim(strip_tags($_GET['EmailProfesor'])));
+                                        $context = new es\ucm\Context(FIND_MODGRUPO_CLASE_PROFESOR, $arrayGrupoClaseProfesor);
+                                        $contextGrupoClaseProfesor = $controller->action($context);
+                                        if ($contextGrupoClaseProfesor->getEvent() === FIND_MODGRUPO_CLASE_PROFESOR_OK) {
+                                            $datosIniciales['idGrupoClase'] = $contextGrupoClaseProfesor->getData()->getIdGrupoClase();
+                                            $datosIniciales['tipo'] = $contextGrupoClaseProfesor->getData()->getTipo();
+                                            $datosIniciales['fechas'] = $contextGrupoClaseProfesor->getData()->getFechas();
+                                            $datosIniciales['emailProfesor'] = $contextGrupoClaseProfesor->getData()->getEmailProfesor();
+                                            $datosIniciales['idAsignatura'] = htmlspecialchars(trim(strip_tags($_GET['IdAsignatura'])));
+                                            $access->gestionaModificacion($datosIniciales);
+                                        }
+                                    } elseif (isset($_GET['IdGrupoClase'])) {
+                                        $datosIniciales['idGrupoClase'] = htmlspecialchars(trim(strip_tags($_GET['IdGrupoClase'])));
+                                        $datosIniciales['idAsignatura'] = htmlspecialchars(trim(strip_tags($_GET['IdAsignatura'])));
+                                        $access->gestionaModificacion($datosIniciales);
+                                    }
+                                    ?>
+                                </div>
+>>>>>>> Stashed changes
                             </div>
                         </div>
                     </div>

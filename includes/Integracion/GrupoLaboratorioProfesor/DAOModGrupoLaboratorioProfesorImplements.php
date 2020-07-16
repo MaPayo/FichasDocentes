@@ -35,10 +35,18 @@ class DAOModGrupoLaboratorioProfesorImplements implements DAOModGrupoLaboratorio
     {
         $singletonDataSource = new SingletonDataSource();
         $dataSource = $singletonDataSource->getInstance();
+<<<<<<< Updated upstream
         $sql = "INSERT INTO modgrupolaboratorioprofesor (IdGrupoLab,EmailProfesor) 
         VALUES (:idGrupoLab, :emailProfesor)";
         $values = array(
             ':idGrupoLab' => $modGrupoLaboratorioProfesor->getIdGrupoLab(),
+=======
+        $sql = "INSERT INTO modgrupolaboratorioprofesor (IdGrupoLab,Fechas,EmailProfesor) 
+        VALUES (:idGrupoLab, :fechas, :emailProfesor)";
+        $values = array(
+            ':idGrupoLab' => $modGrupoLaboratorioProfesor->getIdGrupoLab(),
+            ':fechas' => $modGrupoLaboratorioProfesor->getFechas(),
+>>>>>>> Stashed changes
             ':emailProfesor' => $modGrupoLaboratorioProfesor->getEmailProfesor()
         );
         $results = $dataSource->executeInsertUpdateDelete($sql, $values);
@@ -49,9 +57,19 @@ class DAOModGrupoLaboratorioProfesorImplements implements DAOModGrupoLaboratorio
     {
         $singletonDataSource = new SingletonDataSource();
         $dataSource = $singletonDataSource->getInstance();
+<<<<<<< Updated upstream
         $sql = "UPDATE modgrupolaboratorioprofesor SET IdGrupoLab = :idGrupoLab, EmailProfesor = :emailProfesor WHERE IdGrupoLab = :idGrupoLab AND EmailProfesor = :emailProfesor";
         $values = array(
             ':idGrupoLab' => $modGrupoLaboratorioProfesor->getIdGrupoLab(),
+=======
+        $sql = "UPDATE modgrupolaboratorioprofesor SET IdGrupoLab = :idGrupoLab,
+          Fechas = :fechas,
+            EmailProfesor = :emailProfesor
+             WHERE IdGrupoLab = :idGrupoLab AND EmailProfesor = :emailProfesor";
+        $values = array(
+            ':idGrupoLab' => $modGrupoLaboratorioProfesor->getIdGrupoLab(),
+            ':fechas' => $modGrupoLaboratorioProfesor->getFechas(),
+>>>>>>> Stashed changes
             ':emailProfesor' => $modGrupoLaboratorioProfesor->getEmailProfesor()
         );
         $results = $dataSource->executeInsertUpdateDelete($sql, $values);

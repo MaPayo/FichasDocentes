@@ -13,6 +13,11 @@ class FormGrupoClaseProfesor extends Form
 	protected function generaCamposFormulario($datosIniciales)
 	{
 		$idGrupoClase = isset($datosIniciales['idGrupoClase']) ? $datosIniciales['idGrupoClase'] : null;
+<<<<<<< Updated upstream
+=======
+		$tipo=isset($datosIniciales['tipo']) ? $datosIniciales['tipo'] : null;
+		$fechas=isset($datosIniciales['fechas']) ? $datosIniciales['fechas'] : null;
+>>>>>>> Stashed changes
 		$emailProfesor = isset($datosIniciales['emailProfesor']) ? $datosIniciales['emailProfesor'] : null;
 		$idAsignatura = isset($datosIniciales['idAsignatura']) ? $datosIniciales['idAsignatura'] : null;
 
@@ -36,7 +41,19 @@ class FormGrupoClaseProfesor extends Form
 				}
 			}
 		}
+<<<<<<< Updated upstream
 		$html .= '	</select>
+=======
+		$html.='
+		<div class="form-group">
+			<label for="tipo">Tipo</label>
+			<input class="form-control" type="text" id="tipo" name="tipo" value="' . $tipo. '" />
+		</div>
+
+		<div class="form-group">
+			<label for="tipo">Fechas</label>
+			<input class="form-control" type="text" id="fechas" name="fechas" value="' . $fechas. '" />
+>>>>>>> Stashed changes
 		</div>
 
 		<div class="text-right">
@@ -62,6 +79,22 @@ class FormGrupoClaseProfesor extends Form
 			$erroresFormulario[] = "No has introducido al profesor.";
 		}
 
+<<<<<<< Updated upstream
+=======
+		$tipo = isset($datos['tipo']) ? $datos['tipo'] : null;
+		$tipo = self::clean($tipo);
+		if (empty($tipo)) {
+			$erroresFormulario[] = "No has introducido el tipo.";
+		}
+
+		$fechas = isset($datos['fechas']) ? $datos['fechas'] : null;
+		$fechas = self::clean($fechas);
+		if (empty($fechas)) {
+			$erroresFormulario[] = "No has introducido las fechas.";
+		}
+
+
+>>>>>>> Stashed changes
 		if (count($erroresFormulario) === 0) {
 			$controller = new ControllerImplements();
 			$arrayGrupoClaseProfesor=array();
@@ -70,9 +103,27 @@ class FormGrupoClaseProfesor extends Form
 			$context = new Context(FIND_MODGRUPO_CLASE_PROFESOR, $arrayGrupoClaseProfesor);
 			$contextGrupoClaseProfesor = $controller->action($context);
 			if ($contextGrupoClaseProfesor->getEvent() === FIND_MODGRUPO_CLASE_PROFESOR_OK) {
+<<<<<<< Updated upstream
 				$erroresFormulario[] = "El profesor ya se encuentra registrado en el grupo.";
 			} elseif ($contextGrupoClaseProfesor->getEvent() === FIND_MODGRUPO_CLASE_PROFESOR_FAIL) {
 				$grupoClaseProfesor = new ModGrupoClaseProfesor($datos['idGrupoClase'], $emailProfesor);
+=======
+
+				$grupoClaseProfesor = new ModGrupoClaseProfesor($datos['idGrupoClase'], $tipo, $fechas, $emailProfesor);
+				$context = new Context(UPDATE_MODGRUPO_CLASE_PROFESOR, $grupoClaseProfesor);
+				$contextGrupoClaseProfesor = $controller->action($context);
+				if ($contextGrupoClaseProfesor->getEvent() === UPDATE_MODGRUPO_CLASE_PROFESOR_OK) {
+					$modAsignatura = new ModAsignatura($datos['idAsignatura'], date("Y-m-d H:i:s"), $_SESSION['idUsuario'], $datos['idAsignatura']);
+					$context = new Context(UPDATE_MODASIGNATURA, $modAsignatura);
+					$contextModAsignatura = $controller->action($context);
+					$erroresFormulario = "indexAcceso.php?IdAsignatura=" . $datos['idAsignatura'] . "&modificado=y#nav-grupo-clase";
+				} elseif ($contextGrupoClaseProfesor->getEvent() === CREATE_MODGRUPO_CLASE_PROFESOR_FAIL) {
+					$erroresFormulario[] = "No se ha podido modificar al profesor en el grupo.";
+				}
+
+			} elseif ($contextGrupoClaseProfesor->getEvent() === FIND_MODGRUPO_CLASE_PROFESOR_FAIL) {
+				$grupoClaseProfesor = new ModGrupoClaseProfesor($datos['idGrupoClase'], $tipo, $fechas, $emailProfesor);
+>>>>>>> Stashed changes
 				$context = new Context(CREATE_MODGRUPO_CLASE_PROFESOR, $grupoClaseProfesor);
 				$contextGrupoClaseProfesor = $controller->action($context);
 				if ($contextGrupoClaseProfesor->getEvent() === CREATE_MODGRUPO_CLASE_PROFESOR_OK) {

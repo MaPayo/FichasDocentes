@@ -14,6 +14,7 @@ class SAComparacionImplements implements SAComparacion
         $factoriesDAO = new \es\ucm\FactorySAImplements();
         $DAO = $factoriesDAO->createSAConfiguracion();
         $configuracion = $DAO->findConfiguracion($idAsignatura);
+<<<<<<< Updated upstream
         $comparacion = array('conocimientosPrevios' => false, 
         'conocimientosPreviosI'=>false,
         "BreveDescripcion"=> false,
@@ -40,6 +41,36 @@ class SAComparacionImplements implements SAComparacion
         "RealizacionActividadesI" => false,
         "RealizacionLaboratorio" => false,
         "RealizacionLaboratorioI" => false );
+=======
+        $comparacion = array(
+            'conocimientosPrevios' => false,
+            'conocimientosPreviosI' => false,
+            "BreveDescripcion" => false,
+            "BreveDescripcionI" => false,
+            "ProgramaTeorico" => false,
+            "ProgramaTeoricoI" => false,
+            "ComGenerales" => false,
+            "ComGeneralesI" => false,
+            "ComEspecificas" => false,
+            "ComEspecificasI" => false,
+            "ComBasicas" => false,
+            "ComBasicasI" => false,
+            "ResultadosAprendizaje" => false,
+            "ResultadosAprendizajeI" => false,
+            "Metodologia" => false,
+            "MetodologiaI" => false,
+            "CitasBibliograficas" => false,
+            "RecursosInternet" => false,
+            "RealizacionExamenes" => false,
+            "RealizacionExamenesI" => false,
+            "CalificacionFinal" => false,
+            "CalificacionFinalI" => false,
+            "RealizacionActividades" => false,
+            "RealizacionActividadesI" => false,
+            "RealizacionLaboratorio" => false,
+            "RealizacionLaboratorioI" => false
+        );
+>>>>>>> Stashed changes
 
         $DAOP = $factoriesDAO->createSAProgramaAsignatura();
         $DAOPM = $factoriesDAO->createSAModProgramaAsignatura();
@@ -281,6 +312,7 @@ class SAComparacionImplements implements SAComparacion
                 $comparacion["RealizacionExamenesI"] = true;
             }
         }
+<<<<<<< Updated upstream
         }
         if($configuracion->getCalificacionFinal() === '1'){
             if(empty($modAsignatura)=== false){
@@ -291,6 +323,26 @@ class SAComparacionImplements implements SAComparacion
             $modn = explode(" ", $modn);
             if(sizeof($n) !== sizeof($modn)){
                 $comparacion["CalificacionFinal"] = true;
+=======
+        if ($configuracion->getCalificacionFinal() === '1') {
+            if (empty($modAsignatura) === false) {
+                $n =  $asignatura->getCalificacionFinal();
+                $modn = $modAsignatura->getCalificacionFinal();
+
+                $n = explode(" ", $n);
+                $modn = explode(" ", $modn);
+                if (sizeof($n) !== sizeof($modn)) {
+                    $comparacion["CalificacionFinal"] = true;
+                }
+                $n =  $asignatura->getCalificacionFinalI();
+                $modn = $modAsignatura->getCalificacionFinalI();
+
+                $n = explode(" ", $n);
+                $modn = explode(" ", $modn);
+                if (sizeof($n) !== sizeof($modn)) {
+                    $comparacion["CalificacionFinalI"] = true;
+                }
+>>>>>>> Stashed changes
             }
             $n =  $asignatura->getCalificacionFinalI();
             $modn = $modAsignatura->getCalificacionFinalI();

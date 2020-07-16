@@ -5,10 +5,20 @@ namespace es\ucm;
 class GrupoLaboratorioProfesor
 {
     private $IdGrupoLab;
+<<<<<<< Updated upstream
     private $EmailProfesor;
     public function __construct($IdGrupoLaboratorio, $EmailProfesor)
     {
         $this->IdGrupoLab = $IdGrupoLaboratorio;
+=======
+    private $Fechas;
+    private $EmailProfesor;
+    
+    public function __construct($IdGrupoLaboratorio, $Fechas, $EmailProfesor)
+    {
+        $this->IdGrupoLab = $IdGrupoLaboratorio;
+        $this->Fechas = $Fechas;
+>>>>>>> Stashed changes
         $this->EmailProfesor = $EmailProfesor;
     }
 
@@ -32,6 +42,30 @@ class GrupoLaboratorioProfesor
         return $this;
     }
 
+<<<<<<< Updated upstream
+=======
+
+    /**
+     * @return mixed
+     */
+    public function getFechas()
+    {
+        return $this->Fechas;
+    }
+
+    /**
+     * @param mixed $Fechas
+     *
+     * @return self
+     */
+    public function setFechas($Fechas)
+    {
+        $this->Fechas = $Fechas;
+
+        return $this;
+    }
+
+>>>>>>> Stashed changes
     /**
      * @return mixed
      */

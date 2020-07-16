@@ -1,6 +1,7 @@
 <?php
 namespace es\ucm;
 
+<<<<<<< Updated upstream
 class Configuracion{
 	private $IdConfiguracion;
 	private $ConocimientosPrevios;
@@ -38,6 +39,53 @@ class Configuracion{
 		$this->RealizacionLaboratorio = $RealizacionLaboratorio;
 		$this->IdAsignatura = $IdAsignatura;
 	}
+=======
+class Configuracion
+{
+    private $IdConfiguracion;
+    private $ConocimientosPrevios;
+    private $BreveDescripcion;
+    private $ProgramaTeorico;
+    private $ProgramaSeminarios;
+    private $ProgramaLaboratorio;
+    private $ComGenerales;
+    private $ComEspecificas;
+    private $ComBasicas;
+    private $ResultadosAprendizaje;
+    private $Metodologia;
+    private $CitasBibliograficas;
+    private $RecursosInternet;
+    private $GrupoLaboratorio;
+    private $RealizacionExamenes;
+    private $RealizacionActividades;
+    private $RealizacionLaboratorio;
+    private $CalificacionFinal;
+    private $IdAsignatura;
+
+    public function __construct($IdConfiguracion, $ConocimientosPrevios, $BreveDescripcion, $ProgramaTeorico, $ProgramaSeminarios, $ProgramaLaboratorio, $ComGenerales, $ComEspecificas, $ComBasicas, $ResultadosAprendizaje, $Metodologia, $CitasBibliograficas, $RecursosInternet, $GrupoLaboratorio, $RealizacionExamenes, $RealizacionActividades, $RealizacionLaboratorio, $CalificacionFinal, $IdAsignatura)
+    {
+
+        $this->IdConfiguracion = $IdConfiguracion;
+        $this->ConocimientosPrevios = $ConocimientosPrevios;
+        $this->BreveDescripcion = $BreveDescripcion;
+        $this->ProgramaTeorico = $ProgramaTeorico;
+        $this->ProgramaSeminarios = $ProgramaSeminarios;
+        $this->ProgramaLaboratorio = $ProgramaLaboratorio;
+        $this->ComGenerales = $ComGenerales;
+        $this->ComEspecificas = $ComEspecificas;
+        $this->ComBasicas = $ComBasicas;
+        $this->ResultadosAprendizaje = $ResultadosAprendizaje;
+        $this->Metodologia = $Metodologia;
+        $this->CitasBibliograficas = $CitasBibliograficas;
+        $this->RecursosInternet = $RecursosInternet;
+        $this->GrupoLaboratorio=$GrupoLaboratorio;
+        $this->RealizacionExamenes = $RealizacionExamenes;
+        $this->RealizacionActividades = $RealizacionActividades;
+        $this->RealizacionLaboratorio = $RealizacionLaboratorio;
+        $this->CalificacionFinal = $CalificacionFinal;
+        $this->IdAsignatura = $IdAsignatura;
+    }
+>>>>>>> Stashed changes
 
     /**
      * @return mixed
@@ -116,8 +164,14 @@ class Configuracion{
     {
     	$this->ProgramaDetallado = $ProgramaDetallado;
 
+<<<<<<< Updated upstream
     	return $this;
     }
+=======
+        return $this;
+    }
+
+>>>>>>> Stashed changes
 
     /**
      * @return mixed
@@ -335,10 +389,38 @@ class Configuracion{
      */
     public function setRealizacionLaboratorio($RealizacionLaboratorio)
     {
+<<<<<<< Updated upstream
     	$this->RealizacionLaboratorio = $RealizacionLaboratorio;
 
     	return $this;
     }
+=======
+        $this->RealizacionLaboratorio = $RealizacionLaboratorio;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCalificacionFinal()
+    {
+        return $this->CalificacionFinal;
+    }
+
+    /**
+     * @param mixed $CalificacionFinalO
+     *
+     * @return self
+     */
+    public function setCalificacionFinal($CalificacionFinal)
+    {
+        $this->CalificacionFinal = $CalificacionFinal;
+
+        return $this;
+    }
+
+>>>>>>> Stashed changes
 
     /**
      * @return mixed

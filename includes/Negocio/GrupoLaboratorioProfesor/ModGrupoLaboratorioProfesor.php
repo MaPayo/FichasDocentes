@@ -1,6 +1,7 @@
 <?php
 namespace es\ucm;
 
+<<<<<<< Updated upstream
 class ModGrupoLaboratorioProfesor{
 	private $IdGrupoLab;
     private $EmailProfesor;
@@ -9,6 +10,20 @@ class ModGrupoLaboratorioProfesor{
       $this->IdGrupoLab = $IdGrupoLaboratorio;
       $this->EmailProfesor=$EmailProfesor;
   }
+=======
+class ModGrupoLaboratorioProfesor
+{
+    private $IdGrupoLab;
+    private $Fechas;
+    private $EmailProfesor;
+
+    public function __construct($IdGrupoLaboratorio, $Fechas, $EmailProfesor)
+    {
+        $this->IdGrupoLab = $IdGrupoLaboratorio;
+        $this->Fechas = $Fechas;
+        $this->EmailProfesor = $EmailProfesor;
+    }
+>>>>>>> Stashed changes
 
     /**
      * @return mixed
@@ -29,6 +44,29 @@ class ModGrupoLaboratorioProfesor{
 
         return $this;
     }
+<<<<<<< Updated upstream
+=======
+    
+    /**
+     * @return mixed
+     */
+    public function getFechas()
+    {
+        return $this->Fechas;
+    }
+
+    /**
+     * @param mixed $Fechas
+     *
+     * @return self
+     */
+    public function setFechas($Fechas)
+    {
+        $this->Fechas = $Fechas;
+
+        return $this;
+    }
+>>>>>>> Stashed changes
 
     /**
      * @return mixed

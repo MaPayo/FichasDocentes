@@ -1,6 +1,7 @@
 <?php
 namespace es\ucm;
 
+<<<<<<< Updated upstream
 class ProgramaAsignatura{
 	private $IdPrograma;
 	private $ConocimientosPrevios;
@@ -21,6 +22,38 @@ class ProgramaAsignatura{
 		$this->ProgramaDetalladoI = $ProgramaDetalladoI;
 		$this->IdAsignatura = $IdAsignatura;
 	}
+=======
+class ProgramaAsignatura
+{
+    private $IdPrograma;
+    private $ConocimientosPrevios;
+    private $ConocimientosPreviosI;
+    private $BreveDescripcion;
+    private $BreveDescripcionI;
+    private $ProgramaTeorico;
+    private $ProgramaTeoricoI;
+    private $ProgramaSeminarios;
+    private $ProgramaSeminariosI;
+    private $ProgramaLaboratorio;
+    private $ProgramaLaboratorioI;
+    private $IdAsignatura;
+
+    public function __construct($IdPrograma, $ConocimientosPrevios, $ConocimientosPreviosI, $BreveDescripcion, $BreveDescripcionI, $ProgramaTeorico, $ProgramaTeoricoI, $ProgramaSeminarios, $ProgramaSeminariosI, $ProgramaLaboratorio, $ProgramaLaboratorioI, $IdAsignatura)
+    {
+        $this->IdPrograma = $IdPrograma;
+        $this->ConocimientosPrevios = $ConocimientosPrevios;
+        $this->ConocimientosPreviosI = $ConocimientosPreviosI;
+        $this->BreveDescripcion = $BreveDescripcion;
+        $this->BreveDescripcionI = $BreveDescripcionI;
+        $this->ProgramaTeorico = $ProgramaTeorico;
+        $this->ProgramaTeoricoI = $ProgramaTeoricoI;
+        $this->ProgramaSeminarios = $ProgramaSeminarios;
+        $this->ProgramaSeminariosI = $ProgramaSeminariosI;
+        $this->ProgramaLaboratorio = $ProgramaLaboratorio;
+        $this->ProgramaLaboratorioI = $ProgramaLaboratorioI;
+        $this->IdAsignatura = $IdAsignatura;
+    }
+>>>>>>> Stashed changes
 
     /**
      * @return mixed
@@ -125,6 +158,7 @@ class ProgramaAsignatura{
     /**
      * @return mixed
      */
+<<<<<<< Updated upstream
     public function getProgramaDetallado()
     {
     	return $this->ProgramaDetallado;
@@ -165,6 +199,8 @@ class ProgramaAsignatura{
     /**
      * @return mixed
      */
+=======
+>>>>>>> Stashed changes
     public function getIdAsignatura()
     {
     	return $this->IdAsignatura;

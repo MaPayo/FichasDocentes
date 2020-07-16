@@ -107,6 +107,19 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                         $context = new es\ucm\Context(FIND_ASIGNATURA, htmlspecialchars(trim(strip_tags($_GET['IdAsignatura']))));
                         $asignatura = $controller->action($context);
 
+<<<<<<< Updated upstream
+=======
+                        $context = new es\ucm\Context(FIND_MATERIA, $asignatura->getData()->getIdMateria());
+                        $materia = $controller->action($context);
+
+                        $context = new es\ucm\Context(FIND_MODULO, $materia->getData()->getIdModulo());
+                        $modulo = $controller->action($context);
+
+                        $context = new es\ucm\Context(FIND_PROFESOR, $asignatura->getData()->getCoordinadorAsignatura());
+                        $CoordinadorAsignatura = $controller->action($context);
+
+
+>>>>>>> Stashed changes
                         $context = new es\ucm\Context(FIND_PROGRAMA_ASIGNATURA, htmlspecialchars(trim(strip_tags($_GET['IdAsignatura']))));
                         $contextPrograma = $controller->action($context);
                         $context = new es\ucm\Context(FIND_MODPROGRAMA_ASIGNATURA, htmlspecialchars(trim(strip_tags($_GET['IdAsignatura']))));
@@ -153,14 +166,23 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                         $verGrupoLab = true;
                         $verEvaluacion = true;
 
+<<<<<<< Updated upstream
                         if ($contextConfiguracion->getData()->getConocimientosPrevios() == 0 && $contextConfiguracion->getData()->getBreveDescripcion() == 0 && $contextConfiguracion->getData()->getProgramaDetallado() == 0) $verPrograma = false;
 
+=======
+                        if ($contextConfiguracion->getData()->getConocimientosPrevios() == 0 && $contextConfiguracion->getData()->getBreveDescripcion() == 0 && $contextConfiguracion->getData()->getProgramaTeorico() == 0 && $contextConfiguracion->getData()->getProgramaSeminarios() == 0 && $contextConfiguracion->getData()->getProgramaLaboratorio() == 0) $verPrograma = false;
+>>>>>>> Stashed changes
                         if ($contextConfiguracion->getData()->getComGenerales() == 0 && $contextConfiguracion->getData()->getComEspecificas() == 0 && $contextConfiguracion->getData()->getComBasicas() == 0 && $contextConfiguracion->getData()->getResultadosAprendizaje() == 0) $verCompetencias = false;
                         if ($contextConfiguracion->getData()->getMetodologia() == 0) $verMetodologia = false;
 
                         if ($contextConfiguracion->getData()->getCitasBibliograficas() == 0 && $contextConfiguracion->getData()->getRecursosInternet() == 0) $verBibliografia = false;
+<<<<<<< Updated upstream
 
                         if ($contextConfiguracion->getData()->getRealizacionExamenes() == 0 && $contextConfiguracion->getData()->getCalificacionFinal() == 0 && $contextConfiguracion->getData()->getRealizacionActividades() == 0 && $contextConfiguracion->getData()->getRealizacionLaboratorio() == 0) $verEvaluacion = false;
+=======
+                        if ($contextConfiguracion->getData()->getGrupoLaboratorio() == 0) $verGrupoLab = false;
+                        if ($contextConfiguracion->getData()->getRealizacionExamenes() == 0 && $contextConfiguracion->getData()->getRealizacionActividades() == 0 && $contextConfiguracion->getData()->getRealizacionLaboratorio() == 0 && $contextConfiguracion->getData()->getCalificacionFinal() == 0) $verEvaluacion = false;
+>>>>>>> Stashed changes
                 ?>
 
                         <div class="col-md-8 col-12">
@@ -201,7 +223,11 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                             <a class="nav-item nav-link" id="nav-evaluacion-tab" data-toggle="tab" href="#nav-evaluacion" role="tab" aria-controls="nav-evaluacion" aria-selected="false">Evaluación</a>
                                         <?php } ?>
 
+<<<<<<< Updated upstream
                                         <?php if(strpos($asignatura->getData()->getCoordinadores(),$_SESSION['idUsuario'])!==false){?>
+=======
+                                        <?php if (strpos($asignatura->getData()->getCoordinadorAsignatura(), $_SESSION['idUsuario']) !== false) { ?>
+>>>>>>> Stashed changes
                                             <a class="nav-item nav-link" id="nav-coordinacion-tab" data-toggle="tab" href="#nav-coordinacion" role="tab" aria-controls="nav-coordinacion" aria-selected="false">Coordinación</a>
                                         <?php }?>
                                         
@@ -245,6 +271,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
 
                                                         </tr>
                                                         <tr>
+<<<<<<< Updated upstream
                                                             <th scope="row">Problemas</th>
                                                             <?php
                                                             $horasTotales = ($problema->getData()->getCreditos() * 25 * $problema->getData()->getPresencial()) / 100; //corregir
@@ -261,6 +288,20 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                     <td>' . $laboratorio->getData()->getPresencial() . '%</td>
                                                     <td>' . $horasTotales . '</td>'
                                                             ?>
+=======
+                                                            <th scope="col">Principal:</th>
+                                                            <td><?php echo $CoordinadorAsignatura->getData()->getNombre(); ?></td>
+                                                            <th scope="col" colspan="2">Departamento:</th>
+                                                            <td colspan="2"><?php echo $CoordinadorAsignatura->getData()->getDepartamento(); ?></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope="col">Facultad:</th>
+                                                            <td><?php echo $CoordinadorAsignatura->getData()->getFacultad(); ?></td>
+                                                            <th scope="col">Despacho:</th>
+                                                            <td><?php echo $CoordinadorAsignatura->getData()->getDespacho(); ?></td>
+                                                            <th scope="col">Email:</th>
+                                                            <td><?php echo $CoordinadorAsignatura->getData()->getEmail(); ?></td>
+>>>>>>> Stashed changes
                                                         </tr>
                                                     </tbody>
                                                 </table>
@@ -717,6 +758,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                             </div>
                                                         <?php } ?>
                                                     <?php } ?>
+<<<<<<< Updated upstream
 
                                                     <!-- Pestaña especificas -->
                                                     <?php if ($contextConfiguracion->getData()->getComEspecificas() == 1) { ?>
@@ -753,6 +795,76 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                         </div>
                                                                     </div>
                                                                             <?php } ?>
+=======
+                                                </div>
+
+                                                <?php if ($asignatura->getData()->getEstado()==="B" && unserialize($_SESSION['permisos'][$asignatura->getData()->getIdAsignatura()])->getPermisoPrograma() >= 6) { ?>
+                                                    <div class="text-right">
+                                                        
+                                                        <a href="programaAsignatura.php?IdAsignatura=<?php echo $asignatura->getData()->getIdAsignatura(); ?>">
+                                                            <button type="button" class="btn btn-success" id="btn-form">
+                                                                Crear Nuevo Borrador
+                                                            </button>
+                                                        </a>
+                                                        <?php if ($contextModPrograma->getEvent() === FIND_MODPROGRAMA_ASIGNATURA_OK) { ?>
+                                                            <a href="programaAsignatura.php?IdModAsignatura=<?php echo $asignatura->getData()->getIdAsignatura(); ?>">
+                                                                <button type="button" class="btn btn-warning" id="btn-form">
+                                                                    Modificar Borrador
+                                                                </button>
+                                                            </a>
+                                                            <a href="borrarProgramaAsignatura.php?IdModAsignatura=<?php echo $asignatura->getData()->getIdAsignatura(); ?>">
+                                                                <button type="button" class="btn btn-warning btn-danger" id="btn-form">
+                                                                    Borrar Borrador
+                                                                </button>
+                                                            </a>
+                                                        <?php } ?>
+                                                    </div>
+                                                <?php } ?>
+                                            </div>
+                                        <?php } ?>
+
+                                        <?php if ($verCompetencias) { ?>
+                                            <!--Pestaña competencia asignatura-->
+                                            <div class="tab-pane fade" id="nav-comp-asignatura" role="tabpanel" aria-labelledby="nav-comp-asignatura-tab">
+                                                <div class="accordion" id="accordionCompetencia">
+
+                                                    <!-- Pestaña generales -->
+                                                    <?php if ($contextConfiguracion->getData()->getComGenerales() == 1) { ?>
+                                                        <div class="card">
+                                                            <div class="card-header" id="headingOne">
+                                                                <h2 class="mb-0">
+                                                                    <?php if ($contextComparacion->getData()['ComGenerales'] && unserialize($_SESSION['permisos'][$asignatura->getData()->getIdAsignatura()])->getPermisoCompetencias() >= 4) { ?>
+                                                                        <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                                            Generales
+                                                                        </button>
+                                                                    <?php } else { ?>
+                                                                        <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                                            Generales
+                                                                        </button>
+                                                                    <?php } ?>
+                                                                </h2>
+                                                            </div>
+
+                                                            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionCompetencia">
+                                                                <div class="card-body">
+                                                                    <?php if (unserialize($_SESSION['permisos'][$asignatura->getData()->getIdAsignatura()])->getPermisoCompetencias() >= 4) { ?>
+                                                                        <div class="card">
+                                                                            <div class="card-body">
+                                                                                <h5 class="card-title">Borrador</h5>
+                                                                                <p class="card-text">
+                                                                                    <?php
+                                                                                    if ($contextModCompetencias->getEvent() === FIND_MODCOMPETENCIAS_ASIGNATURA_OK) {
+                                                                                        if ($contextComparacion->getData()['ComGenerales'])
+                                                                                            echo '<b style="font-size: 18px">' . $contextModCompetencias->getData()->getGenerales() . '</b>';
+                                                                                        else
+                                                                                            echo $contextModCompetencias->getData()->getGenerales();
+                                                                                    }
+                                                                                    ?>
+                                                                                </p>
+                                                                            </div>
+                                                                        </div>
+                                                                    <?php } ?>
+>>>>>>> Stashed changes
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h5 class="card-title">Definitivo</h5>
@@ -1382,8 +1494,54 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                                                 </thead>
                                                                                                 <tbody>
                                                                                                     <?php
+<<<<<<< Updated upstream
                                                                                                     foreach ($contextModHorarioLaboratorio->getData() as $horario) {
                                                                                                         echo '<tr scope="row">
+=======
+                                                                                                    $modNumeroHorarios = count($contextModHorarioLaboratorio->getData()) + 1;
+                                                                                                    echo '<td rowspan="' . $modNumeroHorarios . '" >
+                                                                                                        <table class="table table-sm table-bordered">
+                                                                                                                <tr>
+                                                                                                                <th scope="col">Profesor</th>
+                                                                                                                <th scope="col">Fechas</th>
+                                                                                                                <th scope="col">Opciones</th>
+                                                                                                                </tr>';
+                                                                                                    $context = new es\ucm\Context(LIST_MODGRUPO_LABORATORIO_PROFESOR, $grupo->getIdGrupoLab());
+                                                                                                    $contextModGrupoLaboratorioProfesor = $controller->action($context);
+                                                                                                    if ($contextModGrupoLaboratorioProfesor->getEvent() === LIST_MODGRUPO_LABORATORIO_PROFESOR_OK) {
+                                                                                                        foreach ($contextModGrupoLaboratorioProfesor->getData() as $modGrupoLaboratorioProfesor) {
+                                                                                                            $context = new es\ucm\Context(FIND_PROFESOR, $modGrupoLaboratorioProfesor->getEmailProfesor());
+                                                                                                            $contextProfesor = $controller->action($context);
+                                                                                                            if ($contextProfesor->getEvent() == FIND_PROFESOR_OK) {
+                                                                                                                echo '<tr scope="row">
+                                                                                                            <td>' . $contextProfesor->getData()->getNombre() . '</td>
+                                                                                                            <td>' . $modGrupoLaboratorioProfesor->getFechas() . '</td>';
+                                                                                                                if (unserialize($_SESSION['permisos'][$asignatura->getData()->getIdAsignatura()])->getPermisoGrupoClase() >= 6) {
+                                                                                                                    echo '<td> <a href="grupoLaboratorioProfesor.php?EmailProfesor=' . $modGrupoLaboratorioProfesor->getEmailProfesor() . '&IdAsignatura=' . $asignatura->getData()->getIdAsignatura() . '&IdGrupoLaboratorio=' . $grupo->getIdGrupoLab() . '">
+                                                                                                            <button type="button" class="btn btn-warning" id="btn-form">
+                                                                                                            Modificar Profesor
+                                                                                                            </button>
+                                                                                                            </a>
+                                                                                                            <a href="borrarGrupoLaboratorioProfesor.php?EmailProfesor=' . $modGrupoLaboratorioProfesor->getEmailProfesor() . '&IdAsignatura=' . $asignatura->getData()->getIdAsignatura() . '&IdGrupoLaboratorio=' . $grupo->getIdGrupoLab() . '">
+                                                                                                            <button type="button" class="btn btn-danger" id="btn-form">
+                                                                                                            Borrar Profesor
+                                                                                                            </button>
+                                                                                                            </a></td>';
+                                                                                                                }
+                                                                                                                echo '</tr>';
+                                                                                                            }
+                                                                                                        }
+                                                                                                    }
+                                                                                                    echo '</table>
+                                                                                                        </td>';
+                                                                                                    ?>
+                                                                                                </tr>
+                                                                                                <!--</thead>-->
+                                                                                                <!--<tbody>-->
+                                                                                                <?php
+                                                                                                foreach ($contextModHorarioLaboratorio->getData() as $horario) {
+                                                                                                    echo '<tr scope="row">
+>>>>>>> Stashed changes
                                                                                                 <td>' . $horario->getLaboratorio() . '</td>
                                                                                                 <td>' . $horario->getDia() . '</td>
                                                                                                 <td>' . $horario->getHoraInicio() . '</td>
@@ -1462,8 +1620,41 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                                                 </thead>
                                                                                                 <tbody>
                                                                                                     <?php
+<<<<<<< Updated upstream
                                                                                                     foreach ($contextHorarioLaboratorio->getData() as $horario) {
                                                                                                         echo '<tr scope="row">
+=======
+                                                                                                    $numeroHorarios = count($contextHorarioLaboratorio->getData()) + 1;
+                                                                                                    echo '<td rowspan="' . $numeroHorarios . '" >
+                                                                                                        <table class="table table-sm table-bordered">
+                                                                                                                <tr>
+                                                                                                                <th scope="col">Profesor</th>
+                                                                                                                <th scope="col">Fechas</th>
+                                                                                                                </tr>';
+                                                                                                    $context = new es\ucm\Context(LIST_GRUPO_LABORATORIO_PROFESOR, $grupo->getIdGrupoLab());
+                                                                                                    $contextGrupoLaboratorioProfesor = $controller->action($context);
+                                                                                                    if ($contextGrupoLaboratorioProfesor->getEvent() === LIST_GRUPO_LABORATORIO_PROFESOR_OK) {
+                                                                                                        foreach ($contextGrupoLaboratorioProfesor->getData() as $grupoLaboratorioProfesor) {
+                                                                                                            $context = new es\ucm\Context(FIND_PROFESOR, $grupoLaboratorioProfesor->getEmailProfesor());
+                                                                                                            $contextProfesor = $controller->action($context);
+                                                                                                            if ($contextProfesor->getEvent() == FIND_PROFESOR_OK) {
+                                                                                                                echo '<tr scope="row">
+                                                                                                            <td>' . $contextProfesor->getData()->getNombre() . '</td>
+                                                                                                            <td>' . $grupoLaboratorioProfesor->getFechas() . '</td>';
+                                                                                                                echo '</tr>';
+                                                                                                            }
+                                                                                                        }
+                                                                                                    }
+                                                                                                    echo '</table>
+                                                                                                        </td>';
+                                                                                                    ?>
+                                                                                                </tr>
+                                                                                                <!--</thead>-->
+                                                                                                <!--<tbody>-->
+                                                                                                <?php
+                                                                                                foreach ($contextHorarioLaboratorio->getData() as $horario) {
+                                                                                                    echo '<tr scope="row">
+>>>>>>> Stashed changes
                                                                                                 <td>' . $horario->getLaboratorio() . '</td>
                                                                                                 <td>' . $horario->getDia() . '</td>
                                                                                                 <td>' . $horario->getHoraInicio() . '</td>
@@ -1578,8 +1769,56 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                                             </thead>
                                                                                             <tbody>
                                                                                                 <?php
+<<<<<<< Updated upstream
                                                                                                 foreach ($contextModHorarioClase->getData() as $horario) {
                                                                                                     echo '<tr scope="row">
+=======
+                                                                                                $modNumeroHorarios = count($contextModHorarioClase->getData()) + 1;
+                                                                                                echo '<td rowspan="' . $modNumeroHorarios . '" >
+                                                                                                        <table class="table table-sm table-bordered">
+                                                                                                                <tr>
+                                                                                                                <th scope="col">Profesor</th>
+                                                                                                                <th scope="col">Tipo</th>
+                                                                                                                <th scope="col">Fechas</th>
+                                                                                                                <th scope="col">Opciones</th>
+                                                                                                                </tr>';
+                                                                                                $context = new es\ucm\Context(LIST_MODGRUPO_CLASE_PROFESOR, $grupo->getIdGrupoClase());
+                                                                                                $contextModGrupoClaseProfesor = $controller->action($context);
+                                                                                                if ($contextModGrupoClaseProfesor->getEvent() === LIST_MODGRUPO_CLASE_PROFESOR_OK) {
+                                                                                                    foreach ($contextModGrupoClaseProfesor->getData() as $modGrupoClaseProfesor) {
+                                                                                                        $context = new es\ucm\Context(FIND_PROFESOR, $modGrupoClaseProfesor->getEmailProfesor());
+                                                                                                        $contextProfesor = $controller->action($context);
+                                                                                                        if ($contextProfesor->getEvent() == FIND_PROFESOR_OK) {
+                                                                                                            echo '<tr scope="row">
+                                                                                                            <td>' . $contextProfesor->getData()->getNombre() . '</td>
+                                                                                                            <td>' . $modGrupoClaseProfesor->getTipo() . '</td>
+                                                                                                            <td>' . $modGrupoClaseProfesor->getFechas() . '</td>';
+                                                                                                            if ($asignatura->getData()->getEstado()==="B" && unserialize($_SESSION['permisos'][$asignatura->getData()->getIdAsignatura()])->getPermisoGrupoClase() >= 6) {
+                                                                                                                echo '<td> <a href="grupoClaseProfesor.php?EmailProfesor=' . $modGrupoClaseProfesor->getEmailProfesor() . '&IdAsignatura=' . $asignatura->getData()->getIdAsignatura() . '&IdGrupoClase=' . $grupo->getIdGrupoClase() . '">
+                                                                                                            <button type="button" class="btn btn-warning" id="btn-form">
+                                                                                                            Modificar Profesor
+                                                                                                            </button>
+                                                                                                            </a>
+                                                                                                            <a href="borrarGrupoClaseProfesor.php?EmailProfesor=' . $modGrupoClaseProfesor->getEmailProfesor() . '&IdAsignatura=' . $asignatura->getData()->getIdAsignatura() . '&IdGrupoClase=' . $grupo->getIdGrupoClase() . '">
+                                                                                                            <button type="button" class="btn btn-danger" id="btn-form">
+                                                                                                            Borrar Profesor
+                                                                                                            </button>
+                                                                                                            </a></td>';
+                                                                                                            }
+                                                                                                            echo '</tr>';
+                                                                                                        }
+                                                                                                    }
+                                                                                                }
+                                                                                                echo '</table>
+                                                                                                        </td>';
+                                                                                                ?>
+                                                                                            </tr>
+                                                                                            <!--</thead>-->
+                                                                                            <!--<tbody>-->
+                                                                                            <?php
+                                                                                            foreach ($contextModHorarioClase->getData() as $horario) {
+                                                                                                echo '<tr scope="row">
+>>>>>>> Stashed changes
                                                                                             <td>' . $horario->getAula() . '</td>
                                                                                             <td>' . $horario->getDia() . '</td>
                                                                                             <td>' . $horario->getHoraInicio() . '</td>
@@ -1658,6 +1897,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                                             </thead>
                                                                                             <tbody>
                                                                                                 <?php
+<<<<<<< Updated upstream
                                                                                                 foreach ($contextHorarioClase->getData() as $horario) {
                                                                                                     echo '<tr scope="row">
                                                                                             <td>' . $horario->getAula() . '</td>
@@ -1665,6 +1905,30 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                                             <td>' . $horario->getHoraInicio() . '</td>
                                                                                             <td>' . $horario->getHoraFin() . '</td>
                                                                                             </tr>';
+=======
+                                                                                                $numeroHorarios = count($contextHorarioClase->getData()) + 1;
+                                                                                                echo '<td rowspan="' . $numeroHorarios . '" >
+                                                                                                        <table class="table table-sm table-bordered">
+                                                                                                                <tr>
+                                                                                                                <th scope="col">Profesor</th>
+                                                                                                                <th scope="col">Tipo</th>
+                                                                                                                <th scope="col">Fechas</th>
+                                                                                                                </tr>';
+                                                                                                $context = new es\ucm\Context(LIST_GRUPO_CLASE_PROFESOR, $grupo->getIdGrupoClase());
+                                                                                                $contextGrupoClaseProfesor = $controller->action($context);
+                                                                                                if ($contextGrupoClaseProfesor->getEvent() === LIST_GRUPO_CLASE_PROFESOR_OK) {
+                                                                                                    foreach ($contextGrupoClaseProfesor->getData() as $grupoClaseProfesor) {
+                                                                                                        $context = new es\ucm\Context(FIND_PROFESOR, $grupoClaseProfesor->getEmailProfesor());
+                                                                                                        $contextProfesor = $controller->action($context);
+                                                                                                        if ($contextProfesor->getEvent() == FIND_PROFESOR_OK) {
+                                                                                                            echo '<tr scope="row">
+                                                                                                            <td>' . $contextProfesor->getData()->getNombre() . '</td>
+                                                                                                            <td>' . $grupoClaseProfesor->getTipo() . '</td>
+                                                                                                            <td>' . $grupoClaseProfesor->getFechas() . '</td>';
+                                                                                                            echo '</tr>';
+                                                                                                        }
+                                                                                                    }
+>>>>>>> Stashed changes
                                                                                                 }
                                                                                                 ?>
                                                                                             </tbody>
@@ -2012,11 +2276,69 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                 </div>
                                                                 <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionEvaluacion">
                                                                     <div class="card-body">
+<<<<<<< Updated upstream
                                                         <?php if (unserialize($_SESSION['permisos'][$asignatura->getData()->getIdAsignatura()])->getPermisoEvaluacion() >= 4) { ?>2
+=======
+                                                                        <div class="card">
+                                                                            <?php if (unserialize($_SESSION['permisos'][$asignatura->getData()->getIdAsignatura()])->getPermisoEvaluacion() >= 4) { ?>
+                                                                                <div class="card">
+                                                                                    <div class="card-body">
+                                                                                        <h5 class="card-title">Borrador</h5>
+                                                                                        <p class="card-text">
+                                                                                            <?php
+                                                                                            if ($contextModEvaluacion->getEvent() === FIND_MODEVALUACION_OK) {
+                                                                                                if ($contextComparacion->getData()['RealizacionLaboratorioI'])
+                                                                                                    echo '<b style="font-size: 18px">' . $contextModEvaluacion->getData()->getRealizacionLaboratorioI() . '</b>';
+                                                                                                else
+                                                                                                    echo $contextModEvaluacion->getData()->getRealizacionLaboratorioI();
+                                                                                            }
+                                                                                            ?>
+                                                                                        </p>
+                                                                                    </div>
+                                                                                </div>
+                                                                            <?php } ?>
+                                                                            <div class="card-body">
+                                                                                <h5 class="card-title">Consolidado</h5>
+                                                                                <p class="card-text">
+                                                                                    <?php
+                                                                                    if ($contextEvaluacion->getEvent() === FIND_EVALUACION_OK) {
+                                                                                        echo $contextEvaluacion->getData()->getRealizacionLaboratorioI();
+                                                                                    }
+                                                                                    ?>
+                                                                                </p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        <?php } ?>
+                                                    <?php } ?>
+
+                                                    <!-- Pestaña calificacion final  ordinaria -->
+                                                    <?php if ($contextConfiguracion->getData()->getCalificacionFinal() == 1) { ?>
+                                                        <div class="card">
+                                                            <div class="card-header" id="headingSeven">
+                                                                <h2 class="mb-0">
+                                                                    <?php if ($contextComparacion->getData()['CalificacionFinal'] && unserialize($_SESSION['permisos'][$asignatura->getData()->getIdAsignatura()])->getPermisoEvaluacion() >= 4) { ?>
+                                                                        <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="true" aria-controls="collapseSeven">
+                                                                            Calificación final ordinaria
+                                                                        </button>
+                                                                    <?php } else { ?>
+                                                                        <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+                                                                            Calificación final ordinaria
+                                                                        </button>
+                                                                    <?php } ?>
+                                                                </h2>
+                                                            </div>
+                                                            <div id="collapseSeven" class="collapse" aria-labelledby="headingSeven" data-parent="#accordionEvaluacion">
+                                                                <div class="card-body">
+                                                                    <?php if (unserialize($_SESSION['permisos'][$asignatura->getData()->getIdAsignatura()])->getPermisoEvaluacion() >= 4) { ?>
+>>>>>>> Stashed changes
                                                                         <div class="card">
                                                                             <div class="card-body">
                                                                                 <h5 class="card-title">Borrador</h5>
                                                                                 <p class="card-text">
+<<<<<<< Updated upstream
                                                                                 <?php
                                                                                 if ($contextModEvaluacion->getEvent() === FIND_MODEVALUACION_OK) {
                                                                                     if($contextComparacion->getData()['RealizacionActividadesI'])
@@ -2107,16 +2429,46 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                             }
                                                                             ?>
                                                                         </div>
+=======
+                                                                                    <?php
+                                                                                    if ($contextModEvaluacion->getEvent() === FIND_MODEVALUACION_OK) {
+                                                                                        if ($contextComparacion->getData()['CalificacionFinal'])
+                                                                                            echo '<b style="font-size: 18px">' . $contextModEvaluacion->getData()->getCalificacionFinal() . '</b>';
+                                                                                        else
+                                                                                            echo $contextModEvaluacion->getData()->getCalificacionFinal();
+                                                                                    }
+                                                                                    ?>
+                                                                                </p>
+                                                                            </div>
+                                                                        </div>
+                                                                    <?php } ?>
+                                                                    <div class="card">
+                                                                        <div class="card-body">
+                                                                            <h5 class="card-title">Consolidado</h5>
+                                                                            <p class="card-text">
+                                                                                <?php
+                                                                                if ($contextEvaluacion->getEvent() === FIND_EVALUACION_OK) {
+                                                                                    echo $contextEvaluacion->getData()->getCalificacionFinal();
+                                                                                }
+                                                                                ?>
+                                                                            </p>
+                                                                        </div>
+>>>>>>> Stashed changes
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
 
+<<<<<<< Updated upstream
                                                         <!-- Pestaña realizacion laboratorio (inglés) -->
+=======
+                                                        <!-- Pestaña calificacion final ordinaria (inglés) -->
+>>>>>>> Stashed changes
                                                         <?php if (!is_null($asignatura->getData()->getNombreAsignaturaIngles())) { ?>
                                                             <div class="card">
                                                                 <div class="card-header" id="headingEight">
                                                                     <h2 class="mb-0">
+<<<<<<< Updated upstream
                                                                     <?php if($contextComparacion->getData()['RealizacionLaboratorioI'] && unserialize($_SESSION['permisos'][$asignatura->getData()->getIdAsignatura()])->getPermisoEvaluacion() >= 4){?>
                                                                     <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseEight" aria-expanded="true" aria-controls="collapseEight">
                                                                         Realización Laboratorio (Inglés)
@@ -2126,16 +2478,32 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                         Realización laboratorio (Inglés)
                                                                     </button>
                                                                 <?php }?>
+=======
+                                                                        <?php if ($contextComparacion->getData()['CalificacionFinalI'] && unserialize($_SESSION['permisos'][$asignatura->getData()->getIdAsignatura()])->getPermisoEvaluacion() >= 4) { ?>
+                                                                            <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseEight" aria-expanded="true" aria-controls="collapseEight">
+                                                                                Calificación final ordinaria (Inglés)
+                                                                            </button>
+                                                                        <?php } else { ?>
+                                                                            <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
+                                                                                Calificación final ordinaria (Inglés)
+                                                                            </button>
+                                                                        <?php } ?>
+>>>>>>> Stashed changes
                                                                     </h2>
                                                                 </div>
                                                                 <div id="collapseEight" class="collapse" aria-labelledby="headingEight" data-parent="#accordionEvaluacion">
                                                                     <div class="card-body">
+<<<<<<< Updated upstream
                                                                         <div class="card">
                                                         <?php if (unserialize($_SESSION['permisos'][$asignatura->getData()->getIdAsignatura()])->getPermisoEvaluacion() >= 4) { ?>
+=======
+                                                                        <?php if (unserialize($_SESSION['permisos'][$asignatura->getData()->getIdAsignatura()])->getPermisoEvaluacion() >= 4) { ?>
+>>>>>>> Stashed changes
                                                                             <div class="card">
                                                                                 <div class="card-body">
                                                                                     <h5 class="card-title">Borrador</h5>
                                                                                     <p class="card-text">
+<<<<<<< Updated upstream
                                                                                     <?php
                                                                                 if ($contextModEvaluacion->getEvent() === FIND_MODEVALUACION_OK) {
                                                                                     if($contextComparacion->getData()['RealizacionLaboratorioI'])
@@ -2144,6 +2512,16 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                                     echo $contextModEvaluacion->getData()->getRealizacionLaboratorioI();
                                                                                 }
                                                                                 ?>
+=======
+                                                                                        <?php
+                                                                                        if ($contextModEvaluacion->getEvent() === FIND_MODEVALUACION_OK) {
+                                                                                            if ($contextComparacion->getData()['CalificacionFinalI'])
+                                                                                                echo '<b style="font-size: 18px">' . $contextModEvaluacion->getData()->getCalificacionFinalI() . '</b>';
+                                                                                            else
+                                                                                                echo $contextModEvaluacion->getData()->getCalificacionFinalI();
+                                                                                        }
+                                                                                        ?>
+>>>>>>> Stashed changes
                                                                                     </p>
                                                                                 </div>
                                                                             </div>
@@ -2153,7 +2531,11 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                                 <p class="card-text">
                                                                                     <?php
                                                                                     if ($contextEvaluacion->getEvent() === FIND_EVALUACION_OK) {
+<<<<<<< Updated upstream
                                                                                         echo $contextEvaluacion->getData()->getRealizacionLaboratorioI();
+=======
+                                                                                        echo $contextEvaluacion->getData()->getCalificacionFinalI();
+>>>>>>> Stashed changes
                                                                                     }
                                                                                     ?>
                                                                                 </p>
@@ -2186,7 +2568,11 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                             </div>
                                         <?php } ?>
                                         <!--Coordinacion-->
+<<<<<<< Updated upstream
                                         <?php if(strpos($asignatura->getData()->getCoordinadores(),$_SESSION['idUsuario'])!==false){?>
+=======
+                                        <?php if (strpos($asignatura->getData()->getCoordinadorAsignatura(), $_SESSION['idUsuario']) !== false) { ?>
+>>>>>>> Stashed changes
                                             <div class="tab-pane fade" id="nav-coordinacion" role="tabpanel" aria-labelledby="nav-coordinacion-tab">
                                                 <div class="accordion" id="accordionCoordinacion">
                                                 <div class="card-header" id="headingOne">
@@ -2284,6 +2670,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                                             echo '<p>❌Recursos en Internet</p>';
                                                                                         }
 
+<<<<<<< Updated upstream
                                                                                         if($contextConfiguracion->getData()->getRealizacionExamenes()){
                                                                                             echo '<p>✔️<b>Realización de Exámenes</b></p>';
                                                                                                     
@@ -2298,6 +2685,18 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                                         else{
                                                                                             echo '<p>❌Calificación Final</p>';
                                                                                         }
+=======
+                                                                            if ($contextConfiguracion->getData()->getRealizacionExamenes()) {
+                                                                                echo '<p>✔️<b>Realización de Exámenes</b></p>';
+                                                                            } else {
+                                                                                echo '<p>❌Realización de Exámenes</p>';
+                                                                            }
+                                                                            if ($contextConfiguracion->getData()->getCalificacionFinal()) {
+                                                                                echo '<p>✔️<b>Calificación Final Ordinaria</b></p>';
+                                                                            } else {
+                                                                                echo '<p>❌Calificación Final Ordinaria</p>';
+                                                                            }
+>>>>>>> Stashed changes
 
                                                                                         if($contextConfiguracion->getData()->getRealizacionActividades()){
                                                                                             echo '<p>✔️<b>Realización de Activiades</b></p>';

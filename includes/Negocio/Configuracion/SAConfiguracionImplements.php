@@ -17,7 +17,13 @@ class SAConfiguracionImplements implements SAConfiguracion{
                 $configuracion[0]['IdConfiguracion'],
                 $configuracion[0]['ConocimientosPrevios'],
                 $configuracion[0]['BreveDescripcion'],
+<<<<<<< Updated upstream
                 $configuracion[0]['ProgramaDetallado'],
+=======
+                $configuracion[0]['ProgramaTeorico'],
+                $configuracion[0]['ProgramaSeminarios'],
+                $configuracion[0]['ProgramaLaboratorio'],
+>>>>>>> Stashed changes
                 $configuracion[0]['ComGenerales'],
                 $configuracion[0]['ComEspecificas'],
                 $configuracion[0]['ComBasicas'],
@@ -29,6 +35,10 @@ class SAConfiguracionImplements implements SAConfiguracion{
                 $configuracion[0]['CalificacionFinal'],
                 $configuracion[0]['RealizacionActividades'],
                 $configuracion[0]['RealizacionLaboratorio'],
+<<<<<<< Updated upstream
+=======
+                $configuracion[0]['CalificacionFinal'],
+>>>>>>> Stashed changes
                 $configuracion[0]['IdAsignatura']
             );
         }

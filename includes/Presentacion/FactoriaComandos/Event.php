@@ -737,14 +737,16 @@ define("LIST_MODGRUPO_LABORATORIO_PROFESOR",274);
 define("LIST_MODGRUPO_LABORATORIO_PROFESOR_OK",2740);
 define("LIST_MODGRUPO_LABORATORIO_PROFESOR_FAIL",2741);
 
-
 //Comparacion
 //compatacion
 define("COMPARACION", 2810);
 define("COMPARACION_OK", 2811);
 define("COMPARACION_FAIL", 2812);
 
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 //ERROR EVENTO
 
 define("ERROR_EVENTO", -1000);

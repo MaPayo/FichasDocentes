@@ -28,6 +28,11 @@ class SAModEvaluacionImplements implements SAModEvaluacion
                 $evaluacion[0]['RealizacionLaboratorio'],
                 $evaluacion[0]['RealizacionLaboratorioi'],
                 $evaluacion[0]['PesoLaboratorio'],
+<<<<<<< Updated upstream
+=======
+                $evaluacion[0]['CalificacionFinal'],
+                $evaluacion[0]['CalificacionFinali'],
+>>>>>>> Stashed changes
                 $evaluacion[0]['IdModAsignatura']
             );
         }

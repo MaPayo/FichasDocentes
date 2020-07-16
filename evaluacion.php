@@ -78,7 +78,13 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                         $datosIniciales['realizacionLaboratorio']=$contextEvaluacion->getData()->getRealizacionLaboratorio();
                                         $datosIniciales['realizacionLaboratorioI']=$contextEvaluacion->getData()->getRealizacionLaboratorioI();
                                         $datosIniciales['pesoLaboratorio']=$contextEvaluacion->getData()->getPesoLaboratorio();
+<<<<<<< Updated upstream
                                         $datosIniciales['idAsignatura']=$contextEvaluacion->getData()->getIdAsignatura();
+=======
+                                        $datosIniciales['calificacionFinalO']=$contextEvaluacion->getData()->getCalificacionFinal();
+                                        $datosIniciales['calificacionFinalOI']=$contextEvaluacion->getData()->getCalificacionFinalI();
+                                        $datosIniciales['idAsignatura']=$_GET[$name];
+>>>>>>> Stashed changes
                                         $access->gestionaModificacion($datosIniciales);
                                     }
                                     else{
