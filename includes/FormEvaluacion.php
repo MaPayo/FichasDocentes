@@ -22,10 +22,8 @@ class FormEvaluacion extends Form
 		$realizacionLaboratorio = isset($datosIniciales['realizacionLaboratorio']) ? $datosIniciales['realizacionLaboratorio'] : null;
 		$realizacionLaboratorioI = isset($datosIniciales['realizacionLaboratorioI']) ? $datosIniciales['realizacionLaboratorioI'] : null;
 		$pesoLaboratorio = isset($datosIniciales['pesoLaboratorio']) ? $datosIniciales['pesoLaboratorio'] : 0;
-		$calificacionFinalO = isset($datosIniciales['calificacionFinalO']) ? $datosIniciales['calificacionFinalO'] : null;
-		$calificacionFinalOI = isset($datosIniciales['calificacionFinalOI']) ? $datosIniciales['calificacionFinalOI'] : null;
-		$calificacionFinalE = isset($datosIniciales['calificacionFinalE']) ? $datosIniciales['calificacionFinalE'] : null;
-		$calificacionFinalEI = isset($datosIniciales['calificacionFinalEI']) ? $datosIniciales['calificacionFinalEI'] : null;
+		$calificacionFinal = isset($datosIniciales['calificacionFinal']) ? $datosIniciales['calificacionFinal'] : null;
+		$calificacionFinalI = isset($datosIniciales['calificacionFinalI']) ? $datosIniciales['calificacionFinalI'] : null;
 		$idAsignatura = isset($datosIniciales['idAsignatura']) ? $datosIniciales['idAsignatura'] : null;
 
 		$controller = new ControllerImplements();
@@ -98,30 +96,16 @@ class FormEvaluacion extends Form
 				}
 			}
 
-			if ($contextConfiguacion->getData()->getCalificacionFinalO() == 1) {
+			if ($contextConfiguacion->getData()->getCalificacionFinal() == 1) {
 				$html .= '<div class="form-group">
-				<label for="calificacionFinalO">Calificación Final Ordinaria</label>
-				<textarea class="form-control" id="calificacionFinalO" rows="3" name="calificacionFinalO" >' . $calificacionFinalO . '</textarea>
+				<label for="calificacionFinal">Calificación Final Ordinaria</label>
+				<textarea class="form-control" id="calificacionFinal" rows="3" name="calificacionFinal" >' . $calificacionFinal . '</textarea>
 				</div>';
 
 				if (!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())) {
 					$html .= '<div class="form-group">
-					<label for="calificacionFinalOI">Calificación Final Ordinaria(Inglés)</label>
-					<textarea class="form-control" id="calificacionFinalOI" rows="3" name="calificacionFinalOI" >' . $calificacionFinalOI . '</textarea>
-					</div>';
-				}
-			}
-
-			if ($contextConfiguacion->getData()->getCalificacionFinalE() == 1) {
-				$html .= '<div class="form-group">
-				<label for="calificacionFinalE">Calificación Final Extraordinaria</label>
-				<textarea class="form-control" id="calificacionFinalE" rows="3" name="calificacionFinalE" >' . $calificacionFinalE . '</textarea>
-				</div>';
-
-				if (!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())) {
-					$html .= '<div class="form-group">
-					<label for="calificacionFinalEI">Calificación Final Extraordinaria (Inglés)</label>
-					<textarea class="form-control" id="calificacionFinalEI" rows="3" name="calificacionFinalEI" >' . $calificacionFinalEI . '</textarea>
+					<label for="calificacionFinalI">Calificación Final Ordinaria(Inglés)</label>
+					<textarea class="form-control" id="calificacionFinalI" rows="3" name="calificacionFinalI" >' . $calificacionFinalI . '</textarea>
 					</div>';
 				}
 			}
@@ -161,11 +145,8 @@ class FormEvaluacion extends Form
 		$realizacionLaboratorioI = isset($datos['realizacionLaboratorioI']) ? $datos['realizacionLaboratorioI'] : '';
 		$pesoLaboratorio = isset($datos['pesoLaboratorio']) ? $datos['pesoLaboratorio'] : 0;
 
-		$calificacionFinalO = isset($datos['calificacionFinalO']) ? $datos['calificacionFinalO'] : '';
-		$calificacionFinalOI = isset($datos['calificacionFinalOI']) ? $datos['calificacionFinalOI'] : '';
-
-		$calificacionFinalE = isset($datos['calificacionFinalE']) ? $datos['calificacionFinalE'] : '';
-		$calificacionFinalEI = isset($datos['calificacionFinalEI']) ? $datos['calificacionFinalEI'] : '';
+		$calificacionFinal = isset($datos['calificacionFinal']) ? $datos['calificacionFinal'] : '';
+		$calificacionFinalI = isset($datos['calificacionFinalI']) ? $datos['calificacionFinalI'] : '';
 
 		if ($contextConfiguacion->getEvent() === FIND_CONFIGURACION_OK) {
 			if ($contextConfiguacion->getData()->getRealizacionExamenes() == 1) {
@@ -227,31 +208,19 @@ class FormEvaluacion extends Form
 				}
 			}
 
-			if ($contextConfiguacion->getData()->getCalificacionFinalO() == 1) {
-				$calificacionFinalO = self::clean($calificacionFinalO);
-				if (empty($calificacionFinalO)) {
+			if ($contextConfiguacion->getData()->getCalificacionFinal() == 1) {
+				$calificacionFinal = self::clean($calificacionFinal);
+				if (empty($calificacionFinal)) {
 					$erroresFormulario[] = "No has introducido la calificación final ordinaria.";
 				}
 
 
-				$calificacionFinalOI = self::clean($calificacionFinalOI);
-				if (empty($calificacionFinalOI)) {
+				$calificacionFinalI = self::clean($calificacionFinalI);
+				if (empty($calificacionFinalI)) {
 					$erroresFormulario[] = "No has introducido la calificación final ordinaria en inglés.";
 				}
 			}
 
-			if ($contextConfiguacion->getData()->getCalificacionFinalE() == 1) {
-				$calificacionFinalE = self::clean($calificacionFinalE);
-				if (empty($calificacionFinalE)) {
-					$erroresFormulario[] = "No has introducido la calificación final extraordinaria.";
-				}
-
-
-				$calificacionFinalEI = self::clean($calificacionFinalEI);
-				if (empty($calificacionFinalEI)) {
-					$erroresFormulario[] = "No has introducido la calificación final extraordinaria en inglés.";
-				}
-			}
 		}
 
 
@@ -261,7 +230,7 @@ class FormEvaluacion extends Form
 
 			if ($contextEvaluacion->getEvent() === FIND_MODEVALUACION_OK) {
 
-				$evaluacion = new ModEvaluacion($contextEvaluacion->getData()->getIdEvaluacion(), $realizacionExamenes, $realizacionExamenesI, $pesoExamenes, $realizacionActividades, $realizacionActividadesI, $pesoActividades, $realizacionLaboratorio, $realizacionLaboratorioI, $pesoLaboratorio, $calificacionFinalO, $calificacionFinalOI, $calificacionFinalE, $calificacionFinalEI, $datos['idAsignatura']);
+				$evaluacion = new ModEvaluacion($contextEvaluacion->getData()->getIdEvaluacion(), $realizacionExamenes, $realizacionExamenesI, $pesoExamenes, $realizacionActividades, $realizacionActividadesI, $pesoActividades, $realizacionLaboratorio, $realizacionLaboratorioI, $pesoLaboratorio, $calificacionFinal, $calificacionFinalI, $datos['idAsignatura']);
 				$context = new Context(UPDATE_MODEVALUACION, $evaluacion);
 				$contextEvaluacion = $controller->action($context);
 
@@ -276,7 +245,7 @@ class FormEvaluacion extends Form
 				}
 			} elseif ($contextEvaluacion->getEvent() === FIND_MODEVALUACION_FAIL) {
 
-				$evaluacion = new ModEvaluacion(null, $realizacionExamenes, $realizacionExamenesI, $pesoExamenes, $realizacionActividades, $realizacionActividadesI, $pesoActividades, $realizacionLaboratorio, $realizacionLaboratorioI, $pesoLaboratorio, $calificacionFinalO, $calificacionFinalOI, $calificacionFinalE, $calificacionFinalEI, $datos['idAsignatura']);
+				$evaluacion = new ModEvaluacion(null, $realizacionExamenes, $realizacionExamenesI, $pesoExamenes, $realizacionActividades, $realizacionActividadesI, $pesoActividades, $realizacionLaboratorio, $realizacionLaboratorioI, $pesoLaboratorio, $calificacionFinal, $calificacionFinalI, $datos['idAsignatura']);
 				$context = new Context(CREATE_MODEVALUACION, $evaluacion);
 				$contextEvaluacion = $controller->action($context);
 

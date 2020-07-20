@@ -14,13 +14,11 @@ class Evaluacion
     private $RealizacionLaboratorio;
     private $RealizacionLaboratorioI;
     private $PesoLaboratorio;
-    private $CalificacionFinalO;
-    private $CalificacionFinalOI;
-    private $CalificacionFinalE;
-    private $CalificacionFinalEI;
+    private $CalificacionFinal;
+    private $CalificacionFinalI;
     private $IdAsignatura;
 
-    public function __construct($IdEvaluacion, $RealizacionExamenes, $RealizacionExamenesI, $PesoExamenes, $RealizacionActividades, $RealizacionActividadesI, $PesoActividades, $RealizacionLaboratorio, $RealizacionLaboratorioI, $PesoLaboratorio, $CalificacionFinalO, $CalificacionFinalOI, $CalificacionFinalE, $CalificacionFinalEI, $IdAsignatura)
+    public function __construct($IdEvaluacion, $RealizacionExamenes, $RealizacionExamenesI, $PesoExamenes, $RealizacionActividades, $RealizacionActividadesI, $PesoActividades, $RealizacionLaboratorio, $RealizacionLaboratorioI, $PesoLaboratorio, $CalificacionFinal, $CalificacionFinalI, $IdAsignatura)
     {
         $this->IdEvaluacion = $IdEvaluacion;
         $this->RealizacionExamenes = $RealizacionExamenes;
@@ -32,10 +30,8 @@ class Evaluacion
         $this->RealizacionLaboratorio = $RealizacionLaboratorio;
         $this->RealizacionLaboratorioI = $RealizacionLaboratorioI;
         $this->PesoLaboratorio = $PesoLaboratorio;
-        $this->CalificacionFinalO = $CalificacionFinalO;
-        $this->CalificacionFinalOI = $CalificacionFinalOI;
-        $this->CalificacionFinalE = $CalificacionFinalE;
-        $this->CalificacionFinalEI = $CalificacionFinalEI;
+        $this->CalificacionFinal = $CalificacionFinal;
+        $this->CalificacionFinalI = $CalificacionFinalI;
         $this->IdAsignatura = $IdAsignatura;
     }
 
@@ -242,19 +238,19 @@ class Evaluacion
     /**
      * @return mixed
      */
-    public function getCalificacionFinalO()
+    public function getCalificacionFinal()
     {
-        return $this->CalificacionFinalO;
+        return $this->CalificacionFinal;
     }
 
     /**
-     * @param mixed $CalificacionFinalO
+     * @param mixed $CalificacionFinal
      *
      * @return self
      */
-    public function setCalificacionFinalO($CalificacionFinalO)
+    public function setCalificacionFinal($CalificacionFinal)
     {
-        $this->CalificacionFinalO = $CalificacionFinalO;
+        $this->CalificacionFinal = $CalificacionFinal;
 
         return $this;
     }
@@ -262,62 +258,23 @@ class Evaluacion
     /**
      * @return mixed
      */
-    public function getCalificacionFinalOI()
+    public function getCalificacionFinalI()
     {
-        return $this->CalificacionFinalOI;
+        return $this->CalificacionFinalI;
     }
 
     /**
-     * @param mixed $CalificacionFinalOI
+     * @param mixed $CalificacionFinalI
      *
      * @return self
      */
-    public function setCalificacionFinalOI($CalificacionFinalOI)
+    public function setCalificacionFinalI($CalificacionFinalI)
     {
-        $this->CalificacionFinalOI = $CalificacionFinalOI;
+        $this->CalificacionFinalI = $CalificacionFinalI;
 
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getCalificacionFinalE()
-    {
-        return $this->CalificacionFinalE;
-    }
-
-    /**
-     * @param mixed $CalificacionFinalE
-     *
-     * @return self
-     */
-    public function setCalificacionFinalE($CalificacionFinalE)
-    {
-        $this->CalificacionFinalE = $CalificacionFinalE;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getCalificacionFinalEI()
-    {
-        return $this->CalificacionFinalEI;
-    }
-
-    /**
-     * @param mixed $CalificacionFinalEI
-     *
-     * @return self
-     */
-    public function setCalificacionFinalEI($CalificacionFinalEI)
-    {
-        $this->CalificacionFinalEI = $CalificacionFinalEI;
-
-        return $this;
-    }
 
     /**
      * @return mixed

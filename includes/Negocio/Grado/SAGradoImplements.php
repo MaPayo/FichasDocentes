@@ -18,9 +18,8 @@ class SAGradoImplements implements SAGrado
             $grado = new Grado(
                 $grado[0]['CodigoGrado'],
                 $grado[0]['NombreGrado'],
-                $grado[0]['Coordinador'],
-                $grado[0]['HorasEcts'],
-                $grado[0]['AnyoAcademico']
+                $grado[0]['CoordinadorGrado'],
+                $grado[0]['HorasEcts']
             );
         }
         return $grado;
@@ -58,7 +57,7 @@ class SAGradoImplements implements SAGrado
         $arrayGrados = array();
         if ($grados) {
             foreach ($grados as $grado) {
-                $arrayGrados[] = new Grado($grado['CodigoGrado'], $grado['NombreGrado'], $grado['Coordinador'], $grado['HorasEcts'], $grado['AnyoAcademico']);
+                $arrayGrados[] = new Grado($grado['CodigoGrado'], $grado['NombreGrado'], $grado['CoordinadorGrado'], $grado['HorasEcts']);
             }
         }
         return $arrayGrados;

@@ -20,8 +20,8 @@ class SAGrupoClaseProfesorImplements implements SAGrupoClaseProfesor
                 $arrayGrupoClaseProfesor[] = new GrupoClaseProfesor(
                     $grupo['IdGrupoClase'],
                     $grupo['Tipo'],
-                    $grupo['Fechas'],
-                    $grupo['Horas'],
+                    $grupo['FechaInicio'],
+                    $grupo['FechaFin'],
                     $grupo['EmailProfesor']
                 );
             }
@@ -38,8 +38,8 @@ class SAGrupoClaseProfesorImplements implements SAGrupoClaseProfesor
             $grupoClaseProfesor = new GrupoClaseProfesor(
                 $grupoClaseProfesor[0]['IdGrupoClase'],
                 $grupoClaseProfesor[0]['Tipo'],
-                $grupoClaseProfesor[0]['Fechas'],
-                $grupoClaseProfesor[0]['Horas'],
+                $grupoClaseProfesor[0]['FechaInicio'],
+                $grupoClaseProfesor[0]['FechaFin'],
                 $grupoClaseProfesor[0]['EmailProfesor']
             );
         }

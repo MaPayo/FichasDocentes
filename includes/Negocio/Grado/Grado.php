@@ -6,17 +6,15 @@ class Grado
 {
     private $CodigoGrado;
     private $NombreGrado;
-    private $Coordinador;
+    private $CoordinadorGrado;
     private $HorasEcts;
-    private $AnyoAcademico;
 
-    public function __construct($CodigoGrado, $NombreGrado, $Coordinador, $HorasEcts, $AnyoAcademico)
+    public function __construct($CodigoGrado, $NombreGrado, $CoordinadorGrado, $HorasEcts)
     {
         $this->CodigoGrado = $CodigoGrado;
         $this->NombreGrado = $NombreGrado;
-        $this->Coordinador = $Coordinador;
+        $this->CoordinadorGrado = $CoordinadorGrado;
         $this->HorasEcts = $HorasEcts;
-        $this->AnyoAcademico = $AnyoAcademico;
     }
 
     /**
@@ -42,19 +40,19 @@ class Grado
     /**
      * @return mixed
      */
-    public function getCoordinador()
+    public function getCoordinadorGrado()
     {
-        return $this->Coordinador;
+        return $this->CoordinadorGrado;
     }
 
     /**
-     * @param mixed $Coordinador
+     * @param mixed $CoordinadorGrado
      *
      * @return self
      */
-    public function setCoordinador($Coordinador)
+    public function setCoordinadorGrado($CoordinadorGrado)
     {
-        $this->Coordinador = $Coordinador;
+        $this->CoordinadorGrado = $CoordinadorGrado;
 
         return $this;
     }
@@ -79,25 +77,6 @@ class Grado
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getAnyoAcademico()
-    {
-        return $this->AnyoAcademico;
-    }
-
-    /**
-     * @param mixed $AnyoAcademico
-     *
-     * @return self
-     */
-    public function setAnyoAcademico($AnyoAcademico)
-    {
-        $this->AnyoAcademico = $AnyoAcademico;
-
-        return $this;
-    }
 
     /**
      * @return mixed

@@ -21,7 +21,7 @@ class DAOModProgramaAsignaturaImplements implements DAOModProgramaAsignatura
         $singletonDataSource = new SingletonDataSource();
         $dataSource = $singletonDataSource->getInstance();
         $sql = "INSERT INTO modprogramaasignatura (ConocimientosPrevios,ConocimientosPreviosi,BreveDescripcion,BreveDescripcioni,ProgramaTeorico,ProgramaTeoricoi, ProgramaSeminarios, ProgramaSeminariosi, ProgramaLaboratorio, ProgramaLaboratorioi, Influencia, Influenciai,IdModAsignatura) 
-        VALUES (:conocimientosPrevios, :conocimientosPreviosI, :breveDescripcion, :breveDescripcionI, :programaTeorico, :programaTeoricoI, :programaSeminarios, :programaSeminariosI, :programaLaboratorio, :programaLaboratorioI, :influencia, :influenciaI, :idModAsignatura)";
+        VALUES (:conocimientosPrevios, :conocimientosPreviosI, :breveDescripcion, :breveDescripcionI, :programaTeorico, :programaTeoricoI, :programaSeminarios, :programaSeminariosI, :programaLaboratorio, :programaLaboratorioI, :idModAsignatura)";
         $values = array(
             ':conocimientosPrevios' => $modProgramaAsignatura->getConocimientosPrevios(),
             ':conocimientosPreviosI' => $modProgramaAsignatura->getConocimientosPreviosI(),
@@ -33,8 +33,6 @@ class DAOModProgramaAsignaturaImplements implements DAOModProgramaAsignatura
             ':programaSeminariosI' => $modProgramaAsignatura->getProgramaSeminariosI(),
             ':programaLaboratorio' => $modProgramaAsignatura->getProgramaLaboratorio(),
             ':programaLaboratorioI' => $modProgramaAsignatura->getProgramaLaboratorioI(),
-            ':influencia' => $modProgramaAsignatura->getInfluencia(),
-            ':influenciaI' => $modProgramaAsignatura->getInfluenciaI(),
             ':idModAsignatura' => $modProgramaAsignatura->getIdAsignatura()
         );
         $results = $dataSource->executeInsertUpdateDelete($sql, $values);
@@ -45,7 +43,7 @@ class DAOModProgramaAsignaturaImplements implements DAOModProgramaAsignatura
     {
         $singletonDataSource = new SingletonDataSource();
         $dataSource = $singletonDataSource->getInstance();
-        $sql = "UPDATE modprogramaasignatura SET IdPrograma = :idPrograma, ConocimientosPrevios = :conocimientosPrevios,ConocimientosPreviosi = :conocimientosPreviosI,BreveDescripcion = :breveDescripcion,BreveDescripcioni = :breveDescripcionI,ProgramaTeorico = :programaTeorico,ProgramaTeoricoi = :programaTeoricoI,ProgramaSeminarios = :programaSeminarios,ProgramaSeminariosi = :programaSeminariosI,ProgramaLaboratorio = :programaLaboratorio,ProgramaLaboratorioi = :programaLaboratorioI,Influencia = :influencia,influenciai = :influenciaI,IdModAsignatura = :idModAsignatura WHERE IdPrograma = :idPrograma";
+        $sql = "UPDATE modprogramaasignatura SET IdPrograma = :idPrograma, ConocimientosPrevios = :conocimientosPrevios,ConocimientosPreviosi = :conocimientosPreviosI,BreveDescripcion = :breveDescripcion,BreveDescripcioni = :breveDescripcionI,ProgramaTeorico = :programaTeorico,ProgramaTeoricoi = :programaTeoricoI,ProgramaSeminarios = :programaSeminarios,ProgramaSeminariosi = :programaSeminariosI,ProgramaLaboratorio = :programaLaboratorio,ProgramaLaboratorioi = :programaLaboratorioI,IdModAsignatura = :idModAsignatura WHERE IdPrograma = :idPrograma";
         $values = array(
             ':idPrograma' => $modProgramaAsignatura->getIdPrograma(),
             ':conocimientosPrevios' => $modProgramaAsignatura->getConocimientosPrevios(),
@@ -58,8 +56,6 @@ class DAOModProgramaAsignaturaImplements implements DAOModProgramaAsignatura
             ':programaSeminariosI' => $modProgramaAsignatura->getProgramaSeminariosI(),
             ':programaLaboratorio' => $modProgramaAsignatura->getProgramaLaboratorio(),
             ':programaLaboratorioI' => $modProgramaAsignatura->getProgramaLaboratorioI(),
-            ':influencia' => $modProgramaAsignatura->getInfluencia(),
-            ':influenciaI' => $modProgramaAsignatura->getInfluenciaI(),
             ':idModAsignatura' => $modProgramaAsignatura->getIdAsignatura()
         );
         $results = $dataSource->executeInsertUpdateDelete($sql, $values);

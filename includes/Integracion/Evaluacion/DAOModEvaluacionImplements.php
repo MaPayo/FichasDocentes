@@ -20,8 +20,8 @@ class DAOModEvaluacionImplements implements DAOModEvaluacion
     {
         $singletonDataSource = new SingletonDataSource();
         $dataSource = $singletonDataSource->getInstance();
-        $sql = "INSERT INTO modevaluacion (RealizacionExamenes, RealizacionExamenesi, PesoExamenes, RealizacionActividades, RealizacionActividadesi, PesoActividades, RealizacionLaboratorio, RealizacionLaboratorioi, PesoLaboratorio, CalificacionFinalO, CalificacionFinalOi, CalificacionFinalE, CalificacionFinalEi, IdModAsignatura) 
-        VALUES (:realizacionExamenes, :realizacionExamenesI, :pesoExamenes, :realizacionActividades, :realizacionActividadesI, :pesoActividades, :realizacionLaboratorio, :realizacionLaboratorioI, :pesoLaboratorio, :calificacionFinalO, :calificacionFinalOI, :calificacionFinalE, :calificacionFinalEI, :idModAsignatura)";
+        $sql = "INSERT INTO modevaluacion (RealizacionExamenes, RealizacionExamenesi, PesoExamenes, RealizacionActividades, RealizacionActividadesi, PesoActividades, RealizacionLaboratorio, RealizacionLaboratorioi, PesoLaboratorio, CalificacionFinal, CalificacionFinali, CalificacionFinalE, CalificacionFinalEi, IdModAsignatura) 
+        VALUES (:realizacionExamenes, :realizacionExamenesI, :pesoExamenes, :realizacionActividades, :realizacionActividadesI, :pesoActividades, :realizacionLaboratorio, :realizacionLaboratorioI, :pesoLaboratorio, :calificacionFinal, :calificacionFinalI, :idModAsignatura)";
         $values = array(
             ':realizacionExamenes' => $modEvaluacion->getRealizacionExamenes(),
             ':realizacionExamenesI' => $modEvaluacion->getRealizacionExamenesI(),
@@ -32,10 +32,8 @@ class DAOModEvaluacionImplements implements DAOModEvaluacion
             ':realizacionLaboratorio' => $modEvaluacion->getRealizacionLaboratorio(),
             ':realizacionLaboratorioI' => $modEvaluacion->getRealizacionLaboratorioI(),
             ':pesoLaboratorio' => $modEvaluacion->getPesolaboratorio(),
-            ':calificacionFinalO' => $modEvaluacion->getCalificacionFinalO(),
-            ':calificacionFinalOI' => $modEvaluacion->getCalificacionFinalOI(),
-            ':calificacionFinalE' => $modEvaluacion->getCalificacionFinalE(),
-            ':calificacionFinalEI' => $modEvaluacion->getCalificacionFinalEI(),
+            ':calificacionFinal' => $modEvaluacion->getCalificacionFinal(),
+            ':calificacionFinalI' => $modEvaluacion->getCalificacionFinalI(),
             ':idModAsignatura' => $modEvaluacion->getIdModAsignatura()
         );
         $results = $dataSource->executeInsertUpdateDelete($sql, $values);
@@ -56,10 +54,8 @@ class DAOModEvaluacionImplements implements DAOModEvaluacion
         RealizacionLaboratorio = :realizacionLaboratorio,
         RealizacionLaboratorioi = :realizacionLaboratorioI,
         PesoLaboratorio = :pesoLaboratorio,
-        CalificacionFinalO = :calificacionFinalO,
-        CalificacionFinalOi = :calificacionFinalOI,
-        CalificacionFinalE = :calificacionFinalE,
-        CalificacionFinalEi = :calificacionFinalEI,
+        CalificacionFinal = :calificacionFinal,
+        CalificacionFinali = :calificacionFinalI,
         IdModAsignatura = :idModAsignatura  WHERE IdModAsignatura = :idModAsignatura";
         $values = array(
             ':idEvaluacion' => $modEvaluacion->getIdEvaluacion(),
@@ -72,10 +68,8 @@ class DAOModEvaluacionImplements implements DAOModEvaluacion
             ':realizacionLaboratorio' => $modEvaluacion->getRealizacionLaboratorio(),
             ':realizacionLaboratorioI' => $modEvaluacion->getRealizacionLaboratorioI(),
             ':pesoLaboratorio' => $modEvaluacion->getPesolaboratorio(),
-            ':calificacionFinalO' => $modEvaluacion->getCalificacionFinalO(),
-            ':calificacionFinalOI' => $modEvaluacion->getCalificacionFinalOI(),
-            ':calificacionFinalE' => $modEvaluacion->getCalificacionFinalE(),
-            ':calificacionFinalEI' => $modEvaluacion->getCalificacionFinalEI(),
+            ':calificacionFinal' => $modEvaluacion->getCalificacionFinal(),
+            ':calificacionFinalI' => $modEvaluacion->getCalificacionFinalI(),
             ':idModAsignatura' => $modEvaluacion->getIdModAsignatura()
         );
         $results = $dataSource->executeInsertUpdateDelete($sql, $values);

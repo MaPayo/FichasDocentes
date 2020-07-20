@@ -24,8 +24,6 @@ class FormProgramaAsignatura extends Form
 		$programaSeminariosI = isset($datosIniciales['programaSeminariosI']) ? $datosIniciales['programaSeminariosI'] : null;
 		$programaLaboratorio = isset($datosIniciales['programaLaboratorio']) ? $datosIniciales['programaLaboratorio'] : null;
 		$programaLaboratorioI = isset($datosIniciales['programaLaboratorioI']) ? $datosIniciales['programaLaboratorioI'] : null;
-		$influencia = isset($datosIniciales['influencia']) ? $datosIniciales['influencia'] : null;
-		$influenciaI = isset($datosIniciales['influenciaI']) ? $datosIniciales['influenciaI'] : null;
 		$idAsignatura = isset($datosIniciales['idAsignatura']) ? $datosIniciales['idAsignatura'] : null;
 
 		$controller = new ControllerImplements();
@@ -108,20 +106,6 @@ class FormProgramaAsignatura extends Form
 					</div>';
 				}
 			}
-
-			if ($contextConfiguacion->getData()->getInfluencia() == 1) {
-				$html .= '<div class="form-group">
-				<label for="influencia">Influencia</label>
-				<textarea class="form-control" id="influencia" rows="3" name="influencia" >' . $influencia . '</textarea>
-				</div>';
-
-				if(!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())){
-					$html .= '<div class="form-group">
-					<label for="influenciaI">Influencia (Ingles)</label>
-					<textarea class="form-control" id="influenciaI" rows="3" name="influenciaI" >' . $influenciaI . '</textarea>
-					</div>';
-				}
-			}
 			
 		}
 
@@ -157,8 +141,6 @@ class FormProgramaAsignatura extends Form
 		$programaSeminariosI = isset($datos['programaSeminariosI']) ? $datos['programaSeminariosI'] : '';
 		$programaLaboratorio = isset($datos['programaLaboratorio']) ? $datos['programaLaboratorio'] : '';
 		$programaLaboratorioI = isset($datos['programaLaboratorioI']) ? $datos['programaLaboratorioI'] : '';
-		$influencia = isset($datos['influencia']) ? $datos['influencia'] : '';
-		$influenciaI = isset($datos['influenciaI']) ? $datos['influenciaI'] : '';
 
 		if ($contextConfiguacion->getEvent() === FIND_CONFIGURACION_OK){
 
@@ -231,20 +213,6 @@ class FormProgramaAsignatura extends Form
 					}
 				}
 			}
-
-			if ($contextConfiguacion->getData()->getInfluencia() == 1) {
-				$influencia = self::clean($influencia);
-				if (empty($influencia)) {
-					$erroresFormulario[] = "No has introducido la influencia";
-				}
-
-				if(!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())){
-					$influenciaI = self::clean($influenciaI);
-					if (empty($influenciaI)) {
-						$erroresFormulario[] = "No has introducido la influencia en ingles";
-					}
-				}
-			}
 		}
 		
 
@@ -255,7 +223,7 @@ class FormProgramaAsignatura extends Form
 
 			if ($contextPrograma->getEvent() === FIND_MODPROGRAMA_ASIGNATURA_OK) {
 
-				$programa = new ModProgramaAsignatura($contextPrograma->getData()->getIdPrograma(), $conocimientosPrevios, $conocimientosPreviosI, $breveDescripcion, $breveDescripcionI, $programaTeorico, $programaTeoricoI, $programaSeminarios, $programaSeminariosI, $programaLaboratorio, $programaLaboratorioI, $influencia, $influenciaI, $datos['idAsignatura']);
+				$programa = new ModProgramaAsignatura($contextPrograma->getData()->getIdPrograma(), $conocimientosPrevios, $conocimientosPreviosI, $breveDescripcion, $breveDescripcionI, $programaTeorico, $programaTeoricoI, $programaSeminarios, $programaSeminariosI, $programaLaboratorio, $programaLaboratorioI, $datos['idAsignatura']);
 				$context = new Context(UPDATE_MODPROGRAMA_ASIGNATURA, $programa);
 				$contextPrograma = $controller->action($context);
 
@@ -270,7 +238,7 @@ class FormProgramaAsignatura extends Form
 				}
 			} elseif ($contextPrograma->getEvent() === FIND_MODPROGRAMA_ASIGNATURA_FAIL) {
 
-				$programa = new ModProgramaAsignatura(null, $conocimientosPrevios, $conocimientosPreviosI, $breveDescripcion, $breveDescripcionI, $programaTeorico, $programaTeoricoI, $programaSeminarios, $programaSeminariosI, $programaLaboratorio, $programaLaboratorioI, $influencia, $influenciaI, $datos['idAsignatura']);
+				$programa = new ModProgramaAsignatura(null, $conocimientosPrevios, $conocimientosPreviosI, $breveDescripcion, $breveDescripcionI, $programaTeorico, $programaTeoricoI, $programaSeminarios, $programaSeminariosI, $programaLaboratorio, $programaLaboratorioI, $datos['idAsignatura']);
 				$context = new Context(CREATE_MODPROGRAMA_ASIGNATURA, $programa);
 				$contextPrograma = $controller->action($context);
 

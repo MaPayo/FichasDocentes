@@ -20,8 +20,8 @@ class DAOEvaluacionImplements implements DAOEvaluacion
     {
         $singletonDataSource = new SingletonDataSource();
         $dataSource = $singletonDataSource->getInstance();
-        $sql = "INSERT INTO evaluacion (IdEvaluacion,RealizacionExamenes,RealizacionExamenesi,PesoExamenes,RealizacionActividades,RealizacionActividadesi,PesoActividades,RealizacionLaboratorio,RealizacionLaboratorioi,PesoLaboratorio,CalificacionFinalO,CalificacionFinalOi,CalificacionFinalE,CalificacionFinalEi,IdAsignatura) 
-        VALUES (:idEvaluacion, :realizacionExamenes, :realizacionExamenesI, :pesoExamenes, :realizacionActividades, :realizacionActividadesI, :pesoActividades, :realizacionLaboratorio, :realizacionLaboratorioI, :pesoLaboratorio, :calificacionFinalO, :calificacionFinalOI, :calificacionFinalE, :calificacionFinalEI, :idAsignatura)";
+        $sql = "INSERT INTO evaluacion (IdEvaluacion,RealizacionExamenes,RealizacionExamenesi,PesoExamenes,RealizacionActividades,RealizacionActividadesi,PesoActividades,RealizacionLaboratorio,RealizacionLaboratorioi,PesoLaboratorio,CalificacionFinal,CalificacionFinali,IdAsignatura) 
+        VALUES (:idEvaluacion, :realizacionExamenes, :realizacionExamenesI, :pesoExamenes, :realizacionActividades, :realizacionActividadesI, :pesoActividades, :realizacionLaboratorio, :realizacionLaboratorioI, :pesoLaboratorio, :calificacionFinal, :calificacionFinalI, :idAsignatura)";
         $values = array(
             ':idEvaluacion' => $evaluacion->getIdEvaluacion(),
             ':realizacionExamenes' => $evaluacion->getRealizacionExamenes(),
@@ -33,10 +33,8 @@ class DAOEvaluacionImplements implements DAOEvaluacion
             ':realizacionLaboratorio' => $evaluacion->getRealizacionLaboratorio(),
             ':realizacionLaboratorio' => $evaluacion->getRealizacionLaboratorioI(),
             ':pesoLaboratorio' => $evaluacion->getPesolaboratorio(),
-            ':calificacionFinalO' => $evaluacion->getCalificacionFinalO(),
-            ':calificacionFinalOI' => $evaluacion->getCalificacionFinalOI(),
-            ':calificacionFinalE' => $evaluacion->getCalificacionFinalE(),
-            ':calificacionFinalEI' => $evaluacion->getCalificacionFinalEI(),
+            ':calificacionFinal' => $evaluacion->getCalificacionFinal(),
+            ':calificacionFinalI' => $evaluacion->getCalificacionFinalI(),
             ':idAsignatura' => $evaluacion->getIdAsignatura()
         );
         $results = $dataSource->executeInsertUpdateDelete($sql, $values);
@@ -47,7 +45,7 @@ class DAOEvaluacionImplements implements DAOEvaluacion
     {
         $singletonDataSource = new SingletonDataSource();
         $dataSource = $singletonDataSource->getInstance();
-        $sql = "UPDATE evaluacion SET IdEvaluacion = :idEvaluacion, RealizacionExamenes = :realizacionExamenes,RealizacionExamenesi = :realizacionExamenesI, PesoExamenes = :pesoExamenes,RealizacionActividades = :realizacionActividades,RealizacionActividadesi = :realizacionActividadesI,PesoActividades = :pesoActividades,RealizacionLaboratorio = :RealizacionLaboratorio,RealizacionLaboratorioi = :realizacionLaboratorioI,PesoLaboratorio = :pesoLaboratorio,CalificacionFinalO = :calificacionFinalO,CalificacionFinalOi = :calificacionFinalOi,CalificacionFinalE = :calificacionFinalE,CalificacionFinalEI = :calificacionFinalEI,IdAsignatura = :idAsignatura WHERE IdAsignatura = :idAsignatura";
+        $sql = "UPDATE evaluacion SET IdEvaluacion = :idEvaluacion, RealizacionExamenes = :realizacionExamenes,RealizacionExamenesi = :realizacionExamenesI, PesoExamenes = :pesoExamenes,RealizacionActividades = :realizacionActividades,RealizacionActividadesi = :realizacionActividadesI,PesoActividades = :pesoActividades,RealizacionLaboratorio = :RealizacionLaboratorio,RealizacionLaboratorioi = :realizacionLaboratorioI,PesoLaboratorio = :pesoLaboratorio,CalificacionFinal = :calificacionFinal,CalificacionFinali = :calificacionFinali,IdAsignatura = :idAsignatura WHERE IdAsignatura = :idAsignatura";
         $values = array(
             ':idEvaluacion' => $evaluacion->getIdEvaluacion(),
             ':realizacionExamenes' => $evaluacion->getRealizacionExamenes(),
@@ -59,10 +57,8 @@ class DAOEvaluacionImplements implements DAOEvaluacion
             ':realizacionLaboratorio' => $evaluacion->getRealizacionLaboratorio(),
             ':realizacionLaboratorio' => $evaluacion->getRealizacionLaboratorioI(),
             ':pesoLaboratorio' => $evaluacion->getPesolaboratorio(),
-            ':calificacionFinalO' => $evaluacion->getCalificacionFinalO(),
-            ':calificacionFinalOI' => $evaluacion->getCalificacionFinalOI(),
-            ':calificacionFinalE' => $evaluacion->getCalificacionFinalE(),
-            ':calificacionFinalEI' => $evaluacion->getCalificacionFinalEI(),
+            ':calificacionFinal' => $evaluacion->getCalificacionFinal(),
+            ':calificacionFinalI' => $evaluacion->getCalificacionFinalI(),
             ':idAsignatura' => $evaluacion->getIdAsignatura()
         );
         $results = $dataSource->executeInsertUpdateDelete($sql, $values);

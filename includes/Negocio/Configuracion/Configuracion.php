@@ -10,7 +10,6 @@ class Configuracion
     private $ProgramaTeorico;
     private $ProgramaSeminarios;
     private $ProgramaLaboratorio;
-    private $Influencia;
     private $ComGenerales;
     private $ComEspecificas;
     private $ComBasicas;
@@ -22,15 +21,10 @@ class Configuracion
     private $RealizacionExamenes;
     private $RealizacionActividades;
     private $RealizacionLaboratorio;
-    private $CalificacionFinalO;
-    private $CalificacionFinalE;
-    private $Parcial;
-    private $Laboratorio;
-    private $Final;
-    private $Extraordinario;
+    private $CalificacionFinal;
     private $IdAsignatura;
 
-    public function __construct($IdConfiguracion, $ConocimientosPrevios, $BreveDescripcion, $ProgramaTeorico, $ProgramaSeminarios, $ProgramaLaboratorio, $Influencia, $ComGenerales, $ComEspecificas, $ComBasicas, $ResultadosAprendizaje, $Metodologia, $CitasBibliograficas, $RecursosInternet, $GrupoLaboratorio, $RealizacionExamenes, $RealizacionActividades, $RealizacionLaboratorio, $CalificacionFinalO, $CalificacionFinalE, $Parcial, $Laboratorio, $Final, $Extraordinario, $IdAsignatura)
+    public function __construct($IdConfiguracion, $ConocimientosPrevios, $BreveDescripcion, $ProgramaTeorico, $ProgramaSeminarios, $ProgramaLaboratorio, $ComGenerales, $ComEspecificas, $ComBasicas, $ResultadosAprendizaje, $Metodologia, $CitasBibliograficas, $RecursosInternet, $GrupoLaboratorio, $RealizacionExamenes, $RealizacionActividades, $RealizacionLaboratorio, $CalificacionFinal, $IdAsignatura)
     {
 
         $this->IdConfiguracion = $IdConfiguracion;
@@ -39,7 +33,6 @@ class Configuracion
         $this->ProgramaTeorico = $ProgramaTeorico;
         $this->ProgramaSeminarios = $ProgramaSeminarios;
         $this->ProgramaLaboratorio = $ProgramaLaboratorio;
-        $this->Influencia = $Influencia;
         $this->ComGenerales = $ComGenerales;
         $this->ComEspecificas = $ComEspecificas;
         $this->ComBasicas = $ComBasicas;
@@ -51,12 +44,7 @@ class Configuracion
         $this->RealizacionExamenes = $RealizacionExamenes;
         $this->RealizacionActividades = $RealizacionActividades;
         $this->RealizacionLaboratorio = $RealizacionLaboratorio;
-        $this->CalificacionFinalO = $CalificacionFinalO;
-        $this->CalificacionFinalE = $CalificacionFinalE;
-        $this->Parcial = $Parcial;
-        $this->Laboratorio = $Laboratorio;
-        $this->Final = $Final;
-        $this->Extraordinario = $Extraordinario;
+        $this->CalificacionFinal = $CalificacionFinal;
         $this->IdAsignatura = $IdAsignatura;
     }
 
@@ -180,25 +168,6 @@ class Configuracion
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getInfluencia()
-    {
-        return $this->Influencia;
-    }
-
-    /**
-     * @param mixed $Influencia
-     *
-     * @return self
-     */
-    public function setInfluencia($Influencia)
-    {
-        $this->Influencia = $Influencia;
-
-        return $this;
-    }
 
     /**
      * @return mixed
@@ -423,9 +392,9 @@ class Configuracion
     /**
      * @return mixed
      */
-    public function getCalificacionFinalO()
+    public function getCalificacionFinal()
     {
-        return $this->CalificacionFinalO;
+        return $this->CalificacionFinal;
     }
 
     /**
@@ -433,111 +402,13 @@ class Configuracion
      *
      * @return self
      */
-    public function setCalificacionFinalO($CalificacionFinalO)
+    public function setCalificacionFinal($CalificacionFinal)
     {
-        $this->CalificacionFinalO = $CalificacionFinalO;
+        $this->CalificacionFinal = $CalificacionFinal;
 
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getCalificacionFinalE()
-    {
-        return $this->CalificacionFinalE;
-    }
-
-    /**
-     * @param mixed $CalificacionFinalE
-     *
-     * @return self
-     */
-    public function setCalificacionFinalE($CalificacionFinalE)
-    {
-        $this->CalificacionFinalE = $CalificacionFinalE;
-
-        return $this;
-    }
-    /**
-     * @return mixed
-     */
-    public function getParcial()
-    {
-        return $this->Parcial;
-    }
-
-    /**
-     * @param mixed $Parcial
-     *
-     * @return self
-     */
-    public function setParcial($Parcial)
-    {
-        $this->Parcial = $Parcial;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getLaboratorio()
-    {
-        return $this->Laboratorio;
-    }
-
-    /**
-     * @param mixed $Laboratorio
-     *
-     * @return self
-     */
-    public function setLaboratorio($Laboratorio)
-    {
-        $this->Laboratorio = $Laboratorio;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getFinal()
-    {
-        return $this->Final;
-    }
-
-    /**
-     * @param mixed $Final
-     *
-     * @return self
-     */
-    public function setFinal($Final)
-    {
-        $this->Final = $Final;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getExtraordinario()
-    {
-        return $this->Extraordinario;
-    }
-
-    /**
-     * @param mixed $Extraordinario
-     *
-     * @return self
-     */
-    public function setExtraordinario($Extraordinario)
-    {
-        $this->Extraordinario = $Extraordinario;
-
-        return $this;
-    }
 
     /**
      * @return mixed

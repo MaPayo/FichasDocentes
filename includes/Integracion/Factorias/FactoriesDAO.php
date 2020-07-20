@@ -14,7 +14,6 @@ interface FactoriesDAO
     public static function createDAOConfiguracion();
     public static function createDAOEvaluacion();
     public static function createDAOModEvaluacion();
-    public static function createDAOExamenes();
     public static function createDAOGrado();
     public static function createDAOGrupoClase();
     public static function createDAOModGrupoClase();

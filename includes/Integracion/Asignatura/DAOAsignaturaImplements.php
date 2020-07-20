@@ -21,8 +21,8 @@ class DAOAsignaturaImplements implements DAOAsignatura
     {
         $singletonDataSource = new SingletonDataSource();
         $dataSource = $singletonDataSource->getInstance();
-        $sql = "INSERT INTO asignatura (IdAsignatura,NombreAsignatura,Abreviatura,Curso,Semestre,NombreAsignaturaIngles,Creditos,CoordinadorPrincipal,CoordinadorLaboratorio,Estado,IdMateria) 
-        VALUES (:idAsignatura, :nombreAsignatura, :abreviatura, :curso, :semestre,:nombreAsignaturaIngles,:creditos,:coordinadorPrincipal, :coordinadorLaboratorio, :estado,:idMateria)";
+        $sql = "INSERT INTO asignatura (IdAsignatura,NombreAsignatura,Abreviatura,Curso,Semestre,NombreAsignaturaIngles,Creditos,CoordinadorAsignatura,Estado,IdMateria) 
+        VALUES (:idAsignatura, :nombreAsignatura, :abreviatura, :curso, :semestre,:nombreAsignaturaIngles,:creditos,:coordinadorAsignatura, :estado,:idMateria)";
         $values = array(
             ':idAsignatura' => $asignatura->getIdAsignatura(),
             ':nombreAsignatura' => $asignatura->getNombreAsignatura(),
@@ -31,8 +31,7 @@ class DAOAsignaturaImplements implements DAOAsignatura
             ':semestre' => $asignatura->getSemestre(),
             ':nombreAsignaturaIngles' => $asignatura->getNombreAsignaturaIngles(),
             ':creditos' => $asignatura->getCreditos(),
-            ':coordinadorPrincipal' => $asignatura->getCoordinadorPrincipal(),
-            ':coordinadorLaboratorio' => $asignatura->getCoordinadorLaboratorio(),
+            ':coordinadorAsignatura' => $asignatura->getCoordinadorAsignatura(),
             ':estado' => $asignatura->getEstado(),
             ':idMateria' => $asignatura->getIdMateria()
         );
@@ -44,7 +43,7 @@ class DAOAsignaturaImplements implements DAOAsignatura
     {
         $singletonDataSource = new SingletonDataSource();
         $dataSource = $singletonDataSource->getInstance();
-        $sql = "UPDATE asignatura SET IdAsignatura = :idAsignatura, NombreAsignatura = :nombreAsignatura, Abreviatura = :abreviatura, Curso = :curso, Semestre = :semestre, NombreAsignaturaIngles = :nombreAsignaturaIngles, Creditos = :creditos, CoordinadorPrincipal = :coordinadorPrincipal, CoordinadorLaboratorio = :coordinadorLaboratorio, Estado = :estado, IdMateria = :idMateria WHERE IdAsignatura = :idAsignatura";
+        $sql = "UPDATE asignatura SET IdAsignatura = :idAsignatura, NombreAsignatura = :nombreAsignatura, Abreviatura = :abreviatura, Curso = :curso, Semestre = :semestre, NombreAsignaturaIngles = :nombreAsignaturaIngles, Creditos = :creditos, CoordinadorAsignatura = :coordinadorAsignatura, Estado = :estado, IdMateria = :idMateria WHERE IdAsignatura = :idAsignatura";
         $values = array(
             ':idAsignatura' => $asignatura->getIdAsignatura(),
             ':nombreAsignatura' => $asignatura->getNombreAsignatura(),
@@ -53,8 +52,7 @@ class DAOAsignaturaImplements implements DAOAsignatura
             ':semestre' => $asignatura->getSemestre(),
             ':nombreAsignaturaIngles' => $asignatura->getNombreAsignaturaIngles(),
             ':creditos' => $asignatura->getCreditos(),
-            ':coordinadorPrincipal' => $asignatura->getCoordinadorPrincipal(),
-            ':coordinadorLaboratorio' => $asignatura->getCoordinadorLaboratorio(),
+            ':coordinadorAsignatura' => $asignatura->getCoordinadorAsignatura(),
             ':estado' => $asignatura->getEstado(),
             ':idMateria' => $asignatura->getIdMateria()
         );

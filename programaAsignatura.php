@@ -74,8 +74,6 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                             $datosIniciales['programaSeminariosI'] = $contextPrograma->getData()->getProgramaSeminariosI();
                                             $datosIniciales['programaLaboratorio'] = $contextPrograma->getData()->getProgramaLaboratorio();
                                             $datosIniciales['programaLaboratorioI'] = $contextPrograma->getData()->getProgramaLaboratorioI();
-                                            $datosIniciales['influencia'] = $contextPrograma->getData()->getInfluencia();
-                                            $datosIniciales['influenciaI'] = $contextPrograma->getData()->getInfluenciaI();
                                             $datosIniciales['idAsignatura'] = $_GET[$name];
                                             $access->gestionaModificacion($datosIniciales);
                                         } else {

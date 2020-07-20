@@ -6,16 +6,16 @@ class GrupoClaseProfesor
 {
     private $IdGrupoClase;
     private $Tipo;
-    private $Fechas;
-    private $Horas;
+    private $FechaInicio;
+    private $FechaFin;
     private $EmailProfesor;
 
-    public function __construct($IdGrupoClase, $Tipo, $Fechas, $Horas, $EmailProfesor)
+    public function __construct($IdGrupoClase, $Tipo, $FechaInicio, $FechaFin, $EmailProfesor)
     {
         $this->IdGrupoClase = $IdGrupoClase;
         $this->Tipo = $Tipo;
-        $this->Fechas = $Fechas;
-        $this->Horas = $Horas;
+        $this->FechaInicio = $FechaInicio;
+        $this->FechaFin = $FechaFin;
         $this->EmailProfesor = $EmailProfesor;
     }
 
@@ -62,39 +62,39 @@ class GrupoClaseProfesor
     /**
      * @return mixed
      */
-    public function getFechas()
+    public function getFechaInicio()
     {
-        return $this->Fechas;
+        return $this->FechaInicio;
     }
 
     /**
-     * @param mixed $Fechas
+     * @param mixed $FechaInicio
      *
      * @return self
      */
-    public function setFechas($Fechas)
+    public function setFechaInicio($FechaInicio)
     {
-        $this->Fechas = $Fechas;
+        $this->FechaInicio = $FechaInicio;
 
         return $this;
     }
 
-    /**
+/**
      * @return mixed
      */
-    public function getHoras()
+    public function getFechaFin()
     {
-        return $this->Horas;
+        return $this->FechaFin;
     }
 
     /**
-     * @param mixed $Horas
+     * @param mixed $FechaInicio
      *
      * @return self
      */
-    public function setHoras($Horas)
+    public function setFechaFin($FechaFin)
     {
-        $this->Horas = $Horas;
+        $this->FechaInicio = $FechaInicio;
 
         return $this;
     }

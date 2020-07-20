@@ -14,8 +14,8 @@ class FormGrupoClaseProfesor extends Form
 	{
 		$idGrupoClase = isset($datosIniciales['idGrupoClase']) ? $datosIniciales['idGrupoClase'] : null;
 		$tipo=isset($datosIniciales['tipo']) ? $datosIniciales['tipo'] : null;
-		$fechas=isset($datosIniciales['fechas']) ? $datosIniciales['fechas'] : null;
-		$horas=isset($datosIniciales['horas']) ? $datosIniciales['horas'] : null;
+		$fechaInicio=isset($datosIniciales['fechaInicio']) ? $datosIniciales['fechaInicio'] : null;
+		$fechaFin=isset($datosIniciales['fechaFin']) ? $datosIniciales['fechaFin'] : null;
 		$emailProfesor = isset($datosIniciales['emailProfesor']) ? $datosIniciales['emailProfesor'] : null;
 		$idAsignatura = isset($datosIniciales['idAsignatura']) ? $datosIniciales['idAsignatura'] : null;
 
@@ -54,13 +54,13 @@ class FormGrupoClaseProfesor extends Form
 		</div>
 
 		<div class="form-group">
-			<label for="tipo">Fechas</label>
-			<input class="form-control" type="text" id="fechas" name="fechas" value="' . $fechas. '" />
+			<label for="fecha">Fecha Inicio</label>
+			<input class="form-control" type="date" id="fechaInicio" name="fechaInicio" value="' . $fechaInicio. '" />
 		</div>
 
 		<div class="form-group">
-			<label for="horas">Horas</label>
-			<input class="form-control" type="text" id="horas" name="horas" value="' . $horas. '" />
+			<label for="fecha">Fecha Fin</label>
+			<input class="form-control" type="date" id="fechaFin" name="fechaFin" value="' . $fechaFin. '" />
 		</div>
 
 		<div class="text-right">
@@ -92,17 +92,17 @@ class FormGrupoClaseProfesor extends Form
 			$erroresFormulario[] = "No has introducido el tipo.";
 		}
 
-		$fechas = isset($datos['fechas']) ? $datos['fechas'] : null;
-		$fechas = self::clean($fechas);
-		if (empty($fechas)) {
-			$erroresFormulario[] = "No has introducido las fechas.";
+		$fechaInicio = isset($datos['fechaInicio']) ? $datos['fechaInicio'] : null;
+		$fechaInicio = self::clean($fechaInicio);
+		$fechaFin = isset($datos['fechaFin']) ? $datos['fechaFin'] : null;
+		$fechaFin = self::clean($fechaFin);
+		if (empty($fechaInicio) || empty($fechaFin)) {
+			$erroresFormulario[] = "No has introducido alguna de las fechas.";
+		}
+		else if($fechaFin <= $fechaInicio){
+			$erroresFormulario[] = "La fecha de inicio es mayor o igual que la fecha fin.";
 		}
 
-		$horas = isset($datos['horas']) ? $datos['horas'] : null;
-		$horas = self::clean($horas);
-		if (empty($horas)) {
-			$erroresFormulario[] = "No has introducido las horas.";
-		}
 
 		if (count($erroresFormulario) === 0) {
 			$controller = new ControllerImplements();
@@ -113,7 +113,7 @@ class FormGrupoClaseProfesor extends Form
 			$contextGrupoClaseProfesor = $controller->action($context);
 			if ($contextGrupoClaseProfesor->getEvent() === FIND_MODGRUPO_CLASE_PROFESOR_OK) {
 
-				$grupoClaseProfesor = new ModGrupoClaseProfesor($datos['idGrupoClase'], $tipo, $fechas, $horas, $emailProfesor);
+				$grupoClaseProfesor = new ModGrupoClaseProfesor($datos['idGrupoClase'], $tipo, $fechaInicio,$fechaFin, $emailProfesor);
 				$context = new Context(UPDATE_MODGRUPO_CLASE_PROFESOR, $grupoClaseProfesor);
 				$contextGrupoClaseProfesor = $controller->action($context);
 				if ($contextGrupoClaseProfesor->getEvent() === UPDATE_MODGRUPO_CLASE_PROFESOR_OK) {
@@ -126,7 +126,7 @@ class FormGrupoClaseProfesor extends Form
 				}
 
 			} elseif ($contextGrupoClaseProfesor->getEvent() === FIND_MODGRUPO_CLASE_PROFESOR_FAIL) {
-				$grupoClaseProfesor = new ModGrupoClaseProfesor($datos['idGrupoClase'], $tipo, $fechas, $horas, $emailProfesor);
+				$grupoClaseProfesor = new ModGrupoClaseProfesor($datos['idGrupoClase'], $tipo, $fechaInicio,$fechaFin, $emailProfesor);
 				$context = new Context(CREATE_MODGRUPO_CLASE_PROFESOR, $grupoClaseProfesor);
 				$contextGrupoClaseProfesor = $controller->action($context);
 				if ($contextGrupoClaseProfesor->getEvent() === CREATE_MODGRUPO_CLASE_PROFESOR_OK) {

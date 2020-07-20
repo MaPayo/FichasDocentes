@@ -18,13 +18,12 @@ class DAOGradoImplements implements DAOGrado{
     public static function createGrado($grado){
         $singletonDataSource=new SingletonDataSource();
         $dataSource=$singletonDataSource->getInstance();
-        $sql="INSERT INTO grado (CodigoGrado,NombreGrado,Coordinador,HorasEcts,AnyoAcademico) 
-        VALUES (:codigoGrado, :nombreGrado, :coordinador, :horasEcts, :anyoAcademico)";
+        $sql="INSERT INTO grado (CodigoGrado,NombreGrado,CoordinadorGrado,HorasEcts) 
+        VALUES (:codigoGrado, :nombreGrado, :coordinadorGrado, :horasEcts)";
         $values=array(':codigoGrado' => $grado->getCodigoGrado(),
             ':nombreGrado' => $grado->getNombreGrado(),
-            ':coordinador' => $grado->getCoordinador(),
-            ':horasEcts' => $grado->getHorasEcts(),
-            ':anyoAcademico' => $grado->getAnyoAcademico());
+            ':coordinadorGrado' => $grado->getCoordinadorGrado(),
+            ':horasEcts' => $grado->getHorasEcts());
         $results=$dataSource->executeInsertUpdateDelete($sql,$values);
         return $results;
 
@@ -33,12 +32,11 @@ class DAOGradoImplements implements DAOGrado{
     public static function updateGrado($grado){
         $singletonDataSource=new SingletonDataSource();
         $dataSource=$singletonDataSource->getInstance();
-        $sql="UPDATE grado SET CodigoGrado = :codigoGrado, NombreGrado = :nombreGrado,Coordinador = :coordinador,HorasEcts = :horasEcts,AnyoAcademico = :AnyoAcademico WHERE CodigoGrado = :codigoGrado";
+        $sql="UPDATE grado SET CodigoGrado = :codigoGrado, NombreGrado = :nombreGrado,CoordinadorGrado = :coordinadorGrado,HorasEcts = :horasEcts WHERE CodigoGrado = :codigoGrado";
         $values=array(':codigoGrado' => $grado->getCodigoGrado(),
             ':nombreGrado' => $grado->getNombreGrado(),
-            ':coordinador' => $grado->getCoordinador(),
-            ':horasEcts' => $grado->getHorasEcts(),
-            ':anyoAcademico' => $grado->getAnyoAcademico());
+            ':coordinadorGrado' => $grado->getCoordinadorGrado(),
+            ':horasEcts' => $grado->getHorasEcts());
         $results=$dataSource->executeInsertUpdateDelete($sql,$values);
         return $results;
     }

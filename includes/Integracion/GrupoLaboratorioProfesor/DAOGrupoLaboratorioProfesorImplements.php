@@ -35,13 +35,12 @@ class DAOGrupoLaboratorioProfesorImplements implements DAOGrupoLaboratorioProfes
     {
         $singletonDataSource = new SingletonDataSource();
         $dataSource = $singletonDataSource->getInstance();
-        $sql = "INSERT INTO grupolaboratorioprofesor (IdGrupoLab,Sesiones,Fechas,Horas,EmailProfesor) 
-        VALUES (:idGrupoLab, :sesiones, :fechas, :horas, :emailProfesor)";
+        $sql = "INSERT INTO grupolaboratorioprofesor (IdGrupoLab,FechaInicio,FechaFin,EmailProfesor) 
+        VALUES (:idGrupoLab, :fechaInicio,:fechaFin, :emailProfesor)";
         $values = array(
             ':idGrupoLab' => $grupoLaboratorioProfesor->getIdGrupoLab(),
-            ':sesiones' => $grupoLaboratorioProfesor->getSesiones(),
-            ':fechas' => $grupoLaboratorioProfesor->getFechas(),
-            ':horas' => $grupoLaboratorioProfesor->getHoras(),
+            ':fechaInicio' => $grupoLaboratorioProfesor->getFechaInicio(),
+            ':fechaFin' => $grupoLaboratorioProfesor->getFechaFin(),
             ':emailProfesor' => $grupoLaboratorioProfesor->getEmailProfesor()
         );
         $results = $dataSource->executeInsertUpdateDelete($sql, $values);
@@ -52,12 +51,11 @@ class DAOGrupoLaboratorioProfesorImplements implements DAOGrupoLaboratorioProfes
     {
         $singletonDataSource = new SingletonDataSource();
         $dataSource = $singletonDataSource->getInstance();
-        $sql = "UPDATE grupolaboratorioprofesor SET IdGrupoLab = :idGrupoLab, Sesiones = :sesiones, Fechas = :fechas, Horas = :horas, EmailProfesor = :emailProfesor WHERE IdGrupoLab = :idGrupoLab AND EmailProfesor = :emailProfesor";
+        $sql = "UPDATE grupolaboratorioprofesor SET IdGrupoLab = :idGrupoLab, FechaInicio = :fechaInicio, FechaFin = :fechaFin,EmailProfesor = :emailProfesor WHERE IdGrupoLab = :idGrupoLab AND EmailProfesor = :emailProfesor";
         $values = array(
             ':idGrupoLab' => $grupoLaboratorioProfesor->getIdGrupoLab(),
-            ':sesiones' => $grupoLaboratorioProfesor->getSesiones(),
-            ':fechas' => $grupoLaboratorioProfesor->getFechas(),
-            ':horas' => $grupoLaboratorioProfesor->getHoras(),
+            ':fechaInicio' => $grupoLaboratorioProfesor->getFechaInicio(),
+            ':fechaFin' => $grupoLaboratorioProfesor->getFechaFin(),
             ':emailProfesor' => $grupoLaboratorioProfesor->getEmailProfesor()
         );
         $results = $dataSource->executeInsertUpdateDelete($sql, $values);

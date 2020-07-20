@@ -111,14 +111,9 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                         $context = new es\ucm\Context(FIND_MODULO, $materia->getData()->getIdModulo());
                         $modulo = $controller->action($context);
 
-                        $context = new es\ucm\Context(FIND_PROFESOR, $asignatura->getData()->getCoordinadorPrincipal());
-                        $coordinadorPrincipal = $controller->action($context);
+                        $context = new es\ucm\Context(FIND_PROFESOR, $asignatura->getData()->getCoordinadorAsignatura());
+                        $CoordinadorAsignatura = $controller->action($context);
 
-                        $context = new es\ucm\Context(FIND_PROFESOR, $asignatura->getData()->getCoordinadorLaboratorio());
-                        $coordinadorLaboratorio = $controller->action($context);
-
-                        $context = new es\ucm\Context(FIND_EXAMENES, htmlspecialchars(trim(strip_tags($_GET['IdAsignatura']))));
-                        $examenes = $controller->action($context);
 
                         $context = new es\ucm\Context(FIND_PROGRAMA_ASIGNATURA, htmlspecialchars(trim(strip_tags($_GET['IdAsignatura']))));
                         $contextPrograma = $controller->action($context);
@@ -166,12 +161,12 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                         $verGrupoLab = true;
                         $verEvaluacion = true;
 
-                        if ($contextConfiguracion->getData()->getConocimientosPrevios() == 0 && $contextConfiguracion->getData()->getBreveDescripcion() == 0 && $contextConfiguracion->getData()->getProgramaTeorico() == 0 && $contextConfiguracion->getData()->getProgramaSeminarios() == 0 && $contextConfiguracion->getData()->getProgramaLaboratorio() == 0 && $contextConfiguracion->getData()->getInfluencia() == 0) $verPrograma = false;
+                        if ($contextConfiguracion->getData()->getConocimientosPrevios() == 0 && $contextConfiguracion->getData()->getBreveDescripcion() == 0 && $contextConfiguracion->getData()->getProgramaTeorico() == 0 && $contextConfiguracion->getData()->getProgramaSeminarios() == 0 && $contextConfiguracion->getData()->getProgramaLaboratorio() == 0) $verPrograma = false;
                         if ($contextConfiguracion->getData()->getComGenerales() == 0 && $contextConfiguracion->getData()->getComEspecificas() == 0 && $contextConfiguracion->getData()->getComBasicas() == 0 && $contextConfiguracion->getData()->getResultadosAprendizaje() == 0) $verCompetencias = false;
                         if ($contextConfiguracion->getData()->getMetodologia() == 0) $verMetodologia = false;
                         if ($contextConfiguracion->getData()->getCitasBibliograficas() == 0 && $contextConfiguracion->getData()->getRecursosInternet() == 0) $verBibliografia = false;
                         if ($contextConfiguracion->getData()->getGrupoLaboratorio() == 0) $verGrupoLab = false;
-                        if ($contextConfiguracion->getData()->getRealizacionExamenes() == 0 && $contextConfiguracion->getData()->getRealizacionActividades() == 0 && $contextConfiguracion->getData()->getRealizacionLaboratorio() == 0 && $contextConfiguracion->getData()->getCalificacionFinalO() == 0 && $contextConfiguracion->getData()->getCalificacionFinalE() == 0) $verEvaluacion = false;
+                        if ($contextConfiguracion->getData()->getRealizacionExamenes() == 0 && $contextConfiguracion->getData()->getRealizacionActividades() == 0 && $contextConfiguracion->getData()->getRealizacionLaboratorio() == 0 && $contextConfiguracion->getData()->getCalificacionFinal() == 0) $verEvaluacion = false;
                 ?>
 
                         <div class="col-md-8 col-12">
@@ -212,7 +207,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                             <a class="nav-item nav-link" id="nav-evaluacion-tab" data-toggle="tab" href="#nav-evaluacion" role="tab" aria-controls="nav-evaluacion" aria-selected="false">Evaluación</a>
                                         <?php } ?>
 
-                                        <?php if (strpos($asignatura->getData()->getCoordinadorPrincipal(), $_SESSION['idUsuario']) !== false) { ?>
+                                        <?php if (strpos($asignatura->getData()->getCoordinadorAsignatura(), $_SESSION['idUsuario']) !== false) { ?>
                                             <a class="nav-item nav-link" id="nav-coordinacion-tab" data-toggle="tab" href="#nav-coordinacion" role="tab" aria-controls="nav-coordinacion" aria-selected="false">Coordinación</a>
                                         <?php } ?>
 
@@ -298,75 +293,21 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                     <tbody>
                                                         <tr>
                                                             <th scope="col">Principal:</th>
-                                                            <td><?php echo $coordinadorPrincipal->getData()->getNombre(); ?></td>
+                                                            <td><?php echo $CoordinadorAsignatura->getData()->getNombre(); ?></td>
                                                             <th scope="col" colspan="2">Departamento:</th>
-                                                            <td colspan="2"><?php echo $coordinadorPrincipal->getData()->getDepartamento(); ?></td>
+                                                            <td colspan="2"><?php echo $CoordinadorAsignatura->getData()->getDepartamento(); ?></td>
                                                         </tr>
                                                         <tr>
                                                             <th scope="col">Facultad:</th>
-                                                            <td><?php echo $coordinadorPrincipal->getData()->getFacultad(); ?></td>
+                                                            <td><?php echo $CoordinadorAsignatura->getData()->getFacultad(); ?></td>
                                                             <th scope="col">Despacho:</th>
-                                                            <td><?php echo $coordinadorPrincipal->getData()->getDespacho(); ?></td>
+                                                            <td><?php echo $CoordinadorAsignatura->getData()->getDespacho(); ?></td>
                                                             <th scope="col">Email:</th>
-                                                            <td><?php echo $coordinadorPrincipal->getData()->getEmail(); ?></td>
+                                                            <td><?php echo $CoordinadorAsignatura->getData()->getEmail(); ?></td>
                                                         </tr>
-                                                        <?php if ($coordinadorLaboratorio->getEvent() === FIND_PROFESOR_OK) { ?>
-                                                            <tr>
-                                                                <th scope="col">Laboratorio:</th>
-                                                                <td><?php echo $coordinadorLaboratorio->getData()->getNombre(); ?></td>
-                                                                <th scope="col" colspan="2">Departamento:</th>
-                                                                <td colspan="2"><?php echo $coordinadorLaboratorio->getData()->getDepartamento(); ?></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th scope="col">Facultad:</th>
-                                                                <td><?php echo $coordinadorLaboratorio->getData()->getFacultad(); ?></td>
-                                                                <th scope="col">Despacho:</th>
-                                                                <td><?php echo $coordinadorLaboratorio->getData()->getDespacho(); ?></td>
-                                                                <th scope="col">Email:</th>
-                                                                <td><?php echo $coordinadorLaboratorio->getData()->getEmail(); ?></td>
-                                                            </tr>
-                                                        <?php } ?>
                                                     </tbody>
                                                 </table>
                                             </div>
-                                            <?php if ($examenes->getEvent() === FIND_EXAMENES_OK) { ?>
-                                                <br />
-                                                <div class="table-responsive text-center">
-                                                    <table class="table table-sm table-bordered">
-                                                        <thead>
-                                                            <tr>
-                                                                <th scope="col" colspan="2">Fechas de examenes</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <?php if ($contextConfiguracion->getData()->getParcial() == 1) { ?>
-                                                                <tr>
-                                                                    <th scope="col">Examen parcial:</th>
-                                                                    <td><?php echo $examenes->getData()->getParcial(); ?></td>
-                                                                </tr>
-                                                            <?php } ?>
-                                                            <?php if ($contextConfiguracion->getData()->getLaboratorio() == 1) { ?>
-                                                                <tr>
-                                                                    <th scope="col">Examen de laboratorio:</th>
-                                                                    <td><?php echo $examenes->getData()->getLaboratorio(); ?></td>
-                                                                </tr>
-                                                            <?php } ?>
-                                                            <?php if ($contextConfiguracion->getData()->getFinal() == 1) { ?>
-                                                                <tr>
-                                                                    <th scope="col">Examen final:</th>
-                                                                    <td><?php echo $examenes->getData()->getFinal(); ?></td>
-                                                                </tr>
-                                                            <?php } ?>
-                                                            <?php if ($contextConfiguracion->getData()->getExtraordinario() == 1) { ?>
-                                                                <tr>
-                                                                    <th scope="col">Examen extraordinario:</th>
-                                                                    <td><?php echo $examenes->getData()->getExtraordinario(); ?></td>
-                                                                </tr>
-                                                            <?php } ?>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            <?php } ?>
                                         </div>
 
                                         <?php if ($verPrograma) { ?>
@@ -886,109 +827,6 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                                     <?php
                                                                                     if ($contextPrograma->getEvent() === FIND_PROGRAMA_ASIGNATURA_OK) {
                                                                                         echo $contextPrograma->getData()->getProgramaLaboratorioI();
-                                                                                    }
-                                                                                    ?>
-                                                                                </p>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        <?php } ?>
-                                                    <?php } ?>
-                                                    <!--Pestaña influencia-->
-                                                    <?php if ($contextConfiguracion->getData()->getInfluencia() == 1) { ?>
-                                                        <div class="card">
-                                                            <div class="card-header" id="headingEleven">
-                                                                <h2 class="mb-0">
-                                                                    <?php if ($contextComparacion->getData()['ProgramaTeorico'] && unserialize($_SESSION['permisos'][$asignatura->getData()->getIdAsignatura()])->getPermisoPrograma() >= 4) { ?>
-                                                                        <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseEleven" aria-expanded="true" aria-controls="collapseEleven">
-                                                                            Influencia
-                                                                        </button>
-                                                                    <?php } else { ?>
-                                                                        <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseEleven" aria-expanded="false" aria-controls="collapseEleven">
-                                                                            Influencia
-                                                                        </button>
-                                                                    <?php } ?>
-                                                                </h2>
-                                                            </div>
-                                                            <div id="collapseEleven" class="collapse" aria-labelledby="headingEleven" data-parent="#accordionProgram">
-                                                                <div class="card-body">
-                                                                    <?php if (unserialize($_SESSION['permisos'][$asignatura->getData()->getIdAsignatura()])->getPermisoPrograma() >= 4) { ?>
-                                                                        <div class="card">
-                                                                            <div class="card-body">
-                                                                                <h5 class="card-title">Borrador</h5>
-                                                                                <p class="card-text">
-                                                                                    <?php
-                                                                                    if ($contextModPrograma->getEvent() === FIND_MODPROGRAMA_ASIGNATURA_OK) {
-                                                                                        if ($contextComparacion->getData()['ProgramaTeorico'])
-                                                                                            echo '<b style="font-size: 18px">' . $contextModPrograma->getData()->getInfluencia() . '</b>';
-                                                                                        else
-                                                                                            echo $contextModPrograma->getData()->getInfluencia();
-                                                                                    }
-                                                                                    ?>
-                                                                                </p>
-                                                                            </div>
-                                                                        </div>
-                                                                    <?php } ?>
-                                                                    <div class="card">
-                                                                        <div class="card-body">
-                                                                            <h5 class="card-title">Consolidado</h5>
-                                                                            <p class="card-text">
-                                                                                <?php
-                                                                                if ($contextPrograma->getEvent() === FIND_PROGRAMA_ASIGNATURA_OK) {
-                                                                                    echo $contextPrograma->getData()->getInfluencia();
-                                                                                }
-                                                                                ?>
-                                                                            </p>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <!--Pestaña influencia (ingles) -->
-                                                        <?php if (!is_null($asignatura->getData()->getNombreAsignaturaIngles())) { ?>
-                                                            <div class="card">
-                                                                <div class="card-header" id="headingTwelve">
-                                                                    <h2 class="mb-0">
-                                                                        <?php if ($contextComparacion->getData()['ProgramaTeoricoI'] && unserialize($_SESSION['permisos'][$asignatura->getData()->getIdAsignatura()])->getPermisoPrograma() >= 4) { ?>
-                                                                            <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseTwelve" aria-expanded="true" aria-controls="collapseTwelve">
-                                                                                Influencia (Inglés)
-                                                                            </button>
-                                                                        <?php } else { ?>
-                                                                            <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseTwelve" aria-expanded="false" aria-controls="collapseTwelve">
-                                                                                Influencia (Inglés)
-                                                                            </button>
-                                                                        <?php } ?>
-                                                                    </h2>
-                                                                </div>
-                                                                <div id="collapseTwelve" class="collapse" aria-labelledby="headingTwelve" data-parent="#accordionProgram">
-                                                                    <div class="card-body">
-                                                                        <?php if (unserialize($_SESSION['permisos'][$asignatura->getData()->getIdAsignatura()])->getPermisoPrograma() >= 4) { ?>
-                                                                            <div class="card">
-                                                                                <div class="card-body">
-                                                                                    <h5 class="card-title">Borrador</h5>
-                                                                                    <p class="card-text">
-                                                                                        <?php
-                                                                                        if ($contextModPrograma->getEvent() === FIND_MODPROGRAMA_ASIGNATURA_OK) {
-                                                                                            if ($contextComparacion->getData()['ProgramaTeoricoI'])
-                                                                                                echo '<b style="font-size: 18px">' . $contextModPrograma->getData()->getInfluenciaI() . '</b>';
-                                                                                            else
-                                                                                                echo $contextModPrograma->getData()->getInfluenciaI();
-                                                                                        }
-                                                                                        ?>
-                                                                                    </p>
-                                                                                </div>
-                                                                            </div>
-                                                                        <?php } ?>
-                                                                        <div class="card">
-                                                                            <div class="card-body">
-                                                                                <h5 class="card-title">Consolidado</h5>
-                                                                                <p class="card-text">
-                                                                                    <?php
-                                                                                    if ($contextPrograma->getEvent() === FIND_PROGRAMA_ASIGNATURA_OK) {
-                                                                                        echo $contextPrograma->getData()->getInfluenciaI();
                                                                                     }
                                                                                     ?>
                                                                                 </p>
@@ -1813,9 +1651,8 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                                                         <table class="table table-sm table-bordered">
                                                                                                                 <tr>
                                                                                                                 <th scope="col">Profesor</th>
-                                                                                                                <th scope="col">Sesiones</th>
-                                                                                                                <th scope="col">Fechas</th>
-                                                                                                                <th scope="col">Horas</th>
+                                                                                                                <th scope="col">Fecha Inicio</th>
+                                                                                                                <th scope="col">Fecha Fin</th>
                                                                                                                 <th scope="col">Opciones</th>
                                                                                                                 </tr>';
                                                                                                     $context = new es\ucm\Context(LIST_MODGRUPO_LABORATORIO_PROFESOR, $grupo->getIdGrupoLab());
@@ -1827,9 +1664,8 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                                                             if ($contextProfesor->getEvent() == FIND_PROFESOR_OK) {
                                                                                                                 echo '<tr scope="row">
                                                                                                             <td>' . $contextProfesor->getData()->getNombre() . '</td>
-                                                                                                            <td>' . $modGrupoLaboratorioProfesor->getSesiones() . '</td>
-                                                                                                            <td>' . $modGrupoLaboratorioProfesor->getFechas() . '</td>
-                                                                                                            <td>' . $modGrupoLaboratorioProfesor->getHoras() . '</td>';
+                                                                                                            <td>' . $modGrupoLaboratorioProfesor->getFechaInicio() . '</td>
+                                                                                                            td>' . $modGrupoLaboratorioProfesor->getFechaFin() . '</td>';
                                                                                                                 if (unserialize($_SESSION['permisos'][$asignatura->getData()->getIdAsignatura()])->getPermisoGrupoClase() >= 6) {
                                                                                                                     echo '<td> <a href="grupoLaboratorioProfesor.php?EmailProfesor=' . $modGrupoLaboratorioProfesor->getEmailProfesor() . '&IdAsignatura=' . $asignatura->getData()->getIdAsignatura() . '&IdGrupoLaboratorio=' . $grupo->getIdGrupoLab() . '">
                                                                                                             <button type="button" class="btn btn-warning" id="btn-form">
@@ -1929,9 +1765,8 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                                                         <table class="table table-sm table-bordered">
                                                                                                                 <tr>
                                                                                                                 <th scope="col">Profesor</th>
-                                                                                                                <th scope="col">Sesiones</th>
-                                                                                                                <th scope="col">Fechas</th>
-                                                                                                                <th scope="col">Horas</th>
+                                                                                                                <th scope="col">Fecha Inicio</th>
+                                                                                                                <th scope="col">Fecha Fin</th>
                                                                                                                 </tr>';
                                                                                                     $context = new es\ucm\Context(LIST_GRUPO_LABORATORIO_PROFESOR, $grupo->getIdGrupoLab());
                                                                                                     $contextGrupoLaboratorioProfesor = $controller->action($context);
@@ -1942,9 +1777,8 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                                                             if ($contextProfesor->getEvent() == FIND_PROFESOR_OK) {
                                                                                                                 echo '<tr scope="row">
                                                                                                             <td>' . $contextProfesor->getData()->getNombre() . '</td>
-                                                                                                            <td>' . $grupoLaboratorioProfesor->getSesiones() . '</td>
-                                                                                                            <td>' . $grupoLaboratorioProfesor->getFechas() . '</td>
-                                                                                                            <td>' . $grupoLaboratorioProfesor->getHoras() . '</td>';
+                                                                                                            <td>' . $grupoLaboratorioProfesor->getFechaInicio() . '</td>
+                                                                                                            <td>' . $grupoLaboratorioProfesor->getFechaFin() . '</td>';
                                                                                                                 echo '</tr>';
                                                                                                             }
                                                                                                         }
@@ -2070,8 +1904,8 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                                                                 <tr>
                                                                                                                 <th scope="col">Profesor</th>
                                                                                                                 <th scope="col">Tipo</th>
-                                                                                                                <th scope="col">Fechas</th>
-                                                                                                                <th scope="col">Horas</th>
+                                                                                                                <th scope="col">Fecha Inicio</th>
+                                                                                                                <th scope="col">Fecha Fin</th>
                                                                                                                 <th scope="col">Opciones</th>
                                                                                                                 </tr>';
                                                                                                 $context = new es\ucm\Context(LIST_MODGRUPO_CLASE_PROFESOR, $grupo->getIdGrupoClase());
@@ -2084,8 +1918,8 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                                                             echo '<tr scope="row">
                                                                                                             <td>' . $contextProfesor->getData()->getNombre() . '</td>
                                                                                                             <td>' . $modGrupoClaseProfesor->getTipo() . '</td>
-                                                                                                            <td>' . $modGrupoClaseProfesor->getFechas() . '</td>
-                                                                                                            <td>' . $modGrupoClaseProfesor->getHoras() . '</td>';
+                                                                                                            <td>' . $modGrupoClaseProfesor->getFechaInicio() . '</td>
+                                                                                                            <td>' . $modGrupoClaseProfesor->getFechaFin() . '</td>';
                                                                                                             if ($asignatura->getData()->getEstado()==="B" && unserialize($_SESSION['permisos'][$asignatura->getData()->getIdAsignatura()])->getPermisoGrupoClase() >= 6) {
                                                                                                                 echo '<td> <a href="grupoClaseProfesor.php?EmailProfesor=' . $modGrupoClaseProfesor->getEmailProfesor() . '&IdAsignatura=' . $asignatura->getData()->getIdAsignatura() . '&IdGrupoClase=' . $grupo->getIdGrupoClase() . '">
                                                                                                             <button type="button" class="btn btn-warning" id="btn-form">
@@ -2185,8 +2019,8 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                                                                 <tr>
                                                                                                                 <th scope="col">Profesor</th>
                                                                                                                 <th scope="col">Tipo</th>
-                                                                                                                <th scope="col">Fechas</th>
-                                                                                                                <th scope="col">Horas</th>
+                                                                                                                <th scope="col">Fecha Inicio</th>
+                                                                                                                <th scope="col">Fecha Fin</th>
                                                                                                                 </tr>';
                                                                                                 $context = new es\ucm\Context(LIST_GRUPO_CLASE_PROFESOR, $grupo->getIdGrupoClase());
                                                                                                 $contextGrupoClaseProfesor = $controller->action($context);
@@ -2198,8 +2032,8 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                                                             echo '<tr scope="row">
                                                                                                             <td>' . $contextProfesor->getData()->getNombre() . '</td>
                                                                                                             <td>' . $grupoClaseProfesor->getTipo() . '</td>
-                                                                                                            <td>' . $grupoClaseProfesor->getFechas() . '</td>
-                                                                                                            <td>' . $grupoClaseProfesor->getHoras() . '</td>';
+                                                                                                            <td>' . $grupoClaseProfesor->getFechaInicio() . '</td>
+                                                                                                            <td>' . $grupoClaseProfesor->getFechaFin() . '</td>';
                                                                                                             echo '</tr>';
                                                                                                         }
                                                                                                     }
@@ -2616,11 +2450,11 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                     <?php } ?>
 
                                                     <!-- Pestaña calificacion final  ordinaria -->
-                                                    <?php if ($contextConfiguracion->getData()->getCalificacionFinalO() == 1) { ?>
+                                                    <?php if ($contextConfiguracion->getData()->getCalificacionFinal() == 1) { ?>
                                                         <div class="card">
                                                             <div class="card-header" id="headingSeven">
                                                                 <h2 class="mb-0">
-                                                                    <?php if ($contextComparacion->getData()['CalificacionFinalO'] && unserialize($_SESSION['permisos'][$asignatura->getData()->getIdAsignatura()])->getPermisoEvaluacion() >= 4) { ?>
+                                                                    <?php if ($contextComparacion->getData()['CalificacionFinal'] && unserialize($_SESSION['permisos'][$asignatura->getData()->getIdAsignatura()])->getPermisoEvaluacion() >= 4) { ?>
                                                                         <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="true" aria-controls="collapseSeven">
                                                                             Calificación final ordinaria
                                                                         </button>
@@ -2640,10 +2474,10 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                                 <p class="card-text">
                                                                                     <?php
                                                                                     if ($contextModEvaluacion->getEvent() === FIND_MODEVALUACION_OK) {
-                                                                                        if ($contextComparacion->getData()['CalificacionFinalO'])
-                                                                                            echo '<b style="font-size: 18px">' . $contextModEvaluacion->getData()->getCalificacionFinalO() . '</b>';
+                                                                                        if ($contextComparacion->getData()['CalificacionFinal'])
+                                                                                            echo '<b style="font-size: 18px">' . $contextModEvaluacion->getData()->getCalificacionFinal() . '</b>';
                                                                                         else
-                                                                                            echo $contextModEvaluacion->getData()->getCalificacionFinalO();
+                                                                                            echo $contextModEvaluacion->getData()->getCalificacionFinal();
                                                                                     }
                                                                                     ?>
                                                                                 </p>
@@ -2656,7 +2490,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                             <p class="card-text">
                                                                                 <?php
                                                                                 if ($contextEvaluacion->getEvent() === FIND_EVALUACION_OK) {
-                                                                                    echo $contextEvaluacion->getData()->getCalificacionFinalO();
+                                                                                    echo $contextEvaluacion->getData()->getCalificacionFinal();
                                                                                 }
                                                                                 ?>
                                                                             </p>
@@ -2671,7 +2505,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                             <div class="card">
                                                                 <div class="card-header" id="headingEight">
                                                                     <h2 class="mb-0">
-                                                                        <?php if ($contextComparacion->getData()['CalificacionFinalOI'] && unserialize($_SESSION['permisos'][$asignatura->getData()->getIdAsignatura()])->getPermisoEvaluacion() >= 4) { ?>
+                                                                        <?php if ($contextComparacion->getData()['CalificacionFinalI'] && unserialize($_SESSION['permisos'][$asignatura->getData()->getIdAsignatura()])->getPermisoEvaluacion() >= 4) { ?>
                                                                             <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseEight" aria-expanded="true" aria-controls="collapseEight">
                                                                                 Calificación final ordinaria (Inglés)
                                                                             </button>
@@ -2691,10 +2525,10 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                                     <p class="card-text">
                                                                                         <?php
                                                                                         if ($contextModEvaluacion->getEvent() === FIND_MODEVALUACION_OK) {
-                                                                                            if ($contextComparacion->getData()['CalificacionFinalOI'])
-                                                                                                echo '<b style="font-size: 18px">' . $contextModEvaluacion->getData()->getCalificacionFinalOI() . '</b>';
+                                                                                            if ($contextComparacion->getData()['CalificacionFinalI'])
+                                                                                                echo '<b style="font-size: 18px">' . $contextModEvaluacion->getData()->getCalificacionFinalI() . '</b>';
                                                                                             else
-                                                                                                echo $contextModEvaluacion->getData()->getCalificacionFinalOI();
+                                                                                                echo $contextModEvaluacion->getData()->getCalificacionFinalI();
                                                                                         }
                                                                                         ?>
                                                                                     </p>
@@ -2707,111 +2541,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                                 <p class="card-text">
                                                                                     <?php
                                                                                     if ($contextEvaluacion->getEvent() === FIND_EVALUACION_OK) {
-                                                                                        echo $contextEvaluacion->getData()->getCalificacionFinalOI();
-                                                                                    }
-                                                                                    ?>
-                                                                                </p>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        <?php } ?>
-                                                    <?php } ?>
-
-                                                    <!-- Pestaña calificacion final  extraordinaria -->
-                                                    <?php if ($contextConfiguracion->getData()->getCalificacionFinalE() == 1) { ?>
-                                                        <div class="card">
-                                                            <div class="card-header" id="headingNine">
-                                                                <h2 class="mb-0">
-                                                                    <?php if ($contextComparacion->getData()['CalificacionFinalO'] && unserialize($_SESSION['permisos'][$asignatura->getData()->getIdAsignatura()])->getPermisoEvaluacion() >= 4) { ?>
-                                                                        <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseNine" aria-expanded="true" aria-controls="collapseNine">
-                                                                            Calificación final extraordinaria
-                                                                        </button>
-                                                                    <?php } else { ?>
-                                                                        <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseNine" aria-expanded="false" aria-controls="collapseNine">
-                                                                            Calificación final extraordinaria
-                                                                        </button>
-                                                                    <?php } ?>
-                                                                </h2>
-                                                            </div>
-                                                            <div id="collapseNine" class="collapse" aria-labelledby="headingNine" data-parent="#accordionEvaluacion">
-                                                                <div class="card-body">
-                                                                    <?php if (unserialize($_SESSION['permisos'][$asignatura->getData()->getIdAsignatura()])->getPermisoEvaluacion() >= 4) { ?>
-                                                                        <div class="card">
-                                                                            <div class="card-body">
-                                                                                <h5 class="card-title">Borrador</h5>
-                                                                                <p class="card-text">
-                                                                                    <?php
-                                                                                    if ($contextModEvaluacion->getEvent() === FIND_MODEVALUACION_OK) {
-                                                                                        if ($contextComparacion->getData()['CalificacionFinalO'])
-                                                                                            echo '<b style="font-size: 18px">' . $contextModEvaluacion->getData()->getCalificacionFinalE() . '</b>';
-                                                                                        else
-                                                                                            echo $contextModEvaluacion->getData()->getCalificacionFinalE();
-                                                                                    }
-                                                                                    ?>
-                                                                                </p>
-                                                                            </div>
-                                                                        </div>
-                                                                    <?php } ?>
-                                                                    <div class="card">
-                                                                        <div class="card-body">
-                                                                            <h5 class="card-title">Consolidado</h5>
-                                                                            <p class="card-text">
-                                                                                <?php
-                                                                                if ($contextEvaluacion->getEvent() === FIND_EVALUACION_OK) {
-                                                                                    echo $contextEvaluacion->getData()->getCalificacionFinalE();
-                                                                                }
-                                                                                ?>
-                                                                            </p>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <!-- Pestaña calificacion final extraordinaria (inglés) -->
-                                                        <?php if (!is_null($asignatura->getData()->getNombreAsignaturaIngles())) { ?>
-                                                            <div class="card">
-                                                                <div class="card-header" id="headingTen">
-                                                                    <h2 class="mb-0">
-                                                                        <?php if ($contextComparacion->getData()['CalificacionFinalOI'] && unserialize($_SESSION['permisos'][$asignatura->getData()->getIdAsignatura()])->getPermisoEvaluacion() >= 4) { ?>
-                                                                            <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseTen" aria-expanded="true" aria-controls="collapseTen">
-                                                                                Calificación final extraordinaria (Inglés)
-                                                                            </button>
-                                                                        <?php } else { ?>
-                                                                            <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseTen" aria-expanded="false" aria-controls="collapseTen">
-                                                                                Calificación final extraordinaria (Inglés)
-                                                                            </button>
-                                                                        <?php } ?>
-                                                                    </h2>
-                                                                </div>
-                                                                <div id="collapseTen" class="collapse" aria-labelledby="headingTen" data-parent="#accordionEvaluacion">
-                                                                    <div class="card-body">
-                                                                        <?php if (unserialize($_SESSION['permisos'][$asignatura->getData()->getIdAsignatura()])->getPermisoEvaluacion() >= 4) { ?>
-                                                                            <div class="card">
-                                                                                <div class="card-body">
-                                                                                    <h5 class="card-title">Borrador</h5>
-                                                                                    <p class="card-text">
-                                                                                        <?php
-                                                                                        if ($contextModEvaluacion->getEvent() === FIND_MODEVALUACION_OK) {
-                                                                                            if ($contextComparacion->getData()['CalificacionFinalOI'])
-                                                                                                echo '<b style="font-size: 18px">' . $contextModEvaluacion->getData()->getCalificacionFinalEI() . '</b>';
-                                                                                            else
-                                                                                                echo $contextModEvaluacion->getData()->getCalificacionFinalEI();
-                                                                                        }
-                                                                                        ?>
-                                                                                    </p>
-                                                                                </div>
-                                                                            </div>
-                                                                        <?php } ?>
-                                                                        <div class="card">
-                                                                            <div class="card-body">
-                                                                                <h5 class="card-title">Consolidado</h5>
-                                                                                <p class="card-text">
-                                                                                    <?php
-                                                                                    if ($contextEvaluacion->getEvent() === FIND_EVALUACION_OK) {
-                                                                                        echo $contextEvaluacion->getData()->getCalificacionFinalEI();
+                                                                                        echo $contextEvaluacion->getData()->getCalificacionFinalI();
                                                                                     }
                                                                                     ?>
                                                                                 </p>
@@ -2850,7 +2580,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                         <?php } ?>
 
                                         <!--Coordinacion-->
-                                        <?php if (strpos($asignatura->getData()->getCoordinadorPrincipal(), $_SESSION['idUsuario']) !== false) { ?>
+                                        <?php if (strpos($asignatura->getData()->getCoordinadorAsignatura(), $_SESSION['idUsuario']) !== false) { ?>
                                             <div class="tab-pane fade" id="nav-coordinacion" role="tabpanel" aria-labelledby="nav-coordinacion-tab">
                                                 <div class="accordion" id="accordionCoordinacion">
                                                     <div class="card-header" id="headingOne">
@@ -2933,7 +2663,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                             } else {
                                                                                 echo '<p>❌Realización de Exámenes</p>';
                                                                             }
-                                                                            if ($contextConfiguracion->getData()->getCalificacionFinalO()) {
+                                                                            if ($contextConfiguracion->getData()->getCalificacionFinal()) {
                                                                                 echo '<p>✔️<b>Calificación Final Ordinaria</b></p>';
                                                                             } else {
                                                                                 echo '<p>❌Calificación Final Ordinaria</p>';

@@ -23,8 +23,7 @@ class SAAsignaturaImplements implements SAAsignatura
                 $asignatura[0]['Semestre'],
                 $asignatura[0]['NombreAsignaturaIngles'],
                 $asignatura[0]['Creditos'],
-                $asignatura[0]['CoordinadorPrincipal'],
-                $asignatura[0]['CoordinadorLaboratorio'],
+                $asignatura[0]['CoordinadorAsignatura'],
                 $asignatura[0]['Estado'],
                 $asignatura[0]['IdMateria']
             );
@@ -72,8 +71,7 @@ class SAAsignaturaImplements implements SAAsignatura
                     $asignatura['Semestre'],
                     $asignatura['NombreAsignaturaIngles'],
                     $asignatura['Creditos'],
-                    $asignatura['CoordinadorPrincipal'],
-                    $asignatura['CoordinadorLaboratorio'],
+                    $asignatura['CoordinadorAsignatura'],
                     $asignatura['Estado'],
                     $asignatura['IdMateria']
                 );

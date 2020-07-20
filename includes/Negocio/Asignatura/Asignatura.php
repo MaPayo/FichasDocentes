@@ -12,12 +12,11 @@ class Asignatura
     private $Semestre;
     private $NombreAsignaturaIngles;
     private $Creditos;
-    private $CoordinadorPrincipal;
-    private $CoordinadorLaboratorio;
+    private $CoordinadorAsignatura;
     private $Estado;
     private $IdMateria;
 
-    public function __construct($IdAsignatura, $NombreAsignatura, $Abreviatura, $Curso, $Semestre, $NombreAsignaturaIngles, $Creditos, $CoordinadorPrincipal, $CoordinadorLaboratorio, $Estado, $IdMateria)
+    public function __construct($IdAsignatura, $NombreAsignatura, $Abreviatura, $Curso, $Semestre, $NombreAsignaturaIngles, $Creditos, $CoordinadorAsignatura, $Estado, $IdMateria)
     {
         $this->IdAsignatura = $IdAsignatura;
         $this->NombreAsignatura = $NombreAsignatura;
@@ -26,8 +25,7 @@ class Asignatura
         $this->Semestre = $Semestre;
         $this->NombreAsignaturaIngles = $NombreAsignaturaIngles;
         $this->Creditos = $Creditos;
-        $this->CoordinadorPrincipal = $CoordinadorPrincipal;
-        $this->CoordinadorLaboratorio = $CoordinadorLaboratorio;
+        $this->CoordinadorAsignatura = $CoordinadorAsignatura;
         $this->Estado = $Estado;
         $this->IdMateria = $IdMateria;
     }
@@ -67,14 +65,9 @@ class Asignatura
         return $this->Creditos;
     }
 
-    public function getCoordinadorPrincipal()
+    public function getCoordinadorAsignatura()
     {
-        return $this->CoordinadorPrincipal;
-    }
-
-    public function getCoordinadorLaboratorio()
-    {
-        return $this->CoordinadorLaboratorio;
+        return $this->CoordinadorAsignatura;
     }
 
     public function getEstado()
@@ -122,14 +115,9 @@ class Asignatura
         $this->Creditos = $Creditos;
     }
 
-    public function setCoordinadorPrincipal($CoordinadorPrincipal)
+    public function setCoordinadorAsignatura($CoordinadorAsignatura)
     {
-        $this->CoordinadorPrincipal = $CoordinadorPrincipal;
-    }
-
-    public function setCoordinadorLaboratorio($CoordinadorLaboratorio)
-    {
-        $this->CoordinadorLaboratorio = $CoordinadorLaboratorio;
+        $this->CoordinadorAsignatura = $CoordinadorAsignatura;
     }
 
     public function setEstado($Estado)

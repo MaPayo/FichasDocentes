@@ -75,10 +75,8 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                         $datosIniciales['realizacionLaboratorio']=$contextEvaluacion->getData()->getRealizacionLaboratorio();
                                         $datosIniciales['realizacionLaboratorioI']=$contextEvaluacion->getData()->getRealizacionLaboratorioI();
                                         $datosIniciales['pesoLaboratorio']=$contextEvaluacion->getData()->getPesoLaboratorio();
-                                        $datosIniciales['calificacionFinalO']=$contextEvaluacion->getData()->getCalificacionFinalO();
-                                        $datosIniciales['calificacionFinalOI']=$contextEvaluacion->getData()->getCalificacionFinalOI();
-                                        $datosIniciales['calificacionFinalE']=$contextEvaluacion->getData()->getCalificacionFinalE();
-                                        $datosIniciales['calificacionFinalEI']=$contextEvaluacion->getData()->getCalificacionFinalEI();
+                                        $datosIniciales['calificacionFinalO']=$contextEvaluacion->getData()->getCalificacionFinal();
+                                        $datosIniciales['calificacionFinalOI']=$contextEvaluacion->getData()->getCalificacionFinalI();
                                         $datosIniciales['idAsignatura']=$_GET[$name];
                                         $access->gestionaModificacion($datosIniciales);
                                     }

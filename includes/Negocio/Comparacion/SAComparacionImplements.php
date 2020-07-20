@@ -35,8 +35,8 @@ class SAComparacionImplements implements SAComparacion
             "RecursosInternet" => false,
             "RealizacionExamenes" => false,
             "RealizacionExamenesI" => false,
-            "CalificacionFinalO" => false,
-            "CalificacionFinalOI" => false,
+            "CalificacionFinal" => false,
+            "CalificacionFinalI" => false,
             "RealizacionActividades" => false,
             "RealizacionActividadesI" => false,
             "RealizacionLaboratorio" => false,
@@ -288,23 +288,23 @@ class SAComparacionImplements implements SAComparacion
                 }
             }
         }
-        if ($configuracion->getCalificacionFinalO() === '1') {
+        if ($configuracion->getCalificacionFinal() === '1') {
             if (empty($modAsignatura) === false) {
-                $n =  $asignatura->getCalificacionFinalO();
-                $modn = $modAsignatura->getCalificacionFinalO();
+                $n =  $asignatura->getCalificacionFinal();
+                $modn = $modAsignatura->getCalificacionFinal();
 
                 $n = explode(" ", $n);
                 $modn = explode(" ", $modn);
                 if (sizeof($n) !== sizeof($modn)) {
-                    $comparacion["CalificacionFinalO"] = true;
+                    $comparacion["CalificacionFinal"] = true;
                 }
-                $n =  $asignatura->getCalificacionFinalOI();
-                $modn = $modAsignatura->getCalificacionFinalOI();
+                $n =  $asignatura->getCalificacionFinalI();
+                $modn = $modAsignatura->getCalificacionFinalI();
 
                 $n = explode(" ", $n);
                 $modn = explode(" ", $modn);
                 if (sizeof($n) !== sizeof($modn)) {
-                    $comparacion["CalificacionFinalOI"] = true;
+                    $comparacion["CalificacionFinalI"] = true;
                 }
             }
         }

@@ -5,17 +5,15 @@ namespace es\ucm;
 class ModGrupoLaboratorioProfesor
 {
     private $IdGrupoLab;
-    private $Sesiones;
-    private $Fechas;
-    private $Horas;
+    private $FechaInicio;
+    private $FechaFin;
     private $EmailProfesor;
 
-    public function __construct($IdGrupoLaboratorio, $Sesiones, $Fechas, $Horas, $EmailProfesor)
+    public function __construct($IdGrupoLaboratorio, $FechaInicio, $FechaFin, $EmailProfesor)
     {
         $this->IdGrupoLab = $IdGrupoLaboratorio;
-        $this->Sesiones = $Sesiones;
-        $this->Fechas = $Fechas;
-        $this->Horas = $Horas;
+        $this->FechaInicio = $FechaInicio;
+        $this->FechaFin = $FechaFin;
         $this->EmailProfesor = $EmailProfesor;
     }
 
@@ -38,66 +36,47 @@ class ModGrupoLaboratorioProfesor
 
         return $this;
     }
-
+    
     /**
      * @return mixed
      */
-    public function getSesiones()
+    public function getFechaInicio()
     {
-        return $this->Sesiones;
+        return $this->FechaInicio;
     }
 
     /**
-     * @param mixed $Sesiones
+     * @param mixed $FechaInicio
      *
      * @return self
      */
-    public function setSesiones($Sesiones)
+    public function setFechaInicio($FechaInicio)
     {
-        $this->Sesiones = $Sesiones;
+        $this->FechaInicio = $FechaInicio;
 
         return $this;
     }
 
-    /**
+     /**
      * @return mixed
      */
-    public function getFechas()
+    public function getFechaFin()
     {
-        return $this->Fechas;
+        return $this->FechaFin;
     }
 
     /**
-     * @param mixed $Fechas
+     * @param mixed $FechaInicio
      *
      * @return self
      */
-    public function setFechas($Fechas)
+    public function setFechaFin($FechaFin)
     {
-        $this->Fechas = $Fechas;
+        $this->FechaFin = $FechaFin;
 
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getHoras()
-    {
-        return $this->Horas;
-    }
-
-    /**
-     * @param mixed $Horas
-     *
-     * @return self
-     */
-    public function setHoras($Horas)
-    {
-        $this->Horas = $Horas;
-
-        return $this;
-    }
 
     /**
      * @return mixed

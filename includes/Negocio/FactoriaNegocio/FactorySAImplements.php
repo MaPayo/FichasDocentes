@@ -13,7 +13,6 @@ require_once('includes/Negocio/CompetenciasAsignatura/SAModCompetenciaAsignatura
 require_once('includes/Negocio/Configuracion/SAConfiguracionImplements.php');
 require_once('includes/Negocio/Evaluacion/SAEvaluacionImplements.php');
 require_once('includes/Negocio/Evaluacion/SAModEvaluacionImplements.php');
-require_once('includes/Negocio/Examenes/SAExamenesImplements.php');
 require_once('includes/Negocio/Grado/SAGradoImplements.php');
 require_once('includes/Negocio/GrupoClase/SAGrupoClaseImplements.php');
 require_once('includes/Negocio/GrupoClase/SAModGrupoClaseImplements.php');
@@ -93,11 +92,6 @@ class FactorySAImplements implements FactorySA
     public function createSAModEvaluacion()
     {
         return new SAModEvaluacionImplements();
-    }
-
-    public function createSAExamenes()
-    {
-        return new SAExamenesImplements();
     }
 
     public function createSAGrado()

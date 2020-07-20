@@ -22,7 +22,6 @@ class SAConfiguracionImplements implements SAConfiguracion
                 $configuracion[0]['ProgramaTeorico'],
                 $configuracion[0]['ProgramaSeminarios'],
                 $configuracion[0]['ProgramaLaboratorio'],
-                $configuracion[0]['Influencia'],
                 $configuracion[0]['ComGenerales'],
                 $configuracion[0]['ComEspecificas'],
                 $configuracion[0]['ComBasicas'],
@@ -34,12 +33,7 @@ class SAConfiguracionImplements implements SAConfiguracion
                 $configuracion[0]['RealizacionExamenes'],
                 $configuracion[0]['RealizacionActividades'],
                 $configuracion[0]['RealizacionLaboratorio'],
-                $configuracion[0]['CalificacionFinalO'],
-                $configuracion[0]['CalificacionFinalE'],
-                $configuracion[0]['Parcial'],
-                $configuracion[0]['Laboratorio'],
-                $configuracion[0]['Final'],
-                $configuracion[0]['Extraordinario'],
+                $configuracion[0]['CalificacionFinal'],
                 $configuracion[0]['IdAsignatura']
             );
         }

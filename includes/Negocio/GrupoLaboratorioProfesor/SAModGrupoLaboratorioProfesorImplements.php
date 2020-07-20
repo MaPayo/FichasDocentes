@@ -19,9 +19,8 @@ class SAModGrupoLaboratorioProfesorImplements implements SAModGrupoLaboratorioPr
             foreach ($modGrupoLaboratorioProfesor as $grupo) {
                 $arrayModGrupoLaboratorioProfesor[] = new ModGrupoLaboratorioProfesor(
                     $grupo['IdGrupoLab'],
-                    $grupo['Sesiones'],
-                    $grupo['Fechas'],
-                    $grupo['Horas'],
+                    $grupo['FechaInicio'],
+                    $grupo['FechaFin'],
                     $grupo['EmailProfesor']
                 );
             }
@@ -37,9 +36,8 @@ class SAModGrupoLaboratorioProfesorImplements implements SAModGrupoLaboratorioPr
         if ($modGrupoLaboratorioProfesor && count($modGrupoLaboratorioProfesor) === 1) {
             $modGrupoLaboratorioProfesor = new ModGrupoLaboratorioProfesor(
                 $modGrupoLaboratorioProfesor[0]['IdGrupoLab'],
-                $modGrupoLaboratorioProfesor[0]['Sesiones'],
-                $modGrupoLaboratorioProfesor[0]['Fechas'],
-                $modGrupoLaboratorioProfesor[0]['Horas'],
+                $modGrupoLaboratorioProfesor[0]['FechaInicio'],
+                $modGrupoLaboratorioProfesor[0]['FechaFin'],
                 $modGrupoLaboratorioProfesor[0]['EmailProfesor']
             );
         }

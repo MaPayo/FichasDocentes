@@ -33,13 +33,13 @@ class DAOModGrupoClaseProfesorImplements implements DAOModGrupoClaseProfesor
     {
         $singletonDataSource = new SingletonDataSource();
         $dataSource = $singletonDataSource->getInstance();
-        $sql = "INSERT INTO modgrupoclaseprofesor (IdGrupoClase,Tipo,Fechas,Horas,EmailProfesor) 
-        VALUES (:idGrupoClase, :tipo, :fechas, :horas, :emailProfesor)";
+        $sql = "INSERT INTO modgrupoclaseprofesor (IdGrupoClase,Tipo,FechaInicio,FechaFin, EmailProfesor) 
+        VALUES (:idGrupoClase, :tipo, :fechaInicio,:fechaFin, :emailProfesor)";
         $values = array(
             ':idGrupoClase' => $modGrupoClaseProfesor->getIdGrupoClase(),
             ':tipo' => $modGrupoClaseProfesor->getTipo(),
-            ':fechas' => $modGrupoClaseProfesor->getFechas(),
-            ':horas' => $modGrupoClaseProfesor->getHoras(),
+            ':fechaInicio' => $modGrupoClaseProfesor->getFechaInicio(),
+            ':fechaFin' => $modGrupoClaseProfesor->getFechaFin(),
             ':emailProfesor' => $modGrupoClaseProfesor->getEmailProfesor()
         );
         $results = $dataSource->executeInsertUpdateDelete($sql, $values);
@@ -50,12 +50,12 @@ class DAOModGrupoClaseProfesorImplements implements DAOModGrupoClaseProfesor
     {
         $singletonDataSource = new SingletonDataSource();
         $dataSource = $singletonDataSource->getInstance();
-        $sql = "UPDATE modgrupoclaseprofesor SET IdGrupoClase = :idGrupoClase, Tipo = :tipo, Fechas = :fechas, Horas = :horas, EmailProfesor = :emailProfesor WHERE IdGrupoClase = :idGrupoClase AND EmailProfesor = :emailProfesor";
+        $sql = "UPDATE modgrupoclaseprofesor SET IdGrupoClase = :idGrupoClase, Tipo = :tipo, FechaInicio = :fechaInicio,FechaFin = :fechaFin, EmailProfesor = :emailProfesor WHERE IdGrupoClase = :idGrupoClase AND EmailProfesor = :emailProfesor";
         $values = array(
             ':idGrupoClase' => $modGrupoClaseProfesor->getIdGrupoClase(),
             ':tipo' => $modGrupoClaseProfesor->getTipo(),
-            ':fechas' => $modGrupoClaseProfesor->getFechas(),
-            ':horas' => $modGrupoClaseProfesor->getHoras(),
+            ':fechaInicio' => $modGrupoClaseProfesor->getFechaInicio(),
+            ':fechaFin' => $modGrupoClaseProfesor->getFechaFin(),
             ':emailProfesor' => $modGrupoClaseProfesor->getEmailProfesor()
         );
         $results = $dataSource->executeInsertUpdateDelete($sql, $values);

@@ -13,7 +13,6 @@ require_once('includes/Integracion/CompetenciaAsignatura/DAOModCompetenciaAsigna
 require_once('includes/Integracion/Configuracion/DAOConfiguracionImplements.php');
 require_once('includes/Integracion/Evaluacion/DAOEvaluacionImplements.php');
 require_once('includes/Integracion/Evaluacion/DAOModEvaluacionImplements.php');
-require_once('includes/Integracion/Examenes/DAOExamenesImplements.php');
 require_once('includes/Integracion/Grado/DAOGradoImplements.php');
 require_once('includes/Integracion/GrupoClase/DAOGrupoClaseImplements.php');
 require_once('includes/Integracion/GrupoClase/DAOModGrupoClaseImplements.php');
@@ -92,11 +91,6 @@ class FactoriesDAOImplements implements FactoriesDAO
    public static function createDAOModEvaluacion()
    {
       return new DAOModEvaluacionImplements();
-   }
-
-   public static function createDAOExamenes()
-   {
-      return new DAOExamenesImplements();
    }
 
    public static function createDAOGrado()

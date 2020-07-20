@@ -52,8 +52,8 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                         if ($contextGrupoClaseProfesor->getEvent() === FIND_MODGRUPO_CLASE_PROFESOR_OK) {
                                             $datosIniciales['idGrupoClase'] = $contextGrupoClaseProfesor->getData()->getIdGrupoClase();
                                             $datosIniciales['tipo'] = $contextGrupoClaseProfesor->getData()->getTipo();
-                                            $datosIniciales['fechas'] = $contextGrupoClaseProfesor->getData()->getFechas();
-                                            $datosIniciales['horas'] = $contextGrupoClaseProfesor->getData()->getHoras();
+                                            $datosIniciales['fechaInicio'] = $contextGrupoClaseProfesor->getData()->getFechaInicio();
+                                             $datosIniciales['fechaFin'] = $contextGrupoClaseProfesor->getData()->getFechaFin();
                                             $datosIniciales['emailProfesor'] = $contextGrupoClaseProfesor->getData()->getEmailProfesor();
                                             $datosIniciales['idAsignatura'] = htmlspecialchars(trim(strip_tags($_GET['IdAsignatura'])));
                                             $access->gestionaModificacion($datosIniciales);

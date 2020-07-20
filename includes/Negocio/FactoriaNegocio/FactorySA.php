@@ -15,7 +15,6 @@ interface FactorySA
     public function createSAConfiguracion();
     public function createSAEvaluacion();
     public function createSAModEvaluacion();
-    public function createSAExamenes();
     public function createSAGrado();
     public function createSAGrupoClase();
     public function createSAModGrupoClase();

@@ -28,8 +28,6 @@ class SAProgramaAsignaturaImplements implements SAProgramaAsignatura
                 $programaAsignatura[0]['ProgramaSeminariosi'],
                 $programaAsignatura[0]['ProgramaLaboratorio'],
                 $programaAsignatura[0]['ProgramaLaboratorioi'],
-                $programaAsignatura[0]['Influencia'],
-                $programaAsignatura[0]['Influenciai'],
                 $programaAsignatura[0]['IdAsignatura']
             );
         }

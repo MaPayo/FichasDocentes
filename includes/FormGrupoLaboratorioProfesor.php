@@ -13,9 +13,8 @@ class FormGrupoLaboratorioProfesor extends Form
 	protected function generaCamposFormulario($datosIniciales)
 	{
 		$idGrupoLaboratorio = isset($datosIniciales['idGrupoLaboratorio']) ? $datosIniciales['idGrupoLaboratorio'] : null;
-		$sesiones=isset($datosIniciales['sesiones']) ? $datosIniciales['sesiones'] : null;
-		$fechas=isset($datosIniciales['fechas']) ? $datosIniciales['fechas'] : null;
-		$horas=isset($datosIniciales['horas']) ? $datosIniciales['horas'] : null;
+		$fechaInicio=isset($datosIniciales['fechaInicio']) ? $datosIniciales['fechaInicio'] : null;
+		$fechaFin=isset($datosIniciales['fechaFin']) ? $datosIniciales['fechaFin'] : null;
 		$emailProfesor = isset($datosIniciales['emailProfesor']) ? $datosIniciales['emailProfesor'] : null;
 		$idAsignatura = isset($datosIniciales['idAsignatura']) ? $datosIniciales['idAsignatura'] : null;
 
@@ -50,18 +49,13 @@ class FormGrupoLaboratorioProfesor extends Form
 		}
 		$html.='
 		<div class="form-group">
-			<label for="sesiones">Sesiones</label>
-			<input class="form-control" type="text" id="sesiones" name="sesiones" value="' . $sesiones. '" />
+			<label for="fecha">Fecha Inicio</label>
+			<input class="form-control" type="date" id="fechaInicio" name="fechaInicio" value="' . $fechaInicio. '" />
 		</div>
 
 		<div class="form-group">
-			<label for="tipo">Fechas</label>
-			<input class="form-control" type="text" id="fechas" name="fechas" value="' . $fechas. '" />
-		</div>
-
-		<div class="form-group">
-			<label for="horas">Horas</label>
-			<input class="form-control" type="text" id="horas" name="horas" value="' . $horas. '" />
+			<label for="fecha">Fecha Fin</label>
+			<input class="form-control" type="date" id="fechaFin" name="fechaFin" value="' . $fechaFin. '" />
 		</div>
 
 		<div class="text-right">
@@ -87,22 +81,15 @@ class FormGrupoLaboratorioProfesor extends Form
 			$erroresFormulario[] = "No has introducido al profesor.";
 		}
 
-		$sesiones = isset($datos['sesiones']) ? $datos['sesiones'] : null;
-		$sesiones = self::clean($sesiones);
-		if (empty($sesiones)) {
-			$erroresFormulario[] = "No has introducido las sesiones.";
+		$fechaInicio = isset($datos['fechaInicio']) ? $datos['fechaInicio'] : null;
+		$fechaInicio = self::clean($fechaInicio);
+		$fechaFin = isset($datos['fechaFin']) ? $datos['fechaFin'] : null;
+		$fechaFin = self::clean($fechaFin);
+		if (empty($fechaInicio) || empty($fechaFin)) {
+			$erroresFormulario[] = "No has introducido alguna de las fechas.";
 		}
-
-		$fechas = isset($datos['fechas']) ? $datos['fechas'] : null;
-		$fechas = self::clean($fechas);
-		if (empty($fechas)) {
-			$erroresFormulario[] = "No has introducido las fechas.";
-		}
-
-		$horas = isset($datos['horas']) ? $datos['horas'] : null;
-		$horas = self::clean($horas);
-		if (empty($horas)) {
-			$erroresFormulario[] = "No has introducido las horas.";
+		else if($fechaFin <= $fechaInicio){
+			$erroresFormulario[] = "La fecha de inicio es mayor o igual que la fecha fin.";
 		}
 
 		if (count($erroresFormulario) === 0) {
@@ -115,7 +102,7 @@ class FormGrupoLaboratorioProfesor extends Form
 
 			if ($contextGrupoLaboratorio->getEvent() === FIND_MODGRUPO_LABORATORIO_PROFESOR_OK) {
 
-				$grupoLaboratorioProfesor = new ModGrupoLaboratorioProfesor($datos['idGrupoLaboratorio'],$sesiones, $fechas, $horas, $emailProfesor);
+				$grupoLaboratorioProfesor = new ModGrupoLaboratorioProfesor($datos['idGrupoLaboratorio'], $fechaInicio, $fechaFin,$emailProfesor);
 				$context = new Context(UPDATE_MODGRUPO_LABORATORIO_PROFESOR, $grupoLaboratorioProfesor);
 				$contextGrupoLaboratorio = $controller->action($context);
 				if ($contextGrupoLaboratorio->getEvent() === UPDATE_MODGRUPO_LABORATORIO_PROFESOR_OK) {
@@ -129,7 +116,7 @@ class FormGrupoLaboratorioProfesor extends Form
 
 			} elseif ($contextGrupoLaboratorio->getEvent() === FIND_MODGRUPO_LABORATORIO_PROFESOR_FAIL) {
 
-				$grupoLaboratorioProfesor = new ModGrupoLaboratorioProfesor($datos['idGrupoLaboratorio'],$sesiones, $fechas, $horas, $emailProfesor);
+				$grupoLaboratorioProfesor = new ModGrupoLaboratorioProfesor($datos['idGrupoLaboratorio'], $fechaInicio, $fechaFin,$emailProfesor);
 				$context = new Context(CREATE_MODGRUPO_LABORATORIO_PROFESOR, $grupoLaboratorioProfesor);
 				$contextGrupoLaboratorio = $controller->action($context);
 				if ($contextGrupoLaboratorio->getEvent() === CREATE_MODGRUPO_LABORATORIO_PROFESOR_OK) {

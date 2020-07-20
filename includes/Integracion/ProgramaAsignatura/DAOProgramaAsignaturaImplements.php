@@ -21,7 +21,7 @@ class DAOProgramaAsignaturaImplements implements DAOProgramaAsignatura
         $singletonDataSource = new SingletonDataSource();
         $dataSource = $singletonDataSource->getInstance();
         $sql = "INSERT INTO programaasignatura (ConocimientosPrevios,ConocimientosPreviosi,BreveDescripcion,BreveDescripcioni,ProgramaTeorico,ProgramaTeoricoi, ProgramaSeminarios, ProgramaSeminariosi, ProgramaLaboratorio, ProgramaLaboratorioi, Influencia, Influenciai,IdAsignatura) 
-        VALUES (:conocimientosPrevios, :conocimientosPreviosI, :breveDescripcion, :breveDescripcionI, :programaTeorico, :programaTeoricoI, :programaSeminarios, :programaSeminariosI, :programaLaboratorio, :programaLaboratorioI, :influencia, :influenciaI, :idAsignatura)";
+        VALUES (:conocimientosPrevios, :conocimientosPreviosI, :breveDescripcion, :breveDescripcionI, :programaTeorico, :programaTeoricoI, :programaSeminarios, :programaSeminariosI, :programaLaboratorio, :programaLaboratorioI, :idAsignatura)";
         $values = array(
             ':conocimientosPrevios' => $programaAsignatura->getConocimientosPrevios(),
             ':conocimientosPreviosI' => $programaAsignatura->getConocimientosPreviosI(),
@@ -33,8 +33,6 @@ class DAOProgramaAsignaturaImplements implements DAOProgramaAsignatura
             ':programaSeminariosI' => $programaAsignatura->getProgramaSeminariosI(),
             ':programaLaboratorio' => $programaAsignatura->getProgramaLaboratorio(),
             ':programaLaboratorioI' => $programaAsignatura->getProgramaLaboratorioI(),
-            ':influencia' => $programaAsignatura->getInfluencia(),
-            ':influenciaI' => $programaAsignatura->getInfluenciaI(),
             ':idAsignatura' => $programaAsignatura->getIdAsignatura()
         );
         $results = $dataSource->executeInsertUpdateDelete($sql, $values);
@@ -45,7 +43,7 @@ class DAOProgramaAsignaturaImplements implements DAOProgramaAsignatura
     {
         $singletonDataSource = new SingletonDataSource();
         $dataSource = $singletonDataSource->getInstance();
-        $sql = "UPDATE programaasignatura SET IdPrograma = :idPrograma, ConocimientosPrevios = :conocimientosPrevios,ConocimientosPreviosi = :conocimientosPreviosI,BreveDescripcion = :breveDescripcion,BreveDescripcioni = :breveDescripcionI,ProgramaTeorico = :programaTeorico,ProgramaTeoricoi = :programaTeoricoI,ProgramaSeminarios = :programaSeminarios,ProgramaSeminariosi = :programaSeminariosI,ProgramaLaboratorio = :programaLaboratorio,ProgramaLaboratorioi = :programaLaboratorioI,Influencia = :influencia,influenciai = :influenciaI,IdAsignatura = :idAsignatura WHERE IdPrograma = :idPrograma";
+        $sql = "UPDATE programaasignatura SET IdPrograma = :idPrograma, ConocimientosPrevios = :conocimientosPrevios,ConocimientosPreviosi = :conocimientosPreviosI,BreveDescripcion = :breveDescripcion,BreveDescripcioni = :breveDescripcionI,ProgramaTeorico = :programaTeorico,ProgramaTeoricoi = :programaTeoricoI,ProgramaSeminarios = :programaSeminarios,ProgramaSeminariosi = :programaSeminariosI,ProgramaLaboratorio = :programaLaboratorio,ProgramaLaboratorioi = :programaLaboratorioI,IdAsignatura = :idAsignatura WHERE IdPrograma = :idPrograma";
         $values = array(
             ':idPrograma' => $programaAsignatura->getIdPrograma(),
             ':conocimientosPrevios' => $programaAsignatura->getConocimientosPrevios(),
@@ -58,8 +56,6 @@ class DAOProgramaAsignaturaImplements implements DAOProgramaAsignatura
             ':programaSeminariosI' => $programaAsignatura->getProgramaSeminariosI(),
             ':programaLaboratorio' => $programaAsignatura->getProgramaLaboratorio(),
             ':programaLaboratorioI' => $programaAsignatura->getProgramaLaboratorioI(),
-            ':influencia' => $programaAsignatura->getInfluencia(),
-            ':influenciaI' => $programaAsignatura->getInfluenciaI(),
             ':idAsignatura' => $programaAsignatura->getIdAsignatura()
         );
         $results = $dataSource->executeInsertUpdateDelete($sql, $values);

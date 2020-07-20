@@ -15,11 +15,9 @@ class ModProgramaAsignatura
     private $ProgramaSeminariosI;
     private $ProgramaLaboratorio;
     private $ProgramaLaboratorioI;
-    private $Influencia;
-    private $InfluenciaI;
     private $IdModAsignatura;
 
-    public function __construct($IdPrograma, $ConocimientosPrevios, $ConocimientosPreviosI, $BreveDescripcion, $BreveDescripcionI, $ProgramaTeorico, $ProgramaTeoricoI, $ProgramaSeminarios, $ProgramaSeminariosI, $ProgramaLaboratorio, $ProgramaLaboratorioI, $Influencia, $InfluenciaI, $IdModAsignatura)
+    public function __construct($IdPrograma, $ConocimientosPrevios, $ConocimientosPreviosI, $BreveDescripcion, $BreveDescripcionI, $ProgramaTeorico, $ProgramaTeoricoI, $ProgramaSeminarios, $ProgramaSeminariosI, $ProgramaLaboratorio, $ProgramaLaboratorioI,$IdModAsignatura)
     {
         $this->IdPrograma = $IdPrograma;
         $this->ConocimientosPrevios = $ConocimientosPrevios;
@@ -32,8 +30,6 @@ class ModProgramaAsignatura
         $this->ProgramaSeminariosI = $ProgramaSeminariosI;
         $this->ProgramaLaboratorio = $ProgramaLaboratorio;
         $this->ProgramaLaboratorioI = $ProgramaLaboratorioI;
-        $this->Influencia = $Influencia;
-        $this->InfluenciaI = $InfluenciaI;
         $this->IdModAsignatura = $IdModAsignatura;
     }
 
@@ -253,46 +249,6 @@ class ModProgramaAsignatura
     public function setProgramaLaboratorioI($ProgramaLaboratorioI)
     {
         $this->ProgramaLaboratorioI = $ProgramaLaboratorioI;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getInfluencia()
-    {
-        return $this->Influencia;
-    }
-
-    /**
-     * @param mixed $Influencia
-     *
-     * @return self
-     */
-    public function setInfluencia($Influencia)
-    {
-        $this->Influencia = $Influencia;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getInfluenciaI()
-    {
-        return $this->InfluenciaI;
-    }
-
-    /**
-     * @param mixed $InfluenciaI
-     *
-     * @return self
-     */
-    public function setInfluenciaI($InfluenciaI)
-    {
-        $this->InfluenciaI = $InfluenciaI;
 
         return $this;
     }

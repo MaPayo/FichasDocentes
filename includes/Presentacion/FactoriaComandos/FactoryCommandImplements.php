@@ -50,11 +50,6 @@ require_once('includes/Presentacion/FactoriaComandos/Evaluacion/CommandDeleteMod
 require_once('includes/Presentacion/FactoriaComandos/Evaluacion/CommandFindModEvaluacion.php');
 require_once('includes/Presentacion/FactoriaComandos/Evaluacion/CommandUpdateModEvaluacion.php');
 
-require_once('includes/Presentacion/FactoriaComandos/Examenes/CommandCreateExamenes.php');
-require_once('includes/Presentacion/FactoriaComandos/Examenes/CommandDeleteExamenes.php');
-require_once('includes/Presentacion/FactoriaComandos/Examenes/CommandFindExamenes.php');
-require_once('includes/Presentacion/FactoriaComandos/Examenes/CommandUpdateExamenes.php');
-
 require_once('includes/Presentacion/FactoriaComandos/Grado/CommandCreateGrado.php');
 require_once('includes/Presentacion/FactoriaComandos/Grado/CommandDeleteGrado.php');
 require_once('includes/Presentacion/FactoriaComandos/Grado/CommandFindGrado.php');
@@ -299,18 +294,6 @@ class FactoryCommandImplements extends FactoryCommand
                 break;
             case FIND_MODEVALUACION:
                 $command = new CommandFindModEvaluacion();
-                break;
-            case CREATE_EXAMENES:
-                $command = new CommandCreateExamenes();
-                break;
-            case DELETE_EXAMENES:
-                $command = new CommandDeleteExamenes();
-                break;
-            case UPDATE_EXAMENES:
-                $command = new CommandUpdateExamenes();
-                break;
-            case FIND_EXAMENES:
-                $command = new CommandFindExamenes();
                 break;
             case CREATE_GRADO:
                 $command = new CommandCreateGrado();

@@ -20,8 +20,8 @@ class DAOConfiguracionImplements implements DAOConfiguracion
     {
         $singletonDataSource = new SingletonDataSource();
         $dataSource = $singletonDataSource->getInstance();
-        $sql = "INSERT INTO configuracion (IdConfiguracion,ConocimientosPrevios,BreveDescripcion,ProgramaTeorico,ProgramaSeminarios,ProgramaLaboratorio,Influencia,ComGenerales,ComEspecificas,ComBasicas,ResultadosAprendizaje,Metodologia,CitasBibliograficas,RecursosInternet,GrupoLaboratorio,RealizacionExamenes,RealizacionActividades,RealizacionLaboratorio,CalificacionFinalO,CalificacionFinalE,Parcial,Laboratorio,Final,Extraordinario,IdAsignatura) 
-        VALUES (:idConfiguracion, :conocimientosPrevios, :breveDescripcion, :programaTeorico, :programaSeminarios, :programaLaboratorio, :influencia, :comGenerales, :comEspecificas, :comBasicas, :resultadosAprendizaje, :metodologia, :citasBibliograficas, :recursosInternet, :grupoLaboratorio, :realizacionExamenes, :realizacionActividades, :realizacionLaboratorio, :calificacionFinalO, :calificacionFinalE, :parcial, :laboratorio, :final, :extraordinario, :idAsignatura)";
+        $sql = "INSERT INTO configuracion (IdConfiguracion,ConocimientosPrevios,BreveDescripcion,ProgramaTeorico,ProgramaSeminarios,ProgramaLaboratorio,ComGenerales,ComEspecificas,ComBasicas,ResultadosAprendizaje,Metodologia,CitasBibliograficas,RecursosInternet,GrupoLaboratorio,RealizacionExamenes,RealizacionActividades,RealizacionLaboratorio,CalificacionFinal,IdAsignatura) 
+        VALUES (:idConfiguracion, :conocimientosPrevios, :breveDescripcion, :programaTeorico, :programaSeminarios, :programaLaboratorio, :comGenerales, :comEspecificas, :comBasicas, :resultadosAprendizaje, :metodologia, :citasBibliograficas, :recursosInternet, :grupoLaboratorio, :realizacionExamenes, :realizacionActividades, :realizacionLaboratorio, :calificacionFinal, :idAsignatura)";
         $values = array(
             ':idConfiguracion' => $configuracion->getIdConfiguracion(),
             ':conocimientosPrevios' => $configuracion->getConocimientosPrevios(),
@@ -29,7 +29,6 @@ class DAOConfiguracionImplements implements DAOConfiguracion
             ':programaTeorico' => $configuracion->getProgramaTeorico(),
             ':programaSeminarios' => $configuracion->getProgramaSeminarios(),
             ':programaLaboratorio' => $configuracion->getProgramaLaboratorio(),
-            ':influencia' => $configuracion->getInfluencia(),
             ':comGenerales' => $configuracion->getComGenerales(),
             ':comEspecificas' => $configuracion->getComEspecificas(),
             ':comBasicas' => $configuracion->getComBasicas(),
@@ -41,12 +40,7 @@ class DAOConfiguracionImplements implements DAOConfiguracion
             ':realizacionExamenes' => $configuracion->getRealizacionExamenes(),
             ':realizacionActividades' => $configuracion->getRealizacionActividades(),
             ':realizacionLaboratorio' => $configuracion->getRealizacionLaboratorio(),
-            ':calificacionFinalO' => $configuracion->getCalificacionFinalO(),
-            ':calificacionFinalE' => $configuracion->getCalificacionFinalE(),
-            ':parcial' => $configuracion->getParcial(),
-            ':laboratorio' => $configuracion->getLaboratorio(),
-            ':final' => $configuracion->getFinal(),
-            ':extraordinario' => $configuracion->getExtraordinario(),
+            ':calificacionFinal' => $configuracion->getCalificacionFinal(),
             ':idAsignatura' => $configuracion->getIdAsignatura()
         );
         $results = $dataSource->executeInsertUpdateDelete($sql, $values);
@@ -57,7 +51,7 @@ class DAOConfiguracionImplements implements DAOConfiguracion
     {
         $singletonDataSource = new SingletonDataSource();
         $dataSource = $singletonDataSource->getInstance();
-        $sql = "UPDATE configuracion SET IdConfiguracion = :idConfiguracion, ConocimientosPrevios = :conocimientosPrevios,BreveDescripcion = :breveDescripcion,ProgramaTeorico = :programaTeorico,ProgramaSeminarios = :programaSeminarios,ProgramaLaboratorio = :programaLaboratorio,Influencia = :influencia,ComGenerales = :comGenerales,ComEspecificas = :comEspecificas,ComBasicas = :comBasicas,ResultadosAprendizaje = :resultadosAprendizaje,Metodologia = :metodologia,CitasBibliograficas = :citasBibliograficas,RecursosInternet = :recursosInternet, GrupoLaboratorio=:grupoLaboratorio, RealizacionExamenes = :realizacionExamenes,RealizacionActividades = :realizacionActividades,RealizacionLaboratorio = :realizacionLaboratorio,CalificacionFinalO = :calificacionFinalO,CalificacionFinalE = :calificacionFinalE,Parcial = :parcial,Laboratorio = :laboratorio,Final = :final,Extraordinario = :extraordinarios,IdAsignatura = :idAsignatura WHERE IdAsignatura = :idAsignatura";
+        $sql = "UPDATE configuracion SET IdConfiguracion = :idConfiguracion, ConocimientosPrevios = :conocimientosPrevios,BreveDescripcion = :breveDescripcion,ProgramaTeorico = :programaTeorico,ProgramaSeminarios = :programaSeminarios,ProgramaLaboratorio = :programaLaboratorio,ComGenerales = :comGenerales,ComEspecificas = :comEspecificas,ComBasicas = :comBasicas,ResultadosAprendizaje = :resultadosAprendizaje,Metodologia = :metodologia,CitasBibliograficas = :citasBibliograficas,RecursosInternet = :recursosInternet, GrupoLaboratorio=:grupoLaboratorio, RealizacionExamenes = :realizacionExamenes,RealizacionActividades = :realizacionActividades,RealizacionLaboratorio = :realizacionLaboratorio,CalificacionFinal = :calificacionFinal,IdAsignatura = :idAsignatura WHERE IdAsignatura = :idAsignatura";
         $values = array(
             ':idConfiguracion' => $configuracion->getIdConfiguracion(),
             ':conocimientosPrevios' => $configuracion->getConocimientosPrevios(),
@@ -65,7 +59,6 @@ class DAOConfiguracionImplements implements DAOConfiguracion
             ':programaTeorico' => $configuracion->getProgramaTeorico(),
             ':programaSeminarios' => $configuracion->getProgramaSeminarios(),
             ':programaLaboratorio' => $configuracion->getProgramaLaboratorio(),
-            ':influencia' => $configuracion->getInfluencia(),
             ':comGenerales' => $configuracion->getComGenerales(),
             ':comEspecificas' => $configuracion->getComEspecificas(),
             ':comBasicas' => $configuracion->getComBasicas(),
@@ -77,12 +70,7 @@ class DAOConfiguracionImplements implements DAOConfiguracion
             ':realizacionExamenes' => $configuracion->getRealizacionExamenes(),
             ':realizacionActividades' => $configuracion->getRealizacionActividades(),
             ':realizacionLaboratorio' => $configuracion->getRealizacionLaboratorio(),
-            ':calificacionFinalO' => $configuracion->getCalificacionFinalO(),
-            ':calificacionFinalE' => $configuracion->getCalificacionFinalE(),
-            ':parcial' => $configuracion->getParcial(),
-            ':laboratorio' => $configuracion->getLaboratorio(),
-            ':final' => $configuracion->getFinal(),
-            ':extraordinario' => $configuracion->getExtraordinario(),
+            ':calificacionFinal' => $configuracion->getCalificacionFinal(),
             ':idAsignatura' => $configuracion->getIdAsignatura()
         );
         $results = $dataSource->executeInsertUpdateDelete($sql, $values);

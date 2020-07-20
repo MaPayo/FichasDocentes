@@ -20,8 +20,8 @@ class SAModGrupoClaseProfesorImplements implements SAModGrupoClaseProfesor
                 $arrayModGrupoClaseProfesor[] = new ModGrupoClaseProfesor(
                     $grupo['IdGrupoClase'],
                     $grupo['Tipo'],
-                    $grupo['Fechas'],
-                    $grupo['Horas'],
+                    $grupo['FechaInicio'],
+                    $grupo['FechaFin'],
                     $grupo['EmailProfesor']
                 );
             }
@@ -38,8 +38,8 @@ class SAModGrupoClaseProfesorImplements implements SAModGrupoClaseProfesor
             $modGrupoClaseProfesor = new ModGrupoClaseProfesor(
                 $modGrupoClaseProfesor[0]['IdGrupoClase'],
                 $modGrupoClaseProfesor[0]['Tipo'],
-                $modGrupoClaseProfesor[0]['Fechas'],
-                $modGrupoClaseProfesor[0]['Horas'],
+                $modGrupoClaseProfesor[0]['FechaInicio'],
+                $modGrupoClaseProfesor[0]['FechaFin'],
                 $modGrupoClaseProfesor[0]['EmailProfesor']
             );
         }
