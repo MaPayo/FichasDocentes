@@ -16,24 +16,32 @@ define("UPDATE_ADMINISTRADOR_FAIL",121);
 define("FIND_ADMINISTRADOR",13);
 define("FIND_ADMINISTRADOR_OK",130);
 define("FIND_ADMINISTRADOR_FAIL",131);
+//List_grado
+define("LIST_ADMINISTRADOR",14);
+define("LIST_ADMINISTRADOR_OK",140);
+define("LIST_ADMINISTRADOR_FAIL",141);
 
 //ASIGNATURA
 //Create_asignatura
 define("CREATE_ASIGNATURA",20);
 define("CREATE_ASIGNATURA_OK",200);
 define("CREATE_ASIGNATURA_FAIL",201);
-//Detele_administrador
+//Detele_asignatura
 define("DELETE_ASIGNATURA",21);
 define("DELETE_ASIGNATURA_OK",210);
 define("DELETE_ASIGNATURA_FAIL",211);
-//Update_administrador
+//Update_asignatura
 define("UPDATE_ASIGNATURA",22);
 define("UPDATE_ASIGNATURA_OK",220);
 define("UPDATE_ASIGNATURA_FAIL",221);
-//Find_administrador
+//Find_asignatura
 define("FIND_ASIGNATURA",23);
 define("FIND_ASIGNATURA_OK",230);
 define("FIND_ASIGNATURA_FAIL",231);
+//List_asignatura
+define("LIST_ASIGNATURA",28);
+define("LIST_ASIGNATURA_OK",280);
+define("LIST_ASIGNATURA_FAIL",281);
 
 //MODASIGNATURA
 //Create_modasignatura
@@ -629,6 +637,10 @@ define("UPDATE_MATERIA_FAIL",2221);
 define("FIND_MATERIA",223);
 define("FIND_MATERIA_OK",2230);
 define("FIND_MATERIA_FAIL",2231);
+//List_materia
+define("LIST_MATERIA",224);
+define("LIST_MATERIA_OK",2240);
+define("LIST_MATERIA_FAIL",2241);
 
 //MODULO
 //Create_modulo
@@ -647,6 +659,10 @@ define("UPDATE_MODULO_FAIL",2321);
 define("FIND_MODULO",233);
 define("FIND_MODULO_OK",2330);
 define("FIND_MODULO_FAIL",2331);
+//List_modulo
+define("LIST_MODULO",234);
+define("LIST_MODULO_OK",2340);
+define("LIST_MODULO_FAIL",2341);
 
 
 //GRUPOCLASEPROFESOR
@@ -677,7 +693,7 @@ define("CREATE_MODGRUPO_CLASE_PROFESOR",250);
 define("CREATE_MODGRUPO_CLASE_PROFESOR_OK",2500);
 define("CREATE_MODGRUPO_CLASE_PROFESOR_FAIL",2501);
 //Detele_modgrupo_clase
-define("DELETE_MODGRUPO_CLASE_PROFESOR",250);
+define("DELETE_MODGRUPO_CLASE_PROFESOR",251);
 define("DELETE_MODGRUPO_CLASE_PROFESOR_OK",2510);
 define("DELETE_MODGRUPO_CLASE_PROFESOR_FAIL",2511);
 //Update_modgrupo_clase
@@ -743,15 +759,9 @@ define("COMPARACION", 2810);
 define("COMPARACION_OK", 2811);
 define("COMPARACION_FAIL", 2812);
 
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
 //ERROR EVENTO
 
 define("ERROR_EVENTO", -1000);
 
 
 //VISTAS
-
-?>

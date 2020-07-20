@@ -1,14 +1,15 @@
 <?php
+
 namespace es\ucm;
 
-interface SAModulo{
+interface SAModulo
+{
 
     public static function findModulo($idModulo);
 
     public static function createModulo($modulo);
 
     public static function updateModulo($modulo);
-    
-    public static function deleteModulo($idModulo);
 
+    public static function deleteModulo($idModulo);
 }

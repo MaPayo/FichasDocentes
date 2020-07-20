@@ -2,7 +2,8 @@
 
 namespace es\ucm;
 
-interface SAHorarioClase{
+interface SAHorarioClase
+{
 
     public static function listHorarioClase($idGrupoClase);
 
@@ -11,7 +12,6 @@ interface SAHorarioClase{
     public static function createHorarioClase($horarioClase);
 
     public static function updateHorarioClase($horarioClase);
-    
-    public static function deleteHorarioClase($idHorarioClase);
 
+    public static function deleteHorarioClase($idHorarioClase);
 }

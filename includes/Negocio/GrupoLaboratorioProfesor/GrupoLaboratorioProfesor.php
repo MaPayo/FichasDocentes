@@ -5,20 +5,15 @@ namespace es\ucm;
 class GrupoLaboratorioProfesor
 {
     private $IdGrupoLab;
-<<<<<<< Updated upstream
-    private $EmailProfesor;
-    public function __construct($IdGrupoLaboratorio, $EmailProfesor)
-    {
-        $this->IdGrupoLab = $IdGrupoLaboratorio;
-=======
-    private $Fechas;
+    private $FechaInicio;
+    private $FechaFin;
     private $EmailProfesor;
     
-    public function __construct($IdGrupoLaboratorio, $Fechas, $EmailProfesor)
+    public function __construct($IdGrupoLaboratorio, $FechaInicio, $FechaFin,$EmailProfesor)
     {
         $this->IdGrupoLab = $IdGrupoLaboratorio;
-        $this->Fechas = $Fechas;
->>>>>>> Stashed changes
+        $this->FechaInicio = $FechaInicio;
+        $this->FechaFin = $FechaFin;
         $this->EmailProfesor = $EmailProfesor;
     }
 
@@ -42,33 +37,50 @@ class GrupoLaboratorioProfesor
         return $this;
     }
 
-<<<<<<< Updated upstream
-=======
 
     /**
      * @return mixed
      */
-    public function getFechas()
+    public function getFechaInicio()
     {
-        return $this->Fechas;
+        return $this->FechaInicio;
     }
 
     /**
-     * @param mixed $Fechas
+     * @param mixed $FechaInicio
      *
      * @return self
      */
-    public function setFechas($Fechas)
+    public function setFechaInicio($FechaInicio)
     {
-        $this->Fechas = $Fechas;
+        $this->FechaInicio = $FechaInicio;
 
         return $this;
     }
 
->>>>>>> Stashed changes
+/**
+     * @return mixed
+     */
+    public function getFechaFin()
+    {
+        return $this->FechaFin;
+    }
+
+    /**
+     * @param mixed $FechaInicio
+     *
+     * @return self
+     */
+    public function setFechaFin($FechaFin)
+    {
+        $this->FechaFin = $FechaFin;
+
+        return $this;
+    }
     /**
      * @return mixed
      */
+
     public function getEmailProfesor()
     {
         return $this->EmailProfesor;

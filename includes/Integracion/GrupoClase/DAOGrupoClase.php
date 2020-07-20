@@ -1,7 +1,9 @@
 <?php
+
 namespace es\ucm;
 
-interface DAOGrupoClase{
+interface DAOGrupoClase
+{
     public static function listGrupoClase($idAsignatura);
 
     public static function findGrupoClase($idGrupoClase);
@@ -9,6 +11,6 @@ interface DAOGrupoClase{
     public static function createGrupoClase($grupoClase);
 
     public static function updateGrupoClase($grupoClase);
-    
+
     public static function deleteGrupoClase($idGrupoClase);
 }

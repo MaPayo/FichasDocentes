@@ -1,25 +1,28 @@
 <?php
+
 namespace es\ucm;
 
-class ModMetodologia{
-	private $IdMetodologia;
-	private $Metodologia;
-	private $MetodologiaI;
-	private $IdModAsignatura;
+class ModMetodologia
+{
+    private $IdMetodologia;
+    private $Metodologia;
+    private $MetodologiaI;
+    private $IdModAsignatura;
 
-	public function __construct($IdMetodologia,$Metodologia,$MetodologiaI,$IdModAsignatura){
-		$this->IdMetodologia = $IdMetodologia;
-		$this->Metodologia = $Metodologia;
-		$this->MetodologiaI = $MetodologiaI;
-		$this->IdModAsignatura = $IdModAsignatura;
-	}
+    public function __construct($IdMetodologia, $Metodologia, $MetodologiaI, $IdModAsignatura)
+    {
+        $this->IdMetodologia = $IdMetodologia;
+        $this->Metodologia = $Metodologia;
+        $this->MetodologiaI = $MetodologiaI;
+        $this->IdModAsignatura = $IdModAsignatura;
+    }
 
     /**
      * @return mixed
      */
     public function getIdMetodologia()
     {
-    	return $this->IdMetodologia;
+        return $this->IdMetodologia;
     }
 
     /**
@@ -29,9 +32,9 @@ class ModMetodologia{
      */
     public function setIdMetodologia($IdMetodologia)
     {
-    	$this->IdMetodologia = $IdMetodologia;
+        $this->IdMetodologia = $IdMetodologia;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -39,7 +42,7 @@ class ModMetodologia{
      */
     public function getMetodologia()
     {
-    	return $this->Metodologia;
+        return $this->Metodologia;
     }
 
     /**
@@ -49,9 +52,9 @@ class ModMetodologia{
      */
     public function setMetodologia($Metodologia)
     {
-    	$this->Metodologia = $Metodologia;
+        $this->Metodologia = $Metodologia;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -59,7 +62,7 @@ class ModMetodologia{
      */
     public function getMetodologiaI()
     {
-    	return $this->MetodologiaI;
+        return $this->MetodologiaI;
     }
 
     /**
@@ -69,9 +72,9 @@ class ModMetodologia{
      */
     public function setMetodologiaI($MetodologiaI)
     {
-    	$this->MetodologiaI = $MetodologiaI;
+        $this->MetodologiaI = $MetodologiaI;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -79,7 +82,7 @@ class ModMetodologia{
      */
     public function getIdAsignatura()
     {
-    	return $this->IdModAsignatura;
+        return $this->IdModAsignatura;
     }
 
     /**
@@ -89,8 +92,8 @@ class ModMetodologia{
      */
     public function setIdAsignatura($IdModAsignatura)
     {
-    	$this->IdModAsignatura = $IdModAsignatura;
+        $this->IdModAsignatura = $IdModAsignatura;
 
-    	return $this;
+        return $this;
     }
 }

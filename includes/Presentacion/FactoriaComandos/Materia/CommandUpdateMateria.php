@@ -15,9 +15,9 @@ class CommandUpdateMateria implements Command
         $materia = $saMateria->updateMateria($data);
         $responseContext = null;
         if ($materia) {
-            $responseContext = new Context(CREATE_MATERIA_OK, $materia);
+            $responseContext = new Context(UPDATE_MATERIA_OK, $materia);
         } else {
-            $responseContext = new Context(CREATE_MATERIA_FAIL, null);
+            $responseContext = new Context(UPDATE_MATERIA_FAIL, null);
         }
         return $responseContext;
     }

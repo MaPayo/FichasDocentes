@@ -2,7 +2,8 @@
 
 namespace es\ucm;
 
-interface SAModHorarioClase{
+interface SAModHorarioClase
+{
 
     public static function listModHorarioClase($idGrupoClase);
 
@@ -11,7 +12,6 @@ interface SAModHorarioClase{
     public static function createModHorarioClase($horarioClase);
 
     public static function updateModHorarioClase($horarioClase);
-    
-    public static function deleteModHorarioClase($idHorarioClase);
 
+    public static function deleteModHorarioClase($idHorarioClase);
 }

@@ -1,7 +1,9 @@
 <?php
+
 namespace es\ucm;
 
-interface DAOGrupoLaboratorioProfesor{
+interface DAOGrupoLaboratorioProfesor
+{
     public static function listGrupoLaboratorioProfesor($idGrupoLab);
 
     public static function findGrupoLaboratorioProfesor($idGrupoLab, $emailProfesor);
@@ -9,6 +11,6 @@ interface DAOGrupoLaboratorioProfesor{
     public static function createGrupoLaboratorioProfesor($grupoLaboratorioProfesor);
 
     public static function updateGrupoLaboratorioProfesor($grupoLaboratorioProfesor);
-    
+
     public static function deleteGrupoLaboratorioProfesor($idGrupoLab, $emailProfesor);
 }

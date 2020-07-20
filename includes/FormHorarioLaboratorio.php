@@ -83,14 +83,13 @@ class FormHorarioLaboratorio extends Form
 
 		$horaInicio = isset($datos['horaInicio']) ? $datos['horaInicio'] : null;
 		$horaInicio = self::clean($horaInicio);
-		if (empty($horaInicio)) {
-			$erroresFormulario[] = "No has introducido la hora de inicio.";
-		}
-
 		$horaFin = isset($datos['horaFin']) ? $datos['horaFin'] : null;
 		$horaFin = self::clean($horaFin);
-		if (empty($horaFin)) {
-			$erroresFormulario[] = "No has introducido la hora de fin.";
+		if (empty($horaInicio) || empty($horaFin)) {
+			$erroresFormulario[] = "No has introducido alguna de las horas.";
+		}
+		else if ($horaFin <= $horaInicio) {
+			$erroresFormulario[] = "La hora de inicio es mayor o igual que la hora fin.";
 		}
 
 

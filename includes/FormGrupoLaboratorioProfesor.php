@@ -13,44 +13,50 @@ class FormGrupoLaboratorioProfesor extends Form
 	protected function generaCamposFormulario($datosIniciales)
 	{
 		$idGrupoLaboratorio = isset($datosIniciales['idGrupoLaboratorio']) ? $datosIniciales['idGrupoLaboratorio'] : null;
-<<<<<<< Updated upstream
-=======
-		$fechas=isset($datosIniciales['fechas']) ? $datosIniciales['fechas'] : null;
->>>>>>> Stashed changes
+		$fechaInicio=isset($datosIniciales['fechaInicio']) ? $datosIniciales['fechaInicio'] : null;
+		$fechaFin=isset($datosIniciales['fechaFin']) ? $datosIniciales['fechaFin'] : null;
 		$emailProfesor = isset($datosIniciales['emailProfesor']) ? $datosIniciales['emailProfesor'] : null;
 		$idAsignatura = isset($datosIniciales['idAsignatura']) ? $datosIniciales['idAsignatura'] : null;
 
 		$html = '<input type="hidden" name="idGrupoLaboratorio" value="' . $idGrupoLaboratorio . '" required />
-		<input type="hidden" name="idAsignatura" value="' . $idAsignatura . '" required />
+		<input type="hidden" name="idAsignatura" value="' . $idAsignatura . '" required />';
 
-		<div class="form-group">
+		if(isset($emailProfesor)){
+			$html.='<div class="form-group">
+			<label for="emailProfesor">Profesor</label>
+			<input class="form-control" type="text" id="emailProfesor" name="emailProfesor" value="' . $emailProfesor. '" readonly="readonly" />
+			</div>';
+		}else{
+			$html.='<div class="form-group">
 			<label for="emailProfesor">Profesor</label>
 			<select class="form-control" id="emailProfesor" name="emailProfesor" >';
-		$controller = new ControllerImplements();
-		$context = new Context(FIND_PERMISOS, $idAsignatura);
-		$contextPermisos = $controller->action($context);
-		if ($contextPermisos->getEvent() === FIND_PERMISOS_OK) {
-			foreach ($contextPermisos->getData() as $permiso) {
-				$context = new Context(FIND_PROFESOR, $permiso->getEmailProfesor());
-				$contextProfesor = $controller->action($context);
-				if ($contextProfesor->getData()->getEmail() == $emailProfesor) {
-					$html .= '<option value="' . $contextProfesor->getData()->getEmail() . '" selected >' . $contextProfesor->getData()->getNombre() . '</option>';
-				} else {
-					$html .= '<option value="' . $contextProfesor->getData()->getEmail() . '">' . $contextProfesor->getData()->getNombre() . '</option>';
+			$controller = new ControllerImplements();
+			$context = new Context(FIND_PERMISOS, $idAsignatura);
+			$contextPermisos = $controller->action($context);
+			if ($contextPermisos->getEvent() === FIND_PERMISOS_OK) {
+				foreach ($contextPermisos->getData() as $permiso) {
+					$context = new Context(FIND_PROFESOR, $permiso->getEmailProfesor());
+					$contextProfesor = $controller->action($context);
+					if ($contextProfesor->getData()->getEmail() == $emailProfesor) {
+						$html .= '<option value="' . $contextProfesor->getData()->getEmail() . '" selected >' . $contextProfesor->getData()->getNombre() . '</option>';
+					} else {
+						$html .= '<option value="' . $contextProfesor->getData()->getEmail() . '">' . $contextProfesor->getData()->getNombre() . '</option>';
+					}
 				}
 			}
+			$html .= '</select>
+			</div>';
 		}
-<<<<<<< Updated upstream
-		$html .= '	</select>
-		</div>
-=======
 		$html.='
 		<div class="form-group">
-			<label for="tipo">Fechas</label>
-			<input class="form-control" type="text" id="fechas" name="fechas" value="' . $fechas. '" />
+			<label for="fecha">Fecha Inicio</label>
+			<input class="form-control" type="date" id="fechaInicio" name="fechaInicio" value="' . $fechaInicio. '" />
 		</div>
 
->>>>>>> Stashed changes
+		<div class="form-group">
+			<label for="fecha">Fecha Fin</label>
+			<input class="form-control" type="date" id="fechaFin" name="fechaFin" value="' . $fechaFin. '" />
+		</div>
 
 		<div class="text-right">
 		<a href="indexAcceso.php?IdAsignatura=' . $idAsignatura . '#nav-grupo-laboratorio">
@@ -75,15 +81,17 @@ class FormGrupoLaboratorioProfesor extends Form
 			$erroresFormulario[] = "No has introducido al profesor.";
 		}
 
-<<<<<<< Updated upstream
-=======
-		$fechas = isset($datos['fechas']) ? $datos['fechas'] : null;
-		$fechas = self::clean($fechas);
-		if (empty($fechas)) {
-			$erroresFormulario[] = "No has introducido las fechas.";
+		$fechaInicio = isset($datos['fechaInicio']) ? $datos['fechaInicio'] : null;
+		$fechaInicio = self::clean($fechaInicio);
+		$fechaFin = isset($datos['fechaFin']) ? $datos['fechaFin'] : null;
+		$fechaFin = self::clean($fechaFin);
+		if (empty($fechaInicio) || empty($fechaFin)) {
+			$erroresFormulario[] = "No has introducido alguna de las fechas.";
+		}
+		else if($fechaFin <= $fechaInicio){
+			$erroresFormulario[] = "La fecha de inicio es mayor o igual que la fecha fin.";
 		}
 
->>>>>>> Stashed changes
 		if (count($erroresFormulario) === 0) {
 			$controller = new ControllerImplements();
 			$arrayGrupoLaboratorioProfesor=array();
@@ -93,14 +101,8 @@ class FormGrupoLaboratorioProfesor extends Form
 			$contextGrupoLaboratorio = $controller->action($context);
 
 			if ($contextGrupoLaboratorio->getEvent() === FIND_MODGRUPO_LABORATORIO_PROFESOR_OK) {
-<<<<<<< Updated upstream
-				$erroresFormulario[] = "El profesor ya se encuentra registrado en el grupo.";
-			} elseif ($contextGrupoLaboratorio->getEvent() === FIND_MODGRUPO_LABORATORIO_PROFESOR_FAIL) {
 
-				$grupoLaboratorioProfesor = new ModGrupoLaboratorioProfesor($datos['idGrupoLaboratorio'], $emailProfesor);
-=======
-
-				$grupoLaboratorioProfesor = new ModGrupoLaboratorioProfesor($datos['idGrupoLaboratorio'], $fechas, $emailProfesor);
+				$grupoLaboratorioProfesor = new ModGrupoLaboratorioProfesor($datos['idGrupoLaboratorio'], $fechaInicio, $fechaFin,$emailProfesor);
 				$context = new Context(UPDATE_MODGRUPO_LABORATORIO_PROFESOR, $grupoLaboratorioProfesor);
 				$contextGrupoLaboratorio = $controller->action($context);
 				if ($contextGrupoLaboratorio->getEvent() === UPDATE_MODGRUPO_LABORATORIO_PROFESOR_OK) {
@@ -114,8 +116,7 @@ class FormGrupoLaboratorioProfesor extends Form
 
 			} elseif ($contextGrupoLaboratorio->getEvent() === FIND_MODGRUPO_LABORATORIO_PROFESOR_FAIL) {
 
-				$grupoLaboratorioProfesor = new ModGrupoLaboratorioProfesor($datos['idGrupoLaboratorio'], $fechas, $emailProfesor);
->>>>>>> Stashed changes
+				$grupoLaboratorioProfesor = new ModGrupoLaboratorioProfesor($datos['idGrupoLaboratorio'], $fechaInicio, $fechaFin,$emailProfesor);
 				$context = new Context(CREATE_MODGRUPO_LABORATORIO_PROFESOR, $grupoLaboratorioProfesor);
 				$contextGrupoLaboratorio = $controller->action($context);
 				if ($contextGrupoLaboratorio->getEvent() === CREATE_MODGRUPO_LABORATORIO_PROFESOR_OK) {

@@ -1,8 +1,10 @@
 <?php
+
 namespace es\ucm;
 
-interface FactorySA{
-    
+interface FactorySA
+{
+
     public function createSAAdministrador();
     public function createSAAsignatura();
     public function createSAModAsignatura();

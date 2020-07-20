@@ -1,17 +1,7 @@
 <?php
+
 namespace es\ucm;
 
-<<<<<<< Updated upstream
-class Grado{
-	private $CodigoGrado;
-	private $NombreGrado;
-	private $HorasEcts;
-
-	public function __construct($CodigoGrado,$NombreGrado,$HorasEcts){
-		$this->CodigoGrado = $CodigoGrado;
-		$this->NombreGrado = $NombreGrado;
-		$this->HorasEcts = $HorasEcts;
-=======
 class Grado
 {
     private $CodigoGrado;
@@ -25,15 +15,14 @@ class Grado
         $this->NombreGrado = $NombreGrado;
         $this->CoordinadorGrado = $CoordinadorGrado;
         $this->HorasEcts = $HorasEcts;
->>>>>>> Stashed changes
     }
-    
+
     /**
      * @return mixed
      */
     public function getNombreGrado()
     {
-    	return $this->NombreGrado;
+        return $this->NombreGrado;
     }
 
     /**
@@ -43,9 +32,6 @@ class Grado
      */
     public function setNombreGrado($NombreGrado)
     {
-<<<<<<< Updated upstream
-    	$this->NombreGrado = $NombreGrado;
-=======
         $this->NombreGrado = $NombreGrado;
 
         return $this;
@@ -67,9 +53,8 @@ class Grado
     public function setCoordinadorGrado($CoordinadorGrado)
     {
         $this->CoordinadorGrado = $CoordinadorGrado;
->>>>>>> Stashed changes
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -77,7 +62,7 @@ class Grado
      */
     public function getHorasEcts()
     {
-    	return $this->HorasEcts;
+        return $this->HorasEcts;
     }
 
     /**
@@ -87,18 +72,11 @@ class Grado
      */
     public function setHorasEcts($HorasEcts)
     {
-<<<<<<< Updated upstream
-    	$this->HorasEcts = $HorasEcts;
-
-    	return $this;
-    }
-=======
         $this->HorasEcts = $HorasEcts;
 
         return $this;
     }
 
->>>>>>> Stashed changes
 
     /**
      * @return mixed

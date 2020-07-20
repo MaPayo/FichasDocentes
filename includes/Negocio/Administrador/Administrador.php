@@ -1,14 +1,17 @@
 <?php
+
 namespace es\ucm;
 
-class Administrador{
-	private $email;
-	private $Nombre;
-	public function __construct($email, $Nombre){
-		$this->email = $email;
-		$this->Nombre = $Nombre;
-	} 
+class Administrador
+{
+    private $email;
+    private $Nombre;
 
+    public function __construct($email, $Nombre)
+    {
+        $this->email = $email;
+        $this->Nombre = $Nombre;
+    }
 
     /**
      * @return mixed
@@ -22,7 +25,7 @@ class Administrador{
      * @param mixed $email
      *
      * @return self
-     */
+    */
     public function setEmail($email)
     {
         $this->email = $email;

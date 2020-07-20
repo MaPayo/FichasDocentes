@@ -35,18 +35,12 @@ class DAOGrupoLaboratorioProfesorImplements implements DAOGrupoLaboratorioProfes
     {
         $singletonDataSource = new SingletonDataSource();
         $dataSource = $singletonDataSource->getInstance();
-<<<<<<< Updated upstream
-        $sql = "INSERT INTO grupolaboratorioprofesor (IdGrupoLab,EmailProfesor) 
-        VALUES (:idGrupoLab, :emailProfesor)";
+        $sql = "INSERT INTO grupolaboratorioprofesor (IdGrupoLab,FechaInicio,FechaFin,EmailProfesor) 
+        VALUES (:idGrupoLab, :fechaInicio,:fechaFin, :emailProfesor)";
         $values = array(
             ':idGrupoLab' => $grupoLaboratorioProfesor->getIdGrupoLab(),
-=======
-        $sql = "INSERT INTO grupolaboratorioprofesor (IdGrupoLab,Fechas,EmailProfesor) 
-        VALUES (:idGrupoLab, :fechas, :emailProfesor)";
-        $values = array(
-            ':idGrupoLab' => $grupoLaboratorioProfesor->getIdGrupoLab(),
-            ':fechas' => $grupoLaboratorioProfesor->getFechas(),
->>>>>>> Stashed changes
+            ':fechaInicio' => $grupoLaboratorioProfesor->getFechaInicio(),
+            ':fechaFin' => $grupoLaboratorioProfesor->getFechaFin(),
             ':emailProfesor' => $grupoLaboratorioProfesor->getEmailProfesor()
         );
         $results = $dataSource->executeInsertUpdateDelete($sql, $values);
@@ -57,16 +51,11 @@ class DAOGrupoLaboratorioProfesorImplements implements DAOGrupoLaboratorioProfes
     {
         $singletonDataSource = new SingletonDataSource();
         $dataSource = $singletonDataSource->getInstance();
-<<<<<<< Updated upstream
-        $sql = "UPDATE grupolaboratorioprofesor SET IdGrupoLab = :idGrupoLab, EmailProfesor = :emailProfesor WHERE IdGrupoLab = :idGrupoLab AND EmailProfesor = :emailProfesor";
+        $sql = "UPDATE grupolaboratorioprofesor SET IdGrupoLab = :idGrupoLab, FechaInicio = :fechaInicio, FechaFin = :fechaFin,EmailProfesor = :emailProfesor WHERE IdGrupoLab = :idGrupoLab AND EmailProfesor = :emailProfesor";
         $values = array(
             ':idGrupoLab' => $grupoLaboratorioProfesor->getIdGrupoLab(),
-=======
-        $sql = "UPDATE grupolaboratorioprofesor SET IdGrupoLab = :idGrupoLab, Fechas = :fechas, EmailProfesor = :emailProfesor WHERE IdGrupoLab = :idGrupoLab AND EmailProfesor = :emailProfesor";
-        $values = array(
-            ':idGrupoLab' => $grupoLaboratorioProfesor->getIdGrupoLab(),
-            ':fechas' => $grupoLaboratorioProfesor->getFechas(),
->>>>>>> Stashed changes
+            ':fechaInicio' => $grupoLaboratorioProfesor->getFechaInicio(),
+            ':fechaFin' => $grupoLaboratorioProfesor->getFechaFin(),
             ':emailProfesor' => $grupoLaboratorioProfesor->getEmailProfesor()
         );
         $results = $dataSource->executeInsertUpdateDelete($sql, $values);
@@ -80,7 +69,7 @@ class DAOGrupoLaboratorioProfesorImplements implements DAOGrupoLaboratorioProfes
         $sql = "DELETE FROM grupolaboratorioprofesor WHERE IdGrupoLab = :idGrupoLab AND EmailProfesor = :emailProfesor";
         $values = array(
             ':idGrupoLab' => $idGrupoLab,
-            ':emailProfesor' =>$emailProfesor
+            ':emailProfesor' => $emailProfesor
         );
         $results = $dataSource->executeInsertUpdateDelete($sql, $values);
         return $results;

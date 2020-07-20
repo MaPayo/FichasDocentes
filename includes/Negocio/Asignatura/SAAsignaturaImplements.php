@@ -18,16 +18,13 @@ class SAAsignaturaImplements implements SAAsignatura
             $asignatura = new Asignatura(
                 $asignatura[0]['IdAsignatura'],
                 $asignatura[0]['NombreAsignatura'],
+                $asignatura[0]['Abreviatura'],
                 $asignatura[0]['Curso'],
                 $asignatura[0]['Semestre'],
                 $asignatura[0]['NombreAsignaturaIngles'],
                 $asignatura[0]['Creditos'],
-<<<<<<< Updated upstream
-                $asignatura[0]['Coordinadores'],
-=======
                 $asignatura[0]['CoordinadorAsignatura'],
                 $asignatura[0]['Estado'],
->>>>>>> Stashed changes
                 $asignatura[0]['IdMateria']
             );
         }
@@ -57,8 +54,6 @@ class SAAsignaturaImplements implements SAAsignatura
         $asignatura = $DAOAsignatura->deleteAsignatura($idAsignatura);
         return $asignatura;
     }
-<<<<<<< Updated upstream
-=======
 
     public static function listAsignatura($idMateria)
     {
@@ -84,5 +79,4 @@ class SAAsignaturaImplements implements SAAsignatura
         }
         return $arrayAsignaturas;
     }
->>>>>>> Stashed changes
 }

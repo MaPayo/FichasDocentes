@@ -8,43 +8,30 @@ class ModEvaluacion
     private $RealizacionExamenes;
     private $RealizacionExamenesI;
     private $PesoExamenes;
-    private $CalificacionFinal;
-    private $CalificacionFinalI;
     private $RealizacionActividades;
     private $RealizacionActividadesI;
     private $PesoActividades;
     private $RealizacionLaboratorio;
     private $RealizacionLaboratorioI;
     private $PesoLaboratorio;
-<<<<<<< Updated upstream
-    private $IdModAsignatura;
-
-    public function __construct($IdEvaluacion, $RealizacionExamenes, $RealizacionExamenesI, $PesoExamenes, $CalificacionFinal, $CalificacionFinalI, $RealizacionActividades, $RealizacionActividadesI, $PesoActividades, $RealizacionLaboratorio, $RealizacionLaboratorioI, $PesoLaboratorio, $IdModAsignatura)
-=======
     private $CalificacionFinal;
     private $CalificacionFinalI;
     private $IdModAsignatura;
 
     public function __construct($IdEvaluacion, $RealizacionExamenes, $RealizacionExamenesI, $PesoExamenes, $RealizacionActividades, $RealizacionActividadesI, $PesoActividades, $RealizacionLaboratorio, $RealizacionLaboratorioI, $PesoLaboratorio, $CalificacionFinal, $CalificacionFinalI, $IdModAsignatura)
->>>>>>> Stashed changes
     {
         $this->IdEvaluacion = $IdEvaluacion;
         $this->RealizacionExamenes = $RealizacionExamenes;
         $this->RealizacionExamenesI = $RealizacionExamenesI;
         $this->PesoExamenes = $PesoExamenes;
-        $this->CalificacionFinal = $CalificacionFinal;
-        $this->CalificacionFinalI = $CalificacionFinalI;
         $this->RealizacionActividades = $RealizacionActividades;
         $this->RealizacionActividadesI = $RealizacionActividadesI;
         $this->PesoActividades = $PesoActividades;
         $this->RealizacionLaboratorio = $RealizacionLaboratorio;
         $this->RealizacionLaboratorioI = $RealizacionLaboratorioI;
         $this->PesoLaboratorio = $PesoLaboratorio;
-<<<<<<< Updated upstream
-=======
         $this->CalificacionFinal = $CalificacionFinal;
         $this->CalificacionFinalI = $CalificacionFinalI;
->>>>>>> Stashed changes
         $this->IdModAsignatura = $IdModAsignatura;
     }
 
@@ -131,46 +118,6 @@ class ModEvaluacion
     /**
      * @return mixed
      */
-    public function getCalificacionFinal()
-    {
-        return $this->CalificacionFinal;
-    }
-
-    /**
-     * @param mixed $CalificacionFinal
-     *
-     * @return self
-     */
-    public function setCalificacionFinal($CalificacionFinal)
-    {
-        $this->CalificacionFinal = $CalificacionFinal;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getCalificacionFinalI()
-    {
-        return $this->CalificacionFinalI;
-    }
-
-    /**
-     * @param mixed $CalificacionFinalI
-     *
-     * @return self
-     */
-    public function setCalificacionFinalI($CalificacionFinalI)
-    {
-        $this->CalificacionFinalI = $CalificacionFinalI;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getRealizacionActividades()
     {
         return $this->RealizacionActividades;
@@ -211,7 +158,6 @@ class ModEvaluacion
     /**
      * @return mixed
      */
-<<<<<<< Updated upstream
     public function getPesoActividades()
     {
         return $this->PesoActividades;
@@ -225,21 +171,6 @@ class ModEvaluacion
     public function setPesoActividades($PesoActividades)
     {
         $this->PesoActividades = $PesoActividades;
-=======
-    public function getCalificacionFinal()
-    {
-        return $this->CalificacionFinal;
-    }
-
-    /**
-     * @param mixed $CalificacionFinal
-     *
-     * @return self
-     */
-    public function setCalificacionFinal($CalificacionFinal)
-    {
-        $this->CalificacionFinal = $CalificacionFinal;
->>>>>>> Stashed changes
 
         return $this;
     }
@@ -247,7 +178,6 @@ class ModEvaluacion
     /**
      * @return mixed
      */
-<<<<<<< Updated upstream
     public function getRealizacionLaboratorio()
     {
         return $this->RealizacionLaboratorio;
@@ -301,7 +231,33 @@ class ModEvaluacion
     public function setPesoLaboratorio($PesoLaboratorio)
     {
         $this->PesoLaboratorio = $PesoLaboratorio;
-=======
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCalificacionFinal()
+    {
+        return $this->CalificacionFinal;
+    }
+
+    /**
+     * @param mixed $CalificacionFinal
+     *
+     * @return self
+     */
+    public function setCalificacionFinal($CalificacionFinal)
+    {
+        $this->CalificacionFinal = $CalificacionFinal;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getCalificacionFinalI()
     {
         return $this->CalificacionFinalI;
@@ -315,7 +271,6 @@ class ModEvaluacion
     public function setCalificacionFinalI($CalificacionFinalI)
     {
         $this->CalificacionFinalI = $CalificacionFinalI;
->>>>>>> Stashed changes
 
         return $this;
     }

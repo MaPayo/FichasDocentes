@@ -10,8 +10,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <?php
-    echo '<link href="' . RUTA_CSS . 'estilos.css" rel="stylesheet" type="text/css" media="screen"/>
-    <link rel="stylesheet" href="' . RUTA_CSS . 'bootstrap.css">
+    echo '<link rel="stylesheet" href="' . RUTA_CSS . 'bootstrap.css">
     <link rel="stylesheet" href="' . RUTA_CSS . 'fichasdocentes.css">
     <link rel="shortcut icon" type="image/x-icon" href="' . RUTA_IMGS . 'LogoUniversidad.png">
     <script type="text/javascript" src="' . RUTA_JS . 'codigo.js"></script>
@@ -75,7 +74,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                         $datosIniciales['basicasYTransversalesI']=$contextCompetencia->getData()->getBasicasYTransversalesI();
                                         $datosIniciales['resultadosAprendizaje']=$contextCompetencia->getData()->getResultadosAprendizaje();
                                         $datosIniciales['resultadosAprendizajeI']=$contextCompetencia->getData()->getResultadosAprendizajeI();
-                                        $datosIniciales['idAsignatura']=$contextCompetencia->getData()->getIdAsignatura();
+                                        $datosIniciales['idAsignatura']=$_GET[$name];
                                         $access->gestionaModificacion($datosIniciales);
                                     }
                                     else{

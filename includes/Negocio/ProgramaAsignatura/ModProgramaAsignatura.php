@@ -9,13 +9,6 @@ class ModProgramaAsignatura
     private $ConocimientosPreviosI;
     private $BreveDescripcion;
     private $BreveDescripcionI;
-<<<<<<< Updated upstream
-    private $ProgramaDetallado;
-    private $ProgramaDetalladoI;
-    private $IdModAsignatura;
-
-    public function __construct($IdPrograma, $ConocimientosPrevios, $ConocimientosPreviosI, $BreveDescripcion, $BreveDescripcionI, $ProgramaDetallado, $ProgramaDetalladoI, $IdModAsignatura)
-=======
     private $ProgramaTeorico;
     private $ProgramaTeoricoI;
     private $ProgramaSeminarios;
@@ -25,24 +18,18 @@ class ModProgramaAsignatura
     private $IdModAsignatura;
 
     public function __construct($IdPrograma, $ConocimientosPrevios, $ConocimientosPreviosI, $BreveDescripcion, $BreveDescripcionI, $ProgramaTeorico, $ProgramaTeoricoI, $ProgramaSeminarios, $ProgramaSeminariosI, $ProgramaLaboratorio, $ProgramaLaboratorioI,$IdModAsignatura)
->>>>>>> Stashed changes
     {
         $this->IdPrograma = $IdPrograma;
         $this->ConocimientosPrevios = $ConocimientosPrevios;
         $this->ConocimientosPreviosI = $ConocimientosPreviosI;
         $this->BreveDescripcion = $BreveDescripcion;
         $this->BreveDescripcionI = $BreveDescripcionI;
-<<<<<<< Updated upstream
-        $this->ProgramaDetallado = $ProgramaDetallado;
-        $this->ProgramaDetalladoI = $ProgramaDetalladoI;
-=======
         $this->ProgramaTeorico = $ProgramaTeorico;
         $this->ProgramaTeoricoI = $ProgramaTeoricoI;
         $this->ProgramaSeminarios = $ProgramaSeminarios;
         $this->ProgramaSeminariosI = $ProgramaSeminariosI;
         $this->ProgramaLaboratorio = $ProgramaLaboratorio;
         $this->ProgramaLaboratorioI = $ProgramaLaboratorioI;
->>>>>>> Stashed changes
         $this->IdModAsignatura = $IdModAsignatura;
     }
 
@@ -149,19 +136,19 @@ class ModProgramaAsignatura
     /**
      * @return mixed
      */
-    public function getProgramaDetallado()
+    public function getProgramaTeorico()
     {
-        return $this->ProgramaDetallado;
+        return $this->ProgramaTeorico;
     }
 
     /**
-     * @param mixed $ProgramaDetallado
+     * @param mixed $ProgramaTeorico
      *
      * @return self
      */
-    public function setProgramaDetallado($ProgramaDetallado)
+    public function setProgramaTeorico($ProgramaTeorico)
     {
-        $this->ProgramaDetallado = $ProgramaDetallado;
+        $this->ProgramaTeorico = $ProgramaTeorico;
 
         return $this;
     }
@@ -169,21 +156,18 @@ class ModProgramaAsignatura
     /**
      * @return mixed
      */
-    public function getProgramaDetalladoI()
+    public function getProgramaTeoricoI()
     {
-        return $this->ProgramaDetalladoI;
+        return $this->ProgramaTeoricoI;
     }
 
     /**
-     * @param mixed $ProgramaDetalladoI
+     * @param mixed $ProgramaTeoricoI
      *
      * @return self
      */
-    public function setProgramaDetalladoI($ProgramaDetalladoI)
+    public function setProgramaTeoricoI($ProgramaTeoricoI)
     {
-<<<<<<< Updated upstream
-        $this->ProgramaDetalladoI = $ProgramaDetalladoI;
-=======
         $this->ProgramaTeoricoI = $ProgramaTeoricoI;
 
         return $this;
@@ -265,7 +249,6 @@ class ModProgramaAsignatura
     public function setProgramaLaboratorioI($ProgramaLaboratorioI)
     {
         $this->ProgramaLaboratorioI = $ProgramaLaboratorioI;
->>>>>>> Stashed changes
 
         return $this;
     }

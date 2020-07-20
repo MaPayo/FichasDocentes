@@ -15,9 +15,9 @@ class CommandUpdateModulo implements Command
         $modulo = $saModulo->updateModulo($data);
         $responseContext = null;
         if ($modulo) {
-            $responseContext = new Context(CREATE_MODULO_OK, $modulo);
+            $responseContext = new Context(UPDATE_MODULO_OK, $modulo);
         } else {
-            $responseContext = new Context(CREATE_MODULO_FAIL, null);
+            $responseContext = new Context(UPDATE_MODULO_FAIL, null);
         }
         return $responseContext;
     }

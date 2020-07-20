@@ -2,7 +2,8 @@
 
 namespace es\ucm;
 
-interface SAModGrupoClaseProfesor{
+interface SAModGrupoClaseProfesor
+{
 	public static function listModGrupoClaseProfesor($idGrupoClase);
 
 	public static function findModGrupoClaseProfesor($idModGrupoClase, $emailProfesor);

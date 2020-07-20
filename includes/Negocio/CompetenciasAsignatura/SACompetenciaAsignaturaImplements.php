@@ -1,16 +1,19 @@
 <?php
 
 namespace es\ucm;
+
 require_once('includes/Negocio/CompetenciasAsignatura/SACompetenciaAsignatura.php');
 require_once('includes/Negocio/CompetenciasAsignatura/CompetenciaAsignatura.php');
 require_once('includes/Integracion/Factorias/FactoriesDAOImplements.php');
 
-class SACompetenciaAsignaturaImplements implements SACompetenciaAsignatura{
+class SACompetenciaAsignaturaImplements implements SACompetenciaAsignatura
+{
 
-    public static function findCompetenciaAsignatura($idAsignatura){
-        $factoriesDAO=new \es\ucm\FactoriesDAOImplements();
-        $DAOCompetenciaAsignatura=$factoriesDAO->createDAOCompetenciaAsignatura(); 
-        $competenciaAsignatura=$DAOCompetenciaAsignatura->findCompetenciaAsignatura($idAsignatura);
+    public static function findCompetenciaAsignatura($idAsignatura)
+    {
+        $factoriesDAO = new \es\ucm\FactoriesDAOImplements();
+        $DAOCompetenciaAsignatura = $factoriesDAO->createDAOCompetenciaAsignatura();
+        $competenciaAsignatura = $DAOCompetenciaAsignatura->findCompetenciaAsignatura($idAsignatura);
         if ($competenciaAsignatura && count($competenciaAsignatura) === 1) {
             $competenciaAsignatura = new CompetenciaAsignatura(
                 $competenciaAsignatura[0]['IdCompetencia'],
@@ -28,25 +31,27 @@ class SACompetenciaAsignaturaImplements implements SACompetenciaAsignatura{
         return $competenciaAsignatura;
     }
 
-    public static function createCompetenciaAsignatura($competenciaAsignatura){
-        $factoriesDAO=new \es\ucm\FactoriesDAOImplements();
-        $DAOCompetenciaAsignatura=$factoriesDAO->createDAOCompetenciaAsignatura(); 
-        $competenciaAsignatura=$DAOCompetenciaAsignatura->createCompetenciaAsignatura($competenciaAsignatura);
+    public static function createCompetenciaAsignatura($competenciaAsignatura)
+    {
+        $factoriesDAO = new \es\ucm\FactoriesDAOImplements();
+        $DAOCompetenciaAsignatura = $factoriesDAO->createDAOCompetenciaAsignatura();
+        $competenciaAsignatura = $DAOCompetenciaAsignatura->createCompetenciaAsignatura($competenciaAsignatura);
         return $competenciaAsignatura;
     }
 
-    public static function updateCompetenciaAsignatura($competenciaAsignatura){
-        $factoriesDAO=new \es\ucm\FactoriesDAOImplements();
-        $DAOCompetenciaAsignatura=$factoriesDAO->createDAOCompetenciaAsignatura(); 
-        $competenciaAsignatura=$DAOCompetenciaAsignatura->updateCompetenciaAsignatura($competenciaAsignatura);
+    public static function updateCompetenciaAsignatura($competenciaAsignatura)
+    {
+        $factoriesDAO = new \es\ucm\FactoriesDAOImplements();
+        $DAOCompetenciaAsignatura = $factoriesDAO->createDAOCompetenciaAsignatura();
+        $competenciaAsignatura = $DAOCompetenciaAsignatura->updateCompetenciaAsignatura($competenciaAsignatura);
         return $competenciaAsignatura;
     }
 
-    public static function deleteCompetenciaAsignatura($idAsignatura){
-        $factoriesDAO=new \es\ucm\FactoriesDAOImplements();
-        $DAOCompetenciaAsignatura=$factoriesDAO->createDAOCompetenciaAsignatura(); 
-        $competenciaAsignatura=$DAOCompetenciaAsignatura->deleteCompetenciaAsignatura($idAsignatura);
+    public static function deleteCompetenciaAsignatura($idAsignatura)
+    {
+        $factoriesDAO = new \es\ucm\FactoriesDAOImplements();
+        $DAOCompetenciaAsignatura = $factoriesDAO->createDAOCompetenciaAsignatura();
+        $competenciaAsignatura = $DAOCompetenciaAsignatura->deleteCompetenciaAsignatura($idAsignatura);
         return $competenciaAsignatura;
     }
-
 }

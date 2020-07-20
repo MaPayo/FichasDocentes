@@ -16,19 +16,14 @@ class FormEvaluacion extends Form
 		$realizacionExamenes = isset($datosIniciales['realizacionExamenes']) ? $datosIniciales['realizacionExamenes'] : null;
 		$realizacionExamenesI = isset($datosIniciales['realizacionExamenesI']) ? $datosIniciales['realizacionExamenesI'] : null;
 		$pesoExamenes = isset($datosIniciales['pesoExamenes']) ? $datosIniciales['pesoExamenes'] : 0;
-		$calificacionFinal = isset($datosIniciales['calificacionFinal']) ? $datosIniciales['calificacionFinal'] : null;
-		$calificacionFinalI = isset($datosIniciales['calificacionFinalI']) ? $datosIniciales['calificacionFinalI'] : null;
 		$realizacionActividades = isset($datosIniciales['realizacionActividades']) ? $datosIniciales['realizacionActividades'] : null;
 		$realizacionActividadesI = isset($datosIniciales['realizacionActividadesI']) ? $datosIniciales['realizacionActividadesI'] : null;
 		$pesoActividades = isset($datosIniciales['pesoActividades']) ? $datosIniciales['pesoActividades'] : 0;
 		$realizacionLaboratorio = isset($datosIniciales['realizacionLaboratorio']) ? $datosIniciales['realizacionLaboratorio'] : null;
 		$realizacionLaboratorioI = isset($datosIniciales['realizacionLaboratorioI']) ? $datosIniciales['realizacionLaboratorioI'] : null;
 		$pesoLaboratorio = isset($datosIniciales['pesoLaboratorio']) ? $datosIniciales['pesoLaboratorio'] : 0;
-<<<<<<< Updated upstream
-=======
 		$calificacionFinal = isset($datosIniciales['calificacionFinal']) ? $datosIniciales['calificacionFinal'] : null;
 		$calificacionFinalI = isset($datosIniciales['calificacionFinalI']) ? $datosIniciales['calificacionFinalI'] : null;
->>>>>>> Stashed changes
 		$idAsignatura = isset($datosIniciales['idAsignatura']) ? $datosIniciales['idAsignatura'] : null;
 
 		$controller = new ControllerImplements();
@@ -59,20 +54,6 @@ class FormEvaluacion extends Form
 					$html .= '<div class="form-group">
 					<label for="realizacionExamenesI">Realización Exámenes (Inglés)</label>
 					<textarea class="form-control" id="realizacionExamenesI" rows="3" name="realizacionExamenesI" >' . $realizacionExamenesI . '</textarea>
-					</div>';
-				}
-			}
-
-			if ($contextConfiguacion->getData()->getCalificacionFinal() == 1) {
-				$html .= '<div class="form-group">
-				<label for="calificacionFinal">Calificación Final</label>
-				<textarea class="form-control" id="calificacionFinal" rows="3" name="calificacionFinal" >' . $calificacionFinal . '</textarea>
-				</div>';
-
-				if (!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())) {
-					$html .= '<div class="form-group">
-					<label for="calificacionFinalI">Calificación Final (Inglés)</label>
-					<textarea class="form-control" id="calificacionFinalI" rows="3" name="calificacionFinalI" >' . $calificacionFinalI . '</textarea>
 					</div>';
 				}
 			}
@@ -114,8 +95,6 @@ class FormEvaluacion extends Form
 					</div>';
 				}
 			}
-<<<<<<< Updated upstream
-=======
 
 			if ($contextConfiguacion->getData()->getCalificacionFinal() == 1) {
 				$html .= '<div class="form-group">
@@ -130,7 +109,6 @@ class FormEvaluacion extends Form
 					</div>';
 				}
 			}
->>>>>>> Stashed changes
 		}
 
 		$html .= '<div class="text-right">
@@ -159,9 +137,6 @@ class FormEvaluacion extends Form
 		$realizacionExamenesI = isset($datos['realizacionExamenesI']) ? $datos['realizacionExamenesI'] : '';
 		$pesoExamenes = isset($datos['pesoExamenes']) ? $datos['pesoExamenes'] : 0;
 
-		$calificacionFinal = isset($datos['calificacionFinal']) ? $datos['calificacionFinal'] : '';
-		$calificacionFinalI = isset($datos['calificacionFinalI']) ? $datos['calificacionFinalI'] : '';
-
 		$realizacionActividades = isset($datos['realizacionActividades']) ? $datos['realizacionActividades'] : '';
 		$realizacionActividadesI = isset($datos['realizacionActividadesI']) ? $datos['realizacionActividadesI'] : '';
 		$pesoActividades = isset($datos['pesoActividades']) ? $datos['pesoActividades'] : 0;
@@ -170,12 +145,9 @@ class FormEvaluacion extends Form
 		$realizacionLaboratorioI = isset($datos['realizacionLaboratorioI']) ? $datos['realizacionLaboratorioI'] : '';
 		$pesoLaboratorio = isset($datos['pesoLaboratorio']) ? $datos['pesoLaboratorio'] : 0;
 
-<<<<<<< Updated upstream
-=======
 		$calificacionFinal = isset($datos['calificacionFinal']) ? $datos['calificacionFinal'] : '';
 		$calificacionFinalI = isset($datos['calificacionFinalI']) ? $datos['calificacionFinalI'] : '';
 
->>>>>>> Stashed changes
 		if ($contextConfiguacion->getEvent() === FIND_CONFIGURACION_OK) {
 			if ($contextConfiguacion->getData()->getRealizacionExamenes() == 1) {
 				$realizacionExamenes = self::clean($realizacionExamenes);
@@ -193,20 +165,6 @@ class FormEvaluacion extends Form
 					if (empty($realizacionExamenesI)) {
 						$erroresFormulario[] = "No has introducido la realización de exámenes en inglés.";
 					}
-				}
-			}
-
-
-			if ($contextConfiguacion->getData()->getCalificacionFinal() == 1) {
-				$calificacionFinal = self::clean($calificacionFinal);
-				if (empty($calificacionFinal)) {
-					$erroresFormulario[] = "No has introducido la calificación final.";
-				}
-
-
-				$calificacionFinalI = self::clean($calificacionFinalI);
-				if (empty($calificacionFinalI)) {
-					$erroresFormulario[] = "No has introducido la calificación final en inglés.";
 				}
 			}
 
@@ -249,8 +207,6 @@ class FormEvaluacion extends Form
 					}
 				}
 			}
-<<<<<<< Updated upstream
-=======
 
 			if ($contextConfiguacion->getData()->getCalificacionFinal() == 1) {
 				$calificacionFinal = self::clean($calificacionFinal);
@@ -265,7 +221,6 @@ class FormEvaluacion extends Form
 				}
 			}
 
->>>>>>> Stashed changes
 		}
 
 
@@ -275,11 +230,7 @@ class FormEvaluacion extends Form
 
 			if ($contextEvaluacion->getEvent() === FIND_MODEVALUACION_OK) {
 
-<<<<<<< Updated upstream
-				$evaluacion = new ModEvaluacion($contextEvaluacion->getData()->getIdEvaluacion(), $realizacionExamenes, $realizacionExamenesI, $pesoExamenes, $calificacionFinal, $calificacionFinalI, $realizacionActividades, $realizacionActividadesI, $pesoActividades, $realizacionLaboratorio, $realizacionLaboratorioI, $pesoLaboratorio, $datos['idAsignatura']);
-=======
 				$evaluacion = new ModEvaluacion($contextEvaluacion->getData()->getIdEvaluacion(), $realizacionExamenes, $realizacionExamenesI, $pesoExamenes, $realizacionActividades, $realizacionActividadesI, $pesoActividades, $realizacionLaboratorio, $realizacionLaboratorioI, $pesoLaboratorio, $calificacionFinal, $calificacionFinalI, $datos['idAsignatura']);
->>>>>>> Stashed changes
 				$context = new Context(UPDATE_MODEVALUACION, $evaluacion);
 				$contextEvaluacion = $controller->action($context);
 
@@ -294,11 +245,7 @@ class FormEvaluacion extends Form
 				}
 			} elseif ($contextEvaluacion->getEvent() === FIND_MODEVALUACION_FAIL) {
 
-<<<<<<< Updated upstream
-				$evaluacion = new ModEvaluacion(null, $realizacionExamenes, $realizacionExamenesI, $pesoExamenes, $calificacionFinal, $calificacionFinalI, $realizacionActividades, $realizacionActividadesI, $pesoActividades, $realizacionLaboratorio, $realizacionLaboratorioI, $pesoLaboratorio, $datos['idAsignatura']);
-=======
 				$evaluacion = new ModEvaluacion(null, $realizacionExamenes, $realizacionExamenesI, $pesoExamenes, $realizacionActividades, $realizacionActividadesI, $pesoActividades, $realizacionLaboratorio, $realizacionLaboratorioI, $pesoLaboratorio, $calificacionFinal, $calificacionFinalI, $datos['idAsignatura']);
->>>>>>> Stashed changes
 				$context = new Context(CREATE_MODEVALUACION, $evaluacion);
 				$contextEvaluacion = $controller->action($context);
 

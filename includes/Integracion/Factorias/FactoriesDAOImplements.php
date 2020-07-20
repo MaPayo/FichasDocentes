@@ -108,12 +108,12 @@ class FactoriesDAOImplements implements FactoriesDAO
       return new DAOModGrupoClaseImplements();
    }
 
-    public static function createDAOGrupoClaseProfesor()
+   public static function createDAOGrupoClaseProfesor()
    {
       return new DAOGrupoClaseProfesorImplements();
    }
 
-    public static function createDAOModGrupoClaseProfesor()
+   public static function createDAOModGrupoClaseProfesor()
    {
       return new DAOModGrupoClaseProfesorImplements();
    }
@@ -161,11 +161,6 @@ class FactoriesDAOImplements implements FactoriesDAO
    public static function createDAOLaboratorio()
    {
       return new DAOLaboratorioImplements();
-   }
-
-   public static function createDAOLeyenda()
-   {
-      return new DAOLeyendaImplements();
    }
 
    public static function createDAOMateria()

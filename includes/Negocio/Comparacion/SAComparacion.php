@@ -1,8 +1,9 @@
 <?php
+
 namespace es\ucm;
 
-interface SAComparacion{
+interface SAComparacion
+{
 
     public static function comparacion($idAsignatura);
-
 }

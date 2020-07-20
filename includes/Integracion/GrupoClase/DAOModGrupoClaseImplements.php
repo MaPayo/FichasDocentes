@@ -6,8 +6,6 @@ require_once('includes/Integracion/GrupoClase/DAOModGrupoClase.php');
 
 class DAOModGrupoClaseImplements implements DAOModGrupoClase
 {
-
-
     public static function listModGrupoClase($idModAsignatura)
     {
         $singletonDataSource = new SingletonDataSource();

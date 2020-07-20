@@ -1,12 +1,16 @@
 <?php
+
 namespace es\ucm;
 
-interface DAOAdministrador{
-    public static function findAdministrador($idAdministrador);
+interface DAOAdministrador
+{
+    public static function findAdministrador($email);
 
-    public static function createAdministrador($Administrador);
+    public static function createAdministrador($administrador);
 
-    public static function updateAdministrador($Administrador);
-    
-    public static function deleteAdministrador($idAdministrador);
+    public static function updateAdministrador($administrador);
+
+    public static function deleteAdministrador($email);
+
+    public static function listAdministrador();
 }

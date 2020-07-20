@@ -1,25 +1,28 @@
 <?php
+
 namespace es\ucm;
 
-class ModBibliografia{
-	private $IdBibliografia;
-	private $CitasBibliograficas;
-	private $RecursosInternet;
-	private $IdModAsignatura;
+class ModBibliografia
+{
+    private $IdBibliografia;
+    private $CitasBibliograficas;
+    private $RecursosInternet;
+    private $IdModAsignatura;
 
-	public function __construct($IdBibliografia,$CitasBibliograficas,$RecursosInternet,$IdModAsignatura){
-		$this->IdBibliografia = $IdBibliografia;
-		$this->CitasBibliograficas = $CitasBibliograficas;
-		$this->RecursosInternet = $RecursosInternet;
-		$this->IdModAsignatura = $IdModAsignatura;
-	}
+    public function __construct($IdBibliografia, $CitasBibliograficas, $RecursosInternet, $IdModAsignatura)
+    {
+        $this->IdBibliografia = $IdBibliografia;
+        $this->CitasBibliograficas = $CitasBibliograficas;
+        $this->RecursosInternet = $RecursosInternet;
+        $this->IdModAsignatura = $IdModAsignatura;
+    }
 
     /**
      * @return mixed
      */
     public function getIdBibliografia()
     {
-    	return $this->IdBibliografia;
+        return $this->IdBibliografia;
     }
 
     /**
@@ -29,9 +32,9 @@ class ModBibliografia{
      */
     public function setIdBibliografia($IdBibliografia)
     {
-    	$this->IdBibliografia = $IdBibliografia;
+        $this->IdBibliografia = $IdBibliografia;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -39,7 +42,7 @@ class ModBibliografia{
      */
     public function getCitasBibliograficas()
     {
-    	return $this->CitasBibliograficas;
+        return $this->CitasBibliograficas;
     }
 
     /**
@@ -49,9 +52,9 @@ class ModBibliografia{
      */
     public function setCitasBibliograficas($CitasBibliograficas)
     {
-    	$this->CitasBibliograficas = $CitasBibliograficas;
+        $this->CitasBibliograficas = $CitasBibliograficas;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -59,7 +62,7 @@ class ModBibliografia{
      */
     public function getRecursosInternet()
     {
-    	return $this->RecursosInternet;
+        return $this->RecursosInternet;
     }
 
     /**
@@ -69,9 +72,9 @@ class ModBibliografia{
      */
     public function setRecursosInternet($RecursosInternet)
     {
-    	$this->RecursosInternet = $RecursosInternet;
+        $this->RecursosInternet = $RecursosInternet;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -79,7 +82,7 @@ class ModBibliografia{
      */
     public function getIdModAsignatura()
     {
-    	return $this->IdModAsignatura;
+        return $this->IdModAsignatura;
     }
 
     /**
@@ -89,8 +92,8 @@ class ModBibliografia{
      */
     public function setIdModAsignatura($IdModAsignatura)
     {
-    	$this->IdModAsignatura = $IdModAsignatura;
+        $this->IdModAsignatura = $IdModAsignatura;
 
-    	return $this;
+        return $this;
     }
 }

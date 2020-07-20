@@ -1,31 +1,23 @@
 <?php
+
 namespace es\ucm;
 
-<<<<<<< Updated upstream
-class GrupoClaseProfesor{
-	private $IdGrupoClase;
-    private $EmailProfesor;
-
-    public function __construct($IdGrupoClase,$EmailProfesor){
-      $this->IdGrupoClase = $IdGrupoClase;
-      $this->EmailProfesor=$EmailProfesor;
-  }
-=======
 class GrupoClaseProfesor
 {
     private $IdGrupoClase;
     private $Tipo;
-    private $Fechas;
+    private $FechaInicio;
+    private $FechaFin;
     private $EmailProfesor;
 
-    public function __construct($IdGrupoClase, $Tipo, $Fechas, $EmailProfesor)
+    public function __construct($IdGrupoClase, $Tipo, $FechaInicio, $FechaFin, $EmailProfesor)
     {
         $this->IdGrupoClase = $IdGrupoClase;
         $this->Tipo = $Tipo;
-        $this->Fechas = $Fechas;
+        $this->FechaInicio = $FechaInicio;
+        $this->FechaFin = $FechaFin;
         $this->EmailProfesor = $EmailProfesor;
     }
->>>>>>> Stashed changes
 
     /**
      * @return mixed
@@ -50,8 +42,6 @@ class GrupoClaseProfesor
     /**
      * @return mixed
      */
-<<<<<<< Updated upstream
-=======
     public function getTipo()
     {
         return $this->Tipo;
@@ -72,19 +62,39 @@ class GrupoClaseProfesor
     /**
      * @return mixed
      */
-    public function getFechas()
+    public function getFechaInicio()
     {
-        return $this->Fechas;
+        return $this->FechaInicio;
     }
 
     /**
-     * @param mixed $Fechas
+     * @param mixed $FechaInicio
      *
      * @return self
      */
-    public function setFechas($Fechas)
+    public function setFechaInicio($FechaInicio)
     {
-        $this->Fechas = $Fechas;
+        $this->FechaInicio = $FechaInicio;
+
+        return $this;
+    }
+
+/**
+     * @return mixed
+     */
+    public function getFechaFin()
+    {
+        return $this->FechaFin;
+    }
+
+    /**
+     * @param mixed $FechaInicio
+     *
+     * @return self
+     */
+    public function setFechaFin($FechaFin)
+    {
+        $this->FechaInicio = $FechaInicio;
 
         return $this;
     }
@@ -92,7 +102,6 @@ class GrupoClaseProfesor
     /**
      * @return mixed
      */
->>>>>>> Stashed changes
     public function getEmailProfesor()
     {
         return $this->EmailProfesor;

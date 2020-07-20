@@ -6,8 +6,6 @@ require_once('includes/Integracion/GrupoLaboratorioProfesor/DAOModGrupoLaborator
 
 class DAOModGrupoLaboratorioProfesorImplements implements DAOModGrupoLaboratorioProfesor
 {
-
-
     public static function listModGrupoLaboratorioProfesor($idGrupoLab)
     {
         $singletonDataSource = new SingletonDataSource();
@@ -35,18 +33,12 @@ class DAOModGrupoLaboratorioProfesorImplements implements DAOModGrupoLaboratorio
     {
         $singletonDataSource = new SingletonDataSource();
         $dataSource = $singletonDataSource->getInstance();
-<<<<<<< Updated upstream
-        $sql = "INSERT INTO modgrupolaboratorioprofesor (IdGrupoLab,EmailProfesor) 
-        VALUES (:idGrupoLab, :emailProfesor)";
+        $sql = "INSERT INTO modgrupolaboratorioprofesor (IdGrupoLab,FechaInicio,FechaFin, EmailProfesor) 
+        VALUES (:idGrupoLab, :fechaInicio,:fechaFin, :emailProfesor)";
         $values = array(
             ':idGrupoLab' => $modGrupoLaboratorioProfesor->getIdGrupoLab(),
-=======
-        $sql = "INSERT INTO modgrupolaboratorioprofesor (IdGrupoLab,Fechas,EmailProfesor) 
-        VALUES (:idGrupoLab, :fechas, :emailProfesor)";
-        $values = array(
-            ':idGrupoLab' => $modGrupoLaboratorioProfesor->getIdGrupoLab(),
-            ':fechas' => $modGrupoLaboratorioProfesor->getFechas(),
->>>>>>> Stashed changes
+            ':fechaInicio' => $modGrupoLaboratorioProfesor->getFechaInicio(),
+            ':fechaFin' => $modGrupoLaboratorioProfesor->getFechaFin(),
             ':emailProfesor' => $modGrupoLaboratorioProfesor->getEmailProfesor()
         );
         $results = $dataSource->executeInsertUpdateDelete($sql, $values);
@@ -57,19 +49,15 @@ class DAOModGrupoLaboratorioProfesorImplements implements DAOModGrupoLaboratorio
     {
         $singletonDataSource = new SingletonDataSource();
         $dataSource = $singletonDataSource->getInstance();
-<<<<<<< Updated upstream
-        $sql = "UPDATE modgrupolaboratorioprofesor SET IdGrupoLab = :idGrupoLab, EmailProfesor = :emailProfesor WHERE IdGrupoLab = :idGrupoLab AND EmailProfesor = :emailProfesor";
-        $values = array(
-            ':idGrupoLab' => $modGrupoLaboratorioProfesor->getIdGrupoLab(),
-=======
         $sql = "UPDATE modgrupolaboratorioprofesor SET IdGrupoLab = :idGrupoLab,
-          Fechas = :fechas,
+          FechaInicio = :fechaInicio,
+          FechaFin = :fechaFin,
             EmailProfesor = :emailProfesor
              WHERE IdGrupoLab = :idGrupoLab AND EmailProfesor = :emailProfesor";
         $values = array(
             ':idGrupoLab' => $modGrupoLaboratorioProfesor->getIdGrupoLab(),
-            ':fechas' => $modGrupoLaboratorioProfesor->getFechas(),
->>>>>>> Stashed changes
+            ':fechaInicio' => $modGrupoLaboratorioProfesor->getFechaInicio(),
+            ':fechaFin' => $modGrupoLaboratorioProfesor->getFechaFin(),
             ':emailProfesor' => $modGrupoLaboratorioProfesor->getEmailProfesor()
         );
         $results = $dataSource->executeInsertUpdateDelete($sql, $values);

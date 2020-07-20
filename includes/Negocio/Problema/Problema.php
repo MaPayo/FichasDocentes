@@ -1,25 +1,28 @@
 <?php
+
 namespace es\ucm;
 
-class Problema{
-	private $IdProblema;
-	private $Creditos;
-	private $Presencial;
-	private $IdAsignatura;
+class Problema
+{
+    private $IdProblema;
+    private $Creditos;
+    private $Presencial;
+    private $IdAsignatura;
 
-	public function __construct($IdProblema,$Creditos,$Presencial,$IdAsignatura){
-		$this->IdProblema = $IdProblema;
-		$this->Creditos = $Creditos;
-		$this->Presencial = $Presencial;
-		$this->IdAsignatura = $IdAsignatura;
-	}
+    public function __construct($IdProblema, $Creditos, $Presencial, $IdAsignatura)
+    {
+        $this->IdProblema = $IdProblema;
+        $this->Creditos = $Creditos;
+        $this->Presencial = $Presencial;
+        $this->IdAsignatura = $IdAsignatura;
+    }
 
     /**
      * @return mixed
      */
     public function getIdProblema()
     {
-    	return $this->IdProblema;
+        return $this->IdProblema;
     }
 
     /**
@@ -29,9 +32,9 @@ class Problema{
      */
     public function setIdProblema($IdProblema)
     {
-    	$this->IdProblema = $IdProblema;
+        $this->IdProblema = $IdProblema;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -39,7 +42,7 @@ class Problema{
      */
     public function getCreditos()
     {
-    	return $this->Creditos;
+        return $this->Creditos;
     }
 
     /**
@@ -49,9 +52,9 @@ class Problema{
      */
     public function setCreditos($Creditos)
     {
-    	$this->Creditos = $Creditos;
+        $this->Creditos = $Creditos;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -59,7 +62,7 @@ class Problema{
      */
     public function getPresencial()
     {
-    	return $this->Presencial;
+        return $this->Presencial;
     }
 
     /**
@@ -69,9 +72,9 @@ class Problema{
      */
     public function setPresencial($Presencial)
     {
-    	$this->Presencial = $Presencial;
+        $this->Presencial = $Presencial;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -79,7 +82,7 @@ class Problema{
      */
     public function getIdAsignatura()
     {
-    	return $this->IdAsignatura;
+        return $this->IdAsignatura;
     }
 
     /**
@@ -89,8 +92,8 @@ class Problema{
      */
     public function setIdAsignatura($IdAsignatura)
     {
-    	$this->IdAsignatura = $IdAsignatura;
+        $this->IdAsignatura = $IdAsignatura;
 
-    	return $this;
+        return $this;
     }
 }

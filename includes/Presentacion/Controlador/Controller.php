@@ -6,6 +6,5 @@ abstract class Controller
 {
 
 
-public abstract function action($context);
-
+    public abstract function action($context);
 }

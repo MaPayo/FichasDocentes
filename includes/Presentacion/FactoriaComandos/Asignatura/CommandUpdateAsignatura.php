@@ -15,9 +15,9 @@ class CommandUpdateAsignatura implements Command
         $asignatura = $saAsignatura->updateAsignatura($data);
         $responseContext = null;
         if ($asignatura) {
-            $responseContext = new Context(CREATE_ASIGNATURA_OK, $asignatura);
+            $responseContext = new Context(UPDATE_ASIGNATURA_OK, $asignatura);
         } else {
-            $responseContext = new Context(CREATE_ASIGNATURA_FAIL, null);
+            $responseContext = new Context(UPDATE_ASIGNATURA_FAIL, null);
         }
         return $responseContext;
     }

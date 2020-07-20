@@ -17,15 +17,12 @@ class SAModGrupoLaboratorioProfesorImplements implements SAModGrupoLaboratorioPr
         $modGrupoLaboratorioProfesor = $DAOModGrupoLaboratorioProfesor->listModGrupoLaboratorioProfesor($idGrupoLab);
         if ($modGrupoLaboratorioProfesor && count($modGrupoLaboratorioProfesor) > 0) {
             foreach ($modGrupoLaboratorioProfesor as $grupo) {
-<<<<<<< Updated upstream
-                $arrayModGrupoLaboratorioProfesor[] = new ModGrupoLaboratorioProfesor($grupo['IdGrupoLab'], $grupo['EmailProfesor']);
-=======
                 $arrayModGrupoLaboratorioProfesor[] = new ModGrupoLaboratorioProfesor(
                     $grupo['IdGrupoLab'],
-                    $grupo['Fechas'],
+                    $grupo['FechaInicio'],
+                    $grupo['FechaFin'],
                     $grupo['EmailProfesor']
                 );
->>>>>>> Stashed changes
             }
         }
         return $arrayModGrupoLaboratorioProfesor;
@@ -39,10 +36,8 @@ class SAModGrupoLaboratorioProfesorImplements implements SAModGrupoLaboratorioPr
         if ($modGrupoLaboratorioProfesor && count($modGrupoLaboratorioProfesor) === 1) {
             $modGrupoLaboratorioProfesor = new ModGrupoLaboratorioProfesor(
                 $modGrupoLaboratorioProfesor[0]['IdGrupoLab'],
-<<<<<<< Updated upstream
-=======
-                $modGrupoLaboratorioProfesor[0]['Fechas'],
->>>>>>> Stashed changes
+                $modGrupoLaboratorioProfesor[0]['FechaInicio'],
+                $modGrupoLaboratorioProfesor[0]['FechaFin'],
                 $modGrupoLaboratorioProfesor[0]['EmailProfesor']
             );
         }

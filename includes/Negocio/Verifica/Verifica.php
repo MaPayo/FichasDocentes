@@ -1,33 +1,36 @@
 <?php
+
 namespace es\ucm;
 
-class Verifica{
-	private $IdVerifica;
-	private $MaximoExamenes;
-	private $MinimoExamenes;
-	private $MaximoActividades;
-	private $MinimoActividades;
-	private $MaximoLaboratorio;
-	private $MinimoLaboratorio;
-	private $IdAsignatura;
+class Verifica
+{
+    private $IdVerifica;
+    private $MaximoExamenes;
+    private $MinimoExamenes;
+    private $MaximoActividades;
+    private $MinimoActividades;
+    private $MaximoLaboratorio;
+    private $MinimoLaboratorio;
+    private $IdAsignatura;
 
-	public function __construct($IdVerifica,$MaximoExamenes,$MinimoExamenes,$MaximoActividades,$MinimoActividades,$MaximoLaboratorio,$MinimoLaboratorio,$IdAsignatura){
-		$this->IdVerifica = $IdVerifica;
-		$this->MaximoExamenes = $MaximoExamenes;
-		$this->MinimoExamenes = $MinimoExamenes;
-		$this->MaximoActividades = $MaximoActividades;
-		$this->MinimoActividades = $MinimoActividades;
-		$this->MaximoLaboratorio = $MaximoLaboratorio;
-		$this->MinimoLaboratorio = $MinimoLaboratorio;
-		$this->IdAsignatura = $IdAsignatura;
-	}
+    public function __construct($IdVerifica, $MaximoExamenes, $MinimoExamenes, $MaximoActividades, $MinimoActividades, $MaximoLaboratorio, $MinimoLaboratorio, $IdAsignatura)
+    {
+        $this->IdVerifica = $IdVerifica;
+        $this->MaximoExamenes = $MaximoExamenes;
+        $this->MinimoExamenes = $MinimoExamenes;
+        $this->MaximoActividades = $MaximoActividades;
+        $this->MinimoActividades = $MinimoActividades;
+        $this->MaximoLaboratorio = $MaximoLaboratorio;
+        $this->MinimoLaboratorio = $MinimoLaboratorio;
+        $this->IdAsignatura = $IdAsignatura;
+    }
 
     /**
      * @return mixed
      */
     public function getIdVerifica()
     {
-    	return $this->IdVerifica;
+        return $this->IdVerifica;
     }
 
     /**
@@ -37,9 +40,9 @@ class Verifica{
      */
     public function setIdVerifica($IdVerifica)
     {
-    	$this->IdVerifica = $IdVerifica;
+        $this->IdVerifica = $IdVerifica;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -47,7 +50,7 @@ class Verifica{
      */
     public function getMaximoExamenes()
     {
-    	return $this->MaximoExamenes;
+        return $this->MaximoExamenes;
     }
 
     /**
@@ -57,9 +60,9 @@ class Verifica{
      */
     public function setMaximoExamenes($MaximoExamenes)
     {
-    	$this->MaximoExamenes = $MaximoExamenes;
+        $this->MaximoExamenes = $MaximoExamenes;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -67,7 +70,7 @@ class Verifica{
      */
     public function getMinimoExamenes()
     {
-    	return $this->MinimoExamenes;
+        return $this->MinimoExamenes;
     }
 
     /**
@@ -77,9 +80,9 @@ class Verifica{
      */
     public function setMinimoExamenes($MinimoExamenes)
     {
-    	$this->MinimoExamenes = $MinimoExamenes;
+        $this->MinimoExamenes = $MinimoExamenes;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -87,7 +90,7 @@ class Verifica{
      */
     public function getMaximoActividades()
     {
-    	return $this->MaximoActividades;
+        return $this->MaximoActividades;
     }
 
     /**
@@ -97,9 +100,9 @@ class Verifica{
      */
     public function setMaximoActividades($MaximoActividades)
     {
-    	$this->MaximoActividades = $MaximoActividades;
+        $this->MaximoActividades = $MaximoActividades;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -107,7 +110,7 @@ class Verifica{
      */
     public function getMinimoActividades()
     {
-    	return $this->MinimoActividades;
+        return $this->MinimoActividades;
     }
 
     /**
@@ -117,9 +120,9 @@ class Verifica{
      */
     public function setMinimoActividades($MinimoActividades)
     {
-    	$this->MinimoActividades = $MinimoActividades;
+        $this->MinimoActividades = $MinimoActividades;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -127,7 +130,7 @@ class Verifica{
      */
     public function getMaximoLaboratorio()
     {
-    	return $this->MaximoLaboratorio;
+        return $this->MaximoLaboratorio;
     }
 
     /**
@@ -137,9 +140,9 @@ class Verifica{
      */
     public function setMaximoLaboratorio($MaximoLaboratorio)
     {
-    	$this->MaximoLaboratorio = $MaximoLaboratorio;
+        $this->MaximoLaboratorio = $MaximoLaboratorio;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -147,7 +150,7 @@ class Verifica{
      */
     public function getMinimoLaboratorio()
     {
-    	return $this->MinimoLaboratorio;
+        return $this->MinimoLaboratorio;
     }
 
     /**
@@ -157,9 +160,9 @@ class Verifica{
      */
     public function setMinimoLaboratorio($MinimoLaboratorio)
     {
-    	$this->MinimoLaboratorio = $MinimoLaboratorio;
+        $this->MinimoLaboratorio = $MinimoLaboratorio;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -167,7 +170,7 @@ class Verifica{
      */
     public function getIdAsignatura()
     {
-    	return $this->IdAsignatura;
+        return $this->IdAsignatura;
     }
 
     /**
@@ -177,8 +180,8 @@ class Verifica{
      */
     public function setIdAsignatura($IdAsignatura)
     {
-    	$this->IdAsignatura = $IdAsignatura;
+        $this->IdAsignatura = $IdAsignatura;
 
-    	return $this;
+        return $this;
     }
 }

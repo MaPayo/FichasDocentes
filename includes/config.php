@@ -4,8 +4,8 @@
  */
 define('BD_HOST','localhost'); //Direccion IP o URL de la BD de la aplicacion
 define('BD_NAME','guiasdoc'); //Nombre de la BD de la aplicacion
-define('BD_USER','root'); //Nombre de usuario de la BD de la aplicacion
-define('BD_PASS',''); //Password del usuario de la BD de la aplicacion
+define('BD_USER','guiasdoc'); //Nombre de usuario de la BD de la aplicacion
+define('BD_PASS','guiasdoc'); //Password del usuario de la BD de la aplicacion
 define('RAIZ_APP',__DIR__);
 define('RUTA_APP','');
 define('RUTA_IMGS',RUTA_APP.'includes/Presentacion/Vistas/resources/');

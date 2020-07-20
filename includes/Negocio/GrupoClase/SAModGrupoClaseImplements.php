@@ -3,7 +3,7 @@
 namespace es\ucm;
 
 require_once('includes/Negocio/GrupoClase/SAModGrupoClase.php');
-require_once('includes/Negocio/GrupoClase/GrupoClase.php');
+require_once('includes/Negocio/GrupoClase/ModGrupoClase.php');
 require_once('includes/Integracion/Factorias/FactoriesDAOImplements.php');
 
 class SAModGrupoClaseImplements implements SAModGrupoClase
@@ -18,7 +18,7 @@ class SAModGrupoClaseImplements implements SAModGrupoClase
         $grupoClase = $DAOModGrupoClase->listModGrupoClase($idModAsignatura);
         if ($grupoClase && count($grupoClase) > 0) {
             foreach ($grupoClase as $grupo) {
-                $arrayGrupoClase[] = new GrupoClase($grupo['IdGrupoClase'], $grupo['Letra'], $grupo['Idioma'], $grupo['IdModAsignatura']);
+                $arrayGrupoClase[] = new ModGrupoClase($grupo['IdGrupoClase'], $grupo['Letra'], $grupo['Idioma'], $grupo['IdModAsignatura']);
             }
         }
         return $arrayGrupoClase;
@@ -30,7 +30,7 @@ class SAModGrupoClaseImplements implements SAModGrupoClase
         $DAOModGrupoClase = $factoriesDAO->createDAOModGrupoClase();
         $grupoClase = $DAOModGrupoClase->findModGrupoClase($idGrupoClase);
         if ($grupoClase && count($grupoClase) === 1) {
-            $grupoClase = new GrupoClase(
+            $grupoClase = new ModGrupoClase(
                 $grupoClase[0]['IdGrupoClase'],
                 $grupoClase[0]['Letra'],
                 $grupoClase[0]['Idioma'],

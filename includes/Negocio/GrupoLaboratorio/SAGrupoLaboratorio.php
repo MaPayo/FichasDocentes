@@ -2,7 +2,8 @@
 
 namespace es\ucm;
 
-interface SAGrupoLaboratorio{
+interface SAGrupoLaboratorio
+{
 
     public static function listGrupoLaboratorio($idAsignatura);
 
@@ -11,7 +12,6 @@ interface SAGrupoLaboratorio{
     public static function createGrupoLaboratorio($grupoLaboratorio);
 
     public static function updateGrupoLaboratorio($grupoLaboratorio);
-    
-    public static function deleteGrupoLaboratorio($idGrupoLaboratorio);
 
+    public static function deleteGrupoLaboratorio($idGrupoLaboratorio);
 }

@@ -14,8 +14,6 @@ class SAGradoImplements implements SAGrado
         $factoriesDAO = new \es\ucm\FactoriesDAOImplements();
         $DAOGrado = $factoriesDAO->createDAOGrado();
         $grado = $DAOGrado->findGrado($codigoGrado);
-<<<<<<< Updated upstream
-=======
         if ($grado && count($grado) === 1) {
             $grado = new Grado(
                 $grado[0]['CodigoGrado'],
@@ -24,7 +22,6 @@ class SAGradoImplements implements SAGrado
                 $grado[0]['HorasEcts']
             );
         }
->>>>>>> Stashed changes
         return $grado;
     }
 
@@ -58,13 +55,9 @@ class SAGradoImplements implements SAGrado
         $DAOGrado = $factoriesDAO->createDAOGrado();
         $grados = $DAOGrado->listGrado();
         $arrayGrados = array();
-        if($grados){
+        if ($grados) {
             foreach ($grados as $grado) {
-<<<<<<< Updated upstream
-              $arrayGrados[] = new Grado($grado['CodigoGrado'], $grado['NombreGrado'], $grado['HorasEcts']);
-=======
                 $arrayGrados[] = new Grado($grado['CodigoGrado'], $grado['NombreGrado'], $grado['CoordinadorGrado'], $grado['HorasEcts']);
->>>>>>> Stashed changes
             }
         }
         return $arrayGrados;

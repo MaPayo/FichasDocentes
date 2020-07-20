@@ -1,7 +1,9 @@
 <?php
+
 namespace es\ucm;
 
-interface DAOModHorarioLaboratorio{
+interface DAOModHorarioLaboratorio
+{
     public static function listModHorarioLaboratorio($idGrupoLaboratorio);
 
     public static function findModHorarioLaboratorio($idHorarioLaboratorio);
@@ -9,6 +11,6 @@ interface DAOModHorarioLaboratorio{
     public static function createModHorarioLaboratorio($modHorarioLaboratorio);
 
     public static function updateModHorarioLaboratorio($modHorarioLaboratorio);
-    
+
     public static function deleteModHorarioLaboratorio($idHorarioLaboratorio);
 }

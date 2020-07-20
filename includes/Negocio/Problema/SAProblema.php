@@ -2,14 +2,14 @@
 
 namespace es\ucm;
 
-interface SAProblema{
+interface SAProblema
+{
 
     public static function findProblema($idAsignatura);
 
     public static function createProblema($problema);
 
     public static function updateProblema($problema);
-    
-    public static function deleteProblema($idAsignatura);
 
+    public static function deleteProblema($idAsignatura);
 }

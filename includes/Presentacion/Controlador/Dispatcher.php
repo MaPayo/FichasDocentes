@@ -6,6 +6,5 @@ abstract class Dispatcher
 {
 
 
-public abstract function updateView($responseContext);
-
+    public abstract function updateView($responseContext);
 }

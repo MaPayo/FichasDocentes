@@ -1,29 +1,32 @@
 <?php
+
 namespace es\ucm;
 
-class ModHorarioClase{
-	private $IdHorarioClase;
-	private $Aula;
-	private $Dia;
-	private $HoraInicio;
-	private $HoraFin;
-	private $IdGrupoClase;
-    
-	public function __construct($IdHorarioClase,$Aula,$Dia,$HoraInicio,$HoraFin,$IdGrupoClase){
-		$this->IdHorarioClase = $IdHorarioClase;
-		$this->Aula = $Aula;
-		$this->Dia = $Dia;
-		$this->HoraInicio = $HoraInicio;
-		$this->HoraFin = $HoraFin;
-		$this->IdGrupoClase = $IdGrupoClase;
-	}
+class ModHorarioClase
+{
+    private $IdHorarioClase;
+    private $Aula;
+    private $Dia;
+    private $HoraInicio;
+    private $HoraFin;
+    private $IdGrupoClase;
+
+    public function __construct($IdHorarioClase, $Aula, $Dia, $HoraInicio, $HoraFin, $IdGrupoClase)
+    {
+        $this->IdHorarioClase = $IdHorarioClase;
+        $this->Aula = $Aula;
+        $this->Dia = $Dia;
+        $this->HoraInicio = $HoraInicio;
+        $this->HoraFin = $HoraFin;
+        $this->IdGrupoClase = $IdGrupoClase;
+    }
 
     /**
      * @return mixed
      */
     public function getIdHorarioClase()
     {
-    	return $this->IdHorarioClase;
+        return $this->IdHorarioClase;
     }
 
     /**
@@ -33,9 +36,9 @@ class ModHorarioClase{
      */
     public function setIdHorarioClase($IdHorarioClase)
     {
-    	$this->IdHorarioClase = $IdHorarioClase;
+        $this->IdHorarioClase = $IdHorarioClase;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -43,7 +46,7 @@ class ModHorarioClase{
      */
     public function getAula()
     {
-    	return $this->Aula;
+        return $this->Aula;
     }
 
     /**
@@ -53,9 +56,9 @@ class ModHorarioClase{
      */
     public function setAula($Aula)
     {
-    	$this->Aula = $Aula;
+        $this->Aula = $Aula;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -63,7 +66,7 @@ class ModHorarioClase{
      */
     public function getDia()
     {
-    	return $this->Dia;
+        return $this->Dia;
     }
 
     /**
@@ -73,9 +76,9 @@ class ModHorarioClase{
      */
     public function setDia($Dia)
     {
-    	$this->Dia = $Dia;
+        $this->Dia = $Dia;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -83,7 +86,7 @@ class ModHorarioClase{
      */
     public function getHoraInicio()
     {
-    	return $this->HoraInicio;
+        return $this->HoraInicio;
     }
 
     /**
@@ -93,9 +96,9 @@ class ModHorarioClase{
      */
     public function setHoraInicio($HoraInicio)
     {
-    	$this->HoraInicio = $HoraInicio;
+        $this->HoraInicio = $HoraInicio;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -103,7 +106,7 @@ class ModHorarioClase{
      */
     public function getHoraFin()
     {
-    	return $this->HoraFin;
+        return $this->HoraFin;
     }
 
     /**
@@ -113,9 +116,9 @@ class ModHorarioClase{
      */
     public function setHoraFin($HoraFin)
     {
-    	$this->HoraFin = $HoraFin;
+        $this->HoraFin = $HoraFin;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -123,7 +126,7 @@ class ModHorarioClase{
      */
     public function getIdGrupoClase()
     {
-    	return $this->IdGrupoClase;
+        return $this->IdGrupoClase;
     }
 
     /**
@@ -133,8 +136,8 @@ class ModHorarioClase{
      */
     public function setIdGrupoClase($IdGrupoClase)
     {
-    	$this->IdGrupoClase = $IdGrupoClase;
+        $this->IdGrupoClase = $IdGrupoClase;
 
-    	return $this;
+        return $this;
     }
 }

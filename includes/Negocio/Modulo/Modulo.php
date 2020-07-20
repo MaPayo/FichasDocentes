@@ -9,7 +9,7 @@ class Modulo
     private $creditosModulo;
     private $codigoGrado;
 
-    public function __construct($IdModulo, $NombreModulo,$CreditosModulo,$CodigoGrado)
+    public function __construct($IdModulo, $NombreModulo, $CreditosModulo, $CodigoGrado)
     {
         $this->idModulo = $IdModulo;
         $this->nombreModulo = $NombreModulo;

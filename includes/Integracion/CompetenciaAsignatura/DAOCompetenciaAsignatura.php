@@ -1,12 +1,14 @@
 <?php
+
 namespace es\ucm;
 
-interface DAOCompetenciaAsignatura{
+interface DAOCompetenciaAsignatura
+{
     public static function findCompetenciaAsignatura($idAsignatura);
 
-    public static function createCompetenciaAsignatura($CompetenciasAsignatura);
+    public static function createCompetenciaAsignatura($competenciasAsignatura);
 
-    public static function updateCompetenciaAsignatura($CompetenciasAsignatura);
-    
+    public static function updateCompetenciaAsignatura($competenciasAsignatura);
+
     public static function deleteCompetenciaAsignatura($idAsignatura);
 }

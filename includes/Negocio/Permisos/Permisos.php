@@ -28,7 +28,7 @@ class Permisos
         $this->IdAsignatura = $IdAsignatura;
         $this->EmailProfesor = $EmailProfesor;
     }
-    
+
 
     /**
      * @return mixed

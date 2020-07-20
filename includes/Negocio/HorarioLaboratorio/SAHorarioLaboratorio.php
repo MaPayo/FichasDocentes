@@ -2,7 +2,8 @@
 
 namespace es\ucm;
 
-interface SAHorarioLaboratorio{
+interface SAHorarioLaboratorio
+{
 
     public static function listHorarioLaboratorio($idGrupoLab);
 
@@ -11,7 +12,6 @@ interface SAHorarioLaboratorio{
     public static function createHorarioLaboratorio($horarioLaboratorio);
 
     public static function updateHorarioLaboratorio($horarioLaboratorio);
-    
-    public static function deleteHorarioLaboratorio($idHorarioLab);
 
+    public static function deleteHorarioLaboratorio($idHorarioLab);
 }

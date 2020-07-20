@@ -5,4 +5,3 @@ interface Command{
 
     public function execute($data);
 }
-?>

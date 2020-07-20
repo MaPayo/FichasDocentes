@@ -17,16 +17,13 @@ class SAGrupoClaseProfesorImplements implements SAGrupoClaseProfesor
         $grupoClaseProfesor = $DAOGrupoClaseProfesor->listGrupoClaseProfesor($idGrupoClase);
         if ($grupoClaseProfesor && count($grupoClaseProfesor) > 0) {
             foreach ($grupoClaseProfesor as $grupo) {
-<<<<<<< Updated upstream
-                $arrayGrupoClaseProfesor[] = new GrupoClaseProfesor($grupo['IdGrupoClase'], $grupo['EmailProfesor']);
-=======
                 $arrayGrupoClaseProfesor[] = new GrupoClaseProfesor(
                     $grupo['IdGrupoClase'],
                     $grupo['Tipo'],
-                    $grupo['Fechas'],
+                    $grupo['FechaInicio'],
+                    $grupo['FechaFin'],
                     $grupo['EmailProfesor']
                 );
->>>>>>> Stashed changes
             }
         }
         return $arrayGrupoClaseProfesor;
@@ -40,11 +37,9 @@ class SAGrupoClaseProfesorImplements implements SAGrupoClaseProfesor
         if ($grupoClaseProfesor && count($grupoClaseProfesor) === 1) {
             $grupoClaseProfesor = new GrupoClaseProfesor(
                 $grupoClaseProfesor[0]['IdGrupoClase'],
-<<<<<<< Updated upstream
-=======
                 $grupoClaseProfesor[0]['Tipo'],
-                $grupoClaseProfesor[0]['Fechas'],
->>>>>>> Stashed changes
+                $grupoClaseProfesor[0]['FechaInicio'],
+                $grupoClaseProfesor[0]['FechaFin'],
                 $grupoClaseProfesor[0]['EmailProfesor']
             );
         }
