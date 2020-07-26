@@ -90,7 +90,10 @@ class FormLogin extends Form{
 														$idAsignatura = $asignatura->getIdAsignatura();
 													}
 													$_SESSION['asignaturas'][$grado->getCodigoGrado()][$asignatura->getIdAsignatura()]['permisos'] = serialize($permisos->getData());
+<<<<<<< HEAD
 													$_SESSION['asignaturas'][$grado->getCodigoGrado()][$asignatura->getIdAsignatura()]['coordinacion'] = false;
+=======
+>>>>>>> efe7b7f1c9ba2851e2735cddfc08d753fa690bb7
 												}
 												if($grado->getCoordinadorGrado() === $email){
 													if(is_null($idAsignatura)){
@@ -101,6 +104,8 @@ class FormLogin extends Form{
 												}
 											}
 										}
+										
+>>>>>>> efe7b7f1c9ba2851e2735cddfc08d753fa690bb7
 									}
 								}
 							}
