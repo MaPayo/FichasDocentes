@@ -36,18 +36,27 @@ class SAPermisosImplements implements SAPermisos
         }
         return $arrayPermisos;
     }
+
     public static function findPermisosPorProfesorYAsignatura($emailProfesor, $idAsignatura)
     {
-        $arrayPermisos = array();
         $factoriesDAO = new \es\ucm\FactoriesDAOImplements();
         $DAOPermisos = $factoriesDAO->createDAOPermisos();
         $permisos = $DAOPermisos->findPermisosPorProfesorYAsignatura($emailProfesor, $idAsignatura);
-        if ($permisos) {
-            foreach ($permisos as $permiso) {
-                $arrayPermisos[] = new Permisos($permiso['IdPermiso'], $permiso['PermisoPrograma'], $permiso['PermisoCompetencias'], $permiso['PermisoMetodologia'], $permiso['PermisoBibliografia'], $permiso['PermisoGrupoLaboratorio'], $permiso['PermisoGrupoClase'], $permiso['PermisoEvaluacion'], $permiso['IdAsignatura'], $permiso['EmailProfesor']);
-            }
+        if ($permisos && count($permisos) === 1) {
+            $permisos = new Permisos(
+                $permisos[0]['IdPermiso'],
+                $permisos[0]['PermisoPrograma'],
+                $permisos[0]['PermisoCompetencias'],
+                $permisos[0]['PermisoMetodologia'],
+                $permisos[0]['PermisoBibliografia'],
+                $permisos[0]['PermisoGrupoLaboratorio'],
+                $permisos[0]['PermisoGrupoClase'],
+                $permisos[0]['PermisoEvaluacion'],
+                $permisos[0]['IdAsignatura'],
+                $permisos[0]['EmailProfesor']
+            );
         }
-        return $arrayPermisos;
+        return $permisos;
     }
 
     public static function createPermisos($permiso)

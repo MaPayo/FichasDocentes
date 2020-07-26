@@ -37,7 +37,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                         $name = 'IdModAsignatura';
                     }
 
-                    if(isset($_SESSION['permisos'][$_GET[$name]]) && unserialize($_SESSION['permisos'][$_GET[$name]])->getPermisoMetodologia() >= 6){
+                    if(isset($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET[$name]]) && unserialize($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET[$name]]['permisos'])->getPermisoMetodologia() === true){
                      $controller = new es\ucm\ControllerImplements();
                      $context = new es\ucm\Context(FIND_CONFIGURACION, htmlspecialchars(trim(strip_tags($_GET[$name]))));
                      $contextConfiguacion = $controller->action($context);
