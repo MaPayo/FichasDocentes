@@ -37,7 +37,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                         $name = 'IdModAsignatura';
                     }
 
-                    if(isset($_SESSION['permisos'][$_GET[$name]]) && unserialize($_SESSION['permisos'][$_GET[$name]])->getPermisoCompetencias() >= 6){
+                    if($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET[$name]]['coordinacion'] == true || (isset($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET[$name]]['permisos']) && $_SESSION['asignaturas'][$_GET['IdGrado']][$_GET[$name]]['permisos']->getPermisoCompetencias() == true)){
                        $controller = new es\ucm\ControllerImplements();
                        $context = new es\ucm\Context(FIND_CONFIGURACION, htmlspecialchars(trim(strip_tags($_GET[$name]))));
                        $contextConfiguacion = $controller->action($context);
@@ -75,10 +75,12 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                         $datosIniciales['resultadosAprendizaje']=$contextCompetencia->getData()->getResultadosAprendizaje();
                                         $datosIniciales['resultadosAprendizajeI']=$contextCompetencia->getData()->getResultadosAprendizajeI();
                                         $datosIniciales['idAsignatura']=$_GET[$name];
+                                        $datosIniciales['idGrado'] =$_GET['IdGrado'];
                                         $access->gestionaModificacion($datosIniciales);
                                     }
                                     else{
                                        $datosIniciales['idAsignatura']=$_GET[$name];
+                                       $datosIniciales['idGrado'] =$_GET['IdGrado'];
                                        $access->gestionaModificacion($datosIniciales); 
                                    }   
                                    

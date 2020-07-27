@@ -36,7 +36,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                         $name = 'IdModAsignatura';
                     }
 
-                    if (isset($_SESSION['permisos'][$_GET[$name]]) && unserialize($_SESSION['permisos'][$_GET[$name]])->getPermisoPrograma() >= 6) {
+                    if ($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET[$name]]['coordinacion'] == true || (isset($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET[$name]]['permisos']) && $_SESSION['asignaturas'][$_GET['IdGrado']][$_GET[$name]]['permisos']->getPermisoPrograma() == true)) {
                         $controller = new es\ucm\ControllerImplements();
                         $context = new es\ucm\Context(FIND_CONFIGURACION, htmlspecialchars(trim(strip_tags($_GET[$name]))));
                         $contextConfiguacion = $controller->action($context);
@@ -61,18 +61,18 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                             $context = new es\ucm\Context(DELETE_MODPROGRAMA_ASIGNATURA, htmlspecialchars(trim(strip_tags($_GET[$name]))));
                                             $contextPrograma = $controller->action($context);
                                             if($contextPrograma->getEvent()=== DELETE_MODPROGRAMA_ASIGNATURA_OK){
-                                                header('Location: indexAcceso.php?IdAsignatura='.$_GET[$name].'&eliminado=y');
+                                                header('Location: indexAcceso.php?IdGrado='.$_GET['IdGrado'].'&IdAsignatura='.$_GET[$name].'&eliminado=y');
                                             }elseif($contextPrograma->getEvent()=== DELETE_MODPROGRAMA_ASIGNATURA_FAIL){
-                                                header('Location: indexAcceso.php?IdAsignatura='.$_GET[$name].'&eliminado=n');
+                                                header('Location: indexAcceso.php?IdGrado='.$_GET['IdGrado'].'&IdAsignatura='.$_GET[$name].'&eliminado=n');
                                             }
                                             
                                         } elseif($contextPrograma->getEvent() === FIND_PROGRAMA_ASIGNATURA_OK) {
                                             $context = new es\ucm\Context(DELETE_PROGRAMA_ASIGNATURA, htmlspecialchars(trim(strip_tags($_GET[$name]))));
                                             $contextPrograma = $controller->action($context);
                                             if($contextPrograma->getEvent()=== DELETE_PROGRAMA_ASIGNATURA_OK){
-                                                header('Location: indexAcceso.php?IdAsignatura='.$_GET[$name].'&eliminado=y');
+                                                header('Location: indexAcceso.php?IdGrado='.$_GET['IdGrado'].'&IdAsignatura='.$_GET[$name].'&eliminado=y');
                                             }elseif($contextPrograma->getEvent()=== DELETE_PROGRAMA_ASIGNATURA_FAIL){
-                                                header('Location: indexAcceso.php?IdAsignatura='.$_GET[$name].'&eliminado=n');
+                                                header('Location: indexAcceso.php?IdGrado='.$_GET['IdGrado'].'&IdAsignatura='.$_GET[$name].'&eliminado=n');
                                             }
                                         }
                                         ?>

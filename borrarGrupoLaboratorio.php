@@ -31,7 +31,8 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
 
                 if(isset($_GET['IdAsignatura']) || (isset($_GET['IdGrupoLaboratorio']) && isset($_GET['IdAsignatura']))){
 
-                    if(isset($_SESSION['permisos'][$_GET['IdAsignatura']]) && unserialize($_SESSION['permisos'][$_GET['IdAsignatura']])->getPermisoGrupoLaboratorio() >= 6){
+                    if($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET['IdAsignatura']]['coordinacion'] == true || (isset($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET['IdAsignatura']]['permisos']) && $_SESSION['asignaturas'][$_GET['IdGrado']][$_GET['IdAsignatura']]['permisos']->getPermisoGrupoLaboratorio() == true)){
+
                      $controller = new es\ucm\ControllerImplements();
                      $context = new es\ucm\Context(FIND_CONFIGURACION, htmlspecialchars(trim(strip_tags($_GET['IdAsignatura']))));
                      $contextConfiguacion = $controller->action($context);
@@ -80,9 +81,9 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                             $context = new es\ucm\Context(DELETE_MODGRUPO_LABORATORIO, htmlspecialchars(trim(strip_tags($_GET['IdGrupoLaboratorio']))));
                                             $contextModGrupoLaboratorio = $controller->action($context);
                                             if ($contextModGrupoLaboratorio->getEvent() === DELETE_MODGRUPO_LABORATORIO_OK) {
-                                                header('Location: indexAcceso.php?IdAsignatura=' . $_GET['IdAsignatura'] . '&eliminado=y');
+                                                header('Location: indexAcceso.php?IdGrado='.$_GET['IdGrado'].'&IdAsignatura=' . $_GET['IdAsignatura'] . '&eliminado=y');
                                             } elseif ($contextModGrupoLaboratorio->getEvent() === DELETE_MODGRUPO_LABORATORIO_FAIL) {
-                                                header('Location: indexAcceso.php?IdAsignatura=' . $_GET['IdAsignatura'] . '&eliminado=n');
+                                                header('Location: indexAcceso.php?IdGrado='.$_GET['IdGrado'].'&IdAsignatura=' . $_GET['IdAsignatura'] . '&eliminado=n');
                                             }
                                         }
                                     }

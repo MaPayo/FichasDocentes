@@ -37,7 +37,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
             $name = 'IdModAsignatura';
           }
 
-          if(isset($_SESSION['permisos'][$_GET[$name]]) && unserialize($_SESSION['permisos'][$_GET[$name]])->getPermisoBibliografia() >= 6){
+          if($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET[$name]]['coordinacion'] == true || (isset($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET[$name]]['permisos']) && $_SESSION['asignaturas'][$_GET['IdGrado']][$_GET[$name]]['permisos']->getPermisoBibliografia() == true)){
            $controller = new es\ucm\ControllerImplements();
            $context = new es\ucm\Context(FIND_CONFIGURACION, htmlspecialchars(trim(strip_tags($_GET[$name]))));
            $contextConfiguacion = $controller->action($context);
@@ -64,18 +64,18 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                     $context = new es\ucm\Context(DELETE_MODBIBLIOGRAFIA, htmlspecialchars(trim(strip_tags($_GET[$name]))));
                     $contextBibliografia = $controller->action($context);
                     if($contextBibliografia->getEvent()=== DELETE_MODBIBLIOGRAFIA_OK){
-                        header('Location: indexAcceso.php?IdAsignatura='.$_GET[$name].'&eliminado=y');
+                        header('Location: indexAcceso.php?IdGrado='.$_GET['IdGrado'].'&IdAsignatura='.$_GET[$name].'&eliminado=y');
                     }elseif($contextBibliografia->getEvent()=== DELETE_MODBIBLIOGRAFIA_FAIL){
-                        header('Location: indexAcceso.php?IdAsignatura='.$_GET[$name].'&eliminado=n');
+                        header('Location: indexAcceso.php?IdGrado='.$_GET['IdGrado'].'&IdAsignatura='.$_GET[$name].'&eliminado=n');
                     }
                   }
                   elseif($contextBibliografia->getEvent() === FIND_BIBLIOGRAFIA_OK){
                     $context = new es\ucm\Context(DELETE_BIBLIOGRAFIA, htmlspecialchars(trim(strip_tags($_GET[$name]))));
                     $contextBibliografia = $controller->action($context);
                     if($contextBibliografia->getEvent()=== DELETE_BIBLIOGRAFIA_OK){
-                        header('Location: indexAcceso.php?IdAsignatura='.$_GET[$name].'&eliminado=y');
+                        header('Location: indexAcceso.php?IdGrado='.$_GET['IdGrado'].'&IdAsignatura='.$_GET[$name].'&eliminado=y');
                     }elseif($contextBibliografia->getEvent()=== DELETE_BIBLIOGRAFIA_FAIL){
-                        header('Location: indexAcceso.php?IdAsignatura='.$_GET[$name].'&eliminado=n');
+                        header('Location: indexAcceso.php?IdGrado='.$_GET['IdGrado'].'&IdAsignatura='.$_GET[$name].'&eliminado=n');
                     }
                   } 
                   ?>

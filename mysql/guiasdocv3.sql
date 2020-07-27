@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 20-07-2020 a las 18:06:15
+-- Tiempo de generación: 26-07-2020 a las 22:19:34
 -- Versión del servidor: 10.4.11-MariaDB
 -- Versión de PHP: 7.4.6
 
@@ -64,32 +64,32 @@ CREATE TABLE `asignatura` (
 --
 
 INSERT INTO `asignatura` (`IdAsignatura`, `NombreAsignatura`, `Abreviatura`, `Curso`, `Semestre`, `NombreAsignaturaIngles`, `Creditos`, `CoordinadorAsignatura`, `Estado`, `IdMateria`) VALUES
-(800490, 'Fundamentos de física', '', 1, 1, 'Physics fundamentals I', 9, 'cdiazque@ucm.es', '', 80811),
-(800491, 'Fundamentos de física II', '', 1, 2, 'Physics fundamentals II', 9, 'acasmor@fis.ucm.es', '', 80811),
-(800492, 'Matemáticas', '', 1, 1, 'Mathematics', 9, 'jusanz@ucm.es', '', 80812),
-(800493, 'Cálculo', '', 1, 2, 'Calculus', 7.5, 'lsntnfp@ucm.es', '', 80812),
-(800494, 'Álgebra', '', 1, 2, 'Algebra', 7.5, 'p.tempesta@fis.ucm.es', '', 80812),
-(800495, 'Química', '', 1, 1, 'Chemistry', 6, 'iredondo@quim.ucm.es', '', 80813),
-(800496, 'Laboratorio de computación científica', '', 1, 1, 'Scientific computer laboratory', 6, 'mguijarro@ucm.es', '', 80814),
-(800497, 'Laboratorio de física I', '', 1, 2, 'Physics laboratory I', 6, 'jlcontreras@fis.ucm.es', '', 80811),
-(804500, 'Física I', '', 1, 1, NULL, 6, 'jdelrio@ucm.es', '', 88711),
-(804501, 'Física II', '', 1, 2, NULL, 6, 'lsanchez@fis.ucm.es', '', 88711),
-(804502, 'Quimica I', '', 1, 1, NULL, 6, 'sgmartin@quim.ucm.es', '', 88712),
+(800490, 'Fundamentos de física', '', 1, 1, 'Physics fundamentals I', 9, 'cdiazque@ucm.es', 'B', 80811),
+(800491, 'Fundamentos de física II', '', 1, 2, 'Physics fundamentals II', 9, 'acasmor@fis.ucm.es', 'B', 80811),
+(800492, 'Matemáticas', '', 1, 1, 'Mathematics', 9, 'jusanz@ucm.es', 'B', 80812),
+(800493, 'Cálculo', '', 1, 2, 'Calculus', 7.5, 'lsntnfp@ucm.es', 'B', 80812),
+(800494, 'Álgebra', '', 1, 2, 'Algebra', 7.5, 'p.tempesta@fis.ucm.es', 'B', 80812),
+(800495, 'Química', '', 1, 1, 'Chemistry', 6, 'iredondo@quim.ucm.es', 'B', 80813),
+(800496, 'Laboratorio de computación científica', '', 1, 1, 'Scientific computer laboratory', 6, 'mguijarro@ucm.es', 'B', 80814),
+(800497, 'Laboratorio de física I', '', 1, 2, 'Physics laboratory I', 6, 'jlcontreras@fis.ucm.es', 'B', 80811),
+(804500, 'Física I', '', 1, 1, NULL, 6, 'jdelrio@ucm.es', 'B', 88711),
+(804501, 'Física II', '', 1, 2, NULL, 6, 'lsanchez@fis.ucm.es', 'B', 88711),
+(804502, 'Quimica I', '', 1, 1, NULL, 6, 'sgmartin@quim.ucm.es', 'B', 88712),
 (804503, 'Química II', '', 1, 2, NULL, 6, 'sfilippo@ucm.es', '', 88712),
-(804505, 'Matemáticas I', '', 1, 1, NULL, 6, 'fybruno@ucm.es', '', 88713),
-(804506, 'Matemáticas II', '', 1, 2, NULL, 6, 'a.malyshev@fis.ucm.es', '', 88713),
-(804507, 'Métodos informaticos para la ingeniería', '', 1, 2, NULL, 6, 'faccion@ucm.es', '', 88715),
-(804510, 'Introducción a la ingeniería de materiales', '', 1, 1, NULL, 6, 'mlblazquez@quim.ucm.es', '', 88721),
-(804511, 'Diagramas y transformaciones de fases', '', 1, 2, NULL, 6, 'gsalazar@quim.ucm.es', '', 88721),
-(804543, 'Biología', '', 1, 1, NULL, 6, 'mjfeito@ucm.es', '', 88714),
-(804560, 'Física I', '', 1, 1, 'Physics I', 9, 'rafahern@ucm.es', '', 89011),
-(804561, 'Física II', '', 1, 1, 'Physics II', 9, 'coordinadorF2@ucm.es', '', 89011),
-(804562, 'Cálculo', '', 1, 1, 'Calculation', 9, 'mjrplaza@fis.ucm.es', '', 89013),
-(804563, 'Álgebra', '', 1, 2, 'Algebra', 9, 'magflechoso@ucm.es', '', 89013),
+(804505, 'Matemáticas I', '', 1, 1, '', 6, 'fybruno@ucm.es', 'B', 88713),
+(804506, 'Matemáticas II', '', 1, 2, NULL, 6, 'a.malyshev@fis.ucm.es', 'B', 88713),
+(804507, 'Métodos informaticos para la ingeniería', '', 1, 2, NULL, 6, 'faccion@ucm.es', 'B', 88715),
+(804510, 'Introducción a la ingeniería de materiales', '', 1, 1, NULL, 6, 'mlblazquez@quim.ucm.es', 'B', 88721),
+(804511, 'Diagramas y transformaciones de fases', '', 1, 2, NULL, 6, 'gsalazar@quim.ucm.es', 'B', 88721),
+(804543, 'Biología', '', 1, 1, NULL, 6, 'mjfeito@ucm.es', 'B', 88714),
+(804560, 'Física I', '', 1, 1, 'Physics I', 9, 'rafahern@ucm.es', 'B', 89011),
+(804561, 'Física II', '', 1, 1, 'Physics II', 9, 'coordinadorF2@ucm.es', 'B', 89011),
+(804562, 'Cálculo', '', 1, 1, 'Calculation', 9, 'mjrplaza@fis.ucm.es', 'B', 89013),
+(804563, 'Álgebra', '', 1, 2, 'Algebra', 9, 'magflechoso@ucm.es', 'B', 89013),
 (804564, 'Ampliación de Matemáticas', '', 1, 2, 'Mathematics expansion', 6, 'coordinadorAM@ucm.es', 'B', 89013),
 (804566, 'Informática', '', 1, 1, 'Computing', 6, 'igarcia@ucm.es', 'V', 89012),
-(804567, 'Circuitos Digitales', '', 1, 1, 'Digital circuits', 6, 'jluimana@ucm.es', '', 89012),
-(804575, 'Análisis de Circuitos', '', 1, 2, 'rt', 6, 'esas@ucm.es', '', 89011);
+(804567, 'Circuitos Digitales', '', 1, 1, 'Digital circuits', 6, 'jluimana@ucm.es', 'B', 89012),
+(804575, 'Análisis de Circuitos', '', 1, 2, 'rt', 6, 'esas@ucm.es', 'B', 89011);
 
 -- --------------------------------------------------------
 
@@ -159,23 +159,23 @@ INSERT INTO `competenciaasignatura` (`IdCompetencia`, `Generales`, `Generalesi`,
 
 CREATE TABLE `configuracion` (
   `IdConfiguracion` int(6) NOT NULL,
-  `ConocimientosPrevios` int(1) NOT NULL,
-  `BreveDescripcion` int(1) NOT NULL,
-  `ProgramaTeorico` int(1) NOT NULL,
-  `ProgramaSeminarios` int(1) NOT NULL,
-  `ProgramaLaboratorio` int(1) NOT NULL,
-  `ComGenerales` int(1) NOT NULL,
-  `ComEspecificas` int(1) NOT NULL,
-  `ComBasicas` int(1) NOT NULL,
-  `ResultadosAprendizaje` int(1) NOT NULL,
-  `Metodologia` int(1) NOT NULL,
-  `CitasBibliograficas` int(1) NOT NULL,
-  `RecursosInternet` int(1) NOT NULL,
-  `GrupoLaboratorio` int(1) NOT NULL,
-  `RealizacionExamenes` int(1) NOT NULL,
-  `RealizacionActividades` int(1) NOT NULL,
-  `RealizacionLaboratorio` int(1) NOT NULL,
-  `CalificacionFinal` int(1) NOT NULL,
+  `ConocimientosPrevios` tinyint(1) NOT NULL,
+  `BreveDescripcion` tinyint(1) NOT NULL,
+  `ProgramaTeorico` tinyint(1) NOT NULL,
+  `ProgramaSeminarios` tinyint(1) NOT NULL,
+  `ProgramaLaboratorio` tinyint(1) NOT NULL,
+  `ComGenerales` tinyint(1) NOT NULL,
+  `ComEspecificas` tinyint(1) NOT NULL,
+  `ComBasicas` tinyint(1) NOT NULL,
+  `ResultadosAprendizaje` tinyint(1) NOT NULL,
+  `Metodologia` tinyint(1) NOT NULL,
+  `CitasBibliograficas` tinyint(1) NOT NULL,
+  `RecursosInternet` tinyint(1) NOT NULL,
+  `GrupoLaboratorio` tinyint(1) NOT NULL,
+  `RealizacionExamenes` tinyint(1) NOT NULL,
+  `RealizacionActividades` tinyint(1) NOT NULL,
+  `RealizacionLaboratorio` tinyint(1) NOT NULL,
+  `CalificacionFinal` tinyint(1) NOT NULL,
   `IdAsignatura` int(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -546,7 +546,7 @@ INSERT INTO `modasignatura` (`IdModAsignatura`, `FechaMod`, `EmailMod`, `IdAsign
 (804561, '2020-03-31 00:00:00', 'jusanz02@ucm.es', 804561),
 (804562, '2020-03-31 00:00:00', 'mjrplaza@fis.ucm.es', 804562),
 (804563, '2020-03-31 00:00:00', 'magflechoso@ucm.es', 804563),
-(804564, '2020-07-14 17:47:39', 'coordinadorAM@ucm.es', 804564),
+(804564, '2020-07-20 22:57:12', 'coordinadorAM@ucm.es', 804564),
 (804566, '2020-07-14 12:55:38', 'igarcia@ucm.es', 804566),
 (804567, '2020-03-31 00:00:00', 'jluimana@ucm.es', 804567),
 (804575, '2020-04-23 20:03:55', 'esas@ucm.es', 804575);
@@ -623,7 +623,8 @@ CREATE TABLE `modgrupoclase` (
 --
 
 INSERT INTO `modgrupoclase` (`IdGrupoClase`, `Letra`, `Idioma`, `IdModAsignatura`) VALUES
-(15, 'B', 'Español', 804564);
+(16, 'a', 's', 804564),
+(17, 'v', 'v', 804564);
 
 -- --------------------------------------------------------
 
@@ -644,7 +645,7 @@ CREATE TABLE `modgrupoclaseprofesor` (
 --
 
 INSERT INTO `modgrupoclaseprofesor` (`IdGrupoClase`, `Tipo`, `FechaInicio`, `FechaFin`, `EmailProfesor`) VALUES
-(15, 'T/P', '0000-00-00', '0000-00-00', 'coordinadorAM@ucm.es');
+(16, 's', '2020-09-20', '2020-09-30', 'coordinadorAM@ucm.es');
 
 -- --------------------------------------------------------
 
@@ -692,7 +693,7 @@ CREATE TABLE `modhorarioclase` (
 --
 
 INSERT INTO `modhorarioclase` (`IdHorarioClase`, `Aula`, `Dia`, `HoraInicio`, `HoraFin`, `IdGrupoClase`) VALUES
-(11, '10', 'L', '09:00:00', '12:00:00', 15);
+(12, '12', 'L', '01:33:00', '22:28:00', 16);
 
 -- --------------------------------------------------------
 
@@ -789,13 +790,13 @@ INSERT INTO `modulo` (`IdModulo`, `NombreModulo`, `CreditosModulo`, `CodigoGrado
 
 CREATE TABLE `permisos` (
   `IdPermiso` int(6) NOT NULL,
-  `PermisoPrograma` int(1) NOT NULL,
-  `PermisoCompetencias` int(1) NOT NULL,
-  `PermisoMetodologia` int(1) NOT NULL,
-  `PermisoBibliografia` int(1) NOT NULL,
-  `PermisoGrupoLaboratorio` int(1) NOT NULL,
-  `PermisoGrupoClase` int(1) NOT NULL,
-  `PermisoEvaluacion` int(1) NOT NULL,
+  `PermisoPrograma` tinyint(1) NOT NULL,
+  `PermisoCompetencias` tinyint(1) NOT NULL,
+  `PermisoMetodologia` tinyint(1) NOT NULL,
+  `PermisoBibliografia` tinyint(1) NOT NULL,
+  `PermisoGrupoLaboratorio` tinyint(1) NOT NULL,
+  `PermisoGrupoClase` tinyint(1) NOT NULL,
+  `PermisoEvaluacion` tinyint(1) NOT NULL,
   `IdAsignatura` int(6) NOT NULL,
   `EmailProfesor` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -805,22 +806,21 @@ CREATE TABLE `permisos` (
 --
 
 INSERT INTO `permisos` (`IdPermiso`, `PermisoPrograma`, `PermisoCompetencias`, `PermisoMetodologia`, `PermisoBibliografia`, `PermisoGrupoLaboratorio`, `PermisoGrupoClase`, `PermisoEvaluacion`, `IdAsignatura`, `EmailProfesor`) VALUES
-(5, 7, 7, 7, 7, 7, 7, 7, 804564, 'coordinadorAM@ucm.es'),
-(6, 7, 7, 7, 7, 7, 7, 7, 804566, 'igarcia@ucm.es'),
-(7, 4, 4, 4, 4, 7, 4, 7, 804566, 'virginia@fdi.ucm.es'),
-(8, 7, 7, 7, 7, 7, 7, 7, 804562, 'mjrplaza@fis.ucm.es'),
-(9, 7, 7, 7, 7, 7, 7, 7, 804560, 'rafahern@ucm.es'),
-(10, 4, 4, 4, 4, 4, 4, 7, 804560, 'raqumoli@ucm.es'),
-(11, 4, 4, 4, 4, 7, 4, 7, 804560, 'beperez03@ucm.es'),
-(12, 4, 4, 4, 4, 7, 4, 7, 804560, 'avioque@ucm.es'),
-(13, 7, 7, 7, 7, 7, 7, 7, 804567, 'jluimana@ucm.es'),
-(14, 7, 7, 7, 7, 7, 7, 7, 804561, 'coordinadorF2@ucm.es'),
-(15, 4, 4, 4, 4, 7, 4, 7, 804561, 'jusanz02@ucm.es'),
-(16, 7, 7, 7, 7, 7, 7, 7, 804563, 'magflechoso@ucm.es'),
-(17, 7, 7, 7, 7, 7, 7, 7, 804575, 'esas@ucm.es'),
-(19, 4, 4, 4, 6, 0, 4, 6, 804562, 'coordinadorAM@ucm.es'),
-(20, 4, 4, 4, 6, 0, 4, 6, 804563, 'coordinadorAM@ucm.es'),
-(21, 4, 4, 4, 6, 6, 4, 6, 804566, 'virginia@fdi.ucm.es');
+(22, 0, 0, 0, 0, 1, 1, 0, 804560, 'avioque@ucm.es'),
+(23, 1, 1, 1, 1, 1, 1, 1, 804560, 'beperez03@ucm.es'),
+(24, 1, 1, 1, 1, 1, 1, 1, 804564, 'coordinadorAM@ucm.es'),
+(25, 0, 1, 0, 0, 0, 1, 1, 804563, 'coordinadorAM@ucm.es'),
+(26, 1, 0, 0, 0, 1, 0, 0, 804562, 'coordinadorAM@ucm.es'),
+(27, 1, 1, 1, 1, 1, 1, 1, 804561, 'coordinadorF2@ucm.es'),
+(28, 1, 1, 1, 1, 1, 1, 1, 804575, 'esas@ucm.es'),
+(29, 1, 1, 1, 1, 1, 1, 1, 804566, 'igarcia@ucm.es'),
+(30, 1, 1, 1, 1, 1, 1, 1, 804567, 'jluimana@ucm.es'),
+(31, 1, 1, 1, 1, 1, 1, 1, 804561, 'jusanz02@ucm.es'),
+(32, 1, 1, 1, 1, 1, 1, 1, 804563, 'magflechoso@ucm.es'),
+(33, 1, 1, 1, 1, 1, 1, 1, 804562, 'mjrplaza@fis.ucm.es'),
+(34, 1, 1, 1, 1, 1, 1, 1, 804560, 'rafahern@ucm.es'),
+(35, 1, 1, 1, 1, 1, 1, 1, 804560, 'raqumoli@ucm.es'),
+(36, 1, 1, 1, 1, 1, 1, 1, 804566, 'virginia@fdi.ucm.es');
 
 -- --------------------------------------------------------
 
@@ -846,7 +846,6 @@ INSERT INTO `problema` (`IdProblema`, `Creditos`, `Presencial`, `IdAsignatura`) 
 (7, 1.5, 40, 804567),
 (8, 2.5, 40, 804561),
 (9, 3, 40, 804563),
-(10, 2, 40, 804564),
 (11, 1, 40, 804575),
 (20, 4.5, 45, 800490),
 (21, 5, 50, 800492),
@@ -1405,7 +1404,7 @@ ALTER TABLE `modevaluacion`
 -- AUTO_INCREMENT de la tabla `modgrupoclase`
 --
 ALTER TABLE `modgrupoclase`
-  MODIFY `IdGrupoClase` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `IdGrupoClase` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `modgrupolaboratorio`
@@ -1417,7 +1416,7 @@ ALTER TABLE `modgrupolaboratorio`
 -- AUTO_INCREMENT de la tabla `modhorarioclase`
 --
 ALTER TABLE `modhorarioclase`
-  MODIFY `IdHorarioClase` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `IdHorarioClase` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `modhorariolaboratorio`
@@ -1441,7 +1440,7 @@ ALTER TABLE `modprogramaasignatura`
 -- AUTO_INCREMENT de la tabla `permisos`
 --
 ALTER TABLE `permisos`
-  MODIFY `IdPermiso` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `IdPermiso` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT de la tabla `problema`

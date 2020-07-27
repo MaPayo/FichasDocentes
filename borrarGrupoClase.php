@@ -31,7 +31,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
 
             if(isset($_GET['IdAsignatura']) || (isset($_GET['IdGrupoClase']) && isset($_GET['IdAsignatura']))){
 
-                if(isset($_SESSION['permisos'][$_GET['IdAsignatura']]) && unserialize($_SESSION['permisos'][$_GET['IdAsignatura']])->getPermisoGrupoClase() >= 6){
+                if($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET['IdAsignatura']]['coordinacion'] == true || (isset($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET['IdAsignatura']]['permisos']) && $_SESSION['asignaturas'][$_GET['IdGrado']][$_GET['IdAsignatura']]['permisos']->getPermisoGrupoClase() == true )){
                     ?>
                     <div class="col-md-6 col-12">
                         <div class="card ">
@@ -76,9 +76,9 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                             $context = new es\ucm\Context(DELETE_MODGRUPO_CLASE, htmlspecialchars(trim(strip_tags($_GET['IdGrupoClase']))));
                                             $contextModGrupoClase = $controller->action($context);
                                             if ($contextModGrupoClase->getEvent() === DELETE_MODGRUPO_CLASE_OK) {
-                                                header('Location: indexAcceso.php?IdAsignatura=' . $_GET['IdAsignatura'] . '&eliminado=y');
+                                                header('Location: indexAcceso.php?IdGrado='.$_GET['IdGrado'].'&IdAsignatura=' . $_GET['IdAsignatura'] . '&eliminado=y');
                                             } elseif ($contextModGrupoClase->getEvent() === DELETE_MODGRUPO_CLASE_FAIL) {
-                                                header('Location: indexAcceso.php?IdAsignatura=' . $_GET['IdAsignatura'] . '&eliminado=n');
+                                                header('Location: indexAcceso.php?IdGrado='.$_GET['IdGrado'].'&IdAsignatura=' . $_GET['IdAsignatura'] . '&eliminado=n');
                                             }
                                         }
                                     }

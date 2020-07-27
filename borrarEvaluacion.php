@@ -36,7 +36,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                         $name = 'IdModAsignatura';
                     }
 
-                    if (isset($_SESSION['permisos'][$_GET[$name]]) && unserialize($_SESSION['permisos'][$_GET[$name]])->getPermisoEvaluacion() >= 6) {
+                    if ($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET[$name]]['coordinacion'] == true || (isset($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET[$name]]['permisos']) && $_SESSION['asignaturas'][$_GET['IdGrado']][$_GET[$name]]['permisos']->getPermisoEvaluacion() == true)) {
                         $controller = new es\ucm\ControllerImplements();
                         $context = new es\ucm\Context(FIND_CONFIGURACION, htmlspecialchars(trim(strip_tags($_GET[$name]))));
                         $contextConfiguacion = $controller->action($context);
@@ -63,17 +63,17 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                             $context = new es\ucm\Context(DELETE_MODEVALUACION, htmlspecialchars(trim(strip_tags($_GET[$name]))));
                                             $contextEvaluacion = $controller->action($context);
                                             if ($contextEvaluacion->getEvent() === DELETE_MODEVALUACION_OK) {
-                                                header('Location: indexAcceso.php?IdAsignatura=' . $_GET[$name] . '&eliminado=y');
+                                                header('Location: indexAcceso.php?IdGrado='.$_GET['IdGrado'].'&IdAsignatura=' . $_GET[$name] . '&eliminado=y');
                                             } elseif ($contextEvaluacion->getEvent() === DELETE_MODEVALUACION_FAIL) {
-                                                header('Location: indexAcceso.php?IdAsignatura=' . $_GET[$name] . '&eliminado=n');
+                                                header('Location: indexAcceso.php?IdGrado='.$_GET['IdGrado'].'&IdAsignatura=' . $_GET[$name] . '&eliminado=n');
                                             }
                                         } elseif ($contextEvaluacion->getEvent() === FIND_EVALUACION_OK) {
                                             $context = new es\ucm\Context(DELETE_EVALUACION, htmlspecialchars(trim(strip_tags($_GET[$name]))));
                                             $contextEvaluacion = $controller->action($context);
                                             if ($contextEvaluacion->getEvent() === DELETE_EVALUACION_OK) {
-                                                header('Location: indexAcceso.php?IdAsignatura=' . $_GET[$name] . '&eliminado=y');
+                                                header('Location: indexAcceso.php?IdGrado='.$_GET['IdGrado'].'&IdAsignatura=' . $_GET[$name] . '&eliminado=y');
                                             } elseif ($contextEvaluacion->getEvent() === DELETE_EVALUACION_FAIL) {
-                                                header('Location: indexAcceso.php?IdAsignatura=' . $_GET[$name] . '&eliminado=n');
+                                                header('Location: indexAcceso.php?IdGrado='.$_GET['IdGrado'].'&IdAsignatura=' . $_GET[$name] . '&eliminado=n');
                                             }
                                         }
                                         ?>
