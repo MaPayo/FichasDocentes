@@ -14,7 +14,7 @@ class CommandFindUsuario implements Command
         $saUsuario = $factorySA->createSAUsuario();
         $usuario = $saUsuario->findUsuario($data);
         $responseContext = null;
-        if ($usuario) {
+        if (isset($usuario)) {
             $responseContext = new Context(FIND_USUARIO_OK, $usuario);
         } else {
             $responseContext = new Context(FIND_USUARIO_FAIL, null);

@@ -16,7 +16,7 @@ class CommandListHorarioLaboratorio implements Command
         $saHorarioLaboratorio = $factorySA->createSAHorarioLaboratorio();
         $horarioLaboratorio = $saHorarioLaboratorio->listHorarioLaboratorio($data);
         $responseContext = null;
-        if ($horarioLaboratorio) {
+        if (isset($horarioLaboratorio)) {
             $responseContext = new Context(LIST_HORARIO_LABORATORIO_OK, $horarioLaboratorio);
         } else {
             $responseContext = new Context(LIST_HORARIO_LABORATORIO_FAIL, null);

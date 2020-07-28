@@ -25,7 +25,7 @@ class FormEvaluacion extends Form
 		$calificacionFinal = isset($datosIniciales['calificacionFinal']) ? $datosIniciales['calificacionFinal'] : null;
 		$calificacionFinalI = isset($datosIniciales['calificacionFinalI']) ? $datosIniciales['calificacionFinalI'] : null;
 		$idAsignatura = isset($datosIniciales['idAsignatura']) ? $datosIniciales['idAsignatura'] : null;
-		$idGrado = isset($datosIniciales['idGrado']) ? $datosIniciales['idAsignatura'] : null;
+		$idGrado = isset($datosIniciales['idGrado']) ? $datosIniciales['idGrado'] : null;
 
 		$controller = new ControllerImplements();
 		$context = new Context(FIND_CONFIGURACION, $idAsignatura);
@@ -43,18 +43,18 @@ class FormEvaluacion extends Form
 			if ($contextConfiguacion->getData()->getRealizacionExamenes() == 1) {
 				$html .= '<div class="form-group">
 				<label for="pesoExamenes">Peso Examenes</label>
-				<input class="form-control" type="number" id="pesoExamenes" name="pesoExamenes" min="' . $contextVerifica->getData()->getMinimoExamenes() . '" max="' . $contextVerifica->getData()->getMaximoExamenes() . '" step="1" value="' . $pesoExamenes . '">
+				<input class="form-control" type="number" id="pesoExamenes" name="pesoExamenes" min="' . $contextVerifica->getData()->getMinimoExamenes() . '" max="' . $contextVerifica->getData()->getMaximoExamenes() . '" step="1" value="' . $pesoExamenes . '" required />
 				</div>
 
 				<div class="form-group">
 				<label for="realizacionExamenes">Realización Exámenes</label>
-				<textarea class="form-control" id="realizacionExamenes" rows="3" name="realizacionExamenes" >' . $realizacionExamenes . '</textarea>
+				<textarea class="form-control" id="realizacionExamenes" rows="3" name="realizacionExamenes" required>' . $realizacionExamenes . '</textarea>
 				</div>';
 
 				if (!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())) {
 					$html .= '<div class="form-group">
 					<label for="realizacionExamenesI">Realización Exámenes (Inglés)</label>
-					<textarea class="form-control" id="realizacionExamenesI" rows="3" name="realizacionExamenesI" >' . $realizacionExamenesI . '</textarea>
+					<textarea class="form-control" id="realizacionExamenesI" rows="3" name="realizacionExamenesI" required>' . $realizacionExamenesI . '</textarea>
 					</div>';
 				}
 			}
@@ -62,18 +62,18 @@ class FormEvaluacion extends Form
 			if ($contextConfiguacion->getData()->getRealizacionActividades() == 1) {
 				$html .= '<div class="form-group">
 				<label for="pesoActividades">Peso Actividades</label>
-				<input class="form-control" type="number" id="pesoActividades" name="pesoActividades" min="' . $contextVerifica->getData()->getMinimoActividades() . '" max="' . $contextVerifica->getData()->getMaximoActividades() . '" step="1" value="' . $pesoActividades . '">
+				<input class="form-control" type="number" id="pesoActividades" name="pesoActividades" min="' . $contextVerifica->getData()->getMinimoActividades() . '" max="' . $contextVerifica->getData()->getMaximoActividades() . '" step="1" value="' . $pesoActividades . '" required />
 				</div>
 
 				<div class="form-group">
 				<label for="realizacionActividades">Realización Actividades</label>
-				<textarea class="form-control" id="realizacionActividades" rows="3" name="realizacionActividades" >' . $realizacionActividades . '</textarea>
+				<textarea class="form-control" id="realizacionActividades" rows="3" name="realizacionActividades" required>' . $realizacionActividades . '</textarea>
 				</div>';
 
 				if (!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())) {
 					$html .= '<div class="form-group">
 					<label for="realizacionActividadesI">Realización Actividades (Inglés)</label>
-					<textarea class="form-control" id="realizacionActividadesI" rows="3" name="realizacionActividadesI" >' . $realizacionActividadesI . '</textarea>
+					<textarea class="form-control" id="realizacionActividadesI" rows="3" name="realizacionActividadesI" required>' . $realizacionActividadesI . '</textarea>
 					</div>';
 				}
 			}
@@ -81,18 +81,18 @@ class FormEvaluacion extends Form
 			if ($contextConfiguacion->getData()->getRealizacionLaboratorio() == 1) {
 				$html .= '<div class="form-group">
 				<label for="pesoLaboratorio">Peso Laboratorio</label>
-				<input class="form-control" type="number" id="pesoLaboratorio" name="pesoLaboratorio" min="' . $contextVerifica->getData()->getMinimoLaboratorio() . '" max="' . $contextVerifica->getData()->getMaximoLaboratorio() . '" step="1" value="' . $pesoLaboratorio . '">
+				<input class="form-control" type="number" id="pesoLaboratorio" name="pesoLaboratorio" min="' . $contextVerifica->getData()->getMinimoLaboratorio() . '" max="' . $contextVerifica->getData()->getMaximoLaboratorio() . '" step="1" value="' . $pesoLaboratorio . '" required />
 				</div>
 
 				<div class="form-group">
 				<label for="realizacionLaboratorio">Realización Laboratorio</label>
-				<textarea class="form-control" id="realizacionLaboratorio" rows="3" name="realizacionLaboratorio" >' . $realizacionLaboratorio . '</textarea>
+				<textarea class="form-control" id="realizacionLaboratorio" rows="3" name="realizacionLaboratorio" required>' . $realizacionLaboratorio . '</textarea>
 				</div>';
 
 				if (!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())) {
 					$html .= '<div class="form-group">
 					<label for="realizacionLaboratorioI">Realización Laboratorio (Inglés)</label>
-					<textarea class="form-control" id="realizacionLaboratorioI" rows="3" name="realizacionLaboratorioI" >' . $realizacionLaboratorioI . '</textarea>
+					<textarea class="form-control" id="realizacionLaboratorioI" rows="3" name="realizacionLaboratorioI" required>' . $realizacionLaboratorioI . '</textarea>
 					</div>';
 				}
 			}
@@ -100,13 +100,13 @@ class FormEvaluacion extends Form
 			if ($contextConfiguacion->getData()->getCalificacionFinal() == 1) {
 				$html .= '<div class="form-group">
 				<label for="calificacionFinal">Calificación Final Ordinaria</label>
-				<textarea class="form-control" id="calificacionFinal" rows="3" name="calificacionFinal" >' . $calificacionFinal . '</textarea>
+				<textarea class="form-control" id="calificacionFinal" rows="3" name="calificacionFinal" required>' . $calificacionFinal . '</textarea>
 				</div>';
 
 				if (!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())) {
 					$html .= '<div class="form-group">
 					<label for="calificacionFinalI">Calificación Final Ordinaria(Inglés)</label>
-					<textarea class="form-control" id="calificacionFinalI" rows="3" name="calificacionFinalI" >' . $calificacionFinalI . '</textarea>
+					<textarea class="form-control" id="calificacionFinalI" rows="3" name="calificacionFinalI" required>' . $calificacionFinalI . '</textarea>
 					</div>';
 				}
 			}

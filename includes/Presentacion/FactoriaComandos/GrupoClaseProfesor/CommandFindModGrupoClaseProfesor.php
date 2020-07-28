@@ -16,7 +16,7 @@ class CommandFindModGrupoClaseProfesor implements Command
         $saGrupoClaseProfesor = $factorySA->createSAModGrupoClaseProfesor();
         $grupoClaseProfesor = $saGrupoClaseProfesor->findModGrupoClaseProfesor($data['idGrupoClase'], $data['emailProfesor']);
         $responseContext = null;
-        if ($grupoClaseProfesor) {
+        if (isset($grupoClaseProfesor)) {
             $responseContext = new Context(FIND_MODGRUPO_CLASE_PROFESOR_OK, $grupoClaseProfesor);
         } else {
             $responseContext = new Context(FIND_MODGRUPO_CLASE_PROFESOR_FAIL, null);

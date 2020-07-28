@@ -25,6 +25,9 @@ class SAGrupoLaboratorioProfesorImplements implements SAGrupoLaboratorioProfesor
                 );
             }
         }
+        else{
+         $arrayGrupoLaboratorioProfesor   =null;
+        }
         return $arrayGrupoLaboratorioProfesor;
     }
 
@@ -40,6 +43,9 @@ class SAGrupoLaboratorioProfesorImplements implements SAGrupoLaboratorioProfesor
                 $grupoLaboratorioProfesor[0]['FechaFin'],
                 $grupoLaboratorioProfesor[0]['EmailProfesor']
             );
+        }
+        else{
+         $grupoLaboratorioProfesor   =null;
         }
         return $grupoLaboratorioProfesor;
     }

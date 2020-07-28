@@ -14,7 +14,7 @@ class CommandListMateria implements Command
         $saMateria = $factorySA->createSAMateria();
         $materia = $saMateria->listMateria($data);
         $responseContext = null;
-        if ($materia) {
+        if (isset($materia)) {
             $responseContext = new Context(LIST_MATERIA_OK, $materia);
         } else {
             $responseContext = new Context(LIST_MATERIA_FAIL, null);

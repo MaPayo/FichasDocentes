@@ -14,7 +14,7 @@ class CommandFindMateria implements Command
         $saMateria = $factorySA->createSAMateria();
         $materia = $saMateria->findMateria($data);
         $responseContext = null;
-        if ($materia != null) {
+        if (isset($materia)) {
             $responseContext = new Context(FIND_MATERIA_OK, $materia);
         } else {
             $responseContext = new Context(FIND_MATERIA_FAIL, null);

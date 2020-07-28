@@ -16,7 +16,7 @@ class FormMetodologia extends Form
 		$metodologia = isset($datosIniciales['metodologia']) ? $datosIniciales['metodologia'] : null;
 		$metodologiaI = isset($datosIniciales['metodologiaI']) ? $datosIniciales['metodologiaI'] : null;
 		$idAsignatura = isset($datosIniciales['idAsignatura']) ? $datosIniciales['idAsignatura'] : null;
-		$idGrado = isset($datosIniciales['idGrado']) ? $datosIniciales['idAsignatura'] : null;
+		$idGrado = isset($datosIniciales['idGrado']) ? $datosIniciales['idGrado'] : null;
 
 		$controller = new ControllerImplements();
 		$context = new Context(FIND_ASIGNATURA, $idAsignatura);
@@ -26,13 +26,13 @@ class FormMetodologia extends Form
 		<input type="hidden" name="idAsignatura" value="' . $idAsignatura . '" required />
 		<div class="form-group">
 		<label for="metodologia">Metodología</label>
-		<textarea class="form-control" id="metodologia" rows="3" name="metodologia" >' . $metodologia . '</textarea>
+		<textarea class="form-control" id="metodologia" rows="3" name="metodologia" required>' . $metodologia . '</textarea>
 		</div>';
 
 		if(!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())){
 			$html .= '<div class="form-group">
 			<label for="metodologiaI">Metodología (Inglés)</label>
-			<textarea class="form-control" id="metodologiaI" rows="3" name="metodologiaI" >' . $metodologiaI . '</textarea>
+			<textarea class="form-control" id="metodologiaI" rows="3" name="metodologiaI" required>' . $metodologiaI . '</textarea>
 			</div>';
 		}
 

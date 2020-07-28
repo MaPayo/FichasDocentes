@@ -16,7 +16,7 @@ class CommandFindLaboratorio implements Command
         $saLaboratorio = $factorySA->createSALaboratorio();
         $laboratorio = $saLaboratorio->findLaboratorio($data);
         $responseContext = null;
-        if ($laboratorio) {
+        if (isset($laboratorio)) {
             $responseContext = new Context(FIND_LABORATORIO_OK, $laboratorio);
         } else {
             $responseContext = new Context(FIND_LABORATORIO_FAIL, null);

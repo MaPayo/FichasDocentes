@@ -17,6 +17,9 @@ class SAUsuarioImplements implements SAUsuario
         if ($usuario && count($usuario) === 1) {
             $usuario = new Usuario($usuario[0]['Email'], $usuario[0]['Password']);
         }
+        else{
+         $usuario   =null;
+        }
         return $usuario;
     }
 

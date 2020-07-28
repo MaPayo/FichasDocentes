@@ -14,7 +14,7 @@ class CommandFindModAsignatura implements Command
         $saAsignatura = $factorySA->createSAModAsignatura();
         $asignatura = $saAsignatura->findModAsignatura($data);
         $responseContext = null;
-        if ($asignatura != null) {
+        if (isset($asignatura)) {
             $responseContext = new Context(FIND_MODASIGNATURA_OK, $asignatura);
         } else {
             $responseContext = new Context(FIND_MODASIGNATURA_FAIL, null);

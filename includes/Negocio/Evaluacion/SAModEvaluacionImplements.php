@@ -31,6 +31,9 @@ class SAModEvaluacionImplements implements SAModEvaluacion
                 $evaluacion[0]['IdModAsignatura']
             );
         }
+        else{
+         $evaluacion   =null;
+        }
         return $evaluacion;
     }
 

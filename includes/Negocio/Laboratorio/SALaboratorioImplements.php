@@ -22,6 +22,9 @@ class SALaboratorioImplements implements SALaboratorio
                 $laboratorio[0]['IdAsignatura']
             );
         }
+        else{
+         $laboratorio   =null;
+        }
         return $laboratorio;
     }
 

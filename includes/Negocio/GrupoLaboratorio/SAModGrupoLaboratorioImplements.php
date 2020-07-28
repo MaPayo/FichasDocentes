@@ -20,6 +20,9 @@ class SAModGrupoLaboratorioImplements implements SAModGrupoLaboratorio
                 $arrayGrupoLaboratorio[] = new GrupoLaboratorio($grupo['IdGrupoLab'], $grupo['Letra'], $grupo['Idioma'], $grupo['IdModAsignatura']);
             }
         }
+        else{
+            $arrayGrupoLaboratorio=null;
+        }
         return $arrayGrupoLaboratorio;
     }
 
@@ -35,6 +38,9 @@ class SAModGrupoLaboratorioImplements implements SAModGrupoLaboratorio
                 $grupoLaboratorio[0]['Idioma'],
                 $grupoLaboratorio[0]['IdModAsignatura']
             );
+        }
+        else{
+            $grupoLaboratorio=null;
         }
         return $grupoLaboratorio;
     }

@@ -22,7 +22,7 @@ class FormCompetenciaAsignatura extends Form
 		$resultadosAprendizaje = isset($datosIniciales['resultadosAprendizaje']) ? $datosIniciales['resultadosAprendizaje'] : null;
 		$resultadosAprendizajeI = isset($datosIniciales['resultadosAprendizajeI']) ? $datosIniciales['resultadosAprendizajeI'] : null;
 		$idAsignatura = isset($datosIniciales['idAsignatura']) ? $datosIniciales['idAsignatura'] : null;
-		$idGrado = isset($datosIniciales['idGrado']) ? $datosIniciales['idAsignatura'] : null;
+		$idGrado = isset($datosIniciales['idGrado']) ? $datosIniciales['idGrado'] : null;
 
 		$controller = new ControllerImplements();
 		$context = new Context(FIND_CONFIGURACION, $idAsignatura);
@@ -38,13 +38,13 @@ class FormCompetenciaAsignatura extends Form
 			if ($contextConfiguacion->getData()->getComGenerales() == 1) {
 				$html .= '<div class="form-group">
 				<label for="generales">Generales</label>
-				<textarea class="form-control" id="generales" rows="3" name="generales" >' . $generales . '</textarea>
+				<textarea class="form-control" id="generales" rows="3" name="generales" required>' . $generales . '</textarea>
 				</div>';
 
 				if(!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())){
 					$html .= '<div class="form-group">
 					<label for="generalesI">Generales (Ingles)</label>
-					<textarea class="form-control" id="generalesI" rows="3" name="generalesI" >' . $generalesI . '</textarea>
+					<textarea class="form-control" id="generalesI" rows="3" name="generalesI" required>' . $generalesI . '</textarea>
 					</div>';
 				}
 			}
@@ -52,13 +52,13 @@ class FormCompetenciaAsignatura extends Form
 			if ($contextConfiguacion->getData()->getComEspecificas() == 1) {
 				$html .= '<div class="form-group">
 				<label for="especificas">Especificas</label>
-				<textarea class="form-control" id="especificas" rows="3" name="especificas" >' . $especificas . '</textarea>
+				<textarea class="form-control" id="especificas" rows="3" name="especificas" required>' . $especificas . '</textarea>
 				</div>';
 
 				if(!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())){
 					$html .= '<div class="form-group">
 					<label for="especificasI">Especificas (Ingles)</label>
-					<textarea class="form-control" id="especificasI" rows="3" name="especificasI" >' . $especificasI . '</textarea>
+					<textarea class="form-control" id="especificasI" rows="3" name="especificasI" required>' . $especificasI . '</textarea>
 					</div>';
 				}
 			}
@@ -66,13 +66,13 @@ class FormCompetenciaAsignatura extends Form
 			if ($contextConfiguacion->getData()->getComBasicas() == 1) {
 				$html .= '<div class="form-group">
 				<label for="basicasYTransversales">Basicas Y Transversales</label>
-				<textarea class="form-control" id="basicasYTransversales" rows="3" name="basicasYTransversales" >' . $basicasYTransversales . '</textarea>
+				<textarea class="form-control" id="basicasYTransversales" rows="3" name="basicasYTransversales" required>' . $basicasYTransversales . '</textarea>
 				</div>';
 
 				if(!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())){
 					$html .= '<div class="form-group">
 					<label for="basicasYTransversalesI">Basicas Y Transversales (Ingles)</label>
-					<textarea class="form-control" id="basicasYTransversalesI" rows="3" name="basicasYTransversalesI" >' . $basicasYTransversalesI . '</textarea>
+					<textarea class="form-control" id="basicasYTransversalesI" rows="3" name="basicasYTransversalesI" required>' . $basicasYTransversalesI . '</textarea>
 					</div>';
 				}
 			}
@@ -80,13 +80,13 @@ class FormCompetenciaAsignatura extends Form
 			if ($contextConfiguacion->getData()->getResultadosAprendizaje() == 1) {
 				$html .= '<div class="form-group">
 				<label for="resultadosAprendizaje">Resultados Aprendizaje</label>
-				<textarea class="form-control" id="resultadosAprendizaje" rows="3" name="resultadosAprendizaje" >' . $resultadosAprendizaje . '</textarea>
+				<textarea class="form-control" id="resultadosAprendizaje" rows="3" name="resultadosAprendizaje" required>' . $resultadosAprendizaje . '</textarea>
 				</div>';
 
 				if(!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())){
 					$html .= '<div class="form-group">
 					<label for="resultadosAprendizajeI">Resultados Aprendizaje (Ingles)</label>
-					<textarea class="form-control" id="resultadosAprendizajeI" rows="3" name="resultadosAprendizajeI" >' . $resultadosAprendizajeI . '</textarea>
+					<textarea class="form-control" id="resultadosAprendizajeI" rows="3" name="resultadosAprendizajeI" required>' . $resultadosAprendizajeI . '</textarea>
 					</div>';
 				}
 			}

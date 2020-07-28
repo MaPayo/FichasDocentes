@@ -14,7 +14,7 @@ class CommandListAsignatura implements Command
         $saAsignatura = $factorySA->createSAAsignatura();
         $asignatura = $saAsignatura->listAsignatura($data);
         $responseContext = null;
-        if ($asignatura) {
+        if (isset($asignatura)) {
             $responseContext = new Context(LIST_ASIGNATURA_OK, $asignatura);
         } else {
             $responseContext = new Context(LIST_ASIGNATURA_FAIL, null);

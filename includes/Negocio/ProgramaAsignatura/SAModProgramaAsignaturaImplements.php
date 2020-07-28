@@ -30,6 +30,9 @@ class SAModProgramaAsignaturaImplements implements SAModProgramaAsignatura
                 $programaAsignatura[0]['IdModAsignatura']
             );
         }
+         else{
+         $programaAsignatura   =null;
+        }
         return $programaAsignatura;
     }
 

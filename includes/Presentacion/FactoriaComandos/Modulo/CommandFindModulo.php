@@ -14,7 +14,7 @@ class CommandFindModulo implements Command
         $saModulo = $factorySA->createSAModulo();
         $modulo = $saModulo->findModulo($data);
         $responseContext = null;
-        if ($modulo != null) {
+        if (isset($modulo)) {
             $responseContext = new Context(FIND_MODULO_OK, $modulo);
         } else {
             $responseContext = new Context(FIND_MODULO_FAIL, null);

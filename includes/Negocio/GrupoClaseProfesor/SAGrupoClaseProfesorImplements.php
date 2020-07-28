@@ -26,6 +26,9 @@ class SAGrupoClaseProfesorImplements implements SAGrupoClaseProfesor
                 );
             }
         }
+        else{
+         $arrayGrupoClaseProfesor   =null;
+        }
         return $arrayGrupoClaseProfesor;
     }
 
@@ -42,6 +45,9 @@ class SAGrupoClaseProfesorImplements implements SAGrupoClaseProfesor
                 $grupoClaseProfesor[0]['FechaFin'],
                 $grupoClaseProfesor[0]['EmailProfesor']
             );
+        }
+        else{
+         $grupoClaseProfesor   =null;
         }
         return $grupoClaseProfesor;
     }

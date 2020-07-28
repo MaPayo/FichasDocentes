@@ -14,7 +14,7 @@ class CommandFindModEvaluacion implements Command
         $saEvaluacion = $factorySA->createSAModEvaluacion();
         $evaluacion = $saEvaluacion->findModEvaluacion($data);
         $responseContext = null;
-        if ($evaluacion != null) {
+        if (isset($evaluacion )) {
             $responseContext = new Context(FIND_MODEVALUACION_OK, $evaluacion);
         } else {
             $responseContext = new Context(FIND_MODEVALUACION_FAIL, null);

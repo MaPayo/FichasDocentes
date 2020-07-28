@@ -21,6 +21,9 @@ class SAModGrupoClaseImplements implements SAModGrupoClase
                 $arrayGrupoClase[] = new ModGrupoClase($grupo['IdGrupoClase'], $grupo['Letra'], $grupo['Idioma'], $grupo['IdModAsignatura']);
             }
         }
+        else{
+         $arrayGrupoClase   =null;
+        }
         return $arrayGrupoClase;
     }
 
@@ -36,6 +39,9 @@ class SAModGrupoClaseImplements implements SAModGrupoClase
                 $grupoClase[0]['Idioma'],
                 $grupoClase[0]['IdModAsignatura']
             );
+        }
+        else{
+         $grupoClase   =null;
         }
         return $grupoClase;
     }

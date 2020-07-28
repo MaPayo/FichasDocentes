@@ -14,7 +14,7 @@ class CommandFindAdministrador implements Command
         $saAdministrador = $factorySA->createSAAdministrador();
         $administrador = $saAdministrador->findAdministrador($data);
         $responseContext = null;
-        if ($administrador != null) {
+        if (isset($administrador)) {
             $responseContext = new Context(FIND_ADMINISTRADOR_OK, $administrador);
         } else {
             $responseContext = new Context(FIND_ADMINISTRADOR_FAIL, null);

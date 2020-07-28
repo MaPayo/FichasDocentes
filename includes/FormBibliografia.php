@@ -16,7 +16,7 @@ class FormBibliografia extends Form
 		$citasBibliograficas = isset($datosIniciales['citasBibliograficas']) ? $datosIniciales['citasBibliograficas'] : null;
 		$recursosInternet = isset($datosIniciales['recursosInternet']) ? $datosIniciales['recursosInternet'] : null;
 		$idAsignatura = isset($datosIniciales['idAsignatura']) ? $datosIniciales['idAsignatura'] : null;
-		$idGrado = isset($datosIniciales['idGrado']) ? $datosIniciales['idAsignatura'] : null;
+		$idGrado = isset($datosIniciales['idGrado']) ? $datosIniciales['idGrado'] : null;
 
 		$controller = new ControllerImplements();
 		$context = new Context(FIND_CONFIGURACION, $idAsignatura);
@@ -29,13 +29,13 @@ class FormBibliografia extends Form
 			if ($contextConfiguacion->getData()->getCitasBibliograficas() == 1) {
 				$html .= '<div class="form-group">
 				<label for="citasBibliograficas">Citas Bibliográficas</label>
-				<textarea class="form-control" id="citasBibliograficas" rows="3" name="citasBibliograficas" >' . $citasBibliograficas . '</textarea>
+				<textarea class="form-control" id="citasBibliograficas" rows="3" name="citasBibliograficas" required>' . $citasBibliograficas . '</textarea>
 				</div>';
 			}
 			if ($contextConfiguacion->getData()->getRecursosInternet() == 1) {
 				$html .= '<div class="form-group">
 				<label for="recursosInternet">Recursos de Internet</label>
-				<textarea class="form-control" id="recursosInternet" rows="3" name="recursosInternet" >' . $recursosInternet . '</textarea>
+				<textarea class="form-control" id="recursosInternet" rows="3" name="recursosInternet" required>' . $recursosInternet . '</textarea>
 				</div>';
 			}
 		}

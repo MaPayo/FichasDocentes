@@ -31,6 +31,9 @@ class SAProgramaAsignaturaImplements implements SAProgramaAsignatura
                 $programaAsignatura[0]['IdAsignatura']
             );
         }
+        else{
+         $programaAsignatura   =null;
+        }
         return $programaAsignatura;
     }
 

@@ -16,7 +16,7 @@ class CommandFindGrupoLaboratorioProfesor implements Command
         $saGrupoLaboratorioProfesor = $factorySA->createSAGrupoLaboratorioProfesor();
         $grupoLaboratorioProfesor = $saGrupoLaboratorioProfesor->findGrupoLaboratorioProfesor($data['idGrupoLaboratorio'], $data['emailProfesor']);
         $responseContext = null;
-        if ($grupoLaboratorioProfesor) {
+        if (isset($grupoLaboratorioProfesor)) {
             $responseContext = new Context(FIND_GRUPO_LABORATORIO_PROFESOR_OK, $grupoLaboratorioProfesor);
         } else {
             $responseContext = new Context(FIND_GRUPO_LABORATORIO_PROFESOR_FAIL, null);

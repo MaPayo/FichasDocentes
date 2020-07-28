@@ -14,7 +14,7 @@ class CommandFindPermisos implements Command
         $saPermisos = $factorySA->createSAPermisos();
         $permisos = $saPermisos->findPermisos($data);
         $responseContext = null;
-        if ($permisos) {
+        if (isset($permisos)) {
             $responseContext = new Context(FIND_PERMISOS_OK, $permisos);
         } else {
             $responseContext = new Context(FIND_PERMISOS_FAIL, null);

@@ -14,7 +14,7 @@ class CommandListModulo implements Command
         $saModulo = $factorySA->createSAModulo();
         $modulo = $saModulo->listModulo($data);
         $responseContext = null;
-        if ($modulo) {
+        if (isset($modulo)) {
             $responseContext = new Context(LIST_MODULO_OK, $modulo);
         } else {
             $responseContext = new Context(LIST_MODULO_FAIL, null);

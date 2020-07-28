@@ -16,7 +16,7 @@ class CommandFindGrado implements Command
         $saGrado = $factorySA->createSAGrado();
         $grado = $saGrado->findGrado($data);
         $responseContext = null;
-        if ($grado) {
+        if (isset($grado)) {
             $responseContext = new Context(FIND_GRADO_OK, $grado);
         } else {
             $responseContext = new Context(FIND_GRADO_FAIL, null);

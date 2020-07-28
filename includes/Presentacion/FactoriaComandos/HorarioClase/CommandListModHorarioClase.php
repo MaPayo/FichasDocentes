@@ -16,7 +16,7 @@ class CommandListModHorarioClase implements Command
         $saHorarioClase = $factorySA->createSAModHorarioClase();
         $horarioClase = $saHorarioClase->listModHorarioClase($data);
         $responseContext = null;
-        if ($horarioClase) {
+        if (isset($horarioClase)) {
             $responseContext = new Context(LIST_MODHORARIO_CLASE_OK, $horarioClase);
         } else {
             $responseContext = new Context(LIST_MODHORARIO_CLASE_FAIL, null);

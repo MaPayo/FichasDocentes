@@ -24,6 +24,9 @@ class SAProfesorImplements implements SAProfesor
                 $profesor[0]['Facultad']
             );
         }
+        else{
+         $profesor   =null;
+        }
         return $profesor;
     }
 

@@ -22,6 +22,9 @@ class SABibliografiaImplements implements SABibliografia
                 $bibliografia[0]['IdAsignatura']
             );
         }
+        else{
+            $bibliografia=null;
+        }
         return $bibliografia;
     }
 

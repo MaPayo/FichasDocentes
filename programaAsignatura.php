@@ -35,14 +35,13 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                     } else {
                         $name = 'IdModAsignatura';
                     }
-
-                    if ($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET[$name]]['coordinacion'] == true || (isset($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET[$name]]['permisos']) && $_SESSION['asignaturas'][$_GET['IdGrado']][$_GET[$name]]['permisos']->getPermisoPrograma() == true)) {
+                    if ($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET[$name]]['coordinacion'] == true || (isset($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET[$name]]['permisos']) && unserialize($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET[$name]]['permisos'])->getPermisoPrograma() == true)) {
                         $controller = new es\ucm\ControllerImplements();
                         $context = new es\ucm\Context(FIND_CONFIGURACION, htmlspecialchars(trim(strip_tags($_GET[$name]))));
                         $contextConfiguacion = $controller->action($context);
 
                         if ($contextConfiguacion->getEvent() === FIND_CONFIGURACION_OK && ($contextConfiguacion->getData()->getConocimientosPrevios() == 1 || $contextConfiguacion->getData()->getBreveDescripcion() == 1 || $contextConfiguacion->getData()->getProgramaDetallado() == 1)) {
-            ?>
+                            ?>
                             <div class="col-md-6 col-12">
                                 <div class="card ">
                                     <div class="card-header text-center">
@@ -59,8 +58,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                             $context = new es\ucm\Context(FIND_MODPROGRAMA_ASIGNATURA, htmlspecialchars(trim(strip_tags($_GET[$name]))));
                                         }
                                         $contextPrograma = $controller->action($context);
-
-                                        if ($contextPrograma->getEvent() === FIND_PROGRAMA_ASIGNATURA_OK || FIND_MODPROGRAMA_ASIGNATURA_OK) {
+                                        if ($contextPrograma->getEvent() === FIND_PROGRAMA_ASIGNATURA_OK || $contextPrograma->getEvent() ===FIND_MODPROGRAMA_ASIGNATURA_OK) {
                                             if ($contextPrograma->getEvent() === FIND_MODPROGRAMA_ASIGNATURA_OK) {
                                                 $datosIniciales['idPrograma'] = $contextPrograma->getData()->getIdPrograma();
                                             }
@@ -86,42 +84,42 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                     </div>
                                 </div>
                             </div>
-            <?php
+                            <?php
                         } else {
                             echo '
-                     <div class="col-md-6 col-12">
-                     <div class="alert alert-danger" role="alert">
-                     <h2 class="card-title text-center">ACCESO DENEGADO</h2>
-                     <h5 class="text-center">La asignatura seleccionada no ha sido creada correctamente o no contiene este apartado. Contacta con el administrador</h5>
-                     </div>
-                     </div>';
+                            <div class="col-md-6 col-12">
+                            <div class="alert alert-danger" role="alert">
+                            <h2 class="card-title text-center">ACCESO DENEGADO</h2>
+                            <h5 class="text-center">La asignatura seleccionada no ha sido creada correctamente o no contiene este apartado. Contacta con el administrador</h5>
+                            </div>
+                            </div>';
                         }
                     } else {
                         echo '
-                 <div class="col-md-6 col-12">
-                 <div class="alert alert-danger" role="alert">
-                 <h2 class="card-title text-center">ACCESO DENEGADO</h2>
-                 <h5 class="text-center">No tienes permisos suficientes para esta apartado</h5>
-                 </div>
-                 </div>';
+                        <div class="col-md-6 col-12">
+                        <div class="alert alert-danger" role="alert">
+                        <h2 class="card-title text-center">ACCESO DENEGADO</h2>
+                        <h5 class="text-center">No tienes permisos suficientes para esta apartado</h5>
+                        </div>
+                        </div>';
                     }
                 } else {
                     echo '
-            <div class="col-md-6 col-12">
-            <div class="alert alert-danger" role="alert">
-            <h2 class="card-title text-center">ACCESO DENEGADO</h2>
-            <h5 class="text-center">No se ha podido obtener la asignatura</h5>
-            </div>
-            </div>';
+                    <div class="col-md-6 col-12">
+                    <div class="alert alert-danger" role="alert">
+                    <h2 class="card-title text-center">ACCESO DENEGADO</h2>
+                    <h5 class="text-center">No se ha podido obtener la asignatura</h5>
+                    </div>
+                    </div>';
                 }
             } else {
                 echo '
-        <div class="col-md-6 col-12">
-        <div class="alert alert-danger" role="alert">
-        <h2 class="card-title text-center">ACCESO DENEGADO</h2>
-        <h5 class="text-center">Inicia sesión con un usuario que pueda acceder a este contenido</h5>
-        </div>
-        </div>';
+                <div class="col-md-6 col-12">
+                <div class="alert alert-danger" role="alert">
+                <h2 class="card-title text-center">ACCESO DENEGADO</h2>
+                <h5 class="text-center">Inicia sesión con un usuario que pueda acceder a este contenido</h5>
+                </div>
+                </div>';
             }
             ?>
         </div>
@@ -131,44 +129,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script>
-        tinymce.init({
-            selector: '#conocimientosPrevios',
-            plugins: ['link image lists table'],
-            toolbar: 'undo redo | bold italic backcolor | alignleft aligncenter alignjustify | bullist numlist outdent indent | image link table | removeformat',
-            menubar: false,
-        });
-        tinymce.init({
-            selector: '#conocimientosPreviosI',
-            plugins: ['link image lists table'],
-            toolbar: 'undo redo | bold italic backcolor | alignleft aligncenter alignjustify | bullist numlist outdent indent | image link table | removeformat',
-            menubar: false,
-        });
-        tinymce.init({
-            selector: '#breveDescripcion',
-            plugins: ['link image lists table'],
-            toolbar: 'undo redo | bold italic backcolor | alignleft aligncenter alignjustify | bullist numlist outdent indent | image link table | removeformat',
-            menubar: false,
-        });
-        tinymce.init({
-            selector: '#breveDescripcionI',
-            plugins: ['link image lists table'],
-            toolbar: 'undo redo | bold italic backcolor | alignleft aligncenter alignjustify | bullist numlist outdent indent | image link table | removeformat',
-            menubar: false,
-        });
-        tinymce.init({
-            selector: '#programaDetallado',
-            plugins: ['link image lists table'],
-            toolbar: 'undo redo | bold italic backcolor | alignleft aligncenter alignjustify | bullist numlist outdent indent | image link table | removeformat',
-            menubar: false,
-        });
-        tinymce.init({
-            selector: '#programaDetalladoI',
-            plugins: ['link image lists table'],
-            toolbar: 'undo redo | bold italic backcolor | alignleft aligncenter alignjustify | bullist numlist outdent indent | image link table | removeformat',
-            menubar: false,
-        });
-    </script>
+   
 </body>
 
 </html>

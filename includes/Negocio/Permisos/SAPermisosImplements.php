@@ -20,6 +20,9 @@ class SAPermisosImplements implements SAPermisos
                 $arrayPermisos[] = new Permisos($permiso['IdPermiso'], $permiso['PermisoPrograma'], $permiso['PermisoCompetencias'], $permiso['PermisoMetodologia'], $permiso['PermisoBibliografia'], $permiso['PermisoGrupoLaboratorio'], $permiso['PermisoGrupoClase'], $permiso['PermisoEvaluacion'], $permiso['IdAsignatura'], $permiso['EmailProfesor']);
             }
         }
+        else{
+         $arrayPermisos   =null;
+        }
         return $arrayPermisos;
     }
 
@@ -33,6 +36,9 @@ class SAPermisosImplements implements SAPermisos
             foreach ($permisos as $permiso) {
                 $arrayPermisos[] = new Permisos($permiso['IdPermiso'], $permiso['PermisoPrograma'], $permiso['PermisoCompetencias'], $permiso['PermisoMetodologia'], $permiso['PermisoBibliografia'], $permiso['PermisoGrupoLaboratorio'], $permiso['PermisoGrupoClase'], $permiso['PermisoEvaluacion'], $permiso['IdAsignatura'], $permiso['EmailProfesor']);
             }
+        }
+        else{
+         $arrayPermisos   =null;
         }
         return $arrayPermisos;
     }
@@ -55,6 +61,9 @@ class SAPermisosImplements implements SAPermisos
                 $permisos[0]['IdAsignatura'],
                 $permisos[0]['EmailProfesor']
             );
+        }
+        else{
+         $permisos   =null;
         }
         return $permisos;
     }

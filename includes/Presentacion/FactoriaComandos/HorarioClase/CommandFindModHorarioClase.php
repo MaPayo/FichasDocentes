@@ -16,7 +16,7 @@ class CommandFindModHorarioClase implements Command
         $saHorarioClase = $factorySA->createSAModHorarioClase();
         $horarioClase = $saHorarioClase->findModHorarioClase($data);
         $responseContext = null;
-        if ($horarioClase) {
+        if (isset($horarioClase)) {
             $responseContext = new Context(FIND_MODHORARIO_CLASE_OK, $horarioClase);
         } else {
             $responseContext = new Context(FIND_MODHORARIO_CLASE_FAIL, null);

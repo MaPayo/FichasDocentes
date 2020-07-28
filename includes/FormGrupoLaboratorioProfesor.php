@@ -17,9 +17,11 @@ class FormGrupoLaboratorioProfesor extends Form
 		$fechaFin=isset($datosIniciales['fechaFin']) ? $datosIniciales['fechaFin'] : null;
 		$emailProfesor = isset($datosIniciales['emailProfesor']) ? $datosIniciales['emailProfesor'] : null;
 		$idAsignatura = isset($datosIniciales['idAsignatura']) ? $datosIniciales['idAsignatura'] : null;
+		$idGrado = isset($datosIniciales['idGrado']) ? $datosIniciales['idGrado'] : null;
 
 		$html = '<input type="hidden" name="idGrupoLaboratorio" value="' . $idGrupoLaboratorio . '" required />
-		<input type="hidden" name="idAsignatura" value="' . $idAsignatura . '" required />';
+		<input type="hidden" name="idAsignatura" value="' . $idAsignatura . '" required />
+		<input type="hidden" name="idGrado" value="' . $idGrado . '" required />';
 
 		if(isset($emailProfesor)){
 			$html.='<div class="form-group">
@@ -59,7 +61,7 @@ class FormGrupoLaboratorioProfesor extends Form
 		</div>
 
 		<div class="text-right">
-		<a href="indexAcceso.php?IdAsignatura=' . $idAsignatura . '#nav-grupo-laboratorio">
+		<a href="indexAcceso.php?IdGrado='.$idGrado.'&IdAsignatura=' . $idAsignatura . '#nav-grupo-laboratorio">
             <button type="button" class="btn btn-secondary" id="btn-form">
                 Cancelar
             </button>
@@ -109,7 +111,7 @@ class FormGrupoLaboratorioProfesor extends Form
 					$modAsignatura = new ModAsignatura($datos['idAsignatura'], date("Y-m-d H:i:s"), $_SESSION['idUsuario'], $datos['idAsignatura']);
 					$context = new Context(UPDATE_MODASIGNATURA, $modAsignatura);
 					$contextModAsignatura = $controller->action($context);
-					$erroresFormulario = "indexAcceso.php?IdAsignatura=" . $datos['idAsignatura'] . "&modificado=y#nav-grupo-laboratorio";
+					$erroresFormulario = "indexAcceso.php?IdGrado=" . $datos['idGrado'] . "&IdAsignatura=" . $datos['idAsignatura'] . "&modificado=y#nav-grupo-laboratorio";
 				} elseif ($contextGrupoLaboratorio->getEvent() === UPDATE_MODGRUPO_LABORATORIO_PROFESOR_FAIL) {
 					$erroresFormulario[] = "No se ha podido modificar al profesor en el grupo.";
 				}
@@ -123,7 +125,7 @@ class FormGrupoLaboratorioProfesor extends Form
 					$modAsignatura = new ModAsignatura($datos['idAsignatura'], date("Y-m-d H:i:s"), $_SESSION['idUsuario'], $datos['idAsignatura']);
 					$context = new Context(UPDATE_MODASIGNATURA, $modAsignatura);
 					$contextModAsignatura = $controller->action($context);
-					$erroresFormulario = "indexAcceso.php?IdAsignatura=" . $datos['idAsignatura'] . "&anadido=y#nav-grupo-laboratorio";
+					$erroresFormulario = "indexAcceso.php?IdGrado=" . $datos['idGrado'] . "&IdAsignatura=" . $datos['idAsignatura'] . "&anadido=y#nav-grupo-laboratorio";
 				} elseif ($contextGrupoLaboratorio->getEvent() === CREATE_MODGRUPO_LABORATORIO_PROFESOR_FAIL) {
 					$erroresFormulario[] = "No se ha podido registar al profesor en el grupo.";
 				}

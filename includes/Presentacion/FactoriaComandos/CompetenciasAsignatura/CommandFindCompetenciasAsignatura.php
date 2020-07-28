@@ -14,7 +14,7 @@ class CommandFindCompetenciasAsignatura implements Command
         $saCompetencia = $factorySA->createSACompetenciaAsignatura();
         $competencia = $saCompetencia->findCompetenciaAsignatura($data);
         $responseContext = null;
-        if ($competencia != null) {
+        if (isset($competencia)) {
             $responseContext = new Context(FIND_COMPETENCIAS_ASIGNATURA_OK, $competencia);
         } else {
             $responseContext = new Context(FIND_COMPETENCIAS_ASIGNATURA_FAIL, null);

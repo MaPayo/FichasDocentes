@@ -16,7 +16,7 @@ class CommandFindModGrupoClase implements Command
         $saGrupoClase = $factorySA->createSAModGrupoClase();
         $grupoClase = $saGrupoClase->findModGrupoClase($data);
         $responseContext = null;
-        if ($grupoClase) {
+        if (isset($grupoClase)) {
             $responseContext = new Context(FIND_MODGRUPO_CLASE_OK, $grupoClase);
         } else {
             $responseContext = new Context(FIND_MODGRUPO_CLASE_FAIL, null);

@@ -14,7 +14,7 @@ class CommandFindPermisosPorProfesor implements Command
         $saPermisos = $factorySA->createSAPermisos();
         $permisos = $saPermisos->findPermisosPorProfesor($data);
         $responseContext = null;
-        if ($permisos) {
+        if (isset($permisos)) {
             $responseContext = new Context(FIND_PERMISOS_POR_PROFESOR_OK, $permisos);
         } else {
             $responseContext = new Context(FIND_PERMISOS_POR_PROFESOR_FAIL, null);

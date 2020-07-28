@@ -14,7 +14,7 @@ class CommandFindProfesor implements Command
         $saProfesor = $factorySA->createSAProfesor();
         $profesor = $saProfesor->findProfesor($data);
         $responseContext = null;
-        if ($profesor) {
+        if (isset($profesor)) {
             $responseContext = new Context(FIND_PROFESOR_OK, $profesor);
         } else {
             $responseContext = new Context(FIND_PROFESOR_FAIL, null);

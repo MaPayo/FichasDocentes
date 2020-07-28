@@ -36,7 +36,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                         $name = 'IdModAsignatura';
                     }
 
-                    if ($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET[$name]]['coordinacion'] == true || (isset($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET[$name]]['permisos']) && $_SESSION['asignaturas'][$_GET['IdGrado']][$_GET[$name]]['permisos']->getPermisoEvaluacion() == true)) {
+                    if ($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET[$name]]['coordinacion'] == true || (isset($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET[$name]]['permisos']) && unserialize($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET[$name]]['permisos'])->getPermisoEvaluacion() == true)) {
                         $controller = new es\ucm\ControllerImplements();
                         $context = new es\ucm\Context(FIND_CONFIGURACION, htmlspecialchars(trim(strip_tags($_GET[$name]))));
                         $contextConfiguacion = $controller->action($context);

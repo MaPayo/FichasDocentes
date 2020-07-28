@@ -14,7 +14,7 @@ class CommandFindAsignatura implements Command
         $saAsignatura = $factorySA->createSAAsignatura();
         $asignatura = $saAsignatura->findAsignatura($data);
         $responseContext = null;
-        if ($asignatura != null) {
+        if (isset($asignatura)) {
             $responseContext = new Context(FIND_ASIGNATURA_OK, $asignatura);
         } else {
             $responseContext = new Context(FIND_ASIGNATURA_FAIL, null);

@@ -14,7 +14,7 @@ class CommandListAdministrador implements Command
         $saAdministrador = $factorySA->createSAAdministrador();
         $administrador = $saAdministrador->listAdministrador($data);
         $responseContext = null;
-        if ($administrador != null) {
+        if (isset($administrador)) {
             $responseContext = new Context(LIST_ADMINISTRADOR_OK, $administrador);
         } else {
             $responseContext = new Context(LIST_ADMINISTRADOR_FAIL, null);

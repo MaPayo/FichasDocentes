@@ -14,7 +14,7 @@ class CommandFindProblema implements Command
         $saProblema = $factorySA->createSAProblema();
         $problema = $saProblema->findProblema($data);
         $responseContext = null;
-        if ($problema) {
+        if (isset($problema)) {
             $responseContext = new Context(FIND_PROBLEMA_OK, $problema);
         } else {
             $responseContext = new Context(FIND_PROBLEMA_FAIL, null);

@@ -20,6 +20,9 @@ class SAAdministradorImplements implements SAAdministrador
                 $administrador[0]['Nombre']
             );
         }
+        else{
+            $administrador=null;
+        }
         return $administrador;
     }
 
@@ -57,6 +60,9 @@ class SAAdministradorImplements implements SAAdministrador
             foreach ($administradores as $administrador) {
                 $arrayAdministradores[] = new Administrador($administrador['Email'], $administrador['Nombre']);
             }
+        }
+        else{
+            $arrayAdministradores=null;
         }
         return $arrayAdministradores;
     }

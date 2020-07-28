@@ -23,6 +23,9 @@ class SAMateriaImplements implements SAMateria
                 $materia[0]['IdModulo']
             );
         }
+        else{
+         $materia   =null;
+        }
         return $materia;
     }
 
@@ -66,6 +69,9 @@ class SAMateriaImplements implements SAMateria
                     $materia['IdModulo']
                 );
             }
+        }
+        else{
+         $arrayMaterias   =null;
         }
         return $arrayMaterias;
     }

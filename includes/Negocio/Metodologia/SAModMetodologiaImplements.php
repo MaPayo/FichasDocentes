@@ -20,7 +20,10 @@ class SAModMetodologiaImplements implements SAModMetodologia
                 $metodologia[0]['Metodologiai'],
                 $metodologia[0]['IdModAsignatura']
             );
+        }else{
+         $metodologia   =null;
         }
+
         return $metodologia;
     }
 

@@ -30,6 +30,9 @@ class SAEvaluacionImplements implements SAEvaluacion
                 $evaluacion[0]['IdAsignatura']
             );
         }
+        else{
+         $evaluacion   =null;
+        }
         return $evaluacion;
     }
 

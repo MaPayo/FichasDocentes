@@ -14,7 +14,7 @@ class CommandFindModMetodologia implements Command
         $saMetodologia = $factorySA->createSAModMetodologia();
         $metodologia = $saMetodologia->findModMetodologia($data);
         $responseContext = null;
-        if ($metodologia) {
+        if (isset($metodologia)) {
             $responseContext = new Context(FIND_MODMETODOLOGIA_OK, $metodologia);
         } else {
             $responseContext = new Context(FIND_MODMETODOLOGIA_FAIL, null);

@@ -28,6 +28,9 @@ class SACompetenciaAsignaturaImplements implements SACompetenciaAsignatura
                 $competenciaAsignatura[0]['IdAsignatura']
             );
         }
+        else{
+            $competenciaAsignatura=null;
+        }
         return $competenciaAsignatura;
     }
 

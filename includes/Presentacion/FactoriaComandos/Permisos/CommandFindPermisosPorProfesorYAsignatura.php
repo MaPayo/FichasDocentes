@@ -16,7 +16,7 @@ class CommandFindPermisosPorProfesorYAsignatura implements Command
         $asignatura = $data['asignatura'];
         $permisos = $saPermisos->findPermisosPorProfesorYAsignatura($email, $asignatura);
         $responseContext = null;
-        if ($permisos) {
+        if (isset($permisos)) {
             $responseContext = new Context(FIND_PERMISOS_POR_PROFESOR_Y_ASIGNATURA_OK, $permisos);
         } else {
             $responseContext = new Context(FIND_PERMISOS_POR_PROFESOR_Y_ASIGNATURA_FAIL, null);

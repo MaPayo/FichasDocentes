@@ -19,11 +19,13 @@ class FormHorarioClase extends Form
 		$horaFin = isset($datosIniciales['horaFin']) ? $datosIniciales['horaFin'] : null;
 		$idGrupoClase = isset($datosIniciales['idGrupoClase']) ? $datosIniciales['idGrupoClase'] : null;
 		$idAsignatura = isset($datosIniciales['idAsignatura']) ? $datosIniciales['idAsignatura'] : null;
+		$idGrado = isset($datosIniciales['idGrado']) ? $datosIniciales['idGrado'] : null;
 		$arrayDias = array("L", "M", "X", "J", "V", "S", "D");
 
 		$html = '<input type="hidden" name="idHorarioClase" value="' . $idHorarioClase . '" required />
 		<input type="hidden" name="idGrupoClase" value="' . $idGrupoClase . '" required />
 		<input type="hidden" name="idAsignatura" value="' . $idAsignatura . '" required />
+		<input type="hidden" name="idGrado" value="' . $idGrado . '" required />
 		<div class="form-group">
 		<label for="aula">Aula</label>
 		<input type="text" class="form-control" id="aula"  name="aula" value="' . $aula . '" />
@@ -53,7 +55,7 @@ class FormHorarioClase extends Form
 		</div>
 
 		<div class="text-right">
-		<a href="indexAcceso.php?IdAsignatura=' . $idAsignatura . '#nav-grupo-clase">
+		<a href="indexAcceso.php?IdGrado='.$idGrado.'&IdAsignatura=' . $idAsignatura . '#nav-grupo-clase">
             <button type="button" class="btn btn-secondary" id="btn-form">
                 Cancelar
             </button>
@@ -108,7 +110,7 @@ class FormHorarioClase extends Form
 					$modAsignatura = new ModAsignatura($datos['idAsignatura'], date("Y-m-d H:i:s"), $_SESSION['idUsuario'], $datos['idAsignatura']);
 					$context = new Context(UPDATE_MODASIGNATURA, $modAsignatura);
 					$contextModAsignatura = $controller->action($context);
-					$erroresFormulario = "indexAcceso.php?IdAsignatura=" . $datos['idAsignatura'] . "&modificado=y#nav-grupo-clase";
+					$erroresFormulario = "indexAcceso.php?IdGrado=" . $datos['idGrado'] . "&IdAsignatura=" . $datos['idAsignatura'] . "&modificado=y#nav-grupo-clase";
 				} elseif ($contextHorarioClase->getEvent() === UPDATE_MODHORARIO_CLASE_FAIL) {
 					$erroresFormulario[] = "No se ha podido modificar el horario.";
 				}
@@ -121,7 +123,7 @@ class FormHorarioClase extends Form
 					$modAsignatura = new ModAsignatura($datos['idAsignatura'], date("Y-m-d H:i:s"), $_SESSION['idUsuario'], $datos['idAsignatura']);
 					$context = new Context(UPDATE_MODASIGNATURA, $modAsignatura);
 					$contextModAsignatura = $controller->action($context);
-					$erroresFormulario = "indexAcceso.php?IdAsignatura=" . $datos['idAsignatura'] . "&anadido=y#nav-grupo-clase";
+					$erroresFormulario = "indexAcceso.php?IdGrado=" . $datos['idGrado'] . "&IdAsignatura=" . $datos['idAsignatura'] . "&anadido=y#nav-grupo-clase";
 				} elseif ($contextHorarioClase->getEvent() === CREATE_MODHORARIO_CLASE_FAIL) {
 					$erroresFormulario[] = "No se ha podido crear el horario.";
 				}

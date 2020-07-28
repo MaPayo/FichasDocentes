@@ -27,6 +27,9 @@ class SAModCompetenciaAsignaturaImplements implements SAModCompetenciaAsignatura
                 $competenciaAsignatura[0]['IdModAsignatura']
             );
         }
+        else{
+           $competenciaAsignatura =null;
+        }
         return $competenciaAsignatura;
     }
 

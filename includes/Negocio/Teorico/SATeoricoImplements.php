@@ -22,6 +22,9 @@ class SATeoricoImplements implements SATeorico
                 $teorico[0]['IdAsignatura']
             );
         }
+        else{
+         $teorico   =null;
+        }
         return $teorico;
     }
 

@@ -20,6 +20,9 @@ class SAHorarioLaboratorioImplements implements SAHorarioLaboratorio
                 $arrayHorarioLaboratorio[] = new HorarioLaboratorio($horario['IdHorarioLab'], $horario['Laboratorio'], $horario['Dia'], $horario['HoraInicio'], $horario['HoraFin'], $horario['IdGrupoLab']);
             }
         }
+        else{
+         $arrayHorarioLaboratorio   =null;
+        }
         return $arrayHorarioLaboratorio;
     }
 
@@ -37,6 +40,9 @@ class SAHorarioLaboratorioImplements implements SAHorarioLaboratorio
                 $horarioLaboratorio[0]['HoraFin'],
                 $horarioLaboratorio[0]['IdGrupoLab']
             );
+        }
+        else{
+         $horarioLaboratorio   =null;
         }
         return $horarioLaboratorio;
     }

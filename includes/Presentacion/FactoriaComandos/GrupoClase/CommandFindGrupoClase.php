@@ -16,7 +16,7 @@ class CommandFindGrupoClase implements Command
         $saGrupoClase = $factorySA->createSAGrupoClase();
         $grupoClase = $saGrupoClase->findGrupoClase($data);
         $responseContext = null;
-        if ($grupoClase) {
+        if (isset($grupoClase)) {
             $responseContext = new Context(FIND_GRUPO_CLASE_OK, $grupoClase);
         } else {
             $responseContext = new Context(FIND_GRUPO_CLASE_FAIL, null);

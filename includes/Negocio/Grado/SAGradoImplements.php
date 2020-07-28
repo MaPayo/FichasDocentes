@@ -22,6 +22,9 @@ class SAGradoImplements implements SAGrado
                 $grado[0]['HorasEcts']
             );
         }
+        else{
+         $grado   =null;
+        }
         return $grado;
     }
 
@@ -59,6 +62,9 @@ class SAGradoImplements implements SAGrado
             foreach ($grados as $grado) {
                 $arrayGrados[] = new Grado($grado['CodigoGrado'], $grado['NombreGrado'], $grado['CoordinadorGrado'], $grado['HorasEcts']);
             }
+        }
+        else{
+         $arrayGrados   =null;
         }
         return $arrayGrados;
     }

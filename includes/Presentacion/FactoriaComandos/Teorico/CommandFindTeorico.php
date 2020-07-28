@@ -14,7 +14,7 @@ class CommandFindTeorico implements Command
         $saTeorico = $factorySA->createSATeorico();
         $teorico = $saTeorico->findTeorico($data);
         $responseContext = null;
-        if ($teorico) {
+        if (isset($teorico)) {
             $responseContext = new Context(FIND_TEORICO_OK, $teorico);
         } else {
             $responseContext = new Context(FIND_TEORICO_FAIL, null);

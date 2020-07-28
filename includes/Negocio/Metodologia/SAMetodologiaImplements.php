@@ -21,6 +21,9 @@ class SAMetodologiaImplements implements SAMetodologia
                 $metodologia[0]['IdAsignatura']
             );
         }
+        else{
+         $metodologia   =null;
+        }
         return $metodologia;
     }
 

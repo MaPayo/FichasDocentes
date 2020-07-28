@@ -20,6 +20,9 @@ class SAHorarioClaseImplements implements SAHorarioClase
                 $arrayHorarioClase[] = new HorarioClase($horario['IdHorarioClase'], $horario['Aula'], $horario['Dia'], $horario['HoraInicio'], $horario['HoraFin'], $horario['IdGrupoClase']);
             }
         }
+        else{
+         $arrayHorarioClase   =null;
+        }
         return $arrayHorarioClase;
     }
 
@@ -37,6 +40,9 @@ class SAHorarioClaseImplements implements SAHorarioClase
                 $horarioClase[0]['HoraFin'],
                 $horarioClase[0]['IdGrupoClase']
             );
+        }
+        else{
+         $horarioClase   =null;
         }
         return $horarioClase;
     }

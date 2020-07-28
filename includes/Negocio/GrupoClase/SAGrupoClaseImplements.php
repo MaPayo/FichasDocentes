@@ -20,6 +20,9 @@ class SAGrupoClaseImplements implements SAGrupoClase
                 $arrayGrupoClase[] = new GrupoClase($grupo['IdGrupoClase'], $grupo['Letra'], $grupo['Idioma'], $grupo['IdAsignatura']);
             }
         }
+        else{
+         $arrayGrupoClase   =null;
+        }
         return $arrayGrupoClase;
     }
 
@@ -35,6 +38,9 @@ class SAGrupoClaseImplements implements SAGrupoClase
                 $grupoClase[0]['Idioma'],
                 $grupoClase[0]['IdAsignatura']
             );
+        }
+        else{
+         $grupoClase   =null;
         }
         return $grupoClase;
     }

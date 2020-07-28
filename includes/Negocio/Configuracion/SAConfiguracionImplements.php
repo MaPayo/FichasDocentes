@@ -37,6 +37,9 @@ class SAConfiguracionImplements implements SAConfiguracion
                 $configuracion[0]['IdAsignatura']
             );
         }
+        else{
+            $configuracionn=null;
+        }
         return $configuracion;
     }
 

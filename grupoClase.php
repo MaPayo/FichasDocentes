@@ -31,7 +31,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
 
             if(isset($_GET['IdAsignatura']) || (isset($_GET['IdGrupoClase']) && isset($_GET['IdAsignatura']))){
 
-                if($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET['IdAsignatura']]['coordinacion'] == true || (isset($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET['IdAsignatura']]['permisos']) && $_SESSION['asignaturas'][$_GET['IdGrado']][$_GET['IdAsignatura']]['permisos']->getPermisoGrupoClase() == true)){
+                if($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET['IdAsignatura']]['coordinacion'] == true || (isset($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET['IdAsignatura']]['permisos']) && unserialize($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET['IdAsignatura']]['permisos'])->getPermisoGrupoClase() == true)){
                     ?>
                     <div class="col-md-6 col-12">
                         <div class="card ">
@@ -51,7 +51,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                         $datosIniciales['letra'] = $contextModGrupoClase->getData()->getLetra();
                                         $datosIniciales['idioma'] = $contextModGrupoClase->getData()->getIdioma();
                                         $datosIniciales['idAsignatura'] = $contextModGrupoClase->getData()->getIdModAsignatura();
-                                         $datosIniciales['idGrado'] =$_GET['IdGrado'];
+                                        $datosIniciales['idGrado'] =$_GET['IdGrado'];
                                         $access->gestionaModificacion($datosIniciales);
                                     }
                                 } elseif (isset($_GET['IdAsignatura'])) {

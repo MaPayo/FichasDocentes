@@ -188,7 +188,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
 
                                         <?php }
                                         if ($verGrupoLab) { ?>
-                                            <a class="nav-item nav-link" id="nav-grupo-contextLaboratorio-tab" data-toggle="tab" href="#nav-grupo-contextLaboratorio" role="tab" aria-controls="nav-grupo-contextLaboratorio" aria-selected="false">Grupo contextLaboratorio</a>
+                                            <a class="nav-item nav-link" id="nav-grupo-Laboratorio-tab" data-toggle="tab" href="#nav-grupo-Laboratorio" role="tab" aria-controls="nav-grupo-Laboratorio" aria-selected="false">Grupo Laboratorio</a>
 
                                         <?php } ?>
                                         <a class="nav-item nav-link" id="nav-grupo-clase-tab" data-toggle="tab" href="#nav-grupo-clase" role="tab" aria-controls="nav-grupo-clase" aria-selected="false">Grupo clase</a>
@@ -1563,7 +1563,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
 
                                     <!--Pestaña grupo contextLaboratorio-->
                                     <?php if ($verGrupoLab) { ?>
-                                        <div class="tab-pane fade" id="nav-grupo-contextLaboratorio" role="tabpanel" aria-labelledby="nav-grupo-contextLaboratorio-tab">
+                                        <div class="tab-pane fade" id="nav-grupo-Laboratorio" role="tabpanel" aria-labelledby="nav-grupo-Laboratorio-tab">
                                             <div class="card">
                                                 <div class="card-body">
                                                     <h5 class="card-title">Borrador</h5>
@@ -1578,7 +1578,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                                 <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapse<?php echo $grupo->getIdGrupoLab() ?>" aria-expanded="true" aria-controls="collapse<?php echo $grupo->getIdGrupoLab() ?>">
                                                                                     <?php echo $grupo->getLetra();
                                                                                     if ($contextAsignatura->getData()->getEstado()==="B" && ($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['coordinacion'] == true || unserialize($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['permisos'])->getPermisoGrupoLaboratorio() == true)) { ?>
-                                                                                        <a href="horarioLaboratorio.php?IdGrupoLaboratorio=<?php echo $grupo->getIdGrupoLab(); ?>&IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdAsignatura=<?php echo $grupo->getIdAsignatura(); ?>">
+                                                                                        <a href="horarioLaboratorio.php?IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdGrupoLaboratorio=<?php echo $grupo->getIdGrupoLab(); ?>&IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdAsignatura=<?php echo $grupo->getIdAsignatura(); ?>">
                                                                                             <button type="button" class="btn btn-success" id="btn-form">
                                                                                                 Crear Nuevo Horario
                                                                                             </button>
@@ -1644,14 +1644,14 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                                                                 echo '<tr scope="row">
                                                                                                                 <td>' . $contextProfesor->getData()->getNombre() . '</td>
                                                                                                                 <td>' . $modGrupoLaboratorioProfesor->getFechaInicio() . '</td>
-                                                                                                                td>' . $modGrupoLaboratorioProfesor->getFechaFin() . '</td>';
+                                                                                                                <td>' . $modGrupoLaboratorioProfesor->getFechaFin() . '</td>';
                                                                                                                 if ($contextAsignatura->getData()->getEstado()==="B" && ($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['coordinacion'] == true || unserialize($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['permisos'])->getPermisoGrupoClase() == true)) {
-                                                                                                                    echo '<td> <a href="grupoLaboratorioProfesor.php?EmailProfesor=' . $modGrupoLaboratorioProfesor->getEmailProfesor() . '&IdAsignatura=' . $contextAsignatura->getData()->getIdAsignatura() . '&IdGrupoLaboratorio=' . $grupo->getIdGrupoLab() . '">
+                                                                                                                    echo '<td> <a href="grupoLaboratorioProfesor.php?IdGrado='.$contextGrado->getData()->getCodigoGrado().'&EmailProfesor=' . $modGrupoLaboratorioProfesor->getEmailProfesor() . '&IdAsignatura=' . $contextAsignatura->getData()->getIdAsignatura() . '&IdGrupoLaboratorio=' . $grupo->getIdGrupoLab() . '">
                                                                                                                     <button type="button" class="btn btn-warning" id="btn-form">
                                                                                                                     Modificar Profesor
                                                                                                                     </button>
                                                                                                                     </a>
-                                                                                                                    <a href="borrarGrupoLaboratorioProfesor.php?EmailProfesor=' . $modGrupoLaboratorioProfesor->getEmailProfesor() . '&IdAsignatura=' . $contextAsignatura->getData()->getIdAsignatura() . '&IdGrupoLaboratorio=' . $grupo->getIdGrupoLab() . '">
+                                                                                                                    <a href="borrarGrupoLaboratorioProfesor.php?IdGrado='.$contextGrado->getData()->getCodigoGrado().'&EmailProfesor=' . $modGrupoLaboratorioProfesor->getEmailProfesor() . '&IdAsignatura=' . $contextAsignatura->getData()->getIdAsignatura() . '&IdGrupoLaboratorio=' . $grupo->getIdGrupoLab() . '">
                                                                                                                     <button type="button" class="btn btn-danger" id="btn-form">
                                                                                                                     Borrar Profesor
                                                                                                                     </button>
@@ -1675,12 +1675,12 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                                                         <td>' . $horario->getHoraInicio() . '-' . $horario->getHoraFin() . '</td>';
 
                                                                                                         if ($contextAsignatura->getData()->getEstado()==="B" && ($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['coordinacion'] == true || unserialize($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['permisos'])->getPermisoGrupoLaboratorio() == true)) {
-                                                                                                            echo '<td> <a href="horarioLaboratorio.php?IdHorarioLaboratorio=' . $horario->getIdHorarioLab() . '&IdAsignatura=' . $grupo->getIdAsignatura() . '">
+                                                                                                            echo '<td> <a href="horarioLaboratorio.php?IdGrado='.$contextGrado->getData()->getCodigoGrado().'&IdHorarioLaboratorio=' . $horario->getIdHorarioLab() . '&IdAsignatura=' . $grupo->getIdAsignatura() . '">
                                                                                                             <button type="button" class="btn btn-warning" id="btn-form">
                                                                                                             Modificar Horario
                                                                                                             </button>
                                                                                                             </a>
-                                                                                                            <a href="borrarHorarioLaboratorio.php?IdHorarioLaboratorio=' . $horario->getIdHorarioLab() . '&IdAsignatura=' . $grupo->getIdAsignatura() . '">
+                                                                                                            <a href="borrarHorarioLaboratorio.php?IdGrado='.$contextGrado->getData()->getCodigoGrado().'&IdHorarioLaboratorio=' . $horario->getIdHorarioLab() . '&IdAsignatura=' . $grupo->getIdAsignatura() . '">
                                                                                                             <button type="button" class="btn btn-danger" id="btn-form">
                                                                                                             Borrar Horario
                                                                                                             </button>
@@ -1798,13 +1798,13 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                             <?php if ($contextAsignatura->getData()->getEstado()==="B" && ($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['coordinacion'] == true || unserialize($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['permisos'])->getPermisoGrupoLaboratorio() == true)) { ?>
                                                                 <div class="text-right">
                                                                     <?php if ($contextModGrupoLaboratorio->getEvent() === FIND_MODGRUPO_LABORATORIO_OK && $contextModGrupoLaboratorioProfesor->getEvent() === FIND_MODGRUPO_LABORATORIO_PROFESOR_OK) { ?>
-                                                                        <a href="grupoLaboratorio.php?IdModAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
+                                                                        <a href="grupoLaboratorio.php?IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdModAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
                                                                             <button type="button" class="btn btn-primary" id="btn-form">
                                                                                 Modificar Borrador
                                                                             </button>
                                                                         </a>
                                                                     <?php } ?>
-                                                                    <a href="grupoLaboratorio.php?IdAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
+                                                                    <a href="grupoLaboratorio.php?IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
                                                                         <button type="button" class="btn btn-success" id="btn-form">
                                                                             Crear Nuevo Borrador Grupo
                                                                         </button>
@@ -1831,7 +1831,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                                             <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapse<?php echo $grupo->getIdGrupoClase() ?>" aria-expanded="true" aria-controls="collapse<?php echo $grupo->getIdGrupoClase() ?>">
                                                                                                 <?php echo $grupo->getLetra();
                                                                                                 if ($contextAsignatura->getData()->getEstado()==="B" && ($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['coordinacion'] == true || unserialize($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['permisos'])->getPermisoGrupoClase() == true)) { ?>
-                                                                                                    <a href="horarioClase.php?IdGrupoClase=<?php echo $grupo->getIdGrupoClase(); ?>&IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
+                                                                                                    <a href="horarioClase.php?IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdGrupoClase=<?php echo $grupo->getIdGrupoClase(); ?>&IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
                                                                                                         <button type="button" class="btn btn-success" id="btn-form">
                                                                                                             Crear Nuevo Horario
                                                                                                         </button>
@@ -1900,12 +1900,12 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                                                                             <td>' . $modGrupoClaseProfesor->getFechaInicio() . '</td>
                                                                                                                             <td>' . $modGrupoClaseProfesor->getFechaFin() . '</td>';
                                                                                                                             if ($contextAsignatura->getData()->getEstado()==="B" && ($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['coordinacion'] == true || unserialize($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['permisos'])->getPermisoGrupoClase() == true)) {
-                                                                                                                                echo '<td> <a href="grupoClaseProfesor.php?EmailProfesor=' . $modGrupoClaseProfesor->getEmailProfesor() . '&IdAsignatura=' . $contextAsignatura->getData()->getIdAsignatura() . '&IdGrupoClase=' . $grupo->getIdGrupoClase() . '">
+                                                                                                                                echo '<td> <a href="grupoClaseProfesor.php?IdGrado='.$contextGrado->getData()->getCodigoGrado().'&EmailProfesor=' . $modGrupoClaseProfesor->getEmailProfesor() . '&IdAsignatura=' . $contextAsignatura->getData()->getIdAsignatura() . '&IdGrupoClase=' . $grupo->getIdGrupoClase() . '">
                                                                                                                                 <button type="button" class="btn btn-warning" id="btn-form">
                                                                                                                                 Modificar Profesor
                                                                                                                                 </button>
                                                                                                                                 </a>
-                                                                                                                                <a href="borrarGrupoClaseProfesor.php?EmailProfesor=' . $modGrupoClaseProfesor->getEmailProfesor() . '&IdAsignatura=' . $contextAsignatura->getData()->getIdAsignatura() . '&IdGrupoClase=' . $grupo->getIdGrupoClase() . '">
+                                                                                                                                <a href="borrarGrupoClaseProfesor.php?IdGrado='.$contextGrado->getData()->getCodigoGrado().'&EmailProfesor=' . $modGrupoClaseProfesor->getEmailProfesor() . '&IdAsignatura=' . $contextAsignatura->getData()->getIdAsignatura() . '&IdGrupoClase=' . $grupo->getIdGrupoClase() . '">
                                                                                                                                 <button type="button" class="btn btn-danger" id="btn-form">
                                                                                                                                 Borrar Profesor
                                                                                                                                 </button>
@@ -1928,12 +1928,12 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                                                                     <td>' . $horario->getDia() . '</td>
                                                                                                                     <td>' . $horario->getHoraInicio() . '-' . $horario->getHoraFin() . '</td>';
                                                                                                                     if ($contextAsignatura->getData()->getEstado()==="B" && ($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['coordinacion'] == true || unserialize($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['permisos'])->getPermisoGrupoClase() == true)) {
-                                                                                                                        echo '<td> <a href="horarioClase.php?IdHorarioClase=' . $horario->getIdHorarioClase() . '&IdAsignatura=' . $contextAsignatura->getData()->getIdAsignatura() . '">
+                                                                                                                        echo '<td> <a href="horarioClase.php?IdGrado='.$contextGrado->getData()->getCodigoGrado().'&IdHorarioClase=' . $horario->getIdHorarioClase() . '&IdAsignatura=' . $contextAsignatura->getData()->getIdAsignatura() . '">
                                                                                                                         <button type="button" class="btn btn-warning" id="btn-form">
                                                                                                                         Modificar Horario
                                                                                                                         </button>
                                                                                                                         </a>
-                                                                                                                        <a href="borrarHorarioClase.php?IdHorarioClase=' . $horario->getIdHorarioClase() . '&IdAsignatura=' . $contextAsignatura->getData()->getIdAsignatura() . '">
+                                                                                                                        <a href="borrarHorarioClase.php?IdGrado='.$contextGrado->getData()->getCodigoGrado().'&IdHorarioClase=' . $horario->getIdHorarioClase() . '&IdAsignatura=' . $contextAsignatura->getData()->getIdAsignatura() . '">
                                                                                                                         <button type="button" class="btn btn-danger" id="btn-form">
                                                                                                                         Borrar Horario
                                                                                                                         </button>
@@ -2054,13 +2054,13 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                         <?php if ($contextAsignatura->getData()->getEstado()==="B" && ($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['coordinacion'] == true || unserialize($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['permisos'])->getPermisoGrupoClase() == true)) { ?>
                                                                             <div class="text-right">
                                                                                 <?php if ($contextModGrupoClase->getEvent() === FIND_MODGRUPO_CLASE_OK && $contextModGrupoClaseProfesor->getEvent() === FIND_MODGRUPO_CLASE_PROFESOR_OK) { ?>
-                                                                                    <a href="grupoClase.php?IdModAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
+                                                                                    <a href="grupoClase.php?IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdModAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
                                                                                         <button type="button" class="btn btn-success" id="btn-form">
                                                                                             Modificar Borrador
                                                                                         </button>
                                                                                     </a>
                                                                                 <?php } ?>
-                                                                                <a href="grupoClase.php?IdAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
+                                                                                <a href="grupoClase.php?IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
                                                                                     <button type="button" class="btn btn-success" id="btn-form">
                                                                                         Crear Nuevo Borrador Grupo
                                                                                     </button>

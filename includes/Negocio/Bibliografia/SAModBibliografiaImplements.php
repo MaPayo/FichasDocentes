@@ -22,6 +22,9 @@ class SAModBibliografiaImplements implements SAModBibliografia
                 $bibliografia[0]['IdModAsignatura']
             );
         }
+        else{
+            $bibliografia=null;
+        }
         return $bibliografia;
     }
 

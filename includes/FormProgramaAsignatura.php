@@ -25,7 +25,7 @@ class FormProgramaAsignatura extends Form
 		$programaLaboratorio = isset($datosIniciales['programaLaboratorio']) ? $datosIniciales['programaLaboratorio'] : null;
 		$programaLaboratorioI = isset($datosIniciales['programaLaboratorioI']) ? $datosIniciales['programaLaboratorioI'] : null;
 		$idAsignatura = isset($datosIniciales['idAsignatura']) ? $datosIniciales['idAsignatura'] : null;
-		$idGrado = isset($datosIniciales['idGrado']) ? $datosIniciales['idAsignatura'] : null;
+		$idGrado = isset($datosIniciales['idGrado']) ? $datosIniciales['idGrado'] : null;
 		
 		$controller = new ControllerImplements();
 		$context = new Context(FIND_CONFIGURACION, $idAsignatura);
@@ -41,13 +41,13 @@ class FormProgramaAsignatura extends Form
 			if ($contextConfiguacion->getData()->getConocimientosPrevios() == 1) {
 				$html .= '<div class="form-group">
 				<label for="conocimientosPrevios">Conocimientos previos</label>
-				<textarea class="form-control" id="conocimientosPrevios" rows="3" name="conocimientosPrevios" >' . $conocimientosPrevios . '</textarea>
+				<textarea class="form-control" id="conocimientosPrevios" rows="3" name="conocimientosPrevios" required>' . $conocimientosPrevios . '</textarea>
 				</div>';
 
 				if(!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())){
 					$html .= '<div class="form-group">
 					<label for="conocimientosPreviosI">Conocimientos previos (Ingles)</label>
-					<textarea class="form-control" id="conocimientosPreviosI" rows="3" name="conocimientosPreviosI" >' . $conocimientosPreviosI . '</textarea>
+					<textarea class="form-control" id="conocimientosPreviosI" rows="3" name="conocimientosPreviosI" required>' . $conocimientosPreviosI . '</textarea>
 					</div>';
 				}
 			}
@@ -55,13 +55,13 @@ class FormProgramaAsignatura extends Form
 			if ($contextConfiguacion->getData()->getBreveDescripcion() == 1) {
 				$html .= '<div class="form-group">
 				<label for="breveDescripcion">Breve descripción</label>
-				<textarea class="form-control" id="breveDescripcion" rows="3" name="breveDescripcion" >' . $breveDescripcion . '</textarea>
+				<textarea class="form-control" id="breveDescripcion" rows="3" name="breveDescripcion" required>' . $breveDescripcion . '</textarea>
 				</div>';
 
 				if(!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())){
 					$html .= '<div class="form-group">
 					<label for="breveDescripcionI">Breve descripcion (Ingles)</label>
-					<textarea class="form-control" id="breveDescripcionI" rows="3" name="breveDescripcionI" >' . $breveDescripcionI . '</textarea>
+					<textarea class="form-control" id="breveDescripcionI" rows="3" name="breveDescripcionI" required>' . $breveDescripcionI . '</textarea>
 					</div>';
 				}
 			}
@@ -69,13 +69,13 @@ class FormProgramaAsignatura extends Form
 			if ($contextConfiguacion->getData()->getProgramaTeorico() == 1) {
 				$html .= '<div class="form-group">
 				<label for="programaTeorico">Programa teorico</label>
-				<textarea class="form-control" id="programaTeorico" rows="3" name="programaTeorico" >' . $programaTeorico . '</textarea>
+				<textarea class="form-control" id="programaTeorico" rows="3" name="programaTeorico" required>' . $programaTeorico . '</textarea>
 				</div>';
 
 				if(!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())){
 					$html .= '<div class="form-group">
 					<label for="programaTeoricoI">Programa teorico (Ingles)</label>
-					<textarea class="form-control" id="programaTeoricoI" rows="3" name="programaTeoricoI" >' . $programaTeoricoI . '</textarea>
+					<textarea class="form-control" id="programaTeoricoI" rows="3" name="programaTeoricoI" required>' . $programaTeoricoI . '</textarea>
 					</div>';
 				}
 			}
@@ -83,13 +83,13 @@ class FormProgramaAsignatura extends Form
 			if ($contextConfiguacion->getData()->getProgramaSeminarios() == 1) {
 				$html .= '<div class="form-group">
 				<label for="programaSeminarios">Programa seminarios</label>
-				<textarea class="form-control" id="programaTeorico" rows="3" name="programaSeminarios" >' . $programaSeminarios . '</textarea>
+				<textarea class="form-control" id="programaTeorico" rows="3" name="programaSeminarios" required>' . $programaSeminarios . '</textarea>
 				</div>';
 
 				if(!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())){
 					$html .= '<div class="form-group">
 					<label for="programaSeminariosI">Programa seminarios (Ingles)</label>
-					<textarea class="form-control" id="programaSeminariosI" rows="3" name="programaSeminariosI" >' . $programaSeminariosI . '</textarea>
+					<textarea class="form-control" id="programaSeminariosI" rows="3" name="programaSeminariosI" required>' . $programaSeminariosI . '</textarea>
 					</div>';
 				}
 			}
@@ -97,13 +97,13 @@ class FormProgramaAsignatura extends Form
 			if ($contextConfiguacion->getData()->getProgramaLaboratorio() == 1) {
 				$html .= '<div class="form-group">
 				<label for="programaLaboratorio">Programa laboratorio</label>
-				<textarea class="form-control" id="programaLaboratorio" rows="3" name="programaLaboratorio" >' . $programaLaboratorio . '</textarea>
+				<textarea class="form-control" id="programaLaboratorio" rows="3" name="programaLaboratorio" required>' . $programaLaboratorio . '</textarea>
 				</div>';
 
 				if(!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())){
 					$html .= '<div class="form-group">
 					<label for="programaLaboratorioI">Programa laboratorio (Ingles)</label>
-					<textarea class="form-control" id="programaLaboratorioI" rows="3" name="programaLaboratorioI" >' . $programaLaboratorioI . '</textarea>
+					<textarea class="form-control" id="programaLaboratorioI" rows="3" name="programaLaboratorioI" required>' . $programaLaboratorioI . '</textarea>
 					</div>';
 				}
 			}

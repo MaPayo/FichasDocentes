@@ -26,6 +26,9 @@ class SAVerificaImplements implements SAVerifica
                 $verifica[0]['IdAsignatura']
             );
         }
+        else{
+         $verifica   =null;
+        }
         return $verifica;
     }
 

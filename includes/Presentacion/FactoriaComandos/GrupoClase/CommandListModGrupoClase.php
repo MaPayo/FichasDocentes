@@ -16,7 +16,7 @@ class CommandListModGrupoClase implements Command
         $saGrupoClase = $factorySA->createSAModGrupoClase();
         $grupoClase = $saGrupoClase->listModGrupoClase($data);
         $responseContext = null;
-        if ($grupoClase) {
+        if (isset($grupoClase)) {
             $responseContext = new Context(LIST_MODGRUPO_CLASE_OK, $grupoClase);
         } else {
             $responseContext = new Context(LIST_MODGRUPO_CLASE_FAIL, null);

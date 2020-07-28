@@ -16,7 +16,7 @@ class CommandListGrupoClaseProfesor implements Command
         $saGrupoClaseProfesor = $factorySA->createSAGrupoClaseProfesor();
         $grupoClaseProfesor = $saGrupoClaseProfesor->listGrupoClaseProfesor($data);
         $responseContext = null;
-        if ($grupoClaseProfesor) {
+        if (isset($grupoClaseProfesor)) {
             $responseContext = new Context(LIST_GRUPO_CLASE_PROFESOR_OK, $grupoClaseProfesor);
         } else {
             $responseContext = new Context(LIST_GRUPO_CLASE_PROFESOR_FAIL, null);

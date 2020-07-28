@@ -25,6 +25,9 @@ class SAModGrupoLaboratorioProfesorImplements implements SAModGrupoLaboratorioPr
                 );
             }
         }
+        else{
+         $arrayModGrupoLaboratorioProfesor   =null;
+        }
         return $arrayModGrupoLaboratorioProfesor;
     }
 
@@ -40,6 +43,9 @@ class SAModGrupoLaboratorioProfesorImplements implements SAModGrupoLaboratorioPr
                 $modGrupoLaboratorioProfesor[0]['FechaFin'],
                 $modGrupoLaboratorioProfesor[0]['EmailProfesor']
             );
+        }
+        else{
+         $modGrupoLaboratorioProfesor   =null;
         }
         return $modGrupoLaboratorioProfesor;
     }

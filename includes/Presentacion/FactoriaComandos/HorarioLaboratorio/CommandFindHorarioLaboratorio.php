@@ -16,7 +16,7 @@ class CommandFindHorarioLaboratorio implements Command
         $saHorarioLaboratorio = $factorySA->createSAHorarioLaboratorio();
         $horarioLaboratorio = $saHorarioLaboratorio->findHorarioLaboratorio($data);
         $responseContext = null;
-        if ($horarioLaboratorio) {
+        if (isset($horarioLaboratorio)) {
             $responseContext = new Context(FIND_HORARIO_LABORATORIO_OK, $horarioLaboratorio);
         } else {
             $responseContext = new Context(FIND_HORARIO_LABORATORIO_FAIL, null);

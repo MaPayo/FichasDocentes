@@ -16,7 +16,7 @@ class CommandListGrado implements Command
         $saGrado = $factorySA->createSAGrado();
         $grado = $saGrado->listGrado();
         $responseContext = null;
-        if ($grado) {
+        if (isset($grado)) {
             $responseContext = new Context(LIST_GRADO_OK, $grado);
         } else {
             $responseContext = new Context(LIST_GRADO_FAIL, null);

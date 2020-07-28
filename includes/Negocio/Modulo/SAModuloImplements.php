@@ -22,6 +22,9 @@ class SAModuloImplements implements SAModulo
                 $modulo[0]['CodigoGrado']
             );
         }
+        else{
+         $modulo   =null;
+        }
         return $modulo;
     }
 
@@ -64,6 +67,9 @@ class SAModuloImplements implements SAModulo
                     $modulo['CodigoGrado']
                 );
             }
+        }
+        else{
+         $arrayModulos   =null;
         }
         return $arrayModulos;
     }

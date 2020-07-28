@@ -14,7 +14,7 @@ class CommandFindConfiguracion implements Command
         $saConfiguracion = $factorySA->createSAConfiguracion();
         $configuracion = $saConfiguracion->findConfiguracion($data);
         $responseContext = null;
-        if ($configuracion != null) {
+        if (isset($configuracion )) {
             $responseContext = new Context(FIND_CONFIGURACION_OK, $configuracion);
         } else {
             $responseContext = new Context(FIND_CONFIGURACION_FAIL, null);

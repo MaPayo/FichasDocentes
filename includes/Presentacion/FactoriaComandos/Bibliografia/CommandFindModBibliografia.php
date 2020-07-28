@@ -14,7 +14,7 @@ class CommandFindModBibliografia implements Command
         $saBibliografia = $factorySA->createSAModBibliografia();
         $bibliografia = $saBibliografia->findModBibliografia($data);
         $responseContext = null;
-        if ($bibliografia != null) {
+        if (isset($bibliografia)) {
             $responseContext = new Context(FIND_MODBIBLIOGRAFIA_OK, $bibliografia);
         } else {
             $responseContext = new Context(FIND_MODBIBLIOGRAFIA_FAIL, null);

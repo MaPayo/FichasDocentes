@@ -16,7 +16,7 @@ class CommandListGrupoLaboratorio implements Command
         $saGrupoLaboratorio = $factorySA->createSAGrupoLaboratorio();
         $grupoLaboratorio = $saGrupoLaboratorio->listGrupoLaboratorio($data);
         $responseContext = null;
-        if ($grupoLaboratorio) {
+        if (isset($grupoLaboratorio)) {
             $responseContext = new Context(LIST_GRUPO_LABORATORIO_OK, $grupoLaboratorio);
         } else {
             $responseContext = new Context(LIST_GRUPO_LABORATORIO_FAIL, null);

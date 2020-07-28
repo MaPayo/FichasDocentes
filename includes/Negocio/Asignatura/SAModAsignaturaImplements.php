@@ -22,6 +22,9 @@ class SAModAsignaturaImplements implements SAModAsignatura
                 $modAsignatura[0]['IdAsignatura']
             );
         }
+        else{
+            $modAsignatura=null;
+        }
         return $modAsignatura;
     }
 

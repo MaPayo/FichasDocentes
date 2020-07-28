@@ -28,6 +28,9 @@ class SAAsignaturaImplements implements SAAsignatura
                 $asignatura[0]['IdMateria']
             );
         }
+        else{
+           $asignatura=null;
+        }
         return $asignatura;
     }
 
@@ -76,6 +79,9 @@ class SAAsignaturaImplements implements SAAsignatura
                     $asignatura['IdMateria']
                 );
             }
+        }
+        else{
+            $arrayAsignaturas=null;
         }
         return $arrayAsignaturas;
     }

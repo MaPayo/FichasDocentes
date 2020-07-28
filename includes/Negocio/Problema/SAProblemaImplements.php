@@ -22,6 +22,9 @@ class SAProblemaImplements implements SAProblema
                 $problema[0]['IdAsignatura']
             );
         }
+        else{
+         $problema   =null;
+        }
         return $problema;
     }
 

@@ -26,6 +26,9 @@ class SAModGrupoClaseProfesorImplements implements SAModGrupoClaseProfesor
                 );
             }
         }
+        else{
+         $arrayModGrupoClaseProfesor   =null;
+        }
         return $arrayModGrupoClaseProfesor;
     }
 
@@ -42,6 +45,9 @@ class SAModGrupoClaseProfesorImplements implements SAModGrupoClaseProfesor
                 $modGrupoClaseProfesor[0]['FechaFin'],
                 $modGrupoClaseProfesor[0]['EmailProfesor']
             );
+        }
+        else{
+         $modGrupoClaseProfesor   =null;
         }
         return $modGrupoClaseProfesor;
     }

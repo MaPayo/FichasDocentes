@@ -20,6 +20,9 @@ class SAGrupoLaboratorioImplements implements SAGrupoLaboratorio
                 $arrayGrupoLaboratorio[] = new GrupoLaboratorio($grupo['IdGrupoLab'], $grupo['Letra'], $grupo['Idioma'], $grupo['IdAsignatura']);
             }
         }
+        else{
+           $arrayGrupoLaboratorio =null;
+        }
         return $arrayGrupoLaboratorio;
     }
 
@@ -35,6 +38,9 @@ class SAGrupoLaboratorioImplements implements SAGrupoLaboratorio
                 $grupoLaboratorio[0]['Idioma'],
                 $grupoLaboratorio[0]['IdAsignatura']
             );
+        }
+        else{
+          $grupoLaboratorio  =null;
         }
         return $grupoLaboratorio;
     }

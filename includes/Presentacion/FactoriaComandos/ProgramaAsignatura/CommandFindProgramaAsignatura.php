@@ -14,7 +14,7 @@ class CommandFindProgramaAsignatura implements Command
         $saPrograma = $factorySA->createSAProgramaAsignatura();
         $programa = $saPrograma->findProgramaAsignatura($data);
         $responseContext = null;
-        if ($programa) {
+        if (isset($programa)) {
             $responseContext = new Context(FIND_PROGRAMA_ASIGNATURA_OK, $programa);
         } else {
             $responseContext = new Context(FIND_PROGRAMA_ASIGNATURA_FAIL, null);
