@@ -31,7 +31,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
 
                 if((isset($_GET['IdAsignatura']) && isset($_GET['IdGrupoClase'])) || (isset($_GET['IdAsignatura']) && isset($_GET['IdHorarioClase']))){
 
-                    if(isset($_SESSION['permisos'][$_GET['IdAsignatura']]) && unserialize($_SESSION['permisos'][$_GET['IdAsignatura']])->getPermisoGrupoclase() >= 6){
+                    if($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET['IdAsignatura']]['coordinacion'] == true || (isset($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET['IdAsignatura']]['permisos']) && $_SESSION['asignaturas'][$_GET['IdGrado']][$_GET['IdAsignatura']]['permisos']->getPermisoGrupoclase() == true)){
 
                         ?>
                         <div class="col-md-6 col-12">
@@ -55,11 +55,13 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                             $datosIniciales['horaFin'] = $contextHorarioClase->getData()->getHoraFin();
                                             $datosIniciales['idGrupoClase'] = $contextHorarioClase->getData()->getIdGrupoClase();
                                             $datosIniciales['idAsignatura'] =  htmlspecialchars(trim(strip_tags($_GET['IdAsignatura'])));
+                                            $datosIniciales['idGrado'] =$_GET['IdGrado'];
                                             $access->gestionaModificacion($datosIniciales);
                                         }
                                     } elseif (isset($_GET['IdGrupoClase'])) {
                                         $datosIniciales['idAsignatura'] =  htmlspecialchars(trim(strip_tags($_GET['IdAsignatura'])));
                                         $datosIniciales['idGrupoClase'] =  htmlspecialchars(trim(strip_tags($_GET['IdGrupoClase'])));
+                                        $datosIniciales['idGrado'] =$_GET['IdGrado'];
                                         $access->gestionaModificacion($datosIniciales);
                                     }
                                     ?>

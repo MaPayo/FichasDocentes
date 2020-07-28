@@ -13,6 +13,7 @@ require_once('includes/Presentacion/FactoriaComandos/Asignatura/CommandCreateAsi
 require_once('includes/Presentacion/FactoriaComandos/Asignatura/CommandDeleteAsignatura.php');
 require_once('includes/Presentacion/FactoriaComandos/Asignatura/CommandFindAsignatura.php');
 require_once('includes/Presentacion/FactoriaComandos/Asignatura/CommandUpdateAsignatura.php');
+require_once('includes/Presentacion/FactoriaComandos/Asignatura/CommandListAsignatura.php');
 require_once('includes/Presentacion/FactoriaComandos/Asignatura/CommandCreateModAsignatura.php');
 require_once('includes/Presentacion/FactoriaComandos/Asignatura/CommandDeleteModAsignatura.php');
 require_once('includes/Presentacion/FactoriaComandos/Asignatura/CommandFindModAsignatura.php');
@@ -125,6 +126,7 @@ require_once('includes/Presentacion/FactoriaComandos/HorarioLaboratorio/CommandU
 require_once('includes/Presentacion/FactoriaComandos/Laboratorio/CommandFindLaboratorio.php');
 
 require_once('includes/Presentacion/FactoriaComandos/Materia/CommandFindMateria.php');
+require_once('includes/Presentacion/FactoriaComandos/Materia/CommandListMateria.php');
 
 require_once('includes/Presentacion/FactoriaComandos/Metodologia/CommandFindMetodologia.php');
 require_once('includes/Presentacion/FactoriaComandos/Metodologia/CommandFindModMetodologia.php');
@@ -133,6 +135,7 @@ require_once('includes/Presentacion/FactoriaComandos/Metodologia/CommandDeleteMo
 require_once('includes/Presentacion/FactoriaComandos/Metodologia/CommandUpdateModMetodologia.php');
 
 require_once('includes/Presentacion/FactoriaComandos/Modulo/CommandFindModulo.php');
+require_once('includes/Presentacion/FactoriaComandos/Modulo/CommandListModulo.php');
 
 require_once('includes/Presentacion/FactoriaComandos/Permisos/CommandFindPermisos.php');
 require_once('includes/Presentacion/FactoriaComandos/Permisos/CommandDeletePermisos.php');

@@ -26,6 +26,11 @@ h2{
 
 }
 
+h3{
+	font-size: calc(1rem + .9vh);
+
+}
+
 h5{
 	font-size: calc(0.9rem + .6vw);
 }

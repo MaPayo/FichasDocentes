@@ -37,7 +37,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                         $name = 'IdModAsignatura';
                     }
 
-                    if(isset($_SESSION['permisos'][$_GET[$name]]) && unserialize($_SESSION['permisos'][$_GET[$name]])->getPermisoCompetencias() >= 6){
+                    if($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET[$name]]['coordinacion'] == true || (isset($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET[$name]]['permisos']) && unserialize($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET[$name]]['permisos'])->getPermisoCompetencias() == true)){
                        $controller = new es\ucm\ControllerImplements();
                        $context = new es\ucm\Context(FIND_CONFIGURACION, htmlspecialchars(trim(strip_tags($_GET[$name]))));
                        $contextConfiguacion = $controller->action($context);
@@ -65,9 +65,9 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                         $context = new es\ucm\Context(DELETE_MODCOMPETENCIAS_ASIGNATURA, htmlspecialchars(trim(strip_tags($_GET[$name]))));
                                         $contextCompetencia = $controller->action($context);
                                         if($contextCompetencia->getEvent()=== DELETE_MODCOMPETENCIAS_ASIGNATURA_OK){
-                                            header('Location: indexAcceso.php?IdAsignatura='.$_GET[$name].'&eliminado=y');
+                                            header('Location: indexAcceso.php?IdGrado='.$_GET['IdGrado'].'&IdAsignatura='.$_GET[$name].'&eliminado=y');
                                         }elseif($contextCompetencia->getEvent()=== DELETE_MODCOMPETENCIAS_ASIGNATURA_FAIL){
-                                            header('Location: indexAcceso.php?IdAsignatura='.$_GET[$name].'&eliminado=n');
+                                            header('Location: indexAcceso.php?IdGrado='.$_GET['IdGrado'].'&IdAsignatura='.$_GET[$name].'&eliminado=n');
                                         }
                                         
                                     }
@@ -75,9 +75,9 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                         $context = new es\ucm\Context(DELETE_COMPETENCIAS_ASIGNATURA, htmlspecialchars(trim(strip_tags($_GET[$name]))));
                                         $contextCompetencia = $controller->action($context);
                                         if($contextCompetencia->getEvent()=== DELETE_COMPETENCIAS_ASIGNATURA_OK){
-                                            header('Location: indexAcceso.php?IdAsignatura='.$_GET[$name].'&eliminado=y');
+                                            header('Location: indexAcceso.php?IdGrado='.$_GET['IdGrado'].'&IdAsignatura='.$_GET[$name].'&eliminado=y');
                                         }elseif($contextCompetencia->getEvent()=== DELETE_COMPETENCIAS_ASIGNATURA_FAIL){
-                                            header('Location: indexAcceso.php?IdAsignatura='.$_GET[$name].'&eliminado=n');
+                                            header('Location: indexAcceso.php?IdGrado='.$_GET['IdGrado'].'&IdAsignatura='.$_GET[$name].'&eliminado=n');
                                         }
                                    }   
                                    

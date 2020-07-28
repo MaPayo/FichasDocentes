@@ -20,6 +20,8 @@
                 <div class="dropdown-menu dropdown-menu-right">';
 
             if (isset($_SESSION['login']) && $_SESSION['login'] === true) {
+                echo '<a class="dropdown-item" href="config.php">Configuración</a>';
+                echo '<div class="dropdown-divider"></div>';
                 echo '<a class="dropdown-item" href="logout.php">Cerrar Sesión</a>';
             } else {
                 echo ' <a class="dropdown-item" href="index.php">Log In</a>';

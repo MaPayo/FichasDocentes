@@ -37,7 +37,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                         $name = 'IdModAsignatura';
                     }
 
-                    if(isset($_SESSION['permisos'][$_GET[$name]]) && unserialize($_SESSION['permisos'][$_GET[$name]])->getPermisoMetodologia() >= 6){
+                    if($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET[$name]]['coordinacion'] == true || (isset($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET[$name]]['permisos']) && $_SESSION['asignaturas'][$_GET['IdGrado']][$_GET[$name]]['permisos']->getPermisoMetodologia() == true)){
                      $controller = new es\ucm\ControllerImplements();
                      $context = new es\ucm\Context(FIND_CONFIGURACION, htmlspecialchars(trim(strip_tags($_GET[$name]))));
                      $contextConfiguacion = $controller->action($context);
@@ -66,16 +66,16 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                         if($contextMetodologia->getEvent()=== DELETE_MODMETODOLOGIA_OK){
                                             header('Location: indexAcceso.php?IdAsignatura='.$_GET[$name].'&eliminado=y');
                                         }elseif($contextMetodologia->getEvent()=== DELETE_MODMETODOLOGIA_FAIL){
-                                            header('Location: indexAcceso.php?IdAsignatura='.$_GET[$name].'&eliminado=n');
+                                            header('Location: indexAcceso.php?IdGrado='.$_GET['IdGrado'].'&IdAsignatura='.$_GET[$name].'&eliminado=n');
                                         }
                                     }
                                     elseif($contextMetodologia->getEvent() === FIND_METODOLOGIA_OK){
                                         $context = new es\ucm\Context(DELETE_METODOLOGIA, htmlspecialchars(trim(strip_tags($_GET[$name]))));
                                         $contextMetodologia = $controller->action($context);
                                         if($contextMetodologia->getEvent()=== DELETE_METODOLOGIA_OK){
-                                            header('Location: indexAcceso.php?IdAsignatura='.$_GET[$name].'&eliminado=y');
+                                            header('Location: indexAcceso.php?IdGrado='.$_GET['IdGrado'].'&IdAsignatura='.$_GET[$name].'&eliminado=y');
                                         }elseif($contextMetodologia->getEvent()=== DELETE_METODOLOGIA_FAIL){
-                                            header('Location: indexAcceso.php?IdAsignatura='.$_GET[$name].'&eliminado=n');
+                                            header('Location: indexAcceso.php?IdGrado='.$_GET['IdGrado'].'&IdAsignatura='.$_GET[$name].'&eliminado=n');
                                         }
                                     }
                                     ?>

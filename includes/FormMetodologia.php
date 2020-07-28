@@ -16,6 +16,7 @@ class FormMetodologia extends Form
 		$metodologia = isset($datosIniciales['metodologia']) ? $datosIniciales['metodologia'] : null;
 		$metodologiaI = isset($datosIniciales['metodologiaI']) ? $datosIniciales['metodologiaI'] : null;
 		$idAsignatura = isset($datosIniciales['idAsignatura']) ? $datosIniciales['idAsignatura'] : null;
+		$idGrado = isset($datosIniciales['idGrado']) ? $datosIniciales['idGrado'] : null;
 
 		$controller = new ControllerImplements();
 		$context = new Context(FIND_ASIGNATURA, $idAsignatura);
@@ -36,7 +37,7 @@ class FormMetodologia extends Form
 		}
 
 		$html .= '<div class="text-right">
-		<a href="indexAcceso.php?IdAsignatura=' . $idAsignatura . '#nav-metodologia">
+		<a href="indexAcceso.php?IdGrado=' .$idGrado. '&IdAsignatura=' . $idAsignatura . '#nav-metodologia">
 		<button type="button" class="btn btn-secondary" id="btn-form">
 		Cancelar
 		</button>
@@ -86,7 +87,7 @@ class FormMetodologia extends Form
 					$modAsignatura=new ModAsignatura($datos['idAsignatura'],date("Y-m-d H:i:s"),$_SESSION['idUsuario'],$datos['idAsignatura']);
 					$context =new Context(UPDATE_MODASIGNATURA,$modAsignatura);
 					$contextModAsignatura = $controller->action($context);
-					$erroresFormulario = "indexAcceso.php?IdAsignatura=".$datos['idAsignatura']."&modificado=y#nav-metodologia";
+					$erroresFormulario = "indexAcceso.php?IdGrado=" .$datos['idGrado']. "&IdAsignatura=".$datos['idAsignatura']."&modificado=y#nav-metodologia";
 
 				} elseif ($contextMetodologia->getEvent() === UPDATE_MODMETODOLOGIA_FAIL){
 					$erroresFormulario[] = "No se ha podido modificar la metodología.";
@@ -101,7 +102,7 @@ class FormMetodologia extends Form
 					$modAsignatura=new ModAsignatura($datos['idAsignatura'],date("Y-m-d H:i:s"),$_SESSION['idUsuario'],$datos['idAsignatura']);
 					$context =new Context(UPDATE_MODASIGNATURA,$modAsignatura);
 					$contextModAsignatura = $controller->action($context);
-					$erroresFormulario = "indexAcceso.php?IdAsignatura=".$datos['idAsignatura']."&anadido=y#nav-metodologia";
+					$erroresFormulario = "indexAcceso.php?IdGrado=" .$datos['idGrado']. "&IdAsignatura=".$datos['idAsignatura']."&anadido=y#nav-metodologia";
 					
 				} elseif ($contextMetodologia->getEvent() === CREATE_MODMETODOLOGIA_FAIL) {
 					$erroresFormulario[] = "No se ha podido crear la metodología.";

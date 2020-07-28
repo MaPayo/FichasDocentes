@@ -31,7 +31,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
 
                 if (isset($_GET['IdGrupoLaboratorio']) && isset($_GET['IdAsignatura'])) {
 
-                    if (isset($_SESSION['permisos'][$_GET['IdAsignatura']]) && unserialize($_SESSION['permisos'][$_GET['IdAsignatura']])->getPermisoGrupoLaboratorio() >= 6) {
+                    if ($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET['IdAsignatura']]['coordinacion'] == true || (isset($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET['IdAsignatura']]['permisos']) && $_SESSION['asignaturas'][$_GET['IdGrado']][$_GET['IdAsignatura']]['permisos']->getPermisoGrupoLaboratorio() ==true)) {
                         $controller = new es\ucm\ControllerImplements();
                         $context = new es\ucm\Context(FIND_CONFIGURACION, htmlspecialchars(trim(strip_tags($_GET['IdAsignatura']))));
                         $contextConfiguacion = $controller->action($context);
@@ -60,11 +60,13 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                             $datosIniciales['fechaFin'] = $contextGrupoLaboratorioProfesor->getData()->getFechaFin();
                                             $datosIniciales['emailProfesor'] = $contextGrupoLaboratorioProfesor->getData()->getEmailProfesor();
                                             $datosIniciales['idAsignatura'] = htmlspecialchars(trim(strip_tags($_GET['IdAsignatura'])));
+                                            $datosIniciales['idGrado'] =$_GET['IdGrado'];
                                             $access->gestionaModificacion($datosIniciales);
                                         }
                                     } elseif (isset($_GET['IdGrupoLaboratorio'])) {
                                         $datosIniciales['idGrupoLaboratorio'] = htmlspecialchars(trim(strip_tags($_GET['IdGrupoLaboratorio'])));
                                         $datosIniciales['idAsignatura'] = htmlspecialchars(trim(strip_tags($_GET['IdAsignatura'])));
+                                        $datosIniciales['idGrado'] =$_GET['IdGrado'];
                                         $access->gestionaModificacion($datosIniciales);
                                     }
                                     ?>

@@ -31,7 +31,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
 
                 if (isset($_GET['IdGrupoClase']) && isset($_GET['IdAsignatura'])) {
 
-                    if (isset($_SESSION['permisos'][$_GET['IdAsignatura']]) && unserialize($_SESSION['permisos'][$_GET['IdAsignatura']])->getPermisoGrupoClase() >= 6) {
+                    if ($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET['IdAsignatura']]['coordinacion'] == true || (isset($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET['IdAsignatura']]['permisos']) && $_SESSION['asignaturas'][$_GET['IdGrado']][$_GET['IdAsignatura']]['permisos']->getPermisoGrupoClase() == true)) {
             ?>
                         <div class="col-md-6 col-12">
                             <div class="card ">
@@ -56,11 +56,13 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                              $datosIniciales['fechaFin'] = $contextGrupoClaseProfesor->getData()->getFechaFin();
                                             $datosIniciales['emailProfesor'] = $contextGrupoClaseProfesor->getData()->getEmailProfesor();
                                             $datosIniciales['idAsignatura'] = htmlspecialchars(trim(strip_tags($_GET['IdAsignatura'])));
+                                            $datosIniciales['idGrado'] =$_GET['IdGrado'];
                                             $access->gestionaModificacion($datosIniciales);
                                         }
                                     } elseif (isset($_GET['IdGrupoClase'])) {
                                         $datosIniciales['idGrupoClase'] = htmlspecialchars(trim(strip_tags($_GET['IdGrupoClase'])));
                                         $datosIniciales['idAsignatura'] = htmlspecialchars(trim(strip_tags($_GET['IdAsignatura'])));
+                                        $datosIniciales['idGrado'] =$_GET['IdGrado'];
                                         $access->gestionaModificacion($datosIniciales);
                                     }
                                     ?>

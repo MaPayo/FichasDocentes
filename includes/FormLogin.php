@@ -7,13 +7,12 @@ require_once('includes/Presentacion/FactoriaComandos/Usuario/CommandFindUsuario.
 require_once('includes/Presentacion/Controlador/ControllerImplements.php');
 
 
-class FormLogin extends Form
-{
-	protected function generaCamposFormulario($datosIniciales)
-	{
+class FormLogin extends Form{
+
+	protected function generaCamposFormulario($datosIniciales){
 		$html = '<div>
 		<div class="form-group">
-		<input type="text" class="form-control form-control-lg" name="email" placeholder="Email" required />
+		<input type="email" class="form-control form-control-lg" name="email" placeholder="Email" autofocus required />
 		</div>
 
 		<div class="form-group">
@@ -25,8 +24,8 @@ class FormLogin extends Form
 		return $html;
 	}
 
-	protected function procesaFormulario($datos)
-	{
+	protected function procesaFormulario($datos){
+
 		$erroresFormulario = array();
 
 		$email = isset($_POST['email']) ? $_POST['email'] : null;
@@ -48,25 +47,77 @@ class FormLogin extends Form
 			var_dump($usuario->getEvent());
 			if ($usuario->getEvent() === FIND_USUARIO_FAIL) {						
 				$erroresFormulario[] = "El email o la contraseña no coinciden";
-			} else {
-				if ($usuario->getData()->getPassword() === $password) {
-					$_SESSION['login'] = true;
-					$_SESSION['idUsuario'] = $usuario->getData()->getEmail();
-					$context = new Context(FIND_PERMISOS_POR_PROFESOR, $email);
-					$controller = new ControllerImplements();
-					$permisos = $controller->action($context);
-					if($permisos->getEvent() === FIND_PERMISOS_POR_PROFESOR_FAIL){
-						$erroresFormulario[] = "El profesor no tiene ningún permiso";
-					}
-					else{
-						foreach ($permisos->getData() as $permiso) {
-							$_SESSION['permisos'][$permiso->getIdAsignatura()] = serialize($permiso);
-						}
-						$erroresFormulario = 'indexAcceso.php?IdAsignatura='.$permisos->getData()[0]->getIdAsignatura();
-					}
-				} else {
-					$erroresFormulario[] = "El email o la contraseña no coinciden";
+			}
+			else if ($usuario->getData()->getPassword() === $password) {
+				$_SESSION['login'] = true;
+				$_SESSION['idUsuario'] = $usuario->getData()->getEmail();
+
+				$contextAdmin = new Context(FIND_ADMINISTRADOR, $email);
+				$admin = $controller->action($contextAdmin);
+				$contextProfesor = new Context(FIND_PROFESOR, $email);
+				$profesor = $controller->action($contextProfesor);
+				if($admin->getEvent() === FIND_ADMINISTRADOR_OK){
+					$erroresFormulario = 'indexAdmin.php';
 				}
+				else if($profesor->getEvent() === FIND_PROFESOR_OK){
+
+					$idAsignatura = null;
+					$idGrado = null;
+
+					$contextCoordinacion = new Context(LIST_GRADO, null);
+					$grados = $controller->action($contextCoordinacion);
+
+					foreach ($grados->getData() as $grado) {
+						$contextModulo = new Context(LIST_MODULO, $grado->getCodigoGrado());
+						$modulos = $controller->action($contextModulo);
+						if($modulos->getEvent() === LIST_MODULO_OK){
+							foreach ($modulos->getData() as $modulo) {
+								$contextMateria = new Context(LIST_MATERIA, $modulo->getIdModulo());
+								$materias = $controller->action($contextMateria);
+								if($materias->getEvent() === LIST_MATERIA_OK){
+									foreach ($materias->getData() as $materia) {
+										$contextAsignatura = new Context(LIST_ASIGNATURA, $materia->getIdMateria());
+										$asignaturas = $controller->action($contextAsignatura);
+										if($asignaturas->getEvent() === LIST_ASIGNATURA_OK){
+											foreach ($asignaturas->getData() as $asignatura) {
+												$info['email'] =$email;
+												$info['asignatura'] = $asignatura->getIdAsignatura(); 
+												$contextPermisos = new Context(FIND_PERMISOS_POR_PROFESOR_Y_ASIGNATURA, $info);
+												$permisos = $controller->action($contextPermisos);
+												if($permisos->getEvent() === FIND_PERMISOS_POR_PROFESOR_Y_ASIGNATURA_OK){
+													if(is_null($idAsignatura)){
+														$idGrado = $grado->getCodigoGrado();
+														$idAsignatura = $asignatura->getIdAsignatura();
+													}
+													$_SESSION['asignaturas'][$grado->getCodigoGrado()][$asignatura->getIdAsignatura()]['permisos'] = serialize($permisos->getData());
+													$_SESSION['asignaturas'][$grado->getCodigoGrado()][$asignatura->getIdAsignatura()]['coordinacion'] = false;
+												}
+												if($grado->getCoordinadorGrado() === $email){
+													if(is_null($idAsignatura)){
+														$idGrado = $grado->getCodigoGrado();
+														$idAsignatura = $asignatura->getIdAsignatura();
+													}
+													$_SESSION['asignaturas'][$grado->getCodigoGrado()][$asignatura->getIdAsignatura()]['coordinacion'] = true;
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+
+					if(!is_null($idAsignatura)){
+						$erroresFormulario = 'indexAcceso.php?IdGrado='.$idGrado.'&IdAsignatura='.$idAsignatura;
+					}
+					else $erroresFormulario = 'el usuario con rol profesor no tiene ninguna asignatura asociada';
+				}
+				else {
+					$erroresFormulario[] = "No se ha encontrado rol para el usuario";
+				}
+			}
+			else{
+				$erroresFormulario[] = "El email o la contraseña no coinciden";
 			}
 		}
 		return $erroresFormulario;
