@@ -22,7 +22,7 @@ class FormCompetenciaAsignatura extends Form
 		$resultadosAprendizaje = isset($datosIniciales['resultadosAprendizaje']) ? $datosIniciales['resultadosAprendizaje'] : null;
 		$resultadosAprendizajeI = isset($datosIniciales['resultadosAprendizajeI']) ? $datosIniciales['resultadosAprendizajeI'] : null;
 		$idAsignatura = isset($datosIniciales['idAsignatura']) ? $datosIniciales['idAsignatura'] : null;
-		$idGrado = isset($datosIniciales['idGrado']) ? $datosIniciales['idGrado'] : null;
+		$idGrado = isset($datosIniciales['idGrado']) ? $datosIniciales['idAsignatura'] : null;
 
 		$controller = new ControllerImplements();
 		$context = new Context(FIND_CONFIGURACION, $idAsignatura);

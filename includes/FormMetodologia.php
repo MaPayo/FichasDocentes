@@ -16,7 +16,7 @@ class FormMetodologia extends Form
 		$metodologia = isset($datosIniciales['metodologia']) ? $datosIniciales['metodologia'] : null;
 		$metodologiaI = isset($datosIniciales['metodologiaI']) ? $datosIniciales['metodologiaI'] : null;
 		$idAsignatura = isset($datosIniciales['idAsignatura']) ? $datosIniciales['idAsignatura'] : null;
-		$idGrado = isset($datosIniciales['idGrado']) ? $datosIniciales['idGrado'] : null;
+		$idGrado = isset($datosIniciales['idGrado']) ? $datosIniciales['idAsignatura'] : null;
 
 		$controller = new ControllerImplements();
 		$context = new Context(FIND_ASIGNATURA, $idAsignatura);

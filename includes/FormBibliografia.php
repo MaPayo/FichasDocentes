@@ -16,7 +16,7 @@ class FormBibliografia extends Form
 		$citasBibliograficas = isset($datosIniciales['citasBibliograficas']) ? $datosIniciales['citasBibliograficas'] : null;
 		$recursosInternet = isset($datosIniciales['recursosInternet']) ? $datosIniciales['recursosInternet'] : null;
 		$idAsignatura = isset($datosIniciales['idAsignatura']) ? $datosIniciales['idAsignatura'] : null;
-		$idGrado = isset($datosIniciales['idGrado']) ? $datosIniciales['idGrado'] : null;
+		$idGrado = isset($datosIniciales['idGrado']) ? $datosIniciales['idAsignatura'] : null;
 
 		$controller = new ControllerImplements();
 		$context = new Context(FIND_CONFIGURACION, $idAsignatura);
