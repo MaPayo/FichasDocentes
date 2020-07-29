@@ -24,15 +24,16 @@ class FormMetodologia extends Form
 
 		$html = '<input type="hidden" name="idMetodologia" value="' . $idMetodologia . '" required />
 		<input type="hidden" name="idAsignatura" value="' . $idAsignatura . '" required />
+		<input type="hidden" name="idGrado" value="' . $idGrado . '" required />
 		<div class="form-group">
 		<label for="metodologia">Metodología</label>
-		<textarea class="form-control" id="metodologia" rows="3" name="metodologia" required>' . $metodologia . '</textarea>
+		<textarea class="form-control" id="metodologia" rows="10" name="metodologia" required>' . $metodologia . '</textarea>
 		</div>';
 
 		if(!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())){
 			$html .= '<div class="form-group">
 			<label for="metodologiaI">Metodología (Inglés)</label>
-			<textarea class="form-control" id="metodologiaI" rows="3" name="metodologiaI" required>' . $metodologiaI . '</textarea>
+			<textarea class="form-control" id="metodologiaI" rows="10" name="metodologiaI" required>' . $metodologiaI . '</textarea>
 			</div>';
 		}
 

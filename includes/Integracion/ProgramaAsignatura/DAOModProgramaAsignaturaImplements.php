@@ -20,8 +20,29 @@ class DAOModProgramaAsignaturaImplements implements DAOModProgramaAsignatura
     {
         $singletonDataSource = new SingletonDataSource();
         $dataSource = $singletonDataSource->getInstance();
-        $sql = "INSERT INTO modprogramaasignatura (ConocimientosPrevios,ConocimientosPreviosi,BreveDescripcion,BreveDescripcioni,ProgramaTeorico,ProgramaTeoricoi, ProgramaSeminarios, ProgramaSeminariosi, ProgramaLaboratorio, ProgramaLaboratorioi, Influencia, Influenciai,IdModAsignatura) 
-        VALUES (:conocimientosPrevios, :conocimientosPreviosI, :breveDescripcion, :breveDescripcionI, :programaTeorico, :programaTeoricoI, :programaSeminarios, :programaSeminariosI, :programaLaboratorio, :programaLaboratorioI, :idModAsignatura)";
+        $sql = "INSERT INTO modprogramaasignatura (
+        ConocimientosPrevios,
+        ConocimientosPreviosi,
+        BreveDescripcion,
+        BreveDescripcioni,
+        ProgramaTeorico,
+        ProgramaTeoricoi,
+        ProgramaSeminarios,
+        ProgramaSeminariosi,
+        ProgramaLaboratorio,
+        ProgramaLaboratorioi,
+        IdModAsignatura) 
+        VALUES (:conocimientosPrevios,
+        :conocimientosPreviosI,
+        :breveDescripcion,
+        :breveDescripcionI,
+        :programaTeorico,
+        :programaTeoricoI,
+        :programaSeminarios,
+        :programaSeminariosI,
+        :programaLaboratorio,
+        :programaLaboratorioI,
+        :idModAsignatura)";
         $values = array(
             ':conocimientosPrevios' => $modProgramaAsignatura->getConocimientosPrevios(),
             ':conocimientosPreviosI' => $modProgramaAsignatura->getConocimientosPreviosI(),
@@ -33,7 +54,7 @@ class DAOModProgramaAsignaturaImplements implements DAOModProgramaAsignatura
             ':programaSeminariosI' => $modProgramaAsignatura->getProgramaSeminariosI(),
             ':programaLaboratorio' => $modProgramaAsignatura->getProgramaLaboratorio(),
             ':programaLaboratorioI' => $modProgramaAsignatura->getProgramaLaboratorioI(),
-            ':idModAsignatura' => $modProgramaAsignatura->getIdAsignatura()
+            ':idModAsignatura' => $modProgramaAsignatura->getIdModAsignatura()
         );
         $results = $dataSource->executeInsertUpdateDelete($sql, $values);
         return $results;
@@ -43,7 +64,18 @@ class DAOModProgramaAsignaturaImplements implements DAOModProgramaAsignatura
     {
         $singletonDataSource = new SingletonDataSource();
         $dataSource = $singletonDataSource->getInstance();
-        $sql = "UPDATE modprogramaasignatura SET IdPrograma = :idPrograma, ConocimientosPrevios = :conocimientosPrevios,ConocimientosPreviosi = :conocimientosPreviosI,BreveDescripcion = :breveDescripcion,BreveDescripcioni = :breveDescripcionI,ProgramaTeorico = :programaTeorico,ProgramaTeoricoi = :programaTeoricoI,ProgramaSeminarios = :programaSeminarios,ProgramaSeminariosi = :programaSeminariosI,ProgramaLaboratorio = :programaLaboratorio,ProgramaLaboratorioi = :programaLaboratorioI,IdModAsignatura = :idModAsignatura WHERE IdPrograma = :idPrograma";
+        $sql = "UPDATE modprogramaasignatura SET IdPrograma = :idPrograma,
+         ConocimientosPrevios = :conocimientosPrevios,
+         ConocimientosPreviosi = :conocimientosPreviosI,
+         BreveDescripcion = :breveDescripcion,
+         BreveDescripcioni = :breveDescripcionI,
+         ProgramaTeorico = :programaTeorico,
+         ProgramaTeoricoi = :programaTeoricoI,
+         ProgramaSeminarios = :programaSeminarios,
+         ProgramaSeminariosi = :programaSeminariosI,
+         ProgramaLaboratorio = :programaLaboratorio,
+         ProgramaLaboratorioi = :programaLaboratorioI,
+         IdModAsignatura = :idModAsignatura WHERE IdPrograma = :idPrograma";
         $values = array(
             ':idPrograma' => $modProgramaAsignatura->getIdPrograma(),
             ':conocimientosPrevios' => $modProgramaAsignatura->getConocimientosPrevios(),
@@ -56,7 +88,7 @@ class DAOModProgramaAsignaturaImplements implements DAOModProgramaAsignatura
             ':programaSeminariosI' => $modProgramaAsignatura->getProgramaSeminariosI(),
             ':programaLaboratorio' => $modProgramaAsignatura->getProgramaLaboratorio(),
             ':programaLaboratorioI' => $modProgramaAsignatura->getProgramaLaboratorioI(),
-            ':idModAsignatura' => $modProgramaAsignatura->getIdAsignatura()
+            ':idModAsignatura' => $modProgramaAsignatura->getIdModAsignatura()
         );
         $results = $dataSource->executeInsertUpdateDelete($sql, $values);
         return $results;

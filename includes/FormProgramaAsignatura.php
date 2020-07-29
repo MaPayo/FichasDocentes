@@ -34,20 +34,21 @@ class FormProgramaAsignatura extends Form
 		$contextAsignatura = $controller->action($context);
 
 		$html = '<input type="hidden" name="idPrograma" value="' . $idPrograma . '" required />
-		<input type="hidden" name="idAsignatura" value="' . $idAsignatura . '" required />';
+		<input type="hidden" name="idAsignatura" value="' . $idAsignatura . '" required />
+		<input type="hidden" name="idGrado" value="' . $idGrado . '" required />';
 
 		if ($contextConfiguacion->getEvent() === FIND_CONFIGURACION_OK) {
 
 			if ($contextConfiguacion->getData()->getConocimientosPrevios() == 1) {
 				$html .= '<div class="form-group">
 				<label for="conocimientosPrevios">Conocimientos previos</label>
-				<textarea class="form-control" id="conocimientosPrevios" rows="3" name="conocimientosPrevios" required>' . $conocimientosPrevios . '</textarea>
+				<textarea class="form-control" id="conocimientosPrevios" rows="10" name="conocimientosPrevios" required>' . $conocimientosPrevios . '</textarea>
 				</div>';
 
 				if(!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())){
 					$html .= '<div class="form-group">
 					<label for="conocimientosPreviosI">Conocimientos previos (Ingles)</label>
-					<textarea class="form-control" id="conocimientosPreviosI" rows="3" name="conocimientosPreviosI" required>' . $conocimientosPreviosI . '</textarea>
+					<textarea class="form-control" id="conocimientosPreviosI" rows="10" name="conocimientosPreviosI" required>' . $conocimientosPreviosI . '</textarea>
 					</div>';
 				}
 			}
@@ -55,13 +56,13 @@ class FormProgramaAsignatura extends Form
 			if ($contextConfiguacion->getData()->getBreveDescripcion() == 1) {
 				$html .= '<div class="form-group">
 				<label for="breveDescripcion">Breve descripción</label>
-				<textarea class="form-control" id="breveDescripcion" rows="3" name="breveDescripcion" required>' . $breveDescripcion . '</textarea>
+				<textarea class="form-control" id="breveDescripcion" rows="10" name="breveDescripcion" required>' . $breveDescripcion . '</textarea>
 				</div>';
 
 				if(!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())){
 					$html .= '<div class="form-group">
 					<label for="breveDescripcionI">Breve descripcion (Ingles)</label>
-					<textarea class="form-control" id="breveDescripcionI" rows="3" name="breveDescripcionI" required>' . $breveDescripcionI . '</textarea>
+					<textarea class="form-control" id="breveDescripcionI" rows="10" name="breveDescripcionI" required>' . $breveDescripcionI . '</textarea>
 					</div>';
 				}
 			}
@@ -69,13 +70,13 @@ class FormProgramaAsignatura extends Form
 			if ($contextConfiguacion->getData()->getProgramaTeorico() == 1) {
 				$html .= '<div class="form-group">
 				<label for="programaTeorico">Programa teorico</label>
-				<textarea class="form-control" id="programaTeorico" rows="3" name="programaTeorico" required>' . $programaTeorico . '</textarea>
+				<textarea class="form-control" id="programaTeorico" rows="10" name="programaTeorico" required>' . $programaTeorico . '</textarea>
 				</div>';
 
 				if(!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())){
 					$html .= '<div class="form-group">
 					<label for="programaTeoricoI">Programa teorico (Ingles)</label>
-					<textarea class="form-control" id="programaTeoricoI" rows="3" name="programaTeoricoI" required>' . $programaTeoricoI . '</textarea>
+					<textarea class="form-control" id="programaTeoricoI" rows="10" name="programaTeoricoI" required>' . $programaTeoricoI . '</textarea>
 					</div>';
 				}
 			}
@@ -83,13 +84,13 @@ class FormProgramaAsignatura extends Form
 			if ($contextConfiguacion->getData()->getProgramaSeminarios() == 1) {
 				$html .= '<div class="form-group">
 				<label for="programaSeminarios">Programa seminarios</label>
-				<textarea class="form-control" id="programaTeorico" rows="3" name="programaSeminarios" required>' . $programaSeminarios . '</textarea>
+				<textarea class="form-control" id="programaTeorico" rows="10" name="programaSeminarios" required>' . $programaSeminarios . '</textarea>
 				</div>';
 
 				if(!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())){
 					$html .= '<div class="form-group">
 					<label for="programaSeminariosI">Programa seminarios (Ingles)</label>
-					<textarea class="form-control" id="programaSeminariosI" rows="3" name="programaSeminariosI" required>' . $programaSeminariosI . '</textarea>
+					<textarea class="form-control" id="programaSeminariosI" rows="10" name="programaSeminariosI" required>' . $programaSeminariosI . '</textarea>
 					</div>';
 				}
 			}
@@ -97,13 +98,13 @@ class FormProgramaAsignatura extends Form
 			if ($contextConfiguacion->getData()->getProgramaLaboratorio() == 1) {
 				$html .= '<div class="form-group">
 				<label for="programaLaboratorio">Programa laboratorio</label>
-				<textarea class="form-control" id="programaLaboratorio" rows="3" name="programaLaboratorio" required>' . $programaLaboratorio . '</textarea>
+				<textarea class="form-control" id="programaLaboratorio" rows="10" name="programaLaboratorio" required>' . $programaLaboratorio . '</textarea>
 				</div>';
 
 				if(!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())){
 					$html .= '<div class="form-group">
 					<label for="programaLaboratorioI">Programa laboratorio (Ingles)</label>
-					<textarea class="form-control" id="programaLaboratorioI" rows="3" name="programaLaboratorioI" required>' . $programaLaboratorioI . '</textarea>
+					<textarea class="form-control" id="programaLaboratorioI" rows="10" name="programaLaboratorioI" required>' . $programaLaboratorioI . '</textarea>
 					</div>';
 				}
 			}
@@ -238,11 +239,10 @@ class FormProgramaAsignatura extends Form
 					$erroresFormulario[] = "No se ha podido modificar el programa asignatura.";
 				}
 			} elseif ($contextPrograma->getEvent() === FIND_MODPROGRAMA_ASIGNATURA_FAIL) {
-
 				$programa = new ModProgramaAsignatura(null, $conocimientosPrevios, $conocimientosPreviosI, $breveDescripcion, $breveDescripcionI, $programaTeorico, $programaTeoricoI, $programaSeminarios, $programaSeminariosI, $programaLaboratorio, $programaLaboratorioI, $datos['idAsignatura']);
 				$context = new Context(CREATE_MODPROGRAMA_ASIGNATURA, $programa);
 				$contextPrograma = $controller->action($context);
-
+				
 				if ($contextPrograma->getEvent() === CREATE_MODPROGRAMA_ASIGNATURA_OK) {
 
 					$modAsignatura = new ModAsignatura($datos['idAsignatura'], date("Y-m-d H:i:s"), $_SESSION['idUsuario'], $datos['idAsignatura']);

@@ -20,7 +20,7 @@ class DAOModEvaluacionImplements implements DAOModEvaluacion
     {
         $singletonDataSource = new SingletonDataSource();
         $dataSource = $singletonDataSource->getInstance();
-        $sql = "INSERT INTO modevaluacion (RealizacionExamenes, RealizacionExamenesi, PesoExamenes, RealizacionActividades, RealizacionActividadesi, PesoActividades, RealizacionLaboratorio, RealizacionLaboratorioi, PesoLaboratorio, CalificacionFinal, CalificacionFinali, CalificacionFinalE, CalificacionFinalEi, IdModAsignatura) 
+        $sql = "INSERT INTO modevaluacion (RealizacionExamenes, RealizacionExamenesi, PesoExamenes, RealizacionActividades, RealizacionActividadesi, PesoActividades, RealizacionLaboratorio, RealizacionLaboratorioi, PesoLaboratorio, CalificacionFinal, CalificacionFinali, IdModAsignatura) 
         VALUES (:realizacionExamenes, :realizacionExamenesI, :pesoExamenes, :realizacionActividades, :realizacionActividadesI, :pesoActividades, :realizacionLaboratorio, :realizacionLaboratorioI, :pesoLaboratorio, :calificacionFinal, :calificacionFinalI, :idModAsignatura)";
         $values = array(
             ':realizacionExamenes' => $modEvaluacion->getRealizacionExamenes(),

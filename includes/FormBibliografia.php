@@ -23,19 +23,20 @@ class FormBibliografia extends Form
 		$contextConfiguacion = $controller->action($context);
 
 		$html = '<input type="hidden" name="idBibliografia" value="' . $idBibliografia . '" required />
-		<input type="hidden" name="idAsignatura" value="' . $idAsignatura . '" required />';
+		<input type="hidden" name="idAsignatura" value="' . $idAsignatura . '" required />
+		<input type="hidden" name="idGrado" value="' . $idGrado . '" required />';
 		if ($contextConfiguacion->getEvent() === FIND_CONFIGURACION_OK){
 			
 			if ($contextConfiguacion->getData()->getCitasBibliograficas() == 1) {
 				$html .= '<div class="form-group">
 				<label for="citasBibliograficas">Citas Bibliográficas</label>
-				<textarea class="form-control" id="citasBibliograficas" rows="3" name="citasBibliograficas" required>' . $citasBibliograficas . '</textarea>
+				<textarea class="form-control" id="citasBibliograficas" rows="10" name="citasBibliograficas" required>' . $citasBibliograficas . '</textarea>
 				</div>';
 			}
 			if ($contextConfiguacion->getData()->getRecursosInternet() == 1) {
 				$html .= '<div class="form-group">
 				<label for="recursosInternet">Recursos de Internet</label>
-				<textarea class="form-control" id="recursosInternet" rows="3" name="recursosInternet" required>' . $recursosInternet . '</textarea>
+				<textarea class="form-control" id="recursosInternet" rows="10" name="recursosInternet" required>' . $recursosInternet . '</textarea>
 				</div>';
 			}
 		}

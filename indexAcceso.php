@@ -282,12 +282,12 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                 <table class="table table-sm table-bordered">
                                                     <thead>
                                                         <tr>
-                                                            <th scope="col" colspan="6">Coordinadores</th>
+                                                            <th scope="col" colspan="6">Coordinador/a</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
                                                         <tr>
-                                                            <th scope="col">Principal:</th>
+                                                            <th scope="col">Nombre:</th>
                                                             <td><?php echo $CoordinadorAsignatura->getData()->getNombre(); ?></td>
                                                             <th scope="col" colspan="2">Departamento:</th>
                                                             <td colspan="2"><?php echo $CoordinadorAsignatura->getData()->getDepartamento(); ?></td>
@@ -1288,7 +1288,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                         </a>
                                                         <a href="borrarCompetenciasAsignatura.php?IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdModAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
                                                             <button type="button" class="btn btn-danger" id="btn-form">
-                                                                Eliminar Borrador
+                                                                Borrar Borrador
                                                             </button>
                                                         </a>
                                                     <?php } ?>
@@ -2317,7 +2317,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                                                     </button>
                                                                                                 <?php } else { ?>
                                                                                                     <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                                                                                                        Realización contextLaboratorio
+                                                                                                        Realización Laboratorio
                                                                                                     </button>
                                                                                                 <?php } ?>
                                                                                             </h2>
@@ -2381,7 +2381,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                                                         </button>
                                                                                                     <?php } else { ?>
                                                                                                         <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
-                                                                                                            Realización contextLaboratorio (Inglés)
+                                                                                                            Realización Laboratorio (Inglés)
                                                                                                         </button>
                                                                                                     <?php } ?>
                                                                                                 </h2>
@@ -2921,7 +2921,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                     </div>
 
 
-                    <!-- Feecback -->
+                    <!-- Feedback -->
                     <?php
                     if (isset($_GET['anadido']) || isset($_GET['modificado'])) {
                         ?>

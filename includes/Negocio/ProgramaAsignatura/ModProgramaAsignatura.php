@@ -256,7 +256,7 @@ class ModProgramaAsignatura
     /**
      * @return mixed
      */
-    public function getIdAsignatura()
+    public function getIdModAsignatura()
     {
         return $this->IdModAsignatura;
     }
@@ -266,7 +266,7 @@ class ModProgramaAsignatura
      *
      * @return self
      */
-    public function setIdAsignatura($IdModAsignatura)
+    public function setIdModAsignatura($IdModAsignatura)
     {
         $this->IdModAsignatura = $IdModAsignatura;
 
