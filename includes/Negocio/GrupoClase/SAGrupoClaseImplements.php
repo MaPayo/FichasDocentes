@@ -44,7 +44,24 @@ class SAGrupoClaseImplements implements SAGrupoClase
         }
         return $grupoClase;
     }
-
+    public static function findGrupoClaseLetra($comparacion)
+    {
+        $factoriesDAO = new \es\ucm\FactoriesDAOImplements();
+        $DAOGrupoClase = $factoriesDAO->createDAOGrupoClase();
+        $grupoClase = $DAOGrupoClase->findGrupoClaseLetra($comparacion);
+        if ($grupoClase && count($grupoClase) === 1) {
+            $grupoClase = new GrupoClase(
+                $grupoClase[0]['IdGrupoClase'],
+                $grupoClase[0]['Letra'],
+                $grupoClase[0]['Idioma'],
+                $grupoClase[0]['IdAsignatura']
+            );
+        }
+        else{
+         $grupoClase   =null;
+        }
+        return $grupoClase;
+    }
     public static function createGrupoClase($grupoClase)
     {
         $factoriesDAO = new \es\ucm\FactoriesDAOImplements();

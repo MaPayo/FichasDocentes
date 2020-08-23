@@ -5,6 +5,8 @@ namespace es\ucm;
 interface DAOUsuario
 {
     public static function findUsuario($email);
+    
+    public static function findUsuarios();
 
     public static function createUsuario($Usuario);
 

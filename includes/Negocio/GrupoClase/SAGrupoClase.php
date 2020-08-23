@@ -9,6 +9,8 @@ interface SAGrupoClase
 
     public static function findGrupoClase($idGrupoClase);
 
+    public static function findGrupoClaseLetra($comparacion);
+
     public static function createGrupoClase($grupoClase);
 
     public static function updateGrupoClase($grupoClase);

@@ -22,7 +22,24 @@ class SAUsuarioImplements implements SAUsuario
         }
         return $usuario;
     }
+    public static function findUsuarios()
+    {
+        $factoriaDAO = new \es\ucm\FactoriesDAOImplements();
+        $DAOUsuario = $factoriaDAO->createDAOUsuario();
+        $usuarios = $DAOUsuario->findUsuarios();
+        if ($usuarios) {
+            foreach ($usuarios as $usuario) {
+                $arrayUsuarios[] = new Usuario($usuario['Email'], $usuario['Password']);
+            }
+        }
+        else{
+         $arrayUsuarios   =null;
+        }
+        return $arrayUsuarios;
+    }
 
+
+   
     public static function createUsuario($usuario)
     {
         $factoriaDAO = new \es\ucm\FactoriesDAOImplements();

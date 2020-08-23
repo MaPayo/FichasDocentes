@@ -6,6 +6,10 @@ namespace Composer\Autoload;
 
 class ComposerStaticInitd2402fb75b018f9f4af8a2d9019c61e4
 {
+    public static $files = array (
+        '45b89995831374eefdfc4161161938f6' => __DIR__ . '/..' . '/jfcherng/php-color-output/src/helpers.php',
+    );
+
     public static $prefixLengthsPsr4 = array (
         'e' => 
         array (
@@ -13,8 +17,12 @@ class ComposerStaticInitd2402fb75b018f9f4af8a2d9019c61e4
         ),
         'S' => 
         array (
-            'Symfony\\Component\\Process\\' => 26,
             'Svg\\' => 4,
+        ),
+        'J' => 
+        array (
+            'Jfcherng\\Utility\\' => 17,
+            'Jfcherng\\Diff\\' => 14,
         ),
         'F' => 
         array (
@@ -31,13 +39,19 @@ class ComposerStaticInitd2402fb75b018f9f4af8a2d9019c61e4
         array (
             0 => __DIR__ . '/../..' . '/TFG',
         ),
-        'Symfony\\Component\\Process\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/symfony/process',
-        ),
         'Svg\\' => 
         array (
             0 => __DIR__ . '/..' . '/phenx/php-svg-lib/src/Svg',
+        ),
+        'Jfcherng\\Utility\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/jfcherng/php-color-output/src',
+            1 => __DIR__ . '/..' . '/jfcherng/php-mb-string/src',
+        ),
+        'Jfcherng\\Diff\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/jfcherng/php-diff/src',
+            1 => __DIR__ . '/..' . '/jfcherng/php-sequence-matcher/src',
         ),
         'FontLib\\' => 
         array (
@@ -180,6 +194,36 @@ class ComposerStaticInitd2402fb75b018f9f4af8a2d9019c61e4
         'HTML5_Parser' => __DIR__ . '/..' . '/dompdf/dompdf/lib/html5lib/Parser.php',
         'HTML5_Tokenizer' => __DIR__ . '/..' . '/dompdf/dompdf/lib/html5lib/Tokenizer.php',
         'HTML5_TreeBuilder' => __DIR__ . '/..' . '/dompdf/dompdf/lib/html5lib/TreeBuilder.php',
+        'Jfcherng\\Diff\\DiffHelper' => __DIR__ . '/..' . '/jfcherng/php-diff/src/DiffHelper.php',
+        'Jfcherng\\Diff\\Differ' => __DIR__ . '/..' . '/jfcherng/php-diff/src/Differ.php',
+        'Jfcherng\\Diff\\Exception\\FileNotFoundException' => __DIR__ . '/..' . '/jfcherng/php-diff/src/Exception/FileNotFoundException.php',
+        'Jfcherng\\Diff\\Exception\\UnsupportedFunctionException' => __DIR__ . '/..' . '/jfcherng/php-diff/src/Exception/UnsupportedFunctionException.php',
+        'Jfcherng\\Diff\\Factory\\LineRendererFactory' => __DIR__ . '/..' . '/jfcherng/php-diff/src/Factory/LineRendererFactory.php',
+        'Jfcherng\\Diff\\Factory\\RendererFactory' => __DIR__ . '/..' . '/jfcherng/php-diff/src/Factory/RendererFactory.php',
+        'Jfcherng\\Diff\\Renderer\\AbstractRenderer' => __DIR__ . '/..' . '/jfcherng/php-diff/src/Renderer/AbstractRenderer.php',
+        'Jfcherng\\Diff\\Renderer\\Html\\AbstractHtml' => __DIR__ . '/..' . '/jfcherng/php-diff/src/Renderer/Html/AbstractHtml.php',
+        'Jfcherng\\Diff\\Renderer\\Html\\Combined' => __DIR__ . '/..' . '/jfcherng/php-diff/src/Renderer/Html/Combined.php',
+        'Jfcherng\\Diff\\Renderer\\Html\\Inline' => __DIR__ . '/..' . '/jfcherng/php-diff/src/Renderer/Html/Inline.php',
+        'Jfcherng\\Diff\\Renderer\\Html\\Json' => __DIR__ . '/..' . '/jfcherng/php-diff/src/Renderer/Html/Json.php',
+        'Jfcherng\\Diff\\Renderer\\Html\\LineRenderer\\AbstractLineRenderer' => __DIR__ . '/..' . '/jfcherng/php-diff/src/Renderer/Html/LineRenderer/AbstractLineRenderer.php',
+        'Jfcherng\\Diff\\Renderer\\Html\\LineRenderer\\Char' => __DIR__ . '/..' . '/jfcherng/php-diff/src/Renderer/Html/LineRenderer/Char.php',
+        'Jfcherng\\Diff\\Renderer\\Html\\LineRenderer\\Line' => __DIR__ . '/..' . '/jfcherng/php-diff/src/Renderer/Html/LineRenderer/Line.php',
+        'Jfcherng\\Diff\\Renderer\\Html\\LineRenderer\\LineRendererInterface' => __DIR__ . '/..' . '/jfcherng/php-diff/src/Renderer/Html/LineRenderer/LineRendererInterface.php',
+        'Jfcherng\\Diff\\Renderer\\Html\\LineRenderer\\None' => __DIR__ . '/..' . '/jfcherng/php-diff/src/Renderer/Html/LineRenderer/None.php',
+        'Jfcherng\\Diff\\Renderer\\Html\\LineRenderer\\Word' => __DIR__ . '/..' . '/jfcherng/php-diff/src/Renderer/Html/LineRenderer/Word.php',
+        'Jfcherng\\Diff\\Renderer\\Html\\SideBySide' => __DIR__ . '/..' . '/jfcherng/php-diff/src/Renderer/Html/SideBySide.php',
+        'Jfcherng\\Diff\\Renderer\\RendererConstant' => __DIR__ . '/..' . '/jfcherng/php-diff/src/Renderer/RendererConstant.php',
+        'Jfcherng\\Diff\\Renderer\\RendererInterface' => __DIR__ . '/..' . '/jfcherng/php-diff/src/Renderer/RendererInterface.php',
+        'Jfcherng\\Diff\\Renderer\\Text\\AbstractText' => __DIR__ . '/..' . '/jfcherng/php-diff/src/Renderer/Text/AbstractText.php',
+        'Jfcherng\\Diff\\Renderer\\Text\\Context' => __DIR__ . '/..' . '/jfcherng/php-diff/src/Renderer/Text/Context.php',
+        'Jfcherng\\Diff\\Renderer\\Text\\Unified' => __DIR__ . '/..' . '/jfcherng/php-diff/src/Renderer/Text/Unified.php',
+        'Jfcherng\\Diff\\SequenceMatcher' => __DIR__ . '/..' . '/jfcherng/php-sequence-matcher/src/SequenceMatcher.php',
+        'Jfcherng\\Diff\\Utility\\Arr' => __DIR__ . '/..' . '/jfcherng/php-diff/src/Utility/Arr.php',
+        'Jfcherng\\Diff\\Utility\\Language' => __DIR__ . '/..' . '/jfcherng/php-diff/src/Utility/Language.php',
+        'Jfcherng\\Diff\\Utility\\ReverseIterator' => __DIR__ . '/..' . '/jfcherng/php-diff/src/Utility/ReverseIterator.php',
+        'Jfcherng\\Diff\\Utility\\Str' => __DIR__ . '/..' . '/jfcherng/php-diff/src/Utility/Str.php',
+        'Jfcherng\\Utility\\CliColor' => __DIR__ . '/..' . '/jfcherng/php-color-output/src/CliColor.php',
+        'Jfcherng\\Utility\\MbString' => __DIR__ . '/..' . '/jfcherng/php-mb-string/src/MbString.php',
         'Pandoc\\Pandoc' => __DIR__ . '/..' . '/ryakad/pandoc-php/src/Pandoc/Pandoc.php',
         'Pandoc\\PandocException' => __DIR__ . '/..' . '/ryakad/pandoc-php/src/Pandoc/PandocException.php',
         'Pandoc\\Tests\\PandocTest' => __DIR__ . '/..' . '/ryakad/pandoc-php/src/Pandoc/Tests/PandocTest.php',
@@ -248,23 +292,6 @@ class ComposerStaticInitd2402fb75b018f9f4af8a2d9019c61e4
         'Svg\\Tag\\StyleTag' => __DIR__ . '/..' . '/phenx/php-svg-lib/src/Svg/Tag/StyleTag.php',
         'Svg\\Tag\\Text' => __DIR__ . '/..' . '/phenx/php-svg-lib/src/Svg/Tag/Text.php',
         'Svg\\Tag\\UseTag' => __DIR__ . '/..' . '/phenx/php-svg-lib/src/Svg/Tag/UseTag.php',
-        'Symfony\\Component\\Process\\Exception\\ExceptionInterface' => __DIR__ . '/..' . '/symfony/process/Exception/ExceptionInterface.php',
-        'Symfony\\Component\\Process\\Exception\\InvalidArgumentException' => __DIR__ . '/..' . '/symfony/process/Exception/InvalidArgumentException.php',
-        'Symfony\\Component\\Process\\Exception\\LogicException' => __DIR__ . '/..' . '/symfony/process/Exception/LogicException.php',
-        'Symfony\\Component\\Process\\Exception\\ProcessFailedException' => __DIR__ . '/..' . '/symfony/process/Exception/ProcessFailedException.php',
-        'Symfony\\Component\\Process\\Exception\\ProcessTimedOutException' => __DIR__ . '/..' . '/symfony/process/Exception/ProcessTimedOutException.php',
-        'Symfony\\Component\\Process\\Exception\\RuntimeException' => __DIR__ . '/..' . '/symfony/process/Exception/RuntimeException.php',
-        'Symfony\\Component\\Process\\ExecutableFinder' => __DIR__ . '/..' . '/symfony/process/ExecutableFinder.php',
-        'Symfony\\Component\\Process\\InputStream' => __DIR__ . '/..' . '/symfony/process/InputStream.php',
-        'Symfony\\Component\\Process\\PhpExecutableFinder' => __DIR__ . '/..' . '/symfony/process/PhpExecutableFinder.php',
-        'Symfony\\Component\\Process\\PhpProcess' => __DIR__ . '/..' . '/symfony/process/PhpProcess.php',
-        'Symfony\\Component\\Process\\Pipes\\AbstractPipes' => __DIR__ . '/..' . '/symfony/process/Pipes/AbstractPipes.php',
-        'Symfony\\Component\\Process\\Pipes\\PipesInterface' => __DIR__ . '/..' . '/symfony/process/Pipes/PipesInterface.php',
-        'Symfony\\Component\\Process\\Pipes\\UnixPipes' => __DIR__ . '/..' . '/symfony/process/Pipes/UnixPipes.php',
-        'Symfony\\Component\\Process\\Pipes\\WindowsPipes' => __DIR__ . '/..' . '/symfony/process/Pipes/WindowsPipes.php',
-        'Symfony\\Component\\Process\\Process' => __DIR__ . '/..' . '/symfony/process/Process.php',
-        'Symfony\\Component\\Process\\ProcessBuilder' => __DIR__ . '/..' . '/symfony/process/ProcessBuilder.php',
-        'Symfony\\Component\\Process\\ProcessUtils' => __DIR__ . '/..' . '/symfony/process/ProcessUtils.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

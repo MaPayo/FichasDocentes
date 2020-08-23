@@ -15,14 +15,16 @@ class DAOGradoImplements implements DAOGrado{
 
     }
 
+
     public static function createGrado($grado){
         $singletonDataSource=new SingletonDataSource();
         $dataSource=$singletonDataSource->getInstance();
-        $sql="INSERT INTO grado (CodigoGrado,NombreGrado,CoordinadorGrado,HorasEcts) 
-        VALUES (:codigoGrado, :nombreGrado, :coordinadorGrado, :horasEcts)";
+        $sql="INSERT INTO grado (CodigoGrado,NombreGrado,CoordinadorGrado,Activo,HorasEcts) 
+        VALUES (:codigoGrado, :nombreGrado, :coordinadorGrado,:activo, :horasEcts)";
         $values=array(':codigoGrado' => $grado->getCodigoGrado(),
             ':nombreGrado' => $grado->getNombreGrado(),
             ':coordinadorGrado' => $grado->getCoordinadorGrado(),
+            ':activo'=> $grado->getActivo(),
             ':horasEcts' => $grado->getHorasEcts());
         $results=$dataSource->executeInsertUpdateDelete($sql,$values);
         return $results;
@@ -32,10 +34,11 @@ class DAOGradoImplements implements DAOGrado{
     public static function updateGrado($grado){
         $singletonDataSource=new SingletonDataSource();
         $dataSource=$singletonDataSource->getInstance();
-        $sql="UPDATE grado SET CodigoGrado = :codigoGrado, NombreGrado = :nombreGrado,CoordinadorGrado = :coordinadorGrado,HorasEcts = :horasEcts WHERE CodigoGrado = :codigoGrado";
+        $sql="UPDATE grado SET CodigoGrado = :codigoGrado, NombreGrado = :nombreGrado,CoordinadorGrado = :coordinadorGrado,Activo = :activo,HorasEcts = :horasEcts WHERE CodigoGrado = :codigoGrado";
         $values=array(':codigoGrado' => $grado->getCodigoGrado(),
             ':nombreGrado' => $grado->getNombreGrado(),
             ':coordinadorGrado' => $grado->getCoordinadorGrado(),
+            ':activo'=> $grado->getActivo(),
             ':horasEcts' => $grado->getHorasEcts());
         $results=$dataSource->executeInsertUpdateDelete($sql,$values);
         return $results;

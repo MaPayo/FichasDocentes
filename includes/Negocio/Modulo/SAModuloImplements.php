@@ -19,6 +19,7 @@ class SAModuloImplements implements SAModulo
                 $modulo[0]['IdModulo'],
                 $modulo[0]['NombreModulo'],
                 $modulo[0]['CreditosModulo'],
+                $modulo[0]['Activo'],
                 $modulo[0]['CodigoGrado']
             );
         }
@@ -48,7 +49,7 @@ class SAModuloImplements implements SAModulo
     {
         $factoriesDAO = new \es\ucm\FactoriesDAOImplements();
         $DAOModulo = $factoriesDAO->createDAOModulo();
-        $modulo = $DAOModulo->deleteModulo($idModulo);
+        $modulo = $DAOModulo->updateModulo($idModulo);
         return $modulo;
     }
 
@@ -64,6 +65,7 @@ class SAModuloImplements implements SAModulo
                     $modulo['IdModulo'],
                     $modulo['NombreModulo'],
                     $modulo['CreditosModulo'],
+                    $modulo['Activo'],
                     $modulo['CodigoGrado']
                 );
             }

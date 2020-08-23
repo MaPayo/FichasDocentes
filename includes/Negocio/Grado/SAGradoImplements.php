@@ -19,6 +19,7 @@ class SAGradoImplements implements SAGrado
                 $grado[0]['CodigoGrado'],
                 $grado[0]['NombreGrado'],
                 $grado[0]['CoordinadorGrado'],
+                $grado[0]['Activo'],
                 $grado[0]['HorasEcts']
             );
         }
@@ -27,6 +28,7 @@ class SAGradoImplements implements SAGrado
         }
         return $grado;
     }
+
 
     public static function createGrado($grado)
     {
@@ -48,7 +50,7 @@ class SAGradoImplements implements SAGrado
     {
         $factoriesDAO = new \es\ucm\FactoriesDAOImplements();
         $DAOGrado = $factoriesDAO->createDAOGrado();
-        $grado = $DAOGrado->deleteGrado($codigoGrado);
+        $grado = $DAOGrado->updateGrado($codigoGrado);
         return $grado;
     }
 
@@ -60,7 +62,7 @@ class SAGradoImplements implements SAGrado
         $arrayGrados = array();
         if ($grados) {
             foreach ($grados as $grado) {
-                $arrayGrados[] = new Grado($grado['CodigoGrado'], $grado['NombreGrado'], $grado['CoordinadorGrado'], $grado['HorasEcts']);
+                $arrayGrados[] = new Grado($grado['CodigoGrado'], $grado['NombreGrado'], $grado['CoordinadorGrado'], $grado['Activo'], $grado['HorasEcts']);
             }
         }
         else{

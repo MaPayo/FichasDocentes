@@ -7,6 +7,8 @@ interface DAOHorarioClase
     public static function listHorarioClase($idGrupoClase);
 
     public static function findHorarioClase($idHorarioClase);
+    
+    public static function findHorarioClaseGrupoyDia($comparacion);
 
     public static function createHorarioClase($horarioClase);
 

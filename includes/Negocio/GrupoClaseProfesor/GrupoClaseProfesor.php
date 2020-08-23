@@ -94,7 +94,7 @@ class GrupoClaseProfesor
      */
     public function setFechaFin($FechaFin)
     {
-        $this->FechaInicio = $FechaInicio;
+        $this->FechaFin = $FechaFin;
 
         return $this;
     }

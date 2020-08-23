@@ -46,6 +46,26 @@ class SAHorarioClaseImplements implements SAHorarioClase
         }
         return $horarioClase;
     }
+    public static function findHorarioClaseGrupoyDia($comparacion)
+    {
+        $factoriesDAO = new \es\ucm\FactoriesDAOImplements();
+        $DAOHorarioClase = $factoriesDAO->createDAOHorarioClase();
+        $horarioClase = $DAOHorarioClase->findHorarioClaseGrupoyDia($comparacion);
+        if ($horarioClase && count($horarioClase) === 1) {
+            $horarioClase = new HorarioClase(
+                $horarioClase[0]['IdHorarioClase'],
+                $horarioClase[0]['Aula'],
+                $horarioClase[0]['Dia'],
+                $horarioClase[0]['HoraInicio'],
+                $horarioClase[0]['HoraFin'],
+                $horarioClase[0]['IdGrupoClase']
+            );
+        }
+        else{
+         $horarioClase   =null;
+        }
+        return $horarioClase;
+    }
 
     public static function createHorarioClase($horarioClase)
     {

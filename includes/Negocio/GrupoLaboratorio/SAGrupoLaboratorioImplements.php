@@ -43,6 +43,24 @@ class SAGrupoLaboratorioImplements implements SAGrupoLaboratorio
           $grupoLaboratorio  =null;
         }
         return $grupoLaboratorio;
+
+    }public static function findGrupoLaboratorioLetra($comparacion)
+    {
+        $factoriesDAO = new \es\ucm\FactoriesDAOImplements();
+        $DAOGrupoLaboratorio = $factoriesDAO->createDAOGrupoLaboratorio();
+        $grupoLaboratorio = $DAOGrupoLaboratorio->findGrupoLaboratorioLetra($comparacion);
+        if ($grupoLaboratorio && count($grupoLaboratorio) === 1) {
+            $grupoLaboratorio = new GrupoLaboratorio(
+                $grupoLaboratorio[0]['IdGrupoLab'],
+                $grupoLaboratorio[0]['Letra'],
+                $grupoLaboratorio[0]['Idioma'],
+                $grupoLaboratorio[0]['IdAsignatura']
+            );
+        }
+        else{
+          $grupoLaboratorio  =null;
+        }
+        return $grupoLaboratorio;
     }
 
     public static function createGrupoLaboratorio($grupoLaboratorio)

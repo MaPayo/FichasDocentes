@@ -20,8 +20,16 @@ class DAOGrupoClaseImplements implements DAOGrupoClase
     {
         $singletonDataSource = new SingletonDataSource();
         $dataSource = $singletonDataSource->getInstance();
-        $sql = "SELECT * FROM grupoclase WHERE IdGrupoClase = :idGrupoClase";
+        $sql = "SELECT * FROM grupoclase WHERE IdGrupoClase = :idGrupoClase ";
         $values = array(':idGrupoClase' => $idGrupoClase);
+        $results = $dataSource->executeQuery($sql, $values);
+        return $results;
+    }public static function findGrupoClaseLetra($comparacion)
+    {
+        $singletonDataSource = new SingletonDataSource();
+        $dataSource = $singletonDataSource->getInstance();
+        $sql = "SELECT * FROM grupoclase WHERE IdGrupoClase = :idGrupoClase AND Letra = :letra";
+        $values = array(':idGrupoClase' => $comparacion[0], ':letra' => $comparacion[1]);
         $results = $dataSource->executeQuery($sql, $values);
         return $results;
     }

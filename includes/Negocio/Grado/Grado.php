@@ -7,13 +7,15 @@ class Grado
     private $CodigoGrado;
     private $NombreGrado;
     private $CoordinadorGrado;
+    private $Activo;
     private $HorasEcts;
 
-    public function __construct($CodigoGrado, $NombreGrado, $CoordinadorGrado, $HorasEcts)
+    public function __construct($CodigoGrado, $NombreGrado, $CoordinadorGrado, $Activo, $HorasEcts)
     {
         $this->CodigoGrado = $CodigoGrado;
         $this->NombreGrado = $NombreGrado;
         $this->CoordinadorGrado = $CoordinadorGrado;
+        $this->Activo = $Activo;
         $this->HorasEcts = $HorasEcts;
     }
 
@@ -33,8 +35,6 @@ class Grado
     public function setNombreGrado($NombreGrado)
     {
         $this->NombreGrado = $NombreGrado;
-
-        return $this;
     }
 
     /**
@@ -53,8 +53,6 @@ class Grado
     public function setCoordinadorGrado($CoordinadorGrado)
     {
         $this->CoordinadorGrado = $CoordinadorGrado;
-
-        return $this;
     }
 
     /**
@@ -73,11 +71,16 @@ class Grado
     public function setHorasEcts($HorasEcts)
     {
         $this->HorasEcts = $HorasEcts;
-
-        return $this;
     }
 
-
+    public function getActivo()
+    {
+        return $this->Activo;
+    }
+    public function setActivo($Activo)
+    {
+        $this->Activo = $Activo;
+    }
     /**
      * @return mixed
      */
@@ -94,7 +97,5 @@ class Grado
     public function setCodigoGrado($CodigoGrado)
     {
         $this->CodigoGrado = $CodigoGrado;
-
-        return $this;
     }
 }

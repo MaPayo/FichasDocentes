@@ -25,6 +25,7 @@ class SAAsignaturaImplements implements SAAsignatura
                 $asignatura[0]['Creditos'],
                 $asignatura[0]['CoordinadorAsignatura'],
                 $asignatura[0]['Estado'],
+                $asignatura[0]['Activo'],
                 $asignatura[0]['IdMateria']
             );
         }
@@ -46,7 +47,7 @@ class SAAsignaturaImplements implements SAAsignatura
     {
         $factoriesDAO = new FactoriesDAOImplements();
         $DAOAsignatura = $factoriesDAO->createDAOAsignatura();
-        $asignatura = $DAOAsignatura->createAsignatura($asignatura);
+        $asignatura = $DAOAsignatura->updateAsignatura($asignatura);
         return $asignatura;
     }
 
@@ -54,7 +55,7 @@ class SAAsignaturaImplements implements SAAsignatura
     {
         $factoriesDAO = new FactoriesDAOImplements();
         $DAOAsignatura = $factoriesDAO->createDAOAsignatura();
-        $asignatura = $DAOAsignatura->deleteAsignatura($idAsignatura);
+        $asignatura = $DAOAsignatura->updateAsignatura($idAsignatura);
         return $asignatura;
     }
 
@@ -76,6 +77,7 @@ class SAAsignaturaImplements implements SAAsignatura
                     $asignatura['Creditos'],
                     $asignatura['CoordinadorAsignatura'],
                     $asignatura['Estado'],
+                    $asignatura['Activo'],
                     $asignatura['IdMateria']
                 );
             }

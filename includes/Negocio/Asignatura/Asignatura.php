@@ -14,19 +14,21 @@ class Asignatura
     private $Creditos;
     private $CoordinadorAsignatura;
     private $Estado;
+    private $Activo;
     private $IdMateria;
 
-    public function __construct($IdAsignatura, $NombreAsignatura, $Abreviatura, $Curso, $Semestre, $NombreAsignaturaIngles, $Creditos, $CoordinadorAsignatura, $Estado, $IdMateria)
+    public function __construct($IdAsignatura, $NombreAsignatura, $Abreviatura, $Curso, $Semestre, $NombreAsignaturaIngles, $Creditos, $CoordinadorAsignatura, $Estado, $Activo,$IdMateria)
     {
         $this->IdAsignatura = $IdAsignatura;
         $this->NombreAsignatura = $NombreAsignatura;
-        $this->$Abreviatura = $Abreviatura;
+        $this->Abreviatura = $Abreviatura;
         $this->Curso = $Curso;
         $this->Semestre = $Semestre;
         $this->NombreAsignaturaIngles = $NombreAsignaturaIngles;
         $this->Creditos = $Creditos;
         $this->CoordinadorAsignatura = $CoordinadorAsignatura;
         $this->Estado = $Estado;
+        $this->Activo = $Activo;
         $this->IdMateria = $IdMateria;
     }
 
@@ -74,7 +76,10 @@ class Asignatura
     {
         return $this->Estado;
     }
-
+    public function getActivo()
+    {
+        return $this->Activo;
+    }
     public function getIdMateria()
     {
         return $this->IdMateria;
@@ -123,6 +128,11 @@ class Asignatura
     public function setEstado($Estado)
     {
         $this->Estado = $Estado;
+    }
+
+    public function setActivo($Activo)
+    {
+        $this->Activo = $Activo;
     }
 
     public function setIdMateria($IdMateria)

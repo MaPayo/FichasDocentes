@@ -21,6 +21,10 @@ class SAComparacionImplements implements SAComparacion
             "BreveDescripcionI" => false,
             "ProgramaTeorico" => false,
             "ProgramaTeoricoI" => false,
+            "ProgramaSeminarios" => false,
+            "ProgramaSeminariosI" => false,
+            "ProgramaLaboratorio" => false,
+            "ProgramaLaboratorioI" => false,
             "ComGenerales" => false,
             "ComGeneralesI" => false,
             "ComEspecificas" => false,
@@ -62,7 +66,15 @@ class SAComparacionImplements implements SAComparacion
                 //Comprobamos si son iguales
                 if (sizeof($n) !== sizeof($modn)) {
                     $comparacion["conocimientosPrevios"] = true;
+                }else
+                {
+                for ($i=0; $i < sizeof($n) && $i < sizeof($modn) ; $i++) { 
+                    if($n[$i] !== $modn[$i]){
+                        $comparacion["conocimientosPrevios"] = true;
+                    }
                 }
+                }
+
                 $n = $asignatura->getConocimientosPreviosI();
                 $modn = $modAsignatura->getConocimientosPreviosI();
 
@@ -73,6 +85,13 @@ class SAComparacionImplements implements SAComparacion
                 //Comprobamos si son iguales
                 if (sizeof($n) !== sizeof($modn)) {
                     $comparacion["conocimientosPreviosI"] = true;
+                }else
+                {
+                for ($i=0; $i < sizeof($n) && $i < sizeof($modn) ; $i++) { 
+                    if($n[$i] !== $modn[$i]){
+                        $comparacion["conocimientosPreviosI"] = true;
+                    }
+                }
                 }
             }
         }
@@ -85,14 +104,29 @@ class SAComparacionImplements implements SAComparacion
                 $modn = explode(" ", $modn);
                 if (sizeof($n) !== sizeof($modn)) {
                     $comparacion["BreveDescripcion"] = true;
+                }else
+                {
+                for ($i=0; $i < sizeof($n) && $i < sizeof($modn) ; $i++) { 
+                    if($n[$i] !== $modn[$i]){
+                        $comparacion["BreveDescripcion"] = true;
+                    }
+                }
                 }
                 $n =  $asignatura->getBreveDescripcionI();
                 $modn = $modAsignatura->getBreveDescripcionI();
 
                 $n = explode(" ", $n);
                 $modn = explode(" ", $modn);
+                
                 if (sizeof($n) !== sizeof($modn)) {
                     $comparacion["BreveDescripcionI"] = true;
+                }else
+                {
+                for ($i=0; $i < sizeof($n) && $i < sizeof($modn) ; $i++) { 
+                    if($n[$i] !== $modn[$i]){
+                        $comparacion["BreveDescripcionI"] = true;
+                    }
+                }
                 }
             }
         }
@@ -105,6 +139,13 @@ class SAComparacionImplements implements SAComparacion
                 $modn = explode(" ", $modn);
                 if (sizeof($n) !== sizeof($modn)) {
                     $comparacion["ProgramaTeorico"] = true;
+                }else
+                {
+                for ($i=0; $i < sizeof($n) && $i < sizeof($modn) ; $i++) { 
+                    if($n[$i] !== $modn[$i]){
+                        $comparacion["ProgramaTeorico"] = true;
+                    }
+                }
                 }
                 $n =  $asignatura->getProgramaTeoricoI();
                 $modn = $modAsignatura->getProgramaTeoricoI();
@@ -113,6 +154,84 @@ class SAComparacionImplements implements SAComparacion
                 $modn = explode(" ", $modn);
                 if (sizeof($n) !== sizeof($modn)) {
                     $comparacion["ProgramaTeoricoI"] = true;
+                }
+                else
+                {
+                for ($i=0; $i < sizeof($n) && $i < sizeof($modn) ; $i++) { 
+                    if($n[$i] !== $modn[$i]){
+                        $comparacion["ProgramaTeoricoI"] = true;
+                    }
+                }
+                }
+            }
+        }
+        if ($configuracion->getProgramaSeminarios() === '1') {
+            if (empty($modAsignatura) === false) {
+                $n =  $asignatura->getProgramaSeminarios();
+                $modn = $modAsignatura->getProgramaSeminarios();
+
+                $n = explode(" ", $n);
+                $modn = explode(" ", $modn);
+                if (sizeof($n) !== sizeof($modn)) {
+                    $comparacion["ProgramaSeminarios"] = true;
+                }else
+                {
+                for ($i=0; $i < sizeof($n) && $i < sizeof($modn) ; $i++) { 
+                    if($n[$i] !== $modn[$i]){
+                        $comparacion["ProgramaSeminarios"] = true;
+                    }
+                }
+                }
+                $n =  $asignatura->getProgramaSeminariosI();
+                $modn = $modAsignatura->getProgramaSeminariosI();
+
+                $n = explode(" ", $n);
+                $modn = explode(" ", $modn);
+                if (sizeof($n) !== sizeof($modn)) {
+                    $comparacion["ProgramaSeminariosI"] = true;
+                }
+                else
+                {
+                for ($i=0; $i < sizeof($n) && $i < sizeof($modn) ; $i++) { 
+                    if($n[$i] !== $modn[$i]){
+                        $comparacion["ProgramaSeminariosI"] = true;
+                    }
+                }
+                }
+            }
+        }
+        if ($configuracion->getProgramaLaboratorio() === '1') {
+            if (empty($modAsignatura) === false) {
+                $n =  $asignatura->getProgramaLaboratorio();
+                $modn = $modAsignatura->getProgramaLaboratorio();
+
+                $n = explode(" ", $n);
+                $modn = explode(" ", $modn);
+                if (sizeof($n) !== sizeof($modn)) {
+                    $comparacion["ProgramaLaboratorio"] = true;
+                }else
+                {
+                for ($i=0; $i < sizeof($n) && $i < sizeof($modn) ; $i++) { 
+                    if($n[$i] !== $modn[$i]){
+                        $comparacion["ProgramaLaboratorio"] = true;
+                    }
+                }
+                }
+                $n =  $asignatura->getProgramaLaboratorioI();
+                $modn = $modAsignatura->getProgramaLaboratorioI();
+
+                $n = explode(" ", $n);
+                $modn = explode(" ", $modn);
+                if (sizeof($n) !== sizeof($modn)) {
+                    $comparacion["ProgramaLaboratorioI"] = true;
+                }
+                else
+                {
+                for ($i=0; $i < sizeof($n) && $i < sizeof($modn) ; $i++) { 
+                    if($n[$i] !== $modn[$i]){
+                        $comparacion["ProgramaLaboratorioI"] = true;
+                    }
+                }
                 }
             }
         }
@@ -131,6 +250,13 @@ class SAComparacionImplements implements SAComparacion
                 $modn = explode(" ", $modn);
                 if (sizeof($n) !== sizeof($modn)) {
                     $comparacion["ComGenerales"] = true;
+                }else
+                {
+                for ($i=0; $i < sizeof($n) && $i < sizeof($modn) ; $i++) { 
+                    if($n[$i] !== $modn[$i]){
+                        $comparacion["ComGenerales"] = true;
+                    }
+                }
                 }
 
                 $n =  $asignatura->getGeneralesI();
@@ -140,6 +266,14 @@ class SAComparacionImplements implements SAComparacion
                 $modn = explode(" ", $modn);
                 if (sizeof($n) !== sizeof($modn)) {
                     $comparacion["ComGeneralesI"] = true;
+                }
+                else
+                {
+                for ($i=0; $i < sizeof($n) && $i < sizeof($modn) ; $i++) { 
+                    if($n[$i] !== $modn[$i]){
+                        $comparacion["ComGeneralesI"] = true;
+                    }
+                }
                 }
             }
         }
@@ -154,6 +288,14 @@ class SAComparacionImplements implements SAComparacion
                 if (sizeof($n) !== sizeof($modn)) {
                     $comparacion["ComEspecificas"] = true;
                 }
+                else
+                {
+                for ($i=0; $i < sizeof($n) && $i < sizeof($modn) ; $i++) { 
+                    if($n[$i] !== $modn[$i]){
+                        $comparacion["ComEspecificas"] = true;
+                    }
+                }
+                }
                 $n =  $asignatura->getEspecificasI();
                 $modn = $modAsignatura->getEspecificasI();
 
@@ -161,6 +303,14 @@ class SAComparacionImplements implements SAComparacion
                 $modn = explode(" ", $modn);
                 if (sizeof($n) !== sizeof($modn)) {
                     $comparacion["ComEspecificasI"] = true;
+                }
+                else
+                {
+                for ($i=0; $i < sizeof($n) && $i < sizeof($modn) ; $i++) { 
+                    if($n[$i] !== $modn[$i]){
+                        $comparacion["ComEspecificasI"] = true;
+                    }
+                }
                 }
             }
         }
@@ -172,9 +322,16 @@ class SAComparacionImplements implements SAComparacion
                 $n = explode(" ", $n);
                 $modn = explode(" ", $modn);
                 if (sizeof($n) !== sizeof($modn)) {
-                    $comparacion["comBasicas"] = true;
+                    $comparacion["ComBasicas"] = true;
                 }
-
+                else
+                {
+                for ($i=0; $i < sizeof($n) && $i < sizeof($modn) ; $i++) { 
+                    if($n[$i] !== $modn[$i]){
+                        $comparacion["ComBasicas"] = true;
+                    }
+                }
+                }
                 $n =  $asignatura->getBasicasYTransversalesI();
                 $modn = $modAsignatura->getBasicasYTransversalesI();
 
@@ -182,6 +339,14 @@ class SAComparacionImplements implements SAComparacion
                 $modn = explode(" ", $modn);
                 if (sizeof($n) !== sizeof($modn)) {
                     $comparacion["ComBasicasI"] = true;
+                }
+                else
+                {
+                for ($i=0; $i < sizeof($n) && $i < sizeof($modn) ; $i++) { 
+                    if($n[$i] !== $modn[$i]){
+                        $comparacion["ComBasicasI"] = true;
+                    }
+                }
                 }
             }
         }
@@ -195,6 +360,14 @@ class SAComparacionImplements implements SAComparacion
                 if (sizeof($n) !== sizeof($modn)) {
                     $comparacion["ResultadosAprendizaje"] = true;
                 }
+                else
+                {
+                for ($i=0; $i < sizeof($n) && $i < sizeof($modn) ; $i++) { 
+                    if($n[$i] !== $modn[$i]){
+                        $comparacion["ResultadosAprendizaje"] = true;
+                    }
+                }
+                }
 
                 $n =  $asignatura->getResultadosAprendizajeI();
                 $modn = $modAsignatura->getResultadosAprendizajeI();
@@ -203,6 +376,14 @@ class SAComparacionImplements implements SAComparacion
                 $modn = explode(" ", $modn);
                 if (sizeof($n) !== sizeof($modn)) {
                     $comparacion["ResultadosAprendizajeI"] = true;
+                }
+                else
+                {
+                for ($i=0; $i < sizeof($n) && $i < sizeof($modn) ; $i++) { 
+                    if($n[$i] !== $modn[$i]){
+                        $comparacion["ResultadosAprendizajeI"] = true;
+                    }
+                }
                 }
             }
         }
@@ -221,7 +402,14 @@ class SAComparacionImplements implements SAComparacion
                 if (sizeof($n) !== sizeof($modn)) {
                     $comparacion["Metodologia"] = true;
                 }
-
+                else
+                {
+                for ($i=0; $i < sizeof($n) && $i < sizeof($modn) ; $i++) { 
+                    if($n[$i] !== $modn[$i]){
+                        $comparacion["Metodologia"] = true;
+                    }
+                }
+                }
 
                 $n =  $asignatura->getMetodologiaI();
                 $modn = $modAsignatura->getMetodologiaI();
@@ -230,6 +418,14 @@ class SAComparacionImplements implements SAComparacion
                 $modn = explode(" ", $modn);
                 if (sizeof($n) !== sizeof($modn)) {
                     $comparacion["MetodologiaI"] = true;
+                }
+                else
+                {
+                for ($i=0; $i < sizeof($n) && $i < sizeof($modn) ; $i++) { 
+                    if($n[$i] !== $modn[$i]){
+                        $comparacion["MetodologiaI"] = true;
+                    }
+                }
                 }
             }
         }
@@ -248,6 +444,14 @@ class SAComparacionImplements implements SAComparacion
                 if (sizeof($n) !== sizeof($modn)) {
                     $comparacion["CitasBibliograficas"] = true;
                 }
+                else
+                {
+                for ($i=0; $i < sizeof($n) && $i < sizeof($modn) ; $i++) { 
+                    if($n[$i] !== $modn[$i]){
+                        $comparacion["CitasBibliograficas"] = true;
+                    }
+                }
+                }
             }
         }
         if ($configuracion->getRecursosInternet() === '1') {
@@ -259,6 +463,14 @@ class SAComparacionImplements implements SAComparacion
                 $modn = explode(" ", $modn);
                 if (sizeof($n) !== sizeof($modn)) {
                     $comparacion["RecursosInternet"] = true;
+                }
+                else
+                {
+                for ($i=0; $i < sizeof($n) && $i < sizeof($modn) ; $i++) { 
+                    if($n[$i] !== $modn[$i]){
+                        $comparacion["RecursosInternet"] = true;
+                    }
+                }
                 }
             }
         }
@@ -278,6 +490,14 @@ class SAComparacionImplements implements SAComparacion
                 if (sizeof($n) !== sizeof($modn)) {
                     $comparacion["RealizacionExamenes"] = true;
                 }
+                else
+                {
+                for ($i=0; $i < sizeof($n) && $i < sizeof($modn) ; $i++) { 
+                    if($n[$i] !== $modn[$i]){
+                        $comparacion["RealizacionExamenes"] = true;
+                    }
+                }
+                }
                 $n =  $asignatura->getRealizacionExamenesI();
                 $modn = $modAsignatura->getRealizacionExamenesI();
 
@@ -285,6 +505,14 @@ class SAComparacionImplements implements SAComparacion
                 $modn = explode(" ", $modn);
                 if (sizeof($n) !== sizeof($modn)) {
                     $comparacion["RealizacionExamenesI"] = true;
+                }
+                else
+                {
+                for ($i=0; $i < sizeof($n) && $i < sizeof($modn) ; $i++) { 
+                    if($n[$i] !== $modn[$i]){
+                        $comparacion["RealizacionExamenesI"] = true;
+                    }
+                }
                 }
             }
         }
@@ -298,6 +526,14 @@ class SAComparacionImplements implements SAComparacion
                 if (sizeof($n) !== sizeof($modn)) {
                     $comparacion["CalificacionFinal"] = true;
                 }
+                else
+                {
+                for ($i=0; $i < sizeof($n) && $i < sizeof($modn) ; $i++) { 
+                    if($n[$i] !== $modn[$i]){
+                        $comparacion["CalificaciónFinal"] = true;
+                    }
+                }
+                }
                 $n =  $asignatura->getCalificacionFinalI();
                 $modn = $modAsignatura->getCalificacionFinalI();
 
@@ -305,6 +541,14 @@ class SAComparacionImplements implements SAComparacion
                 $modn = explode(" ", $modn);
                 if (sizeof($n) !== sizeof($modn)) {
                     $comparacion["CalificacionFinalI"] = true;
+                }
+                else
+                {
+                for ($i=0; $i < sizeof($n) && $i < sizeof($modn) ; $i++) { 
+                    if($n[$i] !== $modn[$i]){
+                        $comparacion["CalificacionFinalI"] = true;
+                    }
+                }
                 }
             }
         }
@@ -318,6 +562,14 @@ class SAComparacionImplements implements SAComparacion
                 if (sizeof($n) !== sizeof($modn)) {
                     $comparacion["RealizacionActividades"] = true;
                 }
+                else
+                {
+                for ($i=0; $i < sizeof($n) && $i < sizeof($modn) ; $i++) { 
+                    if($n[$i] !== $modn[$i]){
+                        $comparacion["RealizacionActividades"] = true;
+                    }
+                }
+                }
                 $n =  $asignatura->getRealizacionActividadesI();
                 $modn = $modAsignatura->getRealizacionActividadesI();
 
@@ -325,6 +577,14 @@ class SAComparacionImplements implements SAComparacion
                 $modn = explode(" ", $modn);
                 if (sizeof($n) !== sizeof($modn)) {
                     $comparacion["RealizacionActividadesI"] = true;
+                }
+                else
+                {
+                for ($i=0; $i < sizeof($n) && $i < sizeof($modn) ; $i++) { 
+                    if($n[$i] !== $modn[$i]){
+                        $comparacion["RealizacionActividadesI"] = true;
+                    }
+                }
                 }
             }
         }
@@ -338,6 +598,14 @@ class SAComparacionImplements implements SAComparacion
                 if (sizeof($n) !== sizeof($modn)) {
                     $comparacion["RealizacionLaboratorio"] = true;
                 }
+                else
+                {
+                for ($i=0; $i < sizeof($n) && $i < sizeof($modn) ; $i++) { 
+                    if($n[$i] !== $modn[$i]){
+                        $comparacion["RealizacionLaboratorio"] = true;
+                    }
+                }
+                }
                 $n =  $asignatura->getRealizacionLaboratorioI();
                 $modn = $modAsignatura->getRealizacionLaboratorioI();
 
@@ -345,6 +613,14 @@ class SAComparacionImplements implements SAComparacion
                 $modn = explode(" ", $modn);
                 if (sizeof($n) !== sizeof($modn)) {
                     $comparacion["RealizacionLaboratorioI"] = true;
+                }
+                else
+                {
+                for ($i=0; $i < sizeof($n) && $i < sizeof($modn) ; $i++) { 
+                    if($n[$i] !== $modn[$i]){
+                        $comparacion["RealizacionLaboratorioI"] = true;
+                    }
+                }
                 }
             }
         }

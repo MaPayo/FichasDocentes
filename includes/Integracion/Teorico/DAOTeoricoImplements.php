@@ -34,9 +34,10 @@ class DAOTeoricoImplements implements DAOTeorico
 
     public static function updateTeorico($teorico)
     {
+        
         $singletonDataSource = new SingletonDataSource();
         $dataSource = $singletonDataSource->getInstance();
-        $sql = "UPDATE teorico SET IdTeorico = :idTeorico, Creditos = :creditos,Presencial = :presencial IdAsignatura = :idAsignatura WHERE IdTeorico = :idTeorico";
+        $sql = "UPDATE teorico SET IdTeorico = :idTeorico, Creditos = :creditos,Presencial = :presencial,IdAsignatura = :idAsignatura WHERE IdTeorico = :idTeorico";
         $values = array(
             ':idTeorico' => $teorico->getIdTeorico(),
             ':creditos' => $teorico->getCreditos(),

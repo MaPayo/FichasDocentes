@@ -7,13 +7,15 @@ class Modulo
     private $idModulo;
     private $nombreModulo;
     private $creditosModulo;
+    private $activo;
     private $codigoGrado;
 
-    public function __construct($IdModulo, $NombreModulo, $CreditosModulo, $CodigoGrado)
+    public function __construct($IdModulo, $NombreModulo, $CreditosModulo, $activo, $CodigoGrado)
     {
         $this->idModulo = $IdModulo;
         $this->nombreModulo = $NombreModulo;
         $this->creditosModulo = $CreditosModulo;
+        $this->activo = $activo;
         $this->codigoGrado = $CodigoGrado;
     }
 
@@ -77,7 +79,14 @@ class Modulo
 
         return $this;
     }
-
+    public function getActivo()
+    {
+        return $this->activo;
+    }
+    public function setActivo($Activo)
+    {
+        $this->activo = $Activo;
+    }
     /**
      * @return mixed
      */

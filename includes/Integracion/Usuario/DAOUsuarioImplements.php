@@ -17,6 +17,15 @@ class DAOUsuarioImplements implements DAOUsuario
         return $results;
     }
 
+    public static function findUsuarios()
+    {
+        $singletonDataSource = new SingletonDataSource();
+        $dataSource = $singletonDataSource->getInstance();
+        $sql = "SELECT * FROM usuario";
+        $values = null;
+        $results = $dataSource->executeQuery($sql, $values);
+        return $results;
+    }
     public static function createUsuario($usuario)
     {
         $singletonDataSource = new SingletonDataSource();

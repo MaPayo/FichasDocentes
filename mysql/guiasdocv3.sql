@@ -56,6 +56,7 @@ CREATE TABLE `asignatura` (
   `Creditos` float NOT NULL,
   `CoordinadorAsignatura` varchar(50) NOT NULL,
   `Estado` varchar(1) NOT NULL,
+  `Activo` boolean NOT NULL,
   `IdMateria` int(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -63,33 +64,33 @@ CREATE TABLE `asignatura` (
 -- Volcado de datos para la tabla `asignatura`
 --
 
-INSERT INTO `asignatura` (`IdAsignatura`, `NombreAsignatura`, `Abreviatura`, `Curso`, `Semestre`, `NombreAsignaturaIngles`, `Creditos`, `CoordinadorAsignatura`, `Estado`, `IdMateria`) VALUES
-(800490, 'Fundamentos de física', '', 1, 1, 'Physics fundamentals I', 9, 'cdiazque@ucm.es', 'B', 80811),
-(800491, 'Fundamentos de física II', '', 1, 2, 'Physics fundamentals II', 9, 'acasmor@fis.ucm.es', 'B', 80811),
-(800492, 'Matemáticas', '', 1, 1, 'Mathematics', 9, 'jusanz@ucm.es', 'B', 80812),
-(800493, 'Cálculo', '', 1, 2, 'Calculus', 7.5, 'lsntnfp@ucm.es', 'B', 80812),
-(800494, 'Álgebra', '', 1, 2, 'Algebra', 7.5, 'p.tempesta@fis.ucm.es', 'B', 80812),
-(800495, 'Química', '', 1, 1, 'Chemistry', 6, 'iredondo@quim.ucm.es', 'B', 80813),
-(800496, 'Laboratorio de computación científica', '', 1, 1, 'Scientific computer laboratory', 6, 'mguijarro@ucm.es', 'B', 80814),
-(800497, 'Laboratorio de física I', '', 1, 2, 'Physics laboratory I', 6, 'jlcontreras@fis.ucm.es', 'B', 80811),
-(804500, 'Física I', '', 1, 1, NULL, 6, 'jdelrio@ucm.es', 'B', 88711),
-(804501, 'Física II', '', 1, 2, NULL, 6, 'lsanchez@fis.ucm.es', 'B', 88711),
-(804502, 'Quimica I', '', 1, 1, NULL, 6, 'sgmartin@quim.ucm.es', 'B', 88712),
-(804503, 'Química II', '', 1, 2, NULL, 6, 'sfilippo@ucm.es', '', 88712),
-(804505, 'Matemáticas I', '', 1, 1, '', 6, 'fybruno@ucm.es', 'B', 88713),
-(804506, 'Matemáticas II', '', 1, 2, NULL, 6, 'a.malyshev@fis.ucm.es', 'B', 88713),
-(804507, 'Métodos informaticos para la ingeniería', '', 1, 2, NULL, 6, 'faccion@ucm.es', 'B', 88715),
-(804510, 'Introducción a la ingeniería de materiales', '', 1, 1, NULL, 6, 'mlblazquez@quim.ucm.es', 'B', 88721),
-(804511, 'Diagramas y transformaciones de fases', '', 1, 2, NULL, 6, 'gsalazar@quim.ucm.es', 'B', 88721),
-(804543, 'Biología', '', 1, 1, NULL, 6, 'mjfeito@ucm.es', 'B', 88714),
-(804560, 'Física I', '', 1, 1, 'Physics I', 9, 'rafahern@ucm.es', 'B', 89011),
-(804561, 'Física II', '', 1, 1, 'Physics II', 9, 'coordinadorF2@ucm.es', 'B', 89011),
-(804562, 'Cálculo', '', 1, 1, 'Calculation', 9, 'mjrplaza@fis.ucm.es', 'B', 89013),
-(804563, 'Álgebra', '', 1, 2, 'Algebra', 9, 'magflechoso@ucm.es', 'B', 89013),
-(804564, 'Ampliación de Matemáticas', '', 1, 2, 'Mathematics expansion', 6, 'coordinadorAM@ucm.es', 'B', 89013),
-(804566, 'Informática', '', 1, 1, 'Computing', 6, 'igarcia@ucm.es', 'V', 89012),
-(804567, 'Circuitos Digitales', '', 1, 1, 'Digital circuits', 6, 'jluimana@ucm.es', 'B', 89012),
-(804575, 'Análisis de Circuitos', '', 1, 2, 'rt', 6, 'esas@ucm.es', 'B', 89011);
+INSERT INTO `asignatura` (`IdAsignatura`, `NombreAsignatura`, `Abreviatura`, `Curso`, `Semestre`, `NombreAsignaturaIngles`, `Creditos`, `CoordinadorAsignatura`, `Estado`,`Activo`, `IdMateria`) VALUES
+(800490, 'Fundamentos de física', '', 1, 1, 'Physics fundamentals I', 9, 'cdiazque@ucm.es', 'B',1, 80811),
+(800491, 'Fundamentos de física II', '', 1, 2, 'Physics fundamentals II', 9, 'acasmor@fis.ucm.es', 'B',1, 80811),
+(800492, 'Matemáticas', '', 1, 1, 'Mathematics', 9, 'jusanz@ucm.es', 'B',1, 80812),
+(800493, 'Cálculo', '', 1, 2, 'Calculus', 7.5, 'lsntnfp@ucm.es', 'B',1, 80812),
+(800494, 'Álgebra', '', 1, 2, 'Algebra', 7.5, 'p.tempesta@fis.ucm.es', 'B',1, 80812),
+(800495, 'Química', '', 1, 1, 'Chemistry', 6, 'iredondo@quim.ucm.es', 'B', 1,80813),
+(800496, 'Laboratorio de computación científica', '', 1, 1, 'Scientific computer laboratory', 6, 'mguijarro@ucm.es', 'B',1, 80814),
+(800497, 'Laboratorio de física I', '', 1, 2, 'Physics laboratory I', 6, 'jlcontreras@fis.ucm.es', 'B', 1,80811),
+(804500, 'Física I', '', 1, 1, NULL, 6, 'jdelrio@ucm.es', 'B', 1,88711),
+(804501, 'Física II', '', 1, 2, NULL, 6, 'lsanchez@fis.ucm.es', 'B', 1,88711),
+(804502, 'Quimica I', '', 1, 1, NULL, 6, 'sgmartin@quim.ucm.es', 'B', 1,88712),
+(804503, 'Química II', '', 1, 2, NULL, 6, 'sfilippo@ucm.es', '', 1,88712),
+(804505, 'Matemáticas I', '', 1, 1, '', 6, 'fybruno@ucm.es', 'B', 1,88713),
+(804506, 'Matemáticas II', '', 1, 2, NULL, 6, 'a.malyshev@fis.ucm.es', 'B', 1,88713),
+(804507, 'Métodos informaticos para la ingeniería', '', 1, 2, NULL, 6, 'faccion@ucm.es', 'B', 1,88715),
+(804510, 'Introducción a la ingeniería de materiales', '', 1, 1, NULL, 6, 'mlblazquez@quim.ucm.es', 'B',1, 88721),
+(804511, 'Diagramas y transformaciones de fases', '', 1, 2, NULL, 6, 'gsalazar@quim.ucm.es', 'B',1, 88721),
+(804543, 'Biología', '', 1, 1, NULL, 6, 'mjfeito@ucm.es', 'B', 1,88714),
+(804560, 'Física I', '', 1, 1, 'Physics I', 9, 'rafahern@ucm.es', 'B', 1,89011),
+(804561, 'Física II', '', 1, 1, 'Physics II', 9, 'coordinadorF2@ucm.es', 'B', 1,89011),
+(804562, 'Cálculo', '', 1, 1, 'Calculation', 9, 'mjrplaza@fis.ucm.es', 'B', 1,89013),
+(804563, 'Álgebra', '', 1, 2, 'Algebra', 9, 'magflechoso@ucm.es', 'B', 1,89013),
+(804564, 'Ampliación de Matemáticas', '', 1, 2, 'Mathematics expansion', 6, 'coordinadorAM@ucm.es', 'B', 1,89013),
+(804566, 'Informática', '', 1, 1, 'Computing', 6, 'igarcia@ucm.es', 'V', 1,89012),
+(804567, 'Circuitos Digitales', '', 1, 1, 'Digital circuits', 6, 'jluimana@ucm.es', 'B', 1,89012),
+(804575, 'Análisis de Circuitos', '', 1, 2, 'rt', 6, 'esas@ucm.es', 'B', 1,89011);
 
 -- --------------------------------------------------------
 
@@ -239,6 +240,7 @@ CREATE TABLE `grado` (
   `CodigoGrado` int(4) NOT NULL,
   `NombreGrado` varchar(100) NOT NULL,
   `CoordinadorGrado` varchar(50) NOT NULL,
+  `Activo` boolean NOT NULL,
   `HorasEcts` int(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -246,10 +248,10 @@ CREATE TABLE `grado` (
 -- Volcado de datos para la tabla `grado`
 --
 
-INSERT INTO `grado` (`CodigoGrado`, `NombreGrado`, `CoordinadorGrado`, `HorasEcts`) VALUES
-(808, 'Grado en física', '', 26),
-(887, 'Grado en ingeniería de materiales', '', 26),
-(890, 'Ingeniería Electrónica de Comunicaciones', '', 26);
+INSERT INTO `grado` (`CodigoGrado`, `NombreGrado`, `CoordinadorGrado`,`Activo`, `HorasEcts`) VALUES
+(808, 'Grado en física', '',1, 26),
+(887, 'Grado en ingeniería de materiales', '',1, 26),
+(890, 'Ingeniería Electrónica de Comunicaciones', '',1, 26);
 
 -- --------------------------------------------------------
 
@@ -438,6 +440,7 @@ CREATE TABLE `materia` (
   `NombreMateria` varchar(100) NOT NULL,
   `Caracter` varchar(50) NOT NULL,
   `CreditosMateria` float NOT NULL,
+  `Activo` boolean NOT NULL,
   `IdModulo` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -445,57 +448,57 @@ CREATE TABLE `materia` (
 -- Volcado de datos para la tabla `materia`
 --
 
-INSERT INTO `materia` (`IdMateria`, `NombreMateria`, `Caracter`, `CreditosMateria`, `IdModulo`) VALUES
-(80811, 'Física', 'Obligatorio', 24, 8081),
-(80812, 'Matemáticas', 'Obligatorio', 24, 8081),
-(80813, 'Química', 'Obligatorio', 6, 8081),
-(80814, 'Informática', 'Obligatorio', 6, 8081),
-(80821, 'Física clásica', 'Obligatorio', 34.5, 8082),
-(80822, 'Física cuántica y estadística', 'Obligatorio', 30, 8082),
-(80823, 'Métodos matemáticos de la física', 'Obligatorio', 12, 8082),
-(80824, 'Laboratorio de física', 'Obligatorio', 13.5, 8082),
-(80831, 'Obligatoria de física fundamental', 'Obligatorio de itinerario', 30, 8083),
-(80832, 'Astrofísica y cosmología ', 'Optativo', 30, 8083),
-(80833, 'Estructura de la materia', 'Optativo', 30, 8083),
-(80834, 'Física teórica', 'Optativo', 30, 8083),
-(80841, 'Obligatoria de física aplicada', 'Obligatorio de itinerario', 30, 8084),
-(80842, 'Electrónica y procesos físicos', 'Optativo', 36, 8084),
-(80843, 'Física de materiales', 'Optativo', 24, 8084),
-(80844, 'Física de la atmósfera y de la tierra', 'Optativo', 30, 8084),
-(80851, 'Formación transversal', 'Optativo', 36, 8085),
-(80852, 'Prácticas', 'Optativo', 6, 8085),
-(80861, 'Trabajo fin de grado', 'Obligatorio', 6, 8086),
-(88711, 'Física', 'Formación básica', 19, 8871),
-(88712, 'Química', 'Formación básica', 12, 8871),
-(88713, 'Matemáticas', 'Formación básica', 17, 8871),
-(88714, 'Biología', 'Formación básica', 6, 8871),
-(88715, 'Informática', 'Formación básica', 6, 8871),
-(88721, 'Estructura, descripción y caracterización de los materiales', 'Obligatorio', 23, 8872),
-(88731, 'Comportamiento mecánico', 'Obligatorio', 18, 8873),
-(88732, 'Comportamiento electrónico, térmico, óptico y magnético', 'Obligatorio', 12, 8873),
-(88733, 'Ingeniería de superficies', 'Obligatorio', 6, 8873),
-(88734, 'Modelización y simulacion de materiales', 'Obligatorio', 5, 8873),
-(88735, 'Comportamiento químico y biológico', 'Obligatorio', 18, 8873),
-(88741, 'Materiales estructurales', 'Obligatorio', 32, 8874),
-(88742, 'Materiales funcionales', 'Obligatorio', 18, 8874),
-(88743, 'Obtencion, procesado y reciclado de materiales', 'Obligatorio', 18, 8873),
-(88751, 'Economia y gestión de proyectos', 'Obligatorio', 8, 8875),
-(88752, 'Asignaturas optativas', 'Optativo', 10, 8875),
-(88761, 'Trabajo fin de grado', 'Trabajo fin de carrera', 12, 8876),
-(89011, 'Física', 'Formación básica', 24, 8901),
-(89012, 'Informática', 'Formación básica', 12, 8901),
-(89013, 'Matemáticas', 'Formación básica', 24, 8901),
-(89021, 'Fundamentos Físicos de la Electrónica', 'Obligatorio', 6, 8902),
-(89022, 'Electromagnetismo', 'Obligatorio', 13.5, 8902),
-(89023, 'Sistemas Lineales y Control', 'Obligatorio', 13.5, 8902),
-(89024, 'Empresa', 'Obligatorio', 6, 8902),
-(89031, 'Radiofrecuencia', 'Obligatorio', 13.5, 8903),
-(89032, 'Electrónica', 'Obligatorio', 28.5, 8903),
-(89041, 'Sistemas', 'Obligatorio', 27, 8904),
-(89042, 'Redes', 'Obligatorio', 19.5, 8904),
-(89051, 'Sistemas de Comunicación', 'Obligatorio', 22.5, 8905),
-(89061, 'Créditos Optativos', 'Optativo', 18, 8906),
-(89071, 'Trabajo Fin de Grado', 'Trabajo fin de carrera', 12, 8907);
+INSERT INTO `materia` (`IdMateria`, `NombreMateria`, `Caracter`, `CreditosMateria`, `Activo`,`IdModulo`) VALUES
+(80811, 'Física', 'Obligatorio', 24, 1,8081),
+(80812, 'Matemáticas', 'Obligatorio', 24, 1,8081),
+(80813, 'Química', 'Obligatorio', 6, 1,8081),
+(80814, 'Informática', 'Obligatorio', 6,1, 8081),
+(80821, 'Física clásica', 'Obligatorio', 34.5, 1,8082),
+(80822, 'Física cuántica y estadística', 'Obligatorio', 30,1, 8082),
+(80823, 'Métodos matemáticos de la física', 'Obligatorio', 12, 1,8082),
+(80824, 'Laboratorio de física', 'Obligatorio', 13.5, 1,8082),
+(80831, 'Obligatoria de física fundamental', 'Obligatorio de itinerario', 30,1, 8083),
+(80832, 'Astrofísica y cosmología ', 'Optativo', 30,1, 8083),
+(80833, 'Estructura de la materia', 'Optativo', 30, 1,8083),
+(80834, 'Física teórica', 'Optativo', 30, 1,8083),
+(80841, 'Obligatoria de física aplicada', 'Obligatorio de itinerario', 30, 1,8084),
+(80842, 'Electrónica y procesos físicos', 'Optativo', 36, 1,8084),
+(80843, 'Física de materiales', 'Optativo', 24, 1,8084),
+(80844, 'Física de la atmósfera y de la tierra', 'Optativo', 30, 1,8084),
+(80851, 'Formación transversal', 'Optativo', 36,1, 8085),
+(80852, 'Prácticas', 'Optativo', 6, 1,8085),
+(80861, 'Trabajo fin de grado', 'Obligatorio', 6, 1,8086),
+(88711, 'Física', 'Formación básica', 19, 1,8871),
+(88712, 'Química', 'Formación básica', 12,1, 8871),
+(88713, 'Matemáticas', 'Formación básica', 17, 1,8871),
+(88714, 'Biología', 'Formación básica', 6, 1,8871),
+(88715, 'Informática', 'Formación básica', 6, 1,8871),
+(88721, 'Estructura, descripción y caracterización de los materiales', 'Obligatorio', 23,1, 8872),
+(88731, 'Comportamiento mecánico', 'Obligatorio', 18, 1,8873),
+(88732, 'Comportamiento electrónico, térmico, óptico y magnético', 'Obligatorio', 12,1, 8873),
+(88733, 'Ingeniería de superficies', 'Obligatorio', 6, 1,8873),
+(88734, 'Modelización y simulacion de materiales', 'Obligatorio', 5, 1,8873),
+(88735, 'Comportamiento químico y biológico', 'Obligatorio', 18, 1,8873),
+(88741, 'Materiales estructurales', 'Obligatorio', 32,1, 8874),
+(88742, 'Materiales funcionales', 'Obligatorio', 18,1, 8874),
+(88743, 'Obtencion, procesado y reciclado de materiales', 'Obligatorio', 18, 1,8873),
+(88751, 'Economia y gestión de proyectos', 'Obligatorio', 8,1, 8875),
+(88752, 'Asignaturas optativas', 'Optativo', 10,1, 8875),
+(88761, 'Trabajo fin de grado', 'Trabajo fin de carrera', 12, 1,8876),
+(89011, 'Física', 'Formación básica', 24,1, 8901),
+(89012, 'Informática', 'Formación básica', 12, 1,8901),
+(89013, 'Matemáticas', 'Formación básica', 24, 1,8901),
+(89021, 'Fundamentos Físicos de la Electrónica', 'Obligatorio', 6, 1,8902),
+(89022, 'Electromagnetismo', 'Obligatorio', 13.5, 1,8902),
+(89023, 'Sistemas Lineales y Control', 'Obligatorio', 13.5,1, 8902),
+(89024, 'Empresa', 'Obligatorio', 6, 1,8902),
+(89031, 'Radiofrecuencia', 'Obligatorio', 13.5, 1,8903),
+(89032, 'Electrónica', 'Obligatorio', 28.5, 1,8903),
+(89041, 'Sistemas', 'Obligatorio', 27, 1,8904),
+(89042, 'Redes', 'Obligatorio', 19.5, 1,8904),
+(89051, 'Sistemas de Comunicación', 'Obligatorio', 22.5, 1,8905),
+(89061, 'Créditos Optativos', 'Optativo', 18, 1,8906),
+(89071, 'Trabajo Fin de Grado', 'Trabajo fin de carrera', 12, 1,8907);
 
 -- --------------------------------------------------------
 
@@ -754,6 +757,7 @@ CREATE TABLE `modulo` (
   `IdModulo` int(5) NOT NULL,
   `NombreModulo` varchar(100) NOT NULL,
   `CreditosModulo` float NOT NULL,
+  `Activo` float NOT NULL,
   `CodigoGrado` int(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -761,26 +765,26 @@ CREATE TABLE `modulo` (
 -- Volcado de datos para la tabla `modulo`
 --
 
-INSERT INTO `modulo` (`IdModulo`, `NombreModulo`, `CreditosModulo`, `CodigoGrado`) VALUES
-(8081, 'Formacion básica obligatoria', 60, 808),
-(8082, 'Formación general', 90, 808),
-(8083, 'Física fundamental', 30, 808),
-(8084, 'Física aplicada', 30, 808),
-(8085, 'Transversal', 36, 808),
-(8086, 'Trabajo fin de grado', 6, 808),
-(8871, 'Formación básica', 60, 887),
-(8872, 'Fundamentos de la ciencia de materiales', 23, 887),
-(8873, 'Comportamiento de materiales', 59, 887),
-(8874, 'Ciencia y tecnología de materiales', 68, 887),
-(8875, 'Avanzado', 18, 887),
-(8876, 'Trabajo fin de grado', 12, 887),
-(8901, 'Formación Básica', 60, 890),
-(8902, 'Fundamental', 39, 890),
-(8903, 'Electrónica y Electromagnetismo', 42, 890),
-(8904, 'Sistemas y Redes', 46.5, 890),
-(8905, 'Comunicaciones', 22.5, 890),
-(8906, 'Avanzado', 18, 890),
-(8907, 'Trabajo Fin de Grado', 12, 890);
+INSERT INTO `modulo` (`IdModulo`, `NombreModulo`, `CreditosModulo`,`Activo`, `CodigoGrado`) VALUES
+(8081, 'Formacion básica obligatoria', 60,1, 808),
+(8082, 'Formación general', 90, 1,808),
+(8083, 'Física fundamental', 30,1, 808),
+(8084, 'Física aplicada', 30,1, 808),
+(8085, 'Transversal', 36,1, 808),
+(8086, 'Trabajo fin de grado', 6, 1,808),
+(8871, 'Formación básica', 60, 1,887),
+(8872, 'Fundamentos de la ciencia de materiales', 23, 1,887),
+(8873, 'Comportamiento de materiales', 59,1, 887),
+(8874, 'Ciencia y tecnología de materiales', 68,1, 887),
+(8875, 'Avanzado', 18, 1,887),
+(8876, 'Trabajo fin de grado', 12, 1,887),
+(8901, 'Formación Básica', 60, 1,890),
+(8902, 'Fundamental', 39, 1,890),
+(8903, 'Electrónica y Electromagnetismo', 42, 1,890),
+(8904, 'Sistemas y Redes', 46.5, 1,890),
+(8905, 'Comunicaciones', 22.5, 1,890),
+(8906, 'Avanzado', 18, 1,890),
+(8907, 'Trabajo Fin de Grado', 12, 1,890);
 
 -- --------------------------------------------------------
 

@@ -20,6 +20,7 @@ class SAMateriaImplements implements SAMateria
                 $materia[0]['NombreMateria'],
                 $materia[0]['Caracter'],
                 $materia[0]['CreditosMateria'],
+                $materia[0]['Activo'],
                 $materia[0]['IdModulo']
             );
         }
@@ -49,7 +50,7 @@ class SAMateriaImplements implements SAMateria
     {
         $factoriesDAO = new \es\ucm\FactoriesDAOImplements();
         $DAOMateria = $factoriesDAO->createDAOMateria();
-        $materia = $DAOMateria->deleteMateria($idMateria);
+        $materia = $DAOMateria->updateMateria($idMateria);
         return $materia;
     }
 
@@ -66,6 +67,7 @@ class SAMateriaImplements implements SAMateria
                     $materia['NombreMateria'],
                     $materia['Caracter'],
                     $materia['CreditosMateria'],
+                    $materia['Activo'],
                     $materia['IdModulo']
                 );
             }

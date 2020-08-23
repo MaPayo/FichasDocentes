@@ -22,13 +22,14 @@ class DAOMateriaImplements implements DAOMateria
     {
         $singletonDataSource = new SingletonDataSource();
         $dataSource = $singletonDataSource->getInstance();
-        $sql = "INSERT INTO materia (IdMateria, NombreMateria, Caracter, CreditosMateria, IdModulo) 
-        VALUES (:idMateria, :nombreMateria, :caracter, :creditosMateria, :idModulo)";
+        $sql = "INSERT INTO materia (IdMateria, NombreMateria, Caracter, CreditosMateria, Activo, IdModulo) 
+        VALUES (:idMateria, :nombreMateria, :caracter, :creditosMateria,:activo, :idModulo)";
         $values = array(
             ':idMateria' => $Materia->getIdMateria(),
             ':nombreMateria' => $Materia->getNombreMateria(),
             ':caracter' => $Materia->getCaracter(),
             ':creditosMateria' => $Materia->getCreditosMateria(),
+            ':activo'=>$Materia->getActivo(),
             ':idModulo' => $Materia->getIdModulo()
         );
         $results = $dataSource->executeInsertUpdateDelete($sql, $values);
@@ -39,12 +40,13 @@ class DAOMateriaImplements implements DAOMateria
     {
         $singletonDataSource = new SingletonDataSource();
         $dataSource = $singletonDataSource->getInstance();
-        $sql = "UPDATE materia SET IdMateria = :idMateria, NombreMateria = :nombreMateria, Caracter = :caracter, CreditosMateria = :creditosMateria, IdModulo = :idModulo WHERE IdMateria = :idMateria";
+        $sql = "UPDATE materia SET IdMateria = :idMateria, NombreMateria = :nombreMateria, Caracter = :caracter, CreditosMateria = :creditosMateria, Activo = :activo,IdModulo = :idModulo WHERE IdMateria = :idMateria";
         $values = array(
             ':idMateria' => $Materia->getIdMateria(),
             ':nombreMateria' => $Materia->getNombreMateria(),
             ':caracter' => $Materia->getCaracter(),
-            ':creditosMateria' => $Materia->getCreditosMateria(),
+            ':creditosMateria' => $Materia->getCreditosMateria(), 
+            ':activo'=>$Materia->getActivo(),
             ':idModulo' => $Materia->getIdModulo()
         );
         $results = $dataSource->executeInsertUpdateDelete($sql, $values);

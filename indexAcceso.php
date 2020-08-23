@@ -2,6 +2,13 @@
 require_once('includes/config.php');
 require_once('includes/Presentacion/Controlador/Context.php');
 require_once('includes/Presentacion/Controlador/ControllerImplements.php');
+
+require_once('vendor/autoload.php');
+
+use Jfcherng\Diff\Differ;
+use Jfcherng\Diff\DiffHelper;
+use Jfcherng\Diff\Factory\RendererFactory;
+use Jfcherng\Diff\Renderer\RendererConstant;
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -12,6 +19,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
     <?php
     echo '<link rel="stylesheet" href="' . RUTA_CSS . 'bootstrap.css">
     <link rel="stylesheet" href="' . RUTA_CSS . 'fichasdocentes.css">
+    <link rel="stylesheet" href="' . RUTA_CSS . 'diff-table.css">
     <link rel="shortcut icon" type="image/x-icon" href="' . RUTA_IMGS . 'LogoUniversidad.png">
     <script type="text/javascript" src="' . RUTA_JS . 'codigo.js"></script>
     <script src="' . RUTA_JS . 'jquery-3.4.1.min.js" type="text/javascript"></script>';
@@ -157,6 +165,62 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                         if ($contextConfiguracion->getData()->getCitasBibliograficas() == false && $contextConfiguracion->getData()->getRecursosInternet() == false) $verBibliografia = false;
                         if ($contextConfiguracion->getData()->getGrupoLaboratorio() == false) $verGrupoLab = false;
                         if ($contextConfiguracion->getData()->getRealizacionExamenes() == false && $contextConfiguracion->getData()->getRealizacionActividades() == false && $contextConfiguracion->getData()->getRealizacionLaboratorio() == false && $contextConfiguracion->getData()->getCalificacionFinal() == false) $verEvaluacion = false;
+                        
+                        /*Configuración del php-diff */
+                       
+                        $rendererName = 'Inline';
+                        $rendererOptions = [
+                            // how detailed the rendered HTML in-line diff is? (none, line, word, char)
+                            'detailLevel' => 'char',
+                            // renderer language: eng, cht, chs, jpn, ...
+                            // or an array which has the same keys with a language file
+                            'language' => 'eng',
+                            // show line numbers in HTML renderers
+                            'lineNumbers' => true,
+                            // show a separator between different diff hunks in HTML renderers
+                            'separateBlock' => true,
+                            // the frontend HTML could use CSS "white-space: pre;" to visualize consecutive whitespaces
+                            // but if you want to visualize them in the backend with "&nbsp;", you can set this to true
+                            'spacesToNbsp' => false,
+                            // HTML renderer tab width (negative = do not convert into spaces)
+                            'tabSize' => 4,
+                            // this option is currently only for the Combined renderer.
+                            // it determines whether a replace-type block should be merged or not
+                            // depending on the content changed ratio, which values between 0 and 1.
+                            'mergeThreshold' => 0.8,
+                            // this option is currently only for the Unified and the Context renderers.
+                            // RendererConstant::CLI_COLOR_AUTO = colorize the output if possible (default)
+                            // RendererConstant::CLI_COLOR_ENABLE = force to colorize the output
+                            // RendererConstant::CLI_COLOR_DISABLE = force not to colorize the output
+                            'cliColorization' => RendererConstant::CLI_COLOR_ENABLE,
+                            // this option is currently only for the Json renderer.
+                            // internally, ops (tags) are all int type but this is not good for human reading.
+                            // set this to "true" to convert them into string form before outputting.
+                            'outputTagAsString' => false,
+                            // this option is currently only for the Json renderer.
+                            // it controls how the output JSON is formatted.
+                            // see availabe options on https://www.php.net/manual/en/function.json-encode.php
+                            'jsonEncodeFlags' => \JSON_UNESCAPED_SLASHES | \JSON_UNESCAPED_UNICODE,
+                            // this option is currently effective when the "detailLevel" is "word"
+                            // characters listed in this array can be used to make diff segments into a whole
+                            // for example, making "<del>good</del>-<del>looking</del>" into "<del>good-looking</del>"
+                            // this should bring better readability but set this to empty array if you do not want it
+                            'wordGlues' => [' ', '-'],
+                            // change this value to a string as the returned diff if the two input strings are identical
+                            'resultForIdenticals' => null,
+                            // extra HTML classes added to the DOM of the diff container
+                            'wrapperClasses' => ['diff-wrapper'],
+                        ];
+                        $differOptions = [
+                            // show how many neighbor lines
+                            // Differ::CONTEXT_ALL can be used to show the whole file
+                            'context' => 3,
+                            // ignore case difference
+                            'ignoreCase' => false,
+                            // ignore whitespace difference
+                            'ignoreWhitespace' => false,
+                        ];
+                        
                         ?>
 
                         <div class="col-md-9 col-12">
@@ -325,8 +389,9 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                         <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                                                             Conocimientos previos
                                                                         </button>
-                                                                    <?php } else { ?>
-                                                                        <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                                    <?php } else {
+                                                                        
+                                                                        ?><button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                                                             Conocimientos previos
                                                                         </button>
                                                                     <?php } ?>
@@ -335,23 +400,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
 
                                                             <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionProgram">
                                                                 <div class="card-body">
-                                                                    <div class="card">
-                                                                        <div class="card-body">
-                                                                            <h5 class="card-title">Borrador</h5>
-                                                                            <p class="card-text">
-                                                                                <?php
-                                                                                if ($contextModPrograma->getEvent() === FIND_MODPROGRAMA_ASIGNATURA_OK) {
-                                                                                    if ($contextComparacion->getData()['conocimientosPrevios'])
-                                                                                        echo '<b style="font-size: 18px">' . $contextModPrograma->getData()->getConocimientosPrevios() . '</b>';
-                                                                                    else
-                                                                                        echo $contextModPrograma->getData()->getConocimientosPrevios();
-                                                                                }
-                                                                                ?>
-                                                                            </p>
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div class="card">
+                                                                <div class="card">
                                                                         <div class="card-body">
                                                                             <h5 class="card-title">Consolidado</h5>
                                                                             <p class="card-text">
@@ -363,6 +412,21 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                             </p>
                                                                         </div>
                                                                     </div>
+                                                                    <?php if ($contextComparacion->getData()['conocimientosPrevios']){?>
+                                                                    <div class="card">
+                                                                        <div class="card-body">
+                                                                            <h5 class="card-title">Comparación</h5>
+                                                                            <p class="card-text">
+                                                                                <?php
+                                                                                    $differ = new Differ(explode("\n", $contextPrograma->getData()->getConocimientosPrevios()), explode("\n", $contextModPrograma->getData()->getConocimientosPrevios()), $differOptions);
+                                                                                    $renderer = RendererFactory::make($rendererName, $rendererOptions); // or your own renderer object
+                                                                                    $result = $renderer->render($differ);
+                                                                                    echo $result;
+                                                                                ?>
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <?php }   ?>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -386,22 +450,6 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                 </div>
                                                                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionProgram">
                                                                     <div class="card-body">
-                                                                     <div class="card">
-                                                                        <div class="card-body">
-                                                                            <h5 class="card-title">Borrador</h5>
-                                                                            <p class="card-text">
-                                                                                <?php
-                                                                                if ($contextModPrograma->getEvent() === FIND_MODPROGRAMA_ASIGNATURA_OK) {
-                                                                                    if ($contextComparacion->getData()['conocimientosPreviosI'])
-                                                                                        echo '<b style="font-size: 18px">' . $contextModPrograma->getData()->getConocimientosPreviosI() . '</b>';
-                                                                                    else
-                                                                                        echo $contextModPrograma->getData()->getConocimientosPreviosI();
-                                                                                }
-                                                                                ?>
-                                                                            </p>
-                                                                        </div>
-                                                                    </div>
-
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h5 class="card-title">Consolidado</h5>
@@ -414,6 +462,21 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                             </p>
                                                                         </div>
                                                                     </div>
+                                                                    <?php if ($contextComparacion->getData()['conocimientosPreviosI']){?>
+                                                                    <div class="card">
+                                                                        <div class="card-body">
+                                                                            <h5 class="card-title">Comparación</h5>
+                                                                            <p class="card-text">
+                                                                                <?php
+                                                                                    $differ = new Differ(explode("\n", $contextPrograma->getData()->getConocimientosPreviosI()), explode("\n", $contextModPrograma->getData()->getConocimientosPreviosI()), $differOptions);
+                                                                                    $renderer = RendererFactory::make($rendererName, $rendererOptions); // or your own renderer object
+                                                                                    $result = $renderer->render($differ);
+                                                                                    echo $result;
+                                                                                ?>
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <?php }   ?>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -439,24 +502,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                             </h2>
                                                         </div>
                                                         <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionProgram">
-                                                            <div class="card-body">
-                                                                <div class="card">
-                                                                    <div class="card-body">
-                                                                        <h5 class="card-title">Borrador</h5>
-                                                                        <p class="card-text">
-                                                                            <?php
-                                                                            if ($contextModPrograma->getEvent() === FIND_MODPROGRAMA_ASIGNATURA_OK) {
-                                                                                if ($contextComparacion->getData()['BreveDescripcion'])
-                                                                                    echo '<b style="font-size: 18px">' . $contextModPrograma->getData()->getBreveDescripcion() . '</b>';
-                                                                                else
-                                                                                    echo $contextModPrograma->getData()->getBreveDescripcion();
-                                                                            }
-                                                                            ?>
-                                                                        </p>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="card">
+                                                            <div class="card-body"><div class="card">
                                                                     <div class="card-body">
                                                                         <h5 class="card-title">Consolidado</h5>
                                                                         <p class="card-text">
@@ -468,6 +514,22 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                         </p>
                                                                     </div>
                                                                 </div>
+                                                            <?php if ($contextComparacion->getData()['BreveDescripcion']){?>
+                                                                    <div class="card">
+                                                                        <div class="card-body">
+                                                                            <h5 class="card-title">Comparación</h5>
+                                                                            <p class="card-text">
+                                                                                <?php
+                                                                                    $differ = new Differ(explode("\n", $contextPrograma->getData()->getBreveDescripcion()), explode("\n", $contextModPrograma->getData()->getBreveDescripcion()), $differOptions);
+                                                                                    $renderer = RendererFactory::make($rendererName, $rendererOptions); // or your own renderer object
+                                                                                    $result = $renderer->render($differ);
+                                                                                    echo $result;
+                                                                                    
+                                                                                ?>
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <?php }   ?>                                                                
                                                             </div>
                                                         </div>
                                                     </div>
@@ -492,22 +554,6 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                 <div class="card-body">
                                                                     <div class="card">
                                                                         <div class="card-body">
-                                                                            <h5 class="card-title">Borrador</h5>
-                                                                            <p class="card-text">
-                                                                                <?php
-                                                                                if ($contextModPrograma->getEvent() === FIND_MODPROGRAMA_ASIGNATURA_OK) {
-                                                                                    if ($contextComparacion->getData()['BreveDescripcionI'])
-                                                                                        echo '<b style="font-size: 18px">' . $contextModPrograma->getData()->getBreveDescripcionI() . '</b>';
-                                                                                    else
-                                                                                        echo $contextModPrograma->getData()->getBreveDescripcionI();
-                                                                                }
-                                                                                ?>
-                                                                            </p>
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div class="card">
-                                                                        <div class="card-body">
                                                                             <h5 class="card-title">Consolidado</h5>
                                                                             <p class="card-text">
                                                                                 <?php
@@ -518,6 +564,22 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                             </p>
                                                                         </div>
                                                                     </div>
+                                                                    <?php if ($contextComparacion->getData()['BreveDescripcionI']){?>
+                                                                    <div class="card">
+                                                                        <div class="card-body">
+                                                                            <h5 class="card-title">Comparación</h5>
+                                                                            <p class="card-text">
+                                                                                <?php
+                                                                                    $differ = new Differ(explode("\n", $contextPrograma->getData()->getBreveDescripcionI()), explode("\n", $contextModPrograma->getData()->getBreveDescripcionI()), $differOptions);
+                                                                                    $renderer = RendererFactory::make($rendererName, $rendererOptions); // or your own renderer object
+                                                                                    $result = $renderer->render($differ);
+                                                                                    echo $result;
+                                                                                    
+                                                                                ?>
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <?php }   ?>  
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -544,22 +606,6 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                             <div class="card-body">
                                                                 <div class="card">
                                                                     <div class="card-body">
-                                                                        <h5 class="card-title">Borrador</h5>
-                                                                        <p class="card-text">
-                                                                            <?php
-                                                                            if ($contextModPrograma->getEvent() === FIND_MODPROGRAMA_ASIGNATURA_OK) {
-                                                                                if ($contextComparacion->getData()['ProgramaTeorico'])
-                                                                                    echo '<b style="font-size: 18px">' . $contextModPrograma->getData()->getProgramaTeorico() . '</b>';
-                                                                                else
-                                                                                    echo $contextModPrograma->getData()->getProgramaTeorico();
-                                                                            }
-                                                                            ?>
-                                                                        </p>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="card">
-                                                                    <div class="card-body">
                                                                         <h5 class="card-title">Consolidado</h5>
                                                                         <p class="card-text">
                                                                             <?php
@@ -570,6 +616,22 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                         </p>
                                                                     </div>
                                                                 </div>
+                                                                <?php if ($contextComparacion->getData()['ProgramaTeorico']){?>
+                                                                    <div class="card">
+                                                                        <div class="card-body">
+                                                                            <h5 class="card-title">Comparación</h5>
+                                                                            <p class="card-text">
+                                                                                <?php
+                                                                                    $differ = new Differ(explode("\n", $contextPrograma->getData()->getProgramaTeorico()), explode("\n", $contextModPrograma->getData()->getProgramaTeorico()), $differOptions);
+                                                                                    $renderer = RendererFactory::make($rendererName, $rendererOptions); // or your own renderer object
+                                                                                    $result = $renderer->render($differ);
+                                                                                    echo $result;
+                                                                                    
+                                                                                ?>
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <?php }   ?>  
                                                             </div>
                                                         </div>
                                                     </div>
@@ -594,22 +656,6 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                 <div class="card-body">
                                                                     <div class="card">
                                                                         <div class="card-body">
-                                                                            <h5 class="card-title">Borrador</h5>
-                                                                            <p class="card-text">
-                                                                                <?php
-                                                                                if ($contextModPrograma->getEvent() === FIND_MODPROGRAMA_ASIGNATURA_OK) {
-                                                                                    if ($contextComparacion->getData()['ProgramaTeoricoI'])
-                                                                                        echo '<b style="font-size: 18px">' . $contextModPrograma->getData()->getProgramaTeoricoI() . '</b>';
-                                                                                    else
-                                                                                        echo $contextModPrograma->getData()->getProgramaTeoricoI();
-                                                                                }
-                                                                                ?>
-                                                                            </p>
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div class="card">
-                                                                        <div class="card-body">
                                                                             <h5 class="card-title">Consolidado</h5>
                                                                             <p class="card-text">
                                                                                 <?php
@@ -620,6 +666,22 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                             </p>
                                                                         </div>
                                                                     </div>
+                                                                    <?php if ($contextComparacion->getData()['ProgramaTeoricoI']){?>
+                                                                    <div class="card">
+                                                                        <div class="card-body">
+                                                                            <h5 class="card-title">Comparación</h5>
+                                                                            <p class="card-text">
+                                                                                <?php
+                                                                                    $differ = new Differ(explode("\n", $contextPrograma->getData()->getProgramaTeoricoI()), explode("\n", $contextModPrograma->getData()->getProgramaTeoricoI()), $differOptions);
+                                                                                    $renderer = RendererFactory::make($rendererName, $rendererOptions); // or your own renderer object
+                                                                                    $result = $renderer->render($differ);
+                                                                                    echo $result;
+                                                                                    
+                                                                                ?>
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <?php }   ?>  
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -631,7 +693,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                     <div class="card">
                                                         <div class="card-header" id="headingSeven">
                                                             <h2 class="mb-0">
-                                                                <?php if ($contextComparacion->getData()['ProgramaTeorico']) { ?>
+                                                                <?php if ($contextComparacion->getData()['ProgramaSeminarios']) { ?>
                                                                     <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="true" aria-controls="collapseSeven">
                                                                         Programa seminarios
                                                                     </button>
@@ -646,22 +708,6 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                             <div class="card-body">
                                                                 <div class="card">
                                                                     <div class="card-body">
-                                                                        <h5 class="card-title">Borrador</h5>
-                                                                        <p class="card-text">
-                                                                            <?php
-                                                                            if ($contextModPrograma->getEvent() === FIND_MODPROGRAMA_ASIGNATURA_OK) {
-                                                                                if ($contextComparacion->getData()['ProgramaTeorico'])
-                                                                                    echo '<b style="font-size: 18px">' . $contextModPrograma->getData()->getProgramaSeminarios() . '</b>';
-                                                                                else
-                                                                                    echo $contextModPrograma->getData()->getProgramaSeminarios();
-                                                                            }
-                                                                            ?>
-                                                                        </p>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="card">
-                                                                    <div class="card-body">
                                                                         <h5 class="card-title">Consolidado</h5>
                                                                         <p class="card-text">
                                                                             <?php
@@ -672,6 +718,22 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                         </p>
                                                                     </div>
                                                                 </div>
+                                                                <?php if ($contextComparacion->getData()['ProgramaSeminarios']){?>
+                                                                    <div class="card">
+                                                                        <div class="card-body">
+                                                                            <h5 class="card-title">Comparación</h5>
+                                                                            <p class="card-text">
+                                                                                <?php
+                                                                                    $differ = new Differ(explode("\n", $contextPrograma->getData()->getProgramaSeminarios()), explode("\n", $contextModPrograma->getData()->getProgramaSeminarios()), $differOptions);
+                                                                                    $renderer = RendererFactory::make($rendererName, $rendererOptions); // or your own renderer object
+                                                                                    $result = $renderer->render($differ);
+                                                                                    echo $result;
+                                                                                    
+                                                                                ?>
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <?php }   ?> 
                                                             </div>
                                                         </div>
                                                     </div>
@@ -681,7 +743,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                         <div class="card">
                                                             <div class="card-header" id="headingEight">
                                                                 <h2 class="mb-0">
-                                                                    <?php if ($contextComparacion->getData()['ProgramaTeoricoI']) { ?>
+                                                                    <?php if ($contextComparacion->getData()['ProgramaSeminariosI']) { ?>
                                                                         <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseEight" aria-expanded="true" aria-controls="collapseEight">
                                                                             Programa seminarios (Inglés)
                                                                         </button>
@@ -696,22 +758,6 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                 <div class="card-body">
                                                                     <div class="card">
                                                                         <div class="card-body">
-                                                                            <h5 class="card-title">Borrador</h5>
-                                                                            <p class="card-text">
-                                                                                <?php
-                                                                                if ($contextModPrograma->getEvent() === FIND_MODPROGRAMA_ASIGNATURA_OK) {
-                                                                                    if ($contextComparacion->getData()['ProgramaTeoricoI'])
-                                                                                        echo '<b style="font-size: 18px">' . $contextModPrograma->getData()->getProgramaSeminariosI() . '</b>';
-                                                                                    else
-                                                                                        echo $contextModPrograma->getData()->getProgramaSeminariosI();
-                                                                                }
-                                                                                ?>
-                                                                            </p>
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div class="card">
-                                                                        <div class="card-body">
                                                                             <h5 class="card-title">Consolidado</h5>
                                                                             <p class="card-text">
                                                                                 <?php
@@ -722,6 +768,22 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                             </p>
                                                                         </div>
                                                                     </div>
+                                                                    <?php if ($contextComparacion->getData()['ProgramaSeminariosI']){?>
+                                                                    <div class="card">
+                                                                        <div class="card-body">
+                                                                            <h5 class="card-title">Comparación</h5>
+                                                                            <p class="card-text">
+                                                                                <?php
+                                                                                    $differ = new Differ(explode("\n", $contextPrograma->getData()->getProgramaSeminariosI()), explode("\n", $contextModPrograma->getData()->getProgramaSeminariosI()), $differOptions);
+                                                                                    $renderer = RendererFactory::make($rendererName, $rendererOptions); // or your own renderer object
+                                                                                    $result = $renderer->render($differ);
+                                                                                    echo $result;
+                                                                                    
+                                                                                ?>
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <?php }   ?> 
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -732,7 +794,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                     <div class="card">
                                                         <div class="card-header" id="headingNine">
                                                             <h2 class="mb-0">
-                                                                <?php if ($contextComparacion->getData()['ProgramaTeorico']) { ?>
+                                                                <?php if ($contextComparacion->getData()['ProgramaLaboratorio']) { ?>
                                                                     <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseNine" aria-expanded="true" aria-controls="collapseNine">
                                                                         Programa laboratorio
                                                                     </button>
@@ -747,22 +809,6 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                             <div class="card-body">
                                                                 <div class="card">
                                                                     <div class="card-body">
-                                                                        <h5 class="card-title">Borrador</h5>
-                                                                        <p class="card-text">
-                                                                            <?php
-                                                                            if ($contextModPrograma->getEvent() === FIND_MODPROGRAMA_ASIGNATURA_OK) {
-                                                                                if ($contextComparacion->getData()['ProgramaTeorico'])
-                                                                                    echo '<b style="font-size: 18px">' . $contextModPrograma->getData()->getProgramaLaboratorio() . '</b>';
-                                                                                else
-                                                                                    echo $contextModPrograma->getData()->getProgramaLaboratorio();
-                                                                            }
-                                                                            ?>
-                                                                        </p>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="card">
-                                                                    <div class="card-body">
                                                                         <h5 class="card-title">Consolidado</h5>
                                                                         <p class="card-text">
                                                                             <?php
@@ -773,6 +819,22 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                         </p>
                                                                     </div>
                                                                 </div>
+                                                                <?php if ($contextComparacion->getData()['ProgramaLaboratorio']){?>
+                                                                    <div class="card">
+                                                                        <div class="card-body">
+                                                                            <h5 class="card-title">Comparación</h5>
+                                                                            <p class="card-text">
+                                                                                <?php
+                                                                                    $differ = new Differ(explode("\n", $contextPrograma->getData()->getProgramaLaboratorio()), explode("\n", $contextModPrograma->getData()->getProgramaLaboratorio()), $differOptions);
+                                                                                    $renderer = RendererFactory::make($rendererName, $rendererOptions); // or your own renderer object
+                                                                                    $result = $renderer->render($differ);
+                                                                                    echo $result;
+                                                                                    
+                                                                                ?>
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <?php }   ?> 
                                                             </div>
                                                         </div>
                                                     </div>
@@ -782,7 +844,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                         <div class="card">
                                                             <div class="card-header" id="headingTen">
                                                                 <h2 class="mb-0">
-                                                                    <?php if ($contextComparacion->getData()['ProgramaTeoricoI']) { ?>
+                                                                    <?php if ($contextComparacion->getData()['ProgramaLaboratorioI']) { ?>
                                                                         <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseTen" aria-expanded="true" aria-controls="collapseTen">
                                                                             Programa laboratorio (Inglés)
                                                                         </button>
@@ -797,22 +859,6 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                 <div class="card-body">
                                                                     <div class="card">
                                                                         <div class="card-body">
-                                                                            <h5 class="card-title">Borrador</h5>
-                                                                            <p class="card-text">
-                                                                                <?php
-                                                                                if ($contextModPrograma->getEvent() === FIND_MODPROGRAMA_ASIGNATURA_OK) {
-                                                                                    if ($contextComparacion->getData()['ProgramaTeoricoI'])
-                                                                                        echo '<b style="font-size: 18px">' . $contextModPrograma->getData()->getProgramaLaboratorioI() . '</b>';
-                                                                                    else
-                                                                                        echo $contextModPrograma->getData()->getProgramaLaboratorioI();
-                                                                                }
-                                                                                ?>
-                                                                            </p>
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div class="card">
-                                                                        <div class="card-body">
                                                                             <h5 class="card-title">Consolidado</h5>
                                                                             <p class="card-text">
                                                                                 <?php
@@ -824,6 +870,22 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                         </div>
                                                                     </div>
                                                                 </div>
+                                                                <?php if ($contextComparacion->getData()['ProgramaLaboratorioI']){?>
+                                                                    <div class="card">
+                                                                        <div class="card-body">
+                                                                            <h5 class="card-title">Comparación</h5>
+                                                                            <p class="card-text">
+                                                                                <?php
+                                                                                    $differ = new Differ(explode("\n", $contextPrograma->getData()->getProgramaLaboratorioI()), explode("\n", $contextModPrograma->getData()->getProgramaLaboratorioI()), $differOptions);
+                                                                                    $renderer = RendererFactory::make($rendererName, $rendererOptions); // or your own renderer object
+                                                                                    $result = $renderer->render($differ);
+                                                                                    echo $result;
+                                                                                    
+                                                                                ?>
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <?php }   ?> 
                                                             </div>
                                                         </div>
                                                     <?php } ?>
@@ -881,22 +943,6 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                             <div class="card-body">
                                                                 <div class="card">
                                                                     <div class="card-body">
-                                                                        <h5 class="card-title">Borrador</h5>
-                                                                        <p class="card-text">
-                                                                            <?php
-                                                                            if ($contextModCompetencias->getEvent() === FIND_MODCOMPETENCIAS_ASIGNATURA_OK) {
-                                                                                if ($contextComparacion->getData()['ComGenerales'])
-                                                                                    echo '<b style="font-size: 18px">' . $contextModCompetencias->getData()->getGenerales() . '</b>';
-                                                                                else
-                                                                                    echo $contextModCompetencias->getData()->getGenerales();
-                                                                            }
-                                                                            ?>
-                                                                        </p>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="card">
-                                                                    <div class="card-body">
                                                                         <h5 class="card-title">Consolidado</h5>
                                                                         <p class="card-text">
                                                                             <?php
@@ -907,6 +953,22 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                         </p>
                                                                     </div>
                                                                 </div>
+                                                                <?php if ($contextComparacion->getData()['ComGenerales']){?>
+                                                                    <div class="card">
+                                                                        <div class="card-body">
+                                                                            <h5 class="card-title">Comparación</h5>
+                                                                            <p class="card-text">
+                                                                                <?php
+                                                                                    $differ = new Differ(explode("\n", $contextCompetencias->getData()->getGenerales()), explode("\n", $contextModCompetencias->getData()->getGenerales()), $differOptions);
+                                                                                    $renderer = RendererFactory::make($rendererName, $rendererOptions); // or your own renderer object
+                                                                                    $result = $renderer->render($differ);
+                                                                                    echo $result;
+                                                                                    
+                                                                                ?>
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <?php }   ?> 
                                                             </div>
                                                         </div>
                                                     </div>
@@ -931,22 +993,6 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                 <div class="card-body">
                                                                     <div class="card">
                                                                         <div class="card-body">
-                                                                            <h5 class="card-title">Borrador</h5>
-                                                                            <p class="card-text">
-                                                                                <?php
-                                                                                if ($contextModCompetencias->getEvent() === FIND_MODCOMPETENCIAS_ASIGNATURA_OK) {
-                                                                                    if ($contextComparacion->getData()['ComGeneralesI'])
-                                                                                        echo '<b style="font-size: 18px">' . $contextModCompetencias->getData()->getGeneralesI() . '</b>';
-                                                                                    else
-                                                                                        echo $contextModCompetencias->getData()->getGeneralesI();
-                                                                                }
-                                                                                ?>
-                                                                            </p>
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div class="card">
-                                                                        <div class="card-body">
                                                                             <h5 class="card-title">Consolidado</h5>
                                                                             <p class="card-text">
                                                                                 <?php
@@ -957,6 +1003,22 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                             </p>
                                                                         </div>
                                                                     </div>
+                                                                    <?php if ($contextComparacion->getData()['ComGeneralesI']){?>
+                                                                    <div class="card">
+                                                                        <div class="card-body">
+                                                                            <h5 class="card-title">Comparación</h5>
+                                                                            <p class="card-text">
+                                                                                <?php
+                                                                                    $differ = new Differ(explode("\n", $contextCompetencias->getData()->getGeneralesI()), explode("\n", $contextModCompetencias->getData()->getGeneralesI()), $differOptions);
+                                                                                    $renderer = RendererFactory::make($rendererName, $rendererOptions); // or your own renderer object
+                                                                                    $result = $renderer->render($differ);
+                                                                                    echo $result;
+                                                                                    
+                                                                                ?>
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <?php }   ?> 
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -983,22 +1045,6 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                             <div class="card-body">
                                                                 <div class="card">
                                                                     <div class="card-body">
-                                                                        <h5 class="card-title">Borrador</h5>
-                                                                        <p class="card-text">
-                                                                            <?php
-                                                                            if ($contextModCompetencias->getEvent() === FIND_MODCOMPETENCIAS_ASIGNATURA_OK) {
-                                                                                if ($contextComparacion->getData()['ComEspecificas'])
-                                                                                    echo '<b style="font-size: 18px">' . $contextModCompetencias->getData()->getEspecificas() . '</b>';
-                                                                                else
-                                                                                    echo $contextModCompetencias->getData()->getEspecificas();
-                                                                            }
-                                                                            ?>
-                                                                        </p>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="card">
-                                                                    <div class="card-body">
                                                                         <h5 class="card-title">Consolidado</h5>
                                                                         <p class="card-text">
                                                                             <?php
@@ -1009,6 +1055,22 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                         </p>
                                                                     </div>
                                                                 </div>
+                                                                <?php if ($contextComparacion->getData()['ComEspecificas']){?>
+                                                                    <div class="card">
+                                                                        <div class="card-body">
+                                                                            <h5 class="card-title">Comparación</h5>
+                                                                            <p class="card-text">
+                                                                                <?php
+                                                                                    $differ = new Differ(explode("\n", $contextCompetencias->getData()->getEspecificas()), explode("\n", $contextModCompetencias->getData()->getEspecificas()), $differOptions);
+                                                                                    $renderer = RendererFactory::make($rendererName, $rendererOptions); // or your own renderer object
+                                                                                    $result = $renderer->render($differ);
+                                                                                    echo $result;
+                                                                                    
+                                                                                ?>
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <?php }   ?> 
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1033,22 +1095,6 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                 <div class="card-body">
                                                                     <div class="card">
                                                                         <div class="card-body">
-                                                                            <h5 class="card-title">Borrador</h5>
-                                                                            <p class="card-text">
-                                                                                <?php
-                                                                                if ($contextModCompetencias->getEvent() === FIND_MODCOMPETENCIAS_ASIGNATURA_OK) {
-                                                                                    if ($contextComparacion->getData()['ComEspecificasI'])
-                                                                                        echo '<b style="font-size: 18px">' . $contextModCompetencias->getData()->getEspecificasI() . '</b>';
-                                                                                    else
-                                                                                        echo $contextModCompetencias->getData()->getEspecificasI();
-                                                                                }
-                                                                                ?>
-                                                                            </p>
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div class="card">
-                                                                        <div class="card-body">
                                                                             <h5 class="card-title">Consolidado</h5>
                                                                             <p class="card-text">
                                                                                 <?php
@@ -1059,6 +1105,22 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                             </p>
                                                                         </div>
                                                                     </div>
+                                                                    <?php if ($contextComparacion->getData()['ComEspecificasI']){?>
+                                                                    <div class="card">
+                                                                        <div class="card-body">
+                                                                            <h5 class="card-title">Comparación</h5>
+                                                                            <p class="card-text">
+                                                                                <?php
+                                                                                    $differ = new Differ(explode("\n", $contextCompetencias->getData()->getEspecificasI()), explode("\n", $contextModCompetencias->getData()->getEspecificasI()), $differOptions);
+                                                                                    $renderer = RendererFactory::make($rendererName, $rendererOptions); // or your own renderer object
+                                                                                    $result = $renderer->render($differ);
+                                                                                    echo $result;
+                                                                                    
+                                                                                ?>
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <?php }   ?> 
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -1085,22 +1147,6 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                             <div class="card-body">
                                                                 <div class="card">
                                                                     <div class="card-body">
-                                                                        <h5 class="card-title">Borrador</h5>
-                                                                        <p class="card-text">
-                                                                            <?php
-                                                                            if ($contextModCompetencias->getEvent() === FIND_MODCOMPETENCIAS_ASIGNATURA_OK) {
-                                                                                if ($contextComparacion->getData()['ComBasicas'])
-                                                                                    echo '<b style="font-size: 18px">' . $contextModCompetencias->getData()->getBasicasYTransversales() . '</b>';
-                                                                                else
-                                                                                    echo $contextModCompetencias->getData()->getBasicasYTransversales();
-                                                                            }
-                                                                            ?>
-                                                                        </p>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="card">
-                                                                    <div class="card-body">
                                                                         <h5 class="card-title">Consolidado</h5>
                                                                         <p class="card-text">
                                                                             <?php
@@ -1111,6 +1157,22 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                         </p>
                                                                     </div>
                                                                 </div>
+                                                                <?php if ($contextComparacion->getData()['ComBasicas']){?>
+                                                                    <div class="card">
+                                                                        <div class="card-body">
+                                                                            <h5 class="card-title">Comparación</h5>
+                                                                            <p class="card-text">
+                                                                                <?php
+                                                                                    $differ = new Differ(explode("\n", $contextCompetencias->getData()->getBasicas()), explode("\n", $contextModCompetencias->getData()->getBasicas()), $differOptions);
+                                                                                    $renderer = RendererFactory::make($rendererName, $rendererOptions); // or your own renderer object
+                                                                                    $result = $renderer->render($differ);
+                                                                                    echo $result;
+                                                                                    
+                                                                                ?>
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <?php }   ?> 
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1135,22 +1197,6 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                 <div class="card-body">
                                                                     <div class="card">
                                                                         <div class="card-body">
-                                                                            <h5 class="card-title">Borrador</h5>
-                                                                            <p class="card-text">
-                                                                                <?php
-                                                                                if ($contextModCompetencias->getEvent() === FIND_MODCOMPETENCIAS_ASIGNATURA_OK) {
-                                                                                    if ($contextComparacion->getData()['ComBasicasI'])
-                                                                                        echo '<b style="font-size: 18px">' . $contextModCompetencias->getData()->getBasicasYTransversalesI() . '</b>';
-                                                                                    else
-                                                                                        echo $contextModCompetencias->getData()->getBasicasYTransversalesI();
-                                                                                }
-                                                                                ?>
-                                                                            </p>
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div class="card">
-                                                                        <div class="card-body">
                                                                             <h5 class="card-title">Consolidado</h5>
                                                                             <p class="card-text">
                                                                                 <?php
@@ -1161,6 +1207,22 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                             </p>
                                                                         </div>
                                                                     </div>
+                                                                    <?php if ($contextComparacion->getData()['ComBasicasI']){?>
+                                                                    <div class="card">
+                                                                        <div class="card-body">
+                                                                            <h5 class="card-title">Comparación</h5>
+                                                                            <p class="card-text">
+                                                                                <?php
+                                                                                    $differ = new Differ(explode("\n", $contextCompetencias->getData()->getBasicasI()), explode("\n", $contextModCompetencias->getData()->getBasicasI()), $differOptions);
+                                                                                    $renderer = RendererFactory::make($rendererName, $rendererOptions); // or your own renderer object
+                                                                                    $result = $renderer->render($differ);
+                                                                                    echo $result;
+                                                                                    
+                                                                                ?>
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <?php }   ?> 
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -1188,22 +1250,6 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                             <div class="card-body">
                                                                 <div class="card">
                                                                     <div class="card-body">
-                                                                        <h5 class="card-title">Borrador</h5>
-                                                                        <p class="card-text">
-                                                                            <?php
-                                                                            if ($contextModCompetencias->getEvent() === FIND_MODCOMPETENCIAS_ASIGNATURA_OK) {
-                                                                                if ($contextComparacion->getData()['ResultadosAprendizaje'])
-                                                                                    echo '<b style="font-size: 18px">' . $contextModCompetencias->getData()->getResultadosAprendizaje() . '</b>';
-                                                                                else
-                                                                                    echo $contextModCompetencias->getData()->getResultadosAprendizaje();
-                                                                            }
-                                                                            ?>
-                                                                        </p>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="card">
-                                                                    <div class="card-body">
                                                                         <h5 class="card-title">Consolidado</h5>
                                                                         <p class="card-text">
                                                                             <?php
@@ -1214,6 +1260,22 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                         </p>
                                                                     </div>
                                                                 </div>
+                                                                <?php if ($contextComparacion->getData()['ResultadosAprendizaje']){?>
+                                                                    <div class="card">
+                                                                        <div class="card-body">
+                                                                            <h5 class="card-title">Comparación</h5>
+                                                                            <p class="card-text">
+                                                                                <?php
+                                                                                    $differ = new Differ(explode("\n", $contextCompetencias->getData()->getResultadosAprendizaje()), explode("\n", $contextModCompetencias->getData()->getResultadosAprendizaje()), $differOptions);
+                                                                                    $renderer = RendererFactory::make($rendererName, $rendererOptions); // or your own renderer object
+                                                                                    $result = $renderer->render($differ);
+                                                                                    echo $result;
+                                                                                    
+                                                                                ?>
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <?php }   ?> 
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1265,6 +1327,22 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                             </p>
                                                                         </div>
                                                                     </div>
+                                                                    <?php if ($contextComparacion->getData()['ResultadosAprendizajeI']){?>
+                                                                    <div class="card">
+                                                                        <div class="card-body">
+                                                                            <h5 class="card-title">Comparación</h5>
+                                                                            <p class="card-text">
+                                                                                <?php
+                                                                                    $differ = new Differ(explode("\n", $contextCompetencias->getData()->getResultadosAprendizajeI()), explode("\n", $contextModCompetencias->getData()->getResultadosAprendizajeI()), $differOptions);
+                                                                                    $renderer = RendererFactory::make($rendererName, $rendererOptions); // or your own renderer object
+                                                                                    $result = $renderer->render($differ);
+                                                                                    echo $result;
+                                                                                    
+                                                                                ?>
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <?php }   ?>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -1322,22 +1400,6 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                         <div class="card-body">
                                                             <div class="card">
                                                                 <div class="card-body">
-                                                                    <h5 class="card-title">Borrador</h5>
-                                                                    <p class="card-text">
-                                                                        <?php
-                                                                        if ($contextModMetodologia->getEvent() === FIND_MODMETODOLOGIA_OK) {
-                                                                            if ($contextComparacion->getData()['Metodologia'])
-                                                                                echo '<b style="font-size: 18px">' . $contextModMetodologia->getData()->getMetodologia() . '</b>';
-                                                                            else
-                                                                                echo $contextModMetodologia->getData()->getMetodologia();
-                                                                        }
-                                                                        ?>
-                                                                    </p>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="card">
-                                                                <div class="card-body">
                                                                     <h5 class="card-title">Consolidado</h5>
                                                                     <p class="card-text">
                                                                         <?php
@@ -1348,6 +1410,22 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                     </p>
                                                                 </div>
                                                             </div>
+                                                            <?php if ($contextComparacion->getData()['Metodologia']){?>
+                                                                    <div class="card">
+                                                                        <div class="card-body">
+                                                                            <h5 class="card-title">Comparación</h5>
+                                                                            <p class="card-text">
+                                                                                <?php
+                                                                                    $differ = new Differ(explode("\n", $contextMetodologia->getData()->getMetodologia()), explode("\n", $contextModMetodologia->getData()->getMetodologia()), $differOptions);
+                                                                                    $renderer = RendererFactory::make($rendererName, $rendererOptions); // or your own renderer object
+                                                                                    $result = $renderer->render($differ);
+                                                                                    echo $result;
+                                                                                    
+                                                                                ?>
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <?php }   ?>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1372,22 +1450,6 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                             <div class="card-body">
                                                                 <div class="card">
                                                                     <div class="card-body">
-                                                                        <h5 class="card-title">Borrador</h5>
-                                                                        <p class="card-text">
-                                                                            <?php
-                                                                            if ($contextModMetodologia->getEvent() === FIND_MODMETODOLOGIA_OK) {
-                                                                                if ($contextComparacion->getData()['MetodologiaI'])
-                                                                                    echo '<b style="font-size: 18px">' . $contextModMetodoloa->getData()->getMetodologiaI() . '</b>';
-                                                                                else
-                                                                                    echo $contextModMetodologia->getData()->getMetodologiaI();
-                                                                            }
-                                                                            ?>
-                                                                        </p>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="card">
-                                                                    <div class="card-body">
                                                                         <h5 class="card-title">Consolidado</h5>
                                                                         <p class="card-text">
                                                                             <?php
@@ -1398,6 +1460,22 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                         </p>
                                                                     </div>
                                                                 </div>
+                                                                <?php if ($contextComparacion->getData()['MetodologiaI']){?>
+                                                                    <div class="card">
+                                                                        <div class="card-body">
+                                                                            <h5 class="card-title">Comparación</h5>
+                                                                            <p class="card-text">
+                                                                                <?php
+                                                                                    $differ = new Differ(explode("\n", $contextMetodologia->getData()->getMetodologiaI()), explode("\n", $contextModMetodologia->getData()->getMetodologiaI()), $differOptions);
+                                                                                    $renderer = RendererFactory::make($rendererName, $rendererOptions); // or your own renderer object
+                                                                                    $result = $renderer->render($differ);
+                                                                                    echo $result;
+                                                                                    
+                                                                                ?>
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <?php }   ?>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1455,23 +1533,6 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                             <div class="card-body">
                                                                 <div class="card">
                                                                     <div class="card-body">
-                                                                        <h5 class="card-title">Borrador</h5>
-                                                                        <p class="card-text">
-                                                                            <?php
-                                                                            if ($contextModBibliografia->getEvent() === FIND_MODBIBLIOGRAFIA_OK) {
-
-                                                                                if ($contextComparacion->getData()['CitasBibliograficas'])
-                                                                                    echo '<b style="font-size: 18px">' . $contextModBibliografia->getData()->getCitasBibliograficas() . '</b>';
-                                                                                else
-                                                                                    echo $contextModBibliografia->getData()->getCitasBibliograficas();
-                                                                            }
-                                                                            ?>
-                                                                        </p>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="card">
-                                                                    <div class="card-body">
                                                                         <h5 class="card-title">Consolidado</h5>
                                                                         <p class="card-text">
                                                                             <?php
@@ -1482,6 +1543,22 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                         </p>
                                                                     </div>
                                                                 </div>
+                                                                <?php if ($contextComparacion->getData()['CitasBibliograficas']){?>
+                                                                    <div class="card">
+                                                                        <div class="card-body">
+                                                                            <h5 class="card-title">Comparación</h5>
+                                                                            <p class="card-text">
+                                                                                <?php
+                                                                                    $differ = new Differ(explode("\n", $contextBibliografia->getData()->getCitasBibliograficas()), explode("\n", $contextModBibliografia->getData()->getCitasBibliograficas()), $differOptions);
+                                                                                    $renderer = RendererFactory::make($rendererName, $rendererOptions); // or your own renderer object
+                                                                                    $result = $renderer->render($differ);
+                                                                                    echo $result;
+                                                                                    
+                                                                                ?>
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <?php }   ?>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1507,19 +1584,6 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                             <div class="card-body">
                                                                 <div class="card">
                                                                     <div class="card-body">
-                                                                        <h5 class="card-title">Borrador</h5>
-                                                                        <p class="card-text">
-                                                                            <?php
-                                                                            if ($contextModBibliografia->getEvent() === FIND_MODBIBLIOGRAFIA_OK) {
-                                                                                echo $contextModBibliografia->getData()->getRecursosInternet();
-                                                                            }
-                                                                            ?>
-                                                                        </p>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="card">
-                                                                    <div class="card-body">
                                                                         <h5 class="card-title">Consolidado</h5>
                                                                         <p class="card-text">
                                                                             <?php
@@ -1530,6 +1594,22 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                         </p>
                                                                     </div>
                                                                 </div>
+                                                                <?php if ($contextComparacion->getData()['RecursosInternet']){?>
+                                                                    <div class="card">
+                                                                        <div class="card-body">
+                                                                            <h5 class="card-title">Comparación</h5>
+                                                                            <p class="card-text">
+                                                                                <?php
+                                                                                    $differ = new Differ(explode("\n", $contextBibliografia->getData()->getRecursosInternet()), explode("\n", $contextModBibliografia->getData()->getRecursosInternet()), $differOptions);
+                                                                                    $renderer = RendererFactory::make($rendererName, $rendererOptions); // or your own renderer object
+                                                                                    $result = $renderer->render($differ);
+                                                                                    echo $result;
+                                                                                    
+                                                                                ?>
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <?php }   ?>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -2096,29 +2176,6 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                                             <div class="card-body">
                                                                                                 <div class="card">
                                                                                                     <div class="card-body">
-                                                                                                        <h5 class="card-title">Borrador</h5>
-                                                                                                        <p class="card-text">
-                                                                                                            <?php
-                                                                                                            if ($contextModEvaluacion->getEvent() === FIND_MODEVALUACION_OK) {
-                                                                                                                if ($contextComparacion->getData()['RealizacionExamenes'])
-                                                                                                                    echo '<b style="font-size: 18px">' . $contextModEvaluacion->getData()->getRealizacionExamenes() . '</b>';
-                                                                                                                else
-                                                                                                                    echo $contextModEvaluacion->getData()->getRealizacionExamenes();
-                                                                                                            }
-                                                                                                            ?>
-                                                                                                        </p>
-                                                                                                    </div>
-                                                                                                    <div class="card-footer">
-                                                                                                        <?php
-                                                                                                        if ($contextModEvaluacion->getEvent() === FIND_MODEVALUACION_OK) {
-                                                                                                            echo "Peso: " . $contextModEvaluacion->getData()->getPesoExamenes() . "%";
-                                                                                                        }
-                                                                                                        ?>
-                                                                                                    </div>
-                                                                                                </div>
-
-                                                                                                <div class="card">
-                                                                                                    <div class="card-body">
                                                                                                         <h5 class="card-title">Consolidado</h5>
                                                                                                         <p class="card-text">
                                                                                                             <?php
@@ -2136,6 +2193,33 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                                                         ?>
                                                                                                     </div>
                                                                                                 </div>
+                                                                                                <?php if ($contextComparacion->getData()['RealizacionExamenes']){?>
+                                                                                                <div class="card">
+                                                                                                    <div class="card-body">
+                                                                                                        <h5 class="card-title">Comparación</h5>
+                                                                                                        <p class="card-text">
+                                                                                                            <?php
+                                                                                                                $differ = new Differ(explode("\n", $contextEvaluacion->getData()->getRealizacionExamenes()), explode("\n", $contextModEvaluacion->getData()->getRealizacionExamenes()), $differOptions);
+                                                                                                                $renderer = RendererFactory::make($rendererName, $rendererOptions); // or your own renderer object
+                                                                                                                $result = $renderer->render($differ);
+                                                                                                                echo $result;
+                                                                                                                
+                                                                                                            ?>
+                                                                                                        </p>
+                                                                                                    </div>
+                                                                                                    <div class="card-footer">
+                                                                                                        <?php
+                                                                                                        if ($contextModEvaluacion->getEvent() === FIND_MODEVALUACION_OK) {
+                                                                                                            if($contextModEvaluacion->getData()->getPesoExamenes() !== $contextEvaluacion->getData()->getPesoExamenes()){
+                                                                                                                echo "Peso: <b>" . $contextModEvaluacion->getData()->getPesoExamenes() . "%</b>";
+                                                                                                            }else{
+                                                                                                            echo "Peso: " . $contextModEvaluacion->getData()->getPesoExamenes() . "%";
+                                                                                                            }
+                                                                                                        }
+                                                                                                        ?>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <?php }   ?>
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>
@@ -2156,23 +2240,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                                             </div>
                                                                                             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionEvaluacion">
                                                                                                 <div class="card-body">
-                                                                                                    <div class="card">
-                                                                                                        <div class="card-body">
-                                                                                                            <h5 class="card-title">Borrador</h5>
-                                                                                                            <p class="card-text">
-                                                                                                                <?php
-                                                                                                                if ($contextModEvaluacion->getEvent() === FIND_MODEVALUACION_OK) {
-                                                                                                                    if ($contextComparacion->getData()['RealizacionExamenesI'])
-                                                                                                                        echo '<b style="font-size: 18px">' . $contextModEvaluacion->getData()->getRealizacionExamenesI() . '</b>';
-                                                                                                                    else
-                                                                                                                        echo $contextModEvaluacion->getData()->getRealizacionExamenesI();
-                                                                                                                }
-                                                                                                                ?>
-                                                                                                            </p>
-                                                                                                        </div>
-                                                                                                    </div>
-
-                                                                                                    <div class="card">
+                                                                                                  <div class="card">
                                                                                                         <div class="card-body">
                                                                                                             <h5 class="card-title">Consolidado</h5>
                                                                                                             <p class="card-text">
@@ -2184,6 +2252,22 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                                                             </p>
                                                                                                         </div>
                                                                                                     </div>
+                                                                                                    <?php if ($contextComparacion->getData()['RealizacionExamenesI']){?>
+                                                                                                <div class="card">
+                                                                                                    <div class="card-body">
+                                                                                                        <h5 class="card-title">Comparación</h5>
+                                                                                                        <p class="card-text">
+                                                                                                            <?php
+                                                                                                                $differ = new Differ(explode("\n", $contextEvaluacion->getData()->getRealizacionExamenesI()), explode("\n", $contextModEvaluacion->getData()->getRealizacionExamenesI()), $differOptions);
+                                                                                                                $renderer = RendererFactory::make($rendererName, $rendererOptions); // or your own renderer object
+                                                                                                                $result = $renderer->render($differ);
+                                                                                                                echo $result;
+                                                                                                                
+                                                                                                            ?>
+                                                                                                        </p>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <?php }   ?>
                                                                                                 </div>
                                                                                             </div>
                                                                                         </div>
@@ -2210,29 +2294,6 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                                             <div class="card-body">
                                                                                                 <div class="card">
                                                                                                     <div class="card-body">
-                                                                                                        <h5 class="card-title">Borrador</h5>
-                                                                                                        <p class="card-text">
-                                                                                                            <?php
-                                                                                                            if ($contextModEvaluacion->getEvent() === FIND_MODEVALUACION_OK) {
-                                                                                                                if ($contextComparacion->getData()['RealizacionActividades'])
-                                                                                                                    echo '<b style="font-size: 18px">' . $contextModEvaluacion->getData()->getRealizacionActividades() . '</b>';
-                                                                                                                else
-                                                                                                                    echo $contextModEvaluacion->getData()->getRealizacionActividades();
-                                                                                                            }
-                                                                                                            ?>
-                                                                                                        </p>
-                                                                                                    </div>
-                                                                                                    <div class="card-footer">
-                                                                                                        <?php
-                                                                                                        if ($contextModEvaluacion->getEvent() === FIND_MODEVALUACION_OK) {
-                                                                                                            echo "Peso: " . $contextModEvaluacion->getData()->getPesoActividades() . "%";
-                                                                                                        }
-                                                                                                        ?>
-                                                                                                    </div>
-                                                                                                </div>
-
-                                                                                                <div class="card">
-                                                                                                    <div class="card-body">
                                                                                                         <h5 class="card-title">Consolidado</h5>
                                                                                                         <p class="card-text">
                                                                                                             <?php
@@ -2250,6 +2311,33 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                                                         ?>
                                                                                                     </div>
                                                                                                 </div>
+                                                                                                <?php if ($contextComparacion->getData()['RealizacionActividades']){?>
+                                                                                                <div class="card">
+                                                                                                    <div class="card-body">
+                                                                                                        <h5 class="card-title">Comparación</h5>
+                                                                                                        <p class="card-text">
+                                                                                                            <?php
+                                                                                                                $differ = new Differ(explode("\n", $contextEvaluacion->getData()->getRealizacionActividades()), explode("\n", $contextModEvaluacion->getData()->getRealizacionActividades()), $differOptions);
+                                                                                                                $renderer = RendererFactory::make($rendererName, $rendererOptions); // or your own renderer object
+                                                                                                                $result = $renderer->render($differ);
+                                                                                                                echo $result;
+                                                                                                                
+                                                                                                            ?>
+                                                                                                        </p>
+                                                                                                    </div>
+                                                                                                    <div class="card-footer">
+                                                                                                        <?php
+                                                                                                        if ($contextModEvaluacion->getEvent() === FIND_MODEVALUACION_OK) {
+                                                                                                            if($contextModEvaluacion->getData()->getPesoActividades() !== $contextEvaluacion->getData()->getPesoActividades()){
+                                                                                                                echo "Peso: <b>" . $contextModEvaluacion->getData()->getPesoActividades() . "%</b>";
+                                                                                                            }else{
+                                                                                                            echo "Peso: " . $contextModEvaluacion->getData()->getPesoActividades() . "%";
+                                                                                                            }
+                                                                                                        }
+                                                                                                        ?>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <?php }   ?>
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>
@@ -2274,22 +2362,6 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                                                 <div class="card-body">
                                                                                                     <div class="card">
                                                                                                         <div class="card-body">
-                                                                                                            <h5 class="card-title">Borrador</h5>
-                                                                                                            <p class="card-text">
-                                                                                                                <?php
-                                                                                                                if ($contextModEvaluacion->getEvent() === FIND_MODEVALUACION_OK) {
-                                                                                                                    if ($contextComparacion->getData()['RealizacionActividadesI'])
-                                                                                                                        echo '<b style="font-size: 18px">' . $contextModEvaluacion->getData()->getRealizacionActividadesI() . '</b>';
-                                                                                                                    else
-                                                                                                                        echo $contextModEvaluacion->getData()->getRealizacionActividadesI();
-                                                                                                                }
-                                                                                                                ?>
-                                                                                                            </p>
-                                                                                                        </div>
-                                                                                                    </div>
-
-                                                                                                    <div class="card">
-                                                                                                        <div class="card-body">
                                                                                                             <h5 class="card-title">Consolidado</h5>
                                                                                                             <p class="card-text">
                                                                                                                 <?php
@@ -2300,6 +2372,22 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                                                             </p>
                                                                                                         </div>
                                                                                                     </div>
+                                                                                                    <?php if ($contextComparacion->getData()['RealizacionActividadesI']){?>
+                                                                                                <div class="card">
+                                                                                                    <div class="card-body">
+                                                                                                        <h5 class="card-title">Comparación</h5>
+                                                                                                        <p class="card-text">
+                                                                                                            <?php
+                                                                                                                $differ = new Differ(explode("\n", $contextEvaluacion->getData()->getRealizacionActividadesI()), explode("\n", $contextModEvaluacion->getData()->getRealizacionActividadesI()), $differOptions);
+                                                                                                                $renderer = RendererFactory::make($rendererName, $rendererOptions); // or your own renderer object
+                                                                                                                $result = $renderer->render($differ);
+                                                                                                                echo $result;
+                                                                                                                
+                                                                                                            ?>
+                                                                                                        </p>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <?php }   ?>
                                                                                                 </div>
                                                                                             </div>
                                                                                         </div>
@@ -2326,29 +2414,6 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                                             <div class="card-body">
                                                                                                 <div class="card">
                                                                                                     <div class="card-body">
-                                                                                                        <h5 class="card-title">Borrador</h5>
-                                                                                                        <p class="card-text">
-                                                                                                            <?php
-                                                                                                            if ($contextModEvaluacion->getEvent() === FIND_MODEVALUACION_OK) {
-                                                                                                                if ($contextComparacion->getData()['RealizacionLaboratorio'])
-                                                                                                                    echo '<b style="font-size: 18px">' . $contextModEvaluacion->getData()->getRealizacionLaboratorio() . '</b>';
-                                                                                                                else
-                                                                                                                    echo $contextModEvaluacion->getData()->getRealizacionLaboratorio();
-                                                                                                            }
-                                                                                                            ?>
-                                                                                                        </p>
-                                                                                                    </div>
-                                                                                                    <div class="card-footer">
-                                                                                                        <?php
-                                                                                                        if ($contextModEvaluacion->getEvent() === FIND_MODEVALUACION_OK) {
-                                                                                                            echo "Peso: " . $contextModEvaluacion->getData()->getPesoLaboratorio() . "%";
-                                                                                                        }
-                                                                                                        ?>
-                                                                                                    </div>
-                                                                                                </div>
-
-                                                                                                <div class="card">
-                                                                                                    <div class="card-body">
                                                                                                         <h5 class="card-title">Consolidado</h5>
                                                                                                         <p class="card-text">
                                                                                                             <?php
@@ -2366,6 +2431,33 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                                                         ?>
                                                                                                     </div>
                                                                                                 </div>
+                                                                                                <?php if ($contextComparacion->getData()['RealizacionLaboratorio']){?>
+                                                                                                <div class="card">
+                                                                                                    <div class="card-body">
+                                                                                                        <h5 class="card-title">Comparación</h5>
+                                                                                                        <p class="card-text">
+                                                                                                            <?php
+                                                                                                                $differ = new Differ(explode("\n", $contextEvaluacion->getData()->getRealizacionLaboratorio()), explode("\n", $contextModEvaluacion->getData()->getRealizacionLaboratorio()), $differOptions);
+                                                                                                                $renderer = RendererFactory::make($rendererName, $rendererOptions); // or your own renderer object
+                                                                                                                $result = $renderer->render($differ);
+                                                                                                                echo $result;
+                                                                                                                
+                                                                                                            ?>
+                                                                                                        </p>
+                                                                                                    </div>
+                                                                                                    <div class="card-footer">
+                                                                                                        <?php
+                                                                                                        if ($contextModEvaluacion->getEvent() === FIND_MODEVALUACION_OK) {
+                                                                                                            if($contextModEvaluacion->getData()->getPesoLaboratorio() !== $contextEvaluacion->getData()->getPesoLaboratorio()){
+                                                                                                                echo "Peso: <b>" . $contextModEvaluacion->getData()->getPesoLaboratorio() . "%</b>";
+                                                                                                            }else{
+                                                                                                            echo "Peso: " . $contextModEvaluacion->getData()->getPesoLaboratorio() . "%";
+                                                                                                            }
+                                                                                                        }
+                                                                                                        ?>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <?php }   ?>
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>
@@ -2404,7 +2496,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                                                                 </p>
                                                                                                             </div>
                                                                                                         </div>
-
+                                                                                                        <div class="card">
                                                                                                         <div class="card-body">
                                                                                                             <h5 class="card-title">Consolidado</h5>
                                                                                                             <p class="card-text">
@@ -2415,6 +2507,23 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                                                                                 ?>
                                                                                                             </p>
                                                                                                         </div>
+                                                                                                    </div>
+                                                                                                    <?php if ($contextComparacion->getData()['RealizacionLaboratorioI']){?>
+                                                                                                <div class="card">
+                                                                                                    <div class="card-body">
+                                                                                                        <h5 class="card-title">Comparación</h5>
+                                                                                                        <p class="card-text">
+                                                                                                            <?php
+                                                                                                                $differ = new Differ(explode("\n", $contextEvaluacion->getData()->getRealizacionLaboratorioI()), explode("\n", $contextModEvaluacion->getData()->getRealizacionLaboratorioI()), $differOptions);
+                                                                                                                $renderer = RendererFactory::make($rendererName, $rendererOptions); // or your own renderer object
+                                                                                                                $result = $renderer->render($differ);
+                                                                                                                echo $result;
+                                                                                                                
+                                                                                                            ?>
+                                                                                                        </p>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <?php }   ?>
                                                                                                     </div>
                                                                                                 </div>
                                                                                             </div>

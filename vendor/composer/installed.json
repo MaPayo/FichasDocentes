@@ -68,44 +68,206 @@
         "homepage": "https://github.com/dompdf/dompdf"
     },
     {
-        "name": "ondrs/pandoc-php",
-        "version": "v0.1.0",
-        "version_normalized": "0.1.0.0",
+        "name": "jfcherng/php-color-output",
+        "version": "2.0.2",
+        "version_normalized": "2.0.2.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/ondrs/pandoc-php.git",
-            "reference": "f9ff1b1d80a37eca9100ed307bd9bf4014d05783"
+            "url": "https://github.com/jfcherng/php-color-output.git",
+            "reference": "2673074597eca9682d2fdfaee39a22418d4cc2f6"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/ondrs/pandoc-php/zipball/f9ff1b1d80a37eca9100ed307bd9bf4014d05783",
-            "reference": "f9ff1b1d80a37eca9100ed307bd9bf4014d05783",
+            "url": "https://api.github.com/repos/jfcherng/php-color-output/zipball/2673074597eca9682d2fdfaee39a22418d4cc2f6",
+            "reference": "2673074597eca9682d2fdfaee39a22418d4cc2f6",
             "shasum": ""
         },
         "require": {
-            "php": ">=5.4.0",
-            "symfony/process": "^2.5.3|^3.0"
+            "php": ">=7.1.3"
         },
         "require-dev": {
-            "nette/tester": "1.7.0"
+            "friendsofphp/php-cs-fixer": "^2.15",
+            "phan/phan": "^2.2",
+            "phpunit/phpunit": "^7.2 || ^8.2 || ^9",
+            "squizlabs/php_codesniffer": "^3.5"
         },
-        "time": "2016-08-24T09:04:04+00:00",
+        "time": "2020-05-27T19:24:44+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
-            "classmap": [
-                "src/"
+            "psr-4": {
+                "Jfcherng\\Utility\\": "src/"
+            },
+            "files": [
+                "src/helpers.php"
             ]
         },
         "notification-url": "https://packagist.org/downloads/",
         "license": [
             "MIT"
         ],
-        "description": "PHP pandoc",
+        "authors": [
+            {
+                "name": "Jack Cherng",
+                "email": "jfcherng@gmail.com"
+            }
+        ],
+        "description": "Make your PHP command-line application colorful.",
         "keywords": [
-            "pandoc",
-            "wrapper"
+            "ansi-colors",
+            "color",
+            "command-line",
+            "str-color"
         ]
+    },
+    {
+        "name": "jfcherng/php-diff",
+        "version": "6.7.5",
+        "version_normalized": "6.7.5.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/jfcherng/php-diff.git",
+            "reference": "125ad65d1ebfe1565cdeb293b157c383f181fb61"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/jfcherng/php-diff/zipball/125ad65d1ebfe1565cdeb293b157c383f181fb61",
+            "reference": "125ad65d1ebfe1565cdeb293b157c383f181fb61",
+            "shasum": ""
+        },
+        "require": {
+            "jfcherng/php-color-output": "^2.0",
+            "jfcherng/php-mb-string": "^1.3",
+            "jfcherng/php-sequence-matcher": "^3.2.2",
+            "php": ">=7.1.3"
+        },
+        "require-dev": {
+            "friendsofphp/php-cs-fixer": "^2.16",
+            "phan/phan": "^2.5 || ^3",
+            "phpunit/phpunit": ">=7 <10",
+            "squizlabs/php_codesniffer": "^3.5"
+        },
+        "time": "2020-08-10T15:39:06+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Jfcherng\\Diff\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Jack Cherng",
+                "email": "jfcherng@gmail.com"
+            },
+            {
+                "name": "Chris Boulton",
+                "email": "chris.boulton@interspire.com"
+            }
+        ],
+        "description": "A comprehensive library for generating differences between two strings in multiple formats (unified, side by side HTML etc).",
+        "keywords": [
+            "diff",
+            "udiff",
+            "unidiff",
+            "unified diff"
+        ]
+    },
+    {
+        "name": "jfcherng/php-mb-string",
+        "version": "1.4.2",
+        "version_normalized": "1.4.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/jfcherng/php-mb-string.git",
+            "reference": "dd75cc5c36016222baccdbb669375a2293860dca"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/jfcherng/php-mb-string/zipball/dd75cc5c36016222baccdbb669375a2293860dca",
+            "reference": "dd75cc5c36016222baccdbb669375a2293860dca",
+            "shasum": ""
+        },
+        "require": {
+            "ext-iconv": "*",
+            "php": ">=7.1.3"
+        },
+        "require-dev": {
+            "friendsofphp/php-cs-fixer": "^2.15",
+            "phan/phan": "^2.0",
+            "phpunit/phpunit": "^7.2 || ^8.0"
+        },
+        "time": "2020-05-27T19:25:10+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Jfcherng\\Utility\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Jack Cherng",
+                "email": "jfcherng@gmail.com"
+            }
+        ],
+        "description": "A high performance multibytes sting implementation for frequently reading/writing operations."
+    },
+    {
+        "name": "jfcherng/php-sequence-matcher",
+        "version": "3.2.3",
+        "version_normalized": "3.2.3.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/jfcherng/php-sequence-matcher.git",
+            "reference": "9468ac67348c3979fd87b779049fa941ec35b6bf"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/jfcherng/php-sequence-matcher/zipball/9468ac67348c3979fd87b779049fa941ec35b6bf",
+            "reference": "9468ac67348c3979fd87b779049fa941ec35b6bf",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=7.1.3"
+        },
+        "require-dev": {
+            "friendsofphp/php-cs-fixer": "^2.16",
+            "phan/phan": "^2.4",
+            "phpunit/phpunit": "^7.2 || ^8.0",
+            "squizlabs/php_codesniffer": "^3.5"
+        },
+        "time": "2020-05-27T19:25:37+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Jfcherng\\Diff\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Jack Cherng",
+                "email": "jfcherng@gmail.com"
+            },
+            {
+                "name": "Chris Boulton",
+                "email": "chris.boulton@interspire.com"
+            }
+        ],
+        "description": "A longest sequence matcher. The logic is primarily based on the Python difflib package."
     },
     {
         "name": "phenx/php-font-lib",
@@ -218,17 +380,17 @@
     },
     {
         "name": "sabberworm/php-css-parser",
-        "version": "8.3.0",
-        "version_normalized": "8.3.0.0",
+        "version": "8.3.1",
+        "version_normalized": "8.3.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/sabberworm/PHP-CSS-Parser.git",
-            "reference": "91bcc3e3fdb7386c9a2e0e0aa09ca75cc43f121f"
+            "reference": "d217848e1396ef962fb1997cf3e2421acba7f796"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/sabberworm/PHP-CSS-Parser/zipball/91bcc3e3fdb7386c9a2e0e0aa09ca75cc43f121f",
-            "reference": "91bcc3e3fdb7386c9a2e0e0aa09ca75cc43f121f",
+            "url": "https://api.github.com/repos/sabberworm/PHP-CSS-Parser/zipball/d217848e1396ef962fb1997cf3e2421acba7f796",
+            "reference": "d217848e1396ef962fb1997cf3e2421acba7f796",
             "shasum": ""
         },
         "require": {
@@ -238,7 +400,7 @@
             "codacy/coverage": "^1.4",
             "phpunit/phpunit": "~4.8"
         },
-        "time": "2019-02-22T07:42:52+00:00",
+        "time": "2020-06-01T09:10:00+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -262,56 +424,5 @@
             "parser",
             "stylesheet"
         ]
-    },
-    {
-        "name": "symfony/process",
-        "version": "v3.4.39",
-        "version_normalized": "3.4.39.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/symfony/process.git",
-            "reference": "1dbc09f6e14703ae2398efc86b02ae2bcd9a9931"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/symfony/process/zipball/1dbc09f6e14703ae2398efc86b02ae2bcd9a9931",
-            "reference": "1dbc09f6e14703ae2398efc86b02ae2bcd9a9931",
-            "shasum": ""
-        },
-        "require": {
-            "php": "^5.5.9|>=7.0.8"
-        },
-        "time": "2020-03-20T06:07:50+00:00",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "3.4-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Symfony\\Component\\Process\\": ""
-            },
-            "exclude-from-classmap": [
-                "/Tests/"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Fabien Potencier",
-                "email": "fabien@symfony.com"
-            },
-            {
-                "name": "Symfony Community",
-                "homepage": "https://symfony.com/contributors"
-            }
-        ],
-        "description": "Symfony Process Component",
-        "homepage": "https://symfony.com"
     }
 ]

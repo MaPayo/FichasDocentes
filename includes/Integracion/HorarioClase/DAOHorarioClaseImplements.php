@@ -25,7 +25,16 @@ class DAOHorarioClaseImplements implements DAOHorarioClase
         $results = $dataSource->executeQuery($sql, $values);
         return $results;
     }
-
+    public static function findHorarioClaseGrupoyDia($comparacion)
+    {
+        $singletonDataSource = new SingletonDataSource();
+        $dataSource = $singletonDataSource->getInstance();
+        $sql = "SELECT * FROM horarioclase WHERE IdGrupoClase = :idGrupoClase AND Dia = :dia";
+        $values = array(':idGrupoClase' => $comparacion[0], ':dia' => $comparacion[1]);
+        $results = $dataSource->executeQuery($sql, $values);
+        return $results;
+    }
+   
     public static function createHorarioClase($horarioClase)
     {
         $singletonDataSource = new SingletonDataSource();

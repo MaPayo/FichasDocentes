@@ -8,13 +8,15 @@ class Materia
     private $nombreMateria;
     private $caracter;
     private $creditosMateria;
+    private $activo;
     private $idModulo;
-    public function __construct($IdMateria, $NombreMateria, $Caracter, $CreditosMateria, $IdModulo)
+    public function __construct($IdMateria, $NombreMateria, $Caracter, $CreditosMateria,$activo, $IdModulo)
     {
         $this->idMateria = $IdMateria;
         $this->nombreMateria = $NombreMateria;
         $this->caracter = $Caracter;
         $this->creditosMateria = $CreditosMateria;
+        $this->activo = $activo;
         $this->idModulo = $IdModulo;
     }
 
@@ -98,7 +100,14 @@ class Materia
 
         return $this;
     }
-
+    public function getActivo()
+    {
+        return $this->activo;
+    }
+    public function setActivo($Activo)
+    {
+        $this->activo = $Activo;
+    }
     /**
      * @return mixed
      */

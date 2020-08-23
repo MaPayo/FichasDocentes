@@ -21,8 +21,9 @@ class DAOAsignaturaImplements implements DAOAsignatura
     {
         $singletonDataSource = new SingletonDataSource();
         $dataSource = $singletonDataSource->getInstance();
-        $sql = "INSERT INTO asignatura (IdAsignatura,NombreAsignatura,Abreviatura,Curso,Semestre,NombreAsignaturaIngles,Creditos,CoordinadorAsignatura,Estado,IdMateria) 
-        VALUES (:idAsignatura, :nombreAsignatura, :abreviatura, :curso, :semestre,:nombreAsignaturaIngles,:creditos,:coordinadorAsignatura, :estado,:idMateria)";
+        var_dump($asignatura->getAbreviatura());
+        $sql = "INSERT INTO asignatura (IdAsignatura,NombreAsignatura,Abreviatura,Curso,Semestre,NombreAsignaturaIngles,Creditos,CoordinadorAsignatura,Estado,Activo,IdMateria) 
+        VALUES (:idAsignatura, :nombreAsignatura, :abreviatura, :curso, :semestre,:nombreAsignaturaIngles,:creditos,:coordinadorAsignatura, :estado,:activo,:idMateria)";
         $values = array(
             ':idAsignatura' => $asignatura->getIdAsignatura(),
             ':nombreAsignatura' => $asignatura->getNombreAsignatura(),
@@ -33,6 +34,7 @@ class DAOAsignaturaImplements implements DAOAsignatura
             ':creditos' => $asignatura->getCreditos(),
             ':coordinadorAsignatura' => $asignatura->getCoordinadorAsignatura(),
             ':estado' => $asignatura->getEstado(),
+            ':activo'=> $asignatura->getActivo(),
             ':idMateria' => $asignatura->getIdMateria()
         );
         $results = $dataSource->executeInsertUpdateDelete($sql, $values);
@@ -40,10 +42,10 @@ class DAOAsignaturaImplements implements DAOAsignatura
     }
 
     public static function updateAsignatura($asignatura)
-    {
+    {       
         $singletonDataSource = new SingletonDataSource();
         $dataSource = $singletonDataSource->getInstance();
-        $sql = "UPDATE asignatura SET IdAsignatura = :idAsignatura, NombreAsignatura = :nombreAsignatura, Abreviatura = :abreviatura, Curso = :curso, Semestre = :semestre, NombreAsignaturaIngles = :nombreAsignaturaIngles, Creditos = :creditos, CoordinadorAsignatura = :coordinadorAsignatura, Estado = :estado, IdMateria = :idMateria WHERE IdAsignatura = :idAsignatura";
+        $sql = "UPDATE asignatura SET IdAsignatura = :idAsignatura, NombreAsignatura = :nombreAsignatura, Abreviatura = :abreviatura, Curso = :curso, Semestre = :semestre, NombreAsignaturaIngles = :nombreAsignaturaIngles, Creditos = :creditos, CoordinadorAsignatura = :coordinadorAsignatura, Estado = :estado, Activo = :activo, IdMateria = :idMateria WHERE IdAsignatura = :idAsignatura";
         $values = array(
             ':idAsignatura' => $asignatura->getIdAsignatura(),
             ':nombreAsignatura' => $asignatura->getNombreAsignatura(),
@@ -54,6 +56,7 @@ class DAOAsignaturaImplements implements DAOAsignatura
             ':creditos' => $asignatura->getCreditos(),
             ':coordinadorAsignatura' => $asignatura->getCoordinadorAsignatura(),
             ':estado' => $asignatura->getEstado(),
+            ':activo' => $asignatura->getActivo(),
             ':idMateria' => $asignatura->getIdMateria()
         );
         $results = $dataSource->executeInsertUpdateDelete($sql, $values);

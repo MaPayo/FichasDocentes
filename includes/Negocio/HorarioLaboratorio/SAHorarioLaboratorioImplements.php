@@ -47,6 +47,27 @@ class SAHorarioLaboratorioImplements implements SAHorarioLaboratorio
         return $horarioLaboratorio;
     }
 
+    public static function findHorarioLaboratorioGrupoyDia($comparacion)
+    {
+        $factoriesDAO = new \es\ucm\FactoriesDAOImplements();
+        $DAOHorarioLaboratorio = $factoriesDAO->createDAOHorarioLaboratorio();
+        $horarioLaboratorio = $DAOHorarioLaboratorio->findHorarioLaboratorioGrupoyDia($comparacion);
+        if ($horarioLaboratorio && count($horarioLaboratorio) === 1) {
+            $horarioLaboratorio = new HorarioLaboratorio(
+                $horarioLaboratorio[0]['IdHorarioLab'],
+                $horarioLaboratorio[0]['Laboratorio'],
+                $horarioLaboratorio[0]['Dia'],
+                $horarioLaboratorio[0]['HoraInicio'],
+                $horarioLaboratorio[0]['HoraFin'],
+                $horarioLaboratorio[0]['IdGrupoLab']
+            );
+        }
+        else{
+         $horarioLaboratorio   =null;
+        }
+        return $horarioLaboratorio;
+    }
+    
     public static function createHorarioLaboratorio($horarioLaboratorio)
     {
         $factoriesDAO = new \es\ucm\FactoriesDAOImplements();
