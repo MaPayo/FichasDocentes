@@ -59,9 +59,10 @@ class FormLogin extends Form
 				$contextProfesor = new Context(FIND_PROFESOR, $email);
 				$profesor = $controller->action($contextProfesor);
 				if ($admin->getEvent() === FIND_ADMINISTRADOR_OK) {
+					$_SESSION['admin'] = true;
 					$erroresFormulario = 'indexAdmin.php';
 				} else if ($profesor->getEvent() === FIND_PROFESOR_OK) {
-
+					$_SESSION['admin'] = false;
 					$idAsignatura = null;
 					$idGrado = null;
 
@@ -118,7 +119,7 @@ class FormLogin extends Form
 
 					if (!is_null($idAsignatura)) {
 						$erroresFormulario = 'indexAcceso.php?IdGrado=' . $idGrado . '&IdAsignatura=' . $idAsignatura;
-					} else $erroresFormulario = 'el usuario con rol profesor no tiene ninguna asignatura asociada';
+					} else $erroresFormulario[] = 'el usuario con rol profesor no tiene ninguna asignatura asociada';
 				} else {
 					$erroresFormulario[] = "No se ha encontrado rol para el usuario";
 				}

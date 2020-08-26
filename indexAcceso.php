@@ -35,9 +35,9 @@ use Jfcherng\Diff\Renderer\RendererConstant;
         <div class="row justify-content-center">
             <?php
 
-            if (isset($_SESSION['login']) && $_SESSION['login'] == true) {
+            if (isset($_SESSION['login']) && $_SESSION['login'] == true && $_SESSION['admin'] == false) {
                 ?>
-                <div class="col-md-3 col-12">
+                <div class="col-xl-3 col-lg-4 col-12">
                     <div class="card">
                         <div class="card-header text-center">
                             <h3>Listado de asignaturas por Grado</h3>
@@ -223,7 +223,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                         
                         ?>
 
-                        <div class="col-md-9 col-12">
+                        <div class="col-xl-9 col-lg-8 col-12">
                             <div class="card">
                                 <div class="card-header text-center">
                                     <?php
@@ -338,7 +338,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                             </div>
                                             <?php } else{
                                                 echo'<div class="alert alert-danger" role="alert">
-                                                         NO EXISTE LA INFORMACIÓN DE TEÓRICO, PROBLEMA O LABORATORIO
+                                                        <h4 class= "text-center">NO EXISTE LA INFORMACIÓN DE TEÓRICO, PROBLEMA O LABORATORIO</h4>
                                                     </div>';
                                             }
                                             if($CoordinadorAsignatura->getEvent() === FIND_PROFESOR_OK){?>
@@ -369,7 +369,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                             </div>
                                         <?php } else{
                                             echo'<div class="alert alert-danger" role="alert">
-                                                NO EXISTE LA INFORMACIÓN DEL COORDINADOR DE ASIGNATURA
+                                              <h4 class= "text-center">NO EXISTE LA INFORMACIÓN DEL COORDINADOR DE ASIGNATURA</h4>
                                                 </div>';
                                         }
                                         ?>
@@ -402,7 +402,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                 <div class="card-body">
                                                                 <div class="card">
                                                                         <div class="card-body">
-                                                                            <h5 class="card-title">Consolidado</h5>
+                                                                            <h4 class="card-title">Consolidado</h4>
                                                                             <p class="card-text">
                                                                                 <?php
                                                                                 if ($contextPrograma->getEvent() === FIND_PROGRAMA_ASIGNATURA_OK) {
@@ -415,7 +415,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                     <?php if ($contextComparacion->getData()['conocimientosPrevios']){?>
                                                                     <div class="card">
                                                                         <div class="card-body">
-                                                                            <h5 class="card-title">Comparación</h5>
+                                                                            <h4 class="card-title">Comparación</h4>
                                                                             <p class="card-text">
                                                                                 <?php
                                                                                     $differ = new Differ(explode("\n", $contextPrograma->getData()->getConocimientosPrevios()), explode("\n", $contextModPrograma->getData()->getConocimientosPrevios()), $differOptions);
@@ -452,7 +452,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                     <div class="card-body">
                                                                     <div class="card">
                                                                         <div class="card-body">
-                                                                            <h5 class="card-title">Consolidado</h5>
+                                                                            <h4 class="card-title">Consolidado</h4>
                                                                             <p class="card-text">
                                                                                 <?php
                                                                                 if ($contextPrograma->getEvent() === FIND_PROGRAMA_ASIGNATURA_OK) {
@@ -465,7 +465,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                     <?php if ($contextComparacion->getData()['conocimientosPreviosI']){?>
                                                                     <div class="card">
                                                                         <div class="card-body">
-                                                                            <h5 class="card-title">Comparación</h5>
+                                                                            <h4 class="card-title">Comparación</h4>
                                                                             <p class="card-text">
                                                                                 <?php
                                                                                     $differ = new Differ(explode("\n", $contextPrograma->getData()->getConocimientosPreviosI()), explode("\n", $contextModPrograma->getData()->getConocimientosPreviosI()), $differOptions);
@@ -504,7 +504,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                         <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionProgram">
                                                             <div class="card-body"><div class="card">
                                                                     <div class="card-body">
-                                                                        <h5 class="card-title">Consolidado</h5>
+                                                                        <h4 class="card-title">Consolidado</h4>
                                                                         <p class="card-text">
                                                                             <?php
                                                                             if ($contextPrograma->getEvent() === FIND_PROGRAMA_ASIGNATURA_OK) {
@@ -517,7 +517,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                             <?php if ($contextComparacion->getData()['BreveDescripcion']){?>
                                                                     <div class="card">
                                                                         <div class="card-body">
-                                                                            <h5 class="card-title">Comparación</h5>
+                                                                            <h4 class="card-title">Comparación</h4>
                                                                             <p class="card-text">
                                                                                 <?php
                                                                                     $differ = new Differ(explode("\n", $contextPrograma->getData()->getBreveDescripcion()), explode("\n", $contextModPrograma->getData()->getBreveDescripcion()), $differOptions);
@@ -554,7 +554,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                 <div class="card-body">
                                                                     <div class="card">
                                                                         <div class="card-body">
-                                                                            <h5 class="card-title">Consolidado</h5>
+                                                                            <h4 class="card-title">Consolidado</h4>
                                                                             <p class="card-text">
                                                                                 <?php
                                                                                 if ($contextPrograma->getEvent() === FIND_PROGRAMA_ASIGNATURA_OK) {
@@ -567,7 +567,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                     <?php if ($contextComparacion->getData()['BreveDescripcionI']){?>
                                                                     <div class="card">
                                                                         <div class="card-body">
-                                                                            <h5 class="card-title">Comparación</h5>
+                                                                            <h4 class="card-title">Comparación</h4>
                                                                             <p class="card-text">
                                                                                 <?php
                                                                                     $differ = new Differ(explode("\n", $contextPrograma->getData()->getBreveDescripcionI()), explode("\n", $contextModPrograma->getData()->getBreveDescripcionI()), $differOptions);
@@ -606,7 +606,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                             <div class="card-body">
                                                                 <div class="card">
                                                                     <div class="card-body">
-                                                                        <h5 class="card-title">Consolidado</h5>
+                                                                        <h4 class="card-title">Consolidado</h4>
                                                                         <p class="card-text">
                                                                             <?php
                                                                             if ($contextPrograma->getEvent() === FIND_PROGRAMA_ASIGNATURA_OK) {
@@ -619,7 +619,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                 <?php if ($contextComparacion->getData()['ProgramaTeorico']){?>
                                                                     <div class="card">
                                                                         <div class="card-body">
-                                                                            <h5 class="card-title">Comparación</h5>
+                                                                            <h4 class="card-title">Comparación</h4>
                                                                             <p class="card-text">
                                                                                 <?php
                                                                                     $differ = new Differ(explode("\n", $contextPrograma->getData()->getProgramaTeorico()), explode("\n", $contextModPrograma->getData()->getProgramaTeorico()), $differOptions);
@@ -656,7 +656,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                 <div class="card-body">
                                                                     <div class="card">
                                                                         <div class="card-body">
-                                                                            <h5 class="card-title">Consolidado</h5>
+                                                                            <h4 class="card-title">Consolidado</h4>
                                                                             <p class="card-text">
                                                                                 <?php
                                                                                 if ($contextPrograma->getEvent() === FIND_PROGRAMA_ASIGNATURA_OK) {
@@ -669,7 +669,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                     <?php if ($contextComparacion->getData()['ProgramaTeoricoI']){?>
                                                                     <div class="card">
                                                                         <div class="card-body">
-                                                                            <h5 class="card-title">Comparación</h5>
+                                                                            <h4 class="card-title">Comparación</h4>
                                                                             <p class="card-text">
                                                                                 <?php
                                                                                     $differ = new Differ(explode("\n", $contextPrograma->getData()->getProgramaTeoricoI()), explode("\n", $contextModPrograma->getData()->getProgramaTeoricoI()), $differOptions);
@@ -708,7 +708,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                             <div class="card-body">
                                                                 <div class="card">
                                                                     <div class="card-body">
-                                                                        <h5 class="card-title">Consolidado</h5>
+                                                                        <h4 class="card-title">Consolidado</h4>
                                                                         <p class="card-text">
                                                                             <?php
                                                                             if ($contextPrograma->getEvent() === FIND_PROGRAMA_ASIGNATURA_OK) {
@@ -721,7 +721,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                 <?php if ($contextComparacion->getData()['ProgramaSeminarios']){?>
                                                                     <div class="card">
                                                                         <div class="card-body">
-                                                                            <h5 class="card-title">Comparación</h5>
+                                                                            <h4 class="card-title">Comparación</h4>
                                                                             <p class="card-text">
                                                                                 <?php
                                                                                     $differ = new Differ(explode("\n", $contextPrograma->getData()->getProgramaSeminarios()), explode("\n", $contextModPrograma->getData()->getProgramaSeminarios()), $differOptions);
@@ -758,7 +758,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                 <div class="card-body">
                                                                     <div class="card">
                                                                         <div class="card-body">
-                                                                            <h5 class="card-title">Consolidado</h5>
+                                                                            <h4 class="card-title">Consolidado</h4>
                                                                             <p class="card-text">
                                                                                 <?php
                                                                                 if ($contextPrograma->getEvent() === FIND_PROGRAMA_ASIGNATURA_OK) {
@@ -771,7 +771,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                     <?php if ($contextComparacion->getData()['ProgramaSeminariosI']){?>
                                                                     <div class="card">
                                                                         <div class="card-body">
-                                                                            <h5 class="card-title">Comparación</h5>
+                                                                            <h4 class="card-title">Comparación</h4>
                                                                             <p class="card-text">
                                                                                 <?php
                                                                                     $differ = new Differ(explode("\n", $contextPrograma->getData()->getProgramaSeminariosI()), explode("\n", $contextModPrograma->getData()->getProgramaSeminariosI()), $differOptions);
@@ -809,7 +809,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                             <div class="card-body">
                                                                 <div class="card">
                                                                     <div class="card-body">
-                                                                        <h5 class="card-title">Consolidado</h5>
+                                                                        <h4 class="card-title">Consolidado</h4>
                                                                         <p class="card-text">
                                                                             <?php
                                                                             if ($contextPrograma->getEvent() === FIND_PROGRAMA_ASIGNATURA_OK) {
@@ -822,7 +822,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                 <?php if ($contextComparacion->getData()['ProgramaLaboratorio']){?>
                                                                     <div class="card">
                                                                         <div class="card-body">
-                                                                            <h5 class="card-title">Comparación</h5>
+                                                                            <h4 class="card-title">Comparación</h4>
                                                                             <p class="card-text">
                                                                                 <?php
                                                                                     $differ = new Differ(explode("\n", $contextPrograma->getData()->getProgramaLaboratorio()), explode("\n", $contextModPrograma->getData()->getProgramaLaboratorio()), $differOptions);
@@ -859,7 +859,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                 <div class="card-body">
                                                                     <div class="card">
                                                                         <div class="card-body">
-                                                                            <h5 class="card-title">Consolidado</h5>
+                                                                            <h4 class="card-title">Consolidado</h4>
                                                                             <p class="card-text">
                                                                                 <?php
                                                                                 if ($contextPrograma->getEvent() === FIND_PROGRAMA_ASIGNATURA_OK) {
@@ -873,7 +873,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                 <?php if ($contextComparacion->getData()['ProgramaLaboratorioI']){?>
                                                                     <div class="card">
                                                                         <div class="card-body">
-                                                                            <h5 class="card-title">Comparación</h5>
+                                                                            <h4 class="card-title">Comparación</h4>
                                                                             <p class="card-text">
                                                                                 <?php
                                                                                     $differ = new Differ(explode("\n", $contextPrograma->getData()->getProgramaLaboratorioI()), explode("\n", $contextModPrograma->getData()->getProgramaLaboratorioI()), $differOptions);
@@ -943,7 +943,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                             <div class="card-body">
                                                                 <div class="card">
                                                                     <div class="card-body">
-                                                                        <h5 class="card-title">Consolidado</h5>
+                                                                        <h4 class="card-title">Consolidado</h4>
                                                                         <p class="card-text">
                                                                             <?php
                                                                             if ($contextCompetencias->getEvent() === FIND_COMPETENCIAS_ASIGNATURA_OK) {
@@ -956,7 +956,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                 <?php if ($contextComparacion->getData()['ComGenerales']){?>
                                                                     <div class="card">
                                                                         <div class="card-body">
-                                                                            <h5 class="card-title">Comparación</h5>
+                                                                            <h4 class="card-title">Comparación</h4>
                                                                             <p class="card-text">
                                                                                 <?php
                                                                                     $differ = new Differ(explode("\n", $contextCompetencias->getData()->getGenerales()), explode("\n", $contextModCompetencias->getData()->getGenerales()), $differOptions);
@@ -993,7 +993,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                 <div class="card-body">
                                                                     <div class="card">
                                                                         <div class="card-body">
-                                                                            <h5 class="card-title">Consolidado</h5>
+                                                                            <h4 class="card-title">Consolidado</h4>
                                                                             <p class="card-text">
                                                                                 <?php
                                                                                 if ($contextCompetencias->getEvent() === FIND_COMPETENCIAS_ASIGNATURA_OK) {
@@ -1006,7 +1006,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                     <?php if ($contextComparacion->getData()['ComGeneralesI']){?>
                                                                     <div class="card">
                                                                         <div class="card-body">
-                                                                            <h5 class="card-title">Comparación</h5>
+                                                                            <h4 class="card-title">Comparación</h4>
                                                                             <p class="card-text">
                                                                                 <?php
                                                                                     $differ = new Differ(explode("\n", $contextCompetencias->getData()->getGeneralesI()), explode("\n", $contextModCompetencias->getData()->getGeneralesI()), $differOptions);
@@ -1045,7 +1045,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                             <div class="card-body">
                                                                 <div class="card">
                                                                     <div class="card-body">
-                                                                        <h5 class="card-title">Consolidado</h5>
+                                                                        <h4 class="card-title">Consolidado</h4>
                                                                         <p class="card-text">
                                                                             <?php
                                                                             if ($contextCompetencias->getEvent() === FIND_COMPETENCIAS_ASIGNATURA_OK) {
@@ -1058,7 +1058,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                 <?php if ($contextComparacion->getData()['ComEspecificas']){?>
                                                                     <div class="card">
                                                                         <div class="card-body">
-                                                                            <h5 class="card-title">Comparación</h5>
+                                                                            <h4 class="card-title">Comparación</h4>
                                                                             <p class="card-text">
                                                                                 <?php
                                                                                     $differ = new Differ(explode("\n", $contextCompetencias->getData()->getEspecificas()), explode("\n", $contextModCompetencias->getData()->getEspecificas()), $differOptions);
@@ -1095,7 +1095,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                 <div class="card-body">
                                                                     <div class="card">
                                                                         <div class="card-body">
-                                                                            <h5 class="card-title">Consolidado</h5>
+                                                                            <h4 class="card-title">Consolidado</h4>
                                                                             <p class="card-text">
                                                                                 <?php
                                                                                 if ($contextCompetencias->getEvent() === FIND_COMPETENCIAS_ASIGNATURA_OK) {
@@ -1108,7 +1108,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                     <?php if ($contextComparacion->getData()['ComEspecificasI']){?>
                                                                     <div class="card">
                                                                         <div class="card-body">
-                                                                            <h5 class="card-title">Comparación</h5>
+                                                                            <h4 class="card-title">Comparación</h4>
                                                                             <p class="card-text">
                                                                                 <?php
                                                                                     $differ = new Differ(explode("\n", $contextCompetencias->getData()->getEspecificasI()), explode("\n", $contextModCompetencias->getData()->getEspecificasI()), $differOptions);
@@ -1147,7 +1147,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                             <div class="card-body">
                                                                 <div class="card">
                                                                     <div class="card-body">
-                                                                        <h5 class="card-title">Consolidado</h5>
+                                                                        <h4 class="card-title">Consolidado</h4>
                                                                         <p class="card-text">
                                                                             <?php
                                                                             if ($contextCompetencias->getEvent() === FIND_COMPETENCIAS_ASIGNATURA_OK) {
@@ -1160,7 +1160,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                 <?php if ($contextComparacion->getData()['ComBasicas']){?>
                                                                     <div class="card">
                                                                         <div class="card-body">
-                                                                            <h5 class="card-title">Comparación</h5>
+                                                                            <h4 class="card-title">Comparación</h4>
                                                                             <p class="card-text">
                                                                                 <?php
                                                                                     $differ = new Differ(explode("\n", $contextCompetencias->getData()->getBasicas()), explode("\n", $contextModCompetencias->getData()->getBasicas()), $differOptions);
@@ -1197,7 +1197,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                 <div class="card-body">
                                                                     <div class="card">
                                                                         <div class="card-body">
-                                                                            <h5 class="card-title">Consolidado</h5>
+                                                                            <h4 class="card-title">Consolidado</h4>
                                                                             <p class="card-text">
                                                                                 <?php
                                                                                 if ($contextCompetencias->getEvent() === FIND_COMPETENCIAS_ASIGNATURA_OK) {
@@ -1210,7 +1210,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                     <?php if ($contextComparacion->getData()['ComBasicasI']){?>
                                                                     <div class="card">
                                                                         <div class="card-body">
-                                                                            <h5 class="card-title">Comparación</h5>
+                                                                            <h4 class="card-title">Comparación</h4>
                                                                             <p class="card-text">
                                                                                 <?php
                                                                                     $differ = new Differ(explode("\n", $contextCompetencias->getData()->getBasicasI()), explode("\n", $contextModCompetencias->getData()->getBasicasI()), $differOptions);
@@ -1250,7 +1250,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                             <div class="card-body">
                                                                 <div class="card">
                                                                     <div class="card-body">
-                                                                        <h5 class="card-title">Consolidado</h5>
+                                                                        <h4 class="card-title">Consolidado</h4>
                                                                         <p class="card-text">
                                                                             <?php
                                                                             if ($contextCompetencias->getEvent() === FIND_COMPETENCIAS_ASIGNATURA_OK) {
@@ -1263,7 +1263,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                 <?php if ($contextComparacion->getData()['ResultadosAprendizaje']){?>
                                                                     <div class="card">
                                                                         <div class="card-body">
-                                                                            <h5 class="card-title">Comparación</h5>
+                                                                            <h4 class="card-title">Comparación</h4>
                                                                             <p class="card-text">
                                                                                 <?php
                                                                                     $differ = new Differ(explode("\n", $contextCompetencias->getData()->getResultadosAprendizaje()), explode("\n", $contextModCompetencias->getData()->getResultadosAprendizaje()), $differOptions);
@@ -1301,7 +1301,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                 <div class="card-body">
                                                                     <div class="card">
                                                                         <div class="card-body">
-                                                                            <h5 class="card-title">Borrador</h5>
+                                                                            <h4 class="card-title">Borrador</h4>
                                                                             <p class="card-text">
                                                                                 <?php
                                                                                 if ($contextModCompetencias->getEvent() === FIND_MODCOMPETENCIAS_ASIGNATURA_OK) {
@@ -1317,7 +1317,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
 
                                                                     <div class="card">
                                                                         <div class="card-body">
-                                                                            <h5 class="card-title">Consolidado</h5>
+                                                                            <h4 class="card-title">Consolidado</h4>
                                                                             <p class="card-text">
                                                                                 <?php
                                                                                 if ($contextCompetencias->getEvent() === FIND_COMPETENCIAS_ASIGNATURA_OK) {
@@ -1330,7 +1330,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                     <?php if ($contextComparacion->getData()['ResultadosAprendizajeI']){?>
                                                                     <div class="card">
                                                                         <div class="card-body">
-                                                                            <h5 class="card-title">Comparación</h5>
+                                                                            <h4 class="card-title">Comparación</h4>
                                                                             <p class="card-text">
                                                                                 <?php
                                                                                     $differ = new Differ(explode("\n", $contextCompetencias->getData()->getResultadosAprendizajeI()), explode("\n", $contextModCompetencias->getData()->getResultadosAprendizajeI()), $differOptions);
@@ -1400,7 +1400,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                         <div class="card-body">
                                                             <div class="card">
                                                                 <div class="card-body">
-                                                                    <h5 class="card-title">Consolidado</h5>
+                                                                    <h4 class="card-title">Consolidado</h4>
                                                                     <p class="card-text">
                                                                         <?php
                                                                         if ($contextMetodologia->getEvent() === FIND_METODOLOGIA_OK) {
@@ -1413,7 +1413,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                             <?php if ($contextComparacion->getData()['Metodologia']){?>
                                                                     <div class="card">
                                                                         <div class="card-body">
-                                                                            <h5 class="card-title">Comparación</h5>
+                                                                            <h4 class="card-title">Comparación</h4>
                                                                             <p class="card-text">
                                                                                 <?php
                                                                                     $differ = new Differ(explode("\n", $contextMetodologia->getData()->getMetodologia()), explode("\n", $contextModMetodologia->getData()->getMetodologia()), $differOptions);
@@ -1450,7 +1450,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                             <div class="card-body">
                                                                 <div class="card">
                                                                     <div class="card-body">
-                                                                        <h5 class="card-title">Consolidado</h5>
+                                                                        <h4 class="card-title">Consolidado</h4>
                                                                         <p class="card-text">
                                                                             <?php
                                                                             if ($contextMetodologia->getEvent() === FIND_METODOLOGIA_OK) {
@@ -1463,7 +1463,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                 <?php if ($contextComparacion->getData()['MetodologiaI']){?>
                                                                     <div class="card">
                                                                         <div class="card-body">
-                                                                            <h5 class="card-title">Comparación</h5>
+                                                                            <h4 class="card-title">Comparación</h4>
                                                                             <p class="card-text">
                                                                                 <?php
                                                                                     $differ = new Differ(explode("\n", $contextMetodologia->getData()->getMetodologiaI()), explode("\n", $contextModMetodologia->getData()->getMetodologiaI()), $differOptions);
@@ -1533,7 +1533,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                             <div class="card-body">
                                                                 <div class="card">
                                                                     <div class="card-body">
-                                                                        <h5 class="card-title">Consolidado</h5>
+                                                                        <h4 class="card-title">Consolidado</h4>
                                                                         <p class="card-text">
                                                                             <?php
                                                                             if ($contextBibliografia->getEvent() === FIND_BIBLIOGRAFIA_OK) {
@@ -1546,7 +1546,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                 <?php if ($contextComparacion->getData()['CitasBibliograficas']){?>
                                                                     <div class="card">
                                                                         <div class="card-body">
-                                                                            <h5 class="card-title">Comparación</h5>
+                                                                            <h4 class="card-title">Comparación</h4>
                                                                             <p class="card-text">
                                                                                 <?php
                                                                                     $differ = new Differ(explode("\n", $contextBibliografia->getData()->getCitasBibliograficas()), explode("\n", $contextModBibliografia->getData()->getCitasBibliograficas()), $differOptions);
@@ -1584,7 +1584,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                             <div class="card-body">
                                                                 <div class="card">
                                                                     <div class="card-body">
-                                                                        <h5 class="card-title">Consolidado</h5>
+                                                                        <h4 class="card-title">Consolidado</h4>
                                                                         <p class="card-text">
                                                                             <?php
                                                                             if ($contextBibliografia->getEvent() === FIND_BIBLIOGRAFIA_OK) {
@@ -1597,7 +1597,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                 <?php if ($contextComparacion->getData()['RecursosInternet']){?>
                                                                     <div class="card">
                                                                         <div class="card-body">
-                                                                            <h5 class="card-title">Comparación</h5>
+                                                                            <h4 class="card-title">Comparación</h4>
                                                                             <p class="card-text">
                                                                                 <?php
                                                                                     $differ = new Differ(explode("\n", $contextBibliografia->getData()->getRecursosInternet()), explode("\n", $contextModBibliografia->getData()->getRecursosInternet()), $differOptions);
@@ -1646,7 +1646,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                         <div class="tab-pane fade" id="nav-grupo-Laboratorio" role="tabpanel" aria-labelledby="nav-grupo-Laboratorio-tab">
                                             <div class="card">
                                                 <div class="card-body">
-                                                    <h5 class="card-title">Borrador</h5>
+                                                    <h4 class="card-title">Borrador</h4>
                                                     <p class="card-text">
                                                         <?php
                                                         if ($contextModGrupoLaboratorio->getEvent() === LIST_MODGRUPO_LABORATORIO_OK) {
@@ -1787,7 +1787,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                     </div>
                                                     <div class="card">
                                                         <div class="card-body">
-                                                            <h5 class="card-title">Consolidado</h5>
+                                                            <h4 class="card-title">Consolidado</h4>
                                                             <p class="card-text">
                                                                 <?php
                                                                 if ($contextGrupoLaboratorio->getEvent() === LIST_GRUPO_LABORATORIO_OK) {
@@ -1899,7 +1899,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                     <div class="tab-pane fade" id="nav-grupo-clase" role="tabpanel" aria-labelledby="nav-grupo-clase-tab">
                                                         <div class="card">
                                                             <div class="card-body">
-                                                                <h5 class="card-title">Borrador</h5>
+                                                                <h4 class="card-title">Borrador</h4>
                                                                 <p class="card-text">
                                                                     <?php
                                                                     if ($contextModGrupoClase->getEvent() === LIST_MODGRUPO_CLASE_OK) {
@@ -2040,7 +2040,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                 </div>
                                                                 <div class="card">
                                                                     <div class="card-body">
-                                                                        <h5 class="card-title">Consolidado</h5>
+                                                                        <h4 class="card-title">Consolidado</h4>
                                                                         <p class="card-text">
                                                                             <?php
                                                                             if ($contextGrupoClase->getEvent() === LIST_GRUPO_CLASE_OK) {
@@ -2176,7 +2176,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                             <div class="card-body">
                                                                                                 <div class="card">
                                                                                                     <div class="card-body">
-                                                                                                        <h5 class="card-title">Consolidado</h5>
+                                                                                                        <h4 class="card-title">Consolidado</h4>
                                                                                                         <p class="card-text">
                                                                                                             <?php
                                                                                                             if ($contextEvaluacion->getEvent() === FIND_EVALUACION_OK) {
@@ -2196,7 +2196,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                                 <?php if ($contextComparacion->getData()['RealizacionExamenes']){?>
                                                                                                 <div class="card">
                                                                                                     <div class="card-body">
-                                                                                                        <h5 class="card-title">Comparación</h5>
+                                                                                                        <h4 class="card-title">Comparación</h4>
                                                                                                         <p class="card-text">
                                                                                                             <?php
                                                                                                                 $differ = new Differ(explode("\n", $contextEvaluacion->getData()->getRealizacionExamenes()), explode("\n", $contextModEvaluacion->getData()->getRealizacionExamenes()), $differOptions);
@@ -2242,7 +2242,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                                 <div class="card-body">
                                                                                                   <div class="card">
                                                                                                         <div class="card-body">
-                                                                                                            <h5 class="card-title">Consolidado</h5>
+                                                                                                            <h4 class="card-title">Consolidado</h4>
                                                                                                             <p class="card-text">
                                                                                                                 <?php
                                                                                                                 if ($contextEvaluacion->getEvent() === FIND_EVALUACION_OK) {
@@ -2255,7 +2255,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                                     <?php if ($contextComparacion->getData()['RealizacionExamenesI']){?>
                                                                                                 <div class="card">
                                                                                                     <div class="card-body">
-                                                                                                        <h5 class="card-title">Comparación</h5>
+                                                                                                        <h4 class="card-title">Comparación</h4>
                                                                                                         <p class="card-text">
                                                                                                             <?php
                                                                                                                 $differ = new Differ(explode("\n", $contextEvaluacion->getData()->getRealizacionExamenesI()), explode("\n", $contextModEvaluacion->getData()->getRealizacionExamenesI()), $differOptions);
@@ -2294,7 +2294,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                             <div class="card-body">
                                                                                                 <div class="card">
                                                                                                     <div class="card-body">
-                                                                                                        <h5 class="card-title">Consolidado</h5>
+                                                                                                        <h4 class="card-title">Consolidado</h4>
                                                                                                         <p class="card-text">
                                                                                                             <?php
                                                                                                             if ($contextEvaluacion->getEvent() === FIND_EVALUACION_OK) {
@@ -2314,7 +2314,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                                 <?php if ($contextComparacion->getData()['RealizacionActividades']){?>
                                                                                                 <div class="card">
                                                                                                     <div class="card-body">
-                                                                                                        <h5 class="card-title">Comparación</h5>
+                                                                                                        <h4 class="card-title">Comparación</h4>
                                                                                                         <p class="card-text">
                                                                                                             <?php
                                                                                                                 $differ = new Differ(explode("\n", $contextEvaluacion->getData()->getRealizacionActividades()), explode("\n", $contextModEvaluacion->getData()->getRealizacionActividades()), $differOptions);
@@ -2362,7 +2362,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                                 <div class="card-body">
                                                                                                     <div class="card">
                                                                                                         <div class="card-body">
-                                                                                                            <h5 class="card-title">Consolidado</h5>
+                                                                                                            <h4 class="card-title">Consolidado</h4>
                                                                                                             <p class="card-text">
                                                                                                                 <?php
                                                                                                                 if ($contextEvaluacion->getEvent() === FIND_EVALUACION_OK) {
@@ -2375,7 +2375,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                                     <?php if ($contextComparacion->getData()['RealizacionActividadesI']){?>
                                                                                                 <div class="card">
                                                                                                     <div class="card-body">
-                                                                                                        <h5 class="card-title">Comparación</h5>
+                                                                                                        <h4 class="card-title">Comparación</h4>
                                                                                                         <p class="card-text">
                                                                                                             <?php
                                                                                                                 $differ = new Differ(explode("\n", $contextEvaluacion->getData()->getRealizacionActividadesI()), explode("\n", $contextModEvaluacion->getData()->getRealizacionActividadesI()), $differOptions);
@@ -2414,7 +2414,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                             <div class="card-body">
                                                                                                 <div class="card">
                                                                                                     <div class="card-body">
-                                                                                                        <h5 class="card-title">Consolidado</h5>
+                                                                                                        <h4 class="card-title">Consolidado</h4>
                                                                                                         <p class="card-text">
                                                                                                             <?php
                                                                                                             if ($contextEvaluacion->getEvent() === FIND_EVALUACION_OK) {
@@ -2434,7 +2434,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                                 <?php if ($contextComparacion->getData()['RealizacionLaboratorio']){?>
                                                                                                 <div class="card">
                                                                                                     <div class="card-body">
-                                                                                                        <h5 class="card-title">Comparación</h5>
+                                                                                                        <h4 class="card-title">Comparación</h4>
                                                                                                         <p class="card-text">
                                                                                                             <?php
                                                                                                                 $differ = new Differ(explode("\n", $contextEvaluacion->getData()->getRealizacionLaboratorio()), explode("\n", $contextModEvaluacion->getData()->getRealizacionLaboratorio()), $differOptions);
@@ -2483,7 +2483,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                                     <div class="card">
                                                                                                         <div class="card">
                                                                                                             <div class="card-body">
-                                                                                                                <h5 class="card-title">Borrador</h5>
+                                                                                                                <h4 class="card-title">Borrador</h4>
                                                                                                                 <p class="card-text">
                                                                                                                     <?php
                                                                                                                     if ($contextModEvaluacion->getEvent() === FIND_MODEVALUACION_OK) {
@@ -2498,7 +2498,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                                         </div>
                                                                                                         <div class="card">
                                                                                                         <div class="card-body">
-                                                                                                            <h5 class="card-title">Consolidado</h5>
+                                                                                                            <h4 class="card-title">Consolidado</h4>
                                                                                                             <p class="card-text">
                                                                                                                 <?php
                                                                                                                 if ($contextEvaluacion->getEvent() === FIND_EVALUACION_OK) {
@@ -2511,7 +2511,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                                     <?php if ($contextComparacion->getData()['RealizacionLaboratorioI']){?>
                                                                                                 <div class="card">
                                                                                                     <div class="card-body">
-                                                                                                        <h5 class="card-title">Comparación</h5>
+                                                                                                        <h4 class="card-title">Comparación</h4>
                                                                                                         <p class="card-text">
                                                                                                             <?php
                                                                                                                 $differ = new Differ(explode("\n", $contextEvaluacion->getData()->getRealizacionLaboratorioI()), explode("\n", $contextModEvaluacion->getData()->getRealizacionLaboratorioI()), $differOptions);
@@ -2551,7 +2551,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                             <div class="card-body">
                                                                                                 <div class="card">
                                                                                                     <div class="card-body">
-                                                                                                        <h5 class="card-title">Borrador</h5>
+                                                                                                        <h4 class="card-title">Borrador</h4>
                                                                                                         <p class="card-text">
                                                                                                             <?php
                                                                                                             if ($contextModEvaluacion->getEvent() === FIND_MODEVALUACION_OK) {
@@ -2567,7 +2567,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
 
                                                                                                 <div class="card">
                                                                                                     <div class="card-body">
-                                                                                                        <h5 class="card-title">Consolidado</h5>
+                                                                                                        <h4 class="card-title">Consolidado</h4>
                                                                                                         <p class="card-text">
                                                                                                             <?php
                                                                                                             if ($contextEvaluacion->getEvent() === FIND_EVALUACION_OK) {
@@ -2601,7 +2601,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                                 <div class="card-body">
                                                                                                     <div class="card">
                                                                                                         <div class="card-body">
-                                                                                                            <h5 class="card-title">Borrador</h5>
+                                                                                                            <h4 class="card-title">Borrador</h4>
                                                                                                             <p class="card-text">
                                                                                                                 <?php
                                                                                                                 if ($contextModEvaluacion->getEvent() === FIND_MODEVALUACION_OK) {
@@ -2617,7 +2617,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
 
                                                                                                     <div class="card">
                                                                                                         <div class="card-body">
-                                                                                                            <h5 class="card-title">Consolidado</h5>
+                                                                                                            <h4 class="card-title">Consolidado</h4>
                                                                                                             <p class="card-text">
                                                                                                                 <?php
                                                                                                                 if ($contextEvaluacion->getEvent() === FIND_EVALUACION_OK) {
@@ -2796,7 +2796,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                                     foreach ($permisos->getData() as $permiso) {
                                                                                                         $context = new es\ucm\Context(FIND_PROFESOR, $permiso->getEmailProfesor());
                                                                                                         $profesor = $controller->action($context);
-                                                                                                        echo '<div><h5>' . $profesor->getData()->getNombre() . '</h5>
+                                                                                                        echo '<div><h4>' . $profesor->getData()->getNombre() . '</h4>
                                                                                                         <a href="permisos.php?emailProfesor=' . $permiso->getEmailProfesor() . '&idAsignatura=' . $permiso->getIdAsignatura() . '">
                                                                                                         <button type="button" class="btn btn-primary" id="btn-form">
                                                                                                         Modificar Permisos
@@ -2975,7 +2975,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                                     $context = new es\ucm\Context(FIND_PERMISOS, $contextAsignatura->getData()->getIdAsignatura());
                                                                                                     $permisos = $controller->action($context);
 
-                                                                                                    echo '<div><h5>Profesores de la asignatura ' . $contextAsignatura->getData()->getNombreAsignatura() . '</h5>
+                                                                                                    echo '<div><h4>Profesores de la asignatura ' . $contextAsignatura->getData()->getNombreAsignatura() . '</h4>
                                                                                                     <a href="addProfesor.php?idAsignatura=' . $contextAsignatura->getData()->getIdAsignatura() . '">
                                                                                                     <button type="button" class="btn btn-primary" id="btn-form">
                                                                                                     Añadir Profesor
@@ -3038,7 +3038,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title">Informacion</h5>
+                                        <h4 class="modal-title">Informacion</h4>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
@@ -3047,27 +3047,27 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                         <?php
                                         if (isset($_GET['anadido']) && $_GET['anadido'] === "y") {
                                             echo '<div class="alert alert-success" role="alert">
-                                            <h5 class="text-center">Se ha añadido correctamente</h5>
+                                            <h4 class="text-center">Se ha añadido correctamente</h4>
                                             </div>';
                                         } elseif (isset($_GET['anadido']) && $_GET['anadido'] === "n") {
                                             echo '<div class="alert alert-danger" role="alert">
-                                            <h5 class="text-center">Se ha producido un error de insercion en el borrador</h5>
+                                            <h4 class="text-center">Se ha producido un error de insercion en el borrador</h4>
                                             </div>';
                                         } elseif (isset($_GET['modificado']) && $_GET['modificado'] === "y") {
                                             echo '<div class="alert alert-success" role="alert">
-                                            <h5 class="text-center">Se ha modificado correctamente</h5>
+                                            <h4 class="text-center">Se ha modificado correctamente</h4>
                                             </div>';
                                         } elseif (isset($_GET['modificado']) && $_GET['modificado'] === "n") {
                                             echo '<div class="alert alert-danger" role="alert">
-                                            <h5 class="text-center">Se ha producido un error de modificacion en el borrador</h5>
+                                            <h4 class="text-center">Se ha producido un error de modificacion en el borrador</h4>
                                             </div>';
                                         } elseif (isset($_GET['eliminado']) && $_GET['eliminado'] === "y") {
                                             echo '<div class="alert alert-success" role="alert">
-                                            <h5 class="text-center">Se ha eliminado correctamente</h5>
+                                            <h4 class="text-center">Se ha eliminado correctamente</h4>
                                             </div>';
                                         } elseif (isset($_GET['eliminado']) && $_GET['eliminado'] === "n") {
                                             echo '<div class="alert alert-danger" role="alert">
-                                            <h5 class="text-center">Se ha producido un error de eliminacion en el borrador</h5>
+                                            <h4 class="text-center">Se ha producido un error de eliminacion en el borrador</h4>
                                             </div>';
                                         }
                                         ?>
@@ -3087,7 +3087,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                     <div class="col-md-6 col-12">
                     <div class="alert alert-danger" role="alert">
                     <h2 class="card-title text-center">ACCESO DENEGADO</h2>
-                    <h5 class="text-center">La asignatura seleccionada no ha sido creada correctamente. Contacta con el administrador</h5>
+                    <h4 class="text-center">La asignatura seleccionada no ha sido creada correctamente. Contacta con el administrador</h4>
                     </div>
                     </div>';
                 }
@@ -3096,7 +3096,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                 <div class="col-md-6 col-12">
                 <div class="alert alert-danger" role="alert">
                 <h2 class="card-title text-center">ACCESO DENEGADO</h2>
-                <h5 class="text-center">No tienes permisos sobre la asignatura introducida. Elige una en el Listado</h5>
+                <h4 class="text-center">No tienes permisos sobre la asignatura introducida. Elige una en el Listado</h4>
                 </div>
                 </div>';
             }
@@ -3105,7 +3105,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
             <div class="col-md-6 col-12">
             <div class="alert alert-danger" role="alert">
             <h2 class="card-title text-center">ACCESO DENEGADO</h2>
-            <h5 class="text-center">Inicia sesión con un usuario</h5>
+            <h4 class="text-center">Inicia sesión con un usuario Profesor</h4>
             </div>
             </div>';
         }

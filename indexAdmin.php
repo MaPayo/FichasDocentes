@@ -29,7 +29,7 @@ include('vendor/autoload.php');
         require_once('includes/Presentacion/Vistas/html/cabecera_admin.php');
         ?>
         <div class="row justify-content-center align-items-center">
-            <?php if (isset($_SESSION['login']) && $_SESSION['login'] === true) { ?>
+            <?php if (isset($_SESSION['login']) && $_SESSION['login'] === true && $_SESSION['admin'] == true) { ?>
                 <div class="col-md-6 col-12">
                     <div class="card">
                         <div class="card-header text-center">
@@ -50,7 +50,7 @@ include('vendor/autoload.php');
             <div class="col-md-6 col-12">
             <div class="alert alert-danger" role="alert">
             <h2 class="card-title text-center">ACCESO DENEGADO</h2>
-            <h5 class="text-center">Inicia sesión con un usuario que pueda acceder a este contenido</h5>
+            <h4 class="text-center">Inicia sesión con un usuario Administrador</h4>
             </div>
             </div>';
             }

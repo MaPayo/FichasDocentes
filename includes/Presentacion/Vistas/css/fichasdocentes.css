@@ -22,17 +22,17 @@ h1.web_title {
 	font-size: calc(1.425rem + 1.2vw);
 }
 h2{
-	font-size: calc(1.125rem + .7vw);
+	font-size: calc(1.1rem + 0.9vw);
 
 }
 
 h3{
-	font-size: calc(1rem + .9vh);
+	font-size: calc(1.3rem + 0.3vw);
 
 }
 
-h5{
-	font-size: calc(0.9rem + .6vw);
+h4{
+	font-size: calc(1.1rem + 0.4vw);
 }
 
 #cabecera {
