@@ -131,11 +131,14 @@ class FormAsignatura extends Form
                 $asignatura= new Asignatura($datos['idAsignatura'],$nombreAsignatura,$abreviatura, $curso, $semestre, $nombreAsignaturaI, $creditos, $coordinador, 'B',1,0);
                 $context = new Context(CREATE_ASIGNATURA, $asignatura);
                 $contextAsignatura = $controller->action($context);
-
-                if ($contextAsignatura->getEvent() === CREATE_ASIGNATURA_OK) {
-                    $erroresFormulario = "indexAcceso.php?IdGrado=" . $datos['idGrado'] . "&IdAsignatura=" . $datos['idAsignatura'] . "&anadido=y#nav-info-asignatura";
-                } elseif ($contextAsignatura->getEvent() === CREATE_ASIGNATURA_FAIL) {
+                $modAsignatura = new ModAsignatura(null, null, null, $datos['idAsignatura']);
+                $context = new Context(CREATE_MODASIGNATURA, $modAsignatura);
+                $contextMA = $controller->action($context);
+                if ($contextAsignatura->getEvent() === CREATE_ASIGNATURA_FAIL || $contextMA->getEvent()=== CREATE_MODASIGNATURA_FAIL) {
                     $erroresFormulario[] = "No se ha podido crear la Asignatura.";
+                } elseif ($contextAsignatura->getEvent() === CREATE_ASIGNATURA_OK ) {
+                    $erroresFormulario = "indexAcceso.php?IdGrado=" . $datos['idGrado'] . "&IdAsignatura=" . $datos['idAsignatura'] . "&anadido=y#nav-info-asignatura";
+                   
                 }
             }
         }

@@ -586,6 +586,15 @@ class FormSubida extends Form
                                             //throw new \PDOException($e->getMessage(), (int)$e->getCode());						
                                             error_log(date("Y-m-d H:i:s") . " No pudo crearse la asignatura " . $nombre_asignatura . "\r\n", 3, "log_errores.txt");
                                         } else {
+                                            //Creamos su Mod asignatura
+                                            $modAsignatura = new ModAsignatura(null, null, null, $codigo_asignatura);
+                                            $context = new Context(CREATE_MODASIGNATURA, $modAsignatura);
+                                            $contextMA = $controller->action($context);
+                                            if ($contextMA->getEvent() === CREATE_MODASIGNATURA_FAIL) {
+                                                $huboerror = true;
+                                                //throw new \PDOException($e->getMessage(), (int)$e->getCode());						
+                                                error_log(date("Y-m-d H:i:s") . " No pudo crearse el control de versiones de la asignatura " . $nombre_asignatura . "\r\n", 3, "log_errores.txt");
+                                            }
                                             //Actualizamos teorico, laboratorio y problemas. Si de por si la asignatura ya creada los tenia los actualizamos
                                             $context = new Context(CREATE_TEORICO, $teorico);
                                             $contextTeorico = $controller->action($context);
