@@ -44,84 +44,90 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
 
            if($contextConfiguacion->getEvent() === FIND_CONFIGURACION_OK && ($contextConfiguacion->getData()->getCitasBibliograficas() == 1 || $contextConfiguacion->getData()->getRecursosInternet() == 1)){
             ?>
-            <div class="col-md-6 col-12">
+            <div class="col-xl-6 col-lg-8 col-12">
               <div class="card">
                 <div class="card-header text-center">
-                  <h2>Crear/Modificar borrador bibliografía</h2>
-                </div>
-                <div class="card-body">
-                  <?php
-                  $access = new es\ucm\FormBibliografia('idBibliografia');
-                  $datosIniciales= array();
+                 <?php if($name == "IdAsignatura"){
+                  echo'<h2>Crear el borrador de la bibliografía</h2>';
+                 }
+                 else{
+                  echo '<h2>Modificar el borrador de la bibliografía</h2>';
+                }
+                ?>
+              </div>
+              <div class="card-body">
+                <?php
+                $access = new es\ucm\FormBibliografia('idBibliografia');
+                $datosIniciales= array();
 
-                  if(isset($_GET['IdAsignatura'])){
-                    $context = new es\ucm\Context(FIND_BIBLIOGRAFIA, htmlspecialchars(trim(strip_tags($_GET[$name]))));
-                  }else{
-                    $context = new es\ucm\Context(FIND_MODBIBLIOGRAFIA, htmlspecialchars(trim(strip_tags($_GET[$name]))));
+                if($name == "IdAsignatura"){
+                  $context = new es\ucm\Context(FIND_BIBLIOGRAFIA, htmlspecialchars(trim(strip_tags($_GET[$name]))));
+                }else{
+                  $context = new es\ucm\Context(FIND_MODBIBLIOGRAFIA, htmlspecialchars(trim(strip_tags($_GET[$name]))));
+                }
+                $contextBibliografia = $controller->action($context);
+
+                if($contextBibliografia->getEvent() === FIND_BIBLIOGRAFIA_OK || $contextBibliografia->getEvent() === FIND_MODBIBLIOGRAFIA_OK){
+                  if($contextBibliografia->getEvent() === FIND_MODBIBLIOGRAFIA_OK){
+                    $datosIniciales['idBibliografia']=$contextBibliografia->getData()->getIdBibliografia();
                   }
-                  $contextBibliografia = $controller->action($context);
-                  
-                  if($contextBibliografia->getEvent() === FIND_BIBLIOGRAFIA_OK || $contextBibliografia->getEvent() === FIND_MODBIBLIOGRAFIA_OK){
-                    if($contextBibliografia->getEvent() === FIND_MODBIBLIOGRAFIA_OK){
-                      $datosIniciales['idBibliografia']=$contextBibliografia->getData()->getIdBibliografia();
-                    }
-                    $datosIniciales['citasBibliograficas']=$contextBibliografia->getData()->getCitasBibliograficas();
-                    $datosIniciales['recursosInternet']=$contextBibliografia->getData()->getRecursosInternet();
-                    $datosIniciales['idAsignatura']=$_GET[$name];
-                    $datosIniciales['idGrado'] =$_GET['IdGrado'];
-                    $access->gestionaModificacion($datosIniciales);
-                  }
-                  else{
-                    $datosIniciales['idAsignatura']=$_GET[$name];
-                    $datosIniciales['idGrado'] =$_GET['IdGrado'];
-                    $access->gestionaModificacion($datosIniciales); 
-                  } 
-                  ?>
-                </div>
+                  $datosIniciales['citasBibliograficas']=$contextBibliografia->getData()->getCitasBibliograficas();
+                  $datosIniciales['recursosInternet']=$contextBibliografia->getData()->getRecursosInternet();
+                  $datosIniciales['idAsignatura']=$_GET[$name];
+                  $datosIniciales['idGrado'] =$_GET['IdGrado'];
+                  $access->gestionaModificacion($datosIniciales);
+                }
+                else{
+                  $datosIniciales['idAsignatura']=$_GET[$name];
+                  $datosIniciales['idGrado'] =$_GET['IdGrado'];
+                  $access->gestionaModificacion($datosIniciales); 
+                } 
+                ?>
               </div>
             </div>
-            <?php
-          }
-          else{
-           echo '
-           <div class="col-md-6 col-12">
-           <div class="alert alert-danger" role="alert">
-           <h2 class="card-title text-center">ACCESO DENEGADO</h2>
-           <h5 class="text-center">La asignatura seleccionada no ha sido creada correctamente o no contiene este apartado. Contacta con el administrador</h5>
-           </div>
-           </div>';
-         }
-       }
-       else{
+          </div>
+          <?php
+        }
+        else{
          echo '
          <div class="col-md-6 col-12">
          <div class="alert alert-danger" role="alert">
          <h2 class="card-title text-center">ACCESO DENEGADO</h2>
-         <h5 class="text-center">No tienes permisos suficientes para esta apartado</h5>
+         <h5 class="text-center">La asignatura seleccionada no ha sido creada correctamente o no contiene este apartado. Contacta con el administrador</h5>
          </div>
          </div>';
        }
      }
-     else {
-      echo '
-      <div class="col-md-6 col-12">
-      <div class="alert alert-danger" role="alert">
-      <h2 class="card-title text-center">ACCESO DENEGADO</h2>
-      <h5 class="text-center">No se ha podido obtener la asignatura</h5>
-      </div>
-      </div>';
-    }
-  }
-  else {
+     else{
+       echo '
+       <div class="col-md-6 col-12">
+       <div class="alert alert-danger" role="alert">
+       <h2 class="card-title text-center">ACCESO DENEGADO</h2>
+       <h5 class="text-center">No tienes permisos suficientes para esta apartado</h5>
+       </div>
+       </div>';
+     }
+   }
+   else {
     echo '
     <div class="col-md-6 col-12">
     <div class="alert alert-danger" role="alert">
     <h2 class="card-title text-center">ACCESO DENEGADO</h2>
-    <h5 class="text-center">Inicia sesión con un usuario que pueda acceder a este contenido</h5>
+    <h5 class="text-center">No se ha podido obtener la asignatura</h5>
     </div>
     </div>';
   }
-  ?>
+}
+else {
+  echo '
+  <div class="col-md-6 col-12">
+  <div class="alert alert-danger" role="alert">
+  <h2 class="card-title text-center">ACCESO DENEGADO</h2>
+  <h5 class="text-center">Inicia sesión con un usuario que pueda acceder a este contenido</h5>
+  </div>
+  </div>';
+}
+?>
 </div>
 </div>
 <!-- Optional JavaScript -->

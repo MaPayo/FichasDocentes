@@ -45,12 +45,12 @@ class FormHorarioClase extends Form
 		</div>
 
 		<div class="form-group">
-		<label for="horaInicio">Hora Inicio</label>
+		<label for="horaInicio">Hora de inicio</label>
 		<input type="time" class="form-control" id="horaInicio"  name="horaInicio" value="' . $horaInicio . '" />
 		</div>
 
 		<div class="form-group">
-		<label for="horaFin">Hora Fin</label>
+		<label for="horaFin">Hora fin</label>
 		<input type="time" class="form-control" id="horaFin"  name="horaFin" value="' . $horaFin . '" />
 		</div>
 
@@ -74,13 +74,13 @@ class FormHorarioClase extends Form
 		$aula = isset($datos['aula']) ? $datos['aula'] : null;
 		$aula = self::clean($aula);
 		if (empty($aula)) {
-			$erroresFormulario[] = "No has introducido el aula.";
+			$erroresFormulario[] = "No has introducido el aula";
 		}
 
 		$dia = isset($datos['dia']) ? $datos['dia'] : null;
 		$dia = self::clean($dia);
 		if (empty($dia)) {
-			$erroresFormulario[] = "No has introducido el dia.";
+			$erroresFormulario[] = "No has introducido el día";
 		}
 
 		$horaInicio = isset($datos['horaInicio']) ? $datos['horaInicio'] : null;
@@ -88,10 +88,10 @@ class FormHorarioClase extends Form
 		$horaFin = isset($datos['horaFin']) ? $datos['horaFin'] : null;
 		$horaFin = self::clean($horaFin);
 		if (empty($horaInicio) || empty($horaFin)) {
-			$erroresFormulario[] = "No has introducido alguna de las horas.";
+			$erroresFormulario[] = "No has introducido alguna de las horas";
 		}
 		else if ($horaFin <= $horaInicio) {
-			$erroresFormulario[] = "La hora de inicio es mayor o igual que la hora fin.";
+			$erroresFormulario[] = "La hora de inicio es mayor o igual que la hora fin";
 		}
 
 
@@ -112,7 +112,7 @@ class FormHorarioClase extends Form
 					$contextModAsignatura = $controller->action($context);
 					$erroresFormulario = "indexAcceso.php?IdGrado=" . $datos['idGrado'] . "&IdAsignatura=" . $datos['idAsignatura'] . "&modificado=y#nav-grupo-clase";
 				} elseif ($contextHorarioClase->getEvent() === UPDATE_MODHORARIO_CLASE_FAIL) {
-					$erroresFormulario[] = "No se ha podido modificar el horario.";
+					$erroresFormulario[] = "No se ha podido modificar el horario";
 				}
 			} elseif ($contextHorarioClase->getEvent() === FIND_MODHORARIO_CLASE_FAIL) {
 
@@ -125,7 +125,7 @@ class FormHorarioClase extends Form
 					$contextModAsignatura = $controller->action($context);
 					$erroresFormulario = "indexAcceso.php?IdGrado=" . $datos['idGrado'] . "&IdAsignatura=" . $datos['idAsignatura'] . "&anadido=y#nav-grupo-clase";
 				} elseif ($contextHorarioClase->getEvent() === CREATE_MODHORARIO_CLASE_FAIL) {
-					$erroresFormulario[] = "No se ha podido crear el horario.";
+					$erroresFormulario[] = "No se ha podido crear el horario";
 				}
 			}
 		}

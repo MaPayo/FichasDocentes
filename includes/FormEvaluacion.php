@@ -43,18 +43,18 @@ class FormEvaluacion extends Form
 
 			if ($contextConfiguacion->getData()->getRealizacionExamenes() == 1) {
 				$html .= '<div class="form-group">
-				<label for="pesoExamenes">Peso Examenes</label>
+				<label for="pesoExamenes">Peso de los exámenes (porcentaje)</label>
 				<input class="form-control" type="number" id="pesoExamenes" name="pesoExamenes" min="' . $contextVerifica->getData()->getMinimoExamenes() . '" max="' . $contextVerifica->getData()->getMaximoExamenes() . '" step="1" value="' . $pesoExamenes . '" required />
 				</div>
 
 				<div class="form-group">
-				<label for="realizacionExamenes">Realización Exámenes</label>
+				<label for="realizacionExamenes">Realización de los exámenes</label>
 				<textarea class="form-control" id="realizacionExamenes" rows="10" name="realizacionExamenes" required>' . $realizacionExamenes . '</textarea>
 				</div>';
 
 				if (!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())) {
 					$html .= '<div class="form-group">
-					<label for="realizacionExamenesI">Realización Exámenes (Inglés)</label>
+					<label for="realizacionExamenesI">Realización de los exámenes (Inglés)</label>
 					<textarea class="form-control" id="realizacionExamenesI" rows="10" name="realizacionExamenesI" required>' . $realizacionExamenesI . '</textarea>
 					</div>';
 				}
@@ -62,18 +62,18 @@ class FormEvaluacion extends Form
 
 			if ($contextConfiguacion->getData()->getRealizacionActividades() == 1) {
 				$html .= '<div class="form-group">
-				<label for="pesoActividades">Peso Actividades</label>
+				<label for="pesoActividades">Peso de las actividades (porcentaje)</label>
 				<input class="form-control" type="number" id="pesoActividades" name="pesoActividades" min="' . $contextVerifica->getData()->getMinimoActividades() . '" max="' . $contextVerifica->getData()->getMaximoActividades() . '" step="1" value="' . $pesoActividades . '" required />
 				</div>
 
 				<div class="form-group">
-				<label for="realizacionActividades">Realización Actividades</label>
+				<label for="realizacionActividades">Realización de las actividades</label>
 				<textarea class="form-control" id="realizacionActividades" rows="10" name="realizacionActividades" required>' . $realizacionActividades . '</textarea>
 				</div>';
 
 				if (!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())) {
 					$html .= '<div class="form-group">
-					<label for="realizacionActividadesI">Realización Actividades (Inglés)</label>
+					<label for="realizacionActividadesI">Realización de las actividades (Inglés)</label>
 					<textarea class="form-control" id="realizacionActividadesI" rows="10" name="realizacionActividadesI" required>' . $realizacionActividadesI . '</textarea>
 					</div>';
 				}
@@ -81,18 +81,18 @@ class FormEvaluacion extends Form
 
 			if ($contextConfiguacion->getData()->getRealizacionLaboratorio() == 1) {
 				$html .= '<div class="form-group">
-				<label for="pesoLaboratorio">Peso Laboratorio</label>
+				<label for="pesoLaboratorio">Peso del laboratorio (porcentaje)</label>
 				<input class="form-control" type="number" id="pesoLaboratorio" name="pesoLaboratorio" min="' . $contextVerifica->getData()->getMinimoLaboratorio() . '" max="' . $contextVerifica->getData()->getMaximoLaboratorio() . '" step="1" value="' . $pesoLaboratorio . '" required />
 				</div>
 
 				<div class="form-group">
-				<label for="realizacionLaboratorio">Realización Laboratorio</label>
+				<label for="realizacionLaboratorio">Realización del laboratorio</label>
 				<textarea class="form-control" id="realizacionLaboratorio" rows="10" name="realizacionLaboratorio" required>' . $realizacionLaboratorio . '</textarea>
 				</div>';
 
 				if (!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())) {
 					$html .= '<div class="form-group">
-					<label for="realizacionLaboratorioI">Realización Laboratorio (Inglés)</label>
+					<label for="realizacionLaboratorioI">Realización del laboratorio (Inglés)</label>
 					<textarea class="form-control" id="realizacionLaboratorioI" rows="10" name="realizacionLaboratorioI" required>' . $realizacionLaboratorioI . '</textarea>
 					</div>';
 				}
@@ -100,13 +100,13 @@ class FormEvaluacion extends Form
 
 			if ($contextConfiguacion->getData()->getCalificacionFinal() == 1) {
 				$html .= '<div class="form-group">
-				<label for="calificacionFinal">Calificación Final</label>
+				<label for="calificacionFinal">Calificación final</label>
 				<textarea class="form-control" id="calificacionFinal" rows=10 name="calificacionFinal" required>' . $calificacionFinal . '</textarea>
 				</div>';
 
 				if (!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())) {
 					$html .= '<div class="form-group">
-					<label for="calificacionFinalI">Calificación Final (Inglés)</label>
+					<label for="calificacionFinalI">Calificación final (Inglés)</label>
 					<textarea class="form-control" id="calificacionFinalI" rows="10" name="calificacionFinalI" required>' . $calificacionFinalI . '</textarea>
 					</div>';
 				}
@@ -154,18 +154,18 @@ class FormEvaluacion extends Form
 			if ($contextConfiguacion->getData()->getRealizacionExamenes() == 1) {
 				$realizacionExamenes = self::clean($realizacionExamenes);
 				if (empty($realizacionExamenes)) {
-					$erroresFormulario[] = "No has introducido la realización de exámenes.";
+					$erroresFormulario[] = "No has introducido la realización de los exámenes";
 				}
 
 				$pesoExamenes = self::clean($pesoExamenes);
 				if (empty($pesoExamenes)) {
-					$erroresFormulario[] = "No has introducido el peso exámenes.";
+					$erroresFormulario[] = "No has introducido el peso de los exámenes";
 				}
 
 				if (!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())) {
 					$realizacionExamenesI = self::clean($realizacionExamenesI);
 					if (empty($realizacionExamenesI)) {
-						$erroresFormulario[] = "No has introducido la realización de exámenes en inglés.";
+						$erroresFormulario[] = "No has introducido la realización de los exámenes en inglés";
 					}
 				}
 			}
@@ -174,18 +174,18 @@ class FormEvaluacion extends Form
 			if ($contextConfiguacion->getData()->getRealizacionActividades() == 1) {
 				$realizacionActividades = self::clean($realizacionActividades);
 				if (empty($realizacionActividades)) {
-					$erroresFormulario[] = "No has introducido la realización de actividades.";
+					$erroresFormulario[] = "No has introducido la realización de las actividades";
 				}
 
 				$pesoActividades = self::clean($pesoActividades);
 				if (empty($pesoActividades)) {
-					$erroresFormulario[] = "No has introducido el peso actividades.";
+					$erroresFormulario[] = "No has introducido el peso de las actividades";
 				}
 
 				if (!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())) {
 					$realizacionActividadesI = self::clean($realizacionActividadesI);
 					if (empty($realizacionActividadesI)) {
-						$erroresFormulario[] = "No has introducido la realización de actividades en inglés.";
+						$erroresFormulario[] = "No has introducido la realización de las actividades en inglés";
 					}
 				}
 			}
@@ -194,18 +194,18 @@ class FormEvaluacion extends Form
 			if ($contextConfiguacion->getData()->getRealizacionLaboratorio() == 1) {
 				$realizacionLaboratorio = self::clean($realizacionLaboratorio);
 				if (empty($realizacionLaboratorio)) {
-					$erroresFormulario[] = "No has introducido la realización de laboratorio.";
+					$erroresFormulario[] = "No has introducido la realización del laboratorio";
 				}
 
 				$pesoLaboratorio = self::clean($pesoLaboratorio);
 				if (empty($pesoLaboratorio)) {
-					$erroresFormulario[] = "No has introducido el peso laboratorio.";
+					$erroresFormulario[] = "No has introducido el peso del laboratorio";
 				}
 
 				if (!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())) {
 					$realizacionLaboratorioI = self::clean($realizacionLaboratorioI);
 					if (empty($realizacionLaboratorioI)) {
-						$erroresFormulario[] = "No has introducido la realizacioón de laboratorio en inglés.";
+						$erroresFormulario[] = "No has introducido la realizacioón del laboratorio en inglés";
 					}
 				}
 			}
@@ -213,13 +213,13 @@ class FormEvaluacion extends Form
 			if ($contextConfiguacion->getData()->getCalificacionFinal() == 1) {
 				$calificacionFinal = self::clean($calificacionFinal);
 				if (empty($calificacionFinal)) {
-					$erroresFormulario[] = "No has introducido la calificación final ordinaria.";
+					$erroresFormulario[] = "No has introducido la calificación final";
 				}
 
 
 				$calificacionFinalI = self::clean($calificacionFinalI);
 				if (empty($calificacionFinalI)) {
-					$erroresFormulario[] = "No has introducido la calificación final ordinaria en inglés.";
+					$erroresFormulario[] = "No has introducido la calificación final en inglés";
 				}
 			}
 
@@ -243,7 +243,7 @@ class FormEvaluacion extends Form
 					$contextModAsignatura = $controller->action($context);
 					$erroresFormulario = "indexAcceso.php?IdGrado=" .$datos['idGrado']. "&IdAsignatura=" . $datos['idAsignatura'] . "&modificado=y#nav-evaluacion";
 				} elseif ($contextEvaluacion->getEvent() === UPDATE_MODEVALUACION_FAIL) {
-					$erroresFormulario[] = "No se ha podido modificar la evaluación.";
+					$erroresFormulario[] = "No se ha podido modificar la evaluación";
 				}
 			} elseif ($contextEvaluacion->getEvent() === FIND_MODEVALUACION_FAIL) {
 
@@ -258,7 +258,7 @@ class FormEvaluacion extends Form
 					$contextModAsignatura = $controller->action($context);
 					$erroresFormulario = "indexAcceso.php?IdGrado=" .$datos['idGrado']. "&IdAsignatura=" . $datos['idAsignatura'] . "&anadido=y#nav-evaluacion";
 				} elseif ($contextEvaluacion->getEvent() === CREATE_MODEVALUACION_FAIL) {
-					$erroresFormulario[] = "No se ha podido crear la evaluación.";
+					$erroresFormulario[] = "No se ha podido crear la evaluación";
 				}
 			}
 		}

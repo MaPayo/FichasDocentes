@@ -37,7 +37,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
             $controller = new es\ucm\ControllerImplements();
            
             ?>
-            <div class="col-md-6 col-12">
+            <div class="col-xl-6 col-lg-8 col-12">
               <div class="card">
                 <div class="card-header text-center">
                   <h2>Crear/Modificar Laboratorio</h2>

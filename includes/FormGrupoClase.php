@@ -51,13 +51,13 @@ class FormGrupoClase extends Form
 		$letra = isset($datos['letra']) ? $datos['letra'] : null;
 		$letra = self::clean($letra);
 		if (empty($letra)) {
-			$erroresFormulario[] = "No has introducido la letra.";
+			$erroresFormulario[] = "No has introducido la letra";
 		}
 
 		$idioma = isset($datos['idioma']) ? $datos['idioma'] : null;
 		$idioma = self::clean($idioma);
 		if (empty($idioma)) {
-			$erroresFormulario[] = "No has introducido el idioma.";
+			$erroresFormulario[] = "No has introducido el idioma";
 		}
 
 
@@ -78,7 +78,7 @@ class FormGrupoClase extends Form
 					$contextModAsignatura = $controller->action($context);
 					$erroresFormulario = "indexAcceso.php?IdGrado=" . $datos['idGrado'] . "&IdAsignatura=" . $datos['idAsignatura'] . "&modificado=y#nav-grupo-clase";
 				} elseif ($contextGrupoClase->getEvent() === UPDATE_MODGRUPO_CLASE_FAIL) {
-					$erroresFormulario[] = "No se ha podido modificar el grupo.";
+					$erroresFormulario[] = "No se ha podido modificar el grupo";
 				}
 			} elseif ($contextGrupoClase->getEvent() === FIND_MODGRUPO_CLASE_FAIL) {
 
@@ -91,7 +91,7 @@ class FormGrupoClase extends Form
 					$contextModAsignatura = $controller->action($context);
 					$erroresFormulario = "indexAcceso.php?IdGrado=" . $datos['idGrado'] . "&IdAsignatura=" . $datos['idAsignatura'] . "&anadido=y#nav-grupo-clase";
 				} elseif ($contextGrupoClase->getEvent() === CREATE_MODGRUPO_CLASE_FAIL) {
-					$erroresFormulario[] = "No se ha podido crear el grupo.";
+					$erroresFormulario[] = "No se ha podido crear el grupo";
 				}
 			}
 		}

@@ -34,7 +34,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                     if($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET['IdAsignatura']]['coordinacion'] == true || (isset($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET['IdAsignatura']]['permisos']) && unserialize($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET['IdAsignatura']]['permisos'])->getPermisoGrupoclase() == true)){
 
                         ?>
-                        <div class="col-md-6 col-12">
+                        <div class="col-xl-6 col-lg-8 col-12">
                             <div class="card ">
                                 <div class="card-header text-center">
                                     <h2>Crear/Modificar borrador horario clase</h2>

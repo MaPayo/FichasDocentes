@@ -63,13 +63,13 @@ class FormMetodologia extends Form
 
 		$metodologia = self::clean($metodologia);
 		if (empty($metodologia)) {
-			$erroresFormulario[] = "No has introducido la metodología.";
+			$erroresFormulario[] = "No has introducido la metodología";
 		}
 
 		if(!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())){
 			$metodologiaI = self::clean($metodologiaI);
 			if (empty($metodologiaI)) {
-				$erroresFormulario[] = "No has introducido la metodología en inglés.";
+				$erroresFormulario[] = "No has introducido la metodología en inglés";
 			}
 		}
 
@@ -91,7 +91,7 @@ class FormMetodologia extends Form
 					$erroresFormulario = "indexAcceso.php?IdGrado=" .$datos['idGrado']. "&IdAsignatura=".$datos['idAsignatura']."&modificado=y#nav-metodologia";
 
 				} elseif ($contextMetodologia->getEvent() === UPDATE_MODMETODOLOGIA_FAIL){
-					$erroresFormulario[] = "No se ha podido modificar la metodología.";
+					$erroresFormulario[] = "No se ha podido modificar la metodología";
 				}
 			}elseif($contextMetodologia->getEvent() === FIND_MODMETODOLOGIA_FAIL){
 
@@ -106,7 +106,7 @@ class FormMetodologia extends Form
 					$erroresFormulario = "indexAcceso.php?IdGrado=" .$datos['idGrado']. "&IdAsignatura=".$datos['idAsignatura']."&anadido=y#nav-metodologia";
 					
 				} elseif ($contextMetodologia->getEvent() === CREATE_MODMETODOLOGIA_FAIL) {
-					$erroresFormulario[] = "No se ha podido crear la metodología.";
+					$erroresFormulario[] = "No se ha podido crear la metodología";
 				}
 			}
 		}

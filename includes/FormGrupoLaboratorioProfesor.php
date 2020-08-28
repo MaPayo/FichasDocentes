@@ -51,12 +51,12 @@ class FormGrupoLaboratorioProfesor extends Form
 		}
 		$html.='
 		<div class="form-group">
-			<label for="fecha">Fecha Inicio</label>
+			<label for="fecha">Fecha de inicio</label>
 			<input class="form-control" type="date" id="fechaInicio" name="fechaInicio" value="' . $fechaInicio. '" />
 		</div>
 
 		<div class="form-group">
-			<label for="fecha">Fecha Fin</label>
+			<label for="fecha">Fecha fin</label>
 			<input class="form-control" type="date" id="fechaFin" name="fechaFin" value="' . $fechaFin. '" />
 		</div>
 
@@ -80,7 +80,7 @@ class FormGrupoLaboratorioProfesor extends Form
 		$emailProfesor = isset($datos['emailProfesor']) ? $datos['emailProfesor'] : null;
 		$emailProfesor = self::clean($emailProfesor);
 		if (empty($emailProfesor)) {
-			$erroresFormulario[] = "No has introducido al profesor.";
+			$erroresFormulario[] = "No has introducido el profesor";
 		}
 
 		$fechaInicio = isset($datos['fechaInicio']) ? $datos['fechaInicio'] : null;
@@ -88,10 +88,10 @@ class FormGrupoLaboratorioProfesor extends Form
 		$fechaFin = isset($datos['fechaFin']) ? $datos['fechaFin'] : null;
 		$fechaFin = self::clean($fechaFin);
 		if (empty($fechaInicio) || empty($fechaFin)) {
-			$erroresFormulario[] = "No has introducido alguna de las fechas.";
+			$erroresFormulario[] = "No has introducido alguna de las fechas";
 		}
 		else if($fechaFin <= $fechaInicio){
-			$erroresFormulario[] = "La fecha de inicio es mayor o igual que la fecha fin.";
+			$erroresFormulario[] = "La fecha de inicio es mayor o igual que la fecha fin";
 		}
 
 		if (count($erroresFormulario) === 0) {
@@ -113,7 +113,7 @@ class FormGrupoLaboratorioProfesor extends Form
 					$contextModAsignatura = $controller->action($context);
 					$erroresFormulario = "indexAcceso.php?IdGrado=" . $datos['idGrado'] . "&IdAsignatura=" . $datos['idAsignatura'] . "&modificado=y#nav-grupo-laboratorio";
 				} elseif ($contextGrupoLaboratorio->getEvent() === UPDATE_MODGRUPO_LABORATORIO_PROFESOR_FAIL) {
-					$erroresFormulario[] = "No se ha podido modificar al profesor en el grupo.";
+					$erroresFormulario[] = "No se ha podido modificar al profesor en el grupo";
 				}
 
 			} elseif ($contextGrupoLaboratorio->getEvent() === FIND_MODGRUPO_LABORATORIO_PROFESOR_FAIL) {
@@ -127,7 +127,7 @@ class FormGrupoLaboratorioProfesor extends Form
 					$contextModAsignatura = $controller->action($context);
 					$erroresFormulario = "indexAcceso.php?IdGrado=" . $datos['idGrado'] . "&IdAsignatura=" . $datos['idAsignatura'] . "&anadido=y#nav-grupo-laboratorio";
 				} elseif ($contextGrupoLaboratorio->getEvent() === CREATE_MODGRUPO_LABORATORIO_PROFESOR_FAIL) {
-					$erroresFormulario[] = "No se ha podido registar al profesor en el grupo.";
+					$erroresFormulario[] = "No se ha podido registar al profesor en el grupo";
 				}
 			}
 		}

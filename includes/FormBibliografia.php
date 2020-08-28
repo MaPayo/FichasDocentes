@@ -29,13 +29,13 @@ class FormBibliografia extends Form
 			
 			if ($contextConfiguacion->getData()->getCitasBibliograficas() == 1) {
 				$html .= '<div class="form-group">
-				<label for="citasBibliograficas">Citas Bibliográficas</label>
+				<label for="citasBibliograficas">Citas bibliográficas</label>
 				<textarea class="form-control" id="citasBibliograficas" rows="10" name="citasBibliograficas" required>' . $citasBibliograficas . '</textarea>
 				</div>';
 			}
 			if ($contextConfiguacion->getData()->getRecursosInternet() == 1) {
 				$html .= '<div class="form-group">
-				<label for="recursosInternet">Recursos de Internet</label>
+				<label for="recursosInternet">Recursos en internet</label>
 				<textarea class="form-control" id="recursosInternet" rows="10" name="recursosInternet" required>' . $recursosInternet . '</textarea>
 				</div>';
 			}
@@ -69,14 +69,14 @@ class FormBibliografia extends Form
 			if($contextConfiguacion->getData()->getCitasBibliograficas() == 1){
 				$citasBibliograficas = self::clean($citasBibliograficas);
 				if (empty($citasBibliograficas)) {
-					$erroresFormulario[] = "No has introducido las citas bibliográficas.";
+					$erroresFormulario[] = "No has introducido las citas bibliográficas";
 				}
 			}
 
 			if ($contextConfiguacion->getData()->getRecursosInternet() == 1) {
 				$recursosInternet = self::clean($recursosInternet);
 				if (empty($recursosInternet)) {
-					$erroresFormulario[] = "No has introducido los recursos en internet.";
+					$erroresFormulario[] = "No has introducido los recursos en internet";
 				}
 			}
 		}
@@ -98,7 +98,7 @@ class FormBibliografia extends Form
 					$contextModAsignatura = $controller->action($context);
 					$erroresFormulario = "indexAcceso.php?IdGrado=" .$datos['idGrado']. "&IdAsignatura=" . $datos['idAsignatura'] . "&modificado=y#nav-bibliografia";
 				} elseif ($contextBibliografia->getEvent() === UPDATE_MODBIBLIOGRAFIA_FAIL) {
-					$erroresFormulario[] = "No se ha podido modificar la bibliografía.";
+					$erroresFormulario[] = "No se ha podido modificar la bibliografía";
 				}
 			} elseif ($contextBibliografia->getEvent() === FIND_MODBIBLIOGRAFIA_FAIL) {
 
@@ -113,7 +113,7 @@ class FormBibliografia extends Form
 					$contextModAsignatura = $controller->action($context);
 					$erroresFormulario = "indexAcceso.php?IdGrado=" .$datos['idGrado']. "&IdAsignatura=" . $datos['idAsignatura'] . "&anadido=y#nav-bibliografia";
 				} elseif ($contextBibliografia->getEvent() === CREATE_MODBIBLIOGRAFIA_FAIL) {
-					$erroresFormulario[] = "No se ha podido crear la bibliografia.";
+					$erroresFormulario[] = "No se ha podido crear la bibliografia";
 				}
 			}
 		}

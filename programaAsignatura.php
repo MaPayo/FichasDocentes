@@ -42,17 +42,23 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
 
                         if ($contextConfiguacion->getEvent() === FIND_CONFIGURACION_OK && ($contextConfiguacion->getData()->getConocimientosPrevios() == 1 || $contextConfiguacion->getData()->getBreveDescripcion() == 1 || $contextConfiguacion->getData()->getProgramaDetallado() == 1)) {
                             ?>
-                            <div class="col-md-6 col-12">
+                            <div class="col-xl-6 col-lg-8 col-12">
                                 <div class="card ">
                                     <div class="card-header text-center">
-                                        <h2>Crear/Modificar borrador programa asignatura</h2>
+                                        <?php if($name == "IdAsignatura"){
+                                             echo'<h2>Crear el borrador del programa</h2>';
+                                        }
+                                        else{
+                                            echo '<h2>Modificar el borrador del programa</h2>';
+                                        }
+                                       ?>
                                     </div>
                                     <div class="card-body">
                                         <?php
                                         $access = new es\ucm\FormProgramaAsignatura('idProgramaAsignatura');
                                         $datosIniciales = array();
 
-                                        if (isset($_GET['IdAsignatura'])) {
+                                        if ($name == "IdAsignatura") {
                                             $context = new es\ucm\Context(FIND_PROGRAMA_ASIGNATURA, htmlspecialchars(trim(strip_tags($_GET[$name]))));
                                         } else {
                                             $context = new es\ucm\Context(FIND_MODPROGRAMA_ASIGNATURA, htmlspecialchars(trim(strip_tags($_GET[$name]))));

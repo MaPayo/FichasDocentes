@@ -3,7 +3,7 @@
 namespace es\ucm;
 
 require_once('includes/Negocio/Asignatura/SAModAsignatura.php');
-require_once('includes/Negocio/Asignatura/Asignatura.php');
+require_once('includes/Negocio/Asignatura/ModAsignatura.php');
 require_once('includes/Integracion/Factorias/FactoriesDAOImplements.php');
 
 class SAModAsignaturaImplements implements SAModAsignatura

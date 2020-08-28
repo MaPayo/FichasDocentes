@@ -86,6 +86,9 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                     $context = new es\ucm\Context(FIND_ASIGNATURA, htmlspecialchars(trim(strip_tags($_GET['IdAsignatura']))));
                     $contextAsignatura = $controller->action($context);
 
+                    $context = new es\ucm\Context(FIND_MODASIGNATURA, htmlspecialchars(trim(strip_tags($_GET['IdAsignatura']))));
+                    $contextModAsignatura = $controller->action($context);
+
                     $context = new es\ucm\Context(FIND_MATERIA, $contextAsignatura->getData()->getIdMateria());
                     $contextMateria = $controller->action($context);
 
@@ -99,7 +102,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                     $contextConfiguracion = $controller->action($context);
 
 
-                    if ($contextAsignatura->getEvent() === FIND_ASIGNATURA_OK && $contextMateria->getEvent() === FIND_MATERIA_OK && $contextModulo->getEvent() === FIND_MODULO_OK && $contextGrado->getEvent() === FIND_GRADO_OK && $contextConfiguracion->getEvent() === FIND_CONFIGURACION_OK) {
+                    if ($contextAsignatura->getEvent() === FIND_ASIGNATURA_OK && $contextModAsignatura->getEvent() === FIND_MODASIGNATURA_OK && $contextMateria->getEvent() === FIND_MATERIA_OK && $contextModulo->getEvent() === FIND_MODULO_OK && $contextGrado->getEvent() === FIND_GRADO_OK && $contextConfiguracion->getEvent() === FIND_CONFIGURACION_OK) {
 
                         $context = new es\ucm\Context(FIND_TEORICO, htmlspecialchars(trim(strip_tags($_GET['IdAsignatura']))));
                         $contextTeorico = $controller->action($context);
@@ -167,7 +170,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                         if ($contextConfiguracion->getData()->getRealizacionExamenes() == false && $contextConfiguracion->getData()->getRealizacionActividades() == false && $contextConfiguracion->getData()->getRealizacionLaboratorio() == false && $contextConfiguracion->getData()->getCalificacionFinal() == false) $verEvaluacion = false;
                         
                         /*Configuración del php-diff */
-                       
+
                         $rendererName = 'Inline';
                         $rendererOptions = [
                             // how detailed the rendered HTML in-line diff is? (none, line, word, char)
@@ -300,132 +303,142 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                 </table>
                                             </div>
                                             <?php if($contextTeorico->getEvent() === FIND_TEORICO_OK && $contextLaboratorio->getEvent() === FIND_LABORATORIO_OK && $contextProblema->getEvent() === FIND_PROBLEMA_OK){?>
-                                            <div class="table-responsive text-center">
-                                                <table class="table table-sm table-bordered">
-                                                    <thead>
-                                                        <tr>
-                                                            <th scope="col"></th>
-                                                            <th scope="col">Total</th>
-                                                            <th scope="col">Teóricos</th>
-                                                            <th scope="col">Problemas</th>
-                                                            <th scope="col">Laboratorio</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <th scope="row">Créditos (ECTS):</th>
-                                                            <td><?php echo $contextAsignatura->getData()->getCreditos(); ?></td>
-                                                            <td><?php echo $contextTeorico->getData()->getCreditos(); ?></td>
-                                                            <td><?php echo $contextProblema->getData()->getCreditos(); ?></td>
-                                                            <td><?php echo $contextLaboratorio->getData()->getCreditos(); ?></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">Presencialidad:</th>
-                                                            <td>-</td>
-                                                            <td><?php echo $contextTeorico->getData()->getPresencial(); ?>%</td>
-                                                            <td><?php echo $contextProblema->getData()->getPresencial(); ?>%</td>
-                                                            <td><?php echo $contextLaboratorio->getData()->getPresencial(); ?>%</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">Horas totales:</th>
-                                                            <td>-</td>
-                                                            <td><?php echo ($contextTeorico->getData()->getCreditos() * $contextGrado->getData()->getHorasEcts() * $contextTeorico->getData()->getPresencial()) / 100; ?></td>
-                                                            <td><?php echo ($contextProblema->getData()->getCreditos() * $contextGrado->getData()->getHorasEcts() * $contextProblema->getData()->getPresencial()) / 100; ?></td>
-                                                            <td><?php echo ($contextLaboratorio->getData()->getCreditos() * $contextGrado->getData()->getHorasEcts() * $contextLaboratorio->getData()->getPresencial()) / 100; ?></td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
+                                                <div class="table-responsive text-center">
+                                                    <table class="table table-sm table-bordered">
+                                                        <thead>
+                                                            <tr>
+                                                                <th scope="col"></th>
+                                                                <th scope="col">Total</th>
+                                                                <th scope="col">Teóricos</th>
+                                                                <th scope="col">Problemas</th>
+                                                                <th scope="col">Laboratorio</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <th scope="row">Créditos (ECTS):</th>
+                                                                <td><?php echo $contextAsignatura->getData()->getCreditos(); ?></td>
+                                                                <td><?php echo $contextTeorico->getData()->getCreditos(); ?></td>
+                                                                <td><?php echo $contextProblema->getData()->getCreditos(); ?></td>
+                                                                <td><?php echo $contextLaboratorio->getData()->getCreditos(); ?></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th scope="row">Presencialidad:</th>
+                                                                <td>-</td>
+                                                                <td><?php echo $contextTeorico->getData()->getPresencial(); ?>%</td>
+                                                                <td><?php echo $contextProblema->getData()->getPresencial(); ?>%</td>
+                                                                <td><?php echo $contextLaboratorio->getData()->getPresencial(); ?>%</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th scope="row">Horas totales:</th>
+                                                                <td>-</td>
+                                                                <td><?php echo ($contextTeorico->getData()->getCreditos() * $contextGrado->getData()->getHorasEcts() * $contextTeorico->getData()->getPresencial()) / 100; ?></td>
+                                                                <td><?php echo ($contextProblema->getData()->getCreditos() * $contextGrado->getData()->getHorasEcts() * $contextProblema->getData()->getPresencial()) / 100; ?></td>
+                                                                <td><?php echo ($contextLaboratorio->getData()->getCreditos() * $contextGrado->getData()->getHorasEcts() * $contextLaboratorio->getData()->getPresencial()) / 100; ?></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
                                             <?php } else{
                                                 echo'<div class="alert alert-danger" role="alert">
-                                                        <h4 class= "text-center">NO EXISTE LA INFORMACIÓN DE TEÓRICO, PROBLEMA O LABORATORIO</h4>
-                                                    </div>';
+                                                <h4 class= "text-center">NO EXISTE LA INFORMACIÓN DE TEÓRICO, PROBLEMA O LABORATORIO</h4>
+                                                </div>';
                                             }
                                             if($CoordinadorAsignatura->getEvent() === FIND_PROFESOR_OK){?>
-                                            <div class="table-responsive text-center">
-                                                <table class="table table-sm table-bordered">
-                                                    <thead>
-                                                        <tr>
-                                                            <th scope="col" colspan="6">Coordinador/a</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <th scope="col">Nombre:</th>
-                                                            <td><?php echo $CoordinadorAsignatura->getData()->getNombre(); ?></td>
-                                                            <th scope="col" colspan="2">Departamento:</th>
-                                                            <td colspan="2"><?php echo $CoordinadorAsignatura->getData()->getDepartamento(); ?></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="col">Facultad:</th>
-                                                            <td><?php echo $CoordinadorAsignatura->getData()->getFacultad(); ?></td>
-                                                            <th scope="col">Despacho:</th>
-                                                            <td><?php echo $CoordinadorAsignatura->getData()->getDespacho(); ?></td>
-                                                            <th scope="col">Email:</th>
-                                                            <td><?php echo $CoordinadorAsignatura->getData()->getEmail(); ?></td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        <?php } else{
-                                            echo'<div class="alert alert-danger" role="alert">
-                                              <h4 class= "text-center">NO EXISTE LA INFORMACIÓN DEL COORDINADOR DE ASIGNATURA</h4>
+                                                <div class="table-responsive text-center">
+                                                    <table class="table table-sm table-bordered">
+                                                        <thead>
+                                                            <tr>
+                                                                <th scope="col" colspan="6">Coordinador/a</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <th scope="col">Nombre:</th>
+                                                                <td><?php echo $CoordinadorAsignatura->getData()->getNombre(); ?></td>
+                                                                <th scope="col" colspan="2">Departamento:</th>
+                                                                <td colspan="2"><?php echo $CoordinadorAsignatura->getData()->getDepartamento(); ?></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th scope="col">Facultad:</th>
+                                                                <td><?php echo $CoordinadorAsignatura->getData()->getFacultad(); ?></td>
+                                                                <th scope="col">Despacho:</th>
+                                                                <td><?php echo $CoordinadorAsignatura->getData()->getDespacho(); ?></td>
+                                                                <th scope="col">Email:</th>
+                                                                <td><?php echo $CoordinadorAsignatura->getData()->getEmail(); ?></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            <?php } else{
+                                                echo'<div class="alert alert-danger" role="alert">
+                                                <h4 class= "text-center">NO EXISTE LA INFORMACIÓN DEL COORDINADOR DE ASIGNATURA</h4>
                                                 </div>';
-                                        }
-                                        ?>
-                                        </div>
+                                            }
+                                            if (!empty($contextModAsignatura->getData()->getFechaMod()) && !empty($contextModAsignatura->getData()->getEmailMod())){
+                                             $context = new es\ucm\Context(FIND_PROFESOR, $contextModAsignatura->getData()->getEmailMod());
+                                             $contextModificacion = $controller->action($context);
+                                             $date = strtotime($contextModAsignatura->getData()->getFechaMod());
+                                             echo'<div class="alert alert-secondary" role="alert">
+                                             <h4 class= "text-center">ÚLTIMA MODICIACIÓN: '.date("d-m-Y, H:i",$date).'</h4>
+                                             <h4 class= "text-center">AUTOR: '.$contextModificacion->getData()->getNombre().'</h4>
+                                             </div>';
+                                         }
+                                         ?>
 
-                                        <?php if ($verPrograma) { ?>
-                                            <!--Pestaña programa asignatura-->
-                                            <div class="tab-pane fade" id="nav-prog-asignatura" role="tabpanel" aria-labelledby="nav-prog-asignatura-tab">
-                                                <div class="accordion" id="accordionProgram">
+                                     </div>
 
-                                                    <!--Pestaña conocimientos previos -->
-                                                    <?php if ($contextConfiguracion->getData()->getConocimientosPrevios() == true) { ?>
-                                                        <div class="card">
-                                                            <div class="card-header" id="headingOne">
-                                                                <h2 class="mb-0">
-                                                                    <?php if ($contextComparacion->getData()['conocimientosPrevios']) { ?>
-                                                                        <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                                            Conocimientos previos
-                                                                        </button>
-                                                                    <?php } else {
-                                                                        
-                                                                        ?><button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                                            Conocimientos previos
-                                                                        </button>
-                                                                    <?php } ?>
-                                                                </h2>
-                                                            </div>
+                                     <?php if ($verPrograma) { ?>
+                                        <!--Pestaña programa asignatura-->
+                                        <div class="tab-pane fade" id="nav-prog-asignatura" role="tabpanel" aria-labelledby="nav-prog-asignatura-tab">
+                                            <div class="accordion" id="accordionProgram">
 
-                                                            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionProgram">
-                                                                <div class="card-body">
+                                                <!--Pestaña conocimientos previos -->
+                                                <?php if ($contextConfiguracion->getData()->getConocimientosPrevios() == true) { ?>
+                                                    <div class="card">
+                                                        <div class="card-header" id="headingOne">
+                                                            <h2 class="mb-0">
+                                                                <?php if ($contextComparacion->getData()['conocimientosPrevios']) { ?>
+                                                                    <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                                        Conocimientos previos
+                                                                    </button>
+                                                                <?php } else {
+
+                                                                    ?><button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                                        Conocimientos previos
+                                                                    </button>
+                                                                <?php } ?>
+                                                            </h2>
+                                                        </div>
+
+                                                        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionProgram">
+                                                            <div class="card-body">
                                                                 <div class="card">
-                                                                        <div class="card-body">
-                                                                            <h4 class="card-title">Consolidado</h4>
-                                                                            <p class="card-text">
-                                                                                <?php
-                                                                                if ($contextPrograma->getEvent() === FIND_PROGRAMA_ASIGNATURA_OK) {
-                                                                                    echo $contextPrograma->getData()->getConocimientosPrevios();
-                                                                                }
-                                                                                ?>
-                                                                            </p>
-                                                                        </div>
+                                                                    <div class="card-body">
+                                                                        <h4 class="card-title">Consolidado</h4>
+                                                                        <p class="card-text">
+                                                                            <?php
+                                                                            if ($contextPrograma->getEvent() === FIND_PROGRAMA_ASIGNATURA_OK) {
+                                                                                echo $contextPrograma->getData()->getConocimientosPrevios();
+                                                                            }
+                                                                            ?>
+                                                                        </p>
                                                                     </div>
-                                                                    <?php if ($contextComparacion->getData()['conocimientosPrevios']){?>
+                                                                </div>
+                                                                <?php if ($contextComparacion->getData()['conocimientosPrevios']){?>
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h4 class="card-title">Comparación</h4>
                                                                             <p class="card-text">
                                                                                 <?php
-                                                                                    $differ = new Differ(explode("\n", $contextPrograma->getData()->getConocimientosPrevios()), explode("\n", $contextModPrograma->getData()->getConocimientosPrevios()), $differOptions);
+                                                                                $differ = new Differ(explode("\n", $contextPrograma->getData()->getConocimientosPrevios()), explode("\n", $contextModPrograma->getData()->getConocimientosPrevios()), $differOptions);
                                                                                     $renderer = RendererFactory::make($rendererName, $rendererOptions); // or your own renderer object
                                                                                     $result = $renderer->render($differ);
                                                                                     echo $result;
-                                                                                ?>
-                                                                            </p>
+                                                                                    ?>
+                                                                                </p>
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
                                                                     <?php }   ?>
                                                                 </div>
                                                             </div>
@@ -450,32 +463,32 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                 </div>
                                                                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionProgram">
                                                                     <div class="card-body">
-                                                                    <div class="card">
-                                                                        <div class="card-body">
-                                                                            <h4 class="card-title">Consolidado</h4>
-                                                                            <p class="card-text">
-                                                                                <?php
-                                                                                if ($contextPrograma->getEvent() === FIND_PROGRAMA_ASIGNATURA_OK) {
-                                                                                    echo $contextPrograma->getData()->getConocimientosPreviosI();
-                                                                                }
-                                                                                ?>
-                                                                            </p>
+                                                                        <div class="card">
+                                                                            <div class="card-body">
+                                                                                <h4 class="card-title">Consolidado</h4>
+                                                                                <p class="card-text">
+                                                                                    <?php
+                                                                                    if ($contextPrograma->getEvent() === FIND_PROGRAMA_ASIGNATURA_OK) {
+                                                                                        echo $contextPrograma->getData()->getConocimientosPreviosI();
+                                                                                    }
+                                                                                    ?>
+                                                                                </p>
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
-                                                                    <?php if ($contextComparacion->getData()['conocimientosPreviosI']){?>
-                                                                    <div class="card">
-                                                                        <div class="card-body">
-                                                                            <h4 class="card-title">Comparación</h4>
-                                                                            <p class="card-text">
-                                                                                <?php
-                                                                                    $differ = new Differ(explode("\n", $contextPrograma->getData()->getConocimientosPreviosI()), explode("\n", $contextModPrograma->getData()->getConocimientosPreviosI()), $differOptions);
+                                                                        <?php if ($contextComparacion->getData()['conocimientosPreviosI']){?>
+                                                                            <div class="card">
+                                                                                <div class="card-body">
+                                                                                    <h4 class="card-title">Comparación</h4>
+                                                                                    <p class="card-text">
+                                                                                        <?php
+                                                                                        $differ = new Differ(explode("\n", $contextPrograma->getData()->getConocimientosPreviosI()), explode("\n", $contextModPrograma->getData()->getConocimientosPreviosI()), $differOptions);
                                                                                     $renderer = RendererFactory::make($rendererName, $rendererOptions); // or your own renderer object
                                                                                     $result = $renderer->render($differ);
                                                                                     echo $result;
-                                                                                ?>
-                                                                            </p>
+                                                                                    ?>
+                                                                                </p>
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
                                                                     <?php }   ?>
                                                                 </div>
                                                             </div>
@@ -503,82 +516,82 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                         </div>
                                                         <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionProgram">
                                                             <div class="card-body"><div class="card">
+                                                                <div class="card-body">
+                                                                    <h4 class="card-title">Consolidado</h4>
+                                                                    <p class="card-text">
+                                                                        <?php
+                                                                        if ($contextPrograma->getEvent() === FIND_PROGRAMA_ASIGNATURA_OK) {
+                                                                            echo $contextPrograma->getData()->getBreveDescripcion();
+                                                                        }
+                                                                        ?>
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                            <?php if ($contextComparacion->getData()['BreveDescripcion']){?>
+                                                                <div class="card">
                                                                     <div class="card-body">
-                                                                        <h4 class="card-title">Consolidado</h4>
+                                                                        <h4 class="card-title">Comparación</h4>
                                                                         <p class="card-text">
                                                                             <?php
-                                                                            if ($contextPrograma->getEvent() === FIND_PROGRAMA_ASIGNATURA_OK) {
-                                                                                echo $contextPrograma->getData()->getBreveDescripcion();
-                                                                            }
-                                                                            ?>
-                                                                        </p>
-                                                                    </div>
-                                                                </div>
-                                                            <?php if ($contextComparacion->getData()['BreveDescripcion']){?>
-                                                                    <div class="card">
-                                                                        <div class="card-body">
-                                                                            <h4 class="card-title">Comparación</h4>
-                                                                            <p class="card-text">
-                                                                                <?php
-                                                                                    $differ = new Differ(explode("\n", $contextPrograma->getData()->getBreveDescripcion()), explode("\n", $contextModPrograma->getData()->getBreveDescripcion()), $differOptions);
+                                                                            $differ = new Differ(explode("\n", $contextPrograma->getData()->getBreveDescripcion()), explode("\n", $contextModPrograma->getData()->getBreveDescripcion()), $differOptions);
                                                                                     $renderer = RendererFactory::make($rendererName, $rendererOptions); // or your own renderer object
                                                                                     $result = $renderer->render($differ);
                                                                                     echo $result;
                                                                                     
-                                                                                ?>
-                                                                            </p>
+                                                                                    ?>
+                                                                                </p>
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
                                                                     <?php }   ?>                                                                
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
 
-                                                    <!--Pestaña breve descripcion (ingles) -->
-                                                    <?php if (!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())) { ?>
-                                                        <div class="card">
-                                                            <div class="card-header" id="headingFour">
-                                                                <h2 class="mb-0">
-                                                                    <?php if ($contextComparacion->getData()['BreveDescripcionI']) { ?>
-                                                                        <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                                                                            Breve descripción (Inglés)
-                                                                        </button>
-                                                                    <?php } else { ?>
-                                                                        <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                                                                            Breve descripción (Inglés)
-                                                                        </button>
-                                                                    <?php } ?>
-                                                                </h2>
-                                                            </div>
-                                                            <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionProgram">
-                                                                <div class="card-body">
-                                                                    <div class="card">
-                                                                        <div class="card-body">
-                                                                            <h4 class="card-title">Consolidado</h4>
-                                                                            <p class="card-text">
-                                                                                <?php
-                                                                                if ($contextPrograma->getEvent() === FIND_PROGRAMA_ASIGNATURA_OK) {
-                                                                                    echo $contextPrograma->getData()->getBreveDescripcionI();
-                                                                                }
-                                                                                ?>
-                                                                            </p>
+                                                        <!--Pestaña breve descripcion (ingles) -->
+                                                        <?php if (!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())) { ?>
+                                                            <div class="card">
+                                                                <div class="card-header" id="headingFour">
+                                                                    <h2 class="mb-0">
+                                                                        <?php if ($contextComparacion->getData()['BreveDescripcionI']) { ?>
+                                                                            <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                                                                Breve descripción (Inglés)
+                                                                            </button>
+                                                                        <?php } else { ?>
+                                                                            <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                                                                Breve descripción (Inglés)
+                                                                            </button>
+                                                                        <?php } ?>
+                                                                    </h2>
+                                                                </div>
+                                                                <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionProgram">
+                                                                    <div class="card-body">
+                                                                        <div class="card">
+                                                                            <div class="card-body">
+                                                                                <h4 class="card-title">Consolidado</h4>
+                                                                                <p class="card-text">
+                                                                                    <?php
+                                                                                    if ($contextPrograma->getEvent() === FIND_PROGRAMA_ASIGNATURA_OK) {
+                                                                                        echo $contextPrograma->getData()->getBreveDescripcionI();
+                                                                                    }
+                                                                                    ?>
+                                                                                </p>
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
-                                                                    <?php if ($contextComparacion->getData()['BreveDescripcionI']){?>
-                                                                    <div class="card">
-                                                                        <div class="card-body">
-                                                                            <h4 class="card-title">Comparación</h4>
-                                                                            <p class="card-text">
-                                                                                <?php
-                                                                                    $differ = new Differ(explode("\n", $contextPrograma->getData()->getBreveDescripcionI()), explode("\n", $contextModPrograma->getData()->getBreveDescripcionI()), $differOptions);
+                                                                        <?php if ($contextComparacion->getData()['BreveDescripcionI']){?>
+                                                                            <div class="card">
+                                                                                <div class="card-body">
+                                                                                    <h4 class="card-title">Comparación</h4>
+                                                                                    <p class="card-text">
+                                                                                        <?php
+                                                                                        $differ = new Differ(explode("\n", $contextPrograma->getData()->getBreveDescripcionI()), explode("\n", $contextModPrograma->getData()->getBreveDescripcionI()), $differOptions);
                                                                                     $renderer = RendererFactory::make($rendererName, $rendererOptions); // or your own renderer object
                                                                                     $result = $renderer->render($differ);
                                                                                     echo $result;
                                                                                     
-                                                                                ?>
-                                                                            </p>
+                                                                                    ?>
+                                                                                </p>
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
                                                                     <?php }   ?>  
                                                                 </div>
                                                             </div>
@@ -622,65 +635,65 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                             <h4 class="card-title">Comparación</h4>
                                                                             <p class="card-text">
                                                                                 <?php
-                                                                                    $differ = new Differ(explode("\n", $contextPrograma->getData()->getProgramaTeorico()), explode("\n", $contextModPrograma->getData()->getProgramaTeorico()), $differOptions);
+                                                                                $differ = new Differ(explode("\n", $contextPrograma->getData()->getProgramaTeorico()), explode("\n", $contextModPrograma->getData()->getProgramaTeorico()), $differOptions);
                                                                                     $renderer = RendererFactory::make($rendererName, $rendererOptions); // or your own renderer object
                                                                                     $result = $renderer->render($differ);
                                                                                     echo $result;
                                                                                     
-                                                                                ?>
-                                                                            </p>
+                                                                                    ?>
+                                                                                </p>
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
                                                                     <?php }   ?>  
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
 
-                                                    <!--Pestaña programa Teorico (ingles) -->
-                                                    <?php if (!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())) { ?>
-                                                        <div class="card">
-                                                            <div class="card-header" id="headingSix">
-                                                                <h2 class="mb-0">
-                                                                    <?php if ($contextComparacion->getData()['ProgramaTeoricoI']) { ?>
-                                                                        <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseSix" aria-expanded="true" aria-controls="collapseSix">
-                                                                            Programa teórico (Inglés)
-                                                                        </button>
-                                                                    <?php } else { ?>
-                                                                        <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
-                                                                            Programa teórico (Inglés)
-                                                                        </button>
-                                                                    <?php } ?>
-                                                                </h2>
-                                                            </div>
-                                                            <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionProgram">
-                                                                <div class="card-body">
-                                                                    <div class="card">
-                                                                        <div class="card-body">
-                                                                            <h4 class="card-title">Consolidado</h4>
-                                                                            <p class="card-text">
-                                                                                <?php
-                                                                                if ($contextPrograma->getEvent() === FIND_PROGRAMA_ASIGNATURA_OK) {
-                                                                                    echo $contextPrograma->getData()->getProgramaTeoricoI();
-                                                                                }
-                                                                                ?>
-                                                                            </p>
+                                                        <!--Pestaña programa Teorico (ingles) -->
+                                                        <?php if (!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())) { ?>
+                                                            <div class="card">
+                                                                <div class="card-header" id="headingSix">
+                                                                    <h2 class="mb-0">
+                                                                        <?php if ($contextComparacion->getData()['ProgramaTeoricoI']) { ?>
+                                                                            <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseSix" aria-expanded="true" aria-controls="collapseSix">
+                                                                                Programa teórico (Inglés)
+                                                                            </button>
+                                                                        <?php } else { ?>
+                                                                            <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                                                                                Programa teórico (Inglés)
+                                                                            </button>
+                                                                        <?php } ?>
+                                                                    </h2>
+                                                                </div>
+                                                                <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionProgram">
+                                                                    <div class="card-body">
+                                                                        <div class="card">
+                                                                            <div class="card-body">
+                                                                                <h4 class="card-title">Consolidado</h4>
+                                                                                <p class="card-text">
+                                                                                    <?php
+                                                                                    if ($contextPrograma->getEvent() === FIND_PROGRAMA_ASIGNATURA_OK) {
+                                                                                        echo $contextPrograma->getData()->getProgramaTeoricoI();
+                                                                                    }
+                                                                                    ?>
+                                                                                </p>
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
-                                                                    <?php if ($contextComparacion->getData()['ProgramaTeoricoI']){?>
-                                                                    <div class="card">
-                                                                        <div class="card-body">
-                                                                            <h4 class="card-title">Comparación</h4>
-                                                                            <p class="card-text">
-                                                                                <?php
-                                                                                    $differ = new Differ(explode("\n", $contextPrograma->getData()->getProgramaTeoricoI()), explode("\n", $contextModPrograma->getData()->getProgramaTeoricoI()), $differOptions);
+                                                                        <?php if ($contextComparacion->getData()['ProgramaTeoricoI']){?>
+                                                                            <div class="card">
+                                                                                <div class="card-body">
+                                                                                    <h4 class="card-title">Comparación</h4>
+                                                                                    <p class="card-text">
+                                                                                        <?php
+                                                                                        $differ = new Differ(explode("\n", $contextPrograma->getData()->getProgramaTeoricoI()), explode("\n", $contextModPrograma->getData()->getProgramaTeoricoI()), $differOptions);
                                                                                     $renderer = RendererFactory::make($rendererName, $rendererOptions); // or your own renderer object
                                                                                     $result = $renderer->render($differ);
                                                                                     echo $result;
                                                                                     
-                                                                                ?>
-                                                                            </p>
+                                                                                    ?>
+                                                                                </p>
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
                                                                     <?php }   ?>  
                                                                 </div>
                                                             </div>
@@ -724,65 +737,65 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                             <h4 class="card-title">Comparación</h4>
                                                                             <p class="card-text">
                                                                                 <?php
-                                                                                    $differ = new Differ(explode("\n", $contextPrograma->getData()->getProgramaSeminarios()), explode("\n", $contextModPrograma->getData()->getProgramaSeminarios()), $differOptions);
+                                                                                $differ = new Differ(explode("\n", $contextPrograma->getData()->getProgramaSeminarios()), explode("\n", $contextModPrograma->getData()->getProgramaSeminarios()), $differOptions);
                                                                                     $renderer = RendererFactory::make($rendererName, $rendererOptions); // or your own renderer object
                                                                                     $result = $renderer->render($differ);
                                                                                     echo $result;
                                                                                     
-                                                                                ?>
-                                                                            </p>
+                                                                                    ?>
+                                                                                </p>
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
                                                                     <?php }   ?> 
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
 
-                                                    <!--Pestaña programa seminarios (ingles) -->
-                                                    <?php if (!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())) { ?>
-                                                        <div class="card">
-                                                            <div class="card-header" id="headingEight">
-                                                                <h2 class="mb-0">
-                                                                    <?php if ($contextComparacion->getData()['ProgramaSeminariosI']) { ?>
-                                                                        <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseEight" aria-expanded="true" aria-controls="collapseEight">
-                                                                            Programa seminarios (Inglés)
-                                                                        </button>
-                                                                    <?php } else { ?>
-                                                                        <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
-                                                                            Programa seminarios (Inglés)
-                                                                        </button>
-                                                                    <?php } ?>
-                                                                </h2>
-                                                            </div>
-                                                            <div id="collapseEight" class="collapse" aria-labelledby="headingEight" data-parent="#accordionProgram">
-                                                                <div class="card-body">
-                                                                    <div class="card">
-                                                                        <div class="card-body">
-                                                                            <h4 class="card-title">Consolidado</h4>
-                                                                            <p class="card-text">
-                                                                                <?php
-                                                                                if ($contextPrograma->getEvent() === FIND_PROGRAMA_ASIGNATURA_OK) {
-                                                                                    echo $contextPrograma->getData()->getProgramaSeminariosI();
-                                                                                }
-                                                                                ?>
-                                                                            </p>
+                                                        <!--Pestaña programa seminarios (ingles) -->
+                                                        <?php if (!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())) { ?>
+                                                            <div class="card">
+                                                                <div class="card-header" id="headingEight">
+                                                                    <h2 class="mb-0">
+                                                                        <?php if ($contextComparacion->getData()['ProgramaSeminariosI']) { ?>
+                                                                            <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseEight" aria-expanded="true" aria-controls="collapseEight">
+                                                                                Programa seminarios (Inglés)
+                                                                            </button>
+                                                                        <?php } else { ?>
+                                                                            <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
+                                                                                Programa seminarios (Inglés)
+                                                                            </button>
+                                                                        <?php } ?>
+                                                                    </h2>
+                                                                </div>
+                                                                <div id="collapseEight" class="collapse" aria-labelledby="headingEight" data-parent="#accordionProgram">
+                                                                    <div class="card-body">
+                                                                        <div class="card">
+                                                                            <div class="card-body">
+                                                                                <h4 class="card-title">Consolidado</h4>
+                                                                                <p class="card-text">
+                                                                                    <?php
+                                                                                    if ($contextPrograma->getEvent() === FIND_PROGRAMA_ASIGNATURA_OK) {
+                                                                                        echo $contextPrograma->getData()->getProgramaSeminariosI();
+                                                                                    }
+                                                                                    ?>
+                                                                                </p>
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
-                                                                    <?php if ($contextComparacion->getData()['ProgramaSeminariosI']){?>
-                                                                    <div class="card">
-                                                                        <div class="card-body">
-                                                                            <h4 class="card-title">Comparación</h4>
-                                                                            <p class="card-text">
-                                                                                <?php
-                                                                                    $differ = new Differ(explode("\n", $contextPrograma->getData()->getProgramaSeminariosI()), explode("\n", $contextModPrograma->getData()->getProgramaSeminariosI()), $differOptions);
+                                                                        <?php if ($contextComparacion->getData()['ProgramaSeminariosI']){?>
+                                                                            <div class="card">
+                                                                                <div class="card-body">
+                                                                                    <h4 class="card-title">Comparación</h4>
+                                                                                    <p class="card-text">
+                                                                                        <?php
+                                                                                        $differ = new Differ(explode("\n", $contextPrograma->getData()->getProgramaSeminariosI()), explode("\n", $contextModPrograma->getData()->getProgramaSeminariosI()), $differOptions);
                                                                                     $renderer = RendererFactory::make($rendererName, $rendererOptions); // or your own renderer object
                                                                                     $result = $renderer->render($differ);
                                                                                     echo $result;
                                                                                     
-                                                                                ?>
-                                                                            </p>
+                                                                                    ?>
+                                                                                </p>
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
                                                                     <?php }   ?> 
                                                                 </div>
                                                             </div>
@@ -825,67 +838,67 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                             <h4 class="card-title">Comparación</h4>
                                                                             <p class="card-text">
                                                                                 <?php
-                                                                                    $differ = new Differ(explode("\n", $contextPrograma->getData()->getProgramaLaboratorio()), explode("\n", $contextModPrograma->getData()->getProgramaLaboratorio()), $differOptions);
+                                                                                $differ = new Differ(explode("\n", $contextPrograma->getData()->getProgramaLaboratorio()), explode("\n", $contextModPrograma->getData()->getProgramaLaboratorio()), $differOptions);
                                                                                     $renderer = RendererFactory::make($rendererName, $rendererOptions); // or your own renderer object
                                                                                     $result = $renderer->render($differ);
                                                                                     echo $result;
                                                                                     
-                                                                                ?>
-                                                                            </p>
+                                                                                    ?>
+                                                                                </p>
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
                                                                     <?php }   ?> 
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
 
-                                                    <!--Pestaña programa Laboratorio (ingles) -->
-                                                    <?php if (!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())) { ?>
-                                                        <div class="card">
-                                                            <div class="card-header" id="headingTen">
-                                                                <h2 class="mb-0">
-                                                                    <?php if ($contextComparacion->getData()['ProgramaLaboratorioI']) { ?>
-                                                                        <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseTen" aria-expanded="true" aria-controls="collapseTen">
-                                                                            Programa laboratorio (Inglés)
-                                                                        </button>
-                                                                    <?php } else { ?>
-                                                                        <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseTen" aria-expanded="false" aria-controls="collapseTen">
-                                                                            Programa laboratorio (Inglés)
-                                                                        </button>
-                                                                    <?php } ?>
-                                                                </h2>
-                                                            </div>
-                                                            <div id="collapseTen" class="collapse" aria-labelledby="headingTen" data-parent="#accordionProgram">
-                                                                <div class="card-body">
-                                                                    <div class="card">
-                                                                        <div class="card-body">
-                                                                            <h4 class="card-title">Consolidado</h4>
-                                                                            <p class="card-text">
-                                                                                <?php
-                                                                                if ($contextPrograma->getEvent() === FIND_PROGRAMA_ASIGNATURA_OK) {
-                                                                                    echo $contextPrograma->getData()->getProgramaLaboratorioI();
-                                                                                }
-                                                                                ?>
-                                                                            </p>
-                                                                        </div>
-                                                                    </div>
+                                                        <!--Pestaña programa Laboratorio (ingles) -->
+                                                        <?php if (!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())) { ?>
+                                                            <div class="card">
+                                                                <div class="card-header" id="headingTen">
+                                                                    <h2 class="mb-0">
+                                                                        <?php if ($contextComparacion->getData()['ProgramaLaboratorioI']) { ?>
+                                                                            <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseTen" aria-expanded="true" aria-controls="collapseTen">
+                                                                                Programa laboratorio (Inglés)
+                                                                            </button>
+                                                                        <?php } else { ?>
+                                                                            <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseTen" aria-expanded="false" aria-controls="collapseTen">
+                                                                                Programa laboratorio (Inglés)
+                                                                            </button>
+                                                                        <?php } ?>
+                                                                    </h2>
                                                                 </div>
-                                                                <?php if ($contextComparacion->getData()['ProgramaLaboratorioI']){?>
-                                                                    <div class="card">
-                                                                        <div class="card-body">
-                                                                            <h4 class="card-title">Comparación</h4>
-                                                                            <p class="card-text">
-                                                                                <?php
-                                                                                    $differ = new Differ(explode("\n", $contextPrograma->getData()->getProgramaLaboratorioI()), explode("\n", $contextModPrograma->getData()->getProgramaLaboratorioI()), $differOptions);
+                                                                <div id="collapseTen" class="collapse" aria-labelledby="headingTen" data-parent="#accordionProgram">
+                                                                    <div class="card-body">
+                                                                        <div class="card">
+                                                                            <div class="card-body">
+                                                                                <h4 class="card-title">Consolidado</h4>
+                                                                                <p class="card-text">
+                                                                                    <?php
+                                                                                    if ($contextPrograma->getEvent() === FIND_PROGRAMA_ASIGNATURA_OK) {
+                                                                                        echo $contextPrograma->getData()->getProgramaLaboratorioI();
+                                                                                    }
+                                                                                    ?>
+                                                                                </p>
+                                                                            </div>
+                                                                        </div>
+                                                                        <?php if ($contextComparacion->getData()['ProgramaLaboratorioI']){?>
+                                                                            <div class="card">
+                                                                                <div class="card-body">
+                                                                                    <h4 class="card-title">Comparación</h4>
+                                                                                    <p class="card-text">
+                                                                                        <?php
+                                                                                        $differ = new Differ(explode("\n", $contextPrograma->getData()->getProgramaLaboratorioI()), explode("\n", $contextModPrograma->getData()->getProgramaLaboratorioI()), $differOptions);
                                                                                     $renderer = RendererFactory::make($rendererName, $rendererOptions); // or your own renderer object
                                                                                     $result = $renderer->render($differ);
                                                                                     echo $result;
                                                                                     
-                                                                                ?>
-                                                                            </p>
+                                                                                    ?>
+                                                                                </p>
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
                                                                     <?php }   ?> 
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     <?php } ?>
@@ -959,65 +972,65 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                             <h4 class="card-title">Comparación</h4>
                                                                             <p class="card-text">
                                                                                 <?php
-                                                                                    $differ = new Differ(explode("\n", $contextCompetencias->getData()->getGenerales()), explode("\n", $contextModCompetencias->getData()->getGenerales()), $differOptions);
+                                                                                $differ = new Differ(explode("\n", $contextCompetencias->getData()->getGenerales()), explode("\n", $contextModCompetencias->getData()->getGenerales()), $differOptions);
                                                                                     $renderer = RendererFactory::make($rendererName, $rendererOptions); // or your own renderer object
                                                                                     $result = $renderer->render($differ);
                                                                                     echo $result;
                                                                                     
-                                                                                ?>
-                                                                            </p>
+                                                                                    ?>
+                                                                                </p>
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
                                                                     <?php }   ?> 
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
 
-                                                    <!-- Pestaña generales (inglés) -->
-                                                    <?php if (!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())) { ?>
-                                                        <div class="card">
-                                                            <div class="card-header" id="headingTwo">
-                                                                <h2 class="mb-0">
-                                                                    <?php if ($contextComparacion->getData()['ComGeneralesI']) { ?>
-                                                                        <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                                                                            Generales (Inglés)
-                                                                        </button>
-                                                                    <?php } else { ?>
-                                                                        <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                                                                            Generales (Inglés)
-                                                                        </button>
-                                                                    <?php } ?>
-                                                                </h2>
-                                                            </div>
-                                                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionCompetencia">
-                                                                <div class="card-body">
-                                                                    <div class="card">
-                                                                        <div class="card-body">
-                                                                            <h4 class="card-title">Consolidado</h4>
-                                                                            <p class="card-text">
-                                                                                <?php
-                                                                                if ($contextCompetencias->getEvent() === FIND_COMPETENCIAS_ASIGNATURA_OK) {
-                                                                                    echo $contextCompetencias->getData()->getGeneralesI();
-                                                                                }
-                                                                                ?>
-                                                                            </p>
+                                                        <!-- Pestaña generales (inglés) -->
+                                                        <?php if (!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())) { ?>
+                                                            <div class="card">
+                                                                <div class="card-header" id="headingTwo">
+                                                                    <h2 class="mb-0">
+                                                                        <?php if ($contextComparacion->getData()['ComGeneralesI']) { ?>
+                                                                            <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                                                                                Generales (Inglés)
+                                                                            </button>
+                                                                        <?php } else { ?>
+                                                                            <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                                                                                Generales (Inglés)
+                                                                            </button>
+                                                                        <?php } ?>
+                                                                    </h2>
+                                                                </div>
+                                                                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionCompetencia">
+                                                                    <div class="card-body">
+                                                                        <div class="card">
+                                                                            <div class="card-body">
+                                                                                <h4 class="card-title">Consolidado</h4>
+                                                                                <p class="card-text">
+                                                                                    <?php
+                                                                                    if ($contextCompetencias->getEvent() === FIND_COMPETENCIAS_ASIGNATURA_OK) {
+                                                                                        echo $contextCompetencias->getData()->getGeneralesI();
+                                                                                    }
+                                                                                    ?>
+                                                                                </p>
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
-                                                                    <?php if ($contextComparacion->getData()['ComGeneralesI']){?>
-                                                                    <div class="card">
-                                                                        <div class="card-body">
-                                                                            <h4 class="card-title">Comparación</h4>
-                                                                            <p class="card-text">
-                                                                                <?php
-                                                                                    $differ = new Differ(explode("\n", $contextCompetencias->getData()->getGeneralesI()), explode("\n", $contextModCompetencias->getData()->getGeneralesI()), $differOptions);
+                                                                        <?php if ($contextComparacion->getData()['ComGeneralesI']){?>
+                                                                            <div class="card">
+                                                                                <div class="card-body">
+                                                                                    <h4 class="card-title">Comparación</h4>
+                                                                                    <p class="card-text">
+                                                                                        <?php
+                                                                                        $differ = new Differ(explode("\n", $contextCompetencias->getData()->getGeneralesI()), explode("\n", $contextModCompetencias->getData()->getGeneralesI()), $differOptions);
                                                                                     $renderer = RendererFactory::make($rendererName, $rendererOptions); // or your own renderer object
                                                                                     $result = $renderer->render($differ);
                                                                                     echo $result;
                                                                                     
-                                                                                ?>
-                                                                            </p>
+                                                                                    ?>
+                                                                                </p>
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
                                                                     <?php }   ?> 
                                                                 </div>
                                                             </div>
@@ -1061,65 +1074,65 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                             <h4 class="card-title">Comparación</h4>
                                                                             <p class="card-text">
                                                                                 <?php
-                                                                                    $differ = new Differ(explode("\n", $contextCompetencias->getData()->getEspecificas()), explode("\n", $contextModCompetencias->getData()->getEspecificas()), $differOptions);
+                                                                                $differ = new Differ(explode("\n", $contextCompetencias->getData()->getEspecificas()), explode("\n", $contextModCompetencias->getData()->getEspecificas()), $differOptions);
                                                                                     $renderer = RendererFactory::make($rendererName, $rendererOptions); // or your own renderer object
                                                                                     $result = $renderer->render($differ);
                                                                                     echo $result;
                                                                                     
-                                                                                ?>
-                                                                            </p>
+                                                                                    ?>
+                                                                                </p>
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
                                                                     <?php }   ?> 
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
 
-                                                    <!-- Pestaña especificas (inglés) -->
-                                                    <?php if (!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())) { ?>
-                                                        <div class="card">
-                                                            <div class="card-header" id="headingFour">
-                                                                <h2 class="mb-0">
-                                                                    <?php if ($contextComparacion->getData()['ComEspecificasI'] ) { ?>
-                                                                        <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
-                                                                            Específicas (Inglés)
-                                                                        </button>
-                                                                    <?php } else { ?>
-                                                                        <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                                                                            Específicas (Inglés)
-                                                                        </button>
-                                                                    <?php } ?>
-                                                                </h2>
-                                                            </div>
-                                                            <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionCompetencia">
-                                                                <div class="card-body">
-                                                                    <div class="card">
-                                                                        <div class="card-body">
-                                                                            <h4 class="card-title">Consolidado</h4>
-                                                                            <p class="card-text">
-                                                                                <?php
-                                                                                if ($contextCompetencias->getEvent() === FIND_COMPETENCIAS_ASIGNATURA_OK) {
-                                                                                    echo $contextCompetencias->getData()->getEspecificasI();
-                                                                                }
-                                                                                ?>
-                                                                            </p>
+                                                        <!-- Pestaña especificas (inglés) -->
+                                                        <?php if (!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())) { ?>
+                                                            <div class="card">
+                                                                <div class="card-header" id="headingFour">
+                                                                    <h2 class="mb-0">
+                                                                        <?php if ($contextComparacion->getData()['ComEspecificasI'] ) { ?>
+                                                                            <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+                                                                                Específicas (Inglés)
+                                                                            </button>
+                                                                        <?php } else { ?>
+                                                                            <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                                                                Específicas (Inglés)
+                                                                            </button>
+                                                                        <?php } ?>
+                                                                    </h2>
+                                                                </div>
+                                                                <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionCompetencia">
+                                                                    <div class="card-body">
+                                                                        <div class="card">
+                                                                            <div class="card-body">
+                                                                                <h4 class="card-title">Consolidado</h4>
+                                                                                <p class="card-text">
+                                                                                    <?php
+                                                                                    if ($contextCompetencias->getEvent() === FIND_COMPETENCIAS_ASIGNATURA_OK) {
+                                                                                        echo $contextCompetencias->getData()->getEspecificasI();
+                                                                                    }
+                                                                                    ?>
+                                                                                </p>
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
-                                                                    <?php if ($contextComparacion->getData()['ComEspecificasI']){?>
-                                                                    <div class="card">
-                                                                        <div class="card-body">
-                                                                            <h4 class="card-title">Comparación</h4>
-                                                                            <p class="card-text">
-                                                                                <?php
-                                                                                    $differ = new Differ(explode("\n", $contextCompetencias->getData()->getEspecificasI()), explode("\n", $contextModCompetencias->getData()->getEspecificasI()), $differOptions);
+                                                                        <?php if ($contextComparacion->getData()['ComEspecificasI']){?>
+                                                                            <div class="card">
+                                                                                <div class="card-body">
+                                                                                    <h4 class="card-title">Comparación</h4>
+                                                                                    <p class="card-text">
+                                                                                        <?php
+                                                                                        $differ = new Differ(explode("\n", $contextCompetencias->getData()->getEspecificasI()), explode("\n", $contextModCompetencias->getData()->getEspecificasI()), $differOptions);
                                                                                     $renderer = RendererFactory::make($rendererName, $rendererOptions); // or your own renderer object
                                                                                     $result = $renderer->render($differ);
                                                                                     echo $result;
                                                                                     
-                                                                                ?>
-                                                                            </p>
+                                                                                    ?>
+                                                                                </p>
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
                                                                     <?php }   ?> 
                                                                 </div>
                                                             </div>
@@ -1163,65 +1176,65 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                             <h4 class="card-title">Comparación</h4>
                                                                             <p class="card-text">
                                                                                 <?php
-                                                                                    $differ = new Differ(explode("\n", $contextCompetencias->getData()->getBasicas()), explode("\n", $contextModCompetencias->getData()->getBasicas()), $differOptions);
+                                                                                $differ = new Differ(explode("\n", $contextCompetencias->getData()->getBasicasYTransversales()), explode("\n", $contextModCompetencias->getData()->getBasicasYTransversales()), $differOptions);
                                                                                     $renderer = RendererFactory::make($rendererName, $rendererOptions); // or your own renderer object
                                                                                     $result = $renderer->render($differ);
                                                                                     echo $result;
                                                                                     
-                                                                                ?>
-                                                                            </p>
+                                                                                    ?>
+                                                                                </p>
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
                                                                     <?php }   ?> 
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
 
-                                                    <!-- Pestaña basicas y transversales (inglés) -->
-                                                    <?php if (!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())) { ?>
-                                                        <div class="card">
-                                                            <div class="card-header" id="headingSix">
-                                                                <h2 class="mb-0">
-                                                                    <?php if ($contextComparacion->getData()['ComBasicasI']) { ?>
-                                                                        <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseSix" aria-expanded="true" aria-controls="collapseSix">
-                                                                            Básicas y transversales(Inglés)
-                                                                        </button>
-                                                                    <?php } else { ?>
-                                                                        <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
-                                                                            Básicas y transversales (Inglés)
-                                                                        </button>
-                                                                    <?php } ?>
-                                                                </h2>
-                                                            </div>
-                                                            <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionCompetencia">
-                                                                <div class="card-body">
-                                                                    <div class="card">
-                                                                        <div class="card-body">
-                                                                            <h4 class="card-title">Consolidado</h4>
-                                                                            <p class="card-text">
-                                                                                <?php
-                                                                                if ($contextCompetencias->getEvent() === FIND_COMPETENCIAS_ASIGNATURA_OK) {
-                                                                                    echo $contextCompetencias->getData()->getBasicasYTransversalesI();
-                                                                                }
-                                                                                ?>
-                                                                            </p>
+                                                        <!-- Pestaña basicas y transversales (inglés) -->
+                                                        <?php if (!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())) { ?>
+                                                            <div class="card">
+                                                                <div class="card-header" id="headingSix">
+                                                                    <h2 class="mb-0">
+                                                                        <?php if ($contextComparacion->getData()['ComBasicasI']) { ?>
+                                                                            <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseSix" aria-expanded="true" aria-controls="collapseSix">
+                                                                                Básicas y transversales (Inglés)
+                                                                            </button>
+                                                                        <?php } else { ?>
+                                                                            <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                                                                                Básicas y transversales (Inglés)
+                                                                            </button>
+                                                                        <?php } ?>
+                                                                    </h2>
+                                                                </div>
+                                                                <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionCompetencia">
+                                                                    <div class="card-body">
+                                                                        <div class="card">
+                                                                            <div class="card-body">
+                                                                                <h4 class="card-title">Consolidado</h4>
+                                                                                <p class="card-text">
+                                                                                    <?php
+                                                                                    if ($contextCompetencias->getEvent() === FIND_COMPETENCIAS_ASIGNATURA_OK) {
+                                                                                        echo $contextCompetencias->getData()->getBasicasYTransversalesI();
+                                                                                    }
+                                                                                    ?>
+                                                                                </p>
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
-                                                                    <?php if ($contextComparacion->getData()['ComBasicasI']){?>
-                                                                    <div class="card">
-                                                                        <div class="card-body">
-                                                                            <h4 class="card-title">Comparación</h4>
-                                                                            <p class="card-text">
-                                                                                <?php
-                                                                                    $differ = new Differ(explode("\n", $contextCompetencias->getData()->getBasicasI()), explode("\n", $contextModCompetencias->getData()->getBasicasI()), $differOptions);
+                                                                        <?php if ($contextComparacion->getData()['ComBasicasI']){?>
+                                                                            <div class="card">
+                                                                                <div class="card-body">
+                                                                                    <h4 class="card-title">Comparación</h4>
+                                                                                    <p class="card-text">
+                                                                                        <?php
+                                                                                        $differ = new Differ(explode("\n", $contextCompetencias->getData()->getBasicasYTransversalesI()), explode("\n", $contextModCompetencias->getData()->getBasicasYTransversalesI()), $differOptions);
                                                                                     $renderer = RendererFactory::make($rendererName, $rendererOptions); // or your own renderer object
                                                                                     $result = $renderer->render($differ);
                                                                                     echo $result;
                                                                                     
-                                                                                ?>
-                                                                            </p>
+                                                                                    ?>
+                                                                                </p>
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
                                                                     <?php }   ?> 
                                                                 </div>
                                                             </div>
@@ -1236,12 +1249,12 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                             <h2 class="mb-0">
                                                                 <?php if ($contextComparacion->getData()['ResultadosAprendizaje']) { ?>
                                                                     <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="true" aria-controls="collapseSeven">
-                                                                        Resultados de aprendizaje
+                                                                        Resultados del aprendizaje
                                                                     </button>
                                                                 <?php } else { ?>
 
                                                                     <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
-                                                                        Resultados de aprendizaje
+                                                                        Resultados del aprendizaje
                                                                     </button>
                                                                 <?php } ?>
                                                             </h2>
@@ -1266,82 +1279,66 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                             <h4 class="card-title">Comparación</h4>
                                                                             <p class="card-text">
                                                                                 <?php
-                                                                                    $differ = new Differ(explode("\n", $contextCompetencias->getData()->getResultadosAprendizaje()), explode("\n", $contextModCompetencias->getData()->getResultadosAprendizaje()), $differOptions);
+                                                                                $differ = new Differ(explode("\n", $contextCompetencias->getData()->getResultadosAprendizaje()), explode("\n", $contextModCompetencias->getData()->getResultadosAprendizaje()), $differOptions);
                                                                                     $renderer = RendererFactory::make($rendererName, $rendererOptions); // or your own renderer object
                                                                                     $result = $renderer->render($differ);
                                                                                     echo $result;
                                                                                     
-                                                                                ?>
-                                                                            </p>
+                                                                                    ?>
+                                                                                </p>
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
                                                                     <?php }   ?> 
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
 
-                                                    <!-- Pestaña resultados de aprendizaje (inglés) -->
-                                                    <?php if (!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())) { ?>
-                                                        <div class="card">
-                                                            <div class="card-header" id="headingEight">
-                                                                <h2 class="mb-0">
-                                                                    <?php if ($contextComparacion->getData()['ResultadosAprendizajeI']) { ?>
-                                                                        <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseEight" aria-expanded="true" aria-controls="collapseEight">
-                                                                            Resultados de aprendizaje (Inglés)
-                                                                        </button>
-                                                                    <?php } else { ?>
+                                                        <!-- Pestaña resultados de aprendizaje (inglés) -->
+                                                        <?php if (!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())) { ?>
+                                                            <div class="card">
+                                                                <div class="card-header" id="headingEight">
+                                                                    <h2 class="mb-0">
+                                                                        <?php if ($contextComparacion->getData()['ResultadosAprendizajeI']) { ?>
+                                                                            <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseEight" aria-expanded="true" aria-controls="collapseEight">
+                                                                                Resultados del aprendizaje (Inglés)
+                                                                            </button>
+                                                                        <?php } else { ?>
 
-                                                                        <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
-                                                                            Resultados de aprendizaje (Inglés)
-                                                                        </button>
-                                                                    <?php } ?>
-                                                                </h2>
-                                                            </div>
-                                                            <div id="collapseEight" class="collapse" aria-labelledby="headingEight" data-parent="#accordionCompetencia">
-                                                                <div class="card-body">
-                                                                    <div class="card">
-                                                                        <div class="card-body">
-                                                                            <h4 class="card-title">Borrador</h4>
-                                                                            <p class="card-text">
-                                                                                <?php
-                                                                                if ($contextModCompetencias->getEvent() === FIND_MODCOMPETENCIAS_ASIGNATURA_OK) {
-                                                                                    if ($contextComparacion->getData()['ResultadosAprendizajeI'])
-                                                                                        echo '<b style="font-size: 18px">' . $contextModCompetencias->getData()->getResultadosAprendizajeI() . '</b>';
-                                                                                    else
-                                                                                        echo $contextModCompetencias->getData()->getResultadosAprendizajeI();
-                                                                                }
-                                                                                ?>
-                                                                            </p>
+                                                                            <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
+                                                                                Resultados del aprendizaje (Inglés)
+                                                                            </button>
+                                                                        <?php } ?>
+                                                                    </h2>
+                                                                </div>
+                                                                <div id="collapseEight" class="collapse" aria-labelledby="headingEight" data-parent="#accordionCompetencia">
+                                                                    <div class="card-body">
+                                                                        <div class="card">
+                                                                            <div class="card-body">
+                                                                                <h4 class="card-title">Consolidado</h4>
+                                                                                <p class="card-text">
+                                                                                    <?php
+                                                                                    if ($contextCompetencias->getEvent() === FIND_COMPETENCIAS_ASIGNATURA_OK) {
+                                                                                        echo $contextCompetencias->getData()->getResultadosAprendizajeI();
+                                                                                    }
+                                                                                    ?>
+                                                                                </p>
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
-
-                                                                    <div class="card">
-                                                                        <div class="card-body">
-                                                                            <h4 class="card-title">Consolidado</h4>
-                                                                            <p class="card-text">
-                                                                                <?php
-                                                                                if ($contextCompetencias->getEvent() === FIND_COMPETENCIAS_ASIGNATURA_OK) {
-                                                                                    echo $contextCompetencias->getData()->getResultadosAprendizajeI();
-                                                                                }
-                                                                                ?>
-                                                                            </p>
-                                                                        </div>
-                                                                    </div>
-                                                                    <?php if ($contextComparacion->getData()['ResultadosAprendizajeI']){?>
-                                                                    <div class="card">
-                                                                        <div class="card-body">
-                                                                            <h4 class="card-title">Comparación</h4>
-                                                                            <p class="card-text">
-                                                                                <?php
-                                                                                    $differ = new Differ(explode("\n", $contextCompetencias->getData()->getResultadosAprendizajeI()), explode("\n", $contextModCompetencias->getData()->getResultadosAprendizajeI()), $differOptions);
+                                                                        <?php if ($contextComparacion->getData()['ResultadosAprendizajeI']){?>
+                                                                            <div class="card">
+                                                                                <div class="card-body">
+                                                                                    <h4 class="card-title">Comparación</h4>
+                                                                                    <p class="card-text">
+                                                                                        <?php
+                                                                                        $differ = new Differ(explode("\n", $contextCompetencias->getData()->getResultadosAprendizajeI()), explode("\n", $contextModCompetencias->getData()->getResultadosAprendizajeI()), $differOptions);
                                                                                     $renderer = RendererFactory::make($rendererName, $rendererOptions); // or your own renderer object
                                                                                     $result = $renderer->render($differ);
                                                                                     echo $result;
                                                                                     
-                                                                                ?>
-                                                                            </p>
+                                                                                    ?>
+                                                                                </p>
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
                                                                     <?php }   ?>
                                                                 </div>
                                                             </div>
@@ -1411,586 +1408,433 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                 </div>
                                                             </div>
                                                             <?php if ($contextComparacion->getData()['Metodologia']){?>
-                                                                    <div class="card">
-                                                                        <div class="card-body">
-                                                                            <h4 class="card-title">Comparación</h4>
-                                                                            <p class="card-text">
-                                                                                <?php
-                                                                                    $differ = new Differ(explode("\n", $contextMetodologia->getData()->getMetodologia()), explode("\n", $contextModMetodologia->getData()->getMetodologia()), $differOptions);
-                                                                                    $renderer = RendererFactory::make($rendererName, $rendererOptions); // or your own renderer object
-                                                                                    $result = $renderer->render($differ);
-                                                                                    echo $result;
-                                                                                    
-                                                                                ?>
-                                                                            </p>
-                                                                        </div>
-                                                                    </div>
-                                                                    <?php }   ?>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <!--Pestaña metodologia (inglés) -->
-                                                <?php if (!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())) { ?>
-                                                    <div class="card">
-                                                        <div class="card-header" id="headingTwo">
-                                                            <h2 class="mb-0">
-                                                                <?php if ($contextComparacion->getData()['MetodologiaI']) { ?>
-                                                                    <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                                                                        Metodología (Inglés)
-                                                                    </button>
-                                                                <?php } else { ?>
-                                                                    <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                                                                        Metodología (Inglés)
-                                                                    </button>
-                                                                <?php } ?>
-                                                            </h2>
-                                                        </div>
-                                                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionMetodologia">
-                                                            <div class="card-body">
                                                                 <div class="card">
                                                                     <div class="card-body">
-                                                                        <h4 class="card-title">Consolidado</h4>
+                                                                        <h4 class="card-title">Comparación</h4>
                                                                         <p class="card-text">
                                                                             <?php
-                                                                            if ($contextMetodologia->getEvent() === FIND_METODOLOGIA_OK) {
-                                                                                echo $contextMetodologia->getData()->getMetodologiaI();
-                                                                            }
-                                                                            ?>
-                                                                        </p>
-                                                                    </div>
-                                                                </div>
-                                                                <?php if ($contextComparacion->getData()['MetodologiaI']){?>
-                                                                    <div class="card">
-                                                                        <div class="card-body">
-                                                                            <h4 class="card-title">Comparación</h4>
-                                                                            <p class="card-text">
-                                                                                <?php
-                                                                                    $differ = new Differ(explode("\n", $contextMetodologia->getData()->getMetodologiaI()), explode("\n", $contextModMetodologia->getData()->getMetodologiaI()), $differOptions);
+                                                                            $differ = new Differ(explode("\n", $contextMetodologia->getData()->getMetodologia()), explode("\n", $contextModMetodologia->getData()->getMetodologia()), $differOptions);
                                                                                     $renderer = RendererFactory::make($rendererName, $rendererOptions); // or your own renderer object
                                                                                     $result = $renderer->render($differ);
                                                                                     echo $result;
                                                                                     
-                                                                                ?>
-                                                                            </p>
+                                                                                    ?>
+                                                                                </p>
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
                                                                     <?php }   ?>
+                                                                </div>
                                                             </div>
                                                         </div>
+
+                                                        <!--Pestaña metodologia (inglés) -->
+                                                        <?php if (!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())) { ?>
+                                                            <div class="card">
+                                                                <div class="card-header" id="headingTwo">
+                                                                    <h2 class="mb-0">
+                                                                        <?php if ($contextComparacion->getData()['MetodologiaI']) { ?>
+                                                                            <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                                                                                Metodología (Inglés)
+                                                                            </button>
+                                                                        <?php } else { ?>
+                                                                            <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                                                                                Metodología (Inglés)
+                                                                            </button>
+                                                                        <?php } ?>
+                                                                    </h2>
+                                                                </div>
+                                                                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionMetodologia">
+                                                                    <div class="card-body">
+                                                                        <div class="card">
+                                                                            <div class="card-body">
+                                                                                <h4 class="card-title">Consolidado</h4>
+                                                                                <p class="card-text">
+                                                                                    <?php
+                                                                                    if ($contextMetodologia->getEvent() === FIND_METODOLOGIA_OK) {
+                                                                                        echo $contextMetodologia->getData()->getMetodologiaI();
+                                                                                    }
+                                                                                    ?>
+                                                                                </p>
+                                                                            </div>
+                                                                        </div>
+                                                                        <?php if ($contextComparacion->getData()['MetodologiaI']){?>
+                                                                            <div class="card">
+                                                                                <div class="card-body">
+                                                                                    <h4 class="card-title">Comparación</h4>
+                                                                                    <p class="card-text">
+                                                                                        <?php
+                                                                                        $differ = new Differ(explode("\n", $contextMetodologia->getData()->getMetodologiaI()), explode("\n", $contextModMetodologia->getData()->getMetodologiaI()), $differOptions);
+                                                                                    $renderer = RendererFactory::make($rendererName, $rendererOptions); // or your own renderer object
+                                                                                    $result = $renderer->render($differ);
+                                                                                    echo $result;
+                                                                                    
+                                                                                    ?>
+                                                                                </p>
+                                                                            </div>
+                                                                        </div>
+                                                                    <?php }   ?>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    <?php } ?>
+                                                </div>
+
+                                                <?php if ($contextAsignatura->getData()->getEstado()==="B" && ($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['coordinacion'] == true || unserialize($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['permisos'])->getPermisoMetodologia() == true)) { ?>
+                                                    <div class="text-right">
+
+                                                        <a href="metodologia.php?IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
+                                                            <button type="button" class="btn btn-success" id="btn-form">
+                                                                Crear Nuevo Borrador
+                                                            </button>
+                                                        </a>
+                                                        <?php if ($contextModMetodologia->getEvent() === FIND_MODMETODOLOGIA_OK) { ?>
+                                                            <a href="metodologia.php?IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdModAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
+                                                                <button type="button" class="btn btn-warning" id="btn-form">
+                                                                    Modificar Borrador
+                                                                </button>
+                                                            </a>
+                                                            <a href="borrarMetodologia.php?IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdModAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
+                                                                <button type="button" class="btn btn-danger" id="btn-form">
+                                                                    Borrar Borrador
+                                                                </button>
+                                                            </a>
+                                                        <?php } ?>
                                                     </div>
                                                 <?php } ?>
                                             </div>
+                                        <?php } ?>
 
-                                            <?php if ($contextAsignatura->getData()->getEstado()==="B" && ($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['coordinacion'] == true || unserialize($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['permisos'])->getPermisoMetodologia() == true)) { ?>
-                                                <div class="text-right">
+                                        <!--Pestaña bibliografia-->
+                                        <?php if ($verBibliografia) { ?>
+                                            <div class="tab-pane fade" id="nav-bibliografia" role="tabpanel" aria-labelledby="nav-bibliografia-tab">
+                                                <div class="accordion" id="accordionBibliografia">
 
-                                                    <a href="metodologia.php?IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
-                                                        <button type="button" class="btn btn-success" id="btn-form">
-                                                            Crear Nuevo Borrador
-                                                        </button>
-                                                    </a>
-                                                    <?php if ($contextModMetodologia->getEvent() === FIND_MODMETODOLOGIA_OK) { ?>
-                                                        <a href="metodologia.php?IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdModAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
-                                                            <button type="button" class="btn btn-warning" id="btn-form">
-                                                                Modificar Borrador
-                                                            </button>
-                                                        </a>
-                                                        <a href="borrarMetodologia.php?IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdModAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
-                                                            <button type="button" class="btn btn-danger" id="btn-form">
-                                                                Borrar Borrador
-                                                            </button>
-                                                        </a>
-                                                    <?php } ?>
-                                                </div>
-                                            <?php } ?>
-                                        </div>
-                                    <?php } ?>
+                                                    <!-- Pestaña citas bibliograficas -->
+                                                    <?php if ($contextConfiguracion->getData()->getCitasBibliograficas() == true) { ?>
+                                                        <div class="card">
+                                                            <div class="card-header" id="headingOne">
+                                                                <h2 class="mb-0">
+                                                                    <?php if ($contextComparacion->getData()['CitasBibliograficas']) { ?>
+                                                                        <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                                            Citas bibliográficas
+                                                                        </button>
+                                                                    <?php } else { ?>
+                                                                        <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                                            Citas bibliográficas
+                                                                        </button>
+                                                                    <?php } ?>
+                                                                </h2>
+                                                            </div>
 
-                                    <!--Pestaña bibliografia-->
-                                    <?php if ($verBibliografia) { ?>
-                                        <div class="tab-pane fade" id="nav-bibliografia" role="tabpanel" aria-labelledby="nav-bibliografia-tab">
-                                            <div class="accordion" id="accordionBibliografia">
-
-                                                <!-- Pestaña citas bibliograficas -->
-                                                <?php if ($contextConfiguracion->getData()->getCitasBibliograficas() == true) { ?>
-                                                    <div class="card">
-                                                        <div class="card-header" id="headingOne">
-                                                            <h2 class="mb-0">
-                                                                <?php if ($contextComparacion->getData()['CitasBibliograficas']) { ?>
-                                                                    <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                                        Citas bibliográficas
-                                                                    </button>
-                                                                <?php } else { ?>
-                                                                    <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                                        Citas bibliográficas
-                                                                    </button>
-                                                                <?php } ?>
-                                                            </h2>
-                                                        </div>
-
-                                                        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionBibliografia">
-                                                            <div class="card-body">
-                                                                <div class="card">
-                                                                    <div class="card-body">
-                                                                        <h4 class="card-title">Consolidado</h4>
-                                                                        <p class="card-text">
-                                                                            <?php
-                                                                            if ($contextBibliografia->getEvent() === FIND_BIBLIOGRAFIA_OK) {
-                                                                                echo $contextBibliografia->getData()->getCitasBibliograficas();
-                                                                            }
-                                                                            ?>
-                                                                        </p>
-                                                                    </div>
-                                                                </div>
-                                                                <?php if ($contextComparacion->getData()['CitasBibliograficas']){?>
+                                                            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionBibliografia">
+                                                                <div class="card-body">
                                                                     <div class="card">
                                                                         <div class="card-body">
-                                                                            <h4 class="card-title">Comparación</h4>
+                                                                            <h4 class="card-title">Consolidado</h4>
                                                                             <p class="card-text">
                                                                                 <?php
+                                                                                if ($contextBibliografia->getEvent() === FIND_BIBLIOGRAFIA_OK) {
+                                                                                    echo $contextBibliografia->getData()->getCitasBibliograficas();
+                                                                                }
+                                                                                ?>
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <?php if ($contextComparacion->getData()['CitasBibliograficas']){?>
+                                                                        <div class="card">
+                                                                            <div class="card-body">
+                                                                                <h4 class="card-title">Comparación</h4>
+                                                                                <p class="card-text">
+                                                                                    <?php
                                                                                     $differ = new Differ(explode("\n", $contextBibliografia->getData()->getCitasBibliograficas()), explode("\n", $contextModBibliografia->getData()->getCitasBibliograficas()), $differOptions);
                                                                                     $renderer = RendererFactory::make($rendererName, $rendererOptions); // or your own renderer object
                                                                                     $result = $renderer->render($differ);
                                                                                     echo $result;
                                                                                     
+                                                                                    ?>
+                                                                                </p>
+                                                                            </div>
+                                                                        </div>
+                                                                    <?php }   ?>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    <?php } ?>
+
+                                                    <!-- Pestaña recursos en internet -->
+                                                    <?php if ($contextConfiguracion->getData()->getRecursosInternet() == true) { ?>
+                                                        <div class="card">
+                                                            <div class="card-header" id="headingTwo">
+                                                                <h2 class="mb-0">
+                                                                    <?php if ($contextComparacion->getData()['RecursosInternet'] ) { ?>
+                                                                        <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                                                                            Recursos en internet
+                                                                        </button>
+                                                                    <?php } else { ?>
+                                                                        <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                                                            Recursos en internet
+                                                                        </button>
+                                                                    <?php } ?>
+                                                                </h2>
+                                                            </div>
+                                                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionBibliografia">
+                                                                <div class="card-body">
+                                                                    <div class="card">
+                                                                        <div class="card-body">
+                                                                            <h4 class="card-title">Consolidado</h4>
+                                                                            <p class="card-text">
+                                                                                <?php
+                                                                                if ($contextBibliografia->getEvent() === FIND_BIBLIOGRAFIA_OK) {
+                                                                                    echo $contextBibliografia->getData()->getRecursosInternet();
+                                                                                }
                                                                                 ?>
                                                                             </p>
                                                                         </div>
                                                                     </div>
-                                                                    <?php }   ?>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                <?php } ?>
-
-                                                <!-- Pestaña recursos en internet -->
-                                                <?php if ($contextConfiguracion->getData()->getRecursosInternet() == true) { ?>
-                                                    <div class="card">
-                                                        <div class="card-header" id="headingTwo">
-                                                            <h2 class="mb-0">
-                                                                <?php if ($contextComparacion->getData()['RecursosInternet'] ) { ?>
-                                                                    <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                                                                        Recursos en internet
-                                                                    </button>
-                                                                <?php } else { ?>
-                                                                    <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                                                        Recursos en internet
-                                                                    </button>
-                                                                <?php } ?>
-                                                            </h2>
-                                                        </div>
-                                                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionBibliografia">
-                                                            <div class="card-body">
-                                                                <div class="card">
-                                                                    <div class="card-body">
-                                                                        <h4 class="card-title">Consolidado</h4>
-                                                                        <p class="card-text">
-                                                                            <?php
-                                                                            if ($contextBibliografia->getEvent() === FIND_BIBLIOGRAFIA_OK) {
-                                                                                echo $contextBibliografia->getData()->getRecursosInternet();
-                                                                            }
-                                                                            ?>
-                                                                        </p>
-                                                                    </div>
-                                                                </div>
-                                                                <?php if ($contextComparacion->getData()['RecursosInternet']){?>
-                                                                    <div class="card">
-                                                                        <div class="card-body">
-                                                                            <h4 class="card-title">Comparación</h4>
-                                                                            <p class="card-text">
-                                                                                <?php
+                                                                    <?php if ($contextComparacion->getData()['RecursosInternet']){?>
+                                                                        <div class="card">
+                                                                            <div class="card-body">
+                                                                                <h4 class="card-title">Comparación</h4>
+                                                                                <p class="card-text">
+                                                                                    <?php
                                                                                     $differ = new Differ(explode("\n", $contextBibliografia->getData()->getRecursosInternet()), explode("\n", $contextModBibliografia->getData()->getRecursosInternet()), $differOptions);
                                                                                     $renderer = RendererFactory::make($rendererName, $rendererOptions); // or your own renderer object
                                                                                     $result = $renderer->render($differ);
                                                                                     echo $result;
                                                                                     
-                                                                                ?>
-                                                                            </p>
+                                                                                    ?>
+                                                                                </p>
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
                                                                     <?php }   ?>
+                                                                </div>
                                                             </div>
                                                         </div>
+                                                    <?php } ?>
+                                                </div>
+
+                                                <?php if ($contextAsignatura->getData()->getEstado()==="B" && ($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['coordinacion'] == true || unserialize($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['permisos'])->getPermisoBibliografia() == true)) { ?>
+                                                    <div class="text-right">
+
+                                                        <a href="bibliografia.php?IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
+                                                            <button type="button" class="btn btn-success" id="btn-form">
+                                                                Crear Nuevo Borrador
+                                                            </button>
+                                                        </a>
+                                                        <?php if ($contextModBibliografia->getEvent() === FIND_MODBIBLIOGRAFIA_OK) { ?>
+                                                            <a href="bibliografia.php?IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdModAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
+                                                                <button type="button" class="btn btn-warning" id="btn-form">
+                                                                    Modificar Borrador
+                                                                </button>
+                                                            </a>
+                                                            <a href="borrarBibliografia.php?IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdModAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
+                                                                <button type="button" class="btn btn-danger" id="btn-form">
+                                                                    Borrar Borrador
+                                                                </button>
+                                                            </a>
+                                                        <?php } ?>
                                                     </div>
                                                 <?php } ?>
                                             </div>
+                                        <?php } ?>
 
-                                            <?php if ($contextAsignatura->getData()->getEstado()==="B" && ($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['coordinacion'] == true || unserialize($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['permisos'])->getPermisoBibliografia() == true)) { ?>
-                                                <div class="text-right">
+                                        <!--Pestaña grupo Laboratorio-->
+                                        <?php if ($verGrupoLab) { ?>
+                                            <div class="tab-pane fade" id="nav-grupo-Laboratorio" role="tabpanel" aria-labelledby="nav-grupo-Laboratorio-tab">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <h4 class="card-title">Borrador</h4>
+                                                        <p class="card-text">
+                                                            <?php
+                                                            if ($contextModGrupoLaboratorio->getEvent() === LIST_MODGRUPO_LABORATORIO_OK) {
+                                                                foreach ($contextModGrupoLaboratorio->getData() as $grupo) { ?>
+                                                                    <div class="accordion" id="accordionModGrupoLaboratorio">
+                                                                        <div class="card">
+                                                                            <div class="card-header" id="heading<?php echo $grupo->getIdGrupoLab() ?>">
+                                                                                <h2 class="mb-0">
+                                                                                    <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapse<?php echo $grupo->getIdGrupoLab() ?>" aria-expanded="true" aria-controls="collapse<?php echo $grupo->getIdGrupoLab() ?>">
+                                                                                        <?php echo $grupo->getLetra();
+                                                                                        if ($contextAsignatura->getData()->getEstado()==="B" && ($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['coordinacion'] == true || unserialize($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['permisos'])->getPermisoGrupoLaboratorio() == true)) { ?>
+                                                                                            <a href="horarioLaboratorio.php?IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdGrupoLaboratorio=<?php echo $grupo->getIdGrupoLab(); ?>&IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdAsignatura=<?php echo $grupo->getIdAsignatura(); ?>">
+                                                                                                <button type="button" class="btn btn-success" id="btn-form">
+                                                                                                    Crear Nuevo Horario
+                                                                                                </button>
+                                                                                            </a>
+                                                                                            <a href="grupoLaboratorioProfesor.php?IdGrupoLaboratorio=<?php echo $grupo->getIdGrupoLab(); ?>&IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
+                                                                                                <button type="button" class="btn btn-success" id="btn-form">
+                                                                                                    Añadir Profesor
+                                                                                                </button>
+                                                                                            </a>
+                                                                                            <a href="grupoLaboratorio.php?IdGrupoLaboratorio=<?php echo $grupo->getIdGrupoLab(); ?>&IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
+                                                                                                <button type="button" class="btn btn-warning" id="btn-form">
+                                                                                                    Modificar Grupo
+                                                                                                </button>
+                                                                                            </a>
+                                                                                            <a href="borrarGrupoLaboratorio.php?IdGrupoLaboratorio=<?php echo $grupo->getIdGrupoLab(); ?>&IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
+                                                                                                <button type="button" class="btn btn-danger" id="btn-form">
+                                                                                                    Borrar Grupo
+                                                                                                </button>
+                                                                                            </a>
 
-                                                    <a href="bibliografia.php?IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
-                                                        <button type="button" class="btn btn-success" id="btn-form">
-                                                            Crear Nuevo Borrador
-                                                        </button>
-                                                    </a>
-                                                    <?php if ($contextModBibliografia->getEvent() === FIND_MODBIBLIOGRAFIA_OK) { ?>
-                                                        <a href="bibliografia.php?IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdModAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
-                                                            <button type="button" class="btn btn-warning" id="btn-form">
-                                                                Modificar Borrador
-                                                            </button>
-                                                        </a>
-                                                        <a href="borrarBibliografia.php?IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdModAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
-                                                            <button type="button" class="btn btn-danger" id="btn-form">
-                                                                Borrar Borrador
-                                                            </button>
-                                                        </a>
-                                                    <?php } ?>
-                                                </div>
-                                            <?php } ?>
-                                        </div>
-                                    <?php } ?>
-
-                                    <!--Pestaña grupo contextLaboratorio-->
-                                    <?php if ($verGrupoLab) { ?>
-                                        <div class="tab-pane fade" id="nav-grupo-Laboratorio" role="tabpanel" aria-labelledby="nav-grupo-Laboratorio-tab">
-                                            <div class="card">
-                                                <div class="card-body">
-                                                    <h4 class="card-title">Borrador</h4>
-                                                    <p class="card-text">
-                                                        <?php
-                                                        if ($contextModGrupoLaboratorio->getEvent() === LIST_MODGRUPO_LABORATORIO_OK) {
-                                                            foreach ($contextModGrupoLaboratorio->getData() as $grupo) { ?>
-                                                                <div class="accordion" id="accordionModGrupoLaboratorio">
-                                                                    <div class="card">
-                                                                        <div class="card-header" id="heading<?php echo $grupo->getIdGrupoLab() ?>">
-                                                                            <h2 class="mb-0">
-                                                                                <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapse<?php echo $grupo->getIdGrupoLab() ?>" aria-expanded="true" aria-controls="collapse<?php echo $grupo->getIdGrupoLab() ?>">
-                                                                                    <?php echo $grupo->getLetra();
-                                                                                    if ($contextAsignatura->getData()->getEstado()==="B" && ($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['coordinacion'] == true || unserialize($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['permisos'])->getPermisoGrupoLaboratorio() == true)) { ?>
-                                                                                        <a href="horarioLaboratorio.php?IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdGrupoLaboratorio=<?php echo $grupo->getIdGrupoLab(); ?>&IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdAsignatura=<?php echo $grupo->getIdAsignatura(); ?>">
-                                                                                            <button type="button" class="btn btn-success" id="btn-form">
-                                                                                                Crear Nuevo Horario
-                                                                                            </button>
-                                                                                        </a>
-                                                                                        <a href="grupoLaboratorioProfesor.php?IdGrupoLaboratorio=<?php echo $grupo->getIdGrupoLab(); ?>&IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
-                                                                                            <button type="button" class="btn btn-success" id="btn-form">
-                                                                                                Añadir Profesor
-                                                                                            </button>
-                                                                                        </a>
-                                                                                        <a href="grupoLaboratorio.php?IdGrupoLaboratorio=<?php echo $grupo->getIdGrupoLab(); ?>&IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
-                                                                                            <button type="button" class="btn btn-warning" id="btn-form">
-                                                                                                Modificar Grupo
-                                                                                            </button>
-                                                                                        </a>
-                                                                                        <a href="borrarGrupoLaboratorio.php?IdGrupoLaboratorio=<?php echo $grupo->getIdGrupoLab(); ?>&IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
-                                                                                            <button type="button" class="btn btn-danger" id="btn-form">
-                                                                                                Borrar Grupo
-                                                                                            </button>
-                                                                                        </a>
-
-                                                                                        <?php
-                                                                                    }
-                                                                                    ?>
-                                                                                </button>
-                                                                            </h2>
-                                                                        </div>
-
-                                                                        <div id="collapse<?php echo $grupo->getIdGrupoLab() ?>" class="collapse" aria-labelledby="heading<?php echo $grupo->getIdGrupoLab() ?>" data-parent="#accordionModGrupoLaboratorio">
-                                                                            <div class="card-body">
-                                                                                <strong>Idioma:</strong> <?php echo $grupo->getIdioma(); ?><br />
-
-                                                                                <?php
-
-                                                                                $context = new es\ucm\Context(LIST_MODHORARIO_LABORATORIO, $grupo->getIdGrupoLab());
-                                                                                $contextModHorarioLaboratorio = $controller->action($context);
-                                                                                if ($contextModHorarioLaboratorio->getEvent() === LIST_MODHORARIO_LABORATORIO_OK) { ?>
-                                                                                    <div class="table-responsive text-center">
-                                                                                        <table class="table table-sm table-bordered">
-                                                                                            <!--<thead>-->
-                                                                                                <tr>
-                                                                                                    <th scope="col">Laboratorio</th>
-                                                                                                    <th scope="col">Dia</th>
-                                                                                                    <th scope="col">Hora Inicio</th>
-
-                                                                                                    <th scope="col">Opciones</th>
-                                                                                                    <?php
-                                                                                                    $modNumeroHorarios = count($contextModHorarioLaboratorio->getData()) + 1;
-                                                                                                    echo '<td rowspan="' . $modNumeroHorarios . '" >
-                                                                                                    <table class="table table-sm table-bordered">
-                                                                                                    <tr>
-                                                                                                    <th scope="col">Profesor</th>
-                                                                                                    <th scope="col">Fecha Inicio</th>
-                                                                                                    <th scope="col">Fecha Fin</th>
-                                                                                                    <th scope="col">Opciones</th>
-                                                                                                    </tr>';
-                                                                                                    $context = new es\ucm\Context(LIST_MODGRUPO_LABORATORIO_PROFESOR, $grupo->getIdGrupoLab());
-                                                                                                    $contextModGrupoLaboratorioProfesor = $controller->action($context);
-                                                                                                    if ($contextModGrupoLaboratorioProfesor->getEvent() === LIST_MODGRUPO_LABORATORIO_PROFESOR_OK) {
-                                                                                                        foreach ($contextModGrupoLaboratorioProfesor->getData() as $modGrupoLaboratorioProfesor) {
-                                                                                                            $context = new es\ucm\Context(FIND_PROFESOR, $modGrupoLaboratorioProfesor->getEmailProfesor());
-                                                                                                            $contextProfesor = $controller->action($context);
-                                                                                                            if ($contextProfesor->getEvent() == FIND_PROFESOR_OK) {
-                                                                                                                echo '<tr scope="row">
-                                                                                                                <td>' . $contextProfesor->getData()->getNombre() . '</td>
-                                                                                                                <td>' . $modGrupoLaboratorioProfesor->getFechaInicio() . '</td>
-                                                                                                                <td>' . $modGrupoLaboratorioProfesor->getFechaFin() . '</td>';
-                                                                                                                if ($contextAsignatura->getData()->getEstado()==="B" && ($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['coordinacion'] == true || unserialize($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['permisos'])->getPermisoGrupoClase() == true)) {
-                                                                                                                    echo '<td> <a href="grupoLaboratorioProfesor.php?IdGrado='.$contextGrado->getData()->getCodigoGrado().'&EmailProfesor=' . $modGrupoLaboratorioProfesor->getEmailProfesor() . '&IdAsignatura=' . $contextAsignatura->getData()->getIdAsignatura() . '&IdGrupoLaboratorio=' . $grupo->getIdGrupoLab() . '">
-                                                                                                                    <button type="button" class="btn btn-warning" id="btn-form">
-                                                                                                                    Modificar Profesor
-                                                                                                                    </button>
-                                                                                                                    </a>
-                                                                                                                    <a href="borrarGrupoLaboratorioProfesor.php?IdGrado='.$contextGrado->getData()->getCodigoGrado().'&EmailProfesor=' . $modGrupoLaboratorioProfesor->getEmailProfesor() . '&IdAsignatura=' . $contextAsignatura->getData()->getIdAsignatura() . '&IdGrupoLaboratorio=' . $grupo->getIdGrupoLab() . '">
-                                                                                                                    <button type="button" class="btn btn-danger" id="btn-form">
-                                                                                                                    Borrar Profesor
-                                                                                                                    </button>
-                                                                                                                    </a></td>';
-                                                                                                                }
-                                                                                                                echo '</tr>';
-                                                                                                            }
-                                                                                                        }
-                                                                                                    }
-                                                                                                    echo '</table>
-                                                                                                    </td>';
-                                                                                                    ?>
-                                                                                                </tr>
-                                                                                                <!--</thead>-->
-                                                                                                <!--<tbody>-->
-                                                                                                    <?php
-                                                                                                    foreach ($contextModHorarioLaboratorio->getData() as $horario) {
-                                                                                                        echo '<tr scope="row">
-                                                                                                        <td>' . $horario->getLaboratorio() . '</td>
-                                                                                                        <td>' . $horario->getDia() . '</td>
-                                                                                                        <td>' . $horario->getHoraInicio() . '-' . $horario->getHoraFin() . '</td>';
-
-                                                                                                        if ($contextAsignatura->getData()->getEstado()==="B" && ($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['coordinacion'] == true || unserialize($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['permisos'])->getPermisoGrupoLaboratorio() == true)) {
-                                                                                                            echo '<td> <a href="horarioLaboratorio.php?IdGrado='.$contextGrado->getData()->getCodigoGrado().'&IdHorarioLaboratorio=' . $horario->getIdHorarioLab() . '&IdAsignatura=' . $grupo->getIdAsignatura() . '">
-                                                                                                            <button type="button" class="btn btn-warning" id="btn-form">
-                                                                                                            Modificar Horario
-                                                                                                            </button>
-                                                                                                            </a>
-                                                                                                            <a href="borrarHorarioLaboratorio.php?IdGrado='.$contextGrado->getData()->getCodigoGrado().'&IdHorarioLaboratorio=' . $horario->getIdHorarioLab() . '&IdAsignatura=' . $grupo->getIdAsignatura() . '">
-                                                                                                            <button type="button" class="btn btn-danger" id="btn-form">
-                                                                                                            Borrar Horario
-                                                                                                            </button>
-                                                                                                            </a></td>';
-                                                                                                        }
-                                                                                                        echo '</tr>';
-                                                                                                    }
-                                                                                                    ?>
-                                                                                                    <!--</tbody>-->
-                                                                                                </table>
-                                                                                            </div>
-
-                                                                                        <?php }
+                                                                                            <?php
+                                                                                        }
                                                                                         ?>
-                                                                                    </div>
-                                                                                </div>
+                                                                                    </button>
+                                                                                </h2>
                                                                             </div>
-                                                                        </div>
-                                                                    <?php }
-                                                                }
-                                                                ?>
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="card">
-                                                        <div class="card-body">
-                                                            <h4 class="card-title">Consolidado</h4>
-                                                            <p class="card-text">
-                                                                <?php
-                                                                if ($contextGrupoLaboratorio->getEvent() === LIST_GRUPO_LABORATORIO_OK) {
-                                                                    foreach ($contextGrupoLaboratorio->getData() as $grupo) { ?>
-                                                                        <div class="accordion" id="accordionGrupoLaboratorio">
-                                                                            <div class="card">
-                                                                                <div class="card-header" id="heading<?php echo $grupo->getIdGrupoLab() ?>">
-                                                                                    <h2 class="mb-0">
-                                                                                        <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapse<?php echo $grupo->getIdGrupoLab() ?>" aria-expanded="true" aria-controls="collapse<?php echo $grupo->getIdGrupoLab() ?>">
-                                                                                            <?php echo $grupo->getLetra() ?>
-                                                                                        </button>
-                                                                                    </h2>
-                                                                                </div>
 
-                                                                                <div id="collapse<?php echo $grupo->getIdGrupoLab() ?>" class="collapse" aria-labelledby="heading<?php echo $grupo->getIdGrupoLab() ?>" data-parent="#accordionGrupoLaboratorio">
-                                                                                    <div class="card-body">
-                                                                                        <strong>Idioma:</strong> <?php echo $grupo->getIdioma(); ?><br />
+                                                                            <div id="collapse<?php echo $grupo->getIdGrupoLab() ?>" class="collapse" aria-labelledby="heading<?php echo $grupo->getIdGrupoLab() ?>" data-parent="#accordionModGrupoLaboratorio">
+                                                                                <div class="card-body">
+                                                                                    <strong>Idioma:</strong> <?php echo $grupo->getIdioma(); ?><br />
 
-                                                                                        <?php
+                                                                                    <?php
 
-                                                                                        $context = new es\ucm\Context(LIST_HORARIO_LABORATORIO, $grupo->getIdGrupoLab());
-                                                                                        $contextHorarioLaboratorio = $controller->action($context);
-                                                                                        if ($contextHorarioLaboratorio->getEvent() === LIST_HORARIO_LABORATORIO_OK) { ?>
-                                                                                            <div class="table-responsive text-center">
-                                                                                                <table class="table table-sm table-hover table-bordered">
-                                                                                                    <!--<thead>-->
+                                                                                    $context = new es\ucm\Context(LIST_MODHORARIO_LABORATORIO, $grupo->getIdGrupoLab());
+                                                                                    $contextModHorarioLaboratorio = $controller->action($context);
+                                                                                    if ($contextModHorarioLaboratorio->getEvent() === LIST_MODHORARIO_LABORATORIO_OK) { ?>
+                                                                                        <div class="table-responsive text-center">
+                                                                                            <table class="table table-sm table-bordered">
+                                                                                                <!--<thead>-->
+                                                                                                    <tr>
+                                                                                                        <th scope="col">Laboratorio</th>
+                                                                                                        <th scope="col">Dia</th>
+                                                                                                        <th scope="col">Hora Inicio</th>
+
+                                                                                                        <th scope="col">Opciones</th>
+                                                                                                        <?php
+                                                                                                        $modNumeroHorarios = count($contextModHorarioLaboratorio->getData()) + 1;
+                                                                                                        echo '<td rowspan="' . $modNumeroHorarios . '" >
+                                                                                                        <table class="table table-sm table-bordered">
                                                                                                         <tr>
-                                                                                                            <th scope="col">Laboratorio</th>
-                                                                                                            <th scope="col">Dia</th>
-                                                                                                            <th scope="col">Hora</th>
-                                                                                                            <?php
-                                                                                                            $numeroHorarios = count($contextHorarioLaboratorio->getData()) + 1;
-                                                                                                            echo '<td rowspan="' . $numeroHorarios . '" >
-                                                                                                            <table class="table table-sm table-bordered">
-                                                                                                            <tr>
-                                                                                                            <th scope="col">Profesor</th>
-                                                                                                            <th scope="col">Fecha Inicio</th>
-                                                                                                            <th scope="col">Fecha Fin</th>
-                                                                                                            </tr>';
-                                                                                                            $context = new es\ucm\Context(LIST_GRUPO_LABORATORIO_PROFESOR, $grupo->getIdGrupoLab());
-                                                                                                            $contextGrupoLaboratorioProfesor = $controller->action($context);
-                                                                                                            if ($contextGrupoLaboratorioProfesor->getEvent() === LIST_GRUPO_LABORATORIO_PROFESOR_OK) {
-                                                                                                                foreach ($contextGrupoLaboratorioProfesor->getData() as $grupoLaboratorioProfesor) {
-                                                                                                                    $context = new es\ucm\Context(FIND_PROFESOR, $grupoLaboratorioProfesor->getEmailProfesor());
-                                                                                                                    $contextProfesor = $controller->action($context);
-                                                                                                                    if ($contextProfesor->getEvent() == FIND_PROFESOR_OK) {
-                                                                                                                        echo '<tr scope="row">
-                                                                                                                        <td>' . $contextProfesor->getData()->getNombre() . '</td>
-                                                                                                                        <td>' . $grupoLaboratorioProfesor->getFechaInicio() . '</td>
-                                                                                                                        <td>' . $grupoLaboratorioProfesor->getFechaFin() . '</td>';
-                                                                                                                        echo '</tr>';
+                                                                                                        <th scope="col">Profesor</th>
+                                                                                                        <th scope="col">Fecha Inicio</th>
+                                                                                                        <th scope="col">Fecha Fin</th>
+                                                                                                        <th scope="col">Opciones</th>
+                                                                                                        </tr>';
+                                                                                                        $context = new es\ucm\Context(LIST_MODGRUPO_LABORATORIO_PROFESOR, $grupo->getIdGrupoLab());
+                                                                                                        $contextModGrupoLaboratorioProfesor = $controller->action($context);
+                                                                                                        if ($contextModGrupoLaboratorioProfesor->getEvent() === LIST_MODGRUPO_LABORATORIO_PROFESOR_OK) {
+                                                                                                            foreach ($contextModGrupoLaboratorioProfesor->getData() as $modGrupoLaboratorioProfesor) {
+                                                                                                                $context = new es\ucm\Context(FIND_PROFESOR, $modGrupoLaboratorioProfesor->getEmailProfesor());
+                                                                                                                $contextProfesor = $controller->action($context);
+                                                                                                                if ($contextProfesor->getEvent() == FIND_PROFESOR_OK) {
+                                                                                                                    echo '<tr scope="row">
+                                                                                                                    <td>' . $contextProfesor->getData()->getNombre() . '</td>
+                                                                                                                    <td>' . $modGrupoLaboratorioProfesor->getFechaInicio() . '</td>
+                                                                                                                    <td>' . $modGrupoLaboratorioProfesor->getFechaFin() . '</td>';
+                                                                                                                    if ($contextAsignatura->getData()->getEstado()==="B" && ($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['coordinacion'] == true || unserialize($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['permisos'])->getPermisoGrupoClase() == true)) {
+                                                                                                                        echo '<td> <a href="grupoLaboratorioProfesor.php?IdGrado='.$contextGrado->getData()->getCodigoGrado().'&EmailProfesor=' . $modGrupoLaboratorioProfesor->getEmailProfesor() . '&IdAsignatura=' . $contextAsignatura->getData()->getIdAsignatura() . '&IdGrupoLaboratorio=' . $grupo->getIdGrupoLab() . '">
+                                                                                                                        <button type="button" class="btn btn-warning" id="btn-form">
+                                                                                                                        Modificar Profesor
+                                                                                                                        </button>
+                                                                                                                        </a>
+                                                                                                                        <a href="borrarGrupoLaboratorioProfesor.php?IdGrado='.$contextGrado->getData()->getCodigoGrado().'&EmailProfesor=' . $modGrupoLaboratorioProfesor->getEmailProfesor() . '&IdAsignatura=' . $contextAsignatura->getData()->getIdAsignatura() . '&IdGrupoLaboratorio=' . $grupo->getIdGrupoLab() . '">
+                                                                                                                        <button type="button" class="btn btn-danger" id="btn-form">
+                                                                                                                        Borrar Profesor
+                                                                                                                        </button>
+                                                                                                                        </a></td>';
                                                                                                                     }
+                                                                                                                    echo '</tr>';
                                                                                                                 }
                                                                                                             }
-                                                                                                            echo '</table>
-                                                                                                            </td>';
-                                                                                                            ?>
-                                                                                                        </tr>
-                                                                                                        <!--</thead>-->
-                                                                                                        <!--<tbody>-->
-                                                                                                            <?php
-                                                                                                            foreach ($contextHorarioLaboratorio->getData() as $horario) {
-                                                                                                                echo '<tr scope="row">
-                                                                                                                <td>' . $horario->getLaboratorio() . '</td>
-                                                                                                                <td>' . $horario->getDia() . '</td>
-                                                                                                                <td>' . $horario->getHoraInicio() . '-' . $horario->getHoraFin() . '</td>
+                                                                                                        }
+                                                                                                        echo '</table>
+                                                                                                        </td>';
+                                                                                                        ?>
+                                                                                                    </tr>
+                                                                                                    <!--</thead>-->
+                                                                                                    <!--<tbody>-->
+                                                                                                        <?php
+                                                                                                        foreach ($contextModHorarioLaboratorio->getData() as $horario) {
+                                                                                                            echo '<tr scope="row">
+                                                                                                            <td>' . $horario->getLaboratorio() . '</td>
+                                                                                                            <td>' . $horario->getDia() . '</td>
+                                                                                                            <td>' . $horario->getHoraInicio() . '-' . $horario->getHoraFin() . '</td>';
 
-                                                                                                                </tr>';
+                                                                                                            if ($contextAsignatura->getData()->getEstado()==="B" && ($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['coordinacion'] == true || unserialize($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['permisos'])->getPermisoGrupoLaboratorio() == true)) {
+                                                                                                                echo '<td> <a href="horarioLaboratorio.php?IdGrado='.$contextGrado->getData()->getCodigoGrado().'&IdHorarioLaboratorio=' . $horario->getIdHorarioLab() . '&IdAsignatura=' . $grupo->getIdAsignatura() . '">
+                                                                                                                <button type="button" class="btn btn-warning" id="btn-form">
+                                                                                                                Modificar Horario
+                                                                                                                </button>
+                                                                                                                </a>
+                                                                                                                <a href="borrarHorarioLaboratorio.php?IdGrado='.$contextGrado->getData()->getCodigoGrado().'&IdHorarioLaboratorio=' . $horario->getIdHorarioLab() . '&IdAsignatura=' . $grupo->getIdAsignatura() . '">
+                                                                                                                <button type="button" class="btn btn-danger" id="btn-form">
+                                                                                                                Borrar Horario
+                                                                                                                </button>
+                                                                                                                </a></td>';
                                                                                                             }
-                                                                                                            ?>
-                                                                                                            <!--</tbody>-->
-                                                                                                        </table>
-                                                                                                    </div>
+                                                                                                            echo '</tr>';
+                                                                                                        }
+                                                                                                        ?>
+                                                                                                        <!--</tbody>-->
+                                                                                                    </table>
+                                                                                                </div>
 
-                                                                                                <?php }
-                                                                                                ?>
-                                                                                            </div>
+                                                                                            <?php }
+                                                                                            ?>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
-                                                                            <?php }
-                                                                        }
-                                                                        ?>
-                                                                    </p>
-                                                                </div>
+                                                                            </div>
+                                                                        <?php }
+                                                                    }
+                                                                    ?>
+                                                                </p>
                                                             </div>
-
-                                                            <?php if ($contextAsignatura->getData()->getEstado()==="B" && ($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['coordinacion'] == true || unserialize($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['permisos'])->getPermisoGrupoLaboratorio() == true)) { ?>
-                                                                <div class="text-right">
-                                                                    <?php if ($contextModGrupoLaboratorio->getEvent() === FIND_MODGRUPO_LABORATORIO_OK && $contextModGrupoLaboratorioProfesor->getEvent() === FIND_MODGRUPO_LABORATORIO_PROFESOR_OK) { ?>
-                                                                        <a href="grupoLaboratorio.php?IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdModAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
-                                                                            <button type="button" class="btn btn-primary" id="btn-form">
-                                                                                Modificar Borrador
-                                                                            </button>
-                                                                        </a>
-                                                                    <?php } ?>
-                                                                    <a href="grupoLaboratorio.php?IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
-                                                                        <button type="button" class="btn btn-success" id="btn-form">
-                                                                            Crear Nuevo Borrador Grupo
-                                                                        </button>
-                                                                    </a>
-
-                                                                </div>
-                                                            <?php } ?>
                                                         </div>
-                                                    <?php } ?>
-
-                                                    <!--Pestaña grupo clase-->
-                                                    <div class="tab-pane fade" id="nav-grupo-clase" role="tabpanel" aria-labelledby="nav-grupo-clase-tab">
                                                         <div class="card">
                                                             <div class="card-body">
-                                                                <h4 class="card-title">Borrador</h4>
+                                                                <h4 class="card-title">Consolidado</h4>
                                                                 <p class="card-text">
                                                                     <?php
-                                                                    if ($contextModGrupoClase->getEvent() === LIST_MODGRUPO_CLASE_OK) {
-                                                                        foreach ($contextModGrupoClase->getData() as $grupo) { ?>
-                                                                            <div class="accordion" id="accordionModGrupoClase">
+                                                                    if ($contextGrupoLaboratorio->getEvent() === LIST_GRUPO_LABORATORIO_OK) {
+                                                                        foreach ($contextGrupoLaboratorio->getData() as $grupo) { ?>
+                                                                            <div class="accordion" id="accordionGrupoLaboratorio">
                                                                                 <div class="card">
-                                                                                    <div class="card-header" id="heading<?php echo $grupo->getIdGrupoClase() ?>">
+                                                                                    <div class="card-header" id="heading<?php echo $grupo->getIdGrupoLab() ?>">
                                                                                         <h2 class="mb-0">
-                                                                                            <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapse<?php echo $grupo->getIdGrupoClase() ?>" aria-expanded="true" aria-controls="collapse<?php echo $grupo->getIdGrupoClase() ?>">
-                                                                                                <?php echo $grupo->getLetra();
-                                                                                                if ($contextAsignatura->getData()->getEstado()==="B" && ($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['coordinacion'] == true || unserialize($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['permisos'])->getPermisoGrupoClase() == true)) { ?>
-                                                                                                    <a href="horarioClase.php?IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdGrupoClase=<?php echo $grupo->getIdGrupoClase(); ?>&IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
-                                                                                                        <button type="button" class="btn btn-success" id="btn-form">
-                                                                                                            Crear Nuevo Horario
-                                                                                                        </button>
-                                                                                                    </a>
-                                                                                                    <a href="grupoClaseProfesor.php?IdGrupoClase=<?php echo $grupo->getIdGrupoClase(); ?>&IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
-                                                                                                        <button type="button" class="btn btn-success" id="btn-form">
-                                                                                                            Añadir Profesor
-                                                                                                        </button>
-                                                                                                    </a>
-                                                                                                    <a href="grupoClase.php?IdGrupoClase=<?php echo $grupo->getIdGrupoClase(); ?>&IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
-                                                                                                        <button type="button" class="btn btn-warning" id="btn-form">
-                                                                                                            Modificar Grupo
-                                                                                                        </button>
-                                                                                                    </a>
-                                                                                                    <a href="borrarGrupoClase.php?IdGrupoClase=<?php echo $grupo->getIdGrupoClase(); ?>&IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
-                                                                                                        <button type="button" class="btn btn-danger" id="btn-form">
-                                                                                                            Borrar Grupo
-                                                                                                        </button>
-                                                                                                    </a>
-
-                                                                                                    <?php
-                                                                                                }
-                                                                                                ?>
+                                                                                            <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapse<?php echo $grupo->getIdGrupoLab() ?>" aria-expanded="true" aria-controls="collapse<?php echo $grupo->getIdGrupoLab() ?>">
+                                                                                                <?php echo $grupo->getLetra() ?>
                                                                                             </button>
                                                                                         </h2>
                                                                                     </div>
 
-                                                                                    <div id="collapse<?php echo $grupo->getIdGrupoClase() ?>" class="collapse" aria-labelledby="heading<?php echo $grupo->getIdGrupoClase() ?>" data-parent="#accordionModGrupoClase">
+                                                                                    <div id="collapse<?php echo $grupo->getIdGrupoLab() ?>" class="collapse" aria-labelledby="heading<?php echo $grupo->getIdGrupoLab() ?>" data-parent="#accordionGrupoLaboratorio">
                                                                                         <div class="card-body">
                                                                                             <strong>Idioma:</strong> <?php echo $grupo->getIdioma(); ?><br />
 
                                                                                             <?php
 
-                                                                                            $context = new es\ucm\Context(LIST_MODHORARIO_CLASE, $grupo->getIdGrupoClase());
-                                                                                            $contextModHorarioClase = $controller->action($context);
-                                                                                            if ($contextModHorarioClase->getEvent() === LIST_MODHORARIO_CLASE_OK) { ?>
+                                                                                            $context = new es\ucm\Context(LIST_HORARIO_LABORATORIO, $grupo->getIdGrupoLab());
+                                                                                            $contextHorarioLaboratorio = $controller->action($context);
+                                                                                            if ($contextHorarioLaboratorio->getEvent() === LIST_HORARIO_LABORATORIO_OK) { ?>
                                                                                                 <div class="table-responsive text-center">
-                                                                                                    <table class="table table-sm table-bordered">
+                                                                                                    <table class="table table-sm table-hover table-bordered">
                                                                                                         <!--<thead>-->
                                                                                                             <tr>
-                                                                                                                <th scope="col">Aula</th>
+                                                                                                                <th scope="col">Laboratorio</th>
                                                                                                                 <th scope="col">Dia</th>
                                                                                                                 <th scope="col">Hora</th>
-                                                                                                                <th scope="col">Opciones</th>
                                                                                                                 <?php
-                                                                                                                $modNumeroHorarios = count($contextModHorarioClase->getData()) + 1;
-                                                                                                                echo '<td rowspan="' . $modNumeroHorarios . '" >
+                                                                                                                $numeroHorarios = count($contextHorarioLaboratorio->getData()) + 1;
+                                                                                                                echo '<td rowspan="' . $numeroHorarios . '" >
                                                                                                                 <table class="table table-sm table-bordered">
                                                                                                                 <tr>
                                                                                                                 <th scope="col">Profesor</th>
-                                                                                                                <th scope="col">Tipo</th>
                                                                                                                 <th scope="col">Fecha Inicio</th>
                                                                                                                 <th scope="col">Fecha Fin</th>
-                                                                                                                <th scope="col">Opciones</th>
                                                                                                                 </tr>';
-                                                                                                                $context = new es\ucm\Context(LIST_MODGRUPO_CLASE_PROFESOR, $grupo->getIdGrupoClase());
-                                                                                                                $contextModGrupoClaseProfesor = $controller->action($context);
-                                                                                                                if ($contextModGrupoClaseProfesor->getEvent() === LIST_MODGRUPO_CLASE_PROFESOR_OK) {
-                                                                                                                    foreach ($contextModGrupoClaseProfesor->getData() as $modGrupoClaseProfesor) {
-                                                                                                                        $context = new es\ucm\Context(FIND_PROFESOR, $modGrupoClaseProfesor->getEmailProfesor());
+                                                                                                                $context = new es\ucm\Context(LIST_GRUPO_LABORATORIO_PROFESOR, $grupo->getIdGrupoLab());
+                                                                                                                $contextGrupoLaboratorioProfesor = $controller->action($context);
+                                                                                                                if ($contextGrupoLaboratorioProfesor->getEvent() === LIST_GRUPO_LABORATORIO_PROFESOR_OK) {
+                                                                                                                    foreach ($contextGrupoLaboratorioProfesor->getData() as $grupoLaboratorioProfesor) {
+                                                                                                                        $context = new es\ucm\Context(FIND_PROFESOR, $grupoLaboratorioProfesor->getEmailProfesor());
                                                                                                                         $contextProfesor = $controller->action($context);
                                                                                                                         if ($contextProfesor->getEvent() == FIND_PROFESOR_OK) {
                                                                                                                             echo '<tr scope="row">
                                                                                                                             <td>' . $contextProfesor->getData()->getNombre() . '</td>
-                                                                                                                            <td>' . $modGrupoClaseProfesor->getTipo() . '</td>
-                                                                                                                            <td>' . $modGrupoClaseProfesor->getFechaInicio() . '</td>
-                                                                                                                            <td>' . $modGrupoClaseProfesor->getFechaFin() . '</td>';
-                                                                                                                            if ($contextAsignatura->getData()->getEstado()==="B" && ($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['coordinacion'] == true || unserialize($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['permisos'])->getPermisoGrupoClase() == true)) {
-                                                                                                                                echo '<td> <a href="grupoClaseProfesor.php?IdGrado='.$contextGrado->getData()->getCodigoGrado().'&EmailProfesor=' . $modGrupoClaseProfesor->getEmailProfesor() . '&IdAsignatura=' . $contextAsignatura->getData()->getIdAsignatura() . '&IdGrupoClase=' . $grupo->getIdGrupoClase() . '">
-                                                                                                                                <button type="button" class="btn btn-warning" id="btn-form">
-                                                                                                                                Modificar Profesor
-                                                                                                                                </button>
-                                                                                                                                </a>
-                                                                                                                                <a href="borrarGrupoClaseProfesor.php?IdGrado='.$contextGrado->getData()->getCodigoGrado().'&EmailProfesor=' . $modGrupoClaseProfesor->getEmailProfesor() . '&IdAsignatura=' . $contextAsignatura->getData()->getIdAsignatura() . '&IdGrupoClase=' . $grupo->getIdGrupoClase() . '">
-                                                                                                                                <button type="button" class="btn btn-danger" id="btn-form">
-                                                                                                                                Borrar Profesor
-                                                                                                                                </button>
-                                                                                                                                </a></td>';
-                                                                                                                            }
+                                                                                                                            <td>' . $grupoLaboratorioProfesor->getFechaInicio() . '</td>
+                                                                                                                            <td>' . $grupoLaboratorioProfesor->getFechaFin() . '</td>';
                                                                                                                             echo '</tr>';
                                                                                                                         }
                                                                                                                     }
@@ -2002,24 +1846,13 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                                             <!--</thead>-->
                                                                                                             <!--<tbody>-->
                                                                                                                 <?php
-                                                                                                                foreach ($contextModHorarioClase->getData() as $horario) {
+                                                                                                                foreach ($contextHorarioLaboratorio->getData() as $horario) {
                                                                                                                     echo '<tr scope="row">
-                                                                                                                    <td>' . $horario->getAula() . '</td>
+                                                                                                                    <td>' . $horario->getLaboratorio() . '</td>
                                                                                                                     <td>' . $horario->getDia() . '</td>
-                                                                                                                    <td>' . $horario->getHoraInicio() . '-' . $horario->getHoraFin() . '</td>';
-                                                                                                                    if ($contextAsignatura->getData()->getEstado()==="B" && ($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['coordinacion'] == true || unserialize($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['permisos'])->getPermisoGrupoClase() == true)) {
-                                                                                                                        echo '<td> <a href="horarioClase.php?IdGrado='.$contextGrado->getData()->getCodigoGrado().'&IdHorarioClase=' . $horario->getIdHorarioClase() . '&IdAsignatura=' . $contextAsignatura->getData()->getIdAsignatura() . '">
-                                                                                                                        <button type="button" class="btn btn-warning" id="btn-form">
-                                                                                                                        Modificar Horario
-                                                                                                                        </button>
-                                                                                                                        </a>
-                                                                                                                        <a href="borrarHorarioClase.php?IdGrado='.$contextGrado->getData()->getCodigoGrado().'&IdHorarioClase=' . $horario->getIdHorarioClase() . '&IdAsignatura=' . $contextAsignatura->getData()->getIdAsignatura() . '">
-                                                                                                                        <button type="button" class="btn btn-danger" id="btn-form">
-                                                                                                                        Borrar Horario
-                                                                                                                        </button>
-                                                                                                                        </a></td>';
-                                                                                                                    }
-                                                                                                                    echo '</tr>';
+                                                                                                                    <td>' . $horario->getHoraInicio() . '-' . $horario->getHoraFin() . '</td>
+
+                                                                                                                    </tr>';
                                                                                                                 }
                                                                                                                 ?>
                                                                                                                 <!--</tbody>-->
@@ -2038,187 +1871,351 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                         </p>
                                                                     </div>
                                                                 </div>
-                                                                <div class="card">
-                                                                    <div class="card-body">
-                                                                        <h4 class="card-title">Consolidado</h4>
-                                                                        <p class="card-text">
-                                                                            <?php
-                                                                            if ($contextGrupoClase->getEvent() === LIST_GRUPO_CLASE_OK) {
-                                                                                foreach ($contextGrupoClase->getData() as $grupo) { ?>
-                                                                                    <div class="accordion" id="accordionGrupoClase">
-                                                                                        <div class="card">
-                                                                                            <div class="card-header" id="heading<?php echo $grupo->getIdGrupoClase() ?>">
-                                                                                                <h2 class="mb-0">
-                                                                                                    <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapse<?php echo $grupo->getIdGrupoClase() ?>" aria-expanded="true" aria-controls="collapse<?php echo $grupo->getIdGrupoClase() ?>">
-                                                                                                        <?php echo $grupo->getLetra() ?>
-                                                                                                    </button>
-                                                                                                </h2>
-                                                                                            </div>
 
-                                                                                            <div id="collapse<?php echo $grupo->getIdGrupoClase() ?>" class="collapse" aria-labelledby="heading<?php echo $grupo->getIdGrupoClase() ?>" data-parent="#accordionGrupoClase">
-                                                                                                <div class="card-body">
-                                                                                                    <strong>Idioma:</strong> <?php echo $grupo->getIdioma(); ?><br />
-
-                                                                                                    <?php
-
-                                                                                                    $context = new es\ucm\Context(LIST_HORARIO_CLASE, $grupo->getIdGrupoClase());
-                                                                                                    $contextHorarioClase = $controller->action($context);
-                                                                                                    if ($contextHorarioClase->getEvent() === LIST_HORARIO_CLASE_OK) { ?>
-                                                                                                        <div class="table-responsive text-center">
-                                                                                                            <table class="table table-sm table-bordered">
-                                                                                                                <!--<thead> -->
-                                                                                                                    <tr>
-                                                                                                                        <th scope="col">Aula</th>
-                                                                                                                        <th scope="col">Dia</th>
-                                                                                                                        <th scope="col">Hora</th>
-                                                                                                                        <?php
-                                                                                                                        $numeroHorarios = count($contextHorarioClase->getData()) + 1;
-                                                                                                                        echo '<td rowspan="' . $numeroHorarios . '" >
-                                                                                                                        <table class="table table-sm table-bordered">
-                                                                                                                        <tr>
-                                                                                                                        <th scope="col">Profesor</th>
-                                                                                                                        <th scope="col">Tipo</th>
-                                                                                                                        <th scope="col">Fecha Inicio</th>
-                                                                                                                        <th scope="col">Fecha Fin</th>
-                                                                                                                        </tr>';
-                                                                                                                        $context = new es\ucm\Context(LIST_GRUPO_CLASE_PROFESOR, $grupo->getIdGrupoClase());
-                                                                                                                        $contextGrupoClaseProfesor = $controller->action($context);
-                                                                                                                        if ($contextGrupoClaseProfesor->getEvent() === LIST_GRUPO_CLASE_PROFESOR_OK) {
-                                                                                                                            foreach ($contextGrupoClaseProfesor->getData() as $grupoClaseProfesor) {
-                                                                                                                                $context = new es\ucm\Context(FIND_PROFESOR, $grupoClaseProfesor->getEmailProfesor());
-                                                                                                                                $contextProfesor = $controller->action($context);
-                                                                                                                                if ($contextProfesor->getEvent() == FIND_PROFESOR_OK) {
-                                                                                                                                    echo '<tr scope="row">
-                                                                                                                                    <td>' . $contextProfesor->getData()->getNombre() . '</td>
-                                                                                                                                    <td>' . $grupoClaseProfesor->getTipo() . '</td>
-                                                                                                                                    <td>' . $grupoClaseProfesor->getFechaInicio() . '</td>
-                                                                                                                                    <td>' . $grupoClaseProfesor->getFechaFin() . '</td>';
-                                                                                                                                    echo '</tr>';
-                                                                                                                                }
-                                                                                                                            }
-                                                                                                                        }
-                                                                                                                        echo '</table>
-                                                                                                                        </td>';
-                                                                                                                        ?>
-
-                                                                                                                    </tr>
-                                                                                                                    <!--</thead>-->
-                                                                                                                    <!--<tbody>-->
-                                                                                                                        <?php
-
-                                                                                                                        foreach ($contextHorarioClase->getData() as $horario) {
-                                                                                                                            echo '<tr scope="row">
-                                                                                                                            <td>' . $horario->getAula() . '</td>
-                                                                                                                            <td>' . $horario->getDia() . '</td>
-                                                                                                                            <td>' . $horario->getHoraInicio() . '-' . $horario->getHoraFin() . '</td>
-                                                                                                                            </tr>';
-                                                                                                                        }
-                                                                                                                        ?>
-                                                                                                                        <!--</tbody>-->
-                                                                                                                    </table>
-                                                                                                                </div>
-
-                                                                                                            <?php }
-                                                                                                            ?>
-                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        <?php }
-                                                                                    }
-                                                                                    ?>
-                                                                                </p>
-                                                                            </div>
-                                                                        </div>
-
-                                                                        <?php if ($contextAsignatura->getData()->getEstado()==="B" && ($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['coordinacion'] == true || unserialize($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['permisos'])->getPermisoGrupoClase() == true)) { ?>
-                                                                            <div class="text-right">
-                                                                                <?php if ($contextModGrupoClase->getEvent() === FIND_MODGRUPO_CLASE_OK && $contextModGrupoClaseProfesor->getEvent() === FIND_MODGRUPO_CLASE_PROFESOR_OK) { ?>
-                                                                                    <a href="grupoClase.php?IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdModAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
-                                                                                        <button type="button" class="btn btn-success" id="btn-form">
-                                                                                            Modificar Borrador
-                                                                                        </button>
-                                                                                    </a>
-                                                                                <?php } ?>
-                                                                                <a href="grupoClase.php?IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
-                                                                                    <button type="button" class="btn btn-success" id="btn-form">
-                                                                                        Crear Nuevo Borrador Grupo
-                                                                                    </button>
-                                                                                </a>
-
-                                                                            </div>
+                                                                <?php if ($contextAsignatura->getData()->getEstado()==="B" && ($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['coordinacion'] == true || unserialize($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['permisos'])->getPermisoGrupoLaboratorio() == true)) { ?>
+                                                                    <div class="text-right">
+                                                                        <?php if ($contextModGrupoLaboratorio->getEvent() === FIND_MODGRUPO_LABORATORIO_OK && $contextModGrupoLaboratorioProfesor->getEvent() === FIND_MODGRUPO_LABORATORIO_PROFESOR_OK) { ?>
+                                                                            <a href="grupoLaboratorio.php?IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdModAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
+                                                                                <button type="button" class="btn btn-primary" id="btn-form">
+                                                                                    Modificar Borrador
+                                                                                </button>
+                                                                            </a>
                                                                         <?php } ?>
+                                                                        <a href="grupoLaboratorio.php?IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
+                                                                            <button type="button" class="btn btn-success" id="btn-form">
+                                                                                Crear Nuevo Borrador Grupo
+                                                                            </button>
+                                                                        </a>
+
                                                                     </div>
+                                                                <?php } ?>
+                                                            </div>
+                                                        <?php } ?>
 
-                                                                    <!--Pestaña evaluacion-->
-                                                                    <?php if ($verEvaluacion) { ?>
-                                                                        <div class="tab-pane fade" id="nav-evaluacion" role="tabpanel" aria-labelledby="nav-evaluacion-tab">
-                                                                            <div class="accordion" id="accordionEvaluacion">
-
-                                                                                <!-- Pestaña realizacion examenes -->
-                                                                                <?php if ($contextConfiguracion->getData()->getRealizacionExamenes() == true) { ?>
+                                                        <!--Pestaña grupo clase-->
+                                                        <div class="tab-pane fade" id="nav-grupo-clase" role="tabpanel" aria-labelledby="nav-grupo-clase-tab">
+                                                            <div class="card">
+                                                                <div class="card-body">
+                                                                    <h4 class="card-title">Borrador</h4>
+                                                                    <p class="card-text">
+                                                                        <?php
+                                                                        if ($contextModGrupoClase->getEvent() === LIST_MODGRUPO_CLASE_OK) {
+                                                                            foreach ($contextModGrupoClase->getData() as $grupo) { ?>
+                                                                                <div class="accordion" id="accordionModGrupoClase">
                                                                                     <div class="card">
-                                                                                        <div class="card-header" id="headingOne">
+                                                                                        <div class="card-header" id="heading<?php echo $grupo->getIdGrupoClase() ?>">
                                                                                             <h2 class="mb-0">
-                                                                                                <?php if ($contextComparacion->getData()['RealizacionExamenes']) { ?>
-                                                                                                    <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                                                                        Realización exámenes
-                                                                                                    </button>
-                                                                                                <?php } else { ?>
-                                                                                                    <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                                                                        Realización exámenes
-                                                                                                    </button>
-                                                                                                <?php } ?>
+                                                                                                <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapse<?php echo $grupo->getIdGrupoClase() ?>" aria-expanded="true" aria-controls="collapse<?php echo $grupo->getIdGrupoClase() ?>">
+                                                                                                    <?php echo $grupo->getLetra();
+                                                                                                    if ($contextAsignatura->getData()->getEstado()==="B" && ($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['coordinacion'] == true || unserialize($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['permisos'])->getPermisoGrupoClase() == true)) { ?>
+                                                                                                        <a href="horarioClase.php?IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdGrupoClase=<?php echo $grupo->getIdGrupoClase(); ?>&IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
+                                                                                                            <button type="button" class="btn btn-success" id="btn-form">
+                                                                                                                Crear Nuevo Horario
+                                                                                                            </button>
+                                                                                                        </a>
+                                                                                                        <a href="grupoClaseProfesor.php?IdGrupoClase=<?php echo $grupo->getIdGrupoClase(); ?>&IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
+                                                                                                            <button type="button" class="btn btn-success" id="btn-form">
+                                                                                                                Añadir Profesor
+                                                                                                            </button>
+                                                                                                        </a>
+                                                                                                        <a href="grupoClase.php?IdGrupoClase=<?php echo $grupo->getIdGrupoClase(); ?>&IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
+                                                                                                            <button type="button" class="btn btn-warning" id="btn-form">
+                                                                                                                Modificar Grupo
+                                                                                                            </button>
+                                                                                                        </a>
+                                                                                                        <a href="borrarGrupoClase.php?IdGrupoClase=<?php echo $grupo->getIdGrupoClase(); ?>&IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
+                                                                                                            <button type="button" class="btn btn-danger" id="btn-form">
+                                                                                                                Borrar Grupo
+                                                                                                            </button>
+                                                                                                        </a>
+
+                                                                                                        <?php
+                                                                                                    }
+                                                                                                    ?>
+                                                                                                </button>
                                                                                             </h2>
                                                                                         </div>
 
-                                                                                        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionEvaluacion">
+                                                                                        <div id="collapse<?php echo $grupo->getIdGrupoClase() ?>" class="collapse" aria-labelledby="heading<?php echo $grupo->getIdGrupoClase() ?>" data-parent="#accordionModGrupoClase">
                                                                                             <div class="card-body">
-                                                                                                <div class="card">
-                                                                                                    <div class="card-body">
-                                                                                                        <h4 class="card-title">Consolidado</h4>
-                                                                                                        <p class="card-text">
-                                                                                                            <?php
-                                                                                                            if ($contextEvaluacion->getEvent() === FIND_EVALUACION_OK) {
-                                                                                                                echo $contextEvaluacion->getData()->getRealizacionExamenes();
-                                                                                                            }
-                                                                                                            ?>
-                                                                                                        </p>
-                                                                                                    </div>
-                                                                                                    <div class="card-footer">
-                                                                                                        <?php
-                                                                                                        if ($contextEvaluacion->getEvent() === FIND_EVALUACION_OK) {
-                                                                                                            echo "Peso: " . $contextEvaluacion->getData()->getPesoExamenes() . "%";
-                                                                                                        }
+                                                                                                <strong>Idioma:</strong> <?php echo $grupo->getIdioma(); ?><br />
+
+                                                                                                <?php
+
+                                                                                                $context = new es\ucm\Context(LIST_MODHORARIO_CLASE, $grupo->getIdGrupoClase());
+                                                                                                $contextModHorarioClase = $controller->action($context);
+                                                                                                if ($contextModHorarioClase->getEvent() === LIST_MODHORARIO_CLASE_OK) { ?>
+                                                                                                    <div class="table-responsive text-center">
+                                                                                                        <table class="table table-sm table-bordered">
+                                                                                                            <!--<thead>-->
+                                                                                                                <tr>
+                                                                                                                    <th scope="col">Aula</th>
+                                                                                                                    <th scope="col">Dia</th>
+                                                                                                                    <th scope="col">Hora</th>
+                                                                                                                    <th scope="col">Opciones</th>
+                                                                                                                    <?php
+                                                                                                                    $modNumeroHorarios = count($contextModHorarioClase->getData()) + 1;
+                                                                                                                    echo '<td rowspan="' . $modNumeroHorarios . '" >
+                                                                                                                    <table class="table table-sm table-bordered">
+                                                                                                                    <tr>
+                                                                                                                    <th scope="col">Profesor</th>
+                                                                                                                    <th scope="col">Tipo</th>
+                                                                                                                    <th scope="col">Fecha Inicio</th>
+                                                                                                                    <th scope="col">Fecha Fin</th>
+                                                                                                                    <th scope="col">Opciones</th>
+                                                                                                                    </tr>';
+                                                                                                                    $context = new es\ucm\Context(LIST_MODGRUPO_CLASE_PROFESOR, $grupo->getIdGrupoClase());
+                                                                                                                    $contextModGrupoClaseProfesor = $controller->action($context);
+                                                                                                                    if ($contextModGrupoClaseProfesor->getEvent() === LIST_MODGRUPO_CLASE_PROFESOR_OK) {
+                                                                                                                        foreach ($contextModGrupoClaseProfesor->getData() as $modGrupoClaseProfesor) {
+                                                                                                                            $context = new es\ucm\Context(FIND_PROFESOR, $modGrupoClaseProfesor->getEmailProfesor());
+                                                                                                                            $contextProfesor = $controller->action($context);
+                                                                                                                            if ($contextProfesor->getEvent() == FIND_PROFESOR_OK) {
+                                                                                                                                echo '<tr scope="row">
+                                                                                                                                <td>' . $contextProfesor->getData()->getNombre() . '</td>
+                                                                                                                                <td>' . $modGrupoClaseProfesor->getTipo() . '</td>
+                                                                                                                                <td>' . $modGrupoClaseProfesor->getFechaInicio() . '</td>
+                                                                                                                                <td>' . $modGrupoClaseProfesor->getFechaFin() . '</td>';
+                                                                                                                                if ($contextAsignatura->getData()->getEstado()==="B" && ($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['coordinacion'] == true || unserialize($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['permisos'])->getPermisoGrupoClase() == true)) {
+                                                                                                                                    echo '<td> <a href="grupoClaseProfesor.php?IdGrado='.$contextGrado->getData()->getCodigoGrado().'&EmailProfesor=' . $modGrupoClaseProfesor->getEmailProfesor() . '&IdAsignatura=' . $contextAsignatura->getData()->getIdAsignatura() . '&IdGrupoClase=' . $grupo->getIdGrupoClase() . '">
+                                                                                                                                    <button type="button" class="btn btn-warning" id="btn-form">
+                                                                                                                                    Modificar Profesor
+                                                                                                                                    </button>
+                                                                                                                                    </a>
+                                                                                                                                    <a href="borrarGrupoClaseProfesor.php?IdGrado='.$contextGrado->getData()->getCodigoGrado().'&EmailProfesor=' . $modGrupoClaseProfesor->getEmailProfesor() . '&IdAsignatura=' . $contextAsignatura->getData()->getIdAsignatura() . '&IdGrupoClase=' . $grupo->getIdGrupoClase() . '">
+                                                                                                                                    <button type="button" class="btn btn-danger" id="btn-form">
+                                                                                                                                    Borrar Profesor
+                                                                                                                                    </button>
+                                                                                                                                    </a></td>';
+                                                                                                                                }
+                                                                                                                                echo '</tr>';
+                                                                                                                            }
+                                                                                                                        }
+                                                                                                                    }
+                                                                                                                    echo '</table>
+                                                                                                                    </td>';
+                                                                                                                    ?>
+                                                                                                                </tr>
+                                                                                                                <!--</thead>-->
+                                                                                                                <!--<tbody>-->
+                                                                                                                    <?php
+                                                                                                                    foreach ($contextModHorarioClase->getData() as $horario) {
+                                                                                                                        echo '<tr scope="row">
+                                                                                                                        <td>' . $horario->getAula() . '</td>
+                                                                                                                        <td>' . $horario->getDia() . '</td>
+                                                                                                                        <td>' . $horario->getHoraInicio() . '-' . $horario->getHoraFin() . '</td>';
+                                                                                                                        if ($contextAsignatura->getData()->getEstado()==="B" && ($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['coordinacion'] == true || unserialize($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['permisos'])->getPermisoGrupoClase() == true)) {
+                                                                                                                            echo '<td> <a href="horarioClase.php?IdGrado='.$contextGrado->getData()->getCodigoGrado().'&IdHorarioClase=' . $horario->getIdHorarioClase() . '&IdAsignatura=' . $contextAsignatura->getData()->getIdAsignatura() . '">
+                                                                                                                            <button type="button" class="btn btn-warning" id="btn-form">
+                                                                                                                            Modificar Horario
+                                                                                                                            </button>
+                                                                                                                            </a>
+                                                                                                                            <a href="borrarHorarioClase.php?IdGrado='.$contextGrado->getData()->getCodigoGrado().'&IdHorarioClase=' . $horario->getIdHorarioClase() . '&IdAsignatura=' . $contextAsignatura->getData()->getIdAsignatura() . '">
+                                                                                                                            <button type="button" class="btn btn-danger" id="btn-form">
+                                                                                                                            Borrar Horario
+                                                                                                                            </button>
+                                                                                                                            </a></td>';
+                                                                                                                        }
+                                                                                                                        echo '</tr>';
+                                                                                                                    }
+                                                                                                                    ?>
+                                                                                                                    <!--</tbody>-->
+                                                                                                                </table>
+                                                                                                            </div>
+
+                                                                                                        <?php }
                                                                                                         ?>
                                                                                                     </div>
                                                                                                 </div>
-                                                                                                <?php if ($contextComparacion->getData()['RealizacionExamenes']){?>
-                                                                                                <div class="card">
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    <?php }
+                                                                                }
+                                                                                ?>
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="card">
+                                                                        <div class="card-body">
+                                                                            <h4 class="card-title">Consolidado</h4>
+                                                                            <p class="card-text">
+                                                                                <?php
+                                                                                if ($contextGrupoClase->getEvent() === LIST_GRUPO_CLASE_OK) {
+                                                                                    foreach ($contextGrupoClase->getData() as $grupo) { ?>
+                                                                                        <div class="accordion" id="accordionGrupoClase">
+                                                                                            <div class="card">
+                                                                                                <div class="card-header" id="heading<?php echo $grupo->getIdGrupoClase() ?>">
+                                                                                                    <h2 class="mb-0">
+                                                                                                        <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapse<?php echo $grupo->getIdGrupoClase() ?>" aria-expanded="true" aria-controls="collapse<?php echo $grupo->getIdGrupoClase() ?>">
+                                                                                                            <?php echo $grupo->getLetra() ?>
+                                                                                                        </button>
+                                                                                                    </h2>
+                                                                                                </div>
+
+                                                                                                <div id="collapse<?php echo $grupo->getIdGrupoClase() ?>" class="collapse" aria-labelledby="heading<?php echo $grupo->getIdGrupoClase() ?>" data-parent="#accordionGrupoClase">
                                                                                                     <div class="card-body">
-                                                                                                        <h4 class="card-title">Comparación</h4>
-                                                                                                        <p class="card-text">
+                                                                                                        <strong>Idioma:</strong> <?php echo $grupo->getIdioma(); ?><br />
+
+                                                                                                        <?php
+
+                                                                                                        $context = new es\ucm\Context(LIST_HORARIO_CLASE, $grupo->getIdGrupoClase());
+                                                                                                        $contextHorarioClase = $controller->action($context);
+                                                                                                        if ($contextHorarioClase->getEvent() === LIST_HORARIO_CLASE_OK) { ?>
+                                                                                                            <div class="table-responsive text-center">
+                                                                                                                <table class="table table-sm table-bordered">
+                                                                                                                    <!--<thead> -->
+                                                                                                                        <tr>
+                                                                                                                            <th scope="col">Aula</th>
+                                                                                                                            <th scope="col">Dia</th>
+                                                                                                                            <th scope="col">Hora</th>
+                                                                                                                            <?php
+                                                                                                                            $numeroHorarios = count($contextHorarioClase->getData()) + 1;
+                                                                                                                            echo '<td rowspan="' . $numeroHorarios . '" >
+                                                                                                                            <table class="table table-sm table-bordered">
+                                                                                                                            <tr>
+                                                                                                                            <th scope="col">Profesor</th>
+                                                                                                                            <th scope="col">Tipo</th>
+                                                                                                                            <th scope="col">Fecha Inicio</th>
+                                                                                                                            <th scope="col">Fecha Fin</th>
+                                                                                                                            </tr>';
+                                                                                                                            $context = new es\ucm\Context(LIST_GRUPO_CLASE_PROFESOR, $grupo->getIdGrupoClase());
+                                                                                                                            $contextGrupoClaseProfesor = $controller->action($context);
+                                                                                                                            if ($contextGrupoClaseProfesor->getEvent() === LIST_GRUPO_CLASE_PROFESOR_OK) {
+                                                                                                                                foreach ($contextGrupoClaseProfesor->getData() as $grupoClaseProfesor) {
+                                                                                                                                    $context = new es\ucm\Context(FIND_PROFESOR, $grupoClaseProfesor->getEmailProfesor());
+                                                                                                                                    $contextProfesor = $controller->action($context);
+                                                                                                                                    if ($contextProfesor->getEvent() == FIND_PROFESOR_OK) {
+                                                                                                                                        echo '<tr scope="row">
+                                                                                                                                        <td>' . $contextProfesor->getData()->getNombre() . '</td>
+                                                                                                                                        <td>' . $grupoClaseProfesor->getTipo() . '</td>
+                                                                                                                                        <td>' . $grupoClaseProfesor->getFechaInicio() . '</td>
+                                                                                                                                        <td>' . $grupoClaseProfesor->getFechaFin() . '</td>';
+                                                                                                                                        echo '</tr>';
+                                                                                                                                    }
+                                                                                                                                }
+                                                                                                                            }
+                                                                                                                            echo '</table>
+                                                                                                                            </td>';
+                                                                                                                            ?>
+
+                                                                                                                        </tr>
+                                                                                                                        <!--</thead>-->
+                                                                                                                        <!--<tbody>-->
+                                                                                                                            <?php
+
+                                                                                                                            foreach ($contextHorarioClase->getData() as $horario) {
+                                                                                                                                echo '<tr scope="row">
+                                                                                                                                <td>' . $horario->getAula() . '</td>
+                                                                                                                                <td>' . $horario->getDia() . '</td>
+                                                                                                                                <td>' . $horario->getHoraInicio() . '-' . $horario->getHoraFin() . '</td>
+                                                                                                                                </tr>';
+                                                                                                                            }
+                                                                                                                            ?>
+                                                                                                                            <!--</tbody>-->
+                                                                                                                        </table>
+                                                                                                                    </div>
+
+                                                                                                                <?php }
+                                                                                                                ?>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            <?php }
+                                                                                        }
+                                                                                        ?>
+                                                                                    </p>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <?php if ($contextAsignatura->getData()->getEstado()==="B" && ($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['coordinacion'] == true || unserialize($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['permisos'])->getPermisoGrupoClase() == true)) { ?>
+                                                                                <div class="text-right">
+                                                                                    <?php if ($contextModGrupoClase->getEvent() === FIND_MODGRUPO_CLASE_OK && $contextModGrupoClaseProfesor->getEvent() === FIND_MODGRUPO_CLASE_PROFESOR_OK) { ?>
+                                                                                        <a href="grupoClase.php?IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdModAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
+                                                                                            <button type="button" class="btn btn-success" id="btn-form">
+                                                                                                Modificar Borrador
+                                                                                            </button>
+                                                                                        </a>
+                                                                                    <?php } ?>
+                                                                                    <a href="grupoClase.php?IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
+                                                                                        <button type="button" class="btn btn-success" id="btn-form">
+                                                                                            Crear Nuevo Borrador Grupo
+                                                                                        </button>
+                                                                                    </a>
+
+                                                                                </div>
+                                                                            <?php } ?>
+                                                                        </div>
+
+                                                                        <!--Pestaña evaluacion-->
+                                                                        <?php if ($verEvaluacion) { ?>
+                                                                            <div class="tab-pane fade" id="nav-evaluacion" role="tabpanel" aria-labelledby="nav-evaluacion-tab">
+                                                                                <div class="accordion" id="accordionEvaluacion">
+
+                                                                                    <!-- Pestaña realizacion examenes -->
+                                                                                    <?php if ($contextConfiguracion->getData()->getRealizacionExamenes() == true) { ?>
+                                                                                        <div class="card">
+                                                                                            <div class="card-header" id="headingOne">
+                                                                                                <h2 class="mb-0">
+                                                                                                    <?php if ($contextComparacion->getData()['RealizacionExamenes']) { ?>
+                                                                                                        <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                                                                            Realización de los exámenes
+                                                                                                        </button>
+                                                                                                    <?php } else { ?>
+                                                                                                        <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                                                                            Realización de los exámenes
+                                                                                                        </button>
+                                                                                                    <?php } ?>
+                                                                                                </h2>
+                                                                                            </div>
+
+                                                                                            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionEvaluacion">
+                                                                                                <div class="card-body">
+                                                                                                    <div class="card">
+                                                                                                        <div class="card-body">
+                                                                                                            <h4 class="card-title">Consolidado</h4>
+                                                                                                            <p class="card-text">
+                                                                                                                <?php
+                                                                                                                if ($contextEvaluacion->getEvent() === FIND_EVALUACION_OK) {
+                                                                                                                    echo $contextEvaluacion->getData()->getRealizacionExamenes();
+                                                                                                                }
+                                                                                                                ?>
+                                                                                                            </p>
+                                                                                                        </div>
+                                                                                                        <div class="card-footer">
                                                                                                             <?php
-                                                                                                                $differ = new Differ(explode("\n", $contextEvaluacion->getData()->getRealizacionExamenes()), explode("\n", $contextModEvaluacion->getData()->getRealizacionExamenes()), $differOptions);
+                                                                                                            if ($contextEvaluacion->getEvent() === FIND_EVALUACION_OK) {
+                                                                                                                echo "Peso: " . $contextEvaluacion->getData()->getPesoExamenes() . "%";
+                                                                                                            }
+                                                                                                            ?>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                    <?php if ($contextComparacion->getData()['RealizacionExamenes']){?>
+                                                                                                        <div class="card">
+                                                                                                            <div class="card-body">
+                                                                                                                <h4 class="card-title">Comparación</h4>
+                                                                                                                <p class="card-text">
+                                                                                                                    <?php
+                                                                                                                    $differ = new Differ(explode("\n", $contextEvaluacion->getData()->getRealizacionExamenes()), explode("\n", $contextModEvaluacion->getData()->getRealizacionExamenes()), $differOptions);
                                                                                                                 $renderer = RendererFactory::make($rendererName, $rendererOptions); // or your own renderer object
                                                                                                                 $result = $renderer->render($differ);
                                                                                                                 echo $result;
                                                                                                                 
-                                                                                                            ?>
-                                                                                                        </p>
-                                                                                                    </div>
-                                                                                                    <div class="card-footer">
-                                                                                                        <?php
-                                                                                                        if ($contextModEvaluacion->getEvent() === FIND_MODEVALUACION_OK) {
-                                                                                                            if($contextModEvaluacion->getData()->getPesoExamenes() !== $contextEvaluacion->getData()->getPesoExamenes()){
-                                                                                                                echo "Peso: <b>" . $contextModEvaluacion->getData()->getPesoExamenes() . "%</b>";
-                                                                                                            }else{
-                                                                                                            echo "Peso: " . $contextModEvaluacion->getData()->getPesoExamenes() . "%";
+                                                                                                                ?>
+                                                                                                            </p>
+                                                                                                        </div>
+                                                                                                        <div class="card-footer">
+                                                                                                            <?php
+                                                                                                            if ($contextModEvaluacion->getEvent() === FIND_MODEVALUACION_OK) {
+                                                                                                                if($contextModEvaluacion->getData()->getPesoExamenes() !== $contextEvaluacion->getData()->getPesoExamenes()){
+                                                                                                                    echo "Peso: <b>" . $contextModEvaluacion->getData()->getPesoExamenes() . "%</b>";
+                                                                                                                }else{
+                                                                                                                    echo "Peso: " . $contextModEvaluacion->getData()->getPesoExamenes() . "%";
+                                                                                                                }
                                                                                                             }
-                                                                                                        }
-                                                                                                        ?>
+                                                                                                            ?>
+                                                                                                        </div>
                                                                                                     </div>
-                                                                                                </div>
                                                                                                 <?php }   ?>
                                                                                             </div>
                                                                                         </div>
@@ -2230,113 +2227,113 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                             <div class="card-header" id="headingTwo">
                                                                                                 <?php if ($contextComparacion->getData()['RealizacionExamenesI']) { ?>
                                                                                                     <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                                                                                                        Realización exámenes (Inglés)
+                                                                                                        Realización de los exámenes (Inglés)
                                                                                                     </button>
                                                                                                 <?php } else { ?>
                                                                                                     <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                                                                                                        Realización exámenes (Inglés)
+                                                                                                        Realización de los exámenes (Inglés)
                                                                                                     </button>
                                                                                                 <?php } ?>
                                                                                             </div>
                                                                                             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionEvaluacion">
                                                                                                 <div class="card-body">
                                                                                                   <div class="card">
-                                                                                                        <div class="card-body">
-                                                                                                            <h4 class="card-title">Consolidado</h4>
-                                                                                                            <p class="card-text">
-                                                                                                                <?php
-                                                                                                                if ($contextEvaluacion->getEvent() === FIND_EVALUACION_OK) {
-                                                                                                                    echo $contextEvaluacion->getData()->getRealizacionExamenesI();
-                                                                                                                }
-                                                                                                                ?>
-                                                                                                            </p>
-                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                    <?php if ($contextComparacion->getData()['RealizacionExamenesI']){?>
-                                                                                                <div class="card">
-                                                                                                    <div class="card-body">
-                                                                                                        <h4 class="card-title">Comparación</h4>
-                                                                                                        <p class="card-text">
-                                                                                                            <?php
-                                                                                                                $differ = new Differ(explode("\n", $contextEvaluacion->getData()->getRealizacionExamenesI()), explode("\n", $contextModEvaluacion->getData()->getRealizacionExamenesI()), $differOptions);
-                                                                                                                $renderer = RendererFactory::make($rendererName, $rendererOptions); // or your own renderer object
-                                                                                                                $result = $renderer->render($differ);
-                                                                                                                echo $result;
-                                                                                                                
-                                                                                                            ?>
-                                                                                                        </p>
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                                <?php }   ?>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    <?php } ?>
-                                                                                <?php } ?>
-
-                                                                                <!-- Pestaña realizacion actividades -->
-                                                                                <?php if ($contextConfiguracion->getData()->getRealizacionActividades() == true) { ?>
-                                                                                    <div class="card">
-                                                                                        <div class="card-header" id="headingThree">
-                                                                                            <h2 class="mb-0">
-                                                                                                <?php if ($contextComparacion->getData()['RealizacionActividades']) { ?>
-                                                                                                    <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
-                                                                                                        Realización actividades
-                                                                                                    </button>
-                                                                                                <?php } else { ?>
-                                                                                                    <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                                                                                        Realización actividades
-                                                                                                    </button>
-                                                                                                <?php } ?>
-                                                                                            </h2>
-                                                                                        </div>
-                                                                                        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionEvaluacion">
-                                                                                            <div class="card-body">
-                                                                                                <div class="card">
                                                                                                     <div class="card-body">
                                                                                                         <h4 class="card-title">Consolidado</h4>
                                                                                                         <p class="card-text">
                                                                                                             <?php
                                                                                                             if ($contextEvaluacion->getEvent() === FIND_EVALUACION_OK) {
-                                                                                                                echo $contextEvaluacion->getData()->getRealizacionActividades();
+                                                                                                                echo $contextEvaluacion->getData()->getRealizacionExamenesI();
                                                                                                             }
                                                                                                             ?>
                                                                                                         </p>
                                                                                                     </div>
-                                                                                                    <div class="card-footer">
+                                                                                                </div>
+                                                                                                <?php if ($contextComparacion->getData()['RealizacionExamenesI']){?>
+                                                                                                    <div class="card">
+                                                                                                        <div class="card-body">
+                                                                                                            <h4 class="card-title">Comparación</h4>
+                                                                                                            <p class="card-text">
+                                                                                                                <?php
+                                                                                                                $differ = new Differ(explode("\n", $contextEvaluacion->getData()->getRealizacionExamenesI()), explode("\n", $contextModEvaluacion->getData()->getRealizacionExamenesI()), $differOptions);
+                                                                                                                $renderer = RendererFactory::make($rendererName, $rendererOptions); // or your own renderer object
+                                                                                                                $result = $renderer->render($differ);
+                                                                                                                echo $result;
+                                                                                                                
+                                                                                                                ?>
+                                                                                                            </p>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                <?php }   ?>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                <?php } ?>
+                                                                            <?php } ?>
+
+                                                                            <!-- Pestaña realizacion actividades -->
+                                                                            <?php if ($contextConfiguracion->getData()->getRealizacionActividades() == true) { ?>
+                                                                                <div class="card">
+                                                                                    <div class="card-header" id="headingThree">
+                                                                                        <h2 class="mb-0">
+                                                                                            <?php if ($contextComparacion->getData()['RealizacionActividades']) { ?>
+                                                                                                <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                                                                                                    Realización de las actividades
+                                                                                                </button>
+                                                                                            <?php } else { ?>
+                                                                                                <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                                                                                    Realización de las actividades
+                                                                                                </button>
+                                                                                            <?php } ?>
+                                                                                        </h2>
+                                                                                    </div>
+                                                                                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionEvaluacion">
+                                                                                        <div class="card-body">
+                                                                                            <div class="card">
+                                                                                                <div class="card-body">
+                                                                                                    <h4 class="card-title">Consolidado</h4>
+                                                                                                    <p class="card-text">
                                                                                                         <?php
                                                                                                         if ($contextEvaluacion->getEvent() === FIND_EVALUACION_OK) {
-                                                                                                            echo "Peso: " . $contextEvaluacion->getData()->getPesoActividades() . "%";
+                                                                                                            echo $contextEvaluacion->getData()->getRealizacionActividades();
                                                                                                         }
                                                                                                         ?>
-                                                                                                    </div>
+                                                                                                    </p>
                                                                                                 </div>
-                                                                                                <?php if ($contextComparacion->getData()['RealizacionActividades']){?>
+                                                                                                <div class="card-footer">
+                                                                                                    <?php
+                                                                                                    if ($contextEvaluacion->getEvent() === FIND_EVALUACION_OK) {
+                                                                                                        echo "Peso: " . $contextEvaluacion->getData()->getPesoActividades() . "%";
+                                                                                                    }
+                                                                                                    ?>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <?php if ($contextComparacion->getData()['RealizacionActividades']){?>
                                                                                                 <div class="card">
                                                                                                     <div class="card-body">
                                                                                                         <h4 class="card-title">Comparación</h4>
                                                                                                         <p class="card-text">
                                                                                                             <?php
-                                                                                                                $differ = new Differ(explode("\n", $contextEvaluacion->getData()->getRealizacionActividades()), explode("\n", $contextModEvaluacion->getData()->getRealizacionActividades()), $differOptions);
+                                                                                                            $differ = new Differ(explode("\n", $contextEvaluacion->getData()->getRealizacionActividades()), explode("\n", $contextModEvaluacion->getData()->getRealizacionActividades()), $differOptions);
                                                                                                                 $renderer = RendererFactory::make($rendererName, $rendererOptions); // or your own renderer object
                                                                                                                 $result = $renderer->render($differ);
                                                                                                                 echo $result;
                                                                                                                 
-                                                                                                            ?>
-                                                                                                        </p>
-                                                                                                    </div>
-                                                                                                    <div class="card-footer">
-                                                                                                        <?php
-                                                                                                        if ($contextModEvaluacion->getEvent() === FIND_MODEVALUACION_OK) {
-                                                                                                            if($contextModEvaluacion->getData()->getPesoActividades() !== $contextEvaluacion->getData()->getPesoActividades()){
-                                                                                                                echo "Peso: <b>" . $contextModEvaluacion->getData()->getPesoActividades() . "%</b>";
-                                                                                                            }else{
-                                                                                                            echo "Peso: " . $contextModEvaluacion->getData()->getPesoActividades() . "%";
+                                                                                                                ?>
+                                                                                                            </p>
+                                                                                                        </div>
+                                                                                                        <div class="card-footer">
+                                                                                                            <?php
+                                                                                                            if ($contextModEvaluacion->getEvent() === FIND_MODEVALUACION_OK) {
+                                                                                                                if($contextModEvaluacion->getData()->getPesoActividades() !== $contextEvaluacion->getData()->getPesoActividades()){
+                                                                                                                    echo "Peso: <b>" . $contextModEvaluacion->getData()->getPesoActividades() . "%</b>";
+                                                                                                                }else{
+                                                                                                                    echo "Peso: " . $contextModEvaluacion->getData()->getPesoActividades() . "%";
+                                                                                                                }
                                                                                                             }
-                                                                                                        }
-                                                                                                        ?>
+                                                                                                            ?>
+                                                                                                        </div>
                                                                                                     </div>
-                                                                                                </div>
                                                                                                 <?php }   ?>
                                                                                             </div>
                                                                                         </div>
@@ -2349,11 +2346,11 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                                 <h2 class="mb-0">
                                                                                                     <?php if ($contextComparacion->getData()['RealizacionActividadesI']) { ?>
                                                                                                         <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
-                                                                                                            Realización actividades (Inglés)
+                                                                                                            Realización de las actividades (Inglés)
                                                                                                         </button>
                                                                                                     <?php } else { ?>
                                                                                                         <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                                                                                                            Realización actividades (Inglés)
+                                                                                                            Realización de las actividades (Inglés)
                                                                                                         </button>
                                                                                                     <?php } ?>
                                                                                                 </h2>
@@ -2373,107 +2370,107 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                                         </div>
                                                                                                     </div>
                                                                                                     <?php if ($contextComparacion->getData()['RealizacionActividadesI']){?>
-                                                                                                <div class="card">
-                                                                                                    <div class="card-body">
-                                                                                                        <h4 class="card-title">Comparación</h4>
-                                                                                                        <p class="card-text">
-                                                                                                            <?php
-                                                                                                                $differ = new Differ(explode("\n", $contextEvaluacion->getData()->getRealizacionActividadesI()), explode("\n", $contextModEvaluacion->getData()->getRealizacionActividadesI()), $differOptions);
+                                                                                                        <div class="card">
+                                                                                                            <div class="card-body">
+                                                                                                                <h4 class="card-title">Comparación</h4>
+                                                                                                                <p class="card-text">
+                                                                                                                    <?php
+                                                                                                                    $differ = new Differ(explode("\n", $contextEvaluacion->getData()->getRealizacionActividadesI()), explode("\n", $contextModEvaluacion->getData()->getRealizacionActividadesI()), $differOptions);
                                                                                                                 $renderer = RendererFactory::make($rendererName, $rendererOptions); // or your own renderer object
                                                                                                                 $result = $renderer->render($differ);
                                                                                                                 echo $result;
                                                                                                                 
-                                                                                                            ?>
-                                                                                                        </p>
+                                                                                                                ?>
+                                                                                                            </p>
+                                                                                                        </div>
                                                                                                     </div>
-                                                                                                </div>
                                                                                                 <?php }   ?>
-                                                                                                </div>
                                                                                             </div>
                                                                                         </div>
-                                                                                    <?php } ?>
+                                                                                    </div>
                                                                                 <?php } ?>
+                                                                            <?php } ?>
 
-                                                                                <!-- Pestaña realizacion contextLaboratorio -->
-                                                                                <?php if ($contextConfiguracion->getData()->getRealizacionLaboratorio() == true) { ?>
-                                                                                    <div class="card">
-                                                                                        <div class="card-header" id="headingFive">
-                                                                                            <h2 class="mb-0">
-                                                                                                <?php if ($contextComparacion->getData()['RealizacionLaboratorio']) { ?>
-                                                                                                    <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
-                                                                                                        Realización Laboratorio
-                                                                                                    </button>
-                                                                                                <?php } else { ?>
-                                                                                                    <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                                                                                                        Realización Laboratorio
-                                                                                                    </button>
-                                                                                                <?php } ?>
-                                                                                            </h2>
-                                                                                        </div>
-                                                                                        <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionEvaluacion">
-                                                                                            <div class="card-body">
-                                                                                                <div class="card">
-                                                                                                    <div class="card-body">
-                                                                                                        <h4 class="card-title">Consolidado</h4>
-                                                                                                        <p class="card-text">
-                                                                                                            <?php
-                                                                                                            if ($contextEvaluacion->getEvent() === FIND_EVALUACION_OK) {
-                                                                                                                echo $contextEvaluacion->getData()->getRealizacionLaboratorio();
-                                                                                                            }
-                                                                                                            ?>
-                                                                                                        </p>
-                                                                                                    </div>
-                                                                                                    <div class="card-footer">
+                                                                            <!-- Pestaña realizacion Laboratorio -->
+                                                                            <?php if ($contextConfiguracion->getData()->getRealizacionLaboratorio() == true) { ?>
+                                                                                <div class="card">
+                                                                                    <div class="card-header" id="headingFive">
+                                                                                        <h2 class="mb-0">
+                                                                                            <?php if ($contextComparacion->getData()['RealizacionLaboratorio']) { ?>
+                                                                                                <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
+                                                                                                    Realización del laboratorio
+                                                                                                </button>
+                                                                                            <?php } else { ?>
+                                                                                                <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                                                                                    Realización del laboratorio
+                                                                                                </button>
+                                                                                            <?php } ?>
+                                                                                        </h2>
+                                                                                    </div>
+                                                                                    <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionEvaluacion">
+                                                                                        <div class="card-body">
+                                                                                            <div class="card">
+                                                                                                <div class="card-body">
+                                                                                                    <h4 class="card-title">Consolidado</h4>
+                                                                                                    <p class="card-text">
                                                                                                         <?php
                                                                                                         if ($contextEvaluacion->getEvent() === FIND_EVALUACION_OK) {
-                                                                                                            echo "Peso: " . $contextEvaluacion->getData()->getPesoLaboratorio() . "%";
+                                                                                                            echo $contextEvaluacion->getData()->getRealizacionLaboratorio();
                                                                                                         }
                                                                                                         ?>
-                                                                                                    </div>
+                                                                                                    </p>
                                                                                                 </div>
-                                                                                                <?php if ($contextComparacion->getData()['RealizacionLaboratorio']){?>
+                                                                                                <div class="card-footer">
+                                                                                                    <?php
+                                                                                                    if ($contextEvaluacion->getEvent() === FIND_EVALUACION_OK) {
+                                                                                                        echo "Peso: " . $contextEvaluacion->getData()->getPesoLaboratorio() . "%";
+                                                                                                    }
+                                                                                                    ?>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <?php if ($contextComparacion->getData()['RealizacionLaboratorio']){?>
                                                                                                 <div class="card">
                                                                                                     <div class="card-body">
                                                                                                         <h4 class="card-title">Comparación</h4>
                                                                                                         <p class="card-text">
                                                                                                             <?php
-                                                                                                                $differ = new Differ(explode("\n", $contextEvaluacion->getData()->getRealizacionLaboratorio()), explode("\n", $contextModEvaluacion->getData()->getRealizacionLaboratorio()), $differOptions);
+                                                                                                            $differ = new Differ(explode("\n", $contextEvaluacion->getData()->getRealizacionLaboratorio()), explode("\n", $contextModEvaluacion->getData()->getRealizacionLaboratorio()), $differOptions);
                                                                                                                 $renderer = RendererFactory::make($rendererName, $rendererOptions); // or your own renderer object
                                                                                                                 $result = $renderer->render($differ);
                                                                                                                 echo $result;
                                                                                                                 
-                                                                                                            ?>
-                                                                                                        </p>
-                                                                                                    </div>
-                                                                                                    <div class="card-footer">
-                                                                                                        <?php
-                                                                                                        if ($contextModEvaluacion->getEvent() === FIND_MODEVALUACION_OK) {
-                                                                                                            if($contextModEvaluacion->getData()->getPesoLaboratorio() !== $contextEvaluacion->getData()->getPesoLaboratorio()){
-                                                                                                                echo "Peso: <b>" . $contextModEvaluacion->getData()->getPesoLaboratorio() . "%</b>";
-                                                                                                            }else{
-                                                                                                            echo "Peso: " . $contextModEvaluacion->getData()->getPesoLaboratorio() . "%";
+                                                                                                                ?>
+                                                                                                            </p>
+                                                                                                        </div>
+                                                                                                        <div class="card-footer">
+                                                                                                            <?php
+                                                                                                            if ($contextModEvaluacion->getEvent() === FIND_MODEVALUACION_OK) {
+                                                                                                                if($contextModEvaluacion->getData()->getPesoLaboratorio() !== $contextEvaluacion->getData()->getPesoLaboratorio()){
+                                                                                                                    echo "Peso: <b>" . $contextModEvaluacion->getData()->getPesoLaboratorio() . "%</b>";
+                                                                                                                }else{
+                                                                                                                    echo "Peso: " . $contextModEvaluacion->getData()->getPesoLaboratorio() . "%";
+                                                                                                                }
                                                                                                             }
-                                                                                                        }
-                                                                                                        ?>
+                                                                                                            ?>
+                                                                                                        </div>
                                                                                                     </div>
-                                                                                                </div>
                                                                                                 <?php }   ?>
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>
 
-                                                                                    <!-- Pestaña realizacion contextLaboratorio (inglés) -->
+                                                                                    <!-- Pestaña realizacion Laboratorio (inglés) -->
                                                                                     <?php if (!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())) { ?>
                                                                                         <div class="card">
                                                                                             <div class="card-header" id="headingSix">
                                                                                                 <h2 class="mb-0">
                                                                                                     <?php if ($contextComparacion->getData()['RealizacionLaboratorioI']) { ?>
                                                                                                         <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseSix" aria-expanded="true" aria-controls="collapseSix">
-                                                                                                            Realización Laboratorio (Inglés)
+                                                                                                            Realización del laboratorio (Inglés)
                                                                                                         </button>
                                                                                                     <?php } else { ?>
                                                                                                         <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
-                                                                                                            Realización Laboratorio (Inglés)
+                                                                                                            Realización del laboratorio (Inglés)
                                                                                                         </button>
                                                                                                     <?php } ?>
                                                                                                 </h2>
@@ -2481,22 +2478,6 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                             <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionEvaluacion">
                                                                                                 <div class="card-body">
                                                                                                     <div class="card">
-                                                                                                        <div class="card">
-                                                                                                            <div class="card-body">
-                                                                                                                <h4 class="card-title">Borrador</h4>
-                                                                                                                <p class="card-text">
-                                                                                                                    <?php
-                                                                                                                    if ($contextModEvaluacion->getEvent() === FIND_MODEVALUACION_OK) {
-                                                                                                                        if ($contextComparacion->getData()['RealizacionLaboratorioI'])
-                                                                                                                            echo '<b style="font-size: 18px">' . $contextModEvaluacion->getData()->getRealizacionLaboratorioI() . '</b>';
-                                                                                                                        else
-                                                                                                                            echo $contextModEvaluacion->getData()->getRealizacionLaboratorioI();
-                                                                                                                    }
-                                                                                                                    ?>
-                                                                                                                </p>
-                                                                                                            </div>
-                                                                                                        </div>
-                                                                                                        <div class="card">
                                                                                                         <div class="card-body">
                                                                                                             <h4 class="card-title">Consolidado</h4>
                                                                                                             <p class="card-text">
@@ -2509,45 +2490,94 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                                         </div>
                                                                                                     </div>
                                                                                                     <?php if ($contextComparacion->getData()['RealizacionLaboratorioI']){?>
-                                                                                                <div class="card">
-                                                                                                    <div class="card-body">
-                                                                                                        <h4 class="card-title">Comparación</h4>
-                                                                                                        <p class="card-text">
-                                                                                                            <?php
-                                                                                                                $differ = new Differ(explode("\n", $contextEvaluacion->getData()->getRealizacionLaboratorioI()), explode("\n", $contextModEvaluacion->getData()->getRealizacionLaboratorioI()), $differOptions);
+                                                                                                        <div class="card">
+                                                                                                            <div class="card-body">
+                                                                                                                <h4 class="card-title">Comparación</h4>
+                                                                                                                <p class="card-text">
+                                                                                                                    <?php
+                                                                                                                    $differ = new Differ(explode("\n", $contextEvaluacion->getData()->getRealizacionLaboratorioI()), explode("\n", $contextModEvaluacion->getData()->getRealizacionLaboratorioI()), $differOptions);
                                                                                                                 $renderer = RendererFactory::make($rendererName, $rendererOptions); // or your own renderer object
                                                                                                                 $result = $renderer->render($differ);
                                                                                                                 echo $result;
                                                                                                                 
-                                                                                                            ?>
-                                                                                                        </p>
+                                                                                                                ?>
+                                                                                                            </p>
+                                                                                                        </div>
                                                                                                     </div>
-                                                                                                </div>
                                                                                                 <?php }   ?>
-                                                                                                    </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                <?php } ?>
+                                                                            <?php } ?>
+
+                                                                            <!-- Pestaña calificacion final ordinaria -->
+                                                                            <?php if ($contextConfiguracion->getData()->getCalificacionFinal() == true) { ?>
+                                                                                <div class="card">
+                                                                                    <div class="card-header" id="headingSeven">
+                                                                                        <h2 class="mb-0">
+                                                                                            <?php if ($contextComparacion->getData()['CalificacionFinal']) { ?>
+                                                                                                <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="true" aria-controls="collapseSeven">
+                                                                                                    Calificación final
+                                                                                                </button>
+                                                                                            <?php } else { ?>
+                                                                                                <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+                                                                                                    Calificación final
+                                                                                                </button>
+                                                                                            <?php } ?>
+                                                                                        </h2>
+                                                                                    </div>
+                                                                                    <div id="collapseSeven" class="collapse" aria-labelledby="headingSeven" data-parent="#accordionEvaluacion">
+                                                                                        <div class="card-body">
+                                                                                            <div class="card">
+                                                                                                <div class="card-body">
+                                                                                                    <h4 class="card-title">Borrador</h4>
+                                                                                                    <p class="card-text">
+                                                                                                        <?php
+                                                                                                        if ($contextModEvaluacion->getEvent() === FIND_MODEVALUACION_OK) {
+                                                                                                            if ($contextComparacion->getData()['CalificacionFinal'])
+                                                                                                                echo '<b style="font-size: 18px">' . $contextModEvaluacion->getData()->getCalificacionFinal() . '</b>';
+                                                                                                            else
+                                                                                                                echo $contextModEvaluacion->getData()->getCalificacionFinal();
+                                                                                                        }
+                                                                                                        ?>
+                                                                                                    </p>
+                                                                                                </div>
+                                                                                            </div>
+
+                                                                                            <div class="card">
+                                                                                                <div class="card-body">
+                                                                                                    <h4 class="card-title">Consolidado</h4>
+                                                                                                    <p class="card-text">
+                                                                                                        <?php
+                                                                                                        if ($contextEvaluacion->getEvent() === FIND_EVALUACION_OK) {
+                                                                                                            echo $contextEvaluacion->getData()->getCalificacionFinal();
+                                                                                                        }
+                                                                                                        ?>
+                                                                                                    </p>
                                                                                                 </div>
                                                                                             </div>
                                                                                         </div>
-                                                                                    <?php } ?>
-                                                                                <?php } ?>
+                                                                                    </div>
+                                                                                </div>
 
-                                                                                <!-- Pestaña calificacion final  ordinaria -->
-                                                                                <?php if ($contextConfiguracion->getData()->getCalificacionFinal() == true) { ?>
+                                                                                <!-- Pestaña calificacion final ordinaria (inglés) -->
+                                                                                <?php if (!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())) { ?>
                                                                                     <div class="card">
-                                                                                        <div class="card-header" id="headingSeven">
+                                                                                        <div class="card-header" id="headingEight">
                                                                                             <h2 class="mb-0">
-                                                                                                <?php if ($contextComparacion->getData()['CalificacionFinal']) { ?>
-                                                                                                    <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="true" aria-controls="collapseSeven">
-                                                                                                        Calificación final ordinaria
+                                                                                                <?php if ($contextComparacion->getData()['CalificacionFinalI']) { ?>
+                                                                                                    <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseEight" aria-expanded="true" aria-controls="collapseEight">
+                                                                                                        Calificación final (Inglés)
                                                                                                     </button>
                                                                                                 <?php } else { ?>
-                                                                                                    <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
-                                                                                                        Calificación final ordinaria
+                                                                                                    <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
+                                                                                                        Calificación final (Inglés)
                                                                                                     </button>
                                                                                                 <?php } ?>
                                                                                             </h2>
                                                                                         </div>
-                                                                                        <div id="collapseSeven" class="collapse" aria-labelledby="headingSeven" data-parent="#accordionEvaluacion">
+                                                                                        <div id="collapseEight" class="collapse" aria-labelledby="headingEight" data-parent="#accordionEvaluacion">
                                                                                             <div class="card-body">
                                                                                                 <div class="card">
                                                                                                     <div class="card-body">
@@ -2555,10 +2585,10 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                                         <p class="card-text">
                                                                                                             <?php
                                                                                                             if ($contextModEvaluacion->getEvent() === FIND_MODEVALUACION_OK) {
-                                                                                                                if ($contextComparacion->getData()['CalificacionFinal'])
-                                                                                                                    echo '<b style="font-size: 18px">' . $contextModEvaluacion->getData()->getCalificacionFinal() . '</b>';
+                                                                                                                if ($contextComparacion->getData()['CalificacionFinalI'])
+                                                                                                                    echo '<b style="font-size: 18px">' . $contextModEvaluacion->getData()->getCalificacionFinalI() . '</b>';
                                                                                                                 else
-                                                                                                                    echo $contextModEvaluacion->getData()->getCalificacionFinal();
+                                                                                                                    echo $contextModEvaluacion->getData()->getCalificacionFinalI();
                                                                                                             }
                                                                                                             ?>
                                                                                                         </p>
@@ -2571,7 +2601,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                                         <p class="card-text">
                                                                                                             <?php
                                                                                                             if ($contextEvaluacion->getEvent() === FIND_EVALUACION_OK) {
-                                                                                                                echo $contextEvaluacion->getData()->getCalificacionFinal();
+                                                                                                                echo $contextEvaluacion->getData()->getCalificacionFinalI();
                                                                                                             }
                                                                                                             ?>
                                                                                                         </p>
@@ -2580,422 +2610,145 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>
-
-                                                                                    <!-- Pestaña calificacion final ordinaria (inglés) -->
-                                                                                    <?php if (!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())) { ?>
-                                                                                        <div class="card">
-                                                                                            <div class="card-header" id="headingEight">
-                                                                                                <h2 class="mb-0">
-                                                                                                    <?php if ($contextComparacion->getData()['CalificacionFinalI']) { ?>
-                                                                                                        <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseEight" aria-expanded="true" aria-controls="collapseEight">
-                                                                                                            Calificación final ordinaria (Inglés)
-                                                                                                        </button>
-                                                                                                    <?php } else { ?>
-                                                                                                        <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
-                                                                                                            Calificación final ordinaria (Inglés)
-                                                                                                        </button>
-                                                                                                    <?php } ?>
-                                                                                                </h2>
-                                                                                            </div>
-                                                                                            <div id="collapseEight" class="collapse" aria-labelledby="headingEight" data-parent="#accordionEvaluacion">
-                                                                                                <div class="card-body">
-                                                                                                    <div class="card">
-                                                                                                        <div class="card-body">
-                                                                                                            <h4 class="card-title">Borrador</h4>
-                                                                                                            <p class="card-text">
-                                                                                                                <?php
-                                                                                                                if ($contextModEvaluacion->getEvent() === FIND_MODEVALUACION_OK) {
-                                                                                                                    if ($contextComparacion->getData()['CalificacionFinalI'])
-                                                                                                                        echo '<b style="font-size: 18px">' . $contextModEvaluacion->getData()->getCalificacionFinalI() . '</b>';
-                                                                                                                    else
-                                                                                                                        echo $contextModEvaluacion->getData()->getCalificacionFinalI();
-                                                                                                                }
-                                                                                                                ?>
-                                                                                                            </p>
-                                                                                                        </div>
-                                                                                                    </div>
-
-                                                                                                    <div class="card">
-                                                                                                        <div class="card-body">
-                                                                                                            <h4 class="card-title">Consolidado</h4>
-                                                                                                            <p class="card-text">
-                                                                                                                <?php
-                                                                                                                if ($contextEvaluacion->getEvent() === FIND_EVALUACION_OK) {
-                                                                                                                    echo $contextEvaluacion->getData()->getCalificacionFinalI();
-                                                                                                                }
-                                                                                                                ?>
-                                                                                                            </p>
-                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    <?php } ?>
                                                                                 <?php } ?>
-                                                                            </div>
-
-                                                                            <?php if ($contextAsignatura->getData()->getEstado()==="B" && ($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['coordinacion'] == true || unserialize($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['permisos'])->getPermisoEvaluacion() == true)) { ?>
-                                                                                <div class="text-right">
-
-                                                                                    <a href="evaluacion.php?IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
-                                                                                        <button type="button" class="btn btn-success" id="btn-form">
-                                                                                            Crear Nuevo Borrador
-                                                                                        </button>
-                                                                                    </a>
-                                                                                    <?php if ($contextModEvaluacion->getEvent() === FIND_MODEVALUACION_OK) { ?>
-                                                                                        <a href="evaluacion.php?IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdModAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
-                                                                                            <button type="button" class="btn btn-warning" id="btn-form">
-                                                                                                Modificar Borrador
-                                                                                            </button>
-                                                                                        </a>
-                                                                                        <a href="borrarEvaluacion.php?IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdModAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
-                                                                                            <button type="button" class="btn btn-danger" id="btn-form">
-                                                                                                Borrar Borrador
-                                                                                            </button>
-                                                                                        </a>
-                                                                                    <?php } ?>
-                                                                                </div>
                                                                             <?php } ?>
                                                                         </div>
-                                                                    <?php } ?>
 
-                                                                    <!--Coordinacion-->
-                                                                    <?php if ($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['coordinacion'] == true) { ?>
-                                                                        <div class="tab-pane fade" id="nav-coordinacion" role="tabpanel" aria-labelledby="nav-coordinacion-tab">
-                                                                            <div class="accordion" id="accordionCoordinacion">
-                                                                                <div class="card-header" id="headingOne">
-                                                                                    <h2 class="mb-0">
-                                                                                        <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                                                                                            Configuración
+                                                                        <?php if ($contextAsignatura->getData()->getEstado()==="B" && ($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['coordinacion'] == true || unserialize($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['permisos'])->getPermisoEvaluacion() == true)) { ?>
+                                                                            <div class="text-right">
+
+                                                                                <a href="evaluacion.php?IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
+                                                                                    <button type="button" class="btn btn-success" id="btn-form">
+                                                                                        Crear Nuevo Borrador
+                                                                                    </button>
+                                                                                </a>
+                                                                                <?php if ($contextModEvaluacion->getEvent() === FIND_MODEVALUACION_OK) { ?>
+                                                                                    <a href="evaluacion.php?IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdModAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
+                                                                                        <button type="button" class="btn btn-warning" id="btn-form">
+                                                                                            Modificar Borrador
                                                                                         </button>
-                                                                                    </h2>
-                                                                                </div>
-                                                                                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionCoordinacion">
-                                                                                    <div class="card-body">
-                                                                                        <div class="card">
-                                                                                            <div class="card">
-                                                                                                <div class="card-body">
-                                                                                                    <p class="card-text">
-                                                                                                        <?php
-                                                                                                        if ($contextConfiguracion->getData()->getConocimientosPrevios()) {
-                                                                                                            echo '<p>✔️<b>Conocimientos Previos</b></p>';
-                                                                                                        } else {
-                                                                                                            echo '<p>❌Conocimientos Previos</p>';
-                                                                                                        }
-
-                                                                                                        if ($contextConfiguracion->getData()->getBreveDescripcion()) {
-                                                                                                            echo '<p>✔️<b>Breve Descripción</b></p>';
-                                                                                                        } else {
-                                                                                                            echo '<p>❌Breve Descripción</p>';
-                                                                                                        }
-
-
-                                                                                                        if ($contextConfiguracion->getData()->getProgramaTeorico()) {
-                                                                                                            echo '<p>✔️<b>Programa Teorico</b></p>';
-                                                                                                        } else {
-                                                                                                            echo '<p>❌Programa Teorico</p>';
-                                                                                                        }
-
-
-                                                                                                        if ($contextConfiguracion->getData()->getComGenerales()) {
-                                                                                                            echo '<p>✔️<b>Generales</b></p>';
-                                                                                                        } else {
-                                                                                                            echo '<p>❌Generales</p>';
-                                                                                                        }
-
-                                                                                                        if ($contextConfiguracion->getData()->getComEspecificas()) {
-                                                                                                            echo '<p>✔️<b>Específicas</b></p>';
-                                                                                                        } else {
-                                                                                                            echo '<p>❌Específicas</p>';
-                                                                                                        }
-
-                                                                                                        if ($contextConfiguracion->getData()->getComBasicas()) {
-                                                                                                            echo '<p>✔️<b>Básicas y Transversales</b></p>';
-                                                                                                        } else {
-                                                                                                            echo '<p>❌Básicas y Transversales</p>';
-                                                                                                        }
-
-                                                                                                        if ($contextConfiguracion->getData()->getResultadosAprendizaje()) {
-                                                                                                            echo '<p>✔️<b>Resultados Aprendizaje</b></p>';
-                                                                                                        } else {
-                                                                                                            echo '<p>❌Resultados aprendizaje</p>';
-                                                                                                        }
-
-                                                                                                        if ($contextConfiguracion->getData()->getMetodologia()) {
-                                                                                                            echo '<p>✔️<b>Metodología</b></p>';
-                                                                                                        } else {
-                                                                                                            echo '<p>❌Metodología</p>';
-                                                                                                        }
-                                                                                                        if ($contextConfiguracion->getData()->getCitasBibliograficas()) {
-                                                                                                            echo '<p>✔️<b>Citas Bibliográficas</b></p>';
-                                                                                                        } else {
-                                                                                                            echo '<p>❌Citas Bibliográficas</p>';
-                                                                                                        }
-
-                                                                                                        if ($contextConfiguracion->getData()->getRecursosInternet()) {
-                                                                                                            echo '<p>✔️<b>Recursos en Internet</b></p>';
-                                                                                                        } else {
-                                                                                                            echo '<p>❌Recursos en Internet</p>';
-                                                                                                        }
-
-                                                                                                        if ($contextConfiguracion->getData()->getRealizacionExamenes()) {
-                                                                                                            echo '<p>✔️<b>Realización de Exámenes</b></p>';
-                                                                                                        } else {
-                                                                                                            echo '<p>❌Realización de Exámenes</p>';
-                                                                                                        }
-                                                                                                        if ($contextConfiguracion->getData()->getCalificacionFinal()) {
-                                                                                                            echo '<p>✔️<b>Calificación Final Ordinaria</b></p>';
-                                                                                                        } else {
-                                                                                                            echo '<p>❌Calificación Final Ordinaria</p>';
-                                                                                                        }
-
-                                                                                                        if ($contextConfiguracion->getData()->getRealizacionActividades()) {
-                                                                                                            echo '<p>✔️<b>Realización de Activiades</b></p>';
-                                                                                                        } else {
-                                                                                                            echo '<p>❌Realización de Actividades</p>';
-                                                                                                        }
-
-                                                                                                        if ($contextConfiguracion->getData()->getRealizacionLaboratorio()) {
-                                                                                                            echo '<p>✔️<b>Realización de Laboratorio</b></p>';
-                                                                                                        } else {
-                                                                                                            echo '<p>❌Realización de Laboratorio</p>';
-                                                                                                        }
-                                                                                                        ?>
-                                                                                                        <div class="text-right">
-                                                                                                            <a href="configuracion.php?idAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
-                                                                                                                <button type="button" class="btn btn-primary" id="btn-form">
-                                                                                                                    Modificar Configuración
-                                                                                                                </button>
-                                                                                                            </a>
-                                                                                                        </div>
-                                                                                                    </p>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-
-
-                                                                                <!--Permisos-->
-                                                                                <div class="card-header" id="headingTwo">
-                                                                                    <h2 class="mb-0">
-                                                                                        <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                                                                            Permisos
+                                                                                    </a>
+                                                                                    <a href="borrarEvaluacion.php?IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdModAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
+                                                                                        <button type="button" class="btn btn-danger" id="btn-form">
+                                                                                            Borrar Borrador
                                                                                         </button>
-                                                                                    </h2>
-                                                                                </div>
-                                                                                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionCoordinacion">
-                                                                                    <div class="card-body">
+                                                                                    </a>
+                                                                                <?php } ?>
+                                                                            </div>
+                                                                        <?php } ?>
+                                                                    </div>
+                                                                <?php } ?>
+
+                                                                <!--Coordinacion-->
+                                                                <?php if ($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['coordinacion'] == true) { ?>
+                                                                    <div class="tab-pane fade" id="nav-coordinacion" role="tabpanel" aria-labelledby="nav-coordinacion-tab">
+                                                                        <div class="accordion" id="accordionCoordinacion">
+                                                                            <div class="card-header" id="headingOne">
+                                                                                <h2 class="mb-0">
+                                                                                    <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                                                                        Configuración
+                                                                                    </button>
+                                                                                </h2>
+                                                                            </div>
+                                                                            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionCoordinacion">
+                                                                                <div class="card-body">
+                                                                                    <div class="card">
                                                                                         <div class="card">
-                                                                                            <div class="card">
-                                                                                                <div class="card-body">
+                                                                                            <div class="card-body">
+                                                                                                <p class="card-text">
                                                                                                     <?php
+                                                                                                    if ($contextConfiguracion->getData()->getConocimientosPrevios()) {
+                                                                                                        echo '<p>✔️<b>Conocimientos Previos</b></p>';
+                                                                                                    } else {
+                                                                                                        echo '<p>❌Conocimientos Previos</p>';
+                                                                                                    }
 
-                                                                                                    $context = new es\ucm\Context(FIND_PERMISOS, $contextAsignatura->getData()->getIdAsignatura());
-                                                                                                    $permisos = $controller->action($context);
-                                                                                                    foreach ($permisos->getData() as $permiso) {
-                                                                                                        $context = new es\ucm\Context(FIND_PROFESOR, $permiso->getEmailProfesor());
-                                                                                                        $profesor = $controller->action($context);
-                                                                                                        echo '<div><h4>' . $profesor->getData()->getNombre() . '</h4>
-                                                                                                        <a href="permisos.php?emailProfesor=' . $permiso->getEmailProfesor() . '&idAsignatura=' . $permiso->getIdAsignatura() . '">
-                                                                                                        <button type="button" class="btn btn-primary" id="btn-form">
-                                                                                                        Modificar Permisos
-                                                                                                        </button>
-                                                                                                        </a></div>';
-                                                                                                        echo '<div class="table-responsive text-center">
-                                                                                                        <table class="table table-sm table-hover table-borderless">
-                                                                                                        <thead>
-                                                                                                        <tr>
-                                                                                                        <th scope="col">Programa</th>
-                                                                                                        <th scope="col">Competencias</th>
-                                                                                                        <th scope="col">Metodología</th>
-                                                                                                        <th scope="col">Bibliografía</th>
-                                                                                                        <th scope="col">Grupo Laboratorio</th>
-                                                                                                        <th scope="col">Grupo Clase</th>
-                                                                                                        <th scope="col">Evaluación</th>
-                                                                                                        </tr>
-                                                                                                        </thead> <tbody><tr scope="row">';
-                                                                                                        if ($permiso->getPermisoPrograma() === '0') {
-                                                                                                            echo '<td>❌</td>';
-                                                                                                        } elseif ($permiso->getPermisoPrograma() === '1') {
-                                                                                                            echo '<td>Administración</td>';
-                                                                                                        } elseif ($permiso->getPermisoPrograma() === '2') {
-                                                                                                            echo '<td>Modificación</td>';
-                                                                                                        } elseif ($permiso->getPermisoPrograma() === '3') {
-                                                                                                            echo '<td>Administración y Modificación </td>';
-                                                                                                        } elseif ($permiso->getPermisoPrograma() === '4') {
-                                                                                                            echo '<td>Lectura</td>';
-                                                                                                        } elseif ($permiso->getPermisoPrograma() === '5') {
-                                                                                                            echo '<td>Lectura y Administración</td>';
-                                                                                                        } elseif ($permiso->getPermisoPrograma() === '6') {
-                                                                                                            echo '<td>Lectura y Modificacion</td>';
-                                                                                                        } elseif ($permiso->getPermisoPrograma() === '7') {
-                                                                                                            echo '<td>Todos</td>';
-                                                                                                        }
-                                                                                                        if ($permiso->getPermisoCompetencias() === '0') {
-                                                                                                            echo '<td>❌</td>';
-                                                                                                        } elseif ($permiso->getPermisoCompetencias() === '1') {
-                                                                                                            echo '<td>Administración</td>';
-                                                                                                        } elseif ($permiso->getPermisoCompetencias() === '2') {
-                                                                                                            echo '<td>Modificación</td>';
-                                                                                                        } elseif ($permiso->getPermisoCompetencias() === '3') {
-                                                                                                            echo '<td>Administración y Modificación </td>';
-                                                                                                        } elseif ($permiso->getPermisoCompetencias() === '4') {
-                                                                                                            echo '<td>Lectura</td>';
-                                                                                                        } elseif ($permiso->getPermisoCompetencias() === '5') {
-                                                                                                            echo '<td>Lectura y Administración</td>';
-                                                                                                        } elseif ($permiso->getPermisoCompetencias() === '6') {
-                                                                                                            echo '<td>Lectura y Modificacion</td>';
-                                                                                                        } elseif ($permiso->getPermisoCompetencias() === '7') {
-                                                                                                            echo '<td>Todos</td>';
-                                                                                                        }
-                                                                                                        if ($permiso->getPermisoMetodologia() === '0') {
-                                                                                                            echo '<td>❌</td>';
-                                                                                                        } elseif ($permiso->getPermisoMetodologia() === '1') {
-                                                                                                            echo '<td>Administración</td>';
-                                                                                                        } elseif ($permiso->getPermisoMetodologia() === '2') {
-                                                                                                            echo '<td>Modificación</td>';
-                                                                                                        } elseif ($permiso->getPermisoMetodologia() === '3') {
-                                                                                                            echo '<td>Administración y Modificación </td>';
-                                                                                                        } elseif ($permiso->getPermisoMetodologia() === '4') {
-                                                                                                            echo '<td>Lectura</td>';
-                                                                                                        } elseif ($permiso->getPermisoMetodologia() === '5') {
-                                                                                                            echo '<td>Lectura y Administración</td>';
-                                                                                                        } elseif ($permiso->getPermisoMetodologia() === '6') {
-                                                                                                            echo '<td>Lectura y Modificacion</td>';
-                                                                                                        } elseif ($permiso->getPermisoMetodologia() === '7') {
-                                                                                                            echo '<td>Todos</td>';
-                                                                                                        }
-                                                                                                        if ($permiso->getPermisoBibliografia() === '0') {
-                                                                                                            echo '<td>❌</td>';
-                                                                                                        } elseif ($permiso->getPermisoBibliografia() === '1') {
-                                                                                                            echo '<td>Administración</td>';
-                                                                                                        } elseif ($permiso->getPermisoBibliografia() === '2') {
-                                                                                                            echo '<td>Modificación</td>';
-                                                                                                        } elseif ($permiso->getPermisoBibliografia() === '3') {
-                                                                                                            echo '<td>Administración y Modificación </td>';
-                                                                                                        } elseif ($permiso->getPermisoBibliografia() === '4') {
-                                                                                                            echo '<td>Lectura</td>';
-                                                                                                        } elseif ($permiso->getPermisoBibliografia() === '5') {
-                                                                                                            echo '<td>Lectura y Administración</td>';
-                                                                                                        } elseif ($permiso->getPermisoBibliografia() === '6') {
-                                                                                                            echo '<td>Lectura y Modificacion</td>';
-                                                                                                        } elseif ($permiso->getPermisoBibliografia() === '7') {
-                                                                                                            echo '<td>Todos</td>';
-                                                                                                        }
-                                                                                                        if ($permiso->getPermisoGrupoLaboratorio() === '0') {
-                                                                                                            echo '<td>❌</td>';
-                                                                                                        } elseif ($permiso->getPermisoGrupoLaboratorio() === '1') {
-                                                                                                            echo '<td>Administración</td>';
-                                                                                                        } elseif ($permiso->getPermisoGrupoLaboratorio() === '2') {
-                                                                                                            echo '<td>Modificación</td>';
-                                                                                                        } elseif ($permiso->getPermisoGrupoLaboratorio() === '3') {
-                                                                                                            echo '<td>Administración y Modificación </td>';
-                                                                                                        } elseif ($permiso->getPermisoGrupoLaboratorio() === '4') {
-                                                                                                            echo '<td>Lectura</td>';
-                                                                                                        } elseif ($permiso->getPermisoGrupoLaboratorio() === '5') {
-                                                                                                            echo '<td>Lectura y Administración</td>';
-                                                                                                        } elseif ($permiso->getPermisoGrupoLaboratorio() === '6') {
-                                                                                                            echo '<td>Lectura y Modificacion</td>';
-                                                                                                        } elseif ($permiso->getPermisoGrupoLaboratorio() === '7') {
-                                                                                                            echo '<td>Todos</td>';
-                                                                                                        }
-                                                                                                        if ($permiso->getPermisoGrupoClase() === '0') {
-                                                                                                            echo '<td>❌</td>';
-                                                                                                        } elseif ($permiso->getPermisoGrupoClase() === '1') {
-                                                                                                            echo '<td>Administración</td>';
-                                                                                                        } elseif ($permiso->getPermisoGrupoClase() === '2') {
-                                                                                                            echo '<td>Modificación</td>';
-                                                                                                        } elseif ($permiso->getPermisoGrupoClase() === '3') {
-                                                                                                            echo '<td>Administración y Modificación </td>';
-                                                                                                        } elseif ($permiso->getPermisoGrupoClase() === '4') {
-                                                                                                            echo '<td>Lectura</td>';
-                                                                                                        } elseif ($permiso->getPermisoGrupoClase() === '5') {
-                                                                                                            echo '<td>Lectura y Administración</td>';
-                                                                                                        } elseif ($permiso->getPermisoGrupoClase() === '6') {
-                                                                                                            echo '<td>Lectura y Modificacion</td>';
-                                                                                                        } elseif ($permiso->getPermisoGrupoClase() === '7') {
-                                                                                                            echo '<td>Todos</td>';
-                                                                                                        }
-                                                                                                        if ($permiso->getPermisoEvaluacion() === '0') {
-                                                                                                            echo '<td>❌</td>';
-                                                                                                        } elseif ($permiso->getPermisoEvaluacion() === '1') {
-                                                                                                            echo '<td>Administración</td>';
-                                                                                                        } elseif ($permiso->getPermisoEvaluacion() === '2') {
-                                                                                                            echo '<td>Modificación</td>';
-                                                                                                        } elseif ($permiso->getPermisoEvaluacion() === '3') {
-                                                                                                            echo '<td>Administración y Modificación </td>';
-                                                                                                        } elseif ($permiso->getPermisoEvaluacion() === '4') {
-                                                                                                            echo '<td>Lectura</td>';
-                                                                                                        } elseif ($permiso->getPermisoEvaluacion() === '5') {
-                                                                                                            echo '<td>Lectura y Administración</td>';
-                                                                                                        } elseif ($permiso->getPermisoEvaluacion() === '6') {
-                                                                                                            echo '<td>Lectura y Modificacion</td>';
-                                                                                                        } elseif ($permiso->getPermisoEvaluacion() === '7') {
-                                                                                                            echo '<td>Todos</td>';
-                                                                                                        }
+                                                                                                    if ($contextConfiguracion->getData()->getBreveDescripcion()) {
+                                                                                                        echo '<p>✔️<b>Breve Descripción</b></p>';
+                                                                                                    } else {
+                                                                                                        echo '<p>❌Breve Descripción</p>';
+                                                                                                    }
 
 
-                                                                                                        echo '</tr> 
-                                                                                                        </tbody>
-                                                                                                        </table>
-                                                                                                        </div>';
-                                                                                                    } ?>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
+                                                                                                    if ($contextConfiguracion->getData()->getProgramaTeorico()) {
+                                                                                                        echo '<p>✔️<b>Programa Teorico</b></p>';
+                                                                                                    } else {
+                                                                                                        echo '<p>❌Programa Teorico</p>';
+                                                                                                    }
 
 
+                                                                                                    if ($contextConfiguracion->getData()->getComGenerales()) {
+                                                                                                        echo '<p>✔️<b>Generales</b></p>';
+                                                                                                    } else {
+                                                                                                        echo '<p>❌Generales</p>';
+                                                                                                    }
 
+                                                                                                    if ($contextConfiguracion->getData()->getComEspecificas()) {
+                                                                                                        echo '<p>✔️<b>Específicas</b></p>';
+                                                                                                    } else {
+                                                                                                        echo '<p>❌Específicas</p>';
+                                                                                                    }
 
+                                                                                                    if ($contextConfiguracion->getData()->getComBasicas()) {
+                                                                                                        echo '<p>✔️<b>Básicas y Transversales</b></p>';
+                                                                                                    } else {
+                                                                                                        echo '<p>❌Básicas y Transversales</p>';
+                                                                                                    }
 
+                                                                                                    if ($contextConfiguracion->getData()->getResultadosAprendizaje()) {
+                                                                                                        echo '<p>✔️<b>Resultados Aprendizaje</b></p>';
+                                                                                                    } else {
+                                                                                                        echo '<p>❌Resultados aprendizaje</p>';
+                                                                                                    }
 
+                                                                                                    if ($contextConfiguracion->getData()->getMetodologia()) {
+                                                                                                        echo '<p>✔️<b>Metodología</b></p>';
+                                                                                                    } else {
+                                                                                                        echo '<p>❌Metodología</p>';
+                                                                                                    }
+                                                                                                    if ($contextConfiguracion->getData()->getCitasBibliograficas()) {
+                                                                                                        echo '<p>✔️<b>Citas Bibliográficas</b></p>';
+                                                                                                    } else {
+                                                                                                        echo '<p>❌Citas Bibliográficas</p>';
+                                                                                                    }
 
-                                                                                <!--getionprofesores-->
+                                                                                                    if ($contextConfiguracion->getData()->getRecursosInternet()) {
+                                                                                                        echo '<p>✔️<b>Recursos en Internet</b></p>';
+                                                                                                    } else {
+                                                                                                        echo '<p>❌Recursos en Internet</p>';
+                                                                                                    }
 
+                                                                                                    if ($contextConfiguracion->getData()->getRealizacionExamenes()) {
+                                                                                                        echo '<p>✔️<b>Realización de Exámenes</b></p>';
+                                                                                                    } else {
+                                                                                                        echo '<p>❌Realización de Exámenes</p>';
+                                                                                                    }
+                                                                                                    if ($contextConfiguracion->getData()->getCalificacionFinal()) {
+                                                                                                        echo '<p>✔️<b>Calificación Final Ordinaria</b></p>';
+                                                                                                    } else {
+                                                                                                        echo '<p>❌Calificación Final Ordinaria</p>';
+                                                                                                    }
 
+                                                                                                    if ($contextConfiguracion->getData()->getRealizacionActividades()) {
+                                                                                                        echo '<p>✔️<b>Realización de Activiades</b></p>';
+                                                                                                    } else {
+                                                                                                        echo '<p>❌Realización de Actividades</p>';
+                                                                                                    }
 
-
-                                                                                <div class="card-header" id="headingThree">
-                                                                                    <h2 class="mb-0">
-                                                                                        <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                                                                            Gestión Profesores
-                                                                                        </button>
-                                                                                    </h2>
-                                                                                </div>
-                                                                                <div id="collapseThree" class="collapse" aria-labelledby="headingS" data-parent="#accordionCoordinacion">
-                                                                                    <div class="card-body">
-                                                                                        <div class="card">
-                                                                                            <div class="card">
-                                                                                                <div class="card-body">
-                                                                                                    <?php
-
-                                                                                                    $context = new es\ucm\Context(FIND_PERMISOS, $contextAsignatura->getData()->getIdAsignatura());
-                                                                                                    $permisos = $controller->action($context);
-
-                                                                                                    echo '<div><h4>Profesores de la asignatura ' . $contextAsignatura->getData()->getNombreAsignatura() . '</h4>
-                                                                                                    <a href="addProfesor.php?idAsignatura=' . $contextAsignatura->getData()->getIdAsignatura() . '">
-                                                                                                    <button type="button" class="btn btn-primary" id="btn-form">
-                                                                                                    Añadir Profesor
-                                                                                                    </button>
-                                                                                                    </a>
-                                                                                                    </div>';
-                                                                                                    foreach ($permisos->getData() as $permiso) {
-                                                                                                        $context = new es\ucm\Context(FIND_PROFESOR, $permiso->getEmailProfesor());
-                                                                                                        $profesor = $controller->action($context);
-                                                                                                        echo '<p>' . $profesor->getData()->getNombre() . ' - ' . $permiso->getEmailProfesor() . '
-                                                                                                        <a href="eliminarProfesor.php?emailProfesor=' . $permiso->getEmailProfesor() . '&idAsignatura=' . $permiso->getIdAsignatura() . '">
-                                                                                                        <button type="button" class="btn btn-danger" id="btn-form">
-                                                                                                        -
-                                                                                                        </button>
-                                                                                                        </a></p>';
+                                                                                                    if ($contextConfiguracion->getData()->getRealizacionLaboratorio()) {
+                                                                                                        echo '<p>✔️<b>Realización de Laboratorio</b></p>';
+                                                                                                    } else {
+                                                                                                        echo '<p>❌Realización de Laboratorio</p>';
                                                                                                     }
                                                                                                     ?>
-
-
-                                                                                                </div>
+                                                                                                    <div class="text-right">
+                                                                                                        <a href="configuracion.php?idAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
+                                                                                                            <button type="button" class="btn btn-primary" id="btn-form">
+                                                                                                                Modificar Configuración
+                                                                                                            </button>
+                                                                                                        </a>
+                                                                                                    </div>
+                                                                                                </p>
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>
@@ -3003,11 +2756,238 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                             </div>
 
 
+                                                                            <!--Permisos-->
+                                                                            <div class="card-header" id="headingTwo">
+                                                                                <h2 class="mb-0">
+                                                                                    <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                                                                        Permisos
+                                                                                    </button>
+                                                                                </h2>
+                                                                            </div>
+                                                                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionCoordinacion">
+                                                                                <div class="card-body">
+                                                                                    <div class="card">
+                                                                                        <div class="card">
+                                                                                            <div class="card-body">
+                                                                                                <?php
+
+                                                                                                $context = new es\ucm\Context(FIND_PERMISOS, $contextAsignatura->getData()->getIdAsignatura());
+                                                                                                $permisos = $controller->action($context);
+                                                                                                foreach ($permisos->getData() as $permiso) {
+                                                                                                    $context = new es\ucm\Context(FIND_PROFESOR, $permiso->getEmailProfesor());
+                                                                                                    $profesor = $controller->action($context);
+                                                                                                    echo '<div><h4>' . $profesor->getData()->getNombre() . '</h4>
+                                                                                                    <a href="permisos.php?emailProfesor=' . $permiso->getEmailProfesor() . '&idAsignatura=' . $permiso->getIdAsignatura() . '">
+                                                                                                    <button type="button" class="btn btn-primary" id="btn-form">
+                                                                                                    Modificar Permisos
+                                                                                                    </button>
+                                                                                                    </a></div>';
+                                                                                                    echo '<div class="table-responsive text-center">
+                                                                                                    <table class="table table-sm table-hover table-borderless">
+                                                                                                    <thead>
+                                                                                                    <tr>
+                                                                                                    <th scope="col">Programa</th>
+                                                                                                    <th scope="col">Competencias</th>
+                                                                                                    <th scope="col">Metodología</th>
+                                                                                                    <th scope="col">Bibliografía</th>
+                                                                                                    <th scope="col">Grupo Laboratorio</th>
+                                                                                                    <th scope="col">Grupo Clase</th>
+                                                                                                    <th scope="col">Evaluación</th>
+                                                                                                    </tr>
+                                                                                                    </thead> <tbody><tr scope="row">';
+                                                                                                    if ($permiso->getPermisoPrograma() === '0') {
+                                                                                                        echo '<td>❌</td>';
+                                                                                                    } elseif ($permiso->getPermisoPrograma() === '1') {
+                                                                                                        echo '<td>Administración</td>';
+                                                                                                    } elseif ($permiso->getPermisoPrograma() === '2') {
+                                                                                                        echo '<td>Modificación</td>';
+                                                                                                    } elseif ($permiso->getPermisoPrograma() === '3') {
+                                                                                                        echo '<td>Administración y Modificación </td>';
+                                                                                                    } elseif ($permiso->getPermisoPrograma() === '4') {
+                                                                                                        echo '<td>Lectura</td>';
+                                                                                                    } elseif ($permiso->getPermisoPrograma() === '5') {
+                                                                                                        echo '<td>Lectura y Administración</td>';
+                                                                                                    } elseif ($permiso->getPermisoPrograma() === '6') {
+                                                                                                        echo '<td>Lectura y Modificacion</td>';
+                                                                                                    } elseif ($permiso->getPermisoPrograma() === '7') {
+                                                                                                        echo '<td>Todos</td>';
+                                                                                                    }
+                                                                                                    if ($permiso->getPermisoCompetencias() === '0') {
+                                                                                                        echo '<td>❌</td>';
+                                                                                                    } elseif ($permiso->getPermisoCompetencias() === '1') {
+                                                                                                        echo '<td>Administración</td>';
+                                                                                                    } elseif ($permiso->getPermisoCompetencias() === '2') {
+                                                                                                        echo '<td>Modificación</td>';
+                                                                                                    } elseif ($permiso->getPermisoCompetencias() === '3') {
+                                                                                                        echo '<td>Administración y Modificación </td>';
+                                                                                                    } elseif ($permiso->getPermisoCompetencias() === '4') {
+                                                                                                        echo '<td>Lectura</td>';
+                                                                                                    } elseif ($permiso->getPermisoCompetencias() === '5') {
+                                                                                                        echo '<td>Lectura y Administración</td>';
+                                                                                                    } elseif ($permiso->getPermisoCompetencias() === '6') {
+                                                                                                        echo '<td>Lectura y Modificacion</td>';
+                                                                                                    } elseif ($permiso->getPermisoCompetencias() === '7') {
+                                                                                                        echo '<td>Todos</td>';
+                                                                                                    }
+                                                                                                    if ($permiso->getPermisoMetodologia() === '0') {
+                                                                                                        echo '<td>❌</td>';
+                                                                                                    } elseif ($permiso->getPermisoMetodologia() === '1') {
+                                                                                                        echo '<td>Administración</td>';
+                                                                                                    } elseif ($permiso->getPermisoMetodologia() === '2') {
+                                                                                                        echo '<td>Modificación</td>';
+                                                                                                    } elseif ($permiso->getPermisoMetodologia() === '3') {
+                                                                                                        echo '<td>Administración y Modificación </td>';
+                                                                                                    } elseif ($permiso->getPermisoMetodologia() === '4') {
+                                                                                                        echo '<td>Lectura</td>';
+                                                                                                    } elseif ($permiso->getPermisoMetodologia() === '5') {
+                                                                                                        echo '<td>Lectura y Administración</td>';
+                                                                                                    } elseif ($permiso->getPermisoMetodologia() === '6') {
+                                                                                                        echo '<td>Lectura y Modificacion</td>';
+                                                                                                    } elseif ($permiso->getPermisoMetodologia() === '7') {
+                                                                                                        echo '<td>Todos</td>';
+                                                                                                    }
+                                                                                                    if ($permiso->getPermisoBibliografia() === '0') {
+                                                                                                        echo '<td>❌</td>';
+                                                                                                    } elseif ($permiso->getPermisoBibliografia() === '1') {
+                                                                                                        echo '<td>Administración</td>';
+                                                                                                    } elseif ($permiso->getPermisoBibliografia() === '2') {
+                                                                                                        echo '<td>Modificación</td>';
+                                                                                                    } elseif ($permiso->getPermisoBibliografia() === '3') {
+                                                                                                        echo '<td>Administración y Modificación </td>';
+                                                                                                    } elseif ($permiso->getPermisoBibliografia() === '4') {
+                                                                                                        echo '<td>Lectura</td>';
+                                                                                                    } elseif ($permiso->getPermisoBibliografia() === '5') {
+                                                                                                        echo '<td>Lectura y Administración</td>';
+                                                                                                    } elseif ($permiso->getPermisoBibliografia() === '6') {
+                                                                                                        echo '<td>Lectura y Modificacion</td>';
+                                                                                                    } elseif ($permiso->getPermisoBibliografia() === '7') {
+                                                                                                        echo '<td>Todos</td>';
+                                                                                                    }
+                                                                                                    if ($permiso->getPermisoGrupoLaboratorio() === '0') {
+                                                                                                        echo '<td>❌</td>';
+                                                                                                    } elseif ($permiso->getPermisoGrupoLaboratorio() === '1') {
+                                                                                                        echo '<td>Administración</td>';
+                                                                                                    } elseif ($permiso->getPermisoGrupoLaboratorio() === '2') {
+                                                                                                        echo '<td>Modificación</td>';
+                                                                                                    } elseif ($permiso->getPermisoGrupoLaboratorio() === '3') {
+                                                                                                        echo '<td>Administración y Modificación </td>';
+                                                                                                    } elseif ($permiso->getPermisoGrupoLaboratorio() === '4') {
+                                                                                                        echo '<td>Lectura</td>';
+                                                                                                    } elseif ($permiso->getPermisoGrupoLaboratorio() === '5') {
+                                                                                                        echo '<td>Lectura y Administración</td>';
+                                                                                                    } elseif ($permiso->getPermisoGrupoLaboratorio() === '6') {
+                                                                                                        echo '<td>Lectura y Modificacion</td>';
+                                                                                                    } elseif ($permiso->getPermisoGrupoLaboratorio() === '7') {
+                                                                                                        echo '<td>Todos</td>';
+                                                                                                    }
+                                                                                                    if ($permiso->getPermisoGrupoClase() === '0') {
+                                                                                                        echo '<td>❌</td>';
+                                                                                                    } elseif ($permiso->getPermisoGrupoClase() === '1') {
+                                                                                                        echo '<td>Administración</td>';
+                                                                                                    } elseif ($permiso->getPermisoGrupoClase() === '2') {
+                                                                                                        echo '<td>Modificación</td>';
+                                                                                                    } elseif ($permiso->getPermisoGrupoClase() === '3') {
+                                                                                                        echo '<td>Administración y Modificación </td>';
+                                                                                                    } elseif ($permiso->getPermisoGrupoClase() === '4') {
+                                                                                                        echo '<td>Lectura</td>';
+                                                                                                    } elseif ($permiso->getPermisoGrupoClase() === '5') {
+                                                                                                        echo '<td>Lectura y Administración</td>';
+                                                                                                    } elseif ($permiso->getPermisoGrupoClase() === '6') {
+                                                                                                        echo '<td>Lectura y Modificacion</td>';
+                                                                                                    } elseif ($permiso->getPermisoGrupoClase() === '7') {
+                                                                                                        echo '<td>Todos</td>';
+                                                                                                    }
+                                                                                                    if ($permiso->getPermisoEvaluacion() === '0') {
+                                                                                                        echo '<td>❌</td>';
+                                                                                                    } elseif ($permiso->getPermisoEvaluacion() === '1') {
+                                                                                                        echo '<td>Administración</td>';
+                                                                                                    } elseif ($permiso->getPermisoEvaluacion() === '2') {
+                                                                                                        echo '<td>Modificación</td>';
+                                                                                                    } elseif ($permiso->getPermisoEvaluacion() === '3') {
+                                                                                                        echo '<td>Administración y Modificación </td>';
+                                                                                                    } elseif ($permiso->getPermisoEvaluacion() === '4') {
+                                                                                                        echo '<td>Lectura</td>';
+                                                                                                    } elseif ($permiso->getPermisoEvaluacion() === '5') {
+                                                                                                        echo '<td>Lectura y Administración</td>';
+                                                                                                    } elseif ($permiso->getPermisoEvaluacion() === '6') {
+                                                                                                        echo '<td>Lectura y Modificacion</td>';
+                                                                                                    } elseif ($permiso->getPermisoEvaluacion() === '7') {
+                                                                                                        echo '<td>Todos</td>';
+                                                                                                    }
+
+
+                                                                                                    echo '</tr> 
+                                                                                                    </tbody>
+                                                                                                    </table>
+                                                                                                    </div>';
+                                                                                                } ?>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+
+
+
+
+
+
+                                                                            <!--getionprofesores-->
+
+
+
+
+                                                                            <div class="card-header" id="headingThree">
+                                                                                <h2 class="mb-0">
+                                                                                    <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                                                                        Gestión Profesores
+                                                                                    </button>
+                                                                                </h2>
+                                                                            </div>
+                                                                            <div id="collapseThree" class="collapse" aria-labelledby="headingS" data-parent="#accordionCoordinacion">
+                                                                                <div class="card-body">
+                                                                                    <div class="card">
+                                                                                        <div class="card">
+                                                                                            <div class="card-body">
+                                                                                                <?php
+
+                                                                                                $context = new es\ucm\Context(FIND_PERMISOS, $contextAsignatura->getData()->getIdAsignatura());
+                                                                                                $permisos = $controller->action($context);
+
+                                                                                                echo '<div><h4>Profesores de la asignatura ' . $contextAsignatura->getData()->getNombreAsignatura() . '</h4>
+                                                                                                <a href="addProfesor.php?idAsignatura=' . $contextAsignatura->getData()->getIdAsignatura() . '">
+                                                                                                <button type="button" class="btn btn-primary" id="btn-form">
+                                                                                                Añadir Profesor
+                                                                                                </button>
+                                                                                                </a>
+                                                                                                </div>';
+                                                                                                foreach ($permisos->getData() as $permiso) {
+                                                                                                    $context = new es\ucm\Context(FIND_PROFESOR, $permiso->getEmailProfesor());
+                                                                                                    $profesor = $controller->action($context);
+                                                                                                    echo '<p>' . $profesor->getData()->getNombre() . ' - ' . $permiso->getEmailProfesor() . '
+                                                                                                    <a href="eliminarProfesor.php?emailProfesor=' . $permiso->getEmailProfesor() . '&idAsignatura=' . $permiso->getIdAsignatura() . '">
+                                                                                                    <button type="button" class="btn btn-danger" id="btn-form">
+                                                                                                    -
+                                                                                                    </button>
+                                                                                                    </a></p>';
+                                                                                                }
+                                                                                                ?>
+
+
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
                                                                         </div>
+
+
                                                                     </div>
-
-
                                                                 </div>
+
+
+                                                            </div>
 
 
 
