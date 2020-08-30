@@ -198,7 +198,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                 foreach ($materias->getData() as $materia) {
                                   if ($materia->getActivo()) {
                                     echo '<div><h5>Asignaturas de la materia' . $materia->getNombreMateria() . '</h5>
-                                    <a href="asignatura.php?idGrado=' .  $contextGrado->getData()->getCodigoGrado() . '">
+                                    <a href="asignatura.php?idGrado=' .  $contextGrado->getData()->getCodigoGrado() . '&idMateria=' .  $materia->getIdMateria() . '">
                                     <button type="button" class="btn btn-primary" id="btn-form">
                                     Añadir Asignatura
                                     </button>
@@ -208,7 +208,6 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                     $asignaturas = $controller->action($context);
                                     if ($asignaturas->getEvent() === LIST_ASIGNATURA_OK) {
                                       foreach ($asignaturas->getData() as $asignatura) {
-                                        var_dump($asignatura->getActivo());
                                         if ($asignatura->getActivo()) {
                                           echo '<p>' . $asignatura->getNombreAsignatura() . '
                                           <a href="gestionAsignaturas.php?idGrado=' . $contextGrado->getData()->getCodigoGrado() . '&idAsignatura=' . $asignatura->getIdAsignatura() . '#nav-info-asignatura">

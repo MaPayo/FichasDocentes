@@ -48,7 +48,7 @@ class Form
   {
     $this->formId = $formId;
 
-    $opcionesPorDefecto = array( 'action' => null, 'class' => null, 'enctype' => null );
+    $opcionesPorDefecto = array( 'action' => null, 'class' => null, 'enctype' => 'multipart/form-data' );
     $opciones = array_merge($opcionesPorDefecto, $opciones);
 
     $this->action   = $opciones['action'];

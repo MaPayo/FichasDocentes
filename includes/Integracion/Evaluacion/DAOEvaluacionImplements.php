@@ -31,7 +31,7 @@ class DAOEvaluacionImplements implements DAOEvaluacion
             ':realizacionActividadesI' => $evaluacion->getRealizacionActividadesI(),
             ':pesoActividades' => $evaluacion->getPesoActividades(),
             ':realizacionLaboratorio' => $evaluacion->getRealizacionLaboratorio(),
-            ':realizacionLaboratorio' => $evaluacion->getRealizacionLaboratorioI(),
+            ':realizacionLaboratorioI' => $evaluacion->getRealizacionLaboratorioI(),
             ':pesoLaboratorio' => $evaluacion->getPesolaboratorio(),
             ':calificacionFinal' => $evaluacion->getCalificacionFinal(),
             ':calificacionFinalI' => $evaluacion->getCalificacionFinalI(),

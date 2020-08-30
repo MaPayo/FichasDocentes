@@ -50,7 +50,6 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                   $contextModulo = $controller->action($context);
                   
                   if($contextModulo->getEvent() === FIND_MODULO_OK ){
-                    var_dump($_GET['idGrado']);
                     $datosIniciales['Nombre']=$contextModulo->getData()->getNombreModulo();
                     $datosIniciales['Horas']=$contextModulo->getData()->getCreditosModulo();
                     $datosIniciales['Grado']=$_GET['idGrado'];

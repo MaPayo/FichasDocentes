@@ -70,8 +70,6 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
 
           $access = new es\ucm\FormMateria('idMaterias');
           $datosIniciales= array();
-          echo"No existe IdMateria";
-          var_dump($_GET['idGrado']);
           $datosIniciales['Modulo']=$_GET['idModulo'];
           $datosIniciales['Grado']=$_GET['idGrado'];
             $access->gestionaModificacion($datosIniciales);

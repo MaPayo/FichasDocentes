@@ -20,8 +20,29 @@ class DAOProgramaAsignaturaImplements implements DAOProgramaAsignatura
     {
         $singletonDataSource = new SingletonDataSource();
         $dataSource = $singletonDataSource->getInstance();
-        $sql = "INSERT INTO programaasignatura (ConocimientosPrevios,ConocimientosPreviosi,BreveDescripcion,BreveDescripcioni,ProgramaTeorico,ProgramaTeoricoi, ProgramaSeminarios, ProgramaSeminariosi, ProgramaLaboratorio, ProgramaLaboratorioi, Influencia, Influenciai,IdAsignatura) 
-        VALUES (:conocimientosPrevios, :conocimientosPreviosI, :breveDescripcion, :breveDescripcionI, :programaTeorico, :programaTeoricoI, :programaSeminarios, :programaSeminariosI, :programaLaboratorio, :programaLaboratorioI, :idAsignatura)";
+        $sql = "INSERT INTO programaasignatura (
+        ConocimientosPrevios,
+        ConocimientosPreviosi,
+        BreveDescripcion,
+        BreveDescripcioni,
+        ProgramaTeorico,
+        ProgramaTeoricoi,
+        ProgramaSeminarios,
+        ProgramaSeminariosi,
+        ProgramaLaboratorio,
+        ProgramaLaboratorioi,
+        IdAsignatura) 
+        VALUES (:conocimientosPrevios,
+        :conocimientosPreviosI,
+        :breveDescripcion,
+        :breveDescripcionI,
+        :programaTeorico,
+        :programaTeoricoI,
+        :programaSeminarios,
+        :programaSeminariosI,
+        :programaLaboratorio,
+        :programaLaboratorioI,
+        :idModAsignatura)";
         $values = array(
             ':conocimientosPrevios' => $programaAsignatura->getConocimientosPrevios(),
             ':conocimientosPreviosI' => $programaAsignatura->getConocimientosPreviosI(),
@@ -33,7 +54,7 @@ class DAOProgramaAsignaturaImplements implements DAOProgramaAsignatura
             ':programaSeminariosI' => $programaAsignatura->getProgramaSeminariosI(),
             ':programaLaboratorio' => $programaAsignatura->getProgramaLaboratorio(),
             ':programaLaboratorioI' => $programaAsignatura->getProgramaLaboratorioI(),
-            ':idAsignatura' => $programaAsignatura->getIdAsignatura()
+            ':idModAsignatura' => $programaAsignatura->getIdAsignatura()
         );
         $results = $dataSource->executeInsertUpdateDelete($sql, $values);
         return $results;

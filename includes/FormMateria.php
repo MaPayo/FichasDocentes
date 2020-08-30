@@ -64,7 +64,6 @@ class FormMateria extends Form
         $horas = isset($datos['horas']) ?  $datos['horas'] : '';
         $caracter = isset($datos['caracter']) ?  $datos['caracter'] : '';
         $codigo = isset($datos['IdMateria']) ?  $datos['IdMateria'] : -1;
-        var_dump($datos['idMateria']);
         if (empty($nombre)) {
             $erroresFormulario[] = "No has introducido el nombre de la materia.";
         }

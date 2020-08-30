@@ -67,7 +67,6 @@ class FormTeorico extends Form
             $context = new Context(FIND_TEORICO, $datos['idAsignatura']);
             $contextTeorico = $controller->action($context);
             if ($contextTeorico->getEvent() === FIND_TEORICO_OK) {
-                var_dump($contextTeorico->getData()->getIdTeorico());
                     $teorico= new Teorico($contextTeorico->getData()->getIdTeorico() ,$creditos,$presencial, $datos['idAsignatura']);
                     $context= new Context(UPDATE_TEORICO, $teorico);
                     $contextUA = $controller->action($context);

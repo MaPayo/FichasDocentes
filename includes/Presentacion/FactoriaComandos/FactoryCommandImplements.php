@@ -140,6 +140,9 @@ require_once('includes/Presentacion/FactoriaComandos/Materia/CommandUpdateMateri
 require_once('includes/Presentacion/FactoriaComandos/Materia/CommandDeleteMateria.php');
 
 require_once('includes/Presentacion/FactoriaComandos/Metodologia/CommandFindMetodologia.php');
+require_once('includes/Presentacion/FactoriaComandos/Metodologia/CommandCreateMetodologia.php');
+require_once('includes/Presentacion/FactoriaComandos/Metodologia/CommandUpdateMetodologia.php');
+require_once('includes/Presentacion/FactoriaComandos/Metodologia/CommandDeleteMetodologia.php');
 require_once('includes/Presentacion/FactoriaComandos/Metodologia/CommandFindModMetodologia.php');
 require_once('includes/Presentacion/FactoriaComandos/Metodologia/CommandCreateModMetodologia.php');
 require_once('includes/Presentacion/FactoriaComandos/Metodologia/CommandDeleteModMetodologia.php');
@@ -168,6 +171,9 @@ require_once('includes/Presentacion/FactoriaComandos/Problema/CommandUpdateProbl
 require_once('includes/Presentacion/FactoriaComandos/Profesor/CommandFindProfesor.php');
 
 require_once('includes/Presentacion/FactoriaComandos/ProgramaAsignatura/CommandFindProgramaAsignatura.php');
+require_once('includes/Presentacion/FactoriaComandos/ProgramaAsignatura/CommandCreateProgramaAsignatura.php');
+require_once('includes/Presentacion/FactoriaComandos/ProgramaAsignatura/CommandUpdateProgramaAsignatura.php');
+require_once('includes/Presentacion/FactoriaComandos/ProgramaAsignatura/CommandDeleteProgramaAsignatura.php');
 require_once('includes/Presentacion/FactoriaComandos/ProgramaAsignatura/CommandFindModProgramaAsignatura.php');
 require_once('includes/Presentacion/FactoriaComandos/ProgramaAsignatura/CommandCreateModProgramaAsignatura.php');
 require_once('includes/Presentacion/FactoriaComandos/ProgramaAsignatura/CommandDeleteModProgramaAsignatura.php');

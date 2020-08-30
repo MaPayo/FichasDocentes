@@ -28,7 +28,7 @@ class DAOCompetenciaAsignaturaImplements implements DAOCompetenciaAsignatura
             ':generalesI' => $competenciaAsignatura->getGeneralesI(),
             ':especificas' => $competenciaAsignatura->getEspecificas(),
             ':especificasI' => $competenciaAsignatura->getEspecificasI(),
-            ':basicasYTransversales' => $competenciaAsignatura->getCBasicasYTransversales(),
+            ':basicasYTransversales' => $competenciaAsignatura->getBasicasYTransversales(),
             ':basicasYTransversalesI' => $competenciaAsignatura->getBasicasYTransversalesI(),
             ':resultadosAprendizaje' => $competenciaAsignatura->getResultadosAprendizaje(),
             ':resultadosAprendizajeI' => $competenciaAsignatura->getResultadosAprendizajeI(),

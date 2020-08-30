@@ -56,7 +56,6 @@ class FormModulo extends Form
         $nombre = isset($datos['nombre']) ? $datos['nombre'] : '';
         $horas = isset($datos['horas']) ?  $datos['horas'] : '';
         $codigo = isset($datos['IdModulo']) ?  $datos['IdModulo'] : -1;
-        var_dump($datos['idGrado']);
         if (empty($nombre)) {
             $erroresFormulario[] = "No has introducido el nombre del modulo.";
         }

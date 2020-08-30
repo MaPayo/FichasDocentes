@@ -40,7 +40,7 @@ class FormSubida extends Form
         $controller = new ControllerImplements();
         if (isset($_FILES['userfile'])) {
             $nombre_archivo = $_FILES['userfile']['name'];
-            $nombre_con_ruta = __DIR__ . '/storage/' . $nombre_archivo;
+            $nombre_con_ruta = RUTA_APP. '/../storage/' . $nombre_archivo;
             //$tipo_archivo = $_FILES['userfile']['type'];
             $tamano_archivo = $_FILES['userfile']['size'];
             $info = new \SplFileInfo($nombre_archivo);
@@ -508,7 +508,6 @@ class FormSubida extends Form
                                     $teorico = new Teorico(null, $t, $porciento_t, $codigo_asignatura);
                                     $laboratorio = new Laboratorio(null, $l, $porciento_l, $codigo_asignatura);
                                     $problema = new Problema(null, $p, $porciento_p, $codigo_asignatura);
-                                    $configuracion = new Configuracion(null, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, $codigo_asignatura);
                                     if ($contextAsignatura->getEvent() === FIND_ASIGNATURA_OK) {
                                         $context = new Context(UPDATE_ASIGNATURA, $asignatura);
                                         $contextAsignatura = $controller->action($context);
@@ -588,7 +587,7 @@ class FormSubida extends Form
                                             error_log(date("Y-m-d H:i:s") . " No pudo crearse la asignatura " . $nombre_asignatura . "\r\n", 3, "log_errores.txt");
                                         } else {
                                             //Creamos su Mod asignatura
-                                            $modAsignatura = new ModAsignatura(null, null, null, $codigo_asignatura);
+                                            $modAsignatura = new ModAsignatura($codigo_asignatura, date("Y-m-d H:i:s"), null, $codigo_asignatura);
                                             $context = new Context(CREATE_MODASIGNATURA, $modAsignatura);
                                             $contextMA = $controller->action($context);
                                             if ($contextMA->getEvent() === CREATE_MODASIGNATURA_FAIL) {
@@ -597,19 +596,22 @@ class FormSubida extends Form
                                                 error_log(date("Y-m-d H:i:s") . " No pudo crearse el control de versiones de la asignatura " . $nombre_asignatura . "\r\n", 3, "log_errores.txt");
                                             }
                                             //Creamos las tablas vacias
-                                            $metodologia = new Metodologia(null, "", "", $datos['idAsignatura']);
+                                            $configuracion = new Configuracion(null,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,$codigo_asignatura);
+                                            $context = new Context(CREATE_CONFIGURACION, $configuracion);
+                                            $contextC = $controller->action($context);
+                                            $metodologia = new Metodologia(null,"","",$codigo_asignatura);
                                             $context = new Context(CREATE_METODOLOGIA, $metodologia);
                                             $contextM = $controller->action($context);
-                                            $bibliografia = new Bibliografia(null, "", "", $datos['idAsignatura']);
+                                            $bibliografia = new Bibliografia(null, "","",$codigo_asignatura);
                                             $context = new Context(CREATE_BIBLIOGRAFIA, $bibliografia);
                                             $contextB = $controller->action($context);
-                                            $competenciasAsignatura = new CompetenciaAsignatura(null, "", "", "", "", "", "", "", "", $datos['idAsignatura']);
+                                            $competenciasAsignatura = new CompetenciaAsignatura(null, "","","","","","","","",$codigo_asignatura);
                                             $context = new Context(CREATE_COMPETENCIAS_ASIGNATURA, $competenciasAsignatura);
                                             $contextCA = $controller->action($context);
-                                            $evaluacion = new Evaluacion(null, "", "", "", "", "", "", "", "", "", "", "", $datos['idAsignatura']);
+                                            $evaluacion = new Evaluacion(null,"","",0,"","",0,"","",0,"","",$codigo_asignatura);
                                             $context = new Context(CREATE_EVALUACION, $evaluacion);
                                             $contextE = $controller->action($context);
-                                            $programaasignatura = new ProgramaAsignatura(null, "", "", "", "", "", "", "", "", "", "", $datos['idAsignatura']);
+                                            $programaasignatura = new ProgramaAsignatura(null,"","","","","","","","","","",$codigo_asignatura);
                                             $context = new Context(CREATE_PROGRAMA_ASIGNATURA, $programaasignatura);
                                             $contextP = $controller->action($context);
                                             //Actualizamos teorico, laboratorio y problemas. Si de por si la asignatura ya creada los tenia los actualizamos
@@ -634,9 +636,8 @@ class FormSubida extends Form
                                                 //throw new \PDOException($e->getMessage(), (int)$e->getCode());						
                                                 error_log(date("Y-m-d H:i:s") . " No pudo crearse el laboratorio de la asignatura " . $nombre_asignatura . "\r\n", 3, "log_errores.txt");
                                             }
-                                            $context = new Context(CREATE_CONFIGURACION, $configuracion);
-                                            $contextConfiguracion = $controller->action($configuracion);
-                                            if ($contextLaboratorio->getEvent() === CREATE_CONFIGURACION_FAIL) {
+                                           
+                                            if ($contextC->getEvent() === CREATE_CONFIGURACION_FAIL) {
                                                 $huboerror = true;
                                                 //throw new \PDOException($e->getMessage(), (int)$e->getCode());						
                                                 error_log(date("Y-m-d H:i:s") . " No pudo crearse la configuración de la asignatura " . $nombre_asignatura . "\r\n", 3, "log_errores.txt");

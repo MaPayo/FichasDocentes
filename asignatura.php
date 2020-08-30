@@ -59,7 +59,8 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                     $datosIniciales['Semestre']=$contextAsignatura->getData()->getSemestre();
                     $datosIniciales['Coordinador']=$contextAsignatura->getData()->getCoordinadorAsignatura();
                     $datosIniciales['idAsignatura']=$_GET[$name];
-                    $datosIniciales['idGrado'] =$_GET['IdGrado'];
+                    $datosIniciales['idGrado'] =$_GET['idGrado'];
+                    $datosIniciales['idMateria']=$_GET['idMateria'];
                     $access->gestionaModificacion($datosIniciales);
                   }
                   ?>
@@ -72,6 +73,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
             $access = new es\ucm\FormAsignatura('idAsignaturass');
             $datosIniciales= array();
             $datosIniciales['idGrado']=$_GET['idGrado'];
+            $datosIniciales['idMateria']=$_GET['idMateria'];
               $access->gestionaModificacion($datosIniciales);
             
   
