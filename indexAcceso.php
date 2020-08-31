@@ -278,201 +278,270 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                     <div class="tab-content" id="pills-tabContent">
 
                                         <!--Pestaña informacion asignatura-->
-                                        <div class="tab-pane fade show active" id="nav-info-asignatura" role="tabpanel" aria-labelledby="nav-info-asignatura-tab">
-                                            <div class="table-responsive text-center">
-                                                <table class="table table-sm table-bordered">
-                                                    <tbody>
-                                                        <tr>
-                                                            <th scope="col">Asignatura:</th>
-                                                            <td><?php echo $contextAsignatura->getData()->getNombreAsignatura(); ?></td>
-                                                            <th scope="col">Abreviatura:</th>
-                                                            <td><?php echo $contextAsignatura->getData()->getAbreviatura(); ?></td>
-                                                            <th scope="col">Código:</th>
-                                                            <td><?php echo $contextAsignatura->getData()->getIdAsignatura(); ?></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="col">Módulo:</th>
-                                                            <td colspan="2"><?php echo $contextModulo->getData()->getNombreModulo(); ?></td>
-                                                            <th scope="col">Materia:</th>
-                                                            <td colspan="2"><?php echo $contextMateria->getData()->getNombreMateria(); ?></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="col">Carácter:</th>
-                                                            <td><?php echo $contextMateria->getData()->getCaracter(); ?></td>
-                                                            <th scope="col">Curso:</th>
-                                                            <td><?php echo $contextAsignatura->getData()->getCurso(); ?></td>
-                                                            <th scope="col">Semestre:</th>
-                                                            <td><?php echo $contextAsignatura->getData()->getSemestre(); ?></td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                            <?php if($contextTeorico->getEvent() === FIND_TEORICO_OK && $contextLaboratorio->getEvent() === FIND_LABORATORIO_OK && $contextProblema->getEvent() === FIND_PROBLEMA_OK){?>
-                                                <div class="table-responsive text-center">
-                                                    <table class="table table-sm table-bordered">
-                                                        <thead>
-                                                            <tr>
-                                                                <th scope="col"></th>
-                                                                <th scope="col">Total</th>
-                                                                <th scope="col">Teóricos</th>
-                                                                <th scope="col">Problemas</th>
-                                                                <th scope="col">Laboratorio</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr>
-                                                                <th scope="row">Créditos (ECTS):</th>
-                                                                <td><?php echo $contextAsignatura->getData()->getCreditos(); ?></td>
-                                                                <td><?php echo $contextTeorico->getData()->getCreditos(); ?></td>
-                                                                <td><?php echo $contextProblema->getData()->getCreditos(); ?></td>
-                                                                <td><?php echo $contextLaboratorio->getData()->getCreditos(); ?></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th scope="row">Presencialidad:</th>
-                                                                <td>-</td>
-                                                                <td><?php echo $contextTeorico->getData()->getPresencial(); ?>%</td>
-                                                                <td><?php echo $contextProblema->getData()->getPresencial(); ?>%</td>
-                                                                <td><?php echo $contextLaboratorio->getData()->getPresencial(); ?>%</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th scope="row">Horas totales:</th>
-                                                                <td>-</td>
-                                                                <td><?php echo ($contextTeorico->getData()->getCreditos() * $contextGrado->getData()->getHorasEcts() * $contextTeorico->getData()->getPresencial()) / 100; ?></td>
-                                                                <td><?php echo ($contextProblema->getData()->getCreditos() * $contextGrado->getData()->getHorasEcts() * $contextProblema->getData()->getPresencial()) / 100; ?></td>
-                                                                <td><?php echo ($contextLaboratorio->getData()->getCreditos() * $contextGrado->getData()->getHorasEcts() * $contextLaboratorio->getData()->getPresencial()) / 100; ?></td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            <?php } else{
-                                                echo'<div class="alert alert-danger" role="alert">
-                                                <h4 class= "text-center">NO EXISTE LA INFORMACIÓN DE TEÓRICO, PROBLEMA O LABORATORIO</h4>
-                                                </div>';
-                                            }
-                                            if($CoordinadorAsignatura->getEvent() === FIND_PROFESOR_OK){?>
-                                                <div class="table-responsive text-center">
-                                                    <table class="table table-sm table-bordered">
-                                                        <thead>
-                                                            <tr>
-                                                                <th scope="col" colspan="6">Coordinador/a</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr>
-                                                                <th scope="col">Nombre:</th>
-                                                                <td><?php echo $CoordinadorAsignatura->getData()->getNombre(); ?></td>
-                                                                <th scope="col" colspan="2">Departamento:</th>
-                                                                <td colspan="2"><?php echo $CoordinadorAsignatura->getData()->getDepartamento(); ?></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th scope="col">Facultad:</th>
-                                                                <td><?php echo $CoordinadorAsignatura->getData()->getFacultad(); ?></td>
-                                                                <th scope="col">Despacho:</th>
-                                                                <td><?php echo $CoordinadorAsignatura->getData()->getDespacho(); ?></td>
-                                                                <th scope="col">Email:</th>
-                                                                <td><?php echo $CoordinadorAsignatura->getData()->getEmail(); ?></td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            <?php } else{
-                                                echo'<div class="alert alert-danger" role="alert">
-                                                <h4 class= "text-center">NO EXISTE LA INFORMACIÓN DEL COORDINADOR DE ASIGNATURA</h4>
-                                                </div>';
-                                            }
-                                            if (!empty($contextModAsignatura->getData()->getFechaMod()) && !empty($contextModAsignatura->getData()->getEmailMod())){
-                                             $context = new es\ucm\Context(FIND_PROFESOR, $contextModAsignatura->getData()->getEmailMod());
-                                             $contextModificacion = $controller->action($context);
-                                             $date = strtotime($contextModAsignatura->getData()->getFechaMod());
-                                             echo'<div class="alert alert-secondary alert-dismissible fade show" role="alert">
-                                             <h4 class= "text-center">ÚLTIMA MODICIACIÓN: '.date("d-m-Y, H:i",$date).'</h4>
-                                             <h4 class= "text-center">AUTOR: '.$contextModificacion->getData()->getNombre().'</h4>
-                                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                             <span aria-hidden="true">&times;</span>
-                                             </button>
-                                             </div>';
-                                         }
-                                         if($contextAsignatura->getData()->getCoordinadorAsignatura() == $_SESSION['idUsuario']){ 
+                                        <div class="tab-pane fade show active text-center" id="nav-info-asignatura" role="tabpanel" aria-labelledby="nav-info-asignatura-tab">
 
-                                            echo'<div class="alert alert-info alert-dismissible fade show" role="alert">
-                                            <h4 class= "text-center">ERES EL COORDINADOR DE LA ASIGNATURA</h4>
-                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                            </button>
-                                            </div>';
-                                            if($contextAsignatura->getData()->getEstado() =="B"){?>
-                                                <div class="text-center">
-                                                 <a href="validar.php?IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
-                                                    <button type="button" class="btn btn-info btn-lg" id="btn-form">
-                                                        Validar Asignatura
-                                                    </button>
-                                                </a>
-                                            </div>
-                                        <?php  }}
-                                        if($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['coordinacion']){ 
-
-                                            echo'<div class="alert alert-primary alert-dismissible fade show" role="alert">
-                                            <h4 class= "text-center">ERES EL COORDINADOR DEL GRADO</h4>
-                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                            </button>
-                                            </div>';
-                                            if($contextAsignatura->getData()->getEstado() =="V"){?>
-                                                <div class="text-center">
-                                                  <a href="consolidar.php?IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
-                                                      <button type="button" class="btn btn-primary btn-lg" id="btn-form">
-                                                          Consolidar Asignatura
-                                                      </button>
-                                                  </a>
-                                              </div>
-                                          <?php }} ?>
-
-                                      </div>
-
-                                      <?php if ($verPrograma) { ?>
-                                        <!--Pestaña programa asignatura-->
-                                        <div class="tab-pane fade" id="nav-prog-asignatura" role="tabpanel" aria-labelledby="nav-prog-asignatura-tab">
-                                            <div class="accordion" id="accordionProgram">
-
-                                                <!--Pestaña conocimientos previos -->
-                                                <?php if ($contextConfiguracion->getData()->getConocimientosPrevios() == true) { ?>
-                                                    <div class="card">
-                                                        <div class="card-header" id="headingOne">
-                                                            <h2 class="mb-0">
-                                                                <?php if ($contextComparacion->getData()['conocimientosPrevios']) { ?>
-                                                                    <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                                        Conocimientos previos
-                                                                    </button>
-                                                                <?php } else {
-
-                                                                    ?><button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                                        Conocimientos previos
-                                                                    </button>
-                                                                <?php } ?>
-                                                            </h2>
+                                            <div class="card" id="info">
+                                                <h3 class="card-header text-center">
+                                                    Cabecera de la asignatura
+                                                </h3>
+                                                
+                                                <div class="card-body">
+                                                    <div class="table-responsive text-center">
+                                                        <table class="table table-sm table-bordered">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <th scope="col">Asignatura</th>
+                                                                    <td><?php echo $contextAsignatura->getData()->getNombreAsignatura(); ?></td>
+                                                                    <th scope="col">Abreviatura</th>
+                                                                    <td><?php echo $contextAsignatura->getData()->getAbreviatura(); ?></td>
+                                                                    <th scope="col">Código</th>
+                                                                    <td><?php echo $contextAsignatura->getData()->getIdAsignatura(); ?></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="col">Módulo</th>
+                                                                    <td colspan="2"><?php echo $contextModulo->getData()->getNombreModulo(); ?></td>
+                                                                    <th scope="col">Materia</th>
+                                                                    <td colspan="2"><?php echo $contextMateria->getData()->getNombreMateria(); ?></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="col">Carácter</th>
+                                                                    <td><?php echo $contextMateria->getData()->getCaracter(); ?></td>
+                                                                    <th scope="col">Curso</th>
+                                                                    <td><?php echo $contextAsignatura->getData()->getCurso(); ?></td>
+                                                                    <th scope="col">Semestre</th>
+                                                                    <td><?php echo $contextAsignatura->getData()->getSemestre(); ?></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <?php if($contextTeorico->getEvent() === FIND_TEORICO_OK && $contextLaboratorio->getEvent() === FIND_LABORATORIO_OK && $contextProblema->getEvent() === FIND_PROBLEMA_OK){?>
+                                                        <div class="table-responsive text-center">
+                                                            <table class="table table-sm table-bordered">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th scope="col"></th>
+                                                                        <th scope="col">Total</th>
+                                                                        <th scope="col">Teóricos</th>
+                                                                        <th scope="col">Problemas</th>
+                                                                        <th scope="col">Laboratorio</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <th scope="row">Créditos (ECTS)</th>
+                                                                        <td><?php echo $contextAsignatura->getData()->getCreditos(); ?></td>
+                                                                        <td><?php echo $contextTeorico->getData()->getCreditos(); ?></td>
+                                                                        <td><?php echo $contextProblema->getData()->getCreditos(); ?></td>
+                                                                        <td><?php echo $contextLaboratorio->getData()->getCreditos(); ?></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th scope="row">Presencialidad</th>
+                                                                        <td>-</td>
+                                                                        <td><?php echo $contextTeorico->getData()->getPresencial(); ?>%</td>
+                                                                        <td><?php echo $contextProblema->getData()->getPresencial(); ?>%</td>
+                                                                        <td><?php echo $contextLaboratorio->getData()->getPresencial(); ?>%</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th scope="row">Horas totales</th>
+                                                                        <td>-</td>
+                                                                        <td><?php echo ($contextTeorico->getData()->getCreditos() * $contextGrado->getData()->getHorasEcts() * $contextTeorico->getData()->getPresencial()) / 100; ?></td>
+                                                                        <td><?php echo ($contextProblema->getData()->getCreditos() * $contextGrado->getData()->getHorasEcts() * $contextProblema->getData()->getPresencial()) / 100; ?></td>
+                                                                        <td><?php echo ($contextLaboratorio->getData()->getCreditos() * $contextGrado->getData()->getHorasEcts() * $contextLaboratorio->getData()->getPresencial()) / 100; ?></td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
                                                         </div>
+                                                    <?php } else{
+                                                        echo'<div class="alert alert-danger" role="alert">
+                                                        <h4 class= "text-center">NO EXISTE LA INFORMACIÓN DE TEÓRICO, PROBLEMA O LABORATORIO</h4>
+                                                        </div>';
+                                                    }
+                                                    if($CoordinadorAsignatura->getEvent() === FIND_PROFESOR_OK){?>
+                                                        <div class="table-responsive text-center">
+                                                            <table class="table table-sm table-bordered">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th scope="col" colspan="6">Coordinador/a</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <th scope="col">Nombre</th>
+                                                                        <td><?php echo $CoordinadorAsignatura->getData()->getNombre(); ?></td>
+                                                                        <th scope="col" colspan="2">Departamento</th>
+                                                                        <td colspan="2"><?php echo $CoordinadorAsignatura->getData()->getDepartamento(); ?></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th scope="col">Facultad</th>
+                                                                        <td><?php echo $CoordinadorAsignatura->getData()->getFacultad(); ?></td>
+                                                                        <th scope="col">Despacho</th>
+                                                                        <td><?php echo $CoordinadorAsignatura->getData()->getDespacho(); ?></td>
+                                                                        <th scope="col">Email</th>
+                                                                        <td><?php echo $CoordinadorAsignatura->getData()->getEmail(); ?></td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    <?php } else{
+                                                        echo'<div class="alert alert-danger" role="alert">
+                                                        <h4 class= "text-center">NO EXISTE LA INFORMACIÓN DEL COORDINADOR DE ASIGNATURA</h4>
+                                                        </div>';
+                                                    } ?>
 
-                                                        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionProgram">
+                                                </div>
+                                            </div>
+
+                                            <div class="card" id="info">
+                                                <h3 class="card-header text-center">
+                                                 Información adicional
+                                             </h4>
+
+                                             <div class="card-body">
+                                                <div class="table-responsive text-center">
+                                                    <table class="table table-bordered">
+                                                        <tbody>
+                                                            <tr>
+                                                                <th scope="col" colspan="2">Estado</th>
+                                                                <td colspan="2"
+                                                                    <?php  
+                                                                    if($contextAsignatura->getData()->getEstado() =="B"){
+                                                                        echo 'class="text-dark">Borrador (Edición permitida)';
+                                                                    }
+                                                                    elseif ($contextAsignatura->getData()->getEstado() =="V") {
+                                                                        echo 'class="text-primary">Validada (Edición bloqueada)';
+                                                                    }
+                                                                    elseif ($contextAsignatura->getData()->getEstado() =="C") {
+                                                                        echo 'class="text-success">Consolidada (Información actualizada)';
+                                                                    }
+                                                                    ?>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th scope="col" colspan="1">Última modificación</th>
+                                                                <td colspan="1">
+                                                                    <?php
+                                                                    if (!empty($contextModAsignatura->getData()->getFechaMod())){
+
+
+                                                                        $context = new es\ucm\Context(FIND_PROFESOR, $contextModAsignatura->getData()->getEmailMod());
+                                                                        $contextModificacion = $controller->action($context);
+                                                                        $date = strtotime($contextModAsignatura->getData()->getFechaMod());
+                                                                        echo date("H:i , d-m-Y",$date);
+                                                                    }
+                                                                    else{
+                                                                        echo "-";
+                                                                    }
+                                                                    ?>
+                                                                </td>
+                                                                <th scope="col" colspan="1">Autor</th>
+                                                                <td colspan="1">
+                                                                    <?php
+                                                                    if (!empty($contextModAsignatura->getData()->getEmailMod())) {
+                                                                      echo $contextModificacion->getData()->getNombre();
+                                                                  }
+                                                                  else{
+                                                                     echo "-";
+                                                                 }
+                                                                 ?>
+
+                                                             </td>
+                                                         </tr>
+                                                     </tbody>
+                                                 </table>
+                                             </div>
+                                             <?php 
+                                             if($contextAsignatura->getData()->getCoordinadorAsignatura() == $_SESSION['idUsuario']){ 
+
+                                                echo'<div class="alert alert-primary alert-dismissible fade show" role="alert">
+                                                <h4 class= "text-center">Eres el coordinador de la asignatura</h4>
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                                </button>
+                                                </div>';
+                                            } 
+                                            if($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['coordinacion']){ 
+
+                                                echo'<div class="alert alert-primary alert-dismissible fade show" role="alert">
+                                                <h4 class= "text-center">Eres el coordinador del grado</h4>
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                                </button>
+                                                </div>';
+                                            }
+                                            ?>
+                                        </div>
+                                    </div>
+
+                                    <?php 
+                                    if($contextAsignatura->getData()->getEstado() =="B" && $contextAsignatura->getData()->getCoordinadorAsignatura() == $_SESSION['idUsuario']){
+                                     echo '<a href="validar.php?IdGrado=<?'.$contextGrado->getData()->getCodigoGrado().'&IAsignatura='.$contextAsignatura->getData()->getIdAsignatura().'">
+                                     <button type="button" class="btn btn-primary btn-lg" id="btn-form">
+                                     Validar Asignatura
+                                     </button>
+                                     </a>';
+                                 }
+                                 if($contextAsignatura->getData()->getCoordinadorAsignatura() == $_SESSION['idUsuario']){
+                                    if($contextAsignatura->getData()->getEstado() =="V"){
+                                        echo '<a href="consolidar.php?IdGrado'.$contextGrado->getData()->getCodigoGrado().'&IAsignatura='.$contextAsignatura->getData()->getIdAsignatura().'">
+                                        <button type="button" class="btn btn-success btn-lg" id="btn-form">
+                                        Consolidar Asignatura
+                                        </button>
+                                        </a>';
+                                    }
+                                    if ($contextAsignatura->getData()->getEstado() !="B") {
+                                       echo '<a href="borrador.php?IdGrado'.$contextGrado->getData()->getCodigoGrado().'&IAsignatura='.$contextAsignatura->getData()->getIdAsignatura().'">
+                                       <button type="button" class="btn btn-warning btn-lg" id="btn-form">
+                                       Permitir Edición
+                                       </button>
+                                       </a>';
+                                   }
+                               } ?>
+                           </div>
+
+                           <?php if ($verPrograma) { ?>
+                            <!--Pestaña programa asignatura-->
+                            <div class="tab-pane fade" id="nav-prog-asignatura" role="tabpanel" aria-labelledby="nav-prog-asignatura-tab">
+                                <div class="accordion" id="accordionProgram">
+
+                                    <!--Pestaña conocimientos previos -->
+                                    <?php if ($contextConfiguracion->getData()->getConocimientosPrevios() == true) { ?>
+                                        <div class="card">
+                                            <div class="card-header" id="headingOne">
+                                                <h2 class="mb-0">
+                                                    <?php if ($contextComparacion->getData()['conocimientosPrevios']) { ?>
+                                                        <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseOneProg" aria-expanded="true" aria-controls="collapseOne">
+                                                            Conocimientos previos
+                                                        </button>
+                                                    <?php } else {
+
+                                                        ?><button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseOneProg" aria-expanded="true" aria-controls="collapseOne">
+                                                            Conocimientos previos
+                                                        </button>
+                                                    <?php } ?>
+                                                </h2>
+                                            </div>
+
+                                            <div id="collapseOneProg" class="collapse" aria-labelledby="headingOne" data-parent="#accordionProgram">
+                                                <div class="card-body">
+                                                    <div class="card">
+                                                        <div class="card-body">
+                                                            <h4 class="card-title">Consolidado</h4>
+                                                            <p class="card-text">
+                                                                <?php
+                                                                if ($contextPrograma->getEvent() === FIND_PROGRAMA_ASIGNATURA_OK) {
+                                                                    echo $contextPrograma->getData()->getConocimientosPrevios();
+                                                                }
+                                                                ?>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <?php if ($contextComparacion->getData()['conocimientosPrevios']){?>
+                                                        <div class="card">
                                                             <div class="card-body">
-                                                                <div class="card">
-                                                                    <div class="card-body">
-                                                                        <h4 class="card-title">Consolidado</h4>
-                                                                        <p class="card-text">
-                                                                            <?php
-                                                                            if ($contextPrograma->getEvent() === FIND_PROGRAMA_ASIGNATURA_OK) {
-                                                                                echo $contextPrograma->getData()->getConocimientosPrevios();
-                                                                            }
-                                                                            ?>
-                                                                        </p>
-                                                                    </div>
-                                                                </div>
-                                                                <?php if ($contextComparacion->getData()['conocimientosPrevios']){?>
-                                                                    <div class="card">
-                                                                        <div class="card-body">
-                                                                            <h4 class="card-title">Comparación</h4>
-                                                                            <p class="card-text">
-                                                                                <?php
-                                                                                $differ = new Differ(explode("\n", $contextPrograma->getData()->getConocimientosPrevios()), explode("\n", $contextModPrograma->getData()->getConocimientosPrevios()), $differOptions);
+                                                                <h4 class="card-title">Comparación</h4>
+                                                                <p class="card-text">
+                                                                    <?php
+                                                                    $differ = new Differ(explode("\n", $contextPrograma->getData()->getConocimientosPrevios()), explode("\n", $contextModPrograma->getData()->getConocimientosPrevios()), $differOptions);
                                                                                     $renderer = RendererFactory::make($rendererName, $rendererOptions); // or your own renderer object
                                                                                     $result = $renderer->render($differ);
                                                                                     echo $result;
@@ -492,17 +561,17 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                 <div class="card-header" id="headingTwo">
                                                                     <h2 class="mb-0">
                                                                         <?php if ($contextComparacion->getData()['conocimientosPreviosI']) { ?>
-                                                                            <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                                                                            <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseTwoProg" aria-expanded="true" aria-controls="collapseTwo">
                                                                                 Conocimientos previos (Inglés)
                                                                             </button>
                                                                         <?php } else { ?>
-                                                                            <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                                                                            <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseTwoProg" aria-expanded="true" aria-controls="collapseTwo">
                                                                                 Conocimientos previos (Inglés)
                                                                             </button>
                                                                         <?php } ?>
                                                                     </h2>
                                                                 </div>
-                                                                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionProgram">
+                                                                <div id="collapseTwoProg" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionProgram">
                                                                     <div class="card-body">
                                                                         <div class="card">
                                                                             <div class="card-body">
@@ -545,17 +614,17 @@ use Jfcherng\Diff\Renderer\RendererConstant;
 
                                                                 <?php
                                                                 if ($contextComparacion->getData()['BreveDescripcion']) { ?>
-                                                                    <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                                                    <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseThreeProg" aria-expanded="false" aria-controls="collapseThree">
                                                                         Breve descripción
                                                                     </button>
                                                                 <?php } else { ?>
-                                                                    <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                                                    <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseThreeProg" aria-expanded="false" aria-controls="collapseThree">
                                                                         Breve descripción
                                                                     </button>
                                                                 <?php } ?>
                                                             </h2>
                                                         </div>
-                                                        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionProgram">
+                                                        <div id="collapseThreeProg" class="collapse" aria-labelledby="headingThree" data-parent="#accordionProgram">
                                                             <div class="card-body"><div class="card">
                                                                 <div class="card-body">
                                                                     <h4 class="card-title">Consolidado</h4>
@@ -594,17 +663,17 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                 <div class="card-header" id="headingFour">
                                                                     <h2 class="mb-0">
                                                                         <?php if ($contextComparacion->getData()['BreveDescripcionI']) { ?>
-                                                                            <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                                                            <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseFourProg" aria-expanded="false" aria-controls="collapseFour">
                                                                                 Breve descripción (Inglés)
                                                                             </button>
                                                                         <?php } else { ?>
-                                                                            <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                                                            <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseFourProg" aria-expanded="false" aria-controls="collapseFour">
                                                                                 Breve descripción (Inglés)
                                                                             </button>
                                                                         <?php } ?>
                                                                     </h2>
                                                                 </div>
-                                                                <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionProgram">
+                                                                <div id="collapseFourProg" class="collapse" aria-labelledby="headingFour" data-parent="#accordionProgram">
                                                                     <div class="card-body">
                                                                         <div class="card">
                                                                             <div class="card-body">
@@ -646,17 +715,17 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                         <div class="card-header" id="headingFive">
                                                             <h2 class="mb-0">
                                                                 <?php if ($contextComparacion->getData()['ProgramaTeorico']) { ?>
-                                                                    <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
+                                                                    <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseFiveProg" aria-expanded="true" aria-controls="collapseFive">
                                                                         Programa teórico
                                                                     </button>
                                                                 <?php } else { ?>
-                                                                    <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                                                    <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseFiveProg" aria-expanded="false" aria-controls="collapseFive">
                                                                         Programa teórico
                                                                     </button>
                                                                 <?php } ?>
                                                             </h2>
                                                         </div>
-                                                        <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionProgram">
+                                                        <div id="collapseFiveProg" class="collapse" aria-labelledby="headingFive" data-parent="#accordionProgram">
                                                             <div class="card-body">
                                                                 <div class="card">
                                                                     <div class="card-body">
@@ -696,17 +765,17 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                 <div class="card-header" id="headingSix">
                                                                     <h2 class="mb-0">
                                                                         <?php if ($contextComparacion->getData()['ProgramaTeoricoI']) { ?>
-                                                                            <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseSix" aria-expanded="true" aria-controls="collapseSix">
+                                                                            <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseSixProg" aria-expanded="true" aria-controls="collapseSix">
                                                                                 Programa teórico (Inglés)
                                                                             </button>
                                                                         <?php } else { ?>
-                                                                            <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                                                                            <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseSixProg" aria-expanded="false" aria-controls="collapseSix">
                                                                                 Programa teórico (Inglés)
                                                                             </button>
                                                                         <?php } ?>
                                                                     </h2>
                                                                 </div>
-                                                                <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionProgram">
+                                                                <div id="collapseSixProg" class="collapse" aria-labelledby="headingSix" data-parent="#accordionProgram">
                                                                     <div class="card-body">
                                                                         <div class="card">
                                                                             <div class="card-body">
@@ -748,17 +817,17 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                         <div class="card-header" id="headingSeven">
                                                             <h2 class="mb-0">
                                                                 <?php if ($contextComparacion->getData()['ProgramaSeminarios']) { ?>
-                                                                    <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="true" aria-controls="collapseSeven">
+                                                                    <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseSevenProg" aria-expanded="true" aria-controls="collapseSeven">
                                                                         Programa seminarios
                                                                     </button>
                                                                 <?php } else { ?>
-                                                                    <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+                                                                    <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseSevenProg" aria-expanded="false" aria-controls="collapseSeven">
                                                                         Programa seminarios
                                                                     </button>
                                                                 <?php } ?>
                                                             </h2>
                                                         </div>
-                                                        <div id="collapseSeven" class="collapse" aria-labelledby="headingSeven" data-parent="#accordionProgram">
+                                                        <div id="collapseSevenProg" class="collapse" aria-labelledby="headingSeven" data-parent="#accordionProgram">
                                                             <div class="card-body">
                                                                 <div class="card">
                                                                     <div class="card-body">
@@ -798,17 +867,17 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                 <div class="card-header" id="headingEight">
                                                                     <h2 class="mb-0">
                                                                         <?php if ($contextComparacion->getData()['ProgramaSeminariosI']) { ?>
-                                                                            <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseEight" aria-expanded="true" aria-controls="collapseEight">
+                                                                            <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseEightProg" aria-expanded="true" aria-controls="collapseEight">
                                                                                 Programa seminarios (Inglés)
                                                                             </button>
                                                                         <?php } else { ?>
-                                                                            <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
+                                                                            <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseEightProg" aria-expanded="false" aria-controls="collapseEight">
                                                                                 Programa seminarios (Inglés)
                                                                             </button>
                                                                         <?php } ?>
                                                                     </h2>
                                                                 </div>
-                                                                <div id="collapseEight" class="collapse" aria-labelledby="headingEight" data-parent="#accordionProgram">
+                                                                <div id="collapseEightProg" class="collapse" aria-labelledby="headingEight" data-parent="#accordionProgram">
                                                                     <div class="card-body">
                                                                         <div class="card">
                                                                             <div class="card-body">
@@ -849,17 +918,17 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                         <div class="card-header" id="headingNine">
                                                             <h2 class="mb-0">
                                                                 <?php if ($contextComparacion->getData()['ProgramaLaboratorio']) { ?>
-                                                                    <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseNine" aria-expanded="true" aria-controls="collapseNine">
+                                                                    <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseNineProg" aria-expanded="true" aria-controls="collapseNine">
                                                                         Programa laboratorio
                                                                     </button>
                                                                 <?php } else { ?>
-                                                                    <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseNine" aria-expanded="false" aria-controls="collapseNine">
+                                                                    <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseNineProg" aria-expanded="false" aria-controls="collapseNine">
                                                                         Programa laboratorio
                                                                     </button>
                                                                 <?php } ?>
                                                             </h2>
                                                         </div>
-                                                        <div id="collapseNine" class="collapse" aria-labelledby="headingNine" data-parent="#accordionProgram">
+                                                        <div id="collapseNineProg" class="collapse" aria-labelledby="headingNine" data-parent="#accordionProgram">
                                                             <div class="card-body">
                                                                 <div class="card">
                                                                     <div class="card-body">
@@ -899,17 +968,17 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                 <div class="card-header" id="headingTen">
                                                                     <h2 class="mb-0">
                                                                         <?php if ($contextComparacion->getData()['ProgramaLaboratorioI']) { ?>
-                                                                            <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseTen" aria-expanded="true" aria-controls="collapseTen">
+                                                                            <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseTenProg" aria-expanded="true" aria-controls="collapseTen">
                                                                                 Programa laboratorio (Inglés)
                                                                             </button>
                                                                         <?php } else { ?>
-                                                                            <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseTen" aria-expanded="false" aria-controls="collapseTen">
+                                                                            <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseTenProg" aria-expanded="false" aria-controls="collapseTen">
                                                                                 Programa laboratorio (Inglés)
                                                                             </button>
                                                                         <?php } ?>
                                                                     </h2>
                                                                 </div>
-                                                                <div id="collapseTen" class="collapse" aria-labelledby="headingTen" data-parent="#accordionProgram">
+                                                                <div id="collapseTenProg" class="collapse" aria-labelledby="headingTen" data-parent="#accordionProgram">
                                                                     <div class="card-body">
                                                                         <div class="card">
                                                                             <div class="card-body">
@@ -982,18 +1051,18 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                         <div class="card-header" id="headingOne">
                                                             <h2 class="mb-0">
                                                                 <?php if ($contextComparacion->getData()['ComGenerales']) { ?>
-                                                                    <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                                    <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseOneComp" aria-expanded="true" aria-controls="collapseOne">
                                                                         Generales
                                                                     </button>
                                                                 <?php } else { ?>
-                                                                    <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                                    <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseOneComp" aria-expanded="true" aria-controls="collapseOne">
                                                                         Generales
                                                                     </button>
                                                                 <?php } ?>
                                                             </h2>
                                                         </div>
 
-                                                        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionCompetencia">
+                                                        <div id="collapseOneComp" class="collapse" aria-labelledby="headingOne" data-parent="#accordionCompetencia">
                                                             <div class="card-body">
                                                                 <div class="card">
                                                                     <div class="card-body">
@@ -1033,17 +1102,17 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                 <div class="card-header" id="headingTwo">
                                                                     <h2 class="mb-0">
                                                                         <?php if ($contextComparacion->getData()['ComGeneralesI']) { ?>
-                                                                            <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                                                                            <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseTwoComp" aria-expanded="true" aria-controls="collapseTwo">
                                                                                 Generales (Inglés)
                                                                             </button>
                                                                         <?php } else { ?>
-                                                                            <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                                                                            <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseTwoComp" aria-expanded="true" aria-controls="collapseTwo">
                                                                                 Generales (Inglés)
                                                                             </button>
                                                                         <?php } ?>
                                                                     </h2>
                                                                 </div>
-                                                                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionCompetencia">
+                                                                <div id="collapseTwoComp" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionCompetencia">
                                                                     <div class="card-body">
                                                                         <div class="card">
                                                                             <div class="card-body">
@@ -1085,17 +1154,17 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                         <div class="card-header" id="headingThree">
                                                             <h2 class="mb-0">
                                                                 <?php if ($contextComparacion->getData()['ComEspecificas']) { ?>
-                                                                    <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                                                                    <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseThreeComp" aria-expanded="true" aria-controls="collapseThree">
                                                                         Específicas
                                                                     </button>
                                                                 <?php } else { ?>
-                                                                    <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                                                    <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseThreeComp" aria-expanded="false" aria-controls="collapseThree">
                                                                         Específicas
                                                                     </button>
                                                                 <?php } ?>
                                                             </h2>
                                                         </div>
-                                                        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionCompetencia">
+                                                        <div id="collapseThreeComp" class="collapse" aria-labelledby="headingThree" data-parent="#accordionCompetencia">
                                                             <div class="card-body">
                                                                 <div class="card">
                                                                     <div class="card-body">
@@ -1135,17 +1204,17 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                 <div class="card-header" id="headingFour">
                                                                     <h2 class="mb-0">
                                                                         <?php if ($contextComparacion->getData()['ComEspecificasI'] ) { ?>
-                                                                            <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+                                                                            <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseFourComp" aria-expanded="true" aria-controls="collapseFour">
                                                                                 Específicas (Inglés)
                                                                             </button>
                                                                         <?php } else { ?>
-                                                                            <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                                                            <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseFourComp" aria-expanded="false" aria-controls="collapseFour">
                                                                                 Específicas (Inglés)
                                                                             </button>
                                                                         <?php } ?>
                                                                     </h2>
                                                                 </div>
-                                                                <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionCompetencia">
+                                                                <div id="collapseFourComp" class="collapse" aria-labelledby="headingFour" data-parent="#accordionCompetencia">
                                                                     <div class="card-body">
                                                                         <div class="card">
                                                                             <div class="card-body">
@@ -1187,17 +1256,17 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                         <div class="card-header" id="headingFive">
                                                             <h2 class="mb-0">
                                                                 <?php if ($contextComparacion->getData()['ComBasicas']) { ?>
-                                                                    <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
+                                                                    <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseFiveComp" aria-expanded="true" aria-controls="collapseFive">
                                                                         Básicas y transversales
                                                                     </button>
                                                                 <?php } else { ?>
-                                                                    <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                                                    <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseFiveComp" aria-expanded="false" aria-controls="collapseFive">
                                                                         Básicas y transversales
                                                                     </button>
                                                                 <?php } ?>
                                                             </h2>
                                                         </div>
-                                                        <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionCompetencia">
+                                                        <div id="collapseFiveComp" class="collapse" aria-labelledby="headingFive" data-parent="#accordionCompetencia">
                                                             <div class="card-body">
                                                                 <div class="card">
                                                                     <div class="card-body">
@@ -1237,17 +1306,17 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                 <div class="card-header" id="headingSix">
                                                                     <h2 class="mb-0">
                                                                         <?php if ($contextComparacion->getData()['ComBasicasI']) { ?>
-                                                                            <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseSix" aria-expanded="true" aria-controls="collapseSix">
+                                                                            <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseSixComp" aria-expanded="true" aria-controls="collapseSix">
                                                                                 Básicas y transversales (Inglés)
                                                                             </button>
                                                                         <?php } else { ?>
-                                                                            <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                                                                            <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseSixComp" aria-expanded="false" aria-controls="collapseSix">
                                                                                 Básicas y transversales (Inglés)
                                                                             </button>
                                                                         <?php } ?>
                                                                     </h2>
                                                                 </div>
-                                                                <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionCompetencia">
+                                                                <div id="collapseSixComp" class="collapse" aria-labelledby="headingSix" data-parent="#accordionCompetencia">
                                                                     <div class="card-body">
                                                                         <div class="card">
                                                                             <div class="card-body">
@@ -1289,18 +1358,18 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                         <div class="card-header" id="headingSeven">
                                                             <h2 class="mb-0">
                                                                 <?php if ($contextComparacion->getData()['ResultadosAprendizaje']) { ?>
-                                                                    <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="true" aria-controls="collapseSeven">
+                                                                    <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseSevenComp" aria-expanded="true" aria-controls="collapseSeven">
                                                                         Resultados del aprendizaje
                                                                     </button>
                                                                 <?php } else { ?>
 
-                                                                    <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+                                                                    <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseSevenComp" aria-expanded="false" aria-controls="collapseSeven">
                                                                         Resultados del aprendizaje
                                                                     </button>
                                                                 <?php } ?>
                                                             </h2>
                                                         </div>
-                                                        <div id="collapseSeven" class="collapse" aria-labelledby="headingSeven" data-parent="#accordionCompetencia">
+                                                        <div id="collapseSevenComp" class="collapse" aria-labelledby="headingSeven" data-parent="#accordionCompetencia">
                                                             <div class="card-body">
                                                                 <div class="card">
                                                                     <div class="card-body">
@@ -1340,18 +1409,18 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                 <div class="card-header" id="headingEight">
                                                                     <h2 class="mb-0">
                                                                         <?php if ($contextComparacion->getData()['ResultadosAprendizajeI']) { ?>
-                                                                            <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseEight" aria-expanded="true" aria-controls="collapseEight">
+                                                                            <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseEightComp" aria-expanded="true" aria-controls="collapseEight">
                                                                                 Resultados del aprendizaje (Inglés)
                                                                             </button>
                                                                         <?php } else { ?>
 
-                                                                            <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
+                                                                            <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseEightComp" aria-expanded="false" aria-controls="collapseEight">
                                                                                 Resultados del aprendizaje (Inglés)
                                                                             </button>
                                                                         <?php } ?>
                                                                     </h2>
                                                                 </div>
-                                                                <div id="collapseEight" class="collapse" aria-labelledby="headingEight" data-parent="#accordionCompetencia">
+                                                                <div id="collapseEightComp" class="collapse" aria-labelledby="headingEight" data-parent="#accordionCompetencia">
                                                                     <div class="card-body">
                                                                         <div class="card">
                                                                             <div class="card-body">
@@ -1423,18 +1492,18 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                     <div class="card-header" id="headingOne">
                                                         <h2 class="mb-0">
                                                             <?php if ($contextComparacion->getData()['Metodologia']){ ?>
-                                                                <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                                <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseOneMet" aria-expanded="true" aria-controls="collapseOne">
                                                                     Metodología
                                                                 </button>
                                                             <?php } else { ?>
-                                                                <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                                <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseOneMet" aria-expanded="true" aria-controls="collapseOne">
                                                                     Metodología
                                                                 </button>
                                                             <?php } ?>
                                                         </h2>
                                                     </div>
 
-                                                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionMetodologia">
+                                                    <div id="collapseOneMet" class="collapse" aria-labelledby="headingOne" data-parent="#accordionMetodologia">
                                                         <div class="card-body">
                                                             <div class="card">
                                                                 <div class="card-body">
@@ -1474,17 +1543,17 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                 <div class="card-header" id="headingTwo">
                                                                     <h2 class="mb-0">
                                                                         <?php if ($contextComparacion->getData()['MetodologiaI']) { ?>
-                                                                            <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                                                                            <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseTwoMet" aria-expanded="true" aria-controls="collapseTwo">
                                                                                 Metodología (Inglés)
                                                                             </button>
                                                                         <?php } else { ?>
-                                                                            <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                                                                            <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseTwoMet" aria-expanded="true" aria-controls="collapseTwo">
                                                                                 Metodología (Inglés)
                                                                             </button>
                                                                         <?php } ?>
                                                                     </h2>
                                                                 </div>
-                                                                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionMetodologia">
+                                                                <div id="collapseTwoMet" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionMetodologia">
                                                                     <div class="card-body">
                                                                         <div class="card">
                                                                             <div class="card-body">
@@ -1556,18 +1625,18 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                             <div class="card-header" id="headingOne">
                                                                 <h2 class="mb-0">
                                                                     <?php if ($contextComparacion->getData()['CitasBibliograficas']) { ?>
-                                                                        <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                                        <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseOneBib" aria-expanded="true" aria-controls="collapseOne">
                                                                             Citas bibliográficas
                                                                         </button>
                                                                     <?php } else { ?>
-                                                                        <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                                        <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseOneBib" aria-expanded="true" aria-controls="collapseOne">
                                                                             Citas bibliográficas
                                                                         </button>
                                                                     <?php } ?>
                                                                 </h2>
                                                             </div>
 
-                                                            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionBibliografia">
+                                                            <div id="collapseOneBib" class="collapse" aria-labelledby="headingOne" data-parent="#accordionBibliografia">
                                                                 <div class="card-body">
                                                                     <div class="card">
                                                                         <div class="card-body">
@@ -1608,17 +1677,17 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                             <div class="card-header" id="headingTwo">
                                                                 <h2 class="mb-0">
                                                                     <?php if ($contextComparacion->getData()['RecursosInternet'] ) { ?>
-                                                                        <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                                                                        <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseTwoBib" aria-expanded="true" aria-controls="collapseTwo">
                                                                             Recursos en internet
                                                                         </button>
                                                                     <?php } else { ?>
-                                                                        <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                                                        <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseTwoBib" aria-expanded="false" aria-controls="collapseTwo">
                                                                             Recursos en internet
                                                                         </button>
                                                                     <?php } ?>
                                                                 </h2>
                                                             </div>
-                                                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionBibliografia">
+                                                            <div id="collapseTwoBib" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionBibliografia">
                                                                 <div class="card-body">
                                                                     <div class="card">
                                                                         <div class="card-body">
@@ -2199,18 +2268,18 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                             <div class="card-header" id="headingOne">
                                                                                                 <h2 class="mb-0">
                                                                                                     <?php if ($contextComparacion->getData()['RealizacionExamenes']) { ?>
-                                                                                                        <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                                                                        <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseOneEv" aria-expanded="true" aria-controls="collapseOne">
                                                                                                             Realización de los exámenes
                                                                                                         </button>
                                                                                                     <?php } else { ?>
-                                                                                                        <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                                                                        <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseOneEv" aria-expanded="true" aria-controls="collapseOne">
                                                                                                             Realización de los exámenes
                                                                                                         </button>
                                                                                                     <?php } ?>
                                                                                                 </h2>
                                                                                             </div>
 
-                                                                                            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionEvaluacion">
+                                                                                            <div id="collapseOneEv" class="collapse" aria-labelledby="headingOne" data-parent="#accordionEvaluacion">
                                                                                                 <div class="card-body">
                                                                                                     <div class="card">
                                                                                                         <div class="card-body">
@@ -2267,16 +2336,16 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                         <div class="card">
                                                                                             <div class="card-header" id="headingTwo">
                                                                                                 <?php if ($contextComparacion->getData()['RealizacionExamenesI']) { ?>
-                                                                                                    <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                                                                                                    <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseTwoEv" aria-expanded="true" aria-controls="collapseTwo">
                                                                                                         Realización de los exámenes (Inglés)
                                                                                                     </button>
                                                                                                 <?php } else { ?>
-                                                                                                    <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                                                                                                    <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseTwoEv" aria-expanded="true" aria-controls="collapseTwo">
                                                                                                         Realización de los exámenes (Inglés)
                                                                                                     </button>
                                                                                                 <?php } ?>
                                                                                             </div>
-                                                                                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionEvaluacion">
+                                                                                            <div id="collapseTwoEv" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionEvaluacion">
                                                                                                 <div class="card-body">
                                                                                                   <div class="card">
                                                                                                     <div class="card-body">
@@ -2318,17 +2387,17 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                     <div class="card-header" id="headingThree">
                                                                                         <h2 class="mb-0">
                                                                                             <?php if ($contextComparacion->getData()['RealizacionActividades']) { ?>
-                                                                                                <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                                                                                                <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseThreeEv" aria-expanded="true" aria-controls="collapseThree">
                                                                                                     Realización de las actividades
                                                                                                 </button>
                                                                                             <?php } else { ?>
-                                                                                                <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                                                                                <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseThreeEv" aria-expanded="false" aria-controls="collapseThree">
                                                                                                     Realización de las actividades
                                                                                                 </button>
                                                                                             <?php } ?>
                                                                                         </h2>
                                                                                     </div>
-                                                                                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionEvaluacion">
+                                                                                    <div id="collapseThreeEv" class="collapse" aria-labelledby="headingThree" data-parent="#accordionEvaluacion">
                                                                                         <div class="card-body">
                                                                                             <div class="card">
                                                                                                 <div class="card-body">
@@ -2386,17 +2455,17 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                             <div class="card-header" id="headingFour">
                                                                                                 <h2 class="mb-0">
                                                                                                     <?php if ($contextComparacion->getData()['RealizacionActividadesI']) { ?>
-                                                                                                        <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+                                                                                                        <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseFourEv" aria-expanded="true" aria-controls="collapseFour">
                                                                                                             Realización de las actividades (Inglés)
                                                                                                         </button>
                                                                                                     <?php } else { ?>
-                                                                                                        <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                                                                                        <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseFourEv" aria-expanded="false" aria-controls="collapseFour">
                                                                                                             Realización de las actividades (Inglés)
                                                                                                         </button>
                                                                                                     <?php } ?>
                                                                                                 </h2>
                                                                                             </div>
-                                                                                            <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionEvaluacion">
+                                                                                            <div id="collapseFourEv" class="collapse" aria-labelledby="headingFour" data-parent="#accordionEvaluacion">
                                                                                                 <div class="card-body">
                                                                                                     <div class="card">
                                                                                                         <div class="card-body">
@@ -2438,17 +2507,17 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                     <div class="card-header" id="headingFive">
                                                                                         <h2 class="mb-0">
                                                                                             <?php if ($contextComparacion->getData()['RealizacionLaboratorio']) { ?>
-                                                                                                <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
+                                                                                                <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseFiveEv" aria-expanded="true" aria-controls="collapseFive">
                                                                                                     Realización del laboratorio
                                                                                                 </button>
                                                                                             <?php } else { ?>
-                                                                                                <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                                                                                <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseFiveEv" aria-expanded="false" aria-controls="collapseFive">
                                                                                                     Realización del laboratorio
                                                                                                 </button>
                                                                                             <?php } ?>
                                                                                         </h2>
                                                                                     </div>
-                                                                                    <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionEvaluacion">
+                                                                                    <div id="collapseFiveEv" class="collapse" aria-labelledby="headingFive" data-parent="#accordionEvaluacion">
                                                                                         <div class="card-body">
                                                                                             <div class="card">
                                                                                                 <div class="card-body">
@@ -2506,17 +2575,17 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                             <div class="card-header" id="headingSix">
                                                                                                 <h2 class="mb-0">
                                                                                                     <?php if ($contextComparacion->getData()['RealizacionLaboratorioI']) { ?>
-                                                                                                        <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseSix" aria-expanded="true" aria-controls="collapseSix">
+                                                                                                        <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseSixEv" aria-expanded="true" aria-controls="collapseSix">
                                                                                                             Realización del laboratorio (Inglés)
                                                                                                         </button>
                                                                                                     <?php } else { ?>
-                                                                                                        <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                                                                                                        <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseSixEv" aria-expanded="false" aria-controls="collapseSix">
                                                                                                             Realización del laboratorio (Inglés)
                                                                                                         </button>
                                                                                                     <?php } ?>
                                                                                                 </h2>
                                                                                             </div>
-                                                                                            <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionEvaluacion">
+                                                                                            <div id="collapseSixEv" class="collapse" aria-labelledby="headingSix" data-parent="#accordionEvaluacion">
                                                                                                 <div class="card-body">
                                                                                                     <div class="card">
                                                                                                         <div class="card-body">
@@ -2558,17 +2627,17 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                     <div class="card-header" id="headingSeven">
                                                                                         <h2 class="mb-0">
                                                                                             <?php if ($contextComparacion->getData()['CalificacionFinal']) { ?>
-                                                                                                <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="true" aria-controls="collapseSeven">
+                                                                                                <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseSevenEv" aria-expanded="true" aria-controls="collapseSeven">
                                                                                                     Calificación final
                                                                                                 </button>
                                                                                             <?php } else { ?>
-                                                                                                <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+                                                                                                <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseSevenEv" aria-expanded="false" aria-controls="collapseSeven">
                                                                                                     Calificación final
                                                                                                 </button>
                                                                                             <?php } ?>
                                                                                         </h2>
                                                                                     </div>
-                                                                                    <div id="collapseSeven" class="collapse" aria-labelledby="headingSeven" data-parent="#accordionEvaluacion">
+                                                                                    <div id="collapseSevenEv" class="collapse" aria-labelledby="headingSeven" data-parent="#accordionEvaluacion">
                                                                                         <div class="card-body">
                                                                                             <div class="card">
                                                                                                 <div class="card-body">
@@ -2587,8 +2656,8 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                                     <div class="card-body">
                                                                                                         <h4 class="card-title">Comparación</h4>
                                                                                                         <p class="card-text">
-                                                                                                         <?php
-                                                                                                         $differ = new Differ(explode("\n", $contextEvaluacion->getData()->getCalificacionFinal()), explode("\n", $contextModEvaluacion->getData()->getCalificacionFinal()), $differOptions);
+                                                                                                           <?php
+                                                                                                           $differ = new Differ(explode("\n", $contextEvaluacion->getData()->getCalificacionFinal()), explode("\n", $contextModEvaluacion->getData()->getCalificacionFinal()), $differOptions);
                                                                                                                 $renderer = RendererFactory::make($rendererName, $rendererOptions); // or your own renderer object
                                                                                                                 $result = $renderer->render($differ);
                                                                                                                 echo $result;
@@ -2608,17 +2677,17 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                             <div class="card-header" id="headingEight">
                                                                                                 <h2 class="mb-0">
                                                                                                     <?php if ($contextComparacion->getData()['CalificacionFinalI']) { ?>
-                                                                                                        <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseEight" aria-expanded="true" aria-controls="collapseEight">
+                                                                                                        <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseEightEv" aria-expanded="true" aria-controls="collapseEight">
                                                                                                             Calificación final (Inglés)
                                                                                                         </button>
                                                                                                     <?php } else { ?>
-                                                                                                        <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
+                                                                                                        <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseEightEv" aria-expanded="false" aria-controls="collapseEight">
                                                                                                             Calificación final (Inglés)
                                                                                                         </button>
                                                                                                     <?php } ?>
                                                                                                 </h2>
                                                                                             </div>
-                                                                                            <div id="collapseEight" class="collapse" aria-labelledby="headingEight" data-parent="#accordionEvaluacion">
+                                                                                            <div id="collapseEightEv" class="collapse" aria-labelledby="headingEight" data-parent="#accordionEvaluacion">
                                                                                                 <div class="card-body">
                                                                                                     <div class="card">
                                                                                                         <div class="card-body">
@@ -2686,12 +2755,12 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                         <div class="accordion" id="accordionCoordinacion">
                                                                             <div class="card-header" id="headingOne">
                                                                                 <h2 class="mb-0">
-                                                                                    <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                                                                    <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseOneCor" aria-expanded="false" aria-controls="collapseOne">
                                                                                         Configuración
                                                                                     </button>
                                                                                 </h2>
                                                                             </div>
-                                                                            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionCoordinacion">
+                                                                            <div id="collapseOneCor" class="collapse" aria-labelledby="headingOne" data-parent="#accordionCoordinacion">
                                                                                 <div class="card-body">
                                                                                     <div class="card">
                                                                                         <div class="card">
@@ -2783,7 +2852,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                                     }
                                                                                                     ?>
                                                                                                     <div class="text-right">
-                                                                                                        <a href="configuracion.php?idAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
+                                                                                                        <a href="configuracion.php?IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado() ?>&IdAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
                                                                                                             <button type="button" class="btn btn-primary" id="btn-form">
                                                                                                                 Modificar Configuración
                                                                                                             </button>
@@ -2800,12 +2869,12 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                             <!--Permisos-->
                                                                             <div class="card-header" id="headingTwo">
                                                                                 <h2 class="mb-0">
-                                                                                    <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                                                                    <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseTwoCor" aria-expanded="false" aria-controls="collapseTwo">
                                                                                         Permisos
                                                                                     </button>
                                                                                 </h2>
                                                                             </div>
-                                                                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionCoordinacion">
+                                                                            <div id="collapseTwoCor" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionCoordinacion">
                                                                                 <div class="card-body">
                                                                                     <div class="card">
                                                                                         <div class="card">
@@ -2981,12 +3050,12 @@ use Jfcherng\Diff\Renderer\RendererConstant;
 
                                                                             <div class="card-header" id="headingThree">
                                                                                 <h2 class="mb-0">
-                                                                                    <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                                                                    <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseThreeCor" aria-expanded="false" aria-controls="collapseThree">
                                                                                         Gestión Profesores
                                                                                     </button>
                                                                                 </h2>
                                                                             </div>
-                                                                            <div id="collapseThree" class="collapse" aria-labelledby="headingS" data-parent="#accordionCoordinacion">
+                                                                            <div id="collapseThreeCor" class="collapse" aria-labelledby="headingThree" data-parent="#accordionCoordinacion">
                                                                                 <div class="card-body">
                                                                                     <div class="card">
                                                                                         <div class="card">

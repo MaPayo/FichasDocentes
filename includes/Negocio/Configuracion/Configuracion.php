@@ -47,7 +47,6 @@ class Configuracion
         $this->CalificacionFinal = $CalificacionFinal;
         $this->IdAsignatura = $IdAsignatura;
     }
-
     /**
      * @return mixed
      */
@@ -167,7 +166,6 @@ class Configuracion
 
         return $this;
     }
-
 
     /**
      * @return mixed
@@ -398,7 +396,7 @@ class Configuracion
     }
 
     /**
-     * @param mixed $CalificacionFinalO
+     * @param mixed $CalificacionFinal
      *
      * @return self
      */
@@ -408,7 +406,6 @@ class Configuracion
 
         return $this;
     }
-
 
     /**
      * @return mixed
