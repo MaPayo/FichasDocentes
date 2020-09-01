@@ -474,7 +474,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
 
                                     <?php 
                                     if($contextAsignatura->getData()->getEstado() =="B" && $contextAsignatura->getData()->getCoordinadorAsignatura() == $_SESSION['idUsuario']){
-                                     echo '<a href="validar.php?IdGrado=<?'.$contextGrado->getData()->getCodigoGrado().'&IAsignatura='.$contextAsignatura->getData()->getIdAsignatura().'">
+                                     echo '<a href="validar.php?IdGrado='.$contextGrado->getData()->getCodigoGrado().'&IAsignatura='.$contextAsignatura->getData()->getIdAsignatura().'">
                                      <button type="button" class="btn btn-primary btn-lg" id="btn-form">
                                      Validar Asignatura
                                      </button>
@@ -3122,7 +3122,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
 
                     <!-- Feedback -->
                     <?php
-                    if (isset($_GET['anadido']) || isset($_GET['modificado'])) {
+                    if (isset($_GET['anadido']) || isset($_GET['modificado']) || isset($_GET['eliminado'])) {
                         ?>
                         <div class="modal" tabindex="-1" role="dialog" id="feedback">
                             <div class="modal-dialog" role="document">
@@ -3205,7 +3205,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <?php
-if (isset($_GET['anadido']) || isset($_GET['modificado'])) {
+if (isset($_GET['anadido']) || isset($_GET['modificado'])|| isset($_GET['eliminado'])) {
     ?>
     <script>
         $('#feedback').modal('show')
