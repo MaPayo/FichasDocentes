@@ -51,6 +51,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                   $datosIniciales= array();
                   $datosIniciales['IdConfiguracion'] = $contextConfiguracion->getData()->getIdConfiguracion();
                   $datosIniciales['IdAsignatura']=  htmlspecialchars(trim(strip_tags($_GET['IdAsignatura'])));
+                  $datosIniciales['IdGrado']=  htmlspecialchars(trim(strip_tags($_GET['IdGrado'])));
                   $access->gestionaModificacion($datosIniciales);
            } //Find ok
 

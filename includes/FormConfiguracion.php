@@ -12,317 +12,257 @@ class FormConfiguracion extends Form
 	protected function generaCamposFormulario($datosIniciales)
 	{        
 		$IdConfiguracion = $datosIniciales['IdConfiguracion'];
-
         $IdAsignatura = $datosIniciales['IdAsignatura'];
+        $IdGrado = $datosIniciales['IdGrado'];
 
-        
-        
         $controller = new ControllerImplements();
         $context = new Context(FIND_CONFIGURACION, $IdAsignatura);
         $contextConfiguracion = $controller->action($context);
+
+        $html = 
+        '<input type="hidden" name="IdConfiguracion" id="IdConfiguracion" value="' . $IdConfiguracion . '" required />
+        <input type="hidden" name="IdAsignatura" id="IdAsignatura" value="' . $IdAsignatura . '" required />
+        <input type="hidden" name="IdGrado" id="IdGrado" value="' . $IdGrado . '" required />
+
+
+ <table class="table table-hover">
+        <tbody>
+
+        <tr>
+        <th scope="row" class="text-center text-primary" colspan="2">PROGRAMA</th>
+        </tr>
+
+        <tr>
+        <th scope="row">Conocimientos previos</th>
+        <td>  
+        <input class="form-check-input" type="checkbox" name="ConocimientosPrevios" id="ConocimientosPrevios"'; if($contextConfiguracion->getData()->getConocimientosPrevios())$html .='checked'; 
+        $html .='>
+        </td>
+        </tr>
+
+        <tr>
+        <th scope="row">Breve descripción</th>
+        <td> 
+        <input class="form-check-input" type="checkbox" name="BreveDescripcion" id="BreveDescripcion"'; if($contextConfiguracion->getData()->getBreveDescripcion())$html .='checked'; 
+        $html .='>
+        </td>
+        </tr>
+
+        <tr>
+        <th scope="row">Programa teórico</th>
+        <td>
+        <input class="form-check-input" type="checkbox" name="ProgramaTeorico" id="ProgramaTeorico"'; if($contextConfiguracion->getData()->getProgramaTeorico())$html .='checked'; $html .='>
+        </td>
+        </tr>
+
+        <tr>
+        <th scope="row">Programa de seminarios</th>
+        <td>
+        <input class="form-check-input" type="checkbox" name="ProgramaSeminarios" id="ProgramaSeminarios"'; if($contextConfiguracion->getData()->getProgramaSeminarios())$html .='checked';
+        $html .='>
+        </td>
+        </tr>
+
+        <tr>
+        <th scope="row">Programa de laboratorio</th>
+        <td>
+        <input class="form-check-input" type="checkbox" name="ProgramaLaboratorio" id="ProgramaLaboratorio"'; if($contextConfiguracion->getData()->getProgramaLaboratorio())$html .='checked'; 
+        $html .='>
+        </td>
+        </tr>
+
+        <tr>
+        <th scope="row" class="text-center text-primary" colspan="2">COMPETENCIAS</th>
+        </tr>
+
+        <tr>
+        <th scope="row">Generales</th>
+        <td>    
+        <input class="form-check-input" type="checkbox" name="ComGenerales" id="ComGenerales"'; if($contextConfiguracion->getData()->getComGenerales())$html .='checked'; 
+        $html .='>
+        </td>
+        </tr>
+
+        <tr>
+        <th scope="row">Específicas</th>
+        <td>    
+        <input class="form-check-input" type="checkbox" name="ComEspecificas" id="ComEspecificas"'; if($contextConfiguracion->getData()->getComEspecificas())$html .='checked'; 
+        $html .='>
+        </td>
+        </tr>
+
+        <tr>
+        <th scope="row">Básicas y transversales</th>
+        <td>    
+        <input class="form-check-input" type="checkbox" name="ComBasicas" id="ComBasicas"'; if($contextConfiguracion->getData()->getComBasicas())$html .='checked'; 
+        $html .='>
+        </td>
+        </tr>
+
+        <tr>
+        <th scope="row">Resultados del aprendizaje</th>
+        <td>    
+        <input class="form-check-input" type="checkbox" name="ResultadosAprendizaje" id="ResultadosAprendizaje"'; if($contextConfiguracion->getData()->getResultadosAprendizaje())$html .='checked'; 
+        $html .='>
+        </td>
+        </tr>
+
+        <tr>
+        <th scope="row" class="text-center text-primary" colspan="2">METODOLOGÍA</th>
+        </tr>
         
+        <tr>
+        <th scope="row">Metodología</th>
+        <td>    
+        <input class="form-check-input" type="checkbox" name="Metodologia" id="Metodologia"'; if($contextConfiguracion->getData()->getMetodologia())$html .='checked'; 
+        $html .='>
+        </td>
+        </tr>
 
-        <table class="table table-hover">
-         <thead>
-    <tr>
-      <th scope="col" colspan="2">Programa</th>
-    </tr>
-  </thead>
-      <tbody>
-      <tr>
-      <th scope="row">ConocimientosPrevios</th>
-      <td>    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-</td>
-      </tr>
+        <tr>
+        <th scope="row" class="text-center text-primary" colspan="2">BIBLIOGRAFÍA</th>
+        </tr>
+        
+        <tr>
+        <th scope="row">Citas bibliográficas</th>
+        <td>    
+        <input class="form-check-input" type="checkbox" name="CitasBibliograficas" id="CitasBibliograficas"'; if($contextConfiguracion->getData()->getCitasBibliograficas())$html .='checked'; 
+        $html .='>
+        </td>
+        </tr>
 
-      <tr>
-      <th scope="row">BreveDescripcion</th>
-      <td>    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-</td>
-      </tr>
+        <tr>
+        <th scope="row">Recursos en internet</th>
+        <td>   
+        <input class="form-check-input" type="checkbox" name="RecursosInternet" id="RecursosInternet"'; if($contextConfiguracion->getData()->getRecursosInternet())$html .='checked'; 
+        $html .='>
+        </td>
+        </tr>
 
-      <tr>
-      <th scope="row">ProgramaTeorico</th>
-      <td>    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-</td>
-      </tr>
+        <tr>
+        <th scope="row" class="text-center text-primary" colspan="2">GRUPO DE LABORATORIO</th>
+        </tr>
+        
+        <tr>
+        <th scope="row">Grupo de laboratorio</th>
+        <td>    
+        <input class="form-check-input" type="checkbox" name="GrupoLaboratorio" id="GrupoLaboratorio"'; if($contextConfiguracion->getData()->getGrupoLaboratorio())$html .='checked'; 
+        $html .='>
+        </td>
+        </tr>
 
-      <tr>
-      <th scope="row">1</th>
-      <td>    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-</td>
-      </tr>
+        <tr>
+        <th scope="row" class="text-center text-primary" colspan="2">EVALUACIÓN</th>
+        </tr>
+        
+        <tr>
+        <th scope="row">Realización de los exámenes</th>
+        <td>    
+        <input class="form-check-input" type="checkbox" name="RealizacionExamenes" id="RealizacionExamenes"'; if($contextConfiguracion->getData()->getRealizacionExamenes())$html .='checked'; 
+        $html .='>
+        </td>
+        </tr>
 
-      <tr>
-      <th scope="row">1</th>
-      <td>    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-</td>
-      </tr>
+        <tr>
+        <th scope="row">Realización de las actividades</th>
+        <td>    
+        <input class="form-check-input" type="checkbox" name="RealizacionActividades" id="RealizacionActividades"'; if($contextConfiguracion->getData()->getRealizacionActividades())$html .='checked'; 
+        $html .='>
+        </td>
+        </tr>
 
-      <tr>
-      <th scope="row">1</th>
-      <td>    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-</td>
-      </tr>
+        <tr>
+        <th scope="row">Realización del laboratorio</th>
+        <td>    
+        <input class="form-check-input" type="checkbox" name="RealizacionLaboratorio" id="RealizacionLaboratorio"'; if($contextConfiguracion->getData()->getRealizacionLaboratorio())$html .='checked'; 
+        $html .='>
+        </td>
+        </tr>
 
-      <tr>
-      <th scope="row">1</th>
-      <td>    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-</td>
-      </tr>
-
-      <tr>
-      <th scope="row">1</th>
-      <td>    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-</td>
-      </tr>
-
-      <tr>
-      <th scope="row">1</th>
-      <td>    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-</td>
-      </tr>
-
-      <tr>
-      <th scope="row">1</th>
-      <td>    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-</td>
-      </tr>
-
-      <tr>
-      <th scope="row">1</th>
-      <td>    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-</td>
-      </tr>
-
-      <tr>
-      <th scope="row">1</th>
-      <td>    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-</td>
-      </tr>
-
-      <tr>
-      <th scope="row">1</th>
-      <td>    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-</td>
-      </tr>
-
-      <tr>
-      <th scope="row">1</th>
-      <td>    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-</td>
-      </tr>
-
-      <tr>
-      <th scope="row">1</th>
-      <td>    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-</td>
-      </tr>
-
-      <tr>
-      <th scope="row">1</th>
-      <td>    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-</td>
-      </tr>
-
-      <tr>
-      <th scope="row">1</th>
-      <td>    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-</td>
-      </tr>
-      
-      </tbody>
-      </table>
-
-      $html = '<input type="hidden" name="IdConfiguracion" value="' . $IdConfiguracion . '" required />
-      <input type="hidden" name="IdAsignatura" value="' . $IdAsignatura . '" required />';
+        <tr>
+        <th scope="row">Calificación final</th>
+        <td>    
+        <input class="form-check-input" type="checkbox" name="CalificacionFinal" id="CalificacionFinal"'; if($contextConfiguracion->getData()->getCalificacionFinal())$html .='checked'; 
+        $html .='>
+        </td>
+        </tr>
+        </tbody>
+        </table>
 
 
-      if($contextConfiguracion->getData()->getConocimientosPrevios()){
-        $html .= '<p><input type="checkbox" checked name="ConocimientosPrevios">Conocimientos Previos</p>';
+        <div class="text-right">
+        <a href="indexAcceso.php?IdGrado=' .$IdGrado. '&IdAsignatura=' . $IdAsignatura . '#nav-configuracion">
+        <button type="button" class="btn btn-secondary" id="btn-form">
+        Cancelar
+        </button>
+        </a>
 
-    }
-    else{
-        $html .= '<p><input type="checkbox" name="ConocimientosPrevios">Conocimientos Previos</p>';
+        <button type="submit" class="btn btn-success" id="btn-form" name="registrar">Guardar</button>
+        </div>';
+
+        return $html;
     }
 
-    if($contextConfiguracion->getData()->getBreveDescripcion()){
-        $html .= '<p><input type="checkbox" checked name="BreveDescripcion">Breve Descripción</p>';
+    protected function procesaFormulario($datos)
+    {
+      $erroresFormulario = array();
+      $controller = new ControllerImplements();
+      $context = new Context(FIND_CONFIGURACION, $datos['IdAsignatura']);
+      $contextConfiguracion = $controller->action($context);
 
+      $IdConfiguracion = $datos['IdConfiguracion'];
+      $ConocimientosPrevios = isset($datos['ConocimientosPrevios'])? 1:0;
+      $BreveDescripcion = isset($datos['BreveDescripcion'])? 1:0;
+      $ProgramaTeorico = isset($datos['ProgramaTeorico'])? 1:0;
+      $ProgramaSeminarios = isset($datos['ProgramaSeminarios'])? 1:0;
+      $ProgramaLaboratorio = isset($datos['ProgramaLaboratorio'])? 1:0;
+      $ComGenerales = isset($datos['ComGenerales'])? 1:0;
+      $ComEspecificas = isset($datos['ComEspecificas'])? 1:0;
+      $ComBasicas = isset($datos['ComBasicas'])? 1:0;
+      $ResultadosAprendizaje = isset($datos['ResultadosAprendizaje'])? 1:0;
+      $Metodologia = isset($datos['Metodologia'])? 1:0;
+      $CitasBibliograficas = isset($datos['CitasBibliograficas'])? 1:0;
+      $RecursosInternet = isset($datos['RecursosInternet'])? 1:0;
+      $GrupoLaboratorio = isset($datos['GrupoLaboratorio'])? 1:0;
+      $RealizacionExamenes = isset($datos['RealizacionExamenes'])? 1:0;
+      $RealizacionActividades = isset($datos['RealizacionActividades'])? 1:0;
+      $RealizacionLaboratorio = isset($datos['RealizacionLaboratorio'])? 1:0;
+      $CalificacionFinal = isset($datos['CalificacionFinal'])? 1:0;
+      $IdAsignatura = $datos['IdAsignatura'];
+
+      if($contextConfiguracion->getEvent() === FIND_CONFIGURACION_OK){
+
+         $configuracion = new Configuracion( 
+             $IdConfiguracion,
+             $ConocimientosPrevios,
+             $BreveDescripcion,
+             $ProgramaTeorico,
+             $ProgramaSeminarios,
+             $ProgramaLaboratorio,
+             $ComGenerales,
+             $ComEspecificas,
+             $ComBasicas,
+             $ResultadosAprendizaje,
+             $Metodologia,
+             $CitasBibliograficas,
+             $RecursosInternet,
+             $GrupoLaboratorio,
+             $RealizacionExamenes,
+             $RealizacionActividades,
+             $RealizacionLaboratorio,
+             $CalificacionFinal,
+             $IdAsignatura
+         );
+
+         $context = new Context(UPDATE_CONFIGURACION, $configuracion);
+         $contextConfiguracion = $controller->action($context);
+
+         if($contextConfiguracion->getEvent() === UPDATE_CONFIGURACION_OK){
+            $erroresFormulario = "indexAcceso.php?IdGrado=".$datos['IdGrado']."&IdAsignatura=".$datos['IdAsignatura']."&modificado=y#nav-configuracion";
+        }elseif ($contextConfiguracion->getEvent() === UPDATE_CONFIGURACION_FAIL) {
+            $erroresFormulario[] = "No se ha podido modificar la configuración";
+        }
     }
-    else{
-        $html .= '<p><input type="checkbox" name="BreveDescripcion">Breve Descripción</p>';
-    }
-
-
-    if($contextConfiguracion->getData()->getProgramaDetallado()){
-        $html .= '<p><input type="checkbox"checked name="ProgramaDetallado">Programa Detallado</p>';
-
-    }
-    else{
-        $html .= '<p><input type="checkbox" name="ProgramaDetallado">Programa Detallado</p>';
-    }
-
-
-    if($contextConfiguracion->getData()->getComGenerales()){
-        $html .= '<p><input type="checkbox" checked name="ComGenerales">Generales</p>';
-
-    }
-    else{
-        $html .= '<p><input type="checkbox" name="ComGenerales">Generales</p>';
-    }
-
-    if($contextConfiguracion->getData()->getComEspecificas()){
-        $html .= '<p><input type="checkbox" checked name="ComEspecificas">Específicas</p>';
-
-    }
-    else{
-        $html .= '<p><input type="checkbox" name="Comspeficas">Específicas</p>';
-    }
-
-    if($contextConfiguracion->getData()->getComBasicas()){
-        $html .= '<p><input type="checkbox" checked name="ComBasicas">Básicas y Transversales</p>';
-
-    }
-    else{
-        $html .= '<p><input type="checkbox" name="ComBasicas"> Básicas y Transversales</p>';
-    }
-
-    if($contextConfiguracion->getData()->getResultadosAprendizaje()){
-        $html .= '<p><input type="checkbox" checked name="ResultadosAprendizaje">Resultados Aprendizaje</p>';
-
-    }
-    else{
-        $html .= '<p><input type="checkbox name="ResultadosAprendizaje">Resultados aprendizaje</p>';
-    }
-
-    if($contextConfiguracion->getData()->getMetodologia()){
-        $html .= '<p><input type="checkbox" checked name="Metodologia">Metodología</p>';
-
-    }
-    else{
-        $html .= '<p><input type="checkbox" name="Metodologia">Metodología</p>';
-    }
-    if($contextConfiguracion->getData()->getCitasBibliograficas()){
-        $html .= '<p><input type="checkbox" checked name="CitasBibliograficas">Citas Bibliográficas</p>';
-
-    }
-    else{
-        $html .= '<p><input type="checkbox" name="CitasBibliograficas">Citas Bibliográficas</p>';
-    }
-
-    if($contextConfiguracion->getData()->getRecursosInternet()){
-        $html .= '<p><input type="checkbox" checked name="RecursosInternet">Recursos en Internet</p>';
-
-    }
-    else{
-        $html .= '<p><input type="checkbox" name="RecursosInternet">Recursos en Internet</p>';
-    }
-
-    if($contextConfiguracion->getData()->getRealizacionExamenes()){
-        $html .= '<p><input type="checkbox" checked name="RealizacionExamenes">Realización de Exámenes</p>';
-
-    }
-    else{
-        $html .= '<p><input type="checkbox" name="RealizacionExamenes">Realización de Exámenes</p>';
-    }
-    if($contextConfiguracion->getData()->getCalificacionFinal()){
-        $html .= '<p><input type="checkbox" checked name="CalificacionFinal">Calificación Final</p>';
-
-    }
-    else{
-        $html .= '<p><input type="checkbox" name="CalificacionFinal">Calificación Final</p>';
-    }
-
-    if($contextConfiguracion->getData()->getRealizacionActividades()){
-        $html .= '<p><input type="checkbox" checked name="RealizacionActividades">Realización de Activiades</p>';
-
-    }
-    else{
-        $html .= '<p><input type="checkbox" name="RealizacionActividades" >Realización de Actividades</p>';
-    }
-
-    if($contextConfiguracion->getData()->getRealizacionLaboratorio()){
-        $html .= '<p><input type="checkbox" checked name="RealizacionLaboratorio">Realización de Laboratorio</p>';
-
-    }
-    else{
-        $html .= '<p><input type="checkbox" name="RealizacionLaboratorio">Realización de Laboratorio</p>';
-    }
-
-    $html .= '<div class="text-right">
-    <a href="indexAcceso.php?IdAsignatura=' . $IdAsignatura . '#nav-configuracion">
-    <button type="button" class="btn btn-secondary" id="btn-form">
-    Cancelar
-    </button>
-    </a>
-
-    <button type="submit" class="btn btn-success" id="btn-form" name="registrar">Guardar</button>
-    </div>';
-    return $html;
-}
-
-protected function procesaFormulario($datos)
-{
-
-  $erroresFormulario = array();
-  $controller = new ControllerImplements();
-  $context = new Context(FIND_CONFIGURACION, $datos['IdAsignatura']);
-  $contextConfiguracion = $controller->action($context);
-
-
-
-
-  $IdConfiguracion = $datos['IdConfiguracion'] ;
-  $ConocimientosPrevios = isset($datos['ConocimientosPrevios'])? 1:0;
-  $BreveDescripcion = isset($datos['BreveDescripcion'])? 1:0;
-  $ProgramaDetallado = isset($datos['ProgramaDetallado'])? 1:0;
-  $ComGenerales = isset($datos['ComGenerales'])? 1:0;
-  $ComEspecificas = isset($datos['ComEspecificas'])? 1:0;
-  $ComBasicas = isset($datos['ComBasicas'])? 1:0;
-  $ResultadosAprendizaje = isset($datos['ResultadosAprendizaje'])? 1:0;
-  $Metodologia = isset($datos['Metodologia'])? 1:0;
-  $CitasBibliograficas = isset($datos['CitasBibliograficas'])? 1:0;
-  $RecursosInternet = isset($datos['RecursosInternet'])? 1:0;
-  $RealizacionExamenes = isset($datos['RealizacionExamenes'])? 1:0;
-  $CalificacionFinal =isset($datos['CalificacionFinal'])? 1:0;
-  $RealizacionActividades = isset($datos['RealizacionActividades'])? 1:0;
-  $RealizacionLaboratorio = isset($datos['RealizacionLaboratorio'])? 1:0;
-
-
-
-
-  $context = new Context(FIND_CONFIGURACION, $datos['IdAsignatura']);
-  $contextConfiguracion = $controller->action($context);
-
-  if($contextConfiguracion->getEvent() === FIND_CONFIGURACION_OK){
-
-     $configuracion = new Configuracion($IdConfiguracion, 
-         $ConocimientosPrevios, 
-         $BreveDescripcion, 
-         $ProgramaDetallado, 
-         $ComGenerales, 
-         $ComEspecificas, 
-         $ComBasicas, 
-         $ResultadosAprendizaje, 
-         $Metodologia, 
-         $CitasBibliograficas, 
-         $RecursosInternet, 
-         $RealizacionExamenes, 
-         $CalificacionFinal,
-         $RealizacionActividades,
-         $RealizacionLaboratorio,
-         $datos['IdAsignatura']);
-
-     $context = new Context(UPDATE_CONFIGURACION, $configuracion);
-     $contextConfiguracion = $controller->action($context);
-
-     if($contextConfiguracion->getEvent() === UPDATE_CONFIGURACION_OK){
-        $erroresFormulario = "indexAcceso.php?IdAsignatura=" . $datos['IdAsignatura'] . "&modificado=y#nav-configuracion";
-    }elseif ($contextConfiguracion->getEvent() === UPDATE_CONFIGURACION_FAIL) {
-        $erroresFormulario[] = "No se ha podido modificar la configuración.";
-    }
-}
-return $erroresFormulario;
+    return $erroresFormulario;
 }
 }
