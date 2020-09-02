@@ -27,100 +27,90 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
     require_once('includes/Presentacion/Vistas/html/cabecera.php');
     ?>
     <div class="row justify-content-center align-items-center"> 
-      
       <?php
       if (isset($_SESSION['login']) && $_SESSION['login'] === true) {
-       
-        if(isset($_GET['idAsignatura'])){
-            $name ='idAsignatura';
-          }
-          if(isset($_GET['emailProfesor'])){
-            $email = 'emailProfesor';
-          }
-          $comparacion = array('email' => htmlspecialchars(trim(strip_tags($_GET[$email]))), 
-          'asignatura'=>htmlspecialchars(trim(strip_tags($_GET[$name]))));
-          $controller = new es\ucm\ControllerImplements();
-          $context = new es\ucm\Context(FIND_PERMISOS_POR_PROFESOR_Y_ASIGNATURA,$comparacion );
-          $permisos = $controller->action($context);
-          $context = new es\ucm\Context(FIND_PROFESOR, htmlspecialchars(trim(strip_tags($_GET[$email]))));
-          $profesor = $controller->action($context);
-  
-          
-           if($permisos->getEvent() === FIND_PERMISOS_POR_PROFESOR_Y_ASIGNATURA_OK){
-                ?>
-                <div class="col-md-6 col-12">
-                  <div class="card">
-                    <div class="card-header text-center">
-                      <h2>Modificar Permisos de <?php echo $profesor->getData()->getNombre();?></h2>
-                    </div>
-                    <div class="card-body">
-                      <?php
-                      $access = new es\ucm\FormPermisos('idPermisos');
-                      $datosIniciales= array();
-    
-                  $datosIniciales['IdPermiso'] = $permisos->getData()[0]->getIdPermiso();
-                  $datosIniciales['PermisoPrograma'] = $permisos->getData()[0]->getPermisoPrograma();
-                  $datosIniciales['PermisoCompetencias'] = $permisos->getData()[0]->getPermisoCompetencias();
-                  $datosIniciales['PermisoMetodologia'] = $permisos->getData()[0]->getPermisoMetodologia();
-                  $datosIniciales['PermisoBibliografia'] = $permisos->getData()[0]->getPermisoBibliografia();
-                  $datosIniciales['PermisoGrupoLaboratorio'] = $permisos->getData()[0]->getPermisoGrupoLaboratorio();
-                  $datosIniciales['PermisoGrupoClase']= $permisos->getData()[0]->getPermisoGrupoClase();
-                  $datosIniciales['PermisoEvaluacion'] = $permisos->getData()[0]->getPermisoEvaluacion();
-                  $datosIniciales['IdAsignatura'] = $permisos->getData()[0]->getIdAsignatura();
-                  $datosIniciales['EmailProfesor'] = $permisos->getData()[0]->getEmailProfesor();
-                       
-                  $access->gestionaModificacion($datosIniciales);
-              
-              }
-              else{
-                ?> <div class="col-md-6 col-12">
-              <div class="card">
-                <div class="card-header text-center">
-                  <h2>Crear permisos de <?php echo $profesor->getData()->getNombre();?></h2>
-                </div>
-                <div class="card-body">
-                  <?php
-                  $access = new es\ucm\FormPermisos('idPermisos');
-                  $datosIniciales= array();
-                 
-              $datosIniciales['IdPermiso'] = null;
-		          $datosIniciales['IdAsignatura'] = htmlspecialchars(trim(strip_tags($_GET[$name])));
-		          $datosIniciales['EmailProfesor'] =htmlspecialchars(trim(strip_tags($_GET[$email])));
-              
-                  $access->gestionaModificacion($datosIniciales);
-              
-             }
-            
-           
-           
-                  
-                  ?>
+        if(isset($_GET['IdAsignatura']) && isset($_GET['IdGrado']) && isset($_GET['EmailProfesor'])){
+          if(isset($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET['IdAsignatura']]['coordinacion']) && $_SESSION['asignaturas'][$_GET['IdGrado']][$_GET['IdAsignatura']]['coordinacion'] == true){
+
+            $info['email'] = htmlspecialchars(trim(strip_tags($_GET['EmailProfesor'])));
+            $info['asignatura'] = htmlspecialchars(trim(strip_tags($_GET['IdAsignatura'])));
+            $controller = new es\ucm\ControllerImplements();
+            $context = new es\ucm\Context(FIND_PERMISOS_POR_PROFESOR_Y_ASIGNATURA,$info);
+            $permisos = $controller->action($context);
+            $context = new es\ucm\Context(FIND_PROFESOR, htmlspecialchars(trim(strip_tags($_GET['EmailProfesor']))));
+            $profesor = $controller->action($context);
+
+            if($permisos->getEvent() === FIND_PERMISOS_POR_PROFESOR_Y_ASIGNATURA_OK){
+              ?>
+              <div class="col-xl-10 col-12">
+                <div class="card">
+                  <div class="card-header text-center">
+                    <h2>Modificar permisos de <?php echo $profesor->getData()->getNombre();?></h2>
+                  </div>
+                  <div class="card-body">
+                    <?php
+                    $access = new es\ucm\FormPermisos('idPermisos');
+                    $datosIniciales= array();
+
+                    $datosIniciales['IdPermiso'] = $permisos->getData()->getIdPermiso();
+                    $datosIniciales['PermisoPrograma'] = $permisos->getData()->getPermisoPrograma();
+                    $datosIniciales['PermisoCompetencias'] = $permisos->getData()->getPermisoCompetencias();
+                    $datosIniciales['PermisoMetodologia'] = $permisos->getData()->getPermisoMetodologia();
+                    $datosIniciales['PermisoBibliografia'] = $permisos->getData()->getPermisoBibliografia();
+                    $datosIniciales['PermisoGrupoLaboratorio'] = $permisos->getData()->getPermisoGrupoLaboratorio();
+                    $datosIniciales['PermisoGrupoClase']= $permisos->getData()->getPermisoGrupoClase();
+                    $datosIniciales['PermisoEvaluacion'] = $permisos->getData()->getPermisoEvaluacion();
+                    $datosIniciales['IdAsignatura'] = $permisos->getData()->getIdAsignatura();
+                    $datosIniciales['EmailProfesor'] = $permisos->getData()->getEmailProfesor();
+                    $datosIniciales['IdGrado'] =$_GET['IdGrado'];
+                    $access->gestionaModificacion($datosIniciales); 
+                    ?>
+                  </div>
                 </div>
               </div>
-            </div>
-            <?php
-          //permisos
-      /* else{
-         echo '
-         <div class="col-md-6 col-12">
-         <div class="alert alert-danger" role="alert">
-         <h2 class="card-title text-center">ACCESO DENEGADO</h2>
-         <h5 class="text-center">No tienes permisos suficientes para esta apartado</h5>
-         </div>
-         </div>';
-       }*/
-}
-  else {
-    echo '
-    <div class="col-md-6 col-12">
-    <div class="alert alert-danger" role="alert">
-    <h2 class="card-title text-center">ACCESO DENEGADO</h2>
-    <h5 class="text-center">Inicia sesión con un usuario que pueda acceder a este contenido</h5>
-    </div>
-    </div>';
-  }
-  ?>
-</div>
+              <?php
+            }
+            else{
+              echo '
+              <div class="col-md-6 col-12">
+              <div class="alert alert-danger" role="alert">
+              <h2 class="card-title text-center">ACCESO DENEGADO</h2>
+              <h5 class="text-center">No se han encontrado permisos para el profesor seleccionado</h5>
+              </div>
+              </div>';
+            }
+          }
+          else{
+           echo '
+           <div class="col-md-6 col-12">
+           <div class="alert alert-danger" role="alert">
+           <h2 class="card-title text-center">ACCESO DENEGADO</h2>
+           <h5 class="text-center">No tienes permisos suficientes para esta apartado</h5>
+           </div>
+           </div>';
+         }
+       } 
+       else{
+        echo '
+        <div class="col-md-6 col-12">
+        <div class="alert alert-danger" role="alert">
+        <h2 class="card-title text-center">ACCESO DENEGADO</h2>
+        <h5 class="text-center">No se ha podido obtener la asignatura</h5>
+        </div>
+        </div>';
+      }
+    }
+    else {
+      echo '
+      <div class="col-md-6 col-12">
+      <div class="alert alert-danger" role="alert">
+      <h2 class="card-title text-center">ACCESO DENEGADO</h2>
+      <h5 class="text-center">Inicia sesión con un usuario que pueda acceder a este contenido</h5>
+      </div>
+      </div>';
+    }
+    ?>
+  </div>
 </div>
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->

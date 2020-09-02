@@ -34,7 +34,7 @@ class FormModulo extends Form
 				<input class="form-control" id="horas" rows="10" name="horas" value="' . $Horas . '">
                 </div>';
 
-        $html .= '<div class="text-right">
+        $html .= '<div class="text-center">
 		<a href="gestionGrados.php?IdGrado=' . $idGrado . '#nav-info-grado">
 		<button type="button" class="btn btn-secondary" id="btn-form">
 		Cancelar

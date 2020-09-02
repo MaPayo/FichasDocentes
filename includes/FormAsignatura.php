@@ -67,7 +67,7 @@ class FormAsignatura extends Form
 				<input class="form-control" id="coordinador" rows="10" name="coordinador" value="' . $coordinador . '" required>
 				</div>';
 
-        $html .= '<div class="text-right">
+        $html .= '<div class="text-center">
 		<a href="gestionAsignaturas.php?IdGrado=' . $idGrado . '&IdAsignatura=' . $idAsignatura . '#nav-info-asignatura">
 		<button type="button" class="btn btn-secondary" id="btn-form">
 		Cancelar

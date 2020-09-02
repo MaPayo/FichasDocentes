@@ -88,7 +88,7 @@ class FormVerifica extends Form
         </table>
 
 
-        <div class="text-right">
+        <div class="text-center">
         <a href="indexAcceso.php?IdGrado=' . $IdGrado . '&IdAsignatura=' . $IdAsignatura . '#nav-configuracion">
         <button type="button" class="btn btn-secondary" id="btn-form">
         Cancelar

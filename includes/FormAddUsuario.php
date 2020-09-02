@@ -16,7 +16,7 @@ class FormAddUsuario extends Form
         $html = ' <p>Introduce el email del usuario que quieres añadir <input name="emailUsuario"></p>';
        // $html .= '<input type="text" name="EmailProfesor value="'.$email.'" hidden>';
 
-        $html .= '<div class="text-right">
+        $html .= '<div class="text-center">
 		<a href="gestionUsuarios.php>
 		<button type="button" class="btn btn-secondary" id="btn-form">
 		Cancelar

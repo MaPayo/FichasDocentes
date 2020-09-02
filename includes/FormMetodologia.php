@@ -37,7 +37,7 @@ class FormMetodologia extends Form
 			</div>';
 		}
 
-		$html .= '<div class="text-right">
+		$html .= '<div class="text-center">
 		<a href="indexAcceso.php?IdGrado=' .$idGrado. '&IdAsignatura=' . $idAsignatura . '#nav-metodologia">
 		<button type="button" class="btn btn-secondary" id="btn-form">
 		Cancelar

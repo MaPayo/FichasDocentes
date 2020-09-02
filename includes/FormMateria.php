@@ -41,7 +41,7 @@ class FormMateria extends Form
 				<input class="form-control" id="caracter" rows="10" name="caracter" value="' . $Caracter . '">
                 </div>';
 
-        $html .= '<div class="text-right">
+        $html .= '<div class="text-center">
 		<a href="gestionGrados.php?IdGrado=' . $idGrado . '#nav-info-grado">
 		<button type="button" class="btn btn-secondary" id="btn-form">
 		Cancelar

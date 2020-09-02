@@ -30,7 +30,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
       <?php
       if (isset($_SESSION['login']) && $_SESSION['login'] === true) {
         if (isset($_GET['IdGrado']) && isset($_GET['IdAsignatura'])) {
-          if($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET['IdAsignatura']]['coordinacion'] == true){
+          if(isset($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET['IdAsignatura']]['coordinacion']) && $_SESSION['asignaturas'][$_GET['IdGrado']][$_GET['IdAsignatura']]['coordinacion'] == true){
 
            $controller = new es\ucm\ControllerImplements();
            $context = new es\ucm\Context(FIND_ASIGNATURA, htmlspecialchars(trim(strip_tags($_GET['IdAsignatura']))));
@@ -40,7 +40,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
 
            if($contextConfiguracion->getEvent() === FIND_CONFIGURACION_OK){
             ?>
-            <div class="col-md-6 col-12">
+            <div class="col-xl-6 col-lg-8 col-12">
               <div class="card">
                 <div class="card-header text-center">
                   <h2>Configuración de <?php echo $asignatura->getData()->getNombreAsignatura();?></h2>
@@ -53,45 +53,51 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                   $datosIniciales['IdAsignatura']=  htmlspecialchars(trim(strip_tags($_GET['IdAsignatura'])));
                   $datosIniciales['IdGrado']=  htmlspecialchars(trim(strip_tags($_GET['IdGrado'])));
                   $access->gestionaModificacion($datosIniciales);
-           } //Find ok
-
-           ?>
+                  ?>
+                </div>
+              </div>
+            </div>
+            <?php
+          }else{
+           echo '
+           <div class="col-md-6 col-12">
+           <div class="alert alert-danger" role="alert">
+           <h2 class="card-title text-center">ACCESO DENEGADO</h2>
+           <h5 class="text-center">No se ha encontrado la configuración</h5>
+           </div>
+           </div>';
+         }
+       }
+       else{
+         echo '
+         <div class="col-md-6 col-12">
+         <div class="alert alert-danger" role="alert">
+         <h2 class="card-title text-center">ACCESO DENEGADO</h2>
+         <h5 class="text-center">No tienes permisos suficientes para esta apartado</h5>
          </div>
-       </div>
-     </div>
-     <?php
-   }
-   else{
-     echo '
-     <div class="col-md-6 col-12">
-     <div class="alert alert-danger" role="alert">
-     <h2 class="card-title text-center">ACCESO DENEGADO</h2>
-     <h5 class="text-center">No tienes permisos suficientes para esta apartado</h5>
-     </div>
-     </div>';
-     
-   }
- } 
- else{
-  echo '
-  <div class="col-md-6 col-12">
-  <div class="alert alert-danger" role="alert">
-  <h2 class="card-title text-center">ACCESO DENEGADO</h2>
-  <h5 class="text-center">No se ha podido obtener la asignatura</h5>
-  </div>
-  </div>';
-}
-}
-else {
-  echo '
-  <div class="col-md-6 col-12">
-  <div class="alert alert-danger" role="alert">
-  <h2 class="card-title text-center">ACCESO DENEGADO</h2>
-  <h5 class="text-center">Inicia sesión con un usuario que pueda acceder a este contenido</h5>
-  </div>
-  </div>';
-}
-?>
+         </div>';
+       }
+     } 
+     else{
+      echo '
+      <div class="col-md-6 col-12">
+      <div class="alert alert-danger" role="alert">
+      <h2 class="card-title text-center">ACCESO DENEGADO</h2>
+      <h5 class="text-center">No se ha podido obtener la asignatura</h5>
+      </div>
+      </div>';
+    }
+  }
+  else {
+    echo '
+    <div class="col-md-6 col-12">
+    <div class="alert alert-danger" role="alert">
+    <h2 class="card-title text-center">ACCESO DENEGADO</h2>
+    <h5 class="text-center">Inicia sesión con un usuario que pueda acceder a este contenido</h5>
+    </div>
+    </div>';
+  }
+  ?>
 </div>
 </div>
 <!-- Optional JavaScript -->

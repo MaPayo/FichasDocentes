@@ -21,6 +21,10 @@ h1.web_title {
 	margin: 0.2em 0;
 	font-size: calc(1.425rem + 1.2vw);
 }
+h1.web_title:hover{
+color: #FF0055;
+text-decoration: underline;
+}
 h2{
 	font-size: calc(1.1rem + 0.9vw);
 
@@ -37,6 +41,9 @@ h4{
 
 #info{
 	margin-bottom: 1rem !important;
+}
+.table-bordered th{
+	background-color: #f8f9fa;
 }
 
 #cabecera {

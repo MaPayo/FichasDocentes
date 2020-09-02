@@ -54,7 +54,7 @@ class FormHorarioClase extends Form
 		<input type="time" class="form-control" id="horaFin"  name="horaFin" value="' . $horaFin . '" />
 		</div>
 
-		<div class="text-right">
+		<div class="text-center">
 		<a href="indexAcceso.php?IdGrado='.$idGrado.'&IdAsignatura=' . $idAsignatura . '#nav-grupo-clase">
             <button type="button" class="btn btn-secondary" id="btn-form">
                 Cancelar

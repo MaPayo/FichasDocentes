@@ -31,7 +31,7 @@ class FormGrupoClase extends Form
 		<input type="text" class="form-control" id="idioma"  name="idioma" value="' . $idioma . '" required/>
 		</div>
 
-		<div class="text-right">
+		<div class="text-center">
 		<a href="indexAcceso.php?IdGrado='.$idGrado.'&IdAsignatura=' . $idAsignatura . '#nav-grupo-clase">
             <button type="button" class="btn btn-secondary" id="btn-form">
                 Cancelar

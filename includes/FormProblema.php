@@ -33,7 +33,7 @@ class FormProblema extends Form
 				<input class="form-control" id="presencial" rows="10" name="presencial" value="' . $Presencial . '">
                 </div>';
        
-        $html .= '<div class="text-right">
+        $html .= '<div class="text-center">
 		<a href="gestionAsignaturas.php?IdGrado=' . $idGrado . '&IdAsignatura=' . $idAsignatura . '#nav-info-asignatura">
 		<button type="button" class="btn btn-secondary" id="btn-form">
 		Cancelar

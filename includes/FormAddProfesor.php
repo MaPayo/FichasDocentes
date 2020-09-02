@@ -23,7 +23,7 @@ class FormAddProfesor extends Form
         $html .= ' <p>Introduce el email del profesor que quieres añadir <input name="emailProfe"></p>';
        // $html .= '<input type="text" name="EmailProfesor value="'.$email.'" hidden>';
 
-        $html .= '<div class="text-right">
+        $html .= '<div class="text-center">
 		<a href="indexAcceso.php?IdAsignatura=' . $IdAsignatura . '#nav-configuracion">
 		<button type="button" class="btn btn-secondary" id="btn-form">
 		Cancelar

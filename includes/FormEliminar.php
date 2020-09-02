@@ -30,7 +30,7 @@ class FormEliminar extends Form
         $html .= ' <p>¿Deseas eliminar a este profesor de la asignatura?</p>';
        // $html .= '<input type="text" name="EmailProfesor value="'.$email.'" hidden>';
 
-        $html .= '<div class="text-right">
+        $html .= '<div class="text-center">
 		<a href="indexAcceso.php?IdAsignatura=' . $IdAsignatura . '#nav-configuracion">
 		<button type="button" class="btn btn-secondary" id="btn-form">
 		Cancelar
