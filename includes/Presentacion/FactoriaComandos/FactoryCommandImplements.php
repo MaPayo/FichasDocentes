@@ -188,6 +188,7 @@ require_once('includes/Presentacion/FactoriaComandos/Usuario/CommandFindUsuario.
 require_once('includes/Presentacion/FactoriaComandos/Usuario/CommandFindUsuarios.php');
 
 require_once('includes/Presentacion/FactoriaComandos/Verifica/CommandFindVerifica.php');
+require_once('includes/Presentacion/FactoriaComandos/Verifica/CommandUpdateVerifica.php');
 
 require_once('includes/Presentacion/FactoriaComandos/Comparacion/CommandComparacion.php');
 require_once('includes/Presentacion/FactoriaComandos/Conversion/CommandConvertMarkdownToHTML.php');

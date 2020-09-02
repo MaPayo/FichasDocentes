@@ -18,7 +18,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
   <script src="' . RUTA_JS . 'jquery-3.4.1.min.js" type="text/javascript"></script>
   <script src="' . RUTA_JS . 'tinymce.min.js"></script>';
   ?>
-  <title>Gestion Docente: Configuración</title>
+  <title>Gestion Docente: Verificación porcentajes evaluación</title>
 </head>
 
 <body>
@@ -35,21 +35,27 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
            $controller = new es\ucm\ControllerImplements();
            $context = new es\ucm\Context(FIND_ASIGNATURA, htmlspecialchars(trim(strip_tags($_GET['IdAsignatura']))));
            $asignatura = $controller->action($context);
-           $context = new es\ucm\Context(FIND_CONFIGURACION, htmlspecialchars(trim(strip_tags($_GET['IdAsignatura']))));
-           $contextConfiguracion = $controller->action($context);
+           $context = new es\ucm\Context(FIND_VERIFICA, htmlspecialchars(trim(strip_tags($_GET['IdAsignatura']))));
+           $contextVerifica = $controller->action($context);
 
-           if($contextConfiguracion->getEvent() === FIND_CONFIGURACION_OK){
+           if($contextVerifica->getEvent() === FIND_VERIFICA_OK){
             ?>
             <div class="col-md-6 col-12">
               <div class="card">
                 <div class="card-header text-center">
-                  <h2>Configuración de <?php echo $asignatura->getData()->getNombreAsignatura();?></h2>
+                  <h2>Verificación de porcentajes de evaluación de <?php echo $asignatura->getData()->getNombreAsignatura();?></h2>
                 </div>
                 <div class="card-body">
                   <?php
-                  $access = new es\ucm\FormConfiguracion('idConfiguracion');
+                  $access = new es\ucm\FormVerifica('idVerifica');
                   $datosIniciales= array();
-                  $datosIniciales['IdConfiguracion'] = $contextConfiguracion->getData()->getIdConfiguracion();
+                  $datosIniciales['IdVerifica'] = $contextVerifica->getData()->getIdVerifica();
+                  $datosIniciales['maximoExamenes'] = $contextVerifica->getData()->getMaximoExamenes();
+                  $datosIniciales['minimoExamenes'] = $contextVerifica->getData()->getMinimoExamenes();
+                  $datosIniciales['maximoActividades'] = $contextVerifica->getData()->getMaximoActividades();
+                  $datosIniciales['minimoActividades'] = $contextVerifica->getData()->getMinimoActividades();
+                  $datosIniciales['maximoLaboratorio'] = $contextVerifica->getData()->getMaximoLaboratorio();
+                  $datosIniciales['minimoLaboratorio'] = $contextVerifica->getData()->getMinimoLaboratorio();
                   $datosIniciales['IdAsignatura']=  htmlspecialchars(trim(strip_tags($_GET['IdAsignatura'])));
                   $datosIniciales['IdGrado']=  htmlspecialchars(trim(strip_tags($_GET['IdGrado'])));
                   $access->gestionaModificacion($datosIniciales);

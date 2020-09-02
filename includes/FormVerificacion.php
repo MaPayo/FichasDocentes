@@ -6,7 +6,7 @@ require_once('includes/Presentacion/Controlador/Context.php');
 require_once('includes/Presentacion/Controlador/ControllerImplements.php');
 require_once('includes/Negocio/Configuracion/Configuracion.php');
 
-class FormVerificafcion extends Form
+class FormVerificacion extends Form
 {
 
     protected function generaCamposFormulario($datosIniciales)
