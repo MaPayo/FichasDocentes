@@ -392,7 +392,6 @@ use Jfcherng\Diff\Renderer\RendererConstant;
 
                                             <div class="card" id="info">
                                                 <h3 class="card-header text-center">
-<<<<<<< HEAD
                                                     Información adicional
                                                     </h4>
 
@@ -534,157 +533,6 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                 <p class="card-text">
                                                                                     <?php
                                                                                     $differ = new Differ(explode("\n", $contextPrograma->getData()->getConocimientosPrevios()), explode("\n", $contextModPrograma->getData()->getConocimientosPrevios()), $differOptions);
-=======
-                                                   Información adicional
-                                               </h4>
-
-                                               <div class="card-body">
-                                                <div class="table-responsive text-center">
-                                                    <table class="table table-bordered">
-                                                        <tbody>
-                                                            <tr>
-                                                                <th scope="col" colspan="2">Estado</th>
-                                                                <td colspan="2"
-                                                                <?php  
-                                                                if($contextAsignatura->getData()->getEstado() =="B"){
-                                                                    echo 'class="text-primary">Borrador (Edición permitida)';
-                                                                }
-                                                                elseif ($contextAsignatura->getData()->getEstado() =="V") {
-                                                                    echo 'class="text-primary">Validada (Edición bloqueada)';
-                                                                }
-                                                                elseif ($contextAsignatura->getData()->getEstado() =="C") {
-                                                                    echo 'class="text-success">Consolidada (Información actualizada)';
-                                                                }
-                                                                ?>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="col" colspan="1">Última modificación</th>
-                                                            <td colspan="1">
-                                                                <?php
-                                                                if (!empty($contextModAsignatura->getData()->getFechaMod())){
-
-
-                                                                    $context = new es\ucm\Context(FIND_PROFESOR, $contextModAsignatura->getData()->getEmailMod());
-                                                                    $contextModificacion = $controller->action($context);
-                                                                    $date = strtotime($contextModAsignatura->getData()->getFechaMod());
-                                                                    echo date("H:i , d-m-Y",$date);
-                                                                }
-                                                                else{
-                                                                    echo "-";
-                                                                }
-                                                                ?>
-                                                            </td>
-                                                            <th scope="col" colspan="1">Autor</th>
-                                                            <td colspan="1">
-                                                                <?php
-                                                                if (!empty($contextModAsignatura->getData()->getEmailMod())) {
-                                                                  echo $contextModificacion->getData()->getNombre();
-                                                              }
-                                                              else{
-                                                               echo "-";
-                                                           }
-                                                           ?>
-
-                                                       </td>
-                                                   </tr>
-                                               </tbody>
-                                           </table>
-                                       </div>
-                                       <?php 
-                                       if($contextAsignatura->getData()->getCoordinadorAsignatura() == $_SESSION['idUsuario']){ 
-
-                                        echo'<div class="alert alert-primary alert-dismissible fade show" role="alert">
-                                        <h4 class= "text-center">Eres el coordinador de la asignatura</h4>
-                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                        </button>
-                                        </div>';
-                                    } 
-                                    if($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['coordinacion']){ 
-
-                                        echo'<div class="alert alert-primary alert-dismissible fade show" role="alert">
-                                        <h4 class= "text-center">Eres el coordinador del grado</h4>
-                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                        </button>
-                                        </div>';
-                                    }
-                                    ?>
-                                </div>
-                            </div>
-
-                            <?php 
-                            if($contextAsignatura->getData()->getEstado() =="B" && $contextAsignatura->getData()->getCoordinadorAsignatura() == $_SESSION['idUsuario']){
-                               echo '<a href="validar.php?IdGrado='.$contextGrado->getData()->getCodigoGrado().'&IAsignatura='.$contextAsignatura->getData()->getIdAsignatura().'">
-                               <button type="button" class="btn btn-primary btn-lg" id="btn-form">
-                               Validar Asignatura
-                               </button>
-                               </a>';
-                           }
-                           if($contextAsignatura->getData()->getCoordinadorAsignatura() == $_SESSION['idUsuario']){
-                            if($contextAsignatura->getData()->getEstado() =="V"){
-                                echo '<a href="consolidar.php?IdGrado'.$contextGrado->getData()->getCodigoGrado().'&IAsignatura='.$contextAsignatura->getData()->getIdAsignatura().'">
-                                <button type="button" class="btn btn-success btn-lg" id="btn-form">
-                                Consolidar Asignatura
-                                </button>
-                                </a>';
-                            }
-                            if ($contextAsignatura->getData()->getEstado() !="B") {
-                             echo '<a href="borrador.php?IdGrado'.$contextGrado->getData()->getCodigoGrado().'&IAsignatura='.$contextAsignatura->getData()->getIdAsignatura().'">
-                             <button type="button" class="btn btn-warning btn-lg" id="btn-form">
-                             Permitir Edición
-                             </button>
-                             </a>';
-                         }
-                     } ?>
-                 </div>
-
-                 <?php if ($verPrograma) { ?>
-                    <!--Pestaña programa asignatura-->
-                    <div class="tab-pane fade" id="nav-prog-asignatura" role="tabpanel" aria-labelledby="nav-prog-asignatura-tab">
-                        <div class="accordion" id="accordionProgram">
-
-                            <!--Pestaña conocimientos previos -->
-                            <?php if ($contextConfiguracion->getData()->getConocimientosPrevios() == true) { ?>
-                                <div class="card">
-                                    <div class="card-header" id="headingOne">
-                                        <h2 class="mb-0">
-                                            <?php if ($contextComparacion->getData()['conocimientosPrevios']) { ?>
-                                                <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseOneProg" aria-expanded="true" aria-controls="collapseOne">
-                                                    Conocimientos previos
-                                                </button>
-                                            <?php } else {
-
-                                                ?><button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseOneProg" aria-expanded="true" aria-controls="collapseOne">
-                                                    Conocimientos previos
-                                                </button>
-                                            <?php } ?>
-                                        </h2>
-                                    </div>
-
-                                    <div id="collapseOneProg" class="collapse" aria-labelledby="headingOne" data-parent="#accordionProgram">
-                                        <div class="card-body">
-                                            <div class="card">
-                                                <div class="card-body">
-                                                    <h4 class="card-title">Consolidado</h4>
-                                                    <p class="card-text">
-                                                        <?php
-                                                        if ($contextPrograma->getEvent() === FIND_PROGRAMA_ASIGNATURA_OK) {
-                                                            echo $contextPrograma->getData()->getConocimientosPrevios();
-                                                        }
-                                                        ?>
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            <?php if ($contextComparacion->getData()['conocimientosPrevios']){?>
-                                                <div class="card">
-                                                    <div class="card-body">
-                                                        <h4 class="card-title">Comparación</h4>
-                                                        <p class="card-text">
-                                                            <?php
-                                                            $differ = new Differ(explode("\n", $contextPrograma->getData()->getConocimientosPrevios()), explode("\n", $contextModPrograma->getData()->getConocimientosPrevios()), $differOptions);
->>>>>>> be8f6e90412794dc280b7fc1aa2d820f9039a3a4
                                                                                     $renderer = RendererFactory::make($rendererName, $rendererOptions); // or your own renderer object
                                                                                     $result = $renderer->render($differ);
                                                                                     echo $result;
@@ -955,7 +803,6 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                         <?php } ?>
                                                     <?php } ?>
 
-<<<<<<< HEAD
                                                     <!--Pestaña programa seminarios-->
                                                     <?php if ($contextConfiguracion->getData()->getProgramaSeminarios() == true) { ?>
                                                         <div class="card">
@@ -974,39 +821,6 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                             </div>
                                                             <div id="collapseSevenProg" class="collapse" aria-labelledby="headingSeven" data-parent="#accordionProgram">
                                                                 <div class="card-body">
-=======
-                                                <!--Pestaña programa seminarios-->
-                                                <?php if ($contextConfiguracion->getData()->getProgramaSeminarios() == true) { ?>
-                                                    <div class="card">
-                                                        <div class="card-header" id="headingSeven">
-                                                            <h2 class="mb-0">
-                                                                <?php if ($contextComparacion->getData()['ProgramaSeminarios']) { ?>
-                                                                    <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseSevenProg" aria-expanded="true" aria-controls="collapseSeven">
-                                                                        Programa de seminarios
-                                                                    </button>
-                                                                <?php } else { ?>
-                                                                    <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseSevenProg" aria-expanded="false" aria-controls="collapseSeven">
-                                                                        Programa de seminarios
-                                                                    </button>
-                                                                <?php } ?>
-                                                            </h2>
-                                                        </div>
-                                                        <div id="collapseSevenProg" class="collapse" aria-labelledby="headingSeven" data-parent="#accordionProgram">
-                                                            <div class="card-body">
-                                                                <div class="card">
-                                                                    <div class="card-body">
-                                                                        <h4 class="card-title">Consolidado</h4>
-                                                                        <p class="card-text">
-                                                                            <?php
-                                                                            if ($contextPrograma->getEvent() === FIND_PROGRAMA_ASIGNATURA_OK) {
-                                                                                echo $contextPrograma->getData()->getProgramaSeminarios();
-                                                                            }
-                                                                            ?>
-                                                                        </p>
-                                                                    </div>
-                                                                </div>
-                                                                <?php if ($contextComparacion->getData()['ProgramaSeminarios']){?>
->>>>>>> be8f6e90412794dc280b7fc1aa2d820f9039a3a4
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h4 class="card-title">Consolidado</h4>
@@ -1090,7 +904,6 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                             </div>
                                                         <?php } ?>
                                                     <?php } ?>
-<<<<<<< HEAD
                                                     <!--Pestaña programa Laboratorio-->
                                                     <?php if ($contextConfiguracion->getData()->getProgramaLaboratorio() == true) { ?>
                                                         <div class="card">
@@ -1109,40 +922,6 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                             </div>
                                                             <div id="collapseNineProg" class="collapse" aria-labelledby="headingNine" data-parent="#accordionProgram">
                                                                 <div class="card-body">
-=======
-                                                <?php } ?>
-                                                <!--Pestaña programa Laboratorio-->
-                                                <?php if ($contextConfiguracion->getData()->getProgramaLaboratorio() == true) { ?>
-                                                    <div class="card">
-                                                        <div class="card-header" id="headingNine">
-                                                            <h2 class="mb-0">
-                                                                <?php if ($contextComparacion->getData()['ProgramaLaboratorio']) { ?>
-                                                                    <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseNineProg" aria-expanded="true" aria-controls="collapseNine">
-                                                                        Programa de laboratorio
-                                                                    </button>
-                                                                <?php } else { ?>
-                                                                    <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseNineProg" aria-expanded="false" aria-controls="collapseNine">
-                                                                        Programa de laboratorio
-                                                                    </button>
-                                                                <?php } ?>
-                                                            </h2>
-                                                        </div>
-                                                        <div id="collapseNineProg" class="collapse" aria-labelledby="headingNine" data-parent="#accordionProgram">
-                                                            <div class="card-body">
-                                                                <div class="card">
-                                                                    <div class="card-body">
-                                                                        <h4 class="card-title">Consolidado</h4>
-                                                                        <p class="card-text">
-                                                                            <?php
-                                                                            if ($contextPrograma->getEvent() === FIND_PROGRAMA_ASIGNATURA_OK) {
-                                                                                echo $contextPrograma->getData()->getProgramaLaboratorio();
-                                                                            }
-                                                                            ?>
-                                                                        </p>
-                                                                    </div>
-                                                                </div>
-                                                                <?php if ($contextComparacion->getData()['ProgramaLaboratorio']){?>
->>>>>>> be8f6e90412794dc280b7fc1aa2d820f9039a3a4
                                                                     <div class="card">
                                                                         <div class="card-body">
                                                                             <h4 class="card-title">Consolidado</h4>
@@ -2475,7 +2254,6 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                             <div class="tab-pane fade" id="nav-evaluacion" role="tabpanel" aria-labelledby="nav-evaluacion-tab">
                                                 <div class="accordion" id="accordionEvaluacion">
 
-<<<<<<< HEAD
                                                     <!-- Pestaña realizacion examenes -->
                                                     <?php if ($contextConfiguracion->getData()->getRealizacionExamenes() == true) { ?>
                                                         <div class="card">
@@ -2492,109 +2270,6 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                     <?php } ?>
                                                                 </h2>
                                                             </div>
-=======
-                                                                                    <!-- Pestaña realizacion Laboratorio (inglés) -->
-                                                                                    <?php if (!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())) { ?>
-                                                                                        <div class="card">
-                                                                                            <div class="card-header" id="headingSix">
-                                                                                                <h2 class="mb-0">
-                                                                                                    <?php if ($contextComparacion->getData()['RealizacionLaboratorioI']) { ?>
-                                                                                                        <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseSixEv" aria-expanded="true" aria-controls="collapseSix">
-                                                                                                            Realización del laboratorio (Inglés)
-                                                                                                        </button>
-                                                                                                    <?php } else { ?>
-                                                                                                        <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseSixEv" aria-expanded="false" aria-controls="collapseSix">
-                                                                                                            Realización del laboratorio (Inglés)
-                                                                                                        </button>
-                                                                                                    <?php } ?>
-                                                                                                </h2>
-                                                                                            </div>
-                                                                                            <div id="collapseSixEv" class="collapse" aria-labelledby="headingSix" data-parent="#accordionEvaluacion">
-                                                                                                <div class="card-body">
-                                                                                                    <div class="card">
-                                                                                                        <div class="card-body">
-                                                                                                            <h4 class="card-title">Consolidado</h4>
-                                                                                                            <p class="card-text">
-                                                                                                                <?php
-                                                                                                                if ($contextEvaluacion->getEvent() === FIND_EVALUACION_OK) {
-                                                                                                                    echo $contextEvaluacion->getData()->getRealizacionLaboratorioI();
-                                                                                                                }
-                                                                                                                ?>
-                                                                                                            </p>
-                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                    <?php if ($contextComparacion->getData()['RealizacionLaboratorioI']){?>
-                                                                                                        <div class="card">
-                                                                                                            <div class="card-body">
-                                                                                                                <h4 class="card-title">Comparación</h4>
-                                                                                                                <p class="card-text">
-                                                                                                                    <?php
-                                                                                                                    $differ = new Differ(explode("\n", $contextEvaluacion->getData()->getRealizacionLaboratorioI()), explode("\n", $contextModEvaluacion->getData()->getRealizacionLaboratorioI()), $differOptions);
-                                                                                                                $renderer = RendererFactory::make($rendererName, $rendererOptions); // or your own renderer object
-                                                                                                                $result = $renderer->render($differ);
-                                                                                                                echo $result;
-                                                                                                                
-                                                                                                                ?>
-                                                                                                            </p>
-                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                <?php }   ?>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                <?php } ?>
-                                                                            <?php } ?>
-
-                                                                            <!-- Pestaña calificacion final ordinaria -->
-                                                                            <?php if ($contextConfiguracion->getData()->getCalificacionFinal() == true) { ?>
-                                                                                <div class="card">
-                                                                                    <div class="card-header" id="headingSeven">
-                                                                                        <h2 class="mb-0">
-                                                                                            <?php if ($contextComparacion->getData()['CalificacionFinal']) { ?>
-                                                                                                <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseSevenEv" aria-expanded="true" aria-controls="collapseSeven">
-                                                                                                    Calificación final
-                                                                                                </button>
-                                                                                            <?php } else { ?>
-                                                                                                <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseSevenEv" aria-expanded="false" aria-controls="collapseSeven">
-                                                                                                    Calificación final
-                                                                                                </button>
-                                                                                            <?php } ?>
-                                                                                        </h2>
-                                                                                    </div>
-                                                                                    <div id="collapseSevenEv" class="collapse" aria-labelledby="headingSeven" data-parent="#accordionEvaluacion">
-                                                                                        <div class="card-body">
-                                                                                            <div class="card">
-                                                                                                <div class="card-body">
-                                                                                                    <h4 class="card-title">Consolidado</h4>
-                                                                                                    <p class="card-text">
-                                                                                                        <?php
-                                                                                                        if ($contextEvaluacion->getEvent() === FIND_EVALUACION_OK) {
-                                                                                                            echo $contextEvaluacion->getData()->getCalificacionFinal();
-                                                                                                        }
-                                                                                                        ?>
-                                                                                                    </p>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                            <?php if ($contextComparacion->getData()['CalificacionFinal']){?>
-                                                                                                <div class="card">
-                                                                                                    <div class="card-body">
-                                                                                                        <h4 class="card-title">Comparación</h4>
-                                                                                                        <p class="card-text">
-                                                                                                         <?php
-                                                                                                         $differ = new Differ(explode("\n", $contextEvaluacion->getData()->getCalificacionFinal()), explode("\n", $contextModEvaluacion->getData()->getCalificacionFinal()), $differOptions);
-                                                                                                                $renderer = RendererFactory::make($rendererName, $rendererOptions); // or your own renderer object
-                                                                                                                $result = $renderer->render($differ);
-                                                                                                                echo $result;
-                                                                                                                
-                                                                                                                ?>
-                                                                                                            </p>
-                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                <?php } ?> 
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
->>>>>>> be8f6e90412794dc280b7fc1aa2d820f9039a3a4
 
                                                             <div id="collapseOneEv" class="collapse" aria-labelledby="headingOne" data-parent="#accordionEvaluacion">
                                                                 <div class="card-body">
@@ -2648,7 +2323,6 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                             </div>
                                                         </div>
 
-<<<<<<< HEAD
                                                         <!-- Pestaña realizacion examenes (inglés) -->
                                                         <?php if (!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())) { ?>
                                                             <div class="card">
@@ -2675,27 +2349,11 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                     }
                                                                                     ?>
                                                                                 </p>
-=======
-                                                                <!--Coordinacion-->
-                                                                <?php if ($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['coordinacion'] == true) { ?>
-                                                                    <div class="tab-pane fade" id="nav-coordinacion" role="tabpanel" aria-labelledby="nav-coordinacion-tab">
-                                                                        <div class="accordion" id="accordionCoordinacion">
-
-                                                                         <!--Configuración-->
-                                                                         <div class="card">
-                                                                            <div class="card-header" id="headingOne">
-                                                                                <h2 class="mb-0">
-                                                                                    <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseOneCor" aria-expanded="false" aria-controls="collapseOne">
-                                                                                        Configuración
-                                                                                    </button>
-                                                                                </h2>
->>>>>>> be8f6e90412794dc280b7fc1aa2d820f9039a3a4
                                                                             </div>
                                                                         </div>
                                                                         <?php if ($contextComparacion->getData()['RealizacionExamenesI']) { ?>
                                                                             <div class="card">
                                                                                 <div class="card-body">
-<<<<<<< HEAD
                                                                                     <h4 class="card-title">Comparación</h4>
                                                                                     <p class="card-text">
                                                                                         <?php
@@ -3432,199 +3090,8 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                     } elseif ($permiso->getPermisoEvaluacion() === '7') {
                                                                         echo '<td>Todos</td>';
                                                                     }
-=======
-                                                                                    <table class="table table-hover">
-                                                                                        <tbody>
 
-                                                                                            <tr>
-                                                                                                <th scope="row" class="text-center text-primary" colspan="2">PROGRAMA</th>
-                                                                                            </tr>
 
-                                                                                            <tr>
-                                                                                                <th scope="row">Conocimientos previos</th>
-                                                                                                <td>  
-                                                                                                   <?php if($contextConfiguracion->getData()->getConocimientosPrevios()) echo "✔";
-                                                                                                   else echo "❌"; ?>
-                                                                                               </td>
-                                                                                           </tr>
-
-                                                                                           <tr>
-                                                                                            <th scope="row">Breve descripción</th>
-                                                                                            <td> 
-                                                                                                <?php if($contextConfiguracion->getData()->getBreveDescripcion()) echo "✔"; 
-                                                                                                else echo "❌"; ?>
-                                                                                            </td>
-                                                                                        </tr>
-
-                                                                                        <tr>
-                                                                                            <th scope="row">Programa teórico</th>
-                                                                                            <td>
-                                                                                                <?php if($contextConfiguracion->getData()->getProgramaTeorico()) echo "✔"; 
-                                                                                                else echo "❌"; ?>
-                                                                                            </td>
-                                                                                        </tr>
-
-                                                                                        <tr>
-                                                                                            <th scope="row">Programa de seminarios</th>
-                                                                                            <td>
-                                                                                               <?php if($contextConfiguracion->getData()->getProgramaSeminarios()) echo "✔"; 
-                                                                                               else echo "❌"; ?>
-                                                                                           </td>
-                                                                                       </tr>
-
-                                                                                       <tr>
-                                                                                        <th scope="row">Programa de laboratorio</th>
-                                                                                        <td>
-                                                                                            <?php if($contextConfiguracion->getData()->getProgramaLaboratorio()) echo "✔"; 
-                                                                                            else echo "❌"; ?>
-                                                                                        </td>
-                                                                                    </tr>
-
-                                                                                    <tr>
-                                                                                        <th scope="row" class="text-center text-primary" colspan="2">COMPETENCIAS</th>
-                                                                                    </tr>
-
-                                                                                    <tr>
-                                                                                        <th scope="row">Generales</th>
-                                                                                        <td>    
-                                                                                            <?php if($contextConfiguracion->getData()->getComGenerales())echo "✔"; 
-                                                                                            else echo "❌"; ?>
-                                                                                        </td>
-                                                                                    </tr>
-
-                                                                                    <tr>
-                                                                                        <th scope="row">Específicas</th>
-                                                                                        <td>    
-                                                                                            <?php if($contextConfiguracion->getData()->getComEspecificas()) echo "✔"; 
-                                                                                            else echo "❌"; ?>
-                                                                                        </td>
-                                                                                    </tr>
-
-                                                                                    <tr>
-                                                                                        <th scope="row">Básicas y transversales</th>
-                                                                                        <td>    
-                                                                                            <?php if($contextConfiguracion->getData()->getComBasicas()) echo "✔"; 
-                                                                                            else echo "❌"; ?>
-                                                                                        </td>
-                                                                                    </tr>
-
-                                                                                    <tr>
-                                                                                        <th scope="row">Resultados del aprendizaje</th>
-                                                                                        <td>    
-                                                                                            <?php if($contextConfiguracion->getData()->getResultadosAprendizaje()) echo "✔"; 
-                                                                                            else echo "❌"; ?>
-                                                                                        </td>
-                                                                                    </tr>
-
-                                                                                    <tr>
-                                                                                        <th scope="row" class="text-center text-primary" colspan="2">METODOLOGÍA</th>
-                                                                                    </tr>
-
-                                                                                    <tr>
-                                                                                        <th scope="row">Metodología</th>
-                                                                                        <td>    
-                                                                                            <?php if($contextConfiguracion->getData()->getMetodologia()) echo "✔"; 
-                                                                                            else echo "❌"; ?>
-                                                                                        </td>
-                                                                                    </tr>
-
-                                                                                    <tr>
-                                                                                        <th scope="row" class="text-center text-primary" colspan="2">BIBLIOGRAFÍA</th>
-                                                                                    </tr>
-
-                                                                                    <tr>
-                                                                                        <th scope="row">Citas bibliográficas</th>
-                                                                                        <td>    
-                                                                                            <?php if($contextConfiguracion->getData()->getCitasBibliograficas()) echo "✔"; 
-                                                                                            else echo "❌"; ?>
-                                                                                        </td>
-                                                                                    </tr>
-
-                                                                                    <tr>
-                                                                                        <th scope="row">Recursos en internet</th>
-                                                                                        <td>   
-                                                                                            <?php if($contextConfiguracion->getData()->getRecursosInternet()) echo "✔"; 
-                                                                                            else echo "❌"; ?>
-                                                                                        </td>
-                                                                                    </tr>
-
-                                                                                    <tr>
-                                                                                        <th scope="row" class="text-center text-primary" colspan="2">GRUPO DE LABORATORIO</th>
-                                                                                    </tr>
-
-                                                                                    <tr>
-                                                                                        <th scope="row">Grupo de laboratorio</th>
-                                                                                        <td>    
-                                                                                         <?php if($contextConfiguracion->getData()->getGrupoLaboratorio()) echo "✔"; 
-                                                                                         else echo "❌"; ?>
-                                                                                     </td>
-                                                                                 </tr>
-
-                                                                                 <tr>
-                                                                                    <th scope="row" class="text-center text-primary" colspan="2">EVALUACIÓN</th>
-                                                                                </tr>
-
-                                                                                <tr>
-                                                                                    <th scope="row">Realización de los exámenes</th>
-                                                                                    <td>    
-                                                                                        <?php if($contextConfiguracion->getData()->getRealizacionExamenes()) echo "✔"; 
-                                                                                        else echo "❌"; ?>
-                                                                                    </td>
-                                                                                </tr>
-
-                                                                                <tr>
-                                                                                    <th scope="row">Realización de las actividades</th>
-                                                                                    <td>    
-                                                                                        <?php if($contextConfiguracion->getData()->getRealizacionActividades()) echo "✔"; 
-                                                                                        else echo "❌"; ?>
-                                                                                    </td>
-                                                                                </tr>
-
-                                                                                <tr>
-                                                                                    <th scope="row">Realización del laboratorio</th>
-                                                                                    <td>    
-                                                                                        <?php if($contextConfiguracion->getData()->getRealizacionLaboratorio()) echo "✔"; 
-                                                                                        else echo "❌"; ?>
-                                                                                    </td>
-                                                                                </tr>
-
-                                                                                <tr>
-                                                                                    <th scope="row">Calificación final</th>
-                                                                                    <td>    
-                                                                                        <?php if($contextConfiguracion->getData()->getCalificacionFinal()) echo "✔"; 
-                                                                                        else echo "❌"; ?>
-                                                                                    </td>
-                                                                                </tr>
-                                                                            </tbody>
-                                                                        </table>
-
-                                                                        <div class="text-center">
-                                                                            <a href="configuracion.php?IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado() ?>&IdAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
-                                                                                <button type="button" class="btn btn-primary" id="btn-form">
-                                                                                    Modificar Configuración
-                                                                                </button>
-                                                                            </a>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
->>>>>>> be8f6e90412794dc280b7fc1aa2d820f9039a3a4
-
-                                                            <!--Permisos-->
-                                                            <div class="card">
-                                                                <div class="card-header" id="headingTwo">
-                                                                    <h2 class="mb-0">
-                                                                        <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseTwoCor" aria-expanded="false" aria-controls="collapseTwo">
-                                                                            Permisos
-                                                                        </button>
-                                                                    </h2>
-                                                                </div>
-                                                                <div id="collapseTwoCor" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionCoordinacion">
-                                                                    <div class="card-body">
-                                                                        <?php
-
-<<<<<<< HEAD
                                                                     echo '</tr> 
                                                                             </tbody>
                                                                             </table>
@@ -3726,225 +3193,19 @@ use Jfcherng\Diff\Renderer\RendererConstant;
 
                                                                 
                                                                 ?>
-=======
-                                                                        $context = new es\ucm\Context(FIND_PERMISOS, $contextAsignatura->getData()->getIdAsignatura());
-                                                                        $permisos = $controller->action($context);
-                                                                        foreach ($permisos->getData() as $permiso) {
-                                                                            $context = new es\ucm\Context(FIND_PROFESOR, $permiso->getEmailProfesor());
-                                                                            $profesor = $controller->action($context);
-                                                                            echo '<div><h4>' . $profesor->getData()->getNombre() . '</h4>
-                                                                            <a href="permisos.php?emailProfesor=' . $permiso->getEmailProfesor() . '&idAsignatura=' . $permiso->getIdAsignatura() . '">
-                                                                            <button type="button" class="btn btn-primary" id="btn-form">
-                                                                            Modificar Permisos
-                                                                            </button>
-                                                                            </a></div>';
-                                                                            echo '<div class="table-responsive text-center">
-                                                                            <table class="table table-sm table-hover table-borderless">
-                                                                            <thead>
-                                                                            <tr>
-                                                                            <th scope="col">Programa</th>
-                                                                            <th scope="col">Competencias</th>
-                                                                            <th scope="col">Metodología</th>
-                                                                            <th scope="col">Bibliografía</th>
-                                                                            <th scope="col">Grupo Laboratorio</th>
-                                                                            <th scope="col">Grupo Clase</th>
-                                                                            <th scope="col">Evaluación</th>
-                                                                            </tr>
-                                                                            </thead> <tbody><tr scope="row">';
-                                                                            if ($permiso->getPermisoPrograma() === '0') {
-                                                                                echo '<td>❌</td>';
-                                                                            } elseif ($permiso->getPermisoPrograma() === '1') {
-                                                                                echo '<td>Administración</td>';
-                                                                            } elseif ($permiso->getPermisoPrograma() === '2') {
-                                                                                echo '<td>Modificación</td>';
-                                                                            } elseif ($permiso->getPermisoPrograma() === '3') {
-                                                                                echo '<td>Administración y Modificación </td>';
-                                                                            } elseif ($permiso->getPermisoPrograma() === '4') {
-                                                                                echo '<td>Lectura</td>';
-                                                                            } elseif ($permiso->getPermisoPrograma() === '5') {
-                                                                                echo '<td>Lectura y Administración</td>';
-                                                                            } elseif ($permiso->getPermisoPrograma() === '6') {
-                                                                                echo '<td>Lectura y Modificacion</td>';
-                                                                            } elseif ($permiso->getPermisoPrograma() === '7') {
-                                                                                echo '<td>Todos</td>';
-                                                                            }
-                                                                            if ($permiso->getPermisoCompetencias() === '0') {
-                                                                                echo '<td>❌</td>';
-                                                                            } elseif ($permiso->getPermisoCompetencias() === '1') {
-                                                                                echo '<td>Administración</td>';
-                                                                            } elseif ($permiso->getPermisoCompetencias() === '2') {
-                                                                                echo '<td>Modificación</td>';
-                                                                            } elseif ($permiso->getPermisoCompetencias() === '3') {
-                                                                                echo '<td>Administración y Modificación </td>';
-                                                                            } elseif ($permiso->getPermisoCompetencias() === '4') {
-                                                                                echo '<td>Lectura</td>';
-                                                                            } elseif ($permiso->getPermisoCompetencias() === '5') {
-                                                                                echo '<td>Lectura y Administración</td>';
-                                                                            } elseif ($permiso->getPermisoCompetencias() === '6') {
-                                                                                echo '<td>Lectura y Modificacion</td>';
-                                                                            } elseif ($permiso->getPermisoCompetencias() === '7') {
-                                                                                echo '<td>Todos</td>';
-                                                                            }
-                                                                            if ($permiso->getPermisoMetodologia() === '0') {
-                                                                                echo '<td>❌</td>';
-                                                                            } elseif ($permiso->getPermisoMetodologia() === '1') {
-                                                                                echo '<td>Administración</td>';
-                                                                            } elseif ($permiso->getPermisoMetodologia() === '2') {
-                                                                                echo '<td>Modificación</td>';
-                                                                            } elseif ($permiso->getPermisoMetodologia() === '3') {
-                                                                                echo '<td>Administración y Modificación </td>';
-                                                                            } elseif ($permiso->getPermisoMetodologia() === '4') {
-                                                                                echo '<td>Lectura</td>';
-                                                                            } elseif ($permiso->getPermisoMetodologia() === '5') {
-                                                                                echo '<td>Lectura y Administración</td>';
-                                                                            } elseif ($permiso->getPermisoMetodologia() === '6') {
-                                                                                echo '<td>Lectura y Modificacion</td>';
-                                                                            } elseif ($permiso->getPermisoMetodologia() === '7') {
-                                                                                echo '<td>Todos</td>';
-                                                                            }
-                                                                            if ($permiso->getPermisoBibliografia() === '0') {
-                                                                                echo '<td>❌</td>';
-                                                                            } elseif ($permiso->getPermisoBibliografia() === '1') {
-                                                                                echo '<td>Administración</td>';
-                                                                            } elseif ($permiso->getPermisoBibliografia() === '2') {
-                                                                                echo '<td>Modificación</td>';
-                                                                            } elseif ($permiso->getPermisoBibliografia() === '3') {
-                                                                                echo '<td>Administración y Modificación </td>';
-                                                                            } elseif ($permiso->getPermisoBibliografia() === '4') {
-                                                                                echo '<td>Lectura</td>';
-                                                                            } elseif ($permiso->getPermisoBibliografia() === '5') {
-                                                                                echo '<td>Lectura y Administración</td>';
-                                                                            } elseif ($permiso->getPermisoBibliografia() === '6') {
-                                                                                echo '<td>Lectura y Modificacion</td>';
-                                                                            } elseif ($permiso->getPermisoBibliografia() === '7') {
-                                                                                echo '<td>Todos</td>';
-                                                                            }
-                                                                            if ($permiso->getPermisoGrupoLaboratorio() === '0') {
-                                                                                echo '<td>❌</td>';
-                                                                            } elseif ($permiso->getPermisoGrupoLaboratorio() === '1') {
-                                                                                echo '<td>Administración</td>';
-                                                                            } elseif ($permiso->getPermisoGrupoLaboratorio() === '2') {
-                                                                                echo '<td>Modificación</td>';
-                                                                            } elseif ($permiso->getPermisoGrupoLaboratorio() === '3') {
-                                                                                echo '<td>Administración y Modificación </td>';
-                                                                            } elseif ($permiso->getPermisoGrupoLaboratorio() === '4') {
-                                                                                echo '<td>Lectura</td>';
-                                                                            } elseif ($permiso->getPermisoGrupoLaboratorio() === '5') {
-                                                                                echo '<td>Lectura y Administración</td>';
-                                                                            } elseif ($permiso->getPermisoGrupoLaboratorio() === '6') {
-                                                                                echo '<td>Lectura y Modificacion</td>';
-                                                                            } elseif ($permiso->getPermisoGrupoLaboratorio() === '7') {
-                                                                                echo '<td>Todos</td>';
-                                                                            }
-                                                                            if ($permiso->getPermisoGrupoClase() === '0') {
-                                                                                echo '<td>❌</td>';
-                                                                            } elseif ($permiso->getPermisoGrupoClase() === '1') {
-                                                                                echo '<td>Administración</td>';
-                                                                            } elseif ($permiso->getPermisoGrupoClase() === '2') {
-                                                                                echo '<td>Modificación</td>';
-                                                                            } elseif ($permiso->getPermisoGrupoClase() === '3') {
-                                                                                echo '<td>Administración y Modificación </td>';
-                                                                            } elseif ($permiso->getPermisoGrupoClase() === '4') {
-                                                                                echo '<td>Lectura</td>';
-                                                                            } elseif ($permiso->getPermisoGrupoClase() === '5') {
-                                                                                echo '<td>Lectura y Administración</td>';
-                                                                            } elseif ($permiso->getPermisoGrupoClase() === '6') {
-                                                                                echo '<td>Lectura y Modificacion</td>';
-                                                                            } elseif ($permiso->getPermisoGrupoClase() === '7') {
-                                                                                echo '<td>Todos</td>';
-                                                                            }
-                                                                            if ($permiso->getPermisoEvaluacion() === '0') {
-                                                                                echo '<td>❌</td>';
-                                                                            } elseif ($permiso->getPermisoEvaluacion() === '1') {
-                                                                                echo '<td>Administración</td>';
-                                                                            } elseif ($permiso->getPermisoEvaluacion() === '2') {
-                                                                                echo '<td>Modificación</td>';
-                                                                            } elseif ($permiso->getPermisoEvaluacion() === '3') {
-                                                                                echo '<td>Administración y Modificación </td>';
-                                                                            } elseif ($permiso->getPermisoEvaluacion() === '4') {
-                                                                                echo '<td>Lectura</td>';
-                                                                            } elseif ($permiso->getPermisoEvaluacion() === '5') {
-                                                                                echo '<td>Lectura y Administración</td>';
-                                                                            } elseif ($permiso->getPermisoEvaluacion() === '6') {
-                                                                                echo '<td>Lectura y Modificacion</td>';
-                                                                            } elseif ($permiso->getPermisoEvaluacion() === '7') {
-                                                                                echo '<td>Todos</td>';
-                                                                            }
-
-
-                                                                            echo '</tr> 
-                                                                            </tbody>
-                                                                            </table>
-                                                                            </div>';
-                                                                        } ?>
-
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                            <!--gestionprofesores-->
-                                                            <div class="card">
-                                                                <div class="card-header" id="headingThree">
-                                                                    <h2 class="mb-0">
-                                                                        <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseThreeCor" aria-expanded="false" aria-controls="collapseThree">
-                                                                            Gestión Profesores
-                                                                        </button>
-                                                                    </h2>
-                                                                </div>
-                                                                <div id="collapseThreeCor" class="collapse" aria-labelledby="headingThree" data-parent="#accordionCoordinacion">
-                                                                    <div class="card-body">
-                                                                        <?php
-
-                                                                        $context = new es\ucm\Context(FIND_PERMISOS, $contextAsignatura->getData()->getIdAsignatura());
-                                                                        $permisos = $controller->action($context);
-
-                                                                        echo '<div><h4>Profesores de la asignatura ' . $contextAsignatura->getData()->getNombreAsignatura() . '</h4>
-                                                                        <a href="addProfesor.php?idAsignatura=' . $contextAsignatura->getData()->getIdAsignatura() . '">
-                                                                        <button type="button" class="btn btn-primary" id="btn-form">
-                                                                        Añadir Profesor
-                                                                        </button>
-                                                                        </a>
-                                                                        </div>';
-                                                                        foreach ($permisos->getData() as $permiso) {
-                                                                            $context = new es\ucm\Context(FIND_PROFESOR, $permiso->getEmailProfesor());
-                                                                            $profesor = $controller->action($context);
-                                                                            echo '<p>' . $profesor->getData()->getNombre() . ' - ' . $permiso->getEmailProfesor() . '
-                                                                            <a href="eliminarProfesor.php?emailProfesor=' . $permiso->getEmailProfesor() . '&idAsignatura=' . $permiso->getIdAsignatura() . '">
-                                                                            <button type="button" class="btn btn-danger" id="btn-form">
-                                                                            -
-                                                                            </button>
-                                                                            </a></p>';
-                                                                        }
-                                                                        ?>
-                                                                    </div>
-                                                                </div>
->>>>>>> be8f6e90412794dc280b7fc1aa2d820f9039a3a4
                                                             </div>
                                                         </div>
                                                     </div>
 
-<<<<<<< HEAD
                                                 </div>
                                             </div>
 
                                     </div>
                                 </div>
                             </div>
-=======
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    <?php } ?>
-
->>>>>>> be8f6e90412794dc280b7fc1aa2d820f9039a3a4
 
                         <?php } ?>
 
-<<<<<<< HEAD
 
 
                         <!-- Feedback -->
@@ -3990,83 +3251,8 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                                         </div>
                                     </div>
-=======
-                                    <!-- Feedback -->
-                                    <?php
-                                    if (isset($_GET['anadido']) || isset($_GET['modificado']) || isset($_GET['eliminado'])) {
-                                        ?>
-                                        <div class="modal" tabindex="-1" role="dialog" id="feedback">
-                                            <div class="modal-dialog" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h4 class="modal-title">Información</h4>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <?php
-                                                        if (isset($_GET['anadido']) && $_GET['anadido'] === "y") {
-                                                            echo '<div class="alert alert-success" role="alert">
-                                                            <h4 class="text-center">Se ha añadido correctamente</h4>
-                                                            </div>';
-                                                        } elseif (isset($_GET['anadido']) && $_GET['anadido'] === "n") {
-                                                            echo '<div class="alert alert-danger" role="alert">
-                                                            <h4 class="text-center">Se ha producido un error de inserción en el borrador</h4>
-                                                            </div>';
-                                                        } elseif (isset($_GET['modificado']) && $_GET['modificado'] === "y") {
-                                                            echo '<div class="alert alert-success" role="alert">
-                                                            <h4 class="text-center">Se ha modificado correctamente</h4>
-                                                            </div>';
-                                                        } elseif (isset($_GET['modificado']) && $_GET['modificado'] === "n") {
-                                                            echo '<div class="alert alert-danger" role="alert">
-                                                            <h4 class="text-center">Se ha producido un error de modificación en el borrador</h4>
-                                                            </div>';
-                                                        } elseif (isset($_GET['eliminado']) && $_GET['eliminado'] === "y") {
-                                                            echo '<div class="alert alert-success" role="alert">
-                                                            <h4 class="text-center">Se ha eliminado correctamente</h4>
-                                                            </div>';
-                                                        } elseif (isset($_GET['eliminado']) && $_GET['eliminado'] === "n") {
-                                                            echo '<div class="alert alert-danger" role="alert">
-                                                            <h4 class="text-center">Se ha producido un error de eliminación en el borrador</h4>
-                                                            </div>';
-                                                        }
-                                                        ?>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <?php
-                                    }
-                                    ?>
-                                    <?php
-                                } else {
-                                    echo '
-                                    <div class="col-md-6 col-12">
-                                    <div class="alert alert-danger" role="alert">
-                                    <h2 class="card-title text-center">ACCESO DENEGADO</h2>
-                                    <h4 class="text-center">La asignatura seleccionada no ha sido creada correctamente. Contacta con el administrador</h4>
-                                    </div>
-                                    </div>';
-                                }
-                            } else {
-                                echo '
-                                <div class="col-md-6 col-12">
-                                <div class="alert alert-danger" role="alert">
-                                <h2 class="card-title text-center">ACCESO DENEGADO</h2>
-                                <h4 class="text-center">No tienes permisos sobre la asignatura introducida. Elige una en el Listado</h4>
->>>>>>> be8f6e90412794dc280b7fc1aa2d820f9039a3a4
                                 </div>
-                                </div>';
-                            }
-                        } else {
-                            echo '
-                            <div class="col-md-6 col-12">
-                            <div class="alert alert-danger" role="alert">
-                            <h2 class="card-title text-center">ACCESO DENEGADO</h2>
-                            <h4 class="text-center">Inicia sesión con un usuario Profesor</h4>
                             </div>
-<<<<<<< HEAD
                         <?php
                         }
                         ?>
@@ -4116,27 +3302,5 @@ use Jfcherng\Diff\Renderer\RendererConstant;
         }
         ?>
 </body>
-=======
-                            </div>';
-                        }
-                        ?>
-                    </div>
-                </div>
-                <!-- Optional JavaScript -->
-                <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-                <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-                <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-                <?php
-                if (isset($_GET['anadido']) || isset($_GET['modificado'])|| isset($_GET['eliminado'])) {
-                    ?>
-                    <script>
-                        $('#feedback').modal('show')
-                    </script>
-                    <?php
-                }
-                ?>
-            </body>
->>>>>>> be8f6e90412794dc280b7fc1aa2d820f9039a3a4
 
-            </html>
+</html>
