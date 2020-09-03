@@ -127,12 +127,14 @@ require_once('includes/Presentacion/FactoriaComandos/HorarioLaboratorio/CommandL
 require_once('includes/Presentacion/FactoriaComandos/HorarioLaboratorio/CommandUpdateModHorarioLaboratorio.php');
 
 require_once('includes/Presentacion/FactoriaComandos/Laboratorio/CommandFindLaboratorio.php');
+
 require_once('includes/Presentacion/FactoriaComandos/Laboratorio/CommandCreateLaboratorio.php');
 require_once('includes/Presentacion/FactoriaComandos/Laboratorio/CommandDeleteLaboratorio.php');
 require_once('includes/Presentacion/FactoriaComandos/Laboratorio/CommandUpdateLaboratorio.php');
 
 require_once('includes/Presentacion/FactoriaComandos/Materia/CommandFindMateria.php');
 require_once('includes/Presentacion/FactoriaComandos/Materia/CommandListMateria.php');
+
 require_once('includes/Presentacion/FactoriaComandos/Materia/CommandCreateMateria.php');
 require_once('includes/Presentacion/FactoriaComandos/Materia/CommandUpdateMateria.php');
 require_once('includes/Presentacion/FactoriaComandos/Materia/CommandDeleteMateria.php');
@@ -155,8 +157,10 @@ require_once('includes/Presentacion/FactoriaComandos/Modulo/CommandUpdateModulo.
 require_once('includes/Presentacion/FactoriaComandos/Permisos/CommandFindPermisos.php');
 require_once('includes/Presentacion/FactoriaComandos/Permisos/CommandDeletePermisos.php');
 require_once('includes/Presentacion/FactoriaComandos/Permisos/CommandCreatePermisos.php');
+
 require_once('includes/Presentacion/FactoriaComandos/Permisos/CommandUpdatePermisos.php');
 require_once('includes/Presentacion/FactoriaComandos/Permisos/CommandFindPermisosPorProfesor.php');
+
 require_once('includes/Presentacion/FactoriaComandos/Permisos/CommandFindPermisosPorProfesorYAsignatura.php');
 
 require_once('includes/Presentacion/FactoriaComandos/Problema/CommandFindProblema.php');
@@ -165,9 +169,6 @@ require_once('includes/Presentacion/FactoriaComandos/Problema/CommandCreateProbl
 require_once('includes/Presentacion/FactoriaComandos/Problema/CommandUpdateProblema.php');
 
 require_once('includes/Presentacion/FactoriaComandos/Profesor/CommandFindProfesor.php');
-require_once('includes/Presentacion/FactoriaComandos/Profesor/CommandCreateProfesor.php');
-require_once('includes/Presentacion/FactoriaComandos/Profesor/CommandUpdateProfesor.php');
-require_once('includes/Presentacion/FactoriaComandos/Profesor/CommandDeleteProfesor.php');
 
 require_once('includes/Presentacion/FactoriaComandos/ProgramaAsignatura/CommandFindProgramaAsignatura.php');
 require_once('includes/Presentacion/FactoriaComandos/ProgramaAsignatura/CommandCreateProgramaAsignatura.php');
@@ -184,14 +185,10 @@ require_once('includes/Presentacion/FactoriaComandos/Teorico/CommandCreateTeoric
 require_once('includes/Presentacion/FactoriaComandos/Teorico/CommandUpdateTeorico.php');
 
 require_once('includes/Presentacion/FactoriaComandos/Usuario/CommandFindUsuario.php');
-require_once('includes/Presentacion/FactoriaComandos/Usuario/CommandDeleteUsuarios.php');
-require_once('includes/Presentacion/FactoriaComandos/Usuario/CommandCreateUsuarios.php');
-require_once('includes/Presentacion/FactoriaComandos/Usuario/CommandUpdateUsuarios.php');
+require_once('includes/Presentacion/FactoriaComandos/Usuario/CommandFindUsuarios.php');
 
 require_once('includes/Presentacion/FactoriaComandos/Verifica/CommandFindVerifica.php');
 require_once('includes/Presentacion/FactoriaComandos/Verifica/CommandUpdateVerifica.php');
-require_once('includes/Presentacion/FactoriaComandos/Verifica/CommandCreateVerifica.php');
-require_once('includes/Presentacion/FactoriaComandos/Verifica/CommandDeleteVerifica.php');
 
 require_once('includes/Presentacion/FactoriaComandos/Comparacion/CommandComparacion.php');
 require_once('includes/Presentacion/FactoriaComandos/Conversion/CommandConvertMarkdownToHTML.php');
@@ -356,9 +353,9 @@ class FactoryCommandImplements extends FactoryCommand
             case FIND_GRUPO_CLASE:
                 $command = new CommandFindGrupoClase();
                 break;
-            case FIND_GRUPO_CLASE_LETRA:
+            /*case FIND_GRUPO_CLASE_LETRA:
                 $command = new CommandFindGrupoClaseLetra();
-                break;
+                break;*/
             case LIST_GRUPO_CLASE:
                 $command = new CommandListGrupoClase();
                 break;
@@ -389,9 +386,9 @@ class FactoryCommandImplements extends FactoryCommand
             case FIND_GRUPO_LABORATORIO:
                 $command = new CommandFindGrupoLaboratorio();
                 break;
-            case FIND_GRUPO_LABORATORIO_LETRA:
+            /*case FIND_GRUPO_LABORATORIO_LETRA:
                 $command = new CommandFindGrupoLaboratorioLetra();
-                break;
+                break;*/
             case LIST_GRUPO_LABORATORIO:
                 $command = new CommandListGrupoLaboratorio();
                 break;
@@ -482,9 +479,9 @@ class FactoryCommandImplements extends FactoryCommand
             case FIND_HORARIO_CLASE:
                 $command = new CommandFindHorarioClase();
                 break;
-            case FIND_HORARIO_CLASE_GRUPO_DIA:
+            /*case FIND_HORARIO_CLASE_GRUPO_DIA:
                     $command = new CommandFindHorarioClaseGrupoyDia();
-                    break;
+                    break;*/
             case LIST_HORARIO_CLASE:
                 $command = new CommandListHorarioClase();
                 break;
@@ -515,9 +512,9 @@ class FactoryCommandImplements extends FactoryCommand
             case FIND_HORARIO_LABORATORIO:
                 $command = new CommandFindHorarioLaboratorio();
                 break;
-            case FIND_HORARIO_LABORATORIO_GRUPO_DIA:
+            /*case FIND_HORARIO_LABORATORIO_GRUPO_DIA:
                 $command = new CommandFindHorarioLaboratorioGrupoyDia();
-                break;
+                break;*/
             case LIST_HORARIO_LABORATORIO:
                 $command = new CommandListHorarioLaboratorio();
                 break;

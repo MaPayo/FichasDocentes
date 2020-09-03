@@ -1809,8 +1809,8 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                                                 if ($contextProfesor->getEvent() == FIND_PROFESOR_OK) {
                                                                                                                     echo '<tr scope="row">
                                                                                                                     <td>' . $contextProfesor->getData()->getNombre() . '</td>
-                                                                                                                    <td>' . $modGrupoLaboratorioProfesor->getFechaInicio() . '</td>
-                                                                                                                    <td>' . $modGrupoLaboratorioProfesor->getFechaFin() . '</td>';
+                                                                                                                    <td>' . date_format(date_create($modGrupoLaboratorioProfesor->getFechaInicio()),"d-m-Y") . '</td>
+                                                                                                                    <td>' . date_format(date_create($modGrupoLaboratorioProfesor->getFechaFin()),"d-m-Y") . '</td>';
                                                                                                                     if ($contextAsignatura->getData()->getEstado() === "B" && ($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['coordinacion'] == true || unserialize($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['permisos'])->getPermisoGrupoClase() == true)) {
                                                                                                                         echo '<td> <a href="grupoLaboratorioProfesor.php?IdGrado=' . $contextGrado->getData()->getCodigoGrado() . '&EmailProfesor=' . $modGrupoLaboratorioProfesor->getEmailProfesor() . '&IdAsignatura=' . $contextAsignatura->getData()->getIdAsignatura() . '&IdGrupoLaboratorio=' . $grupo->getIdGrupoLab() . '">
                                                                                                                         <button type="button" class="btn btn-warning" id="btn-form">
@@ -1922,8 +1922,8 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                                                         if ($contextProfesor->getEvent() == FIND_PROFESOR_OK) {
                                                                                                                             echo '<tr scope="row">
                                                                                                                             <td>' . $contextProfesor->getData()->getNombre() . '</td>
-                                                                                                                            <td>' . $grupoLaboratorioProfesor->getFechaInicio() . '</td>
-                                                                                                                            <td>' . $grupoLaboratorioProfesor->getFechaFin() . '</td>';
+                                                                                                                            <td>' . date_format(date_create($grupoLaboratorioProfesor->getFechaInicio()),"d-m-Y") . '</td>
+                                                                                                                            <td>' . date_format(date_create($grupoLaboratorioProfesor->getFechaFin()),"d-m-Y") . '</td>';
                                                                                                                             echo '</tr>';
                                                                                                                         }
                                                                                                                     }
@@ -2063,8 +2063,8 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                                                                 echo '<tr scope="row">
                                                                                                                                 <td>' . $contextProfesor->getData()->getNombre() . '</td>
                                                                                                                                 <td>' . $modGrupoClaseProfesor->getTipo() . '</td>
-                                                                                                                                <td>' . $modGrupoClaseProfesor->getFechaInicio() . '</td>
-                                                                                                                                <td>' . $modGrupoClaseProfesor->getFechaFin() . '</td>';
+                                                                                                                                <td>' . date_format(date_create($modGrupoClaseProfesor->getFechaInicio()),"d-m-Y") . '</td>
+                                                                                                                                <td>' . date_format(date_create($modGrupoClaseProfesor->getFechaFin()),"d-m-Y") . '</td>';
                                                                                                                                 if ($contextAsignatura->getData()->getEstado() === "B" && ($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['coordinacion'] == true || unserialize($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['permisos'])->getPermisoGrupoClase() == true)) {
                                                                                                                                     echo '<td> <a href="grupoClaseProfesor.php?IdGrado=' . $contextGrado->getData()->getCodigoGrado() . '&EmailProfesor=' . $modGrupoClaseProfesor->getEmailProfesor() . '&IdAsignatura=' . $contextAsignatura->getData()->getIdAsignatura() . '&IdGrupoClase=' . $grupo->getIdGrupoClase() . '">
                                                                                                                                     <button type="button" class="btn btn-warning" id="btn-form">
@@ -2177,8 +2177,8 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                                                                         echo '<tr scope="row">
                                                                                                                                         <td>' . $contextProfesor->getData()->getNombre() . '</td>
                                                                                                                                         <td>' . $grupoClaseProfesor->getTipo() . '</td>
-                                                                                                                                        <td>' . $grupoClaseProfesor->getFechaInicio() . '</td>
-                                                                                                                                        <td>' . $grupoClaseProfesor->getFechaFin() . '</td>';
+                                                                                                                                        <td>' . date_format(date_create($grupoClaseProfesor->getFechaInicio()),"d-m-Y") . '</td>
+                                                                                                                                        <td>' . date_format(date_create($grupoClaseProfesor->getFechaFin()),"d-m-Y") . '</td>';
                                                                                                                                         echo '</tr>';
                                                                                                                                     }
                                                                                                                                 }
