@@ -12,56 +12,68 @@ class FormAddProfesor extends Form
     protected function generaCamposFormulario($datosIniciales)
     {
 
-
         $IdAsignatura = $datosIniciales['IdAsignatura'];
+        $IdGrado = $datosIniciales['IdGrado'];
 
+        $html = 
+        '<input type="hidden" name="IdAsignatura" value="' . $IdAsignatura . '" required />
+        <input type="hidden" name="IdGrado" value="' . $IdGrado . '" required />
 
-        
+        <div class="form-group">
+        <label for="email">Correo electrónico completo</label>
+        <input class="form-control" type="email" name="email" id="email" placeholder="ejemplo@ucm.es">
+        </div>
 
-        $html = ' <input type="hidden" name="IdAsignatura" value="' . $IdAsignatura . '" required />';
-        //Buscamos los permisos del profesor en concreto
-        $html .= ' <p>Introduce el email del profesor que quieres añadir <input name="emailProfe"></p>';
-       // $html .= '<input type="text" name="EmailProfesor value="'.$email.'" hidden>';
+        <div class="text-center">
+        <a href="indexAcceso.php?IdGrado='.$IdGrado.'&IdAsignatura=' . $IdAsignatura . '#nav-configuracion">
+        <button type="button" class="btn btn-secondary" id="btn-form">
+        Cancelar
+        </button>
+        </a>
 
-        $html .= '<div class="text-center">
-		<a href="indexAcceso.php?IdAsignatura=' . $IdAsignatura . '#nav-configuracion">
-		<button type="button" class="btn btn-secondary" id="btn-form">
-		Cancelar
-		</button>
-		</a>
-
-		<button type="submit" class="btn btn-success" id="btn-form" name="registrar">Crear Permisos</button>
-		</div>';
+        <button type="submit" class="btn btn-success" id="btn-form" name="registrar">Añadir</button>
+        </div>';
         return $html;
     }
 
     protected function procesaFormulario($datos)
     {
-      
         $erroresFormulario = array();
         $controller = new ControllerImplements();
-        $context = new Context(FIND_PERMISOS, $datos['IdAsignatura']);
-        $contextPermisos = $controller->action($context);
 
-        $IdAsignatura = $datos['IdAsignatura'];
-        $EmailProfesor = $datos['emailProfe'];
 
-        $context = new Context(FIND_PROFESOR, $EmailProfesor);
-        $contextPermisos = $controller->action($context);
-        $context = new Context(FIND_USUARIO, $EmailProfesor);
-        $contextUsuario = $controller->action($context);
-        $comparacion = array('email' =>$EmailProfesor, 
-        'asignatura'=>$IdAsignatura);
-        $context = new Context(FIND_PERMISOS_POR_PROFESOR_Y_ASIGNATURA, $comparacion);
-        $contextPA = $controller->action($context);
+        $context = new Context(FIND_PROFESOR, $datos['email']);
+        $contextProfesor = $controller->action($context);
 
-        if ($contextPermisos->getEvent() === FIND_PROFESOR_OK && $contextUsuario->getEvent() === FIND_USUARIO_OK && $contextPA->getEvent()=== FIND_PERMISOS_POR_PROFESOR_Y_ASIGNATURA_FAIL) {
-            
-            $erroresFormulario = "permisos.php?emailProfesor=".$EmailProfesor."&idAsignatura=".$IdAsignatura;
-            
-        } else{
-            $erroresFormulario[] = "No puedes añadir a este profesor";
-        }
-        return $erroresFormulario;
+        if ($contextProfesor->getEvent() === FIND_PROFESOR_OK) {
+
+         $info['email'] = $datos['email'];
+         $info['asignatura'] = $datos['IdAsignatura'];
+         $context = new Context(FIND_PERMISOS_POR_PROFESOR_Y_ASIGNATURA, $info);
+         $contextPYA = $controller->action($context);
+
+         if ($contextPYA->getEvent() === FIND_PERMISOS_POR_PROFESOR_Y_ASIGNATURA_FAIL) {
+            $permisos = new Permisos(null, 0, 0, 0, 0, 0, 0, 0,  $datos['IdAsignatura'], $datos['email']);
+            $context = new Context(CREATE_PERMISOS, $permisos);
+            $contextPermisos = $controller->action($context);
+
+            if($contextPermisos->getEvent() === CREATE_PERMISOS_OK) {
+               $erroresFormulario = 'indexAcceso.php?IdGrado='.$datos['IdGrado'].'&IdAsignatura=' . $datos['IdAsignatura'] . '&anadido=y#nav-configuracion'; 
+           }
+           else{
+            $erroresFormulario[] = "No se puede añadir ese profesor, revisa el correo introducido";
+        } 
+
+    } 
+    else{
+        $erroresFormulario[] = "El profesor introducido ya existe en la asignatura";
     }
+
+}
+else{
+ $erroresFormulario[] = "No existe el profesor introducido";
+}
+
+return $erroresFormulario;
+}
 }

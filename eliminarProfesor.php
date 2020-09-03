@@ -29,73 +29,63 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
     <div class="row justify-content-center align-items-center">
       <?php
       if (isset($_SESSION['login']) && $_SESSION['login'] === true) {
-        if(isset($_GET['idAsignatura'])){
-            $name ='idAsignatura';
-          }
-          if(isset($_GET['emailProfesor'])){
-            $email = 'emailProfesor';
-          }
-          
-          $controller = new es\ucm\ControllerImplements();
-          $context = new es\ucm\Context(FIND_ASIGNATURA, htmlspecialchars(trim(strip_tags($_GET[$name]))));
-          $asignatura = $controller->action($context);
-          
+        if(isset($_GET['IdAsignatura']) && isset($_GET['IdGrado']) && isset($_GET['EmailProfesor'])){
+          if(isset($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET['IdAsignatura']]['coordinacion']) && $_SESSION['asignaturas'][$_GET['IdGrado']][$_GET['IdAsignatura']]['coordinacion'] == true){
 
-          //Comprueba si es un coordinador
-          if(strpos($asignatura->getData()->getCoordinadores(),$_SESSION['idUsuario'])!==false){
+            $controller = new es\ucm\ControllerImplements();
+            $info['email'] = htmlspecialchars(trim(strip_tags($_GET['EmailProfesor'])));
+            $info['asignatura'] = htmlspecialchars(trim(strip_tags($_GET['IdAsignatura'])));
+            $context = new es\ucm\Context(FIND_PERMISOS_POR_PROFESOR_Y_ASIGNATURA, $info);
+            $permisos = $controller->action($context);
 
-           $controller = new es\ucm\ControllerImplements();
-           $context = new es\ucm\Context(FIND_PROFESOR,htmlspecialchars(trim(strip_tags($_GET[$email]))));
-           $profesor = $controller->action($context);
-           $context = new es\ucm\Context(FIND_PERMISOS_POR_PROFESOR, htmlspecialchars(trim(strip_tags($_GET[$email]))));
-          $permiso = $controller->action($context);
-          
-           if($profesor->getEvent() === FIND_PROFESOR_OK){
-            ?>
-            <div class="col-md-6 col-12">
-              <div class="card">
-                <div class="card-header text-center">
-                  <h2>Eliminar <?php echo $profesor->getData()->getNombre() ?> de la asignatura <?php echo $asignatura->getData()->getNombreAsignatura();?></h2>
-                </div>
-                <div class="card-body">
-                  <?php
-                  $access = new es\ucm\FormEliminar('idPermisos');
-                  $datosIniciales= array();
+            if($permisos->getEvent() === FIND_PERMISOS_POR_PROFESOR_Y_ASIGNATURA_OK){
+            $context = new es\ucm\Context(DELETE_PERMISOS, $permisos->getData()->getIdPermiso());
+            $res = $controller->action($context);
 
-                  $datosIniciales['IdPermiso'] = $permiso->getData()[0]->getIdPermiso();
-		              $datosIniciales['EmailProfesor']= htmlspecialchars(trim(strip_tags($_GET[$email])));
-                  $datosIniciales['IdAsignatura']=  htmlspecialchars(trim(strip_tags($_GET[$name])));
-        
-                  $access->gestionaModificacion($datosIniciales);
-           } //Find ok
-                  
-                  ?>
-                </div>
+            if($res->getEvent() === DELETE_PERMISOS_OK) header('Location: indexAcceso.php?IdGrado='.$_GET['IdGrado'].'&IdAsignatura='.$_GET['IdAsignatura'].'&eliminado=y');
+            else  header('Location: indexAcceso.php?IdGrado='.$_GET['IdGrado'].'&IdAsignatura='.$_GET['IdAsignatura'].'&eliminado=n');
+            }
+            else{
+              echo '
+              <div class="col-md-6 col-12">
+              <div class="alert alert-danger" role="alert">
+              <h2 class="card-title text-center">ACCESO DENEGADO</h2>
+              <h5 class="text-center">No se ha encontrado al profesor seleccionado</h5>
               </div>
-            </div>
-            <?php
-          } //permisos
+              </div>';
+            }
+          }
+          else{
+           echo '
+           <div class="col-md-6 col-12">
+           <div class="alert alert-danger" role="alert">
+           <h2 class="card-title text-center">ACCESO DENEGADO</h2>
+           <h5 class="text-center">No tienes permisos suficientes para esta apartado</h5>
+           </div>
+           </div>';
+         }
+       } 
        else{
-         echo '
-         <div class="col-md-6 col-12">
-         <div class="alert alert-danger" role="alert">
-         <h2 class="card-title text-center">ACCESO DENEGADO</h2>
-         <h5 class="text-center">No tienes permisos suficientes para esta apartado</h5>
-         </div>
-         </div>';
-       }
-}
-  else {
-    echo '
-    <div class="col-md-6 col-12">
-    <div class="alert alert-danger" role="alert">
-    <h2 class="card-title text-center">ACCESO DENEGADO</h2>
-    <h5 class="text-center">Inicia sesión con un usuario que pueda acceder a este contenido</h5>
-    </div>
-    </div>';
-  }
-  ?>
-</div>
+        echo '
+        <div class="col-md-6 col-12">
+        <div class="alert alert-danger" role="alert">
+        <h2 class="card-title text-center">ACCESO DENEGADO</h2>
+        <h5 class="text-center">No se ha podido obtener la información necesaria para realizar la operación</h5>
+        </div>
+        </div>';
+      }
+    }
+    else {
+      echo '
+      <div class="col-md-6 col-12">
+      <div class="alert alert-danger" role="alert">
+      <h2 class="card-title text-center">ACCESO DENEGADO</h2>
+      <h5 class="text-center">Inicia sesión con un usuario que pueda acceder a este contenido</h5>
+      </div>
+      </div>';
+    }
+    ?>
+  </div>
 </div>
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->

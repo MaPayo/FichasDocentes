@@ -2912,7 +2912,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                 </div>
                                                                 <div class="text-center">
                                                                     <a href="configuracion.php?IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado() ?>&IdAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
-                                                                        <button type="button" class="btn btn-warning" id="btn-form">
+                                                                        <button type="button" class="btn btn-warning btn-lg" id="btn-form">
                                                                             Modificar Configuración
                                                                         </button>
                                                                     </a>
@@ -2924,48 +2924,10 @@ use Jfcherng\Diff\Renderer\RendererConstant;
 
                                                     <!--gestionprofesores-->
                                                     <div class="card">
-                                                        <div class="card-header" id="headingThree">
-                                                            <h2 class="mb-0">
-                                                                <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseThreeCor" aria-expanded="false" aria-controls="collapseThree">
-                                                                    Gestión del profesorado
-                                                                </button>
-                                                            </h2>
-                                                        </div>
-                                                        <div id="collapseThreeCor" class="collapse" aria-labelledby="headingThree" data-parent="#accordionCoordinacion">
-                                                            <div class="card-body">
-                                                                <?php
-
-                                                                $context = new es\ucm\Context(FIND_PERMISOS, $contextAsignatura->getData()->getIdAsignatura());
-                                                                $permisos = $controller->action($context);
-
-                                                                echo '<a href="addProfesor.php?idAsignatura=' . $contextAsignatura->getData()->getIdAsignatura() . '">
-                                                                <button type="button" class="btn btn-primary" id="btn-form">
-                                                                Añadir Profesor
-                                                                </button>
-                                                                </a>
-                                                                </div>';
-                                                                foreach ($permisos->getData() as $permiso) {
-                                                                    $context = new es\ucm\Context(FIND_PROFESOR, $permiso->getEmailProfesor());
-                                                                    $profesor = $controller->action($context);
-                                                                    echo '<p>' . $profesor->getData()->getNombre() . ' - ' . $permiso->getEmailProfesor() . '
-                                                                    <a href="eliminarProfesor.php?emailProfesor=' . $permiso->getEmailProfesor() . '&idAsignatura=' . $permiso->getIdAsignatura() . '">
-                                                                    <button type="button" class="btn btn-danger" id="btn-form">
-                                                                    -
-                                                                    </button>
-                                                                    </a></p>';
-                                                                }
-                                                                ?>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-
-                                                    <!--Permisos-->
-                                                    <div class="card">
                                                         <div class="card-header" id="headingTwo">
                                                             <h2 class="mb-0">
                                                                 <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseTwoCor" aria-expanded="false" aria-controls="collapseTwo">
-                                                                    Permisos del profesorado
+                                                                    Gestión del profesorado
                                                                 </button>
                                                             </h2>
                                                         </div>
@@ -2978,7 +2940,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                 if ($permisos->getEvent() === FIND_PERMISOS_FAIL) {
                                                                     echo '<div class="alert alert-secondary" role="alert">
                                                                     <h4 class= "text-center">No existen profesores en la asignatura</h4>
-                                                                    </div';
+                                                                    </div>';
                                                                 }
                                                                 else{ ?>
 
@@ -3015,17 +2977,27 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                 <td><?php if($permiso->getPermisoEvaluacion()) echo'✏'; else echo'📄'; ?> </td>
                                                                                 <?php
                                                                                 echo'<td>
-                                                                                <a href="permisos.php?IdGrado='.$contextGrado->getData()->getCodigoGrado().'&IdAsignatura='.$contextAsignatura->getData()->getIdAsignatura().'&EmailProfesor='.$profesor->getData()->getEmail().'"><button type="button" class="btn btn-warning" id="btn-form">Editar</button></a> 
+                                                                                <a href="permisos.php?IdGrado='.$contextGrado->getData()->getCodigoGrado().'&IdAsignatura='.$contextAsignatura->getData()->getIdAsignatura().'&EmailProfesor='.$profesor->getData()->getEmail().'"><button type="button" class="btn btn-warning" id="btn-form">Editar</button>
+                                                                                </a> 
+                                                                                <a href="eliminarProfesor.php?IdGrado='.$contextGrado->getData()->getCodigoGrado().'&IdAsignatura='.$contextAsignatura->getData()->getIdAsignatura().'&EmailProfesor='.$permiso->getEmailProfesor().'">
+                                                                                <button type="button" class="btn btn-danger" id="btn-form">Eliminar</button>
+                                                                                </a>
                                                                                 </td>
                                                                                 </tr>';
-                                                                                
-                                                                            }
-                                                                        }
-                                                                        ?>
-                                                                    </tbody>
-                                                                </table>
-                                                            </div>
 
+                                                                            }
+                                                                            ?>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            <?php } ?>
+                                                            <div class="text-center">
+                                                                <a href="addProfesor.php?IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado() ?>&IdAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura() ?>">
+                                                                    <button type="button" class="btn btn-success btn-lg" id="btn-form">
+                                                                        Añadir Profesor
+                                                                    </button>
+                                                                </a>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -3033,14 +3005,14 @@ use Jfcherng\Diff\Renderer\RendererConstant;
 
                                                 <!--Verificacion porcentajes evaluacion-->
                                                 <div class="card">
-                                                    <div class="card-header" id="headingFour">
+                                                    <div class="card-header" id="headingThree">
                                                         <h2 class="mb-0">
-                                                            <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseFourCor" aria-expanded="false" aria-controls="collapseFour">
+                                                            <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseThreeCor" aria-expanded="false" aria-controls="collapseThree">
                                                                 Rango de porcentajes de la evaluación
                                                             </button>
                                                         </h2>
                                                     </div>
-                                                    <div id="collapseFourCor" class="collapse" aria-labelledby="headingFour" data-parent="#accordionCoordinacion">
+                                                    <div id="collapseThreeCor" class="collapse" aria-labelledby="headingThree" data-parent="#accordionCoordinacion">
                                                         <div class="card-body">
                                                             <?php
 
@@ -3076,7 +3048,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                 </div>
                                                                 <div class="text-center">
                                                                     <a href="verifica.php?IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado() ?>&IdAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura() ?>">
-                                                                        <button type="button" class="btn btn-warning" id="btn-form">
+                                                                        <button type="button" class="btn btn-warning btn-lg" id="btn-form">
                                                                             Modificar Porcentajes
                                                                         </button>
                                                                     </a>
@@ -3149,8 +3121,6 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                             </div>
                             <?php
                         }
-                        ?>
-                        <?php
                     } else {
                         echo '
                         <div class="col-md-6 col-12">
