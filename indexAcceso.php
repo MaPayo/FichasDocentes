@@ -390,136 +390,138 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                     </thead>
                                                     <tbody>
                                                         <tr>
-                                                            <th scope="col" colspan="2">Estado</th>
+                                                            <th scope="col" colspan="2">Estado de la ficha</th>
                                                             <td colspan="2" <?php
                                                             if ($contextAsignatura->getData()->getEstado() == "B") {
                                                                 echo 'class="text-primary">Borrador (Edición permitida)';
                                                             } elseif ($contextAsignatura->getData()->getEstado() == "V") {
-                                                                echo 'class="text-primary">Validada (Edición bloqueada)';
+                                                                echo 'class="text-primary">Validado (Edición bloqueada)';
                                                             } elseif ($contextAsignatura->getData()->getEstado() == "C") {
-                                                                echo 'class="text-success">Consolidada (Información actualizada)';
+                                                                echo 'class="text-success">Consolidado (Información actualizada)';
                                                             }
-                                                            ?> </td> </tr> <tr>
-                                                                <th scope="col" colspan="1">Última modificación</th>
-                                                                <td colspan="1">
-                                                                    <?php
-                                                                    if (!empty($contextModAsignatura->getData()->getFechaMod())) {
+                                                            ?> </td> 
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope="col" colspan="1">Última modificación</th>
+                                                            <td colspan="1">
+                                                                <?php
+                                                                if (!empty($contextModAsignatura->getData()->getFechaMod())) {
 
 
-                                                                        $context = new es\ucm\Context(FIND_PROFESOR, $contextModAsignatura->getData()->getEmailMod());
-                                                                        $contextModificacion = $controller->action($context);
-                                                                        $date = strtotime($contextModAsignatura->getData()->getFechaMod());
-                                                                        echo date("H:i , d-m-Y", $date);
-                                                                    } else {
-                                                                        echo "-";
-                                                                    }
-                                                                    ?>
-                                                                </td>
-                                                                <th scope="col" colspan="1">Autor</th>
-                                                                <td colspan="1">
-                                                                    <?php
-                                                                    if (!empty($contextModAsignatura->getData()->getEmailMod())) {
-                                                                        echo $contextModificacion->getData()->getNombre();
-                                                                    } else {
-                                                                        echo "-";
-                                                                    }
-                                                                    ?>
+                                                                    $context = new es\ucm\Context(FIND_PROFESOR, $contextModAsignatura->getData()->getEmailMod());
+                                                                    $contextModificacion = $controller->action($context);
+                                                                    $date = strtotime($contextModAsignatura->getData()->getFechaMod());
+                                                                    echo date("H:i , d-m-Y", $date);
+                                                                } else {
+                                                                    echo "-";
+                                                                }
+                                                                ?>
+                                                            </td>
+                                                            <th scope="col" colspan="1">Autor</th>
+                                                            <td colspan="1">
+                                                                <?php
+                                                                if (!empty($contextModAsignatura->getData()->getEmailMod())) {
+                                                                    echo $contextModificacion->getData()->getNombre();
+                                                                } else {
+                                                                    echo "-";
+                                                                }
+                                                                ?>
 
-                                                                </td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                                <?php
-                                                if ($contextAsignatura->getData()->getCoordinadorAsignatura() == $_SESSION['idUsuario']) {
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <?php
+                                            if ($contextAsignatura->getData()->getCoordinadorAsignatura() == $_SESSION['idUsuario']) {
 
-                                                    echo '<div class="alert alert-primary alert-dismissible fade show" role="alert">
-                                                    <h4 class= "text-center">Eres el coordinador de la asignatura</h4>
-                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                    </div>';
-                                                }
-                                                if ($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['coordinacion']) {
+                                                echo '<div class="alert alert-primary alert-dismissible fade show" role="alert">
+                                                <h4 class= "text-center">Eres el coordinador de la asignatura</h4>
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                                </button>
+                                                </div>';
+                                            }
+                                            if ($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['coordinacion']) {
 
-                                                    echo '<div class="alert alert-primary alert-dismissible fade show" role="alert">
-                                                    <h4 class= "text-center">Eres el coordinador del grado</h4>
-                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                    </div>';
-                                                }
-                                                ?>
-                                                <?php
-                                                if ($contextAsignatura->getData()->getEstado() == "B" && $contextAsignatura->getData()->getCoordinadorAsignatura() == $_SESSION['idUsuario']) {
-                                                    echo '<a href="validar.php?IdGrado=' . $contextGrado->getData()->getCodigoGrado() . '&IAsignatura=' . $contextAsignatura->getData()->getIdAsignatura() . '">
-                                                    <button type="button" class="btn btn-primary btn-lg" id="btn-form">
-                                                    Validar Asignatura
+                                                echo '<div class="alert alert-primary alert-dismissible fade show" role="alert">
+                                                <h4 class= "text-center">Eres el coordinador del grado</h4>
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                                </button>
+                                                </div>';
+                                            }
+                                            ?>
+                                            <?php
+                                            if ($contextAsignatura->getData()->getEstado() == "B" && $contextAsignatura->getData()->getCoordinadorAsignatura() == $_SESSION['idUsuario']) {
+                                                echo '<a href="validar.php?IdGrado=' . $contextGrado->getData()->getCodigoGrado() . '&IAsignatura=' . $contextAsignatura->getData()->getIdAsignatura() . '">
+                                                <button type="button" class="btn btn-primary btn-lg" id="btn-form">
+                                                Validar Asignatura
+                                                </button>
+                                                </a>';
+                                            }
+                                            if ($contextAsignatura->getData()->getCoordinadorAsignatura() == $_SESSION['idUsuario']) {
+                                                if ($contextAsignatura->getData()->getEstado() == "V") {
+                                                    echo '<a href="consolidar.php?IdGrado' . $contextGrado->getData()->getCodigoGrado() . '&IAsignatura=' . $contextAsignatura->getData()->getIdAsignatura() . '">
+                                                    <button type="button" class="btn btn-success btn-lg" id="btn-form">
+                                                    Consolidar Asignatura
                                                     </button>
                                                     </a>';
                                                 }
-                                                if ($contextAsignatura->getData()->getCoordinadorAsignatura() == $_SESSION['idUsuario']) {
-                                                    if ($contextAsignatura->getData()->getEstado() == "V") {
-                                                        echo '<a href="consolidar.php?IdGrado' . $contextGrado->getData()->getCodigoGrado() . '&IAsignatura=' . $contextAsignatura->getData()->getIdAsignatura() . '">
-                                                        <button type="button" class="btn btn-success btn-lg" id="btn-form">
-                                                        Consolidar Asignatura
-                                                        </button>
-                                                        </a>';
-                                                    }
-                                                    if ($contextAsignatura->getData()->getEstado() != "B") {
-                                                        echo '<a href="borrador.php?IdGrado' . $contextGrado->getData()->getCodigoGrado() . '&IAsignatura=' . $contextAsignatura->getData()->getIdAsignatura() . '">
-                                                        <button type="button" class="btn btn-warning btn-lg" id="btn-form">
-                                                        Permitir Edición
-                                                        </button>
-                                                        </a>';
-                                                    }
-                                                } ?>
-                                            </div>
+                                                if ($contextAsignatura->getData()->getEstado() != "B") {
+                                                    echo '<a href="borrador.php?IdGrado' . $contextGrado->getData()->getCodigoGrado() . '&IAsignatura=' . $contextAsignatura->getData()->getIdAsignatura() . '">
+                                                    <button type="button" class="btn btn-warning btn-lg" id="btn-form">
+                                                    Permitir Edición
+                                                    </button>
+                                                    </a>';
+                                                }
+                                            } ?>
+                                        </div>
 
-                                            <?php if ($verPrograma) { ?>
-                                                <!--Pestaña programa asignatura-->
-                                                <div class="tab-pane fade" id="nav-prog-asignatura" role="tabpanel" aria-labelledby="nav-prog-asignatura-tab">
-                                                    <div class="accordion" id="accordionProgram">
+                                        <?php if ($verPrograma) { ?>
+                                            <!--Pestaña programa asignatura-->
+                                            <div class="tab-pane fade" id="nav-prog-asignatura" role="tabpanel" aria-labelledby="nav-prog-asignatura-tab">
+                                                <div class="accordion" id="accordionProgram">
 
-                                                        <!--Pestaña conocimientos previos -->
-                                                        <?php if ($contextConfiguracion->getData()->getConocimientosPrevios() == true) { ?>
-                                                            <div class="card">
-                                                                <div class="card-header" id="headingOne">
-                                                                    <h2 class="mb-0">
-                                                                        <?php if ($contextComparacion->getData()['conocimientosPrevios']) { ?>
-                                                                            <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseOneProg" aria-expanded="true" aria-controls="collapseOne">
-                                                                                Conocimientos previos
-                                                                            </button>
-                                                                        <?php } else {
+                                                    <!--Pestaña conocimientos previos -->
+                                                    <?php if ($contextConfiguracion->getData()->getConocimientosPrevios() == true) { ?>
+                                                        <div class="card">
+                                                            <div class="card-header" id="headingOne">
+                                                                <h2 class="mb-0">
+                                                                    <?php if ($contextComparacion->getData()['conocimientosPrevios']) { ?>
+                                                                        <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseOneProg" aria-expanded="true" aria-controls="collapseOne">
+                                                                            Conocimientos previos
+                                                                        </button>
+                                                                    <?php } else {
 
-                                                                            ?><button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseOneProg" aria-expanded="true" aria-controls="collapseOne">
-                                                                                Conocimientos previos
-                                                                            </button>
-                                                                        <?php } ?>
-                                                                    </h2>
-                                                                </div>
+                                                                        ?><button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseOneProg" aria-expanded="true" aria-controls="collapseOne">
+                                                                            Conocimientos previos
+                                                                        </button>
+                                                                    <?php } ?>
+                                                                </h2>
+                                                            </div>
 
-                                                                <div id="collapseOneProg" class="collapse" aria-labelledby="headingOne" data-parent="#accordionProgram">
-                                                                    <div class="card-body">
+                                                            <div id="collapseOneProg" class="collapse" aria-labelledby="headingOne" data-parent="#accordionProgram">
+                                                                <div class="card-body">
+                                                                    <div class="card">
+                                                                        <div class="card-body">
+                                                                            <h4 class="card-title">Consolidado</h4>
+                                                                            <p class="card-text">
+                                                                                <?php
+                                                                                if ($contextPrograma->getEvent() === FIND_PROGRAMA_ASIGNATURA_OK) {
+                                                                                    echo $contextPrograma->getData()->getConocimientosPrevios();
+                                                                                }
+                                                                                ?>
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <?php if ($contextComparacion->getData()['conocimientosPrevios']) { ?>
                                                                         <div class="card">
                                                                             <div class="card-body">
-                                                                                <h4 class="card-title">Consolidado</h4>
+                                                                                <h4 class="card-title">Comparación</h4>
                                                                                 <p class="card-text">
                                                                                     <?php
-                                                                                    if ($contextPrograma->getEvent() === FIND_PROGRAMA_ASIGNATURA_OK) {
-                                                                                        echo $contextPrograma->getData()->getConocimientosPrevios();
-                                                                                    }
-                                                                                    ?>
-                                                                                </p>
-                                                                            </div>
-                                                                        </div>
-                                                                        <?php if ($contextComparacion->getData()['conocimientosPrevios']) { ?>
-                                                                            <div class="card">
-                                                                                <div class="card-body">
-                                                                                    <h4 class="card-title">Comparación</h4>
-                                                                                    <p class="card-text">
-                                                                                        <?php
-                                                                                        $differ = new Differ(explode("\n", $contextPrograma->getData()->getConocimientosPrevios()), explode("\n", $contextModPrograma->getData()->getConocimientosPrevios()), $differOptions);
+                                                                                    $differ = new Differ(explode("\n", $contextPrograma->getData()->getConocimientosPrevios()), explode("\n", $contextModPrograma->getData()->getConocimientosPrevios()), $differOptions);
                                                                                     $renderer = RendererFactory::make($rendererName, $rendererOptions); // or your own renderer object
                                                                                     $result = $renderer->render($differ);
                                                                                     echo $result;
@@ -1745,22 +1747,22 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                         <?php echo $grupo->getLetra();
                                                                                         if ($contextAsignatura->getData()->getEstado() === "B" && ($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['coordinacion'] == true || unserialize($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['permisos'])->getPermisoGrupoLaboratorio() == true)) { ?>
                                                                                             <a href="horarioLaboratorio.php?IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdGrupoLaboratorio=<?php echo $grupo->getIdGrupoLab(); ?>&IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdAsignatura=<?php echo $grupo->getIdAsignatura(); ?>">
-                                                                                                <button type="button" class="btn btn-success" id="btn-form">
+                                                                                                <button type="button" class="btn btn-success btn-sm" id="btn-form">
                                                                                                     Crear Nuevo Horario
                                                                                                 </button>
                                                                                             </a>
                                                                                             <a href="grupoLaboratorioProfesor.php?IdGrupoLaboratorio=<?php echo $grupo->getIdGrupoLab(); ?>&IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
-                                                                                                <button type="button" class="btn btn-success" id="btn-form">
+                                                                                                <button type="button" class="btn btn-success btn-sm" id="btn-form">
                                                                                                     Añadir Profesor
                                                                                                 </button>
                                                                                             </a>
                                                                                             <a href="grupoLaboratorio.php?IdGrupoLaboratorio=<?php echo $grupo->getIdGrupoLab(); ?>&IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
-                                                                                                <button type="button" class="btn btn-warning" id="btn-form">
+                                                                                                <button type="button" class="btn btn-warning btn-sm" id="btn-form">
                                                                                                     Modificar Grupo
                                                                                                 </button>
                                                                                             </a>
                                                                                             <a href="borrarGrupoLaboratorio.php?IdGrupoLaboratorio=<?php echo $grupo->getIdGrupoLab(); ?>&IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
-                                                                                                <button type="button" class="btn btn-danger" id="btn-form">
+                                                                                                <button type="button" class="btn btn-danger btn-sm" id="btn-form">
                                                                                                     Borrar Grupo
                                                                                                 </button>
                                                                                             </a>
@@ -1813,12 +1815,12 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                                                     <td>' . date_format(date_create($modGrupoLaboratorioProfesor->getFechaFin()),"d-m-Y") . '</td>';
                                                                                                                     if ($contextAsignatura->getData()->getEstado() === "B" && ($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['coordinacion'] == true || unserialize($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['permisos'])->getPermisoGrupoClase() == true)) {
                                                                                                                         echo '<td> <a href="grupoLaboratorioProfesor.php?IdGrado=' . $contextGrado->getData()->getCodigoGrado() . '&EmailProfesor=' . $modGrupoLaboratorioProfesor->getEmailProfesor() . '&IdAsignatura=' . $contextAsignatura->getData()->getIdAsignatura() . '&IdGrupoLaboratorio=' . $grupo->getIdGrupoLab() . '">
-                                                                                                                        <button type="button" class="btn btn-warning" id="btn-form">
+                                                                                                                        <button type="button" class="btn btn-warning btn-sm" id="btn-form">
                                                                                                                         Modificar Profesor
                                                                                                                         </button>
                                                                                                                         </a>
                                                                                                                         <a href="borrarGrupoLaboratorioProfesor.php?IdGrado=' . $contextGrado->getData()->getCodigoGrado() . '&EmailProfesor=' . $modGrupoLaboratorioProfesor->getEmailProfesor() . '&IdAsignatura=' . $contextAsignatura->getData()->getIdAsignatura() . '&IdGrupoLaboratorio=' . $grupo->getIdGrupoLab() . '">
-                                                                                                                        <button type="button" class="btn btn-danger" id="btn-form">
+                                                                                                                        <button type="button" class="btn btn-danger btn-sm" id="btn-form">
                                                                                                                         Borrar Profesor
                                                                                                                         </button>
                                                                                                                         </a></td>';
@@ -1842,12 +1844,12 @@ use Jfcherng\Diff\Renderer\RendererConstant;
 
                                                                                                             if ($contextAsignatura->getData()->getEstado() === "B" && ($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['coordinacion'] == true || unserialize($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['permisos'])->getPermisoGrupoLaboratorio() == true)) {
                                                                                                                 echo '<td> <a href="horarioLaboratorio.php?IdGrado=' . $contextGrado->getData()->getCodigoGrado() . '&IdHorarioLaboratorio=' . $horario->getIdHorarioLab() . '&IdAsignatura=' . $grupo->getIdAsignatura() . '">
-                                                                                                                <button type="button" class="btn btn-warning" id="btn-form">
+                                                                                                                <button type="button" class="btn btn-warning btn-sm" id="btn-form">
                                                                                                                 Modificar Horario
                                                                                                                 </button>
                                                                                                                 </a>
                                                                                                                 <a href="borrarHorarioLaboratorio.php?IdGrado=' . $contextGrado->getData()->getCodigoGrado() . '&IdHorarioLaboratorio=' . $horario->getIdHorarioLab() . '&IdAsignatura=' . $grupo->getIdAsignatura() . '">
-                                                                                                                <button type="button" class="btn btn-danger" id="btn-form">
+                                                                                                                <button type="button" class="btn btn-danger btn-sm" id="btn-form">
                                                                                                                 Borrar Horario
                                                                                                                 </button>
                                                                                                                 </a></td>';
@@ -1998,22 +2000,22 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                                     <?php echo $grupo->getLetra();
                                                                                                     if ($contextAsignatura->getData()->getEstado() === "B" && ($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['coordinacion'] == true || unserialize($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['permisos'])->getPermisoGrupoClase() == true)) { ?>
                                                                                                         <a href="horarioClase.php?IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdGrupoClase=<?php echo $grupo->getIdGrupoClase(); ?>&IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
-                                                                                                            <button type="button" class="btn btn-success" id="btn-form">
+                                                                                                            <button type="button" class="btn btn-success btn-sm" id="btn-form">
                                                                                                                 Crear Nuevo Horario
                                                                                                             </button>
                                                                                                         </a>
                                                                                                         <a href="grupoClaseProfesor.php?IdGrupoClase=<?php echo $grupo->getIdGrupoClase(); ?>&IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
-                                                                                                            <button type="button" class="btn btn-success" id="btn-form">
+                                                                                                            <button type="button" class="btn btn-success btn-sm" id="btn-form">
                                                                                                                 Añadir Profesor
                                                                                                             </button>
                                                                                                         </a>
                                                                                                         <a href="grupoClase.php?IdGrupoClase=<?php echo $grupo->getIdGrupoClase(); ?>&IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
-                                                                                                            <button type="button" class="btn btn-warning" id="btn-form">
+                                                                                                            <button type="button" class="btn btn-warning btn-sm" id="btn-form">
                                                                                                                 Modificar Grupo
                                                                                                             </button>
                                                                                                         </a>
                                                                                                         <a href="borrarGrupoClase.php?IdGrupoClase=<?php echo $grupo->getIdGrupoClase(); ?>&IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
-                                                                                                            <button type="button" class="btn btn-danger" id="btn-form">
+                                                                                                            <button type="button" class="btn btn-danger btn-sm" id="btn-form">
                                                                                                                 Borrar Grupo
                                                                                                             </button>
                                                                                                         </a>
@@ -2067,12 +2069,12 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                                                                 <td>' . date_format(date_create($modGrupoClaseProfesor->getFechaFin()),"d-m-Y") . '</td>';
                                                                                                                                 if ($contextAsignatura->getData()->getEstado() === "B" && ($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['coordinacion'] == true || unserialize($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['permisos'])->getPermisoGrupoClase() == true)) {
                                                                                                                                     echo '<td> <a href="grupoClaseProfesor.php?IdGrado=' . $contextGrado->getData()->getCodigoGrado() . '&EmailProfesor=' . $modGrupoClaseProfesor->getEmailProfesor() . '&IdAsignatura=' . $contextAsignatura->getData()->getIdAsignatura() . '&IdGrupoClase=' . $grupo->getIdGrupoClase() . '">
-                                                                                                                                    <button type="button" class="btn btn-warning" id="btn-form">
+                                                                                                                                    <button type="button" class="btn btn-warning btn-sm" id="btn-form">
                                                                                                                                     Modificar Profesor
                                                                                                                                     </button>
                                                                                                                                     </a>
                                                                                                                                     <a href="borrarGrupoClaseProfesor.php?IdGrado=' . $contextGrado->getData()->getCodigoGrado() . '&EmailProfesor=' . $modGrupoClaseProfesor->getEmailProfesor() . '&IdAsignatura=' . $contextAsignatura->getData()->getIdAsignatura() . '&IdGrupoClase=' . $grupo->getIdGrupoClase() . '">
-                                                                                                                                    <button type="button" class="btn btn-danger" id="btn-form">
+                                                                                                                                    <button type="button" class="btn btn-danger btn-sm" id="btn-form">
                                                                                                                                     Borrar Profesor
                                                                                                                                     </button>
                                                                                                                                     </a></td>';
@@ -2095,12 +2097,12 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                                                         <td>' . $horario->getHoraInicio() . '-' . $horario->getHoraFin() . '</td>';
                                                                                                                         if ($contextAsignatura->getData()->getEstado() === "B" && ($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['coordinacion'] == true || unserialize($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['permisos'])->getPermisoGrupoClase() == true)) {
                                                                                                                             echo '<td> <a href="horarioClase.php?IdGrado=' . $contextGrado->getData()->getCodigoGrado() . '&IdHorarioClase=' . $horario->getIdHorarioClase() . '&IdAsignatura=' . $contextAsignatura->getData()->getIdAsignatura() . '">
-                                                                                                                            <button type="button" class="btn btn-warning" id="btn-form">
+                                                                                                                            <button type="button" class="btn btn-warning btn-sm" id="btn-form">
                                                                                                                             Modificar Horario
                                                                                                                             </button>
                                                                                                                             </a>
                                                                                                                             <a href="borrarHorarioClase.php?IdGrado=' . $contextGrado->getData()->getCodigoGrado() . '&IdHorarioClase=' . $horario->getIdHorarioClase() . '&IdAsignatura=' . $contextAsignatura->getData()->getIdAsignatura() . '">
-                                                                                                                            <button type="button" class="btn btn-danger" id="btn-form">
+                                                                                                                            <button type="button" class="btn btn-danger btn-sm" id="btn-form">
                                                                                                                             Borrar Horario
                                                                                                                             </button>
                                                                                                                             </a></td>';
