@@ -212,7 +212,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                           echo '<p>' . $asignatura->getNombreAsignatura() . '
                                           <a href="gestionAsignaturas.php?idGrado=' . $contextGrado->getData()->getCodigoGrado() . '&idAsignatura=' . $asignatura->getIdAsignatura() . '#nav-info-asignatura">
                                           <button type="button" class="btn btn-primary" id="btn-form">
-                                          Gestiónar
+                                          Gestionar
                                           </button>
                                           </a></p>';
                                         }
