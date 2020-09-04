@@ -18,7 +18,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
   <script src="' . RUTA_JS . 'jquery-3.4.1.min.js" type="text/javascript"></script>
   <script src="' . RUTA_JS . 'tinymce.min.js"></script>';
   ?>
-  <title>Gestion Docente: Configuración</title>
+  <title>Gestión Docente: Configuración</title>
 </head>
 
 <body>

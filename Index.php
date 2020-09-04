@@ -25,7 +25,7 @@ if(isset($_SESSION['login']) && $_SESSION['login'] == true && $_SESSION['admin']
     <link rel="shortcut icon" type="image/x-icon" href="' . RUTA_IMGS . 'LogoUniversidad.png" />
     <script src="' . RUTA_JS . 'codigo.js"></script>';
     ?>
-    <title>Gestion Docente: Inicio</title>
+    <title>Gestión Docente: Inicio</title>
 </head>
 
 <body>

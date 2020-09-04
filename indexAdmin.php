@@ -20,7 +20,7 @@ include('vendor/autoload.php');
     ?>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.19.0/themes/prism-okaidia.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.19.0/plugins/line-numbers/prism-line-numbers.min.css" />
-    <title>Gestion Docente: Subida Masiva</title>
+    <title>Gestión Docente: Subida Masiva</title>
 </head>
 
 <body>

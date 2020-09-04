@@ -16,7 +16,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
     <script type="text/javascript" src="' . RUTA_JS . 'codigo.js"></script>
     <script src="' . RUTA_JS . 'jquery-3.4.1.min.js" type="text/javascript"></script>';
   ?>
-  <title>Gestion Docente: Panel de control</title>
+  <title>Gestión Docente: Panel de control</title>
 </head>
 
 <body>

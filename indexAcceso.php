@@ -24,7 +24,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
     <script type="text/javascript" src="' . RUTA_JS . 'codigo.js"></script>
     <script src="' . RUTA_JS . 'jquery-3.4.1.min.js" type="text/javascript"></script>';
     ?>
-    <title>Gestion Docente: Panel de control</title>
+    <title>Gestión Docente: Panel de control</title>
 </head>
 
 <body>
@@ -454,22 +454,22 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                             ?>
                                             <?php
                                             if ($contextAsignatura->getData()->getEstado() == "B" && $contextAsignatura->getData()->getCoordinadorAsignatura() == $_SESSION['idUsuario']) {
-                                                echo '<a href="validar.php?IdGrado=' . $contextGrado->getData()->getCodigoGrado() . '&IAsignatura=' . $contextAsignatura->getData()->getIdAsignatura() . '">
+                                                echo '<a href="validar.php?IdGrado=' . $contextGrado->getData()->getCodigoGrado() . '&IdAsignatura=' . $contextAsignatura->getData()->getIdAsignatura() . '">
                                                 <button type="button" class="btn btn-primary btn-lg" id="btn-form">
                                                 Validar Asignatura
                                                 </button>
                                                 </a>';
                                             }
-                                            if ($contextAsignatura->getData()->getCoordinadorAsignatura() == $_SESSION['idUsuario']) {
+                                            if ($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['coordinacion']) {
                                                 if ($contextAsignatura->getData()->getEstado() == "V") {
-                                                    echo '<a href="consolidar.php?IdGrado' . $contextGrado->getData()->getCodigoGrado() . '&IAsignatura=' . $contextAsignatura->getData()->getIdAsignatura() . '">
+                                                    echo '<a href="consolidar.php?IdGrado=' . $contextGrado->getData()->getCodigoGrado() . '&IdAsignatura=' . $contextAsignatura->getData()->getIdAsignatura() . '">
                                                     <button type="button" class="btn btn-success btn-lg" id="btn-form">
                                                     Consolidar Asignatura
                                                     </button>
                                                     </a>';
                                                 }
                                                 if ($contextAsignatura->getData()->getEstado() != "B") {
-                                                    echo '<a href="borrador.php?IdGrado' . $contextGrado->getData()->getCodigoGrado() . '&IAsignatura=' . $contextAsignatura->getData()->getIdAsignatura() . '">
+                                                    echo '<a href="borrador.php?IdGrado=' . $contextGrado->getData()->getCodigoGrado() . '&IdAsignatura=' . $contextAsignatura->getData()->getIdAsignatura() . '">
                                                     <button type="button" class="btn btn-warning btn-lg" id="btn-form">
                                                     Permitir Edición
                                                     </button>
