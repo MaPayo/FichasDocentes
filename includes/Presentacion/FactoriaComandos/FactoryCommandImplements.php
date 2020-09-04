@@ -185,10 +185,10 @@ require_once('includes/Presentacion/FactoriaComandos/Teorico/CommandDeleteTeoric
 require_once('includes/Presentacion/FactoriaComandos/Teorico/CommandCreateTeorico.php');
 require_once('includes/Presentacion/FactoriaComandos/Teorico/CommandUpdateTeorico.php');
 
-require_once('includes/Presentacion/FactoriaComandos/Usuario/CommandFindUsuario.php');
-require_once('includes/Presentacion/FactoriaComandos/Usuario/CommandCreateUsuarios.php');
-require_once('includes/Presentacion/FactoriaComandos/Usuario/CommandDeleteUsuarios.php');
-require_once('includes/Presentacion/FactoriaComandos/Usuario/CommandUpdateUsuarios.php');
+require_once('includes/Presentacion/FactoriaComandos/Usuario/CommandFindUsuarios.php');
+require_once('includes/Presentacion/FactoriaComandos/Usuario/CommandCreateUsuario.php');
+require_once('includes/Presentacion/FactoriaComandos/Usuario/CommandDeleteUsuario.php');
+require_once('includes/Presentacion/FactoriaComandos/Usuario/CommandUpdateUsuario.php');
 
 
 require_once('includes/Presentacion/FactoriaComandos/Verifica/CommandFindVerifica.php');
