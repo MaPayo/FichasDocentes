@@ -157,10 +157,8 @@ require_once('includes/Presentacion/FactoriaComandos/Modulo/CommandUpdateModulo.
 require_once('includes/Presentacion/FactoriaComandos/Permisos/CommandFindPermisos.php');
 require_once('includes/Presentacion/FactoriaComandos/Permisos/CommandDeletePermisos.php');
 require_once('includes/Presentacion/FactoriaComandos/Permisos/CommandCreatePermisos.php');
-
 require_once('includes/Presentacion/FactoriaComandos/Permisos/CommandUpdatePermisos.php');
 require_once('includes/Presentacion/FactoriaComandos/Permisos/CommandFindPermisosPorProfesor.php');
-
 require_once('includes/Presentacion/FactoriaComandos/Permisos/CommandFindPermisosPorProfesorYAsignatura.php');
 
 require_once('includes/Presentacion/FactoriaComandos/Problema/CommandFindProblema.php');
@@ -169,6 +167,9 @@ require_once('includes/Presentacion/FactoriaComandos/Problema/CommandCreateProbl
 require_once('includes/Presentacion/FactoriaComandos/Problema/CommandUpdateProblema.php');
 
 require_once('includes/Presentacion/FactoriaComandos/Profesor/CommandFindProfesor.php');
+require_once('includes/Presentacion/FactoriaComandos/Profesor/CommandCreateProfesor.php');
+require_once('includes/Presentacion/FactoriaComandos/Profesor/CommandDeleteProfesor.php');
+require_once('includes/Presentacion/FactoriaComandos/Profesor/CommandUpdateProfesor.php');
 
 require_once('includes/Presentacion/FactoriaComandos/ProgramaAsignatura/CommandFindProgramaAsignatura.php');
 require_once('includes/Presentacion/FactoriaComandos/ProgramaAsignatura/CommandCreateProgramaAsignatura.php');
@@ -185,10 +186,15 @@ require_once('includes/Presentacion/FactoriaComandos/Teorico/CommandCreateTeoric
 require_once('includes/Presentacion/FactoriaComandos/Teorico/CommandUpdateTeorico.php');
 
 require_once('includes/Presentacion/FactoriaComandos/Usuario/CommandFindUsuario.php');
-require_once('includes/Presentacion/FactoriaComandos/Usuario/CommandFindUsuarios.php');
+require_once('includes/Presentacion/FactoriaComandos/Usuario/CommandCreateUsuarios.php');
+require_once('includes/Presentacion/FactoriaComandos/Usuario/CommandDeleteUsuarios.php');
+require_once('includes/Presentacion/FactoriaComandos/Usuario/CommandUpdateUsuarios.php');
+
 
 require_once('includes/Presentacion/FactoriaComandos/Verifica/CommandFindVerifica.php');
 require_once('includes/Presentacion/FactoriaComandos/Verifica/CommandUpdateVerifica.php');
+require_once('includes/Presentacion/FactoriaComandos/Verifica/CommandCreateVerifica.php');
+require_once('includes/Presentacion/FactoriaComandos/Verifica/CommandDeleteVerifica.php');
 
 require_once('includes/Presentacion/FactoriaComandos/Comparacion/CommandComparacion.php');
 require_once('includes/Presentacion/FactoriaComandos/Conversion/CommandConvertMarkdownToHTML.php');
