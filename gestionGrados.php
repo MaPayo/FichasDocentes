@@ -7,15 +7,15 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
 <html lang="es">
 
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <?php
-  echo '<link rel="stylesheet" href="' . RUTA_CSS . 'bootstrap.css">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <?php
+    echo '<link rel="stylesheet" href="' . RUTA_CSS . 'bootstrap.css">
     <link rel="stylesheet" href="' . RUTA_CSS . 'fichasdocentes.css">
     <link rel="shortcut icon" type="image/x-icon" href="' . RUTA_IMGS . 'LogoUniversidad.png">
     <script type="text/javascript" src="' . RUTA_JS . 'codigo.js"></script>
     <script src="' . RUTA_JS . 'jquery-3.4.1.min.js" type="text/javascript"></script>';
-  ?>
+    ?>
   <title>Gestion Docente: Panel de control</title>
 </head>
 
@@ -82,19 +82,19 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                   ?>
                 </div>
                 <div class="card-body">
-                  <nav id="nav-asignatura" class="nav nav-pills nav-fill">
+                  <nav id="nav-grado" class="nav nav-pills nav-fill">
 
                     <a class="nav-item nav-link active" id="nav-info-grado-tab" data-toggle="tab" href="#nav-info-grado" role="tab" aria-controls="nav-info-grado" aria-selected="true">Información Grado</a>
 
-                    <a class="nav-item nav-link active" id="nav-modulos-tab" data-toggle="tab" href="#nav-modulos" role="tab" aria-controls="nav-modulos" aria-selected="true">Modulos</a>
+                    <a class="nav-item nav-link active" id="nav-modulos-tab" data-toggle="tab" href="#nav-modulos" role="tab" aria-controls="nav-modulos" aria-selected="false">Modulos</a>
 
-                    <a class="nav-item nav-link active" id="nav-materias-tab" data-toggle="tab" href="#nav-materias" role="tab" aria-controls="nav-materias" aria-selected="true">Materias</a>
+                    <a class="nav-item nav-link active" id="nav-materias-tab" data-toggle="tab" href="#nav-materias" role="tab" aria-controls="nav-materias" aria-selected="false">Materias</a>
 
-                    <a class="nav-item nav-link active" id="nav-asignaturas-tab" data-toggle="tab" href="#nav-asignaturas" role="tab" aria-controls="nav-asignaturas" aria-selected="true">Asignaturas</a>
+                    <a class="nav-item nav-link active" id="nav-asignaturas-tab" data-toggle="tab" href="#nav-asignaturas" role="tab" aria-controls="nav-asignaturas" aria-selected="false">Asignaturas</a>
 
                   </nav>
-                  <div class="tab-content" id="nav-tabContent">
-                    <div class="tab-pane fade show active" id="nav-info-grado" role="tabpanel" aria-labelledby="nav-info-grado-tab">
+                  <div class="tab-content" id="pills-tabContent">
+                  <div class="tab-pane fade show active text-center" id="nav-info-grado" role="tabpanel" aria-labelledby="nav-info-grado-tab">
                       <div class="table-responsive text-center">
                         <table class="table table-sm table-bordered">
                           <tbody>
@@ -123,7 +123,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                           </a>
                         </div>
                       </div>
-                      <div class="tab-pane fade show active" id="nav-modulo" role="tabpanel" aria-labelledby="nav-modulo-tab">
+                      <div class="tab-pane fade show active" id="nav-modulos" role="tabpanel" aria-labelledby="nav-modulos-tab">
                         <?php echo '<div><h5>Modulos del grado' . $contextGrado->getData()->getNombreGrado() . '</h5>
                           <a href="modulo.php?idGrado=' .  $contextGrado->getData()->getCodigoGrado() . '">
                           <button type="button" class="btn btn-primary" id="btn-form">
@@ -152,7 +152,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                         ?>
 
                       </div>
-                      <div class="tab-pane fade show active" id="nav-materia" role="tabpanel" aria-labelledby="nav-materia-tab">
+                      <div class="tab-pane fade show active" id="nav-materias" role="tabpanel" aria-labelledby="nav-materias-tab">
                         <?php
                         if ($modulos->getEvent() === LIST_MODULO_OK)
                           foreach ($modulos->getData() as $modulo) {
@@ -188,7 +188,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
 
                         ?>
                       </div>
-                      <div class="tab-pane fade show active" id="nav-laboratorio" role="tabpanel" aria-labelledby="nav-laboratorio-tab">
+                      <div class="tab-pane fade show active" id="nav-asignaturas" role="tabpanel" aria-labelledby="nav-asignaturas-tab">
                         <?php if ($modulos->getEvent() === LIST_MODULO_OK)
                           foreach ($modulos->getData() as $modulo) {
                             if ($modulo->getActivo()) {

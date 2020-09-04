@@ -41,13 +41,25 @@ class FormAddUsuario extends Form
 
         if ($contextFU->getEvent() === FIND_USUARIO_FAIL) {
             $pass = explode("@", $EmailUsuario)[0];
-            $usuario = new Usuario($EmailUsuario, $pass);
+            $pass_hash = password_hash(trim($pass), PASSWORD_BCRYPT);
+            $usuario = new Usuario($EmailUsuario, $pass_hash);
 
             $context = new Context(CREATE_USUARIO, $usuario);
             $contextCU = $controller->action($context);
-            if($contextCU->getEvent()===CREATE_USUARIO_OK)
+            if($contextCU->getEvent()===CREATE_USUARIO_OK){
+            //Creamos un profesor asociado
+            $profesor = new Profesor($EmailUsuario,"","","","","");
+            $context = new Context(FIND_PROFESOR, $EmailUsuario);
+            $contextFP = $controller->action($context);
+            if($contextFP->getEvent()===FIND_PROFESOR_OK){
+                $context = new Context(UPDATE_PROFESOR, $profesor);
+                $contextP = $controller->action($context);
+            }else{
+                $context = new Context(CREATE_PROFESOR, $profesor);
+                $contextP = $controller->action($context);
+            }
             $erroresFormulario = "gestionUsuarios.php";
-            else
+        }else
             $erroresFormulario[] = "El usuario no ha podido ser añadido";
             
         } else{

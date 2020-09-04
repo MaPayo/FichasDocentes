@@ -186,6 +186,7 @@ require_once('includes/Presentacion/FactoriaComandos/Teorico/CommandCreateTeoric
 require_once('includes/Presentacion/FactoriaComandos/Teorico/CommandUpdateTeorico.php');
 
 require_once('includes/Presentacion/FactoriaComandos/Usuario/CommandFindUsuarios.php');
+require_once('includes/Presentacion/FactoriaComandos/Usuario/CommandFindUsuario.php');
 require_once('includes/Presentacion/FactoriaComandos/Usuario/CommandCreateUsuario.php');
 require_once('includes/Presentacion/FactoriaComandos/Usuario/CommandDeleteUsuario.php');
 require_once('includes/Presentacion/FactoriaComandos/Usuario/CommandUpdateUsuario.php');
@@ -359,9 +360,9 @@ class FactoryCommandImplements extends FactoryCommand
             case FIND_GRUPO_CLASE:
                 $command = new CommandFindGrupoClase();
                 break;
-            /*case FIND_GRUPO_CLASE_LETRA:
+            case FIND_GRUPO_CLASE_LETRA:
                 $command = new CommandFindGrupoClaseLetra();
-                break;*/
+                break;
             case LIST_GRUPO_CLASE:
                 $command = new CommandListGrupoClase();
                 break;
@@ -392,9 +393,9 @@ class FactoryCommandImplements extends FactoryCommand
             case FIND_GRUPO_LABORATORIO:
                 $command = new CommandFindGrupoLaboratorio();
                 break;
-            /*case FIND_GRUPO_LABORATORIO_LETRA:
+            case FIND_GRUPO_LABORATORIO_LETRA:
                 $command = new CommandFindGrupoLaboratorioLetra();
-                break;*/
+                break;
             case LIST_GRUPO_LABORATORIO:
                 $command = new CommandListGrupoLaboratorio();
                 break;
@@ -485,9 +486,9 @@ class FactoryCommandImplements extends FactoryCommand
             case FIND_HORARIO_CLASE:
                 $command = new CommandFindHorarioClase();
                 break;
-            /*case FIND_HORARIO_CLASE_GRUPO_DIA:
+            case FIND_HORARIO_CLASE_GRUPO_DIA:
                     $command = new CommandFindHorarioClaseGrupoyDia();
-                    break;*/
+                    break;
             case LIST_HORARIO_CLASE:
                 $command = new CommandListHorarioClase();
                 break;
@@ -518,9 +519,9 @@ class FactoryCommandImplements extends FactoryCommand
             case FIND_HORARIO_LABORATORIO:
                 $command = new CommandFindHorarioLaboratorio();
                 break;
-            /*case FIND_HORARIO_LABORATORIO_GRUPO_DIA:
+            case FIND_HORARIO_LABORATORIO_GRUPO_DIA:
                 $command = new CommandFindHorarioLaboratorioGrupoyDia();
-                break;*/
+                break;
             case LIST_HORARIO_LABORATORIO:
                 $command = new CommandListHorarioLaboratorio();
                 break;

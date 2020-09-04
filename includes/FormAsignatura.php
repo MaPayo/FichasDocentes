@@ -158,11 +158,14 @@ class FormAsignatura extends Form
                 $programaasignatura = new ProgramaAsignatura(null,"","","","","","","","","","",$datos['IdAsignatura']);
                 $context = new Context(CREATE_PROGRAMA_ASIGNATURA, $programaasignatura);
                 $contextP = $controller->action($context);
+                $verifica = new Verifica(null, 0,0,0,0,0,0,$datos['IdAsignatura']);
+                $context= new Context(CREATE_VERIFICA, $verifica);
+                $contextv = $controller->action($context);
 
                 if ($contextAsignatura->getEvent() === CREATE_ASIGNATURA_OK && $contextMA->getEvent()=== CREATE_MODASIGNATURA_OK  
                 && $contextC->getEvent()=== CREATE_CONFIGURACION_OK  && $contextM->getEvent()=== CREATE_METODOLOGIA_OK 
                 && $contextB->getEvent()=== CREATE_BIBLIOGRAFIA_OK && $contextCA->getEvent()=== CREATE_COMPETENCIAS_ASIGNATURA_OK 
-                && $contextE->getEvent()=== CREATE_EVALUACION_OK && $contextP->getEvent()=== CREATE_PROGRAMA_ASIGNATURA_OK ) {
+                && $contextE->getEvent()=== CREATE_EVALUACION_OK && $contextP->getEvent()=== CREATE_PROGRAMA_ASIGNATURA_OK && $contextv->getEvent()=== CREATE_VERIFICA_OK ) {
                     $erroresFormulario = "gestionAsignaturas.php?IdGrado=" . $datos['idGrado'] . "&IdAsignatura=" . $datos['IdAsignatura'] . "&anadIdo=y#nav-info-asignatura";
                 }else {
                     $erroresFormulario[] = "No se ha podIdo crear la Asignatura.";

@@ -614,6 +614,9 @@ class FormSubida extends Form
                                             $programaasignatura = new ProgramaAsignatura(null,"","","","","","","","","","",$codigo_asignatura);
                                             $context = new Context(CREATE_PROGRAMA_ASIGNATURA, $programaasignatura);
                                             $contextP = $controller->action($context);
+                                            $verifica = new Verifica(null, 0,0,0,0,0,0,$codigo_asignatura);
+                                            $context= new Context(CREATE_VERIFICA, $verifica);
+                                            $contextv = $controller->action($context);
                                             //Actualizamos teorico, laboratorio y problemas. Si de por si la asignatura ya creada los tenia los actualizamos
                                             $context = new Context(CREATE_TEORICO, $teorico);
                                             $contextTeorico = $controller->action($context);
