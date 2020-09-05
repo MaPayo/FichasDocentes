@@ -76,98 +76,193 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
             $contextBibliografia = $controller->action($context);
           }
 
+
           $context = new Context(LIST_MODGRUPO_LABORATORIO,$IdAsignatura);
           $contextLaboratorio = $controller->action($context); 
           if($contextLaboratorio->getEvent() === LIST_MODGRUPO_LABORATORIO_OK){
 
+           $context = new Context(LIST_GRUPO_LABORATORIO,$IdAsignatura);
+           $deletelab = $controller->action($context);
+           if ($deletelab->getEvent() === LIST_GRUPO_LABORATORIO_OK) {
 
-            $context = new Context(LIST_MODHORARIO_LABORATORIO, htmlspecialchars(trim(strip_tags($_GET['IdGrupoLaboratorio']))));
-           $contextHorariosLaboratorio = $controller->action($context);
-           if ($contextHorariosLaboratorio->getEvent() === LIST_MODHORARIO_LABORATORIO_OK) {
-            foreach($contextHorariosLaboratorio->getData() as $horarioLaboratorio){
-              $context = new Context(DELETE_MODHORARIO_LABORATORIO, $horarioLaboratorio->getIdHorarioLab());
-              $horarioLaboratorio = $controller->action($context);
+            foreach ($deletelab->getData() as $lab) {
+
+              $context = new Context(LIST_HORARIO_LABORATORIO,$lab->getIdGrupoLab());
+              $deletehor = $controller->action($context);
+              if ($deletehor->getEvent() === LIST_HORARIO_LABORATORIO_OK) {
+               foreach ($deletehor->getData() as $hor) {
+                $context = new Context(DELETE_HORARIO_LABORATORIO,$hor->getIdHorarioLab());
+                $delete = $controller->action($context);
+              }
+            }
+
+            $context = new Context(LIST_GRUPO_LABORATORIO_PROFESOR,$lab->getIdGrupoLab());
+            $deleteprof = $controller->action($context);
+            if ($deleteprof->getEvent() === LIST_GRUPO_LABORATORIO_PROFESOR_OK) {
+             foreach ($deleteprof->getData() as $prof) {
+              $context = new Context(DELETE_GRUPO_LABORATORIO_PROFESOR,$prof->getIdGrupoLab(),$prof->getEmailProfesor());
+              $delete = $controller->action($context);
             }
           }
 
-          $context = new es\ucm\Context(LIST_MODGRUPO_LABORATORIO_PROFESOR, htmlspecialchars(trim(strip_tags($_GET['IdGrupoLaboratorio']))));
-          $contextGrupoLaboratorioProfesor = $controller->action($context);
-          if ($contextGrupoLaboratorioProfesor->getEvent() === LIST_MODGRUPO_LABORATORIO_PROFESOR_OK) {
-            foreach($contextGrupoLaboratorioProfesor->getData() as $grupoLaboratorioProfesor){
-              $arrayGrupoLaboratorioProfesor = array();
-              $arrayGrupoLaboratorioProfesor['idGrupoLaboratorio'] = $grupoLaboratorioProfesor->getIdGrupoLab();
-              $arrayGrupoLaboratorioProfesor['emailProfesor'] = $grupoLaboratorioProfesor->getEmailProfesor();
-              $context = new es\ucm\Context(DELETE_MODGRUPO_LABORATORIO_PROFESOR, $arrayGrupoLaboratorioProfesor);
-              $grupoLaboratorioProfesor = $controller->action($context);
-            }
-          }
-
-
-
-          foreach ($contextLaboratorio->getData() as $modlab) {
-            $context = new Context(UPATE_GRUPO_LABORATORIO,$IdAsignatura);
-            $contextLaboratorio = $controller->action($context); 
-          }
-
+          $context = new Context(DELETE_GRUPO_LABORATORIO,$lab->getIdGrupoLab());
+          $delete = $controller->action($context);
         }
-
-
-        $context = new Context(LIST_MODGRUPO_CLASE,$IdAsignatura);
-        $contextClase = $controller->action($context); 
-        if($contextClase->getEvent() === LIST_MODGRUPO_CLASE_OK){
-
-        }
-
-
-        $context = new Context(FIND_MODEVALUACION,$IdAsignatura);
-        $contextEvaluacion = $controller->action($context); 
-        if($contextEvaluacion->getEvent() === FIND_MODEVALUACION_OK){
-          $context = new Context(UPDATE_EVALUACION,$contextEvaluacion->getData());
-          $contextEvaluacion = $controller->action($context);
-          $context = new Context(DELETE_MODEVALUACION,$IdAsignatura);
-          $contextEvaluacion = $controller->action($context);
-        }
-
-
-        $asignatura = new Asignatura(
-         $contextAsignatura->getData()->getIdAsignatura(),
-         $contextAsignatura->getData()->getNombreAsignatura(),
-         $contextAsignatura->getData()->getAbreviatura(),
-         $contextAsignatura->getData()->getCurso(),
-         $contextAsignatura->getData()->getSemestre(),
-         $contextAsignatura->getData()->getNombreAsignaturaIngles(),
-         $contextAsignatura->getData()->getCreditos(),
-         $contextAsignatura->getData()->getCoordinadorAsignatura(),
-         "C",
-         $contextAsignatura->getData()->getActivo(),
-         $contextAsignatura->getData()->getIdMateria()
-       );
-
-        $context = new Context(UPDATE_ASIGNATURA,$asignatura);
-        $res = $controller->action($context);
-
-        if($res->getEvent() === UPDATE_ASIGNATURA_OK) header('Location: indexAcceso.php?IdGrado='.$_GET['IdGrado'].'&IdAsignatura='.$_GET['IdAsignatura'].'&modificado=y');
-        else  header('Location: indexAcceso.php?IdGrado='.$_GET['IdGrado'].'&IdAsignatura='.$_GET['IdAsignatura'].'&modificado=n');
       }
-      else{
-       echo '
-       <div class="col-md-6 col-12">
-       <div class="alert alert-danger" role="alert">
-       <h2 class="card-title text-center">ACCESO DENEGADO</h2>
-       <h5 class="text-center">No tienes permisos suficientes para esta apartado</h5>
-       </div>
-       </div>';
-     }
-   } 
-   else{
-    echo '
-    <div class="col-md-6 col-12">
-    <div class="alert alert-danger" role="alert">
-    <h2 class="card-title text-center">ACCESO DENEGADO</h2>
-    <h5 class="text-center">No se ha podido obtener la información necesaria para realizar la operación</h5>
-    </div>
-    </div>';
+
+      foreach ($contextLaboratorio->getData() as $modlab) {
+        $context = new Context(CREATE_GRUPO_LABORATORIO,$modlab);
+        $update = $controller->action($context);
+
+        $context = new Context(LIST_MODHORARIO_LABORATORIO,$modlab->getIdGrupoLab());
+        $updatehor = $controller->action($context);
+        if ($updatehor->getEvent() === LIST_MODHORARIO_LABORATORIO_OK) {
+         foreach ($updatehor->getData() as $hor) {
+          $context = new Context(CREATE_HORARIO_LABORATORIO,$hor);
+          $update = $controller->action($context);
+          $context = new Context(DELETE_MODHORARIO_LABORATORIO,$hor->getIdHorarioLab());
+          $delete = $controller->action($context);
+        }
+      }
+
+      $context = new Context(LIST_MODGRUPO_LABORATORIO_PROFESOR,$modlab->getIdGrupoLab());
+      $updateprof = $controller->action($context);
+      if ($updateprof->getEvent() === LIST_MODGRUPO_LABORATORIO_PROFESOR_OK) {
+       foreach ($updateprof->getData() as $prof) {
+        $context = new Context(CREATE_GRUPO_LABORATORIO_PROFESOR,$prof);
+        $update = $controller->action($context);
+        $context = new Context(DELETE_MODGRUPO_LABORATORIO_PROFESOR,$prof->getIdGrupoLab(),$prof->getEmailProfesor());
+        $delete = $controller->action($context);
+      }
+    }
+
+    $context = new Context(DELETE_MODGRUPO_LABORATORIO,$modlab->getIdGrupoLab());
+    $delete = $controller->action($context);
   }
+}
+
+
+
+
+  $context = new Context(LIST_MODGRUPO_CLASE,$IdAsignatura);
+          $contextClase = $controller->action($context); 
+          if($contextClase->getEvent() === LIST_MODGRUPO_CLASE_OK){
+
+           $context = new Context(LIST_GRUPO_CLASE,$IdAsignatura);
+           $deleteclase = $controller->action($context);
+           if ($deleteclase->getEvent() === LIST_GRUPO_CLASE_OK) {
+
+            foreach ($deleteclase->getData() as $clase) {
+
+              $context = new Context(LIST_HORARIO_CLASE,$clase->getIdGrupoClase());
+              $deletehor = $controller->action($context);
+              if ($deletehor->getEvent() === LIST_HORARIO_CLASE_OK) {
+               foreach ($deletehor->getData() as $hor) {
+                $context = new Context(DELETE_HORARIO_CLASE,$hor->getIdHorarioClase());
+                $delete = $controller->action($context);
+              }
+            }
+
+            $context = new Context(LIST_GRUPO_CLASE_PROFESOR,$clase->getIdGrupoClase());
+            $deleteprof = $controller->action($context);
+            if ($deleteprof->getEvent() === LIST_GRUPO_CLASE_PROFESOR_OK) {
+             foreach ($deleteprof->getData() as $prof) {
+              $context = new Context(DELETE_GRUPO_CLASE_PROFESOR,$prof->getIdGrupoClase(),$prof->getEmailProfesor());
+              $delete = $controller->action($context);
+            }
+          }
+
+          $context = new Context(DELETE_GRUPO_CLASE,$clase->getIdGrupoClase());
+          $delete = $controller->action($context);
+        }
+      }
+
+      foreach ($contextClase->getData() as $modclase) {
+        $context = new Context(CREATE_GRUPO_CLASE,$modclase);
+        $update = $controller->action($context);
+
+        $context = new Context(LIST_MODHORARIO_CLASE,$modclase->getIdGrupoClase());
+        $updatehor = $controller->action($context);
+        if ($updatehor->getEvent() === LIST_MODHORARIO_CLASE_OK) {
+         foreach ($updatehor->getData() as $hor) {
+          $context = new Context(CREATE_HORARIO_CLASE,$hor);
+          $update = $controller->action($context);
+          $context = new Context(DELETE_MODHORARIO_CLASE,$hor->getIdHorarioClase());
+          $delete = $controller->action($context);
+        }
+      }
+
+      $context = new Context(LIST_MODGRUPO_CLASE_PROFESOR,$modclase->getIdGrupoClase());
+      $updateprof = $controller->action($context);
+      if ($updateprof->getEvent() === LIST_MODGRUPO_CLASE_PROFESOR_OK) {
+       foreach ($updateprof->getData() as $prof) {
+        $context = new Context(CREATE_GRUPO_CLASE_PROFESOR,$prof);
+        $update = $controller->action($context);
+        $context = new Context(DELETE_MODGRUPO_CLASE_PROFESOR,$prof->getIdGrupoClase(),$prof->getEmailProfesor());
+        $delete = $controller->action($context);
+      }
+    }
+
+    $context = new Context(DELETE_MODGRUPO_CLASE,$modclase->getIdGrupoClase());
+    $delete = $controller->action($context);
+  }
+}
+
+
+
+$context = new Context(FIND_MODEVALUACION,$IdAsignatura);
+$contextEvaluacion = $controller->action($context); 
+if($contextEvaluacion->getEvent() === FIND_MODEVALUACION_OK){
+  $context = new Context(UPDATE_EVALUACION,$contextEvaluacion->getData());
+  $contextEvaluacion = $controller->action($context);
+  $context = new Context(DELETE_MODEVALUACION,$IdAsignatura);
+  $contextEvaluacion = $controller->action($context);
+}
+
+
+$asignatura = new Asignatura(
+ $contextAsignatura->getData()->getIdAsignatura(),
+ $contextAsignatura->getData()->getNombreAsignatura(),
+ $contextAsignatura->getData()->getAbreviatura(),
+ $contextAsignatura->getData()->getCurso(),
+ $contextAsignatura->getData()->getSemestre(),
+ $contextAsignatura->getData()->getNombreAsignaturaIngles(),
+ $contextAsignatura->getData()->getCreditos(),
+ $contextAsignatura->getData()->getCoordinadorAsignatura(),
+ "C",
+ $contextAsignatura->getData()->getActivo(),
+ $contextAsignatura->getData()->getIdMateria()
+);
+
+$context = new Context(UPDATE_ASIGNATURA,$asignatura);
+$res = $controller->action($context);
+
+if($res->getEvent() === UPDATE_ASIGNATURA_OK){
+  header('Location: indexAcceso.php?IdGrado='.$_GET['IdGrado'].'&IdAsignatura='.$_GET['IdAsignatura'].'&modificado=y');
+} 
+else{
+  header('Location: indexAcceso.php?IdGrado='.$_GET['IdGrado'].'&IdAsignatura='.$_GET['IdAsignatura'].'&modificado=n');
+}  
+}
+else{
+ echo '
+ <div class="col-md-6 col-12">
+ <div class="alert alert-danger" role="alert">
+ <h2 class="card-title text-center">ACCESO DENEGADO</h2>
+ <h5 class="text-center">No tienes permisos suficientes para esta apartado</h5>
+ </div>
+ </div>';
+}
+} 
+else{
+  echo '
+  <div class="col-md-6 col-12">
+  <div class="alert alert-danger" role="alert">
+  <h2 class="card-title text-center">ACCESO DENEGADO</h2>
+  <h5 class="text-center">No se ha podido obtener la información necesaria para realizar la operación</h5>
+  </div>
+  </div>';
+}
 }
 else {
   echo '
