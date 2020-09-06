@@ -48,18 +48,21 @@ class FormGeneracion extends Form
         $siguiente = $datos['siguiente'];
         $curso = "20$actual/$siguiente";
         //$folder = /tmp/storage/output
-        $folder = 'C:\wamp\www\temp/output'; //Ruta donde se almacenan los datos
+        $folder = 'C:\wamp\www\temp/output/'.$datos['email']; //Ruta donde se almacenan los datos
+        if(!is_dir($folder)){
+            mkdir($folder);
+        }
         foreach ($_POST['asignaturas'] as $idAsignatura) {
             //Para cada una de las asignaturas marcadas recogemos su id y creamos el nombre de archivo
             $context = new Context(FIND_ASIGNATURA, $idAsignatura);
             $asignatura = $controller->action($context);
-            $filehtml = "20$actual-20$siguiente-español-$idAsignatura.html";
-            $filepdf = "20$actual-20$siguiente-español-$idAsignatura.pdf";
+            $filehtml = "20$actual-20$siguiente-spanish-$idAsignatura.html";
+            $filepdf = "20$actual-20$siguiente-spanish-$idAsignatura.pdf";
             $rutehtml = "$folder/$filehtml";
             $rutepdf = "$folder/$filepdf";
             if(is_file($rutehtml)){
                 unlink($rutehtml);
-               // unlink($rutepdf);
+               unlink($rutepdf);
             }
             $datoshtml = array(0 => $idAsignatura, 1 => $rutehtml);
             $datospdf = array(0 => $idAsignatura, 1 => $rutepdf, 2=>$rutehtml);
@@ -72,13 +75,13 @@ class FormGeneracion extends Form
             } else {
                 $erroresFormulario[] = "No se ha podido generar los documentos";
             }
-            /*if(count($erroresFormulario===0)){
-            if ($asignatura->getData()->getNombreAsignaturaI() !== "" || $asignatura->getData()->getNombreAsignaturaI() !== null) {
+            if(count($erroresFormulario)===0){
+            if ($asignatura->getData()->getNombreAsignaturaIngles() !== "" || $asignatura->getData()->getNombreAsignaturaIngles() !== null) {
                 $filehtmlI = "20$actual-20$siguiente-english-$idAsignatura.html";
                 $filepdfI = "20$actual-20$siguiente-english-$idAsignatura.pdf";
             }
 
-        }*/
+        }
             
         }
         return $erroresFormulario;
