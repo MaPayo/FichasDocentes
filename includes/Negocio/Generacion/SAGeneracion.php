@@ -7,7 +7,9 @@ interface SAGeneracion
 
     public static function generacionHTMLSpanish($datos);
     
-    public static function generacionPDFSpanish($datos);
+    public static function generacionHTMLEnglish($datos);
+
+    public static function generacionPDF($datos);
 
     
 }

@@ -6,18 +6,18 @@ require_once('includes/Presentacion/FactoriaComandos/Event.php');
 require_once('includes/Presentacion/FactoriaComandos/Command.php');
 require_once('includes/Negocio/FactoriaNegocio/FactorySAImplements.php');
 
-class CommandGeneracionPDFSpanish implements Command
+class CommandGeneracionHTMLEnglish implements Command
 {
     public function execute($data)
     {
         $factorySA = new FactorySAImplements();
         $saGeneracion = $factorySA->createSAGeneracion();
-        $generacion = $saGeneracion->generacionPDFSpanish($data);
+        $generacion = $saGeneracion->generacionHTMLEnglish($data);
         $responseContext = null;
         if ($generacion) {
-            $responseContext = new Context(GENERACION_PDF_SPANISH_OK, $generacion);
+            $responseContext = new Context(GENERACION_HTML_ENGLISH_OK, $generacion);
         } else {
-            $responseContext = new Context(GENERACION_PDF_SPANISH_FAIL, null);
+            $responseContext = new Context(GENERACION_HTML_ENGLISH_FAIL, null);
         }
         return $responseContext;
     }

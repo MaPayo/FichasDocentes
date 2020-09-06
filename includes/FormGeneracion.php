@@ -30,12 +30,6 @@ class FormGeneracion extends Form
             }
         }
         $html .= '<div class="text-right position-fixed w-50 p-2" >
-		<a href="generarTodas.php">
-		<button type="button" class="btn btn-secondary" id="btn-form">
-		Generar todas
-		</button>
-        </a>
-
         <button type="submit" class="btn btn-secondary" id="btn-form" name="GenerarSelecionadas">Generar seleccionadas</button>
         </div>';
         return $html;
@@ -48,8 +42,8 @@ class FormGeneracion extends Form
         $siguiente = $datos['siguiente'];
         $curso = "20$actual/$siguiente";
         //$folder = /tmp/storage/output
-        $folder = 'C:\wamp\www\temp/output/'.$datos['email']; //Ruta donde se almacenan los datos
-        if(!is_dir($folder)){
+        $folder = 'C:\wamp\www\temp/output/' . $datos['email']; //Ruta donde se almacenan los datos CAMBIAR
+        if (!is_dir($folder)) {
             mkdir($folder);
         }
         foreach ($_POST['asignaturas'] as $idAsignatura) {
@@ -58,31 +52,45 @@ class FormGeneracion extends Form
             $asignatura = $controller->action($context);
             $filehtml = "20$actual-20$siguiente-spanish-$idAsignatura.html";
             $filepdf = "20$actual-20$siguiente-spanish-$idAsignatura.pdf";
+            $filehtmlI = "20$actual-20$siguiente-english-$idAsignatura.html";
+            $filepdfI = "20$actual-20$siguiente-english-$idAsignatura.pdf";
             $rutehtml = "$folder/$filehtml";
             $rutepdf = "$folder/$filepdf";
-            if(is_file($rutehtml)){
+            $rutehtmlI = "$folder/$filehtmlI";
+            $rutepdfI = "$folder/$filepdfI";
+            if (is_file($rutehtml)) {
                 unlink($rutehtml);
-               unlink($rutepdf);
+                unlink($rutepdf);
             }
             $datoshtml = array(0 => $idAsignatura, 1 => $rutehtml);
-            $datospdf = array(0 => $idAsignatura, 1 => $rutepdf, 2=>$rutehtml);
+            $datospdf = array(0 => $idAsignatura, 1 => $rutepdf, 2 => $rutehtml);
             //Generamos los documentos en español
             $context = new Context(GENERACION_HTML_SPANISH, $datoshtml);
             $contexthtml = $controller->action($context);
             if ($contexthtml->getEvent() === GENERACION_HTML_SPANISH_OK) {
-                $context = new Context(GENERACION_PDF_SPANISH, $datospdf);
+                $context = new Context(GENERACION_PDF, $datospdf);
                 $contextpdf = $controller->action($context);
             } else {
                 $erroresFormulario[] = "No se ha podido generar los documentos";
             }
-            if(count($erroresFormulario)===0){
-            if ($asignatura->getData()->getNombreAsignaturaIngles() !== "" || $asignatura->getData()->getNombreAsignaturaIngles() !== null) {
-                $filehtmlI = "20$actual-20$siguiente-english-$idAsignatura.html";
-                $filepdfI = "20$actual-20$siguiente-english-$idAsignatura.pdf";
-            }
+            if (count($erroresFormulario) === 0) {
+                if ($asignatura->getData()->getNombreAsignaturaIngles() !== "" || $asignatura->getData()->getNombreAsignaturaIngles() !== null) {
+                    $datoshtml = array(0 => $idAsignatura, 1 => $rutehtmlI, 2 => $curso);
+                    $datospdf = array(0 => $idAsignatura, 1 => $rutepdfI, 2 => $rutehtmlI);
 
+                    $context = new Context(GENERACION_HTML_ENGLISH, $datoshtml);
+                    $contexthtml = $controller->action($context);
+                    if ($contexthtml->getEvent() === GENERACION_HTML_ENGLISH_OK) {
+                        $context = new Context(GENERACION_PDF, $datospdf);
+                        $contextpdf = $controller->action($context);
+                    } else {
+                        $erroresFormulario[] = "No se ha podido generar los documentos";
+                    }
+                }
+            }
         }
-            
+        if(count($erroresFormulario)===0){
+            $erroresFormulario="descargadocumentos.php";
         }
         return $erroresFormulario;
     }

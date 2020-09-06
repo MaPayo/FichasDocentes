@@ -125,7 +125,8 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');?>
 </div>
 <!-- Third Form End -->
 
-<?php if($rowsGrupoClaseProfesor !== null){?>
+<?php if($rowsGrupoClaseProfesor !== null)
+if(!isset($rowsGrupoClaseProfesorMod)){?>
  <!-- Four Form Box  Start -->
     <div class="fourFormBox">
         
@@ -190,14 +191,9 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');?>
     </table>
 
 </div>
-<?php }?>
-
-<!-- Five Form Box End -->
-
-<!-- Last Form Box  Start -->
-<?php if($rowsGrupoLaboratorioProfesor !== null){?>
+<?php }else{?>
  <!-- Four Form Box  Start -->
-    <div class="fiveFormBox">
+    <div class="fourFormBox">
         
         <table class="table">
           <tr><td colspan="4" class="bg-secondary text-center">Profesores de la asignatura</td></tr>
@@ -210,7 +206,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');?>
   <?php
   foreach($rowsGrupoClaseProfesor as $grupo){
     $controller = new es\ucm\ControllerImplements();
-    $context = new es\ucm\Context(FIND_GRUPO_CLASE_PROFESOR, $grupo->getIdGrupoClase());
+    $context = new es\ucm\Context(FIND_MODGRUPO_CLASE_PROFESOR, $grupo->getIdGrupoClase());
     $profesores = $controller->action($context);
     echo'<tr>
     <td>'.$grupo->getLetra().'</td>';
@@ -246,7 +242,144 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');?>
 
       <?php foreach($rowsGrupoClaseProfesor as $grupo){
     $controller = new es\ucm\ControllerImplements();
-    $context = new es\ucm\Context(FIND_HORARIO_CLASE, $grupo->getIdGrupoClase());
+    $context = new es\ucm\Context(FIND_MODHORARIO_CLASE, $grupo->getIdGrupoClase());
+    echo "<tr><td>".$grupo->getLetra()."</td>";
+    $grupos = $controller->action($context);
+      foreach($grupos as $g) ?>  
+        
+        	<td><?php echo $g->getDia() ?></td>
+        	<td><?php echo $g->getHoraInicio(). " - " . $g->getHoraFinal(); ?></td>
+        	<td><?php echo $g->getAula(); ?></td>
+
+      <?php }?>
+      </tr>
+    </table>
+
+</div>
+<?php }?>
+
+
+<!-- Five Form Box End -->
+
+<!-- Last Form Box  Start -->
+<?php if($rowsGrupoLaboratorioProfesor !== null)
+if(!isset($rowsGrupoLaboratorioProfesor)){?>
+ <!-- Four Form Box  Start -->
+    <div class="fiveFormBox">
+        
+        <table class="table">
+          <tr><td colspan="4" class="bg-secondary text-center">Profesores de la asignatura</td></tr>
+          <tr>
+              <td class="bg-info"> <span class="p-1"> Grupo </span> </td>
+              <td class="bg-info"> <span class="p-1"> Profesor </span> </td>
+              <td class="bg-info"> <span class="p-1"> Dpto </span> </td>
+              <td class="bg-info"> <span class="p-1"> email </span> </td>
+          </tr>
+  <?php
+  foreach($rowsGrupoLaboratorioProfesor as $grupo){
+    $controller = new es\ucm\ControllerImplements();
+    $context = new es\ucm\Context(FIND_GRUPO_LABORATORIO_PROFESOR, $grupo->getIdGrupoLaboratorio());
+    $profesores = $controller->action($context);
+    echo'<tr>
+    <td>'.$grupo->getLetra().'</td>';
+    foreach($profesores->getData() as $profesor){
+           echo '<td>'.$profesor->getNombre().'</td>
+                <td>'.$profesor->getDepartamento().'</td>
+              <td>'.$profesor->getEmail().'</td>
+            </tr>';
+  }
+}
+      ?>
+        </table>
+</div>
+  <!-- Four Form Box End -->
+
+
+<!-- Five No Form Box  Start -->
+
+<div >
+	
+	<table class="table">
+      <tr><td colspan="5" class="bg-secondary text-center">Horarios de clases</td></tr>
+      <tr>
+      	<td rowspan="2" class="bg-info"> <span class="p-1"> Grupo </span> </td>
+      	<td colspan="3" class="bg-info"> <span class="p-1"> Horarios clases </span> </td>
+      </tr>
+
+      <tr>
+      	<td class="bg-info"> <span class="p-1"> Día </span> </td>
+      	<td class="bg-info"> <span class="p-1"> Horas </span> </td>
+      	<td class="bg-info"> <span class="p-1"> Aula </span> </td>
+      </tr>
+
+      <?php foreach($rowsGrupoLaboratorioProfesor as $grupo){
+    $controller = new es\ucm\ControllerImplements();
+    $context = new es\ucm\Context(FIND_HORARIO_LABORATORIO, $grupo->getIdGrupoLaboratorio());
+    echo "<tr><td>".$grupo->getLetra()."</td>";
+    $grupos = $controller->action($context);
+      foreach($grupos as $g) ?>  
+        
+        	<td><?php echo $g->getDia() ?></td>
+        	<td><?php echo $g->getHoraInicio(). " - " . $g->getHoraFinal(); ?></td>
+        	<td><?php echo $g->getAula(); ?></td>
+
+      <?php }?>
+      </tr>
+    </table>
+
+</div>
+<?php }else{?>
+  <!-- Four Form Box  Start -->
+  <div class="fiveFormBox">
+        
+        <table class="table">
+          <tr><td colspan="4" class="bg-secondary text-center">Profesores de la asignatura</td></tr>
+          <tr>
+              <td class="bg-info"> <span class="p-1"> Grupo </span> </td>
+              <td class="bg-info"> <span class="p-1"> Profesor </span> </td>
+              <td class="bg-info"> <span class="p-1"> Dpto </span> </td>
+              <td class="bg-info"> <span class="p-1"> email </span> </td>
+          </tr>
+  <?php
+  foreach($rowsGrupoLaboratorioProfesor as $grupo){
+    $controller = new es\ucm\ControllerImplements();
+    $context = new es\ucm\Context(FIND_MODGRUPO_LABORATORIO_PROFESOR, $grupo->getIdGrupoLaboratorio());
+    $profesores = $controller->action($context);
+    echo'<tr>
+    <td>'.$grupo->getLetra().'</td>';
+    foreach($profesores->getData() as $profesor){
+           echo '<td>'.$profesor->getNombre().'</td>
+                <td>'.$profesor->getDepartamento().'</td>
+              <td>'.$profesor->getEmail().'</td>
+            </tr>';
+  }
+}
+      ?>
+        </table>
+</div>
+  <!-- Four Form Box End -->
+
+
+<!-- Five No Form Box  Start -->
+
+<div >
+	
+	<table class="table">
+      <tr><td colspan="5" class="bg-secondary text-center">Horarios de clases</td></tr>
+      <tr>
+      	<td rowspan="2" class="bg-info"> <span class="p-1"> Grupo </span> </td>
+      	<td colspan="3" class="bg-info"> <span class="p-1"> Horarios clases </span> </td>
+      </tr>
+
+      <tr>
+      	<td class="bg-info"> <span class="p-1"> Día </span> </td>
+      	<td class="bg-info"> <span class="p-1"> Horas </span> </td>
+      	<td class="bg-info"> <span class="p-1"> Aula </span> </td>
+      </tr>
+
+      <?php foreach($rowsGrupoLaboratorioProfesor as $grupo){
+    $controller = new es\ucm\ControllerImplements();
+    $context = new es\ucm\Context(FIND_MODHORARIO_LABORATORIO, $grupo->getIdGrupoLaboratorio());
     echo "<tr><td>".$grupo->getLetra()."</td>";
     $grupos = $controller->action($context);
       foreach($grupos as $g) ?>  
@@ -277,7 +410,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');?>
 <?php endif; ?>
     
 
-    <?php if($BreveDescripcionHTML): ?>
+    
     <div class="contenedor">
       <div class="cabeceras">
           Breve descripción de contenidos
@@ -286,9 +419,9 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');?>
         <?php echo $BreveDescripcionHTML;  ?>
       </div>
     </div>
-    <?php endif; ?>
+ 
 
-    <?php if($ConocimientosPreviosHTML): ?>
+    
     <div class="contenedor">
       <div class="cabeceras">
           Conocimientos previos necesarios
@@ -297,38 +430,36 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');?>
         <?php echo $ConocimientosPreviosHTML;  ?>
       </div>
     </div>
-    <?php endif; ?>
+  
 
-    <?php if($ProgramaDetalladoHTML): ?>
+    
     <div class="contenedor">
       <div class="cabeceras">
         Programa Teorico
       </div>
       <div class="contenido">
-        <?php echo $ProgramaDetalladoHTML;  ?>
+        <?php echo $ProgramaTeoricoHTML;  ?>
       </div>
     </div>
-    <?php endif; ?>
-    <?php if($ProgramaDetalladoHTMLS): ?>
+    
     <div class="contenedor">
       <div class="cabeceras">
         Programa de Seminario
       </div>
       <div class="contenido">
-        <?php echo $ProgramaDetalladoHTMLS;  ?>
+        <?php echo $ProgramaSeminarioHTML;  ?>
       </div>
     </div>
-    <?php endif; ?>
-    <?php if($ProgramaDetalladoHTMLL): ?>
+    
     <div class="contenedor">
       <div class="cabeceras">
         Programa de Laboratorio
       </div>
       <div class="contenido">
-        <?php echo $ProgramaDetalladoHTMLL;  ?>
+        <?php echo $ProgramaLaboratorioHTML;  ?>
       </div>
     </div>
-    <?php endif; ?>
+    
 
 
     <div class="contenedor" style="page-break-after: avoid;">

@@ -199,7 +199,8 @@ require_once('includes/Presentacion/FactoriaComandos/Verifica/CommandDeleteVerif
 
 require_once('includes/Presentacion/FactoriaComandos/Comparacion/CommandComparacion.php');
 require_once('includes/Presentacion/FactoriaComandos/Generacion/CommandGeneracionHTMLSpanish.php');
-require_once('includes/Presentacion/FactoriaComandos/Generacion/CommandGeneracionPDFSpanish.php');
+require_once('includes/Presentacion/FactoriaComandos/Generacion/CommandGeneracionHTMLEnglish.php');
+require_once('includes/Presentacion/FactoriaComandos/Generacion/CommandGeneracionPDF.php');
 class FactoryCommandImplements extends FactoryCommand
 {
 
@@ -714,16 +715,14 @@ class FactoryCommandImplements extends FactoryCommand
                 case FIND_USUARIOS:
                     $command = new CommandFindUsuarios();
                     break;
-                /*case CONVERSION_HTML:
-                $command = new CommandConvertMarkdownToHTML();
-                break;*/
-
                 case GENERACION_HTML_SPANISH:
                     $command = new CommandGeneracionHTMLSpanish();
                 break;
-                
-                case GENERACION_PDF_SPANISH:
-                    $command = new CommandGeneracionPDFSpanish();
+                case GENERACION_HTML_ENGLISH:
+                    $command = new CommandGeneracionHTMLEnglish();
+                break;
+                case GENERACION_PDF:
+                    $command = new CommandGeneracionPDF();
                 break;
             case FIND_USUARIO:
                 $command = new CommandFindUsuario();

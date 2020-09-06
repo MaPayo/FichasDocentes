@@ -1,12 +1,16 @@
+<?php
+require_once('includes/Presentacion/Controlador/Context.php');
+require_once('includes/Presentacion/Controlador/ControllerImplements.php');?>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Guía Docente</title>
-
-    <link rel="stylesheet" type="text/css" href="css/guiaDocenteTemplate.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet"> 
+    <style>
+      <?php require_once(RUTA_CSS.'guiaDocenteTemplate.css');?>
+    </style>
 </head>
 <body>
 
@@ -19,7 +23,7 @@
 		<thead>
 			<tr class="min-h-100 text-left">
 				<th class="w-25"><img src="images/escudo.png" alt="escudo ucm" height="100" width="85"/></th>
-				<th class="w-50" ><?php echo $NombreGradoHTML;  ?></th>
+				<th class="w-50" ><?php echo $NombreGrado;  ?></th>
 				<th class="w-25"><span class="p-1">Curso <?php echo $cursoAcademico;  ?> </span></th>
 			</tr>
 		</thead>
@@ -32,7 +36,7 @@
                     <thead>
                         <tr>
                             <td class="bg-info"><span class="p-1" >subject:</span></td>
-                            <td colspan="4"><?php echo $NombreAsignaturaHTML;  ?></td>
+                            <td colspan="4"><?php echo $NombreAsignatura;  ?></td>
                             <td class="bg-info"><span class="p-1">Code: </span> </td>
                             <td colspan="2"><?php echo $idAsignatura;  ?></td>
                         </tr>
@@ -40,45 +44,45 @@
                     <tbody>
                         <tr>
                             <td class="bg-info"><span class="p-1">Area: </span></td>
-                            <td colspan="3"><?php echo $NombreMateriaHTML;  ?></td>
+                            <td colspan="3"><?php echo $NombreMateria;  ?></td>
                             <td class="bg-info"><span class="p-1"> Module: </span> </td>
-                            <td colspan="3"><?php echo $NombreModuloHTML;  ?></td>
+                            <td colspan="3"><?php echo $NombreModulo;  ?></td>
                         </tr>
 
                         <tr>
                             <td class="bg-info"><span class="p-1">Character:    </span></td>
-                            <td colspan="3"><?php echo $CaracterHTML;  ?></td>
+                            <td colspan="3"><?php echo $Caracter;  ?></td>
                             <td class="bg-info"> <span class="p-1"> Course: </span></td>
-                            <td><?php echo $CursoHTML;  ?></td>
+                            <td><?php echo $Curso;  ?></td>
                             <td class="bg-info"> <span class="p-1">  Semester: </span> </td>
-                            <td><?php echo $SemestreHTML;  ?></td>
+                            <td><?php echo $Semestre;  ?></td>
                         </tr>
 
 
                         <tr>
                         	<td class="bg-info"><span class="p-1"> Credits (ECTS)   </span></td>
-                        	<td><?php echo $CreditosHTML;  ?></td>
+                        	<td><?php echo $Creditos;  ?></td>
                         	<td rowspan="3" class="align-middle bg-info">
                         		<span class="p-1"> Theoretical </span> </td>
-                        	<td><?php echo $CreditosTeoricoHTML;  ?></td>
+                        	<td><?php echo $CreditosTeorico;  ?></td>
                         	<td rowspan="3" class="align-middle bg-info">
                         		<span class="p-1"> Problems </span> </td>
-                        	<td><?php echo $CreditosProblemaHTML;  ?></td>
+                        	<td><?php echo $CreditosProblema;  ?></td>
                         	<td rowspan="3" class="align-middle bg-info">
                         		<span class="p-1"> Laboratory  </span> </td>
 
-                        	<td><?php echo $CreditosLaboratorioHTML;  ?></td>
+                        	<td><?php echo $CreditosLaboratorio;  ?></td>
                         </tr>
 
                         <tr>
                         	<td class="bg-info"><span class="p-1"> Classroom Credits   </span></td>
                         	<td> <!-- 2 Blank --> </td>
 							<!-- 3 Remove -->
-                        	<td><?php echo $PresencialHTML;  ?></td>
+                        	<td><?php echo $PresencialTeorico;  ?></td>
                         	<!-- 5 No Field Remove -->
-                        	<td><?php echo $PresencialProblemaHTML;  ?></td>
+                        	<td><?php echo $PresencialProblema;  ?></td>
                         	<!-- 7 No Field Remove -->
-                        	<td><?php echo $PresencialLaboratorioHTML;  ?></td>
+                        	<td><?php echo $PresencialLaboratorio;  ?></td>
                         </tr>
                         <tr>
                         	<td class="bg-info"><span class="p-1"> Total Hours   </span></td>
@@ -104,28 +108,28 @@
       	<td rowspan="2" class="w-25 bg-info"> 
       		<span class="p-1"> Coordinating <br/> Teacher: </span> 
         </td>
-      	<td colspan="2" class="w-50"><?php echo $CoordinadorHTML;  ?></td>
+      	<td colspan="2" class="w-50"><?php echo $Coordinador;  ?></td>
       	<td class="bg-info"> <span class="p-1">  Dpto:  </span> </td>
-      	<td><?php echo $DepartamentoHTML;  ?></td>
+      	<td><?php echo $Departamento;  ?></td>
       </tr>
 
       <tr>
       	<td class="bg-info"> <span class="p-1"> Office: </span> </td>
-      	<td><?php echo $DespachoHTML;  ?></td>
+      	<td><?php echo $Despacho;  ?></td>
       	<td class="bg-info"> <span class="p-1"> Email: </span> </td>
-      	<td><?php echo $EmailHTML;  ?></td>
+      	<td><?php echo $Email;  ?></td>
       </tr>
 
     </table>
 
 </div>
 <!-- Third Form End -->
-
-<?php if($rowsgrupoClaseProfesor): ?>
-  <!-- Four Form Box  Start -->
-  <div class="fourFormBox">
-  	
-  	<table class="table">
+<?php if($rowsGrupoClaseProfesor !== null)
+if(!isset($rowsGrupoClaseProfesorMod)){?>
+ <!-- Four Form Box  Start -->
+    <div class="fourFormBox">
+        
+        <table class="table">
         <tr><td colspan="4" class="bg-secondary text-center">Teachers of the Subject</td></tr>
         <tr>
         	<td class="bg-info"> <span class="p-1"> Group </span> </td>
@@ -133,32 +137,35 @@
         	<td class="bg-info"> <span class="p-1"> Department </span> </td>
         	<td class="bg-info"> <span class="p-1"> Email </span> </td>
         </tr>
-
-        <?php foreach($rowsgrupoClaseProfesor as $row): ?>
-          <tr>
-          	<td><?php echo $row['Letra']; ?></td>
-          	<td><?php echo $row['Nombre']; ?></td>
-          	<td><?php echo $row['Departamento']; ?></td>
-            <td><?php echo $row['Email']; ?></td>
-          </tr>
-        <?php endforeach; ?>
-        
-      </table>
-
-  </div>
+  <?php
+  foreach($rowsGrupoClaseProfesor as $grupo){
+    $controller = new es\ucm\ControllerImplements();
+    $context = new es\ucm\Context(FIND_GRUPO_CLASE_PROFESOR, $grupo->getIdGrupoClase());
+    $profesores = $controller->action($context);
+    echo'<tr>
+    <td>'.$grupo->getLetra().'</td>';
+    foreach($profesores->getData() as $profesor){
+           echo '<td>'.$profesor->getNombre().'</td>
+                <td>'.$profesor->getDepartamento().'</td>
+              <td>'.$profesor->getEmail().'</td>
+            </tr>';
+  }
+}
+      ?>
+        </table>
+</div>
   <!-- Four Form Box End -->
-<?php endif; ?>
+
 
 <!-- Five No Form Box  Start -->
-<?php if($rowsgrupoClaseProfesor): ?>
+
 <div >
 	
 	<table class="table">
-      <tr><td colspan="5" class="bg-secondary text-center">Class Schedule</td></tr>
+  <tr><td colspan="5" class="bg-secondary text-center">Class Schedule</td></tr>
       <tr>
       	<td rowspan="2" class="bg-info"> <span class="p-1"> Group </span> </td>
       	<td colspan="3" class="bg-info"> <span class="p-1"> Class schedule </span> </td>
-      	<td rowspan="2" class="w-50 bg-info"> <span class="p-1"> Tutoring </span> </td>
       </tr>
 
       <tr>
@@ -167,34 +174,199 @@
       	<td class="bg-info"> <span class="p-1"> Classroom </span> </td>
       </tr>
 
-      <?php foreach($rowsHorario as $i => $row): ?>  
-        <tr>
-        	<td><?php echo $row['Letra']; ?></td>
-        	<td><?php echo $row['Dia']; ?></td>
-        	<td><?php echo $row['HoraInicio'] . " - " . $row['HoraFin']; ?></td>
-        	<td><?php echo $row['Aula']; ?></td>
-          <?php if($i == 0): ?>
-            <td rowspan="<?php echo $rowcountHorario; ?>"><?php echo $tutoriaConcatenadas; ?></td>
-          <?php endif; ?>
-        </tr>
-      <?php endforeach; ?>
+      <?php foreach($rowsGrupoClaseProfesor as $grupo){
+    $controller = new es\ucm\ControllerImplements();
+    $context = new es\ucm\Context(FIND_HORARIO_CLASE, $grupo->getIdGrupoClase());
+    echo "<tr><td>".$grupo->getLetra()."</td>";
+    $grupos = $controller->action($context);
+      foreach($grupos as $g) ?>  
+        
+        	<td><?php echo $g->getDia() ?></td>
+        	<td><?php echo $g->getHoraInicio(). " - " . $g->getHoraFinal(); ?></td>
+        	<td><?php echo $g->getAula(); ?></td>
+
+      <?php }?>
+      </tr>
     </table>
 
 </div>
-<?php endif; ?>
+<?php }else{?>
+ <!-- Four Form Box  Start -->
+    <div class="fourFormBox">
+        
+    <tr><td colspan="4" class="bg-secondary text-center">Teachers of the Subject</td></tr>
+        <tr>
+        	<td class="bg-info"> <span class="p-1"> Group </span> </td>
+        	<td class="bg-info"> <span class="p-1"> Teachers </span> </td>
+        	<td class="bg-info"> <span class="p-1"> Department </span> </td>
+        	<td class="bg-info"> <span class="p-1"> Email </span> </td>
+        </tr>
+  <?php
+  foreach($rowsGrupoClaseProfesor as $grupo){
+    $controller = new es\ucm\ControllerImplements();
+    $context = new es\ucm\Context(FIND_MODGRUPO_CLASE_PROFESOR, $grupo->getIdGrupoClase());
+    $profesores = $controller->action($context);
+    echo'<tr>
+    <td>'.$grupo->getLetra().'</td>';
+    foreach($profesores->getData() as $profesor){
+           echo '<td>'.$profesor->getNombre().'</td>
+                <td>'.$profesor->getDepartamento().'</td>
+              <td>'.$profesor->getEmail().'</td>
+            </tr>';
+  }
+}
+      ?>
+        </table>
+</div>
+  <!-- Four Form Box End -->
+
+
+<!-- Five No Form Box  Start -->
+
+<div >
+	
+	<table class="table">
+  <tr><td colspan="5" class="bg-secondary text-center">Class Schedule</td></tr>
+      <tr>
+      	<td rowspan="2" class="bg-info"> <span class="p-1"> Group </span> </td>
+      	<td colspan="3" class="bg-info"> <span class="p-1"> Class schedule </span> </td>
+      	</tr>
+
+      <tr>
+      	<td class="bg-info"> <span class="p-1"> Day </span> </td>
+      	<td class="bg-info"> <span class="p-1"> Hours </span> </td>
+      	<td class="bg-info"> <span class="p-1"> Classroom </span> </td>
+      </tr>
+
+      <?php foreach($rowsGrupoClaseProfesor as $grupo){
+    $controller = new es\ucm\ControllerImplements();
+    $context = new es\ucm\Context(FIND_MODHORARIO_CLASE, $grupo->getIdGrupoClase());
+    echo "<tr><td>".$grupo->getLetra()."</td>";
+    $grupos = $controller->action($context);
+      foreach($grupos as $g) ?>  
+        
+        	<td><?php echo $g->getDia() ?></td>
+        	<td><?php echo $g->getHoraInicio(). " - " . $g->getHoraFinal(); ?></td>
+        	<td><?php echo $g->getAula(); ?></td>
+
+      <?php }?>
+      </tr>
+    </table>
+
+</div>
+<?php }?>
+
 
 <!-- Five Form Box End -->
 
 <!-- Last Form Box  Start -->
-<?php if($rowsHorarioLab): ?>
-<div class="FiveFormBox">
+<?php if($rowsGrupoLaboratorioProfesor !== null)
+if(!isset($rowsGrupoLaboratorioProfesor)){?>
+ <!-- Four Form Box  Start -->
+    <div class="fiveFormBox">
+        
+        <table class="table">
+          <tr><td colspan="4" class="bg-secondary text-center">Profesores de la asignatura</td></tr>
+          <tr>
+              <td class="bg-info"> <span class="p-1"> Grupo </span> </td>
+              <td class="bg-info"> <span class="p-1"> Profesor </span> </td>
+              <td class="bg-info"> <span class="p-1"> Dpto </span> </td>
+              <td class="bg-info"> <span class="p-1"> email </span> </td>
+          </tr>
+  <?php
+  foreach($rowsGrupoLaboratorioProfesor as $grupo){
+    $controller = new es\ucm\ControllerImplements();
+    $context = new es\ucm\Context(FIND_GRUPO_LABORATORIO_PROFESOR, $grupo->getIdGrupoLaboratorio());
+    $profesores = $controller->action($context);
+    echo'<tr>
+    <td>'.$grupo->getLetra().'</td>';
+    foreach($profesores->getData() as $profesor){
+           echo '<td>'.$profesor->getNombre().'</td>
+                <td>'.$profesor->getDepartamento().'</td>
+              <td>'.$profesor->getEmail().'</td>
+            </tr>';
+  }
+}
+      ?>
+        </table>
+</div>
+  <!-- Four Form Box End -->
+
+
+<!-- Five No Form Box  Start -->
+
+<div >
 	
 	<table class="table">
-      <tr><td colspan="5" class="bg-secondary text-center">Laboratory Hours</td></tr>
+  <tr><td colspan="5" class="bg-secondary text-center">Class Schedule</td></tr>
       <tr>
-      	<td class="bg-info" rowspan="2"> <span class="p-1"> Group </span> </td>
-      	<td class="bg-info" colspan="3"> <span class="p-1"> Laboratory </span> </td>
-      	<td class="bg-info" rowspan="2" > <span class="p-1"> Teachers </span> </td>
+      	<td rowspan="2" class="bg-info"> <span class="p-1"> Group </span> </td>
+      	<td colspan="3" class="bg-info"> <span class="p-1"> Class schedule </span> </td>
+      	</tr>
+
+      <tr>
+      	<td class="bg-info"> <span class="p-1"> Day </span> </td>
+      	<td class="bg-info"> <span class="p-1"> Hours </span> </td>
+      	<td class="bg-info"> <span class="p-1"> Classroom </span> </td>
+      </tr>
+
+      <?php foreach($rowsGrupoLaboratorioProfesor as $grupo){
+    $controller = new es\ucm\ControllerImplements();
+    $context = new es\ucm\Context(FIND_HORARIO_LABORATORIO, $grupo->getIdGrupoLaboratorio());
+    echo "<tr><td>".$grupo->getLetra()."</td>";
+    $grupos = $controller->action($context);
+      foreach($grupos as $g) ?>  
+        
+        	<td><?php echo $g->getDia() ?></td>
+        	<td><?php echo $g->getHoraInicio(). " - " . $g->getHoraFinal(); ?></td>
+        	<td><?php echo $g->getAula(); ?></td>
+
+      <?php }?>
+      </tr>
+    </table>
+
+</div>
+<?php }else{?>
+  <!-- Four Form Box  Start -->
+  <div class="fiveFormBox">
+        
+        <table class="table">
+          <tr><td colspan="4" class="bg-secondary text-center">Profesores de la asignatura</td></tr>
+          <tr>
+              <td class="bg-info"> <span class="p-1"> Grupo </span> </td>
+              <td class="bg-info"> <span class="p-1"> Profesor </span> </td>
+              <td class="bg-info"> <span class="p-1"> Dpto </span> </td>
+              <td class="bg-info"> <span class="p-1"> email </span> </td>
+          </tr>
+  <?php
+  foreach($rowsGrupoLaboratorioProfesor as $grupo){
+    $controller = new es\ucm\ControllerImplements();
+    $context = new es\ucm\Context(FIND_MODGRUPO_LABORATORIO_PROFESOR, $grupo->getIdGrupoLaboratorio());
+    $profesores = $controller->action($context);
+    echo'<tr>
+    <td>'.$grupo->getLetra().'</td>';
+    foreach($profesores->getData() as $profesor){
+           echo '<td>'.$profesor->getNombre().'</td>
+                <td>'.$profesor->getDepartamento().'</td>
+              <td>'.$profesor->getEmail().'</td>
+            </tr>';
+  }
+}
+      ?>
+        </table>
+</div>
+  <!-- Four Form Box End -->
+
+
+<!-- Five No Form Box  Start -->
+
+<div >
+	
+	<table class="table">
+  <tr><td colspan="5" class="bg-secondary text-center">Class Schedule</td></tr>
+      <tr>
+      	<td rowspan="2" class="bg-info"> <span class="p-1"> Group </span> </td>
+      	<td colspan="3" class="bg-info"> <span class="p-1"> Class schedule </span> </td>
       </tr>
 
       <tr>
@@ -203,19 +375,23 @@
       	<td class="bg-info"> <span class="p-1"> Classroom </span> </td>
       </tr>
 
-      <?php foreach($rowsHorarioLab as $i => $row): ?>
-      <tr>
-      	<td><?php echo $row['Letra']; ?></td>
-      	<td><?php echo $row['Dia']; ?></td>
-      	<td><?php echo $row['HoraInicio'] . " - " . $row['HoraFin']; ?></td>
-      	<td><?php echo $row['Laboratorio']; ?></td>
-      	<td><?php echo $row['Nombre']; ?></td>
+      <?php foreach($rowsGrupoLaboratorioProfesor as $grupo){
+    $controller = new es\ucm\ControllerImplements();
+    $context = new es\ucm\Context(FIND_MODHORARIO_LABORATORIO, $grupo->getIdGrupoLaboratorio());
+    echo "<tr><td>".$grupo->getLetra()."</td>";
+    $grupos = $controller->action($context);
+      foreach($grupos as $g) ?>  
+        
+        	<td><?php echo $g->getDia() ?></td>
+        	<td><?php echo $g->getHoraInicio(). " - " . $g->getHoraFinal(); ?></td>
+        	<td><?php echo $g->getAula(); ?></td>
+
+      <?php }?>
       </tr>
-      <?php endforeach; ?>
     </table>
 
 </div>
-<?php endif; ?>
+<?php }?>
 <!-- Last Form Box End -->
 
       <div class="contenedor">
@@ -230,7 +406,7 @@
         </div>
       </div>
 
-    <?php if($BreveDescripcionHTML): ?> 
+    
     <div class="contenedor">
       <div class="cabeceras">
           Brief description of content
@@ -239,9 +415,7 @@
         <?php echo $BreveDescripcionHTML;  ?>
       </div>
     </div>
-    <?php endif; ?>
-
-    <?php if($ConocimientosPreviosHTML): ?>
+   
     <div class="contenedor">
       <div class="cabeceras">
           Required background knowledge
@@ -250,19 +424,32 @@
         <?php echo $ConocimientosPreviosHTML;  ?>
       </div>
     </div>
-    <?php endif; ?>
-
-
-    <?php if($ProgramaDetalladoHTML): ?>
+   
     <div class="contenedor">
       <div class="cabeceras">
-         Subject Program
+         Theoric Program
       </div>
       <div class="contenido">
-        <?php echo $ProgramaDetalladoHTML;  ?>
+        <?php echo $ProgramaTeoricoHTML;  ?>
       </div>
     </div>
-    <?php endif; ?>
+    <div class="contenedor">
+      <div class="cabeceras">
+         Seminary Program
+      </div>
+      <div class="contenido">
+        <?php echo $ProgramaSeminarioHTML;  ?>
+      </div>
+    </div>
+    <div class="contenedor">
+      <div class="cabeceras">
+         Laboratory Program
+      </div>
+      <div class="contenido">
+        <?php echo $ProgramaLaboratorioHTML;  ?>
+      </div>
+    </div>
+        
 
     <div class="contenedor" style="page-break-after: avoid;">
       <div class="cabeceras" style="page-break-after: avoid;">
