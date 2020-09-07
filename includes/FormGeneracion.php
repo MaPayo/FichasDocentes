@@ -18,19 +18,19 @@ class FormGeneracion extends Form
         $html = '<input type="hidden" name="idAsignatura" value="' . $idAsignatura . '" required />
 		<input type="hidden" name="email" value="' . $email . '" required />';
         $html .= 'Introduce el curso actual: 20<input name="actual">/<input name="siguiente"><br>';
-        $context = new Context(FIND_PERMISOS_POR_PROFESOR, $email);
-        $contextPP = $controller->action($context);
-        if ($contextPP->getEvent() === FIND_PERMISOS_POR_PROFESOR_OK) {
-            foreach ($contextPP->getData() as $permisos) {
-                $context = new Context(FIND_ASIGNATURA, $permisos->getIdAsignatura());
-                $contextA = $controller->action($context);
-                if ($contextA->getData()->getActivo()) {
-                    $html .= '<input type="checkbox" name="asignaturas[]" value="' . $contextA->getData()->getIdAsignatura() . '"> <label>' . $contextA->getData()->getNombreAsignatura() . '</label></br>';
+        foreach ($_SESSION['asignaturas'] as $codGrado => $grado) {
+            $context = new Context(FIND_GRADO, $codGrado);
+            $grad = $controller->action($context);
+            $html .='<h3>'.$grad->getData()->getNombreGrado().'</h3>';
+            foreach ($_SESSION['asignaturas'][$codGrado] as $codAsig => $asignatura) {
+                $context = new Context(FIND_ASIGNATURA, $codAsig);
+                $as = $controller->action($context);
+                if ($as->getData()->getActivo()) {
+                    $html .= '<input type="checkbox" name="asignaturas[]" value="' . $as->getData()->getIdAsignatura() . '"> <label>' . $as->getData()->getNombreAsignatura() . '</label></br>';
                 }
             }
         }
-        //Si es un coordinador
-        
+
         $html .= '<div class="text-center">
         <a href="index.php">
                   <button type="button" class="btn btn-secondary" id="btn-form">

@@ -36,29 +36,53 @@ class SAGeneracionImplements implements SAGeneracion{
 		//Teorico Laboratorio y Problemas
 		$sa = $factoriesSA->createSATeorico();
 		$n = $sa->findTeorico($idAsignatura);
+		if(isset($n)){
 		$CreditosTeorico = $n->getCreditos();
 		$PresencialTeorico = $n->getPresencial();
 		$HorasTeorico = ($CreditosTeorico *$HorasECTS * $PresencialTeorico) / 100;
+		}else{
+		$CreditosTeorico = "";
+		$PresencialTeorico = "";
+		$HorasTeorico = "";
+		}
 		$sa = $factoriesSA->createSALaboratorio();
 		$n = $sa->findLaboratorio($idAsignatura);
+		if(isset($n)){
 		$CreditosLaboratorio = $n->getCreditos();
 		$PresencialLaboratorio = $n->getPresencial();
 		$HorasLaboratorio = ($CreditosLaboratorio *$HorasECTS * $PresencialLaboratorio) / 100;
+		}else{
+		$CreditosLaboratorio = "";
+		$PresencialLaboratorio = "";
+		$HorasLaboratorio = "";
+		}
 		$sa = $factoriesSA->createSAProblema();
 		$n = $sa->findProblema($idAsignatura);
+		if(isset($n)){
 		$CreditosProblema = $n->getCreditos();
 		$PresencialProblema = $n->getPresencial();
 		$HorasProblema = ($CreditosProblema *$HorasECTS * $PresencialProblema) / 100;
+		}else{
+			$CreditosProblema = "";
+		$PresencialProblema = "";
+		$HorasProblema = "";
+		}
 		//Coordinador
 		$saP = $factoriesSA->createSAProfesor();
 		$n = $saP->findProfesor($Email);
+		if(isset($n)){
 		$Coordinador = $n->getNombre();
 		$Departamento = $n->getDepartamento();
 		$Despacho = $n->getDespacho();
+		}else{
+		$Coordinador = "";
+		$Departamento = "";
+		$Despacho = "";
+		}
 		//Profesores de la asignatura
 		$sa = $factoriesSA->createSAGrupoClase();
 		$n = $sa->findGrupoClase($idAsignatura);
-		$rowsGrupoClaseProfesor = $n;
+		$rowsGrupoClaseProfesor = $n;		
 		//Comprobamos si existe mod
 		$sa = $factoriesSA->createSAModGrupoClase();
 		$n = $sa->findModGrupoClase($idAsignatura);
@@ -202,25 +226,49 @@ class SAGeneracionImplements implements SAGeneracion{
 		//Teorico Laboratorio y Problemas
 		$sa = $factoriesSA->createSATeorico();
 		$n = $sa->findTeorico($idAsignatura);
+		if(isset($n)){
 		$CreditosTeorico = $n->getCreditos();
 		$PresencialTeorico = $n->getPresencial();
 		$HorasTeorico = ($CreditosTeorico *$HorasECTS * $PresencialTeorico) / 100;
+		}else{
+		$CreditosTeorico = "";
+		$PresencialTeorico = "";
+		$HorasTeorico = "";
+		}
 		$sa = $factoriesSA->createSALaboratorio();
 		$n = $sa->findLaboratorio($idAsignatura);
+		if(isset($n)){
 		$CreditosLaboratorio = $n->getCreditos();
 		$PresencialLaboratorio = $n->getPresencial();
 		$HorasLaboratorio = ($CreditosLaboratorio *$HorasECTS * $PresencialLaboratorio) / 100;
+		}else{
+		$CreditosLaboratorio = "";
+		$PresencialLaboratorio = "";
+		$HorasLaboratorio = "";
+		}
 		$sa = $factoriesSA->createSAProblema();
 		$n = $sa->findProblema($idAsignatura);
+		if(isset($n)){
 		$CreditosProblema = $n->getCreditos();
 		$PresencialProblema = $n->getPresencial();
 		$HorasProblema = ($CreditosProblema *$HorasECTS * $PresencialProblema) / 100;
+		}else{
+			$CreditosProblema = "";
+		$PresencialProblema = "";
+		$HorasProblema = "";
+		}
 		//Coordinador
 		$saP = $factoriesSA->createSAProfesor();
 		$n = $saP->findProfesor($Email);
+		if(isset($n)){
 		$Coordinador = $n->getNombre();
 		$Departamento = $n->getDepartamento();
 		$Despacho = $n->getDespacho();
+		}else{
+		$Coordinador = "";
+		$Departamento = "";
+		$Despacho = "";
+		}
 		//Profesores de la asignatura
 		$sa = $factoriesSA->createSAGrupoClase();
 		$n = $sa->findGrupoClase($idAsignatura);

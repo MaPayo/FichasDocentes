@@ -20,6 +20,8 @@
             if (isset($_SESSION['login']) && $_SESSION['login'] === true) {
                 echo '<a class="dropdown-item" href="index.php">Inicio</a>';
                 echo '<a class="dropdown-item" href="perfil.php">Configuración</a>';
+                echo '<a class="dropdown-item" href="generaciondocumentos.php">Generación Fichas</a>';
+                echo '<a class="dropdown-item" href="descargadocumentos.php">Descarga Fichas</a>';
                 echo '<div class="dropdown-divider"></div>';
                 echo '<a class="dropdown-item" href="logout.php">Cerrar Sesión</a>';
             } else {
