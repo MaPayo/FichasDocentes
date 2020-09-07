@@ -9,7 +9,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');?>
     <title>Guía Docente</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet"> 
     <style>
-      <?php require_once(RUTA_CSS.'guiaDocenteTemplate.css');?>
+      <?php require(RUTA_CSS.'guiaDocenteTemplate.css');?>
     </style>
 </head>
 <body>

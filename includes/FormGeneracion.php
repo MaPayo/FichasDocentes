@@ -62,7 +62,7 @@ class FormGeneracion extends Form
                 unlink($rutehtml);
                 unlink($rutepdf);
             }
-            $datoshtml = array(0 => $idAsignatura, 1 => $rutehtml);
+            $datoshtml = array(0 => $idAsignatura, 1 => $rutehtml, 2=> $curso);
             $datospdf = array(0 => $idAsignatura, 1 => $rutepdf, 2 => $rutehtml);
             //Generamos los documentos en español
             $context = new Context(GENERACION_HTML_SPANISH, $datoshtml);

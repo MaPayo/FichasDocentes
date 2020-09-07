@@ -17,6 +17,7 @@ class SAGeneracionImplements implements SAGeneracion{
 		$Semestre = $n->getSemestre();
 		$Creditos = $n->getCreditos();
 		$Email = $n->getCoordinadorAsignatura();
+		$cursoAcademico = $datos[2];
 		//Materia
 		$sa = $factoriesSA->createSAMateria();
 		$n = $sa->findMateria($n->getIdMateria());
@@ -181,6 +182,7 @@ class SAGeneracionImplements implements SAGeneracion{
 		$Semestre = $n->getSemestre();
 		$Creditos = $n->getCreditos();
 		$Email = $n->getCoordinadorAsignatura();
+		$cursoAcademico = $datos[2];
 		//Materia
 		$sa = $factoriesSA->createSAMateria();
 		$n = $sa->findMateria($n->getIdMateria());
