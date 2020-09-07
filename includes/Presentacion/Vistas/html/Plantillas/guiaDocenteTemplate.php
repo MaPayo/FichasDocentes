@@ -13,7 +13,12 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');?>
     </style>
 </head>
 <body>
-
+<?php 
+if($estado === 'B')
+echo '<h1<center>Borrador</center></h1>';
+if($estado === 'V')
+echo '<h1><center>Verificado</center></h1>';
+?>
 
 <div class="container">
 

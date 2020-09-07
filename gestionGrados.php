@@ -210,7 +210,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                       foreach ($asignaturas->getData() as $asignatura) {
                                         if ($asignatura->getActivo()) {
                                           echo '<p>' . $asignatura->getNombreAsignatura() . '
-                                          <a href="gestionAsignaturas.php?idGrado=' . $contextGrado->getData()->getCodigoGrado() . '&idAsignatura=' . $asignatura->getIdAsignatura() . '#nav-info-asignatura">
+                                          <a href="gestionAsignaturas.php?IdGrado=' . $contextGrado->getData()->getCodigoGrado() . '&IdAsignatura=' . $asignatura->getIdAsignatura() . '#nav-info-asignatura">
                                           <button type="button" class="btn btn-primary" id="btn-form">
                                           Gestionar
                                           </button>

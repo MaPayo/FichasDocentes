@@ -23,7 +23,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
 <body>
   <div class="container-fluid">
     <?php
-    require_once('includes/Presentacion/Vistas/html/cabecera_admin.php');
+    require_once('includes/Presentacion/Vistas/html/cabecera.php');
     ?>
     <div class="row justify-content-center align-items-center">
       <?php
@@ -56,7 +56,20 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                         echo "<a href='download.php?file=$ficheros[$i]'>".$asignatura->getData()->getNombreAsignatura()."(".$idAsignatura[2].") PDF</a><br>";
                       }
                     }
+                  }else{
+                    echo '
+    <div class="col-md-6 col-12">
+    <div class="alert alert-warning" role="alert">
+    <h2 class="card-title text-center">No se han encontrado archivos</h2>
+    <h5 class="text-center">No hay ningun archivo generado en este momento</h5>
+    </div>
+    </div>';
                   }
+                  echo '<a href="index.php">
+                  <button type="button" class="btn btn-secondary" id="btn-form">
+                      Volver al inicio
+                  </button>
+              </a>';
                   ?>
                 </div>
               </div>

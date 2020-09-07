@@ -92,6 +92,7 @@ class FormAsignatura extends Form
         $curso = isset($datos['curso']) ?  $datos['curso'] : '';
         $semestre = isset($datos['semestre']) ?  $datos['semestre'] : '';
         $coordinador= isset($datos['coordinador']) ? $datos['coordinador']: '';
+        $idAsignatura = isset($datos['IdAsignatura']) ? $datos['IdAsignatura']:$datos['idAsignatura'];
                 if (empty($nombreAsignatura)) {
                     $erroresFormulario[] = "No has introducido el nombre de la asignatura.";
                 }
@@ -110,22 +111,23 @@ class FormAsignatura extends Form
                  if (empty($coordinador)) {
                     $erroresFormulario[] = "No has introducido el coordinador.";
                 }
-
-           
+                if(empty($idAsignatura)){
+                    $erroresFormulario[] ="No has introducido el código de la asignatura";
+                }
 
         if (count($erroresFormulario) === 0) {
-            $context = new Context(FIND_ASIGNATURA, $datos['IdAsignatura']);
+            $context = new Context(FIND_ASIGNATURA, $idAsignatura);
             $contextAsignatura = $controller->action($context);
             if ($contextAsignatura->getEvent() === FIND_ASIGNATURA_OK) {
                 $context = new Context(FIND_PROFESOR, $coordinador);
                 $contextProfesor = $controller->action($context);
                 if($contextProfesor->getEvent() === FIND_PROFESOR_OK){
-                    $asignatura= new Asignatura($datos['IdAsignatura'],$nombreAsignatura,$abreviatura, $curso, $semestre, $nombreAsignaturaI, $creditos, $coordinador, 'B',1,$contextAsignatura->getData()->getIdMateria());
+                    $asignatura= new Asignatura($idAsignatura,$nombreAsignatura,$abreviatura, $curso, $semestre, $nombreAsignaturaI, $creditos, $coordinador, 'B',1,$contextAsignatura->getData()->getIdMateria());
                     $context= new Context(UPDATE_ASIGNATURA, $asignatura);
                     $contextUA = $controller->action($context);
                    
                     if($contextUA->getEvent() === UPDATE_ASIGNATURA_OK){
-                        $erroresFormulario = "gestionAsignaturas.php?IdGrado=" . $datos['idGrado'] . "&IdAsignatura=" . $datos['IdAsignatura'] . "&modificado=y#nav-info-asignatura";
+                        $erroresFormulario = "gestionAsignaturas.php?IdGrado=" . $datos['idGrado'] . "&IdAsignatura=" . $idAsignatura . "&modificado=y#nav-info-asignatura";
                     }else{
                         $erroresFormulario[] ="No se ha podIdo modificar la asignatura";
                     }
@@ -134,31 +136,31 @@ class FormAsignatura extends Form
                 } 
             } elseif ($contextAsignatura->getEvent() === FIND_ASIGNATURA_FAIL) {
 
-                $asignatura= new Asignatura($datos['IdAsignatura'],$nombreAsignatura,$abreviatura, $curso, $semestre, $nombreAsignaturaI, $creditos, $coordinador, 'B',1,$datos['idMateria']);
+                $asignatura= new Asignatura($idAsignatura,$nombreAsignatura,$abreviatura, $curso, $semestre, $nombreAsignaturaI, $creditos, $coordinador, 'B',1,$datos['idMateria']);
                 $context = new Context(CREATE_ASIGNATURA, $asignatura);
                 $contextAsignatura = $controller->action($context);
-                $modAsignatura = new ModAsignatura($datos['IdAsignatura'], date("Y-m-d H:i:s"), null, $datos['IdAsignatura']);
+                $modAsignatura = new ModAsignatura($idAsignatura, date("Y-m-d H:i:s"), null, $idAsignatura);
                 $context = new Context(CREATE_MODASIGNATURA, $modAsignatura);
                 $contextMA = $controller->action($context);
-                $configuracion = new Configuracion(null,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,$datos['IdAsignatura']);
+                $configuracion = new Configuracion(null,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,$idAsignatura);
                 $context = new Context(CREATE_CONFIGURACION, $configuracion);
                 $contextC = $controller->action($context);
-                $metodologia = new Metodologia(null,"","",$datos['IdAsignatura']);
+                $metodologia = new Metodologia(null,"","",$idAsignatura);
                 $context = new Context(CREATE_METODOLOGIA, $metodologia);
                 $contextM = $controller->action($context);
-                $bibliografia = new Bibliografia(null, "","",$datos['IdAsignatura']);
+                $bibliografia = new Bibliografia(null, "","",$idAsignatura);
                 $context = new Context(CREATE_BIBLIOGRAFIA, $bibliografia);
                 $contextB = $controller->action($context);
-                $competenciasAsignatura = new CompetenciaAsignatura(null, "","","","","","","","",$datos['IdAsignatura']);
+                $competenciasAsignatura = new CompetenciaAsignatura(null, "","","","","","","","",$idAsignatura);
                 $context = new Context(CREATE_COMPETENCIAS_ASIGNATURA, $competenciasAsignatura);
                 $contextCA = $controller->action($context);
-                $evaluacion = new Evaluacion(null,"","",0,"","",0,"","",0,"","",$datos['IdAsignatura']);
+                $evaluacion = new Evaluacion(null,"","",0,"","",0,"","",0,"","",$idAsignatura);
                 $context = new Context(CREATE_EVALUACION, $evaluacion);
                 $contextE = $controller->action($context);
-                $programaasignatura = new ProgramaAsignatura(null,"","","","","","","","","","",$datos['IdAsignatura']);
+                $programaasignatura = new ProgramaAsignatura(null,"","","","","","","","","","",$idAsignatura);
                 $context = new Context(CREATE_PROGRAMA_ASIGNATURA, $programaasignatura);
                 $contextP = $controller->action($context);
-                $verifica = new Verifica(null, 0,0,0,0,0,0,$datos['IdAsignatura']);
+                $verifica = new Verifica(null, 0,0,0,0,0,0,$idAsignatura);
                 $context= new Context(CREATE_VERIFICA, $verifica);
                 $contextv = $controller->action($context);
 
@@ -166,7 +168,7 @@ class FormAsignatura extends Form
                 && $contextC->getEvent()=== CREATE_CONFIGURACION_OK  && $contextM->getEvent()=== CREATE_METODOLOGIA_OK 
                 && $contextB->getEvent()=== CREATE_BIBLIOGRAFIA_OK && $contextCA->getEvent()=== CREATE_COMPETENCIAS_ASIGNATURA_OK 
                 && $contextE->getEvent()=== CREATE_EVALUACION_OK && $contextP->getEvent()=== CREATE_PROGRAMA_ASIGNATURA_OK && $contextv->getEvent()=== CREATE_VERIFICA_OK ) {
-                    $erroresFormulario = "gestionAsignaturas.php?IdGrado=" . $datos['idGrado'] . "&IdAsignatura=" . $datos['IdAsignatura'] . "&anadIdo=y#nav-info-asignatura";
+                    $erroresFormulario = "gestionAsignaturas.php?IdGrado=" . $datos['idGrado'] . "&IdAsignatura=" . $idAsignatura . "&anadIdo=y#nav-info-asignatura";
                 }else {
                     $erroresFormulario[] = "No se ha podIdo crear la Asignatura.";
                 }

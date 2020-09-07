@@ -29,7 +29,14 @@ class FormGeneracion extends Form
                 }
             }
         }
-        $html .= '<div class="text-right position-fixed w-50 p-2" >
+        //Si es un coordinador
+        
+        $html .= '<div class="text-center">
+        <a href="index.php">
+                  <button type="button" class="btn btn-secondary" id="btn-form">
+                      Volver al índice
+                  </button>
+              </a>
         <button type="submit" class="btn btn-secondary" id="btn-form" name="GenerarSelecionadas">Generar seleccionadas</button>
         </div>';
         return $html;
@@ -46,6 +53,7 @@ class FormGeneracion extends Form
         if (!is_dir($folder)) {
             mkdir($folder);
         }
+        if(!empty($_POST['asignaturas']))
         foreach ($_POST['asignaturas'] as $idAsignatura) {
             //Para cada una de las asignaturas marcadas recogemos su id y creamos el nombre de archivo
             $context = new Context(FIND_ASIGNATURA, $idAsignatura);
@@ -88,6 +96,9 @@ class FormGeneracion extends Form
                     }
                 }
             }
+        }
+        else{
+            $erroresFormulario[]="No has seleccionado asignaturas";
         }
         if(count($erroresFormulario)===0){
             $erroresFormulario="descargadocumentos.php";

@@ -191,7 +191,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                       ?>
                         <div class="text-right">
 
-                          <a href="asignatura.php?idGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&idAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>&idMateria=<?php echo $contextMateria->getData()->getIdMateria();?> ">
+                          <a href="asignatura.php?idGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>&idMateria=<?php echo $contextMateria->getData()->getIdMateria();?> ">
                             <button type="button" class="btn btn-warning" id="btn-form">
                               Modificar Información Asignatura
                             </button>

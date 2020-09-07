@@ -15,7 +15,7 @@ class FormUsuarios extends Form
         $context = new Context(FIND_USUARIOS, null);
         $contextUsuarios = $controller->action($context);
 
-        $html= '<div class="text-right position-fixed w-50 p-2" >
+        $html= '<div class="text-center">
 		<a href="addUsuario.php">
 		<button type="button" class="btn btn-secondary" id="btn-form">
 		Añadir usuario
