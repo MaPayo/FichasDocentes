@@ -165,7 +165,7 @@ class FormSubida extends Form
                                             if ($contextProfesor->getEvent() === CREATE_PERMISOS_FAIL) {
                                                 $huboerror = true;
                                                 //throw new \PDOException($e->getMessage(), (int)$e->getCode());						
-                                                error_log(date("Y-m-d H:i:s") . " No se pudo crear los permisos del profesor con email" . $email_profesor . "\r\n", 3, LOGS . "/log_errores.txt");
+                                                error_log(date("Y-m-d H:i:s") . " No se pudo crear los permisos del profesor con email " . $email_profesor . "\r\n", 3, LOGS . "/log_errores.txt");
                                             }
                                         }
                                         if ($insertaenGrupoClase) {
