@@ -27,15 +27,16 @@ class FormSubida extends Form
     <input id="userfile" name="userfile" type="file">
     <br>
     <button type="submit" class="btn btn-success" id="btn-form" name="registrar">Guardar</button>';
-    if(is_file(LOGS.'/log_errores.txt')){
-        $html .='<a href="downloadlog.php">
+
+        if (is_file(LOGS . '/log_errores.txt')) {
+            $html .= '<a href="downloadlog.php">
 		<button type="button" class="btn btn-secondary" id="btn-form">
 		Descargar Log
 		</button>
         </a>';
-    }
-        
-    return $html;
+        }
+
+        return $html;
     }
 
     protected function procesaFormulario($datos)
