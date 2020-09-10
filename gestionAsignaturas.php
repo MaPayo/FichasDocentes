@@ -120,14 +120,14 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
 
                     <a class="nav-item nav-link active" id="nav-info-asignatura-tab" data-toggle="tab" href="#nav-info-asignatura" role="tab" aria-controls="nav-info-asignatura" aria-selected="true">Información</a>
 
-                    <a class="nav-item nav-link active" id="nav-teorico-tab" data-toggle="tab" href="#nav-teorico" role="tab" aria-controls="nav-teorico" aria-selected="true">Teórico</a>
+                    <a class="nav-item nav-link " id="nav-teorico-tab" data-toggle="tab" href="#nav-teorico" role="tab" aria-controls="nav-teorico" aria-selected="false">Teórico</a>
 
-                    <a class="nav-item nav-link active" id="nav-problema-tab" data-toggle="tab" href="#nav-problema" role="tab" aria-controls="nav-problema" aria-selected="true">Problema</a>
+                    <a class="nav-item nav-link " id="nav-problema-tab" data-toggle="tab" href="#nav-problema" role="tab" aria-controls="nav-problema" aria-selected="false">Problema</a>
 
-                    <a class="nav-item nav-link active" id="nav-laboratorio-tab" data-toggle="tab" href="#nav-laboratorio" role="tab" aria-controls="nav-teorico" aria-selected="true">Laboratorio</a>
+                    <a class="nav-item nav-link " id="nav-laboratorio-tab" data-toggle="tab" href="#nav-laboratorio" role="tab" aria-controls="nav-teorico" aria-selected="false">Laboratorio</a>
 
                     </nav>
-                  <div class="tab-content" id="nav-tabContent">
+                  <div class="tab-content" id="pills-tabContent">
                     <div class="tab-pane fade show active" id="nav-info-asignatura" role="tabpanel" aria-labelledby="nav-info-asignatura-tab">
                       <div class="table-responsive text-center">
                         <table class="table table-sm table-bordered">
@@ -205,7 +205,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                         
                       </div>
                     </div>
-                    <div class="tab-pane fade show active" id="nav-teorico" role="tabpanel" aria-labelledby="nav-teorico-tab">
+                    <div class="tab-pane fade" id="nav-teorico" role="tabpanel" aria-labelledby="nav-teorico-tab">
                       <?php if ($contextTeorico->getEvent() === FIND_TEORICO_OK) { ?>
                         <div class="table-responsive text-center">
                           <table class="table table-sm table-bordered">
@@ -262,7 +262,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                       <?php }
                       ?>
                     </div>
-                    <div class="tab-pane fade show active" id="nav-problema" role="tabpanel" aria-labelledby="nav-problema-tab">
+                    <div class="tab-pane fade" id="nav-problema" role="tabpanel" aria-labelledby="nav-problema-tab">
                       <?php if ($contextProblema->getEvent() === FIND_PROBLEMA_OK) { ?>
                         <div class="table-responsive text-center">
                           <table class="table table-sm table-bordered">
@@ -319,7 +319,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                       <?php }
                       ?>
                     </div>
-                    <div class="tab-pane fade show active" id="nav-laboratorio" role="tabpanel" aria-labelledby="nav-laboratorio-tab">
+                    <div class="tab-pane fade" id="nav-laboratorio" role="tabpanel" aria-labelledby="nav-laboratorio-tab">
                       <?php if ($contextLaboratorio->getEvent() === FIND_LABORATORIO_OK) { ?>
                         <div class="table-responsive text-center">
                           <table class="table table-sm table-bordered">
