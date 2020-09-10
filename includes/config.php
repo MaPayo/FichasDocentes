@@ -13,7 +13,8 @@ define('RUTA_CSS',RUTA_APP.'includes/Presentacion/Vistas/css/');
 define('RUTA_JS',RUTA_APP.'includes/Presentacion/Vistas/js/');
 define('RUTA_AUTOLOAD',RUTA_APP, 'vendor/');
 define('INSTALADA',true); //Apaga o enciende la aplicacion
-
+define('STORAGE',dirname(__FILE__, 2).'/storage');
+define('LOGS',dirname(__FILE__, 2).'/logs');
 /**
  * Comprueba si la aplicacion esta configurada o no. En cado de no estarlo mostraria un mensaje
  */

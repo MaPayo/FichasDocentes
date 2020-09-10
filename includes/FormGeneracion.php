@@ -17,7 +17,7 @@ class FormGeneracion extends Form
 
         $html = '<input type="hidden" name="idAsignatura" value="' . $idAsignatura . '" required />
 		<input type="hidden" name="email" value="' . $email . '" required />';
-        $html .= 'Introduce el curso actual: 20<input name="actual">/<input name="siguiente"><br>';
+        $html .= 'Introduce el curso actual: 20<input name="actual" required>/<input name="siguiente" required><br>';
         foreach ($_SESSION['asignaturas'] as $codGrado => $grado) {
             $context = new Context(FIND_GRADO, $codGrado);
             $grad = $controller->action($context);
@@ -37,7 +37,7 @@ class FormGeneracion extends Form
                       Volver al índice
                   </button>
               </a>
-        <button type="submit" class="btn btn-secondary" id="btn-form" name="GenerarSelecionadas">Generar seleccionadas</button>
+        <button type="submit" class="btn btn-secondary" id="btn-form"111 name="GenerarSelecionadas">Generar seleccionadas</button>
         </div>';
         return $html;
     }
@@ -49,17 +49,18 @@ class FormGeneracion extends Form
         $siguiente = $datos['siguiente'];
         $curso = "20$actual/$siguiente";
         //$folder = /tmp/storage/output
-        $folder = 'C:\wamp\www\temp/output/' . $datos['email']; //Ruta donde se almacenan los datos CAMBIAR
+        $folder = STORAGE.'/'.$datos['email']; //Ruta donde se almacenan los datos CAMBIAR
         if (!is_dir($folder)) {
             mkdir($folder);
         }
+        var_dump($folder);
         if(!empty($_POST['asignaturas']))
         foreach ($_POST['asignaturas'] as $idAsignatura) {
             //Para cada una de las asignaturas marcadas recogemos su id y creamos el nombre de archivo
             $context = new Context(FIND_ASIGNATURA, $idAsignatura);
             $asignatura = $controller->action($context);
-            $filehtml = "20$actual-20$siguiente-spanish-$idAsignatura.html";
-            $filepdf = "20$actual-20$siguiente-spanish-$idAsignatura.pdf";
+            $filehtml = "20$actual-20$siguiente-español-$idAsignatura.html";
+            $filepdf = "20$actual-20$siguiente-español-$idAsignatura.pdf";
             $filehtmlI = "20$actual-20$siguiente-english-$idAsignatura.html";
             $filepdfI = "20$actual-20$siguiente-english-$idAsignatura.pdf";
             $rutehtml = "$folder/$filehtml";

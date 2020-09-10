@@ -39,7 +39,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                 </div>
                 <div class="card-body">
                   <?php
-                   $folder = 'C:\wamp\www\temp/output/'.$_SESSION['idUsuario']; //CAMBIAR
+                $folder = STORAGE.'/'.$_SESSION['idUsuario']; //CAMBIAR
                   if(is_dir($folder)){//Si se ha creado algun archivo
                     $ficheros = array_diff(scandir($folder), array('..', '.'));
                     for ($i=2; $i < count($ficheros)+2; $i++) { 

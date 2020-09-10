@@ -24,11 +24,12 @@ class DAOGrupoClaseImplements implements DAOGrupoClase
         $values = array(':idGrupoClase' => $idGrupoClase);
         $results = $dataSource->executeQuery($sql, $values);
         return $results;
+        
     }public static function findGrupoClaseLetra($comparacion)
     {
         $singletonDataSource = new SingletonDataSource();
         $dataSource = $singletonDataSource->getInstance();
-        $sql = "SELECT * FROM grupoclase WHERE IdGrupoClase = :idGrupoClase AND Letra = :letra";
+        $sql = "SELECT * FROM grupoclase WHERE IdAsignatura = :idGrupoClase AND Letra = :letra";
         $values = array(':idGrupoClase' => $comparacion[0], ':letra' => $comparacion[1]);
         $results = $dataSource->executeQuery($sql, $values);
         return $results;
