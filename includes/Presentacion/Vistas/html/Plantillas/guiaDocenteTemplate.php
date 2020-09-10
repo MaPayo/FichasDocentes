@@ -130,7 +130,8 @@ echo '<h1><center>Verificado</center></h1>';
 </div>
 <!-- Third Form End -->
 
-<?php if($rowsGrupoClaseProfesor !== null)
+<?php
+if($rowsGrupoClaseProfesor !== null)
 if(!isset($rowsGrupoClaseProfesorMod)){?>
  <!-- Four Form Box  Start -->
     <div class="fourFormBox">
@@ -146,10 +147,11 @@ if(!isset($rowsGrupoClaseProfesorMod)){?>
   <?php
   foreach($rowsGrupoClaseProfesor as $grupo){
     $controller = new es\ucm\ControllerImplements();
-    $context = new es\ucm\Context(FIND_GRUPO_CLASE_PROFESOR, $grupo->getIdGrupoClase());
+    $context = new es\ucm\Context(LIST_GRUPO_CLASE_PROFESOR, $grupo->getIdGrupoClase());
     $profesores = $controller->action($context);
     echo'<tr>
     <td>'.$grupo->getLetra().'</td>';
+    if($profesores->getEvent() === LIST_GRUPO_CLASE_OK)
     foreach($profesores->getData() as $profesor){
            echo '<td>'.$profesor->getNombre().'</td>
                 <td>'.$profesor->getDepartamento().'</td>
@@ -179,19 +181,21 @@ if(!isset($rowsGrupoClaseProfesorMod)){?>
       	<td class="bg-info"> <span class="p-1"> Horas </span> </td>
       	<td class="bg-info"> <span class="p-1"> Aula </span> </td>
       </tr>
-
-      <?php foreach($rowsGrupoClaseProfesor as $grupo){
+    
+      <?php  
+      foreach($rowsGrupoClaseProfesor as $grupo){
     $controller = new es\ucm\ControllerImplements();
-    $context = new es\ucm\Context(FIND_HORARIO_CLASE, $grupo->getIdGrupoClase());
+    $context = new es\ucm\Context(LIST_HORARIO_CLASE, $grupo->getIdGrupoClase());
     echo "<tr><td>".$grupo->getLetra()."</td>";
     $grupos = $controller->action($context);
-      foreach($grupos as $g) ?>  
-        
+    if($grupos->getEvent() === LIST_HORARIO_CLASE_OK)
+      foreach($grupos as $g){ ?>  
         	<td><?php echo $g->getDia() ?></td>
         	<td><?php echo $g->getHoraInicio(). " - " . $g->getHoraFinal(); ?></td>
         	<td><?php echo $g->getAula(); ?></td>
 
-      <?php }?>
+      <?php }
+    }?>
       </tr>
     </table>
 
@@ -211,10 +215,11 @@ if(!isset($rowsGrupoClaseProfesorMod)){?>
   <?php
   foreach($rowsGrupoClaseProfesor as $grupo){
     $controller = new es\ucm\ControllerImplements();
-    $context = new es\ucm\Context(FIND_MODGRUPO_CLASE_PROFESOR, $grupo->getIdGrupoClase());
+    $context = new es\ucm\Context(LIST_MODGRUPO_CLASE_PROFESOR, $grupo->getIdGrupoClase());
     $profesores = $controller->action($context);
     echo'<tr>
     <td>'.$grupo->getLetra().'</td>';
+    if($profesores->getEvent() === LIST_MODGRUPO_CLASE_PROFESOR_OK)
     foreach($profesores->getData() as $profesor){
            echo '<td>'.$profesor->getNombre().'</td>
                 <td>'.$profesor->getDepartamento().'</td>
@@ -247,16 +252,18 @@ if(!isset($rowsGrupoClaseProfesorMod)){?>
 
       <?php foreach($rowsGrupoClaseProfesor as $grupo){
     $controller = new es\ucm\ControllerImplements();
-    $context = new es\ucm\Context(FIND_MODHORARIO_CLASE, $grupo->getIdGrupoClase());
+    $context = new es\ucm\Context(LIST_MODHORARIO_CLASE, $grupo->getIdGrupoClase());
     echo "<tr><td>".$grupo->getLetra()."</td>";
     $grupos = $controller->action($context);
-      foreach($grupos as $g) ?>  
+    if($grupos->getEvent()=== LIST_MODHORARIO_CLASE_OK)
+      foreach($grupos as $g){ ?>  
         
         	<td><?php echo $g->getDia() ?></td>
         	<td><?php echo $g->getHoraInicio(). " - " . $g->getHoraFinal(); ?></td>
         	<td><?php echo $g->getAula(); ?></td>
 
-      <?php }?>
+      <?php }
+    }?>
       </tr>
     </table>
 
@@ -283,10 +290,11 @@ if(!isset($rowsGrupoLaboratorioProfesor)){?>
   <?php
   foreach($rowsGrupoLaboratorioProfesor as $grupo){
     $controller = new es\ucm\ControllerImplements();
-    $context = new es\ucm\Context(FIND_GRUPO_LABORATORIO_PROFESOR, $grupo->getIdGrupoLaboratorio());
+    $context = new es\ucm\Context(LIST_GRUPO_LABORATORIO_PROFESOR, $grupo->getIdGrupoLaboratorio());
     $profesores = $controller->action($context);
     echo'<tr>
     <td>'.$grupo->getLetra().'</td>';
+    if($profesores->getEvent()===LIST_GRUPO_LABORATORIO_PROFESOR_OK)
     foreach($profesores->getData() as $profesor){
            echo '<td>'.$profesor->getNombre().'</td>
                 <td>'.$profesor->getDepartamento().'</td>
@@ -319,16 +327,18 @@ if(!isset($rowsGrupoLaboratorioProfesor)){?>
 
       <?php foreach($rowsGrupoLaboratorioProfesor as $grupo){
     $controller = new es\ucm\ControllerImplements();
-    $context = new es\ucm\Context(FIND_HORARIO_LABORATORIO, $grupo->getIdGrupoLaboratorio());
+    $context = new es\ucm\Context(LIST_HORARIO_LABORATORIO, $grupo->getIdGrupoLaboratorio());
     echo "<tr><td>".$grupo->getLetra()."</td>";
     $grupos = $controller->action($context);
-      foreach($grupos as $g) ?>  
+    if($grupos->getEvent()===LIST_HORARIO_LABORATORIO_OK)
+      foreach($grupos as $g) {?>  
         
         	<td><?php echo $g->getDia() ?></td>
         	<td><?php echo $g->getHoraInicio(). " - " . $g->getHoraFinal(); ?></td>
         	<td><?php echo $g->getAula(); ?></td>
 
-      <?php }?>
+      <?php }
+    }?>
       </tr>
     </table>
 
@@ -348,10 +358,11 @@ if(!isset($rowsGrupoLaboratorioProfesor)){?>
   <?php
   foreach($rowsGrupoLaboratorioProfesor as $grupo){
     $controller = new es\ucm\ControllerImplements();
-    $context = new es\ucm\Context(FIND_MODGRUPO_LABORATORIO_PROFESOR, $grupo->getIdGrupoLaboratorio());
+    $context = new es\ucm\Context(LIST_MODGRUPO_LABORATORIO_PROFESOR, $grupo->getIdGrupoLaboratorio());
     $profesores = $controller->action($context);
     echo'<tr>
     <td>'.$grupo->getLetra().'</td>';
+    if($profesores->getEvent()===LIST_MODGRUPO_LABORATORIO_OK)
     foreach($profesores->getData() as $profesor){
            echo '<td>'.$profesor->getNombre().'</td>
                 <td>'.$profesor->getDepartamento().'</td>
@@ -384,16 +395,17 @@ if(!isset($rowsGrupoLaboratorioProfesor)){?>
 
       <?php foreach($rowsGrupoLaboratorioProfesor as $grupo){
     $controller = new es\ucm\ControllerImplements();
-    $context = new es\ucm\Context(FIND_MODHORARIO_LABORATORIO, $grupo->getIdGrupoLaboratorio());
+    $context = new es\ucm\Context(LIST_MODHORARIO_LABORATORIO, $grupo->getIdGrupoLaboratorio());
     echo "<tr><td>".$grupo->getLetra()."</td>";
     $grupos = $controller->action($context);
-      foreach($grupos as $g) ?>  
+    if($grupos->getEvent()===LIST_MODHORARIO_LABORATORIO_OK)
+      foreach($grupos as $g){ ?>  
         
         	<td><?php echo $g->getDia() ?></td>
         	<td><?php echo $g->getHoraInicio(). " - " . $g->getHoraFinal(); ?></td>
         	<td><?php echo $g->getAula(); ?></td>
 
-      <?php }?>
+      <?php }}?>
       </tr>
     </table>
 

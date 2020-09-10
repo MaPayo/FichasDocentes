@@ -83,23 +83,23 @@ class SAGeneracionImplements implements SAGeneracion{
 		}
 		//Profesores de la asignatura
 		$sa = $factoriesSA->createSAGrupoClase();
-		$n = $sa->findGrupoClase($idAsignatura);
+		$n = $sa->listGrupoClase($idAsignatura);
 		$rowsGrupoClaseProfesor = $n;		
 		//Comprobamos si existe mod
 		$sa = $factoriesSA->createSAModGrupoClase();
-		$n = $sa->findModGrupoClase($idAsignatura);
-		if($n !== null){
-			$rowsGrupoClaseProfesorMod = $n;
+		$nmod = $sa->listModGrupoClase($idAsignatura);
+		if($nmod !== null){
+			$rowsGrupoClaseProfesorMod = $nmod;
 		}
 		//Profesores del laboratorio
 		$sa = $factoriesSA->createSAGrupoLaboratorio();
-		$n = $sa->findGrupoLaboratorio($idAsignatura);
+		$n = $sa->listGrupoLaboratorio($idAsignatura);
 		$rowsGrupoLaboratorioProfesor = $n;
 		//Comprobamos si existe mod
 		$sa = $factoriesSA->createSAModGrupoLaboratorio();
-		$n = $sa->findModGrupoLaboratorio($idAsignatura);
-		if($n !== null){
-			$rowsGrupoLaboratorioProfesorMod = $n;
+		$nmod = $sa->listModGrupoLaboratorio($idAsignatura);
+		if($nmod !== null){
+			$rowsGrupoLaboratorioProfesorMod = $nmod;
 		}
 		//Empezamos con los textos tochos y los mods
 		//Por ahora sin pandoc para poder probarlo
@@ -278,23 +278,23 @@ class SAGeneracionImplements implements SAGeneracion{
 		}
 		//Profesores de la asignatura
 		$sa = $factoriesSA->createSAGrupoClase();
-		$n = $sa->findGrupoClase($idAsignatura);
+		$n = $sa->listGrupoClase($idAsignatura);
 		$rowsGrupoClaseProfesor = $n;
 		//Comprobamos si existe mod
 		$sa = $factoriesSA->createSAModGrupoClase();
-		$n = $sa->findModGrupoClase($idAsignatura);
-		if($n !== null){
-			$rowsGrupoClaseProfesorMod = $n;
+		$nmod = $sa->listModGrupoClase($idAsignatura);
+		if($nmod !== null){
+			$rowsGrupoClaseProfesorMod = $nmod;
 		}
 		//Profesores del laboratorio
 		$sa = $factoriesSA->createSAGrupoLaboratorio();
-		$n = $sa->findGrupoLaboratorio($idAsignatura);
+		$n = $sa->listGrupoLaboratorio($idAsignatura);
 		$rowsGrupoLaboratorioProfesor = $n;
 		//Comprobamos si existe mod
 		$sa = $factoriesSA->createSAModGrupoLaboratorio();
-		$n = $sa->findModGrupoLaboratorio($idAsignatura);
-		if($n !== null){
-			$rowsGrupoLaboratorioProfesorMod = $n;
+		$nmod = $sa->listModGrupoLaboratorio($idAsignatura);
+		if($nmod !== null){
+			$rowsGrupoLaboratorioProfesorMod = $nmod;
 		}
 		//Empezamos con los textos tochos y los mods
 		//Por ahora sin pandoc para poder probarlo
