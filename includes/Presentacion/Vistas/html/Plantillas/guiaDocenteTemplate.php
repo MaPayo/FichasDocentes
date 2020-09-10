@@ -40,7 +40,7 @@ echo '<h1><center>Verificado</center></h1>';
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <td class="bg-info"><span class="p-1" >Ficha de la <br/> Asignarura: </span></td>
+                            <td class="bg-info"><span class="p-1" >Ficha de la <br/> Asignatura: </span></td>
                             <td colspan="4"><?php echo $NombreAsignatura;  ?></td>
                             <td class="bg-info"><span class="p-1">   Código: </span> </td>
                             <td colspan="2"><?php echo $idAsignatura;  ?></td>
@@ -414,8 +414,7 @@ if(!isset($rowsGrupoLaboratorioProfesor)){?>
       </div>
 <?php endif; ?>
     
-
-    
+<?php if(!empty($BreveDescripcionHTML)){?>
     <div class="contenedor">
       <div class="cabeceras">
           Breve descripción de contenidos
@@ -424,9 +423,9 @@ if(!isset($rowsGrupoLaboratorioProfesor)){?>
         <?php echo $BreveDescripcionHTML;  ?>
       </div>
     </div>
- 
+<?php } ?>
 
-    
+<?php if(!empty($ConocimientosPreviosHTML)){?>
     <div class="contenedor">
       <div class="cabeceras">
           Conocimientos previos necesarios
@@ -437,7 +436,9 @@ if(!isset($rowsGrupoLaboratorioProfesor)){?>
     </div>
   
 
-    
+    <?php } ?>
+
+<?php if(!empty($ProgramaTeoricoHTML)){?>
     <div class="contenedor">
       <div class="cabeceras">
         Programa Teorico
@@ -447,6 +448,9 @@ if(!isset($rowsGrupoLaboratorioProfesor)){?>
       </div>
     </div>
     
+    <?php } ?>
+
+<?php if(!empty($ProgramaSeminariooHTML)){?>
     <div class="contenedor">
       <div class="cabeceras">
         Programa de Seminario
@@ -456,6 +460,9 @@ if(!isset($rowsGrupoLaboratorioProfesor)){?>
       </div>
     </div>
     
+    <?php } ?>
+
+<?php if(!empty($ProgramaLaboratorioHTML)){?>
     <div class="contenedor">
       <div class="cabeceras">
         Programa de Laboratorio
@@ -464,7 +471,9 @@ if(!isset($rowsGrupoLaboratorioProfesor)){?>
         <?php echo $ProgramaLaboratorioHTML;  ?>
       </div>
     </div>
-    
+
+    <?php } ?>
+ 
 
 
     <div class="contenedor" style="page-break-after: avoid;">
@@ -514,7 +523,9 @@ if(!isset($rowsGrupoLaboratorioProfesor)){?>
             <tr>
                 <td class="text-left" colspan="3"><?php echo $RealizacionExamenesHTML;  ?></td>
             </tr>
+    
 
+<?php if(!empty($RealizacionLaboratorioHTML)){?>
              <tr>
                 <td class="bg-info"><span class="p-1">Realización Laboratorio </span></td>
                 <td class="bg-info"><span class="p-1">Peso: </span></td>
@@ -525,6 +536,9 @@ if(!isset($rowsGrupoLaboratorioProfesor)){?>
                 <td class="text-left" colspan="3"><?php echo $RealizacionLaboratorioHTML;  ?></td>
             </tr>
 
+            <?php } ?>
+            
+<?php if(!empty($RealizacionActividadesHTML)){?>
              <tr>
                 <td class="bg-info"><span class="p-1">Otras actividades </span></td>
                 <td class="bg-info"><span class="p-1">Peso: </span></td>
@@ -534,6 +548,7 @@ if(!isset($rowsGrupoLaboratorioProfesor)){?>
             <tr>
                 <td class="text-left" colspan="3"><?php echo $RealizacionActividadesHTML;  ?></td>
             </tr>
+            <?php } ?>
 
             <tr>
                 <td class="bg-info" colspan="3"><span class="p-1"> Calificación final  </span></td>
