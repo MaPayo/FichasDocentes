@@ -27,8 +27,15 @@ class FormSubida extends Form
     <input id="userfile" name="userfile" type="file">
     <br>
     <button type="submit" class="btn btn-success" id="btn-form" name="registrar">Guardar</button>';
-
-        return $html;
+    if(is_file(LOGS.'/log_errores.txt')){
+        $html .='<a href="downloadlog.php">
+		<button type="button" class="btn btn-secondary" id="btn-form">
+		Descargar Log
+		</button>
+        </a>';
+    }
+        
+    return $html;
     }
 
     protected function procesaFormulario($datos)
@@ -36,7 +43,7 @@ class FormSubida extends Form
         $huboerror = false;
         $erroresFormulario = array();
         $archivo = $datos['archivo'];
-        
+
         date_default_timezone_set("Europe/Madrid");
         $controller = new ControllerImplements();
         if (isset($_FILES['userfile'])) {
@@ -52,10 +59,10 @@ class FormSubida extends Form
 
                 mkdir(LOGS, 0777, true);
             }
-            
+
             //$nombre_con_ruta = RUTA_APP. '/../storage/' . $nombre_archivo;
-            $nombre_con_ruta = STORAGE. "/" . $nombre_archivo;
-            
+            $nombre_con_ruta = STORAGE . "/" . $nombre_archivo;
+
             //$tipo_archivo = $_FILES['userfile']['type'];
             $tamano_archivo = $_FILES['userfile']['size'];
             $info = new \SplFileInfo($nombre_archivo);
@@ -138,109 +145,115 @@ class FormSubida extends Form
 
                                     if ($icampo == 9)
                                         $email_profesor = utf8_encode(trim($data[$icampo])); //varchar
-                                } //For 
-                                if ($codigo_asignatura != "" && $codigo_asignatura != null) {
-                                    $comparacion = array(
-                                        'email' => $email_profesor,
-                                        'asignatura' => $codigo_asignatura
-                                    );
-                                    $context = new Context(FIND_PERMISOS_POR_PROFESOR_Y_ASIGNATURA, $comparacion);
-                                    $contextPermisos = $controller->action($context);
-                                    if ($contextPermisos->getEvent() === FIND_PERMISOS_POR_PROFESOR_Y_ASIGNATURA_FAIL) {
-                                        $permisos = new Permisos(null, 0, 0, 0, 0, 0, 0, 0, $codigo_asignatura, $email_profesor);
-                                        $context = new Context(CREATE_PERMISOS, $permisos);
-                                        $contextProfesor = $controller->action($context);
-                                        if ($contextProfesor->getEvent() === CREATE_PERMISOS_FAIL) {
-                                            $huboerror = true;
-                                            //throw new \PDOException($e->getMessage(), (int)$e->getCode());						
-                                            error_log(date("Y-m-d H:i:s") . " No se pudo crear los permisos del profesor con email" . $email_profesor . "\r\n", 3, LOGS."/log_errores.txt");
-                                        }
-                                    }
-                                    if ($insertaenGrupoClase) {
-                                        $comparacion = array(0 => $codigo_asignatura, 1 => $grupo_letra);
-                                        $context = new Context(FIND_GRUPO_CLASE_LETRA, $comparacion);
-                                        $contextGL = $controller->action($context);
-                                        if ($contextGL->getEvent() === FIND_GRUPO_CLASE_LETRA_FAIL) {
-                                            $grupoClase = new GrupoClase(null, $grupo_letra, 'español', $codigo_asignatura);
-                                            $context = new Context(CREATE_GRUPO_CLASE, $grupoClase);
-                                            $contextGC = $controller->action($context);
-                                        }else{
-                                            $grupoClase = new GrupoClase($contextGL->getData()->getIdGrupoClase(), $grupo_letra, $contextGL->getData()->getIdioma(), $codigo_asignatura);
-                                            $context = new Context(UPDATE_GRUPO_CLASE, $grupoClase);
-                                            $contextGC = $controller->action($context);
-                                        }
-                                        $comparacion = array(0 => $codigo_asignatura, 1 => $grupo_letra);
-                                        $context = new Context(FIND_GRUPO_CLASE_LETRA, $comparacion);
-                                        $contextGL = $controller->action($context);
-                                        $data = array("idGrupoClase"=> $contextGL->getData()->getIdGrupoClase(), "emailProfesor"=> $email_profesor);
-                                        $context = new Context(FIND_GRUPO_CLASE_PROFESOR, $data);
-                                        $contextGCP = $controller->action($context);
-                                        if ($contextGCP->getEvent() === FIND_GRUPO_CLASE_PROFESOR_FAIL) {
-                                            $grupoClaseP = new GrupoClaseProfesor($contextGL->getData()->getIdGrupoClase(), "", date("Y-m-d H:i:s", strtotime($hora_inicio)), date("Y-m-d H:i:s", strtotime($hora_fin)), $email_profesor);
-                                            $context = new Context(CREATE_GRUPO_CLASE_PROFESOR, $grupoClaseP);
-                                            $contextGCP = $controller->action($context);
-                                        }else{
-                                            $grupoClaseP = new GrupoClaseProfesor($contextGL->getData()->getIdGrupoClase(),"", date("Y-m-d H:i:s", strtotime($hora_inicio)), date("Y-m-d H:i:s", strtotime($hora_fin)), $email_profesor);
-                                            $context = new Context(UPDATE_GRUPO_CLASE_PROFESOR, $grupoClaseP);
-                                            $contextGCP = $controller->action($context);
-                                        }
-                                        $comparacion = array(0 => $contextGL->getData()->getIdGrupoClase(), 1 => $dia);
-                                        $context = new Context(FIND_HORARIO_CLASE_GRUPO_DIA, $comparacion);
-                                        $contextGCD = $controller->action($context);
-                                        $horario = new HorarioClase(null, $aula, $dia,date("Y-m-d H:i:s", strtotime($hora_inicio)), date("Y-m-d H:i:s", strtotime($hora_fin)), $contextGL->getData()->getIdGrupoClase());
-                                        if ($contextGCD->getEvent() === FIND_HORARIO_CLASE_GRUPO_DIA_FAIL) {
-                                            $context = new Context(CREATE_HORARIO_CLASE, $horario);
-                                            $contextGCD = $controller->action($context);
-                                        } elseif ($contextGCD->getEvent() === FIND_HORARIO_CLASE_GRUPO_DIA_OK) {
-                                            $horario->setIdHorarioClase($contextGCD->getData()->getIdHorarioClase());
-                                            $context = new Context(UPDATE_HORARIO_CLASE, $horario);
-                                            $contextGCD = $controller->action($context);
-                                        }
-                                    }
-                                    if ($insertaenGrupoLab) {
-                                        $comparacion = array(0 => $codigo_asignatura, 1 => $grupo_letra);
-                                        $context = new Context(FIND_GRUPO_LABORATORIO_LETRA, $comparacion);
-                                        $contextGL = $controller->action($context);
-                                        if ($contextGL->getEvent() === FIND_GRUPO_LABORATORIO_LETRA_FAIL) {
-                                            $grupoLaboratorio = new GrupoLaboratorio(null, $grupo_letra, 'español', $codigo_asignatura);
-                                            $context = new Context(CREATE_GRUPO_LABORATORIO, $grupoLaboratorio);
-                                            $contextGL = $controller->action($context);
-                                        } else{
-                                            $grupoLaboratorio = new GrupoLaboratorio($contextGL->getData()->getIdGrupoLab(), $grupo_letra, $contextGL->getData()->getIdioma(), $codigo_asignatura);
-                                            $context = new Context(UPDATE_GRUPO_LABORATORIO, $grupoLaboratorio);
-                                            $contextGL = $controller->action($context);
-                                        }
-                                        $comparacion = array(0 => $codigo_asignatura, 1 => $grupo_letra);
-                                        $context = new Context(FIND_GRUPO_LABORATORIO_LETRA, $comparacion);
-                                        $contextGL = $controller->action($context);
-                                        
-                                        $data = array("idGrupoLaboratorio"=> $contextGL->getData()->getIdGrupoLab(), "emailProfesor"=> $email_profesor);
-                                        $context = new Context(FIND_GRUPO_LABORATORIO_PROFESOR, $data);
-                                        $contextGCP = $controller->action($context);
-                                        if ($contextGCP->getEvent() === FIND_GRUPO_LABORATORIO_PROFESOR_FAIL) {
-                                            $grupoLaboratorioP = new GrupoLaboratorioProfesor($contextGL->getData()->getIdGrupoLab()," ",date("Y-m-d H:i:s"), date("Y-m-d H:i:s"), $email_profesor);
-                                            $context = new Context(CREATE_GRUPO_LABORATORIO_PROFESOR, $grupoLaboratorioP);
-                                            $contextGCP = $controller->action($context);
-                                        }else{
-                                            $grupoLaboratorioP = new GrupoLaboratorioProfesor($contextGL->getData()->getIdGrupoLab(), "",date("Y-m-d H:i:s"), date("Y-m-d H:i:s"), $email_profesor);
-                                            $context = new Context(UPDATE_GRUPO_LABORATORIO_PROFESOR, $grupoLaboratorioP);
-                                            $contextGCP = $controller->action($context);
-                                        }
-                                        $comparacion = array(0 => $contextGL->getData()->getIdGrupoLab(), 1 => $dia);
-                                        $context = new Context(FIND_HORARIO_LABORATORIO_GRUPO_DIA, $comparacion);
-                                        $contextGCD = $controller->action($context);
-                                        $horario = new HorarioLaboratorio(null, $aula, $dia, date("Y-m-d H:i:s", strtotime($hora_inicio)), date("Y-m-d H:i:s", strtotime($hora_fin)), $contextGL->getData()->getIdGrupoLab());
-                                        if ($contextGCD->getEvent() === FIND_HORARIO_LABORATORIO_GRUPO_DIA_FAIL) {
-                                            $context = new Context(CREATE_HORARIO_LABORATORIO, $horario);
-                                            $contextGCD = $controller->action($context);
-                                        } elseif ($contextGCD->getEvent() === FIND_HORARIO_LABORATORIO_GRUPO_DIA_OK) {
-                                            $horario->setIdHorarioLab($contextGCD->getData()->getIdHorarioLaboratorio());
-                                            $context = new Context(UPDATE_HORARIO_LABORATORIO, $horario);
-                                            $contextGCD = $controller->action($context);
-                                        }
-                                    }
-                                } //null
+                                } //For
 
+                                $context = new Context(FIND_ASIGNATURA, $codigo_asignatura);
+                                $as = $controller->action($context);
+                                if ($as->getEvent() === FIND_ASIGNATURA_OK) {
+                                    if ($codigo_asignatura != "" && $codigo_asignatura != null) {
+                                        $comparacion = array(
+                                            'email' => $email_profesor,
+                                            'asignatura' => $codigo_asignatura
+                                        );
+                                        $context = new Context(FIND_PERMISOS_POR_PROFESOR_Y_ASIGNATURA, $comparacion);
+                                        $contextPermisos = $controller->action($context);
+                                        if ($contextPermisos->getEvent() === FIND_PERMISOS_POR_PROFESOR_Y_ASIGNATURA_FAIL) {
+                                            $permisos = new Permisos(null, 0, 0, 0, 0, 0, 0, 0, $codigo_asignatura, $email_profesor);
+                                            $context = new Context(CREATE_PERMISOS, $permisos);
+                                            $contextProfesor = $controller->action($context);
+                                            if ($contextProfesor->getEvent() === CREATE_PERMISOS_FAIL) {
+                                                $huboerror = true;
+                                                //throw new \PDOException($e->getMessage(), (int)$e->getCode());						
+                                                error_log(date("Y-m-d H:i:s") . " No se pudo crear los permisos del profesor con email" . $email_profesor . "\r\n", 3, LOGS . "/log_errores.txt");
+                                            }
+                                        }
+                                        if ($insertaenGrupoClase) {
+                                            $comparacion = array(0 => $codigo_asignatura, 1 => $grupo_letra);
+                                            $context = new Context(FIND_GRUPO_CLASE_LETRA, $comparacion);
+                                            $contextGL = $controller->action($context);
+                                            if ($contextGL->getEvent() === FIND_GRUPO_CLASE_LETRA_FAIL) {
+                                                $grupoClase = new GrupoClase(null, $grupo_letra, 'español', $codigo_asignatura);
+                                                $context = new Context(CREATE_GRUPO_CLASE, $grupoClase);
+                                                $contextGC = $controller->action($context);
+                                            } else {
+                                                $grupoClase = new GrupoClase($contextGL->getData()->getIdGrupoClase(), $grupo_letra, $contextGL->getData()->getIdioma(), $codigo_asignatura);
+                                                $context = new Context(UPDATE_GRUPO_CLASE, $grupoClase);
+                                                $contextGC = $controller->action($context);
+                                            }
+                                            $comparacion = array(0 => $codigo_asignatura, 1 => $grupo_letra);
+                                            $context = new Context(FIND_GRUPO_CLASE_LETRA, $comparacion);
+                                            $contextGL = $controller->action($context);
+                                            $data = array("idGrupoClase" => $contextGL->getData()->getIdGrupoClase(), "emailProfesor" => $email_profesor);
+                                            $context = new Context(FIND_GRUPO_CLASE_PROFESOR, $data);
+                                            $contextGCP = $controller->action($context);
+                                            if ($contextGCP->getEvent() === FIND_GRUPO_CLASE_PROFESOR_FAIL) {
+                                                $grupoClaseP = new GrupoClaseProfesor($contextGL->getData()->getIdGrupoClase(), "", date("Y-m-d H:i:s", strtotime($hora_inicio)), date("Y-m-d H:i:s", strtotime($hora_fin)), $email_profesor);
+                                                $context = new Context(CREATE_GRUPO_CLASE_PROFESOR, $grupoClaseP);
+                                                $contextGCP = $controller->action($context);
+                                            } else {
+                                                $grupoClaseP = new GrupoClaseProfesor($contextGL->getData()->getIdGrupoClase(), "", date("Y-m-d H:i:s", strtotime($hora_inicio)), date("Y-m-d H:i:s", strtotime($hora_fin)), $email_profesor);
+                                                $context = new Context(UPDATE_GRUPO_CLASE_PROFESOR, $grupoClaseP);
+                                                $contextGCP = $controller->action($context);
+                                            }
+                                            $comparacion = array(0 => $contextGL->getData()->getIdGrupoClase(), 1 => $dia);
+                                            $context = new Context(FIND_HORARIO_CLASE_GRUPO_DIA, $comparacion);
+                                            $contextGCD = $controller->action($context);
+                                            $horario = new HorarioClase(null, $aula, $dia, date("Y-m-d H:i:s", strtotime($hora_inicio)), date("Y-m-d H:i:s", strtotime($hora_fin)), $contextGL->getData()->getIdGrupoClase());
+                                            if ($contextGCD->getEvent() === FIND_HORARIO_CLASE_GRUPO_DIA_FAIL) {
+                                                $context = new Context(CREATE_HORARIO_CLASE, $horario);
+                                                $contextGCD = $controller->action($context);
+                                            } elseif ($contextGCD->getEvent() === FIND_HORARIO_CLASE_GRUPO_DIA_OK) {
+                                                $horario->setIdHorarioClase($contextGCD->getData()->getIdHorarioClase());
+                                                $context = new Context(UPDATE_HORARIO_CLASE, $horario);
+                                                $contextGCD = $controller->action($context);
+                                            }
+                                        }
+                                        if ($insertaenGrupoLab) {
+                                            $comparacion = array(0 => $codigo_asignatura, 1 => $grupo_letra);
+                                            $context = new Context(FIND_GRUPO_LABORATORIO_LETRA, $comparacion);
+                                            $contextGL = $controller->action($context);
+                                            if ($contextGL->getEvent() === FIND_GRUPO_LABORATORIO_LETRA_FAIL) {
+                                                $grupoLaboratorio = new GrupoLaboratorio(null, $grupo_letra, 'español', $codigo_asignatura);
+                                                $context = new Context(CREATE_GRUPO_LABORATORIO, $grupoLaboratorio);
+                                                $contextGL = $controller->action($context);
+                                            } else {
+                                                $grupoLaboratorio = new GrupoLaboratorio($contextGL->getData()->getIdGrupoLab(), $grupo_letra, $contextGL->getData()->getIdioma(), $codigo_asignatura);
+                                                $context = new Context(UPDATE_GRUPO_LABORATORIO, $grupoLaboratorio);
+                                                $contextGL = $controller->action($context);
+                                            }
+                                            $comparacion = array(0 => $codigo_asignatura, 1 => $grupo_letra);
+                                            $context = new Context(FIND_GRUPO_LABORATORIO_LETRA, $comparacion);
+                                            $contextGL = $controller->action($context);
+
+                                            $data = array("idGrupoLaboratorio" => $contextGL->getData()->getIdGrupoLab(), "emailProfesor" => $email_profesor);
+                                            $context = new Context(FIND_GRUPO_LABORATORIO_PROFESOR, $data);
+                                            $contextGCP = $controller->action($context);
+                                            if ($contextGCP->getEvent() === FIND_GRUPO_LABORATORIO_PROFESOR_FAIL) {
+                                                $grupoLaboratorioP = new GrupoLaboratorioProfesor($contextGL->getData()->getIdGrupoLab(), " ", date("Y-m-d H:i:s"), date("Y-m-d H:i:s"), $email_profesor);
+                                                $context = new Context(CREATE_GRUPO_LABORATORIO_PROFESOR, $grupoLaboratorioP);
+                                                $contextGCP = $controller->action($context);
+                                            } else {
+                                                $grupoLaboratorioP = new GrupoLaboratorioProfesor($contextGL->getData()->getIdGrupoLab(), "", date("Y-m-d H:i:s"), date("Y-m-d H:i:s"), $email_profesor);
+                                                $context = new Context(UPDATE_GRUPO_LABORATORIO_PROFESOR, $grupoLaboratorioP);
+                                                $contextGCP = $controller->action($context);
+                                            }
+                                            $comparacion = array(0 => $contextGL->getData()->getIdGrupoLab(), 1 => $dia);
+                                            $context = new Context(FIND_HORARIO_LABORATORIO_GRUPO_DIA, $comparacion);
+                                            $contextGCD = $controller->action($context);
+                                            $horario = new HorarioLaboratorio(null, $aula, $dia, date("Y-m-d H:i:s", strtotime($hora_inicio)), date("Y-m-d H:i:s", strtotime($hora_fin)), $contextGL->getData()->getIdGrupoLab());
+                                            if ($contextGCD->getEvent() === FIND_HORARIO_LABORATORIO_GRUPO_DIA_FAIL) {
+                                                $context = new Context(CREATE_HORARIO_LABORATORIO, $horario);
+                                                $contextGCD = $controller->action($context);
+                                            } elseif ($contextGCD->getEvent() === FIND_HORARIO_LABORATORIO_GRUPO_DIA_OK) {
+                                                $horario->setIdHorarioLab($contextGCD->getData()->getIdHorarioLaboratorio());
+                                                $context = new Context(UPDATE_HORARIO_LABORATORIO, $horario);
+                                                $contextGCD = $controller->action($context);
+                                            }
+                                        }
+                                    } //null
+                                } else {
+                                    error_log(date("Y-m-d H:i:s") . " La asignatura que intenta añadir no existe \r\n", 3, LOGS . "/log_errores.txt");
+                                }
                             } //while
                         } //Sinerrores
 
@@ -274,14 +287,14 @@ class FormSubida extends Form
                                 $context = new Context(FIND_PROFESOR, $email);
                                 $contextProfesor = $controller->action($context);
                                 $profesor = new Profesor($email, $profesor, $depto, $despacho, $tutorias, $facultad);
-                                
+
                                 if ($contextProfesor->getEvent() === FIND_PROFESOR_OK) {
                                     $context = new Context(UPDATE_PROFESOR, $profesor);
                                     $contextProfesor = $controller->action($context);
                                     if ($contextProfesor->getEvent() === UPDATE_PROFESOR_FAIL) {
                                         $huboerror = true;
                                         //throw new \PDOException($e->getMessage(), (int)$e->getCode());						
-                                        error_log(date("Y-m-d H:i:s") . " No pudo actualizarse el profesor con email" . $email . "\r\n", 3, LOGS."/log_errores.txt");
+                                        error_log(date("Y-m-d H:i:s") . " No pudo actualizarse el profesor con email" . $email . "\r\n", 3, LOGS . "/log_errores.txt");
                                     }
                                 } elseif ($contextProfesor->getEvent() === FIND_PROFESOR_FAIL) {
                                     $context = new Context(CREATE_PROFESOR, $profesor);
@@ -289,7 +302,7 @@ class FormSubida extends Form
                                     if ($contextProfesor->getEvent() === CREATE_PROFESOR_FAIL) {
                                         $huboerror = true;
                                         //throw new \PDOException($e->getMessage(), (int)$e->getCode());						
-                                        error_log(date("Y-m-d H:i:s") . " No pudo crearse el profesor con email" . $email . "\r\n", 3, LOGS."/log_errores.txt");
+                                        error_log(date("Y-m-d H:i:s") . " No pudo crearse el profesor con email" . $email . "\r\n", 3, LOGS . "/log_errores.txt");
                                     }
                                 }
                             } //FinWhile
@@ -337,7 +350,7 @@ class FormSubida extends Form
                                     if ($contextUsuario->getEvent() === UPDATE_USUARIO_FAIL) {
                                         $huboerror = true;
                                         //throw new \PDOException($e->getMessage(), (int)$e->getCode());						
-                                        error_log(date("Y-m-d H:i:s") . " No pudo actualizarse el usuario con email" . $email . "\r\n", 3, LOGS."/log_errores.txt");
+                                        error_log(date("Y-m-d H:i:s") . " No pudo actualizarse el usuario con email" . $email . "\r\n", 3, LOGS . "/log_errores.txt");
                                     }
                                 } elseif ($contextUsuario->getEvent() === FIND_USUARIO_FAIL) {
                                     $context = new Context(CREATE_USUARIO, $usuario);
@@ -345,7 +358,7 @@ class FormSubida extends Form
                                     if ($contextUsuario->getEvent() === CREATE_USUARIO_FAIL) {
                                         $huboerror = true;
                                         //throw new \PDOException($e->getMessage(), (int)$e->getCode());						
-                                        error_log(date("Y-m-d H:i:s") . " No pudo crearse el usuario con email" . $email . "\r\n", 3, LOGS."/log_errores.txt");
+                                        error_log(date("Y-m-d H:i:s") . " No pudo crearse el usuario con email" . $email . "\r\n", 3, LOGS . "/log_errores.txt");
                                     }
                                 }
                             } //FinWhile
@@ -430,7 +443,7 @@ class FormSubida extends Form
 
                                     if ($icampo == 12) {
                                         $t = trim($data[$icampo]); //float
-                                        $t = floatval(str_replace(',','.',$t));                                
+                                        $t = floatval(str_replace(',', '.', $t));
                                         if ($t == "" || $t == null)
                                             $t = 0;
                                         //$t = (float)trim($data[$icampo]); //float
@@ -440,7 +453,7 @@ class FormSubida extends Form
 
                                     if ($icampo == 13) {
                                         $p = trim($data[$icampo]); //float
-                                        $p = floatval(str_replace(',','.',$p));
+                                        $p = floatval(str_replace(',', '.', $p));
                                         if ($p == "" || $p == null)
                                             $p = 0;
                                         //$p = trim($data[$icampo]); //float
@@ -449,7 +462,7 @@ class FormSubida extends Form
 
                                     if ($icampo == 14) {
                                         $l = trim($data[$icampo]); //float
-                                        $l = floatval(str_replace(',','.',$l));
+                                        $l = floatval(str_replace(',', '.', $l));
                                         if ($l == "" || $l == null)
                                             $l = 0;
                                         //$l = (float)trim($data[$icampo]); //float
@@ -494,7 +507,7 @@ class FormSubida extends Form
                                         if ($contextGrado->getEvent() === UPDATE_GRADO_FAIL) {
                                             $huboerror = true;
                                             //throw new \PDOException($e->getMessage(), (int)$e->getCode());						
-                                            error_log(date("Y-m-d H:i:s") . " No pudo actualizarse el grado" . $nombre_grado . "\r\n", 3, LOGS."/log_errores.txt");
+                                            error_log(date("Y-m-d H:i:s") . " No pudo actualizarse el grado" . $nombre_grado . "\r\n", 3, LOGS . "/log_errores.txt");
                                         }
                                     } elseif ($contextGrado->getEvent() === FIND_GRADO_FAIL) {
                                         $context = new Context(CREATE_GRADO, $grado);
@@ -502,7 +515,7 @@ class FormSubida extends Form
                                         if ($contextGrado->getEvent() === CREATE_GRADO_FAIL) {
                                             $huboerror = true;
                                             //throw new \PDOException($e->getMessage(), (int)$e->getCode());						
-                                            error_log(date("Y-m-d H:i:s") . " No pudo crearse el grado" . $nombre_grado . "\r\n", 3, LOGS."/log_errores.txt");
+                                            error_log(date("Y-m-d H:i:s") . " No pudo crearse el grado" . $nombre_grado . "\r\n", 3, LOGS . "/log_errores.txt");
                                         }
                                     } //Grado
                                     $context = new Context(FIND_MODULO, $id_modulo);
@@ -514,7 +527,7 @@ class FormSubida extends Form
                                         if ($contextModulo->getEvent() === UPDATE_MODULO_FAIL) {
                                             $huboerror = true;
                                             //throw new \PDOException($e->getMessage(), (int)$e->getCode());						
-                                            error_log(date("Y-m-d H:i:s") . " No pudo actualizarse el modulo" . $nombre_modulo . "\r\n", 3, LOGS."/log_errores.txt");
+                                            error_log(date("Y-m-d H:i:s") . " No pudo actualizarse el modulo" . $nombre_modulo . "\r\n", 3, LOGS . "/log_errores.txt");
                                         }
                                     } elseif ($contextModulo->getEvent() === FIND_MODULO_FAIL) {
                                         $context = new Context(CREATE_MODULO, $modulo);
@@ -522,7 +535,7 @@ class FormSubida extends Form
                                         if ($contextModulo->getEvent() === CREATE_MODULO_FAIL) {
                                             $huboerror = true;
                                             //throw new \PDOException($e->getMessage(), (int)$e->getCode());						
-                                            error_log(date("Y-m-d H:i:s") . " No pudo crearse el modulo" . $nombre_modulo . "\r\n", 3, LOGS."/log_errores.txt");
+                                            error_log(date("Y-m-d H:i:s") . " No pudo crearse el modulo" . $nombre_modulo . "\r\n", 3, LOGS . "/log_errores.txt");
                                         }
                                     } //Modulo
                                     $context = new Context(FIND_MATERIA, $id_materia);
@@ -534,7 +547,7 @@ class FormSubida extends Form
                                         if ($contextMateria->getEvent() === UPDATE_MATERIA_FAIL) {
                                             $huboerror = true;
                                             //throw new \PDOException($e->getMessage(), (int)$e->getCode());						
-                                            error_log(date("Y-m-d H:i:s") . " No pudo actualizarse la materia " . $nombre_materia . "\r\n", 3, LOGS."/log_errores.txt");
+                                            error_log(date("Y-m-d H:i:s") . " No pudo actualizarse la materia " . $nombre_materia . "\r\n", 3, LOGS . "/log_errores.txt");
                                         }
                                     } elseif ($contextMateria->getEvent() === FIND_MATERIA_FAIL) {
                                         $context = new Context(CREATE_MATERIA, $materia);
@@ -542,28 +555,28 @@ class FormSubida extends Form
                                         if ($contextMateria->getEvent() === CREATE_MATERIA_FAIL) {
                                             $huboerror = true;
                                             //throw new \PDOException($e->getMessage(), (int)$e->getCode());						
-                                            error_log(date("Y-m-d H:i:s") . " No pudo crearse la materia " . $nombre_materia . "\r\n", 3, LOGS."/log_errores.txt");
+                                            error_log(date("Y-m-d H:i:s") . " No pudo crearse la materia " . $nombre_materia . "\r\n", 3, LOGS . "/log_errores.txt");
                                         }
                                     } //Materia
-                                    
+
                                     $context = new Context(FIND_ASIGNATURA, $id_materia);
                                     $contextAsignatura = $controller->action($context);
-                                    
+
                                     //echo $t . $p.$l;
                                     $suma_creditos = $t + $p + $l;
                                     $asignatura = new Asignatura($codigo_asignatura, $nombre_asignatura, "", $curso, $semestre, $nombre_asignatura_ingles, $suma_creditos, $coordinador, 'B', 1, $id_materia);
                                     $teorico = new Teorico(null, $t, $porciento_t, $codigo_asignatura);
                                     $laboratorio = new Laboratorio(null, $l, $porciento_l, $codigo_asignatura);
                                     $problema = new Problema(null, $p, $porciento_p, $codigo_asignatura);
-                                    
+
                                     if ($contextAsignatura->getEvent() === FIND_ASIGNATURA_OK) {
                                         $context = new Context(UPDATE_ASIGNATURA, $asignatura);
                                         $contextAsignatura = $controller->action($context);
-                                        
+
                                         if ($contextAsignatura->getEvent() === UPDATE_ASIGNATURA_FAIL) {
                                             $huboerror = true;
                                             //throw new \PDOException($e->getMessage(), (int)$e->getCode());						
-                                            error_log(date("Y-m-d H:i:s") . " No pudo actualizarse la asignatura " . $nombre_asignatura . "\r\n", 3, LOGS."/log_errores.txt");
+                                            error_log(date("Y-m-d H:i:s") . " No pudo actualizarse la asignatura " . $nombre_asignatura . "\r\n", 3, LOGS . "/log_errores.txt");
                                         } else {
                                             //Actualizamos teorico, laboratorio y problemas. Si de por si la asignatura ya creada los tenia los actualizamos
                                             $context = new Context(FIND_TEORICO, $codigo_asignatura);
@@ -575,7 +588,7 @@ class FormSubida extends Form
                                                 if ($contextAsignatura->getEvent() === UPDATE_TEORICO_FAIL) {
                                                     $huboerror = true;
                                                     //throw new \PDOException($e->getMessage(), (int)$e->getCode());						
-                                                    error_log(date("Y-m-d H:i:s") . " No pudo actualizarse el teorico de la asignatura " . $nombre_asignatura . "\r\n", 3, LOGS."/log_errores.txt");
+                                                    error_log(date("Y-m-d H:i:s") . " No pudo actualizarse el teorico de la asignatura " . $nombre_asignatura . "\r\n", 3, LOGS . "/log_errores.txt");
                                                 }
                                             } elseif ($contextTeorico->getEvent() === FIND_TEORICO_FAIL) {
                                                 $context = new Context(CREATE_TEORICO, $teorico);
@@ -583,13 +596,13 @@ class FormSubida extends Form
                                                 if ($contextAsignatura->getEvent() === CREATE_TEORICO_FAIL) {
                                                     $huboerror = true;
                                                     //throw new \PDOException($e->getMessage(), (int)$e->getCode());						
-                                                    error_log(date("Y-m-d H:i:s") . " No pudo crearse el teorico de la asignatura " . $nombre_asignatura . "\r\n", 3, LOGS."/log_errores.txt");
+                                                    error_log(date("Y-m-d H:i:s") . " No pudo crearse el teorico de la asignatura " . $nombre_asignatura . "\r\n", 3, LOGS . "/log_errores.txt");
                                                 }
                                             }
-                                            
+
                                             $context = new Context(FIND_PROBLEMA, $codigo_asignatura);
                                             $contextProblema = $controller->action($context);
-                                            
+
                                             if ($contextProblema->getEvent() === FIND_PROBLEMA_OK) {
                                                 $problema->setIdProblema($contextProblema->getData()->getIdProblema());
                                                 $context = new Context(UPDATE_PROBLEMA, $problema);
@@ -597,7 +610,7 @@ class FormSubida extends Form
                                                 if ($contextAsignatura->getEvent() === UPDATE_PROBLEMA_FAIL) {
                                                     $huboerror = true;
                                                     //throw new \PDOException($e->getMessage(), (int)$e->getCode());						
-                                                    error_log(date("Y-m-d H:i:s") . " No pudo actualizarse el problema de la asignatura " . $nombre_asignatura . "\r\n", 3, LOGS."/log_errores.txt");
+                                                    error_log(date("Y-m-d H:i:s") . " No pudo actualizarse el problema de la asignatura " . $nombre_asignatura . "\r\n", 3, LOGS . "/log_errores.txt");
                                                 }
                                             } elseif ($contextProblema->getEvent() === FIND_PROBLEMA_FAIL) {
                                                 $context = new Context(CREATE_PROBLEMA, $problema);
@@ -605,13 +618,13 @@ class FormSubida extends Form
                                                 if ($contextAsignatura->getEvent() === CREATE_PROBLEMA_FAIL) {
                                                     $huboerror = true;
                                                     //throw new \PDOException($e->getMessage(), (int)$e->getCode());						
-                                                    error_log(date("Y-m-d H:i:s") . " No pudo crearse el problema de la asignatura " . $nombre_asignatura . "\r\n", 3, LOGS."/log_errores.txt");
+                                                    error_log(date("Y-m-d H:i:s") . " No pudo crearse el problema de la asignatura " . $nombre_asignatura . "\r\n", 3, LOGS . "/log_errores.txt");
                                                 }
                                             }
-                                            
+
                                             $context = new Context(FIND_LABORATORIO, $codigo_asignatura);
                                             $contextLaboratorio = $controller->action($context);
-                                            
+
                                             if ($contextLaboratorio->getEvent() === FIND_LABORATORIO_OK) {
                                                 $laboratorio->setIdLaboratorio($contextLaboratorio->getData()->getIdLaboratorio());
                                                 $context = new Context(UPDATE_LABORATORIO, $laboratorio);
@@ -619,7 +632,7 @@ class FormSubida extends Form
                                                 if ($contextAsignatura->getEvent() === UPDATE_LABORATORIO_FAIL) {
                                                     $huboerror = true;
                                                     //throw new \PDOException($e->getMessage(), (int)$e->getCode());						
-                                                    error_log(date("Y-m-d H:i:s") . " No pudo actualizarse el laboratorio de la asignatura " . $nombre_asignatura . "\r\n", 3, LOGS."/log_errores.txt");
+                                                    error_log(date("Y-m-d H:i:s") . " No pudo actualizarse el laboratorio de la asignatura " . $nombre_asignatura . "\r\n", 3, LOGS . "/log_errores.txt");
                                                 }
                                             } elseif ($contextLaboratorio->getEvent() === FIND_LABORATORIO_FAIL) {
                                                 $context = new Context(CREATE_LABORATORIO, $laboratorio);
@@ -627,7 +640,7 @@ class FormSubida extends Form
                                                 if ($contextAsignatura->getEvent() === CREATE_LABORATORIO_FAIL) {
                                                     $huboerror = true;
                                                     //throw new \PDOException($e->getMessage(), (int)$e->getCode());						
-                                                    error_log(date("Y-m-d H:i:s") . " No pudo crearse el laboratorio de la asignatura " . $nombre_asignatura . "\r\n", 3, LOGS."/log_errores.txt");
+                                                    error_log(date("Y-m-d H:i:s") . " No pudo crearse el laboratorio de la asignatura " . $nombre_asignatura . "\r\n", 3, LOGS . "/log_errores.txt");
                                                 }
                                             }
                                         }
@@ -637,7 +650,7 @@ class FormSubida extends Form
                                         if ($contextAsignatura->getEvent() === CREATE_ASIGNATURA_FAIL) {
                                             $huboerror = true;
                                             //throw new \PDOException($e->getMessage(), (int)$e->getCode());						
-                                            error_log(date("Y-m-d H:i:s") . " No pudo crearse la asignatura " . $nombre_asignatura . "\r\n", 3, LOGS."/log_errores.txt");
+                                            error_log(date("Y-m-d H:i:s") . " No pudo crearse la asignatura " . $nombre_asignatura . "\r\n", 3, LOGS . "/log_errores.txt");
                                         } else {
                                             //Creamos su Mod asignatura
                                             $modAsignatura = new ModAsignatura($codigo_asignatura, date("Y-m-d H:i:s"), null, $codigo_asignatura);
@@ -646,64 +659,64 @@ class FormSubida extends Form
                                             if ($contextMA->getEvent() === CREATE_MODASIGNATURA_FAIL) {
                                                 $huboerror = true;
                                                 //throw new \PDOException($e->getMessage(), (int)$e->getCode());						
-                                                error_log(date("Y-m-d H:i:s") . " No pudo crearse el control de versiones de la asignatura " . $nombre_asignatura . "\r\n", 3, LOGS."/log_errores.txt");
+                                                error_log(date("Y-m-d H:i:s") . " No pudo crearse el control de versiones de la asignatura " . $nombre_asignatura . "\r\n", 3, LOGS . "/log_errores.txt");
                                             }
                                             //Creamos las tablas vacias
-                                            $configuracion = new Configuracion(null,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,$codigo_asignatura);
+                                            $configuracion = new Configuracion(null, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, $codigo_asignatura);
                                             $context = new Context(CREATE_CONFIGURACION, $configuracion);
                                             $contextC = $controller->action($context);
-                                            
-                                            $metodologia = new Metodologia(null,"","",$codigo_asignatura);
+
+                                            $metodologia = new Metodologia(null, "", "", $codigo_asignatura);
                                             $context = new Context(CREATE_METODOLOGIA, $metodologia);
                                             $contextM = $controller->action($context);
-                                            
-                                            $bibliografia = new Bibliografia(null, "","",$codigo_asignatura);
+
+                                            $bibliografia = new Bibliografia(null, "", "", $codigo_asignatura);
                                             $context = new Context(CREATE_BIBLIOGRAFIA, $bibliografia);
                                             $contextB = $controller->action($context);
-                                            
-                                            $competenciasAsignatura = new CompetenciaAsignatura(null, "","","","","","","","",$codigo_asignatura);
+
+                                            $competenciasAsignatura = new CompetenciaAsignatura(null, "", "", "", "", "", "", "", "", $codigo_asignatura);
                                             $context = new Context(CREATE_COMPETENCIAS_ASIGNATURA, $competenciasAsignatura);
                                             $contextCA = $controller->action($context);
-                                            
-                                            $evaluacion = new Evaluacion(null,"","",0,"","",0,"","",0,"","",$codigo_asignatura);
+
+                                            $evaluacion = new Evaluacion(null, "", "", 0, "", "", 0, "", "", 0, "", "", $codigo_asignatura);
                                             $context = new Context(CREATE_EVALUACION, $evaluacion);
                                             $contextE = $controller->action($context);
-                                            
-                                            $programaasignatura = new ProgramaAsignatura(null,"","","","","","","","","","",$codigo_asignatura);
+
+                                            $programaasignatura = new ProgramaAsignatura(null, "", "", "", "", "", "", "", "", "", "", $codigo_asignatura);
                                             $context = new Context(CREATE_PROGRAMA_ASIGNATURA, $programaasignatura);
                                             $contextP = $controller->action($context);
-                                            
-                                            $verifica = new Verifica(null, 0,0,0,0,0,0,$codigo_asignatura);
-                                            $context= new Context(CREATE_VERIFICA, $verifica);
+
+                                            $verifica = new Verifica(null, 0, 0, 0, 0, 0, 0, $codigo_asignatura);
+                                            $context = new Context(CREATE_VERIFICA, $verifica);
                                             $contextv = $controller->action($context);
-                                            
+
                                             //Actualizamos teorico, laboratorio y problemas. Si de por si la asignatura ya creada los tenia los actualizamos
                                             $context = new Context(CREATE_TEORICO, $teorico);
                                             $contextTeorico = $controller->action($context);
                                             if ($contextTeorico->getEvent() === CREATE_TEORICO_FAIL) {
                                                 $huboerror = true;
                                                 //throw new \PDOException($e->getMessage(), (int)$e->getCode());						
-                                                error_log(date("Y-m-d H:i:s") . " No pudo crearse el teorico de la asignatura " . $nombre_asignatura . "\r\n", 3, LOGS."/log_errores.txt");
+                                                error_log(date("Y-m-d H:i:s") . " No pudo crearse el teorico de la asignatura " . $nombre_asignatura . "\r\n", 3, LOGS . "/log_errores.txt");
                                             }
                                             $context = new Context(CREATE_PROBLEMA, $problema);
                                             $contextProblema = $controller->action($context);
                                             if ($contextProblema->getEvent() === CREATE_PROBLEMA_FAIL) {
                                                 $huboerror = true;
                                                 //throw new \PDOException($e->getMessage(), (int)$e->getCode());						
-                                                error_log(date("Y-m-d H:i:s") . " No pudo crearse el problema de la asignatura " . $nombre_asignatura . "\r\n", 3, LOGS."/log_errores.txt");
+                                                error_log(date("Y-m-d H:i:s") . " No pudo crearse el problema de la asignatura " . $nombre_asignatura . "\r\n", 3, LOGS . "/log_errores.txt");
                                             }
                                             $context = new Context(CREATE_LABORATORIO, $laboratorio);
                                             $contextLaboratorio = $controller->action($context);
                                             if ($contextLaboratorio->getEvent() === CREATE_LABORATORIO_FAIL) {
                                                 $huboerror = true;
                                                 //throw new \PDOException($e->getMessage(), (int)$e->getCode());						
-                                                error_log(date("Y-m-d H:i:s") . " No pudo crearse el laboratorio de la asignatura " . $nombre_asignatura . "\r\n", 3, LOGS."/log_errores.txt");
+                                                error_log(date("Y-m-d H:i:s") . " No pudo crearse el laboratorio de la asignatura " . $nombre_asignatura . "\r\n", 3, LOGS . "/log_errores.txt");
                                             }
-                                           
+
                                             if ($contextC->getEvent() === CREATE_CONFIGURACION_FAIL) {
                                                 $huboerror = true;
                                                 //throw new \PDOException($e->getMessage(), (int)$e->getCode());						
-                                                error_log(date("Y-m-d H:i:s") . " No pudo crearse la configuración de la asignatura " . $nombre_asignatura . "\r\n", 3, LOGS."/log_errores.txt");
+                                                error_log(date("Y-m-d H:i:s") . " No pudo crearse la configuración de la asignatura " . $nombre_asignatura . "\r\n", 3, LOGS . "/log_errores.txt");
                                             }
                                         }
                                     }
