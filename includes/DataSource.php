@@ -80,7 +80,7 @@ class DataSource{
                 $num_tablas_afect = $consulta->rowCount();
                 //Muestra los errores de la BBD (depuracion) QUITAR!!!!!
                 $arr = $consulta->errorInfo();
-                print_r($arr);
+                //print_r($arr);
                 return $num_tablas_afect;
             }
         }

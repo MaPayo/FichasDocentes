@@ -164,22 +164,30 @@ class FormSubida extends Form
                                             $grupoClase = new GrupoClase(null, $grupo_letra, 'español', $codigo_asignatura);
                                             $context = new Context(CREATE_GRUPO_CLASE, $grupoClase);
                                             $contextGC = $controller->action($context);
+                                        }else{
+                                            $grupoClase = new GrupoClase($contextGL->getData()->getIdGrupoClase(), $grupo_letra, $contextGL->getData()->getIdioma(), $codigo_asignatura);
+                                            $context = new Context(UPDATE_GRUPO_CLASE, $grupoClase);
+                                            $contextGC = $controller->action($context);
                                         }
                                         $comparacion = array(0 => $codigo_asignatura, 1 => $grupo_letra);
                                         $context = new Context(FIND_GRUPO_CLASE_LETRA, $comparacion);
                                         $contextGL = $controller->action($context);
-                                        $data = array('idGrupoClase'=> $contextGL->getData()->getIdGrupoClase(), 'emailProfesor'=> $email_profesor);
-                                        $context = new Context(FIND_GRUPO_CLASE_PROFESOR, $contextGL->getData()->getIdGrupoClase());
+                                        $data = array("idGrupoClase"=> $contextGL->getData()->getIdGrupoClase(), "emailProfesor"=> $email_profesor);
+                                        $context = new Context(FIND_GRUPO_CLASE_PROFESOR, $data);
                                         $contextGCP = $controller->action($context);
                                         if ($contextGCP->getEvent() === FIND_GRUPO_CLASE_PROFESOR_FAIL) {
-                                            $grupoClaseP = new GrupoClaseProfesor($contextGL->getData()->getIdGrupoClase(), "", "", "", $email_profesor);
+                                            $grupoClaseP = new GrupoClaseProfesor($contextGL->getData()->getIdGrupoClase(), "", date("Y-m-d H:i:s", strtotime($hora_inicio)), date("Y-m-d H:i:s", strtotime($hora_fin)), $email_profesor);
                                             $context = new Context(CREATE_GRUPO_CLASE_PROFESOR, $grupoClaseP);
+                                            $contextGCP = $controller->action($context);
+                                        }else{
+                                            $grupoClaseP = new GrupoClaseProfesor($contextGL->getData()->getIdGrupoClase(),"", date("Y-m-d H:i:s", strtotime($hora_inicio)), date("Y-m-d H:i:s", strtotime($hora_fin)), $email_profesor);
+                                            $context = new Context(UPDATE_GRUPO_CLASE_PROFESOR, $grupoClaseP);
                                             $contextGCP = $controller->action($context);
                                         }
                                         $comparacion = array(0 => $contextGL->getData()->getIdGrupoClase(), 1 => $dia);
                                         $context = new Context(FIND_HORARIO_CLASE_GRUPO_DIA, $comparacion);
                                         $contextGCD = $controller->action($context);
-                                        $horario = new HorarioClase(null, $aula, $dia, $hora_inicio, $hora_fin, $contextGL->getData()->getIdGrupoClase());
+                                        $horario = new HorarioClase(null, $aula, $dia,date("Y-m-d H:i:s", strtotime($hora_inicio)), date("Y-m-d H:i:s", strtotime($hora_fin)), $contextGL->getData()->getIdGrupoClase());
                                         if ($contextGCD->getEvent() === FIND_HORARIO_CLASE_GRUPO_DIA_FAIL) {
                                             $context = new Context(CREATE_HORARIO_CLASE, $horario);
                                             $contextGCD = $controller->action($context);
@@ -197,18 +205,31 @@ class FormSubida extends Form
                                             $grupoLaboratorio = new GrupoLaboratorio(null, $grupo_letra, 'español', $codigo_asignatura);
                                             $context = new Context(CREATE_GRUPO_LABORATORIO, $grupoLaboratorio);
                                             $contextGL = $controller->action($context);
+                                        } else{
+                                            $grupoLaboratorio = new GrupoLaboratorio($contextGL->getData()->getIdGrupoLab(), $grupo_letra, $contextGL->getData()->getIdioma(), $codigo_asignatura);
+                                            $context = new Context(UPDATE_GRUPO_LABORATORIO, $grupoLaboratorio);
+                                            $contextGL = $controller->action($context);
                                         }
-                                        $context = new Context(FIND_GRUPO_LABORATORIO_PROFESOR, $contextGL->getData()->getIdGrupoLaboratorio());
+                                        $comparacion = array(0 => $codigo_asignatura, 1 => $grupo_letra);
+                                        $context = new Context(FIND_GRUPO_LABORATORIO_LETRA, $comparacion);
+                                        $contextGL = $controller->action($context);
+                                        
+                                        $data = array("idGrupoLaboratorio"=> $contextGL->getData()->getIdGrupoLab(), "emailProfesor"=> $email_profesor);
+                                        $context = new Context(FIND_GRUPO_LABORATORIO_PROFESOR, $data);
                                         $contextGCP = $controller->action($context);
                                         if ($contextGCP->getEvent() === FIND_GRUPO_LABORATORIO_PROFESOR_FAIL) {
-                                            $grupoLaboratorioP = new GrupoLaboratorioProfesor($contextGL->getData()->getIdGrupoLaboratorio(), "", "", "", $email_profesor);
+                                            $grupoLaboratorioP = new GrupoLaboratorioProfesor($contextGL->getData()->getIdGrupoLab()," ",date("Y-m-d H:i:s"), date("Y-m-d H:i:s"), $email_profesor);
                                             $context = new Context(CREATE_GRUPO_LABORATORIO_PROFESOR, $grupoLaboratorioP);
                                             $contextGCP = $controller->action($context);
+                                        }else{
+                                            $grupoLaboratorioP = new GrupoLaboratorioProfesor($contextGL->getData()->getIdGrupoLab(), "",date("Y-m-d H:i:s"), date("Y-m-d H:i:s"), $email_profesor);
+                                            $context = new Context(UPDATE_GRUPO_LABORATORIO_PROFESOR, $grupoLaboratorioP);
+                                            $contextGCP = $controller->action($context);
                                         }
-                                        $comparacion = array(0 => $contextGL->getData()->getIdGrupoLaboratorio(), 1 => $dia);
+                                        $comparacion = array(0 => $contextGL->getData()->getIdGrupoLab(), 1 => $dia);
                                         $context = new Context(FIND_HORARIO_LABORATORIO_GRUPO_DIA, $comparacion);
                                         $contextGCD = $controller->action($context);
-                                        $horario = new HorarioLaboratorio(null, $aula, $dia, $hora_inicio, $hora_fin, $contextGL->getData()->getIdGrupoLaboratorio());
+                                        $horario = new HorarioLaboratorio(null, $aula, $dia, date("Y-m-d H:i:s", strtotime($hora_inicio)), date("Y-m-d H:i:s", strtotime($hora_fin)), $contextGL->getData()->getIdGrupoLab());
                                         if ($contextGCD->getEvent() === FIND_HORARIO_LABORATORIO_GRUPO_DIA_FAIL) {
                                             $context = new Context(CREATE_HORARIO_LABORATORIO, $horario);
                                             $contextGCD = $controller->action($context);
