@@ -47,9 +47,9 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                         <div class="col-md-6 col-12">
                             <div class="card ">
                                 <div class="card-header text-center">
-                                    <h2>Borrar borrador competencias asignatura</h2>
+                                    <h2>Borrar el borrador de las competencias</h2>
                                 </div>
-                                <div class="card-body">
+                                <div class="card-body text-center">
                                     <?php
                                     if (isset($_GET['Confirmacion']) && $_GET['Confirmacion'] === 'y') {
                                         if(isset($_GET['IdAsignatura'])){
@@ -82,18 +82,18 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                        }   
                                     }else{
                                         ?>
-                                        ¿Estas seguro de que quieres borrar el borrador de las competencias asignatura?
+                                        ¿Estás seguro de que quieres borrar el borrador de las competencias?
                                         <div class="text-center">
+                                          <a href="indexAcceso.php?IdGrado=<?php echo $_GET['IdGrado']; ?>&IdAsignatura=<?php echo $_GET[$name]; ?>">
+                                            <button type="button" class="btn btn-secondary" id="btn-form">
+                                              Cancelar
+                                            </button>
+                                          </a>
                                           <a href="borrarCompetenciasAsignatura.php?IdGrado=<?php echo $_GET['IdGrado']; ?>&IdModAsignatura=<?php echo $_GET[$name]; ?>&Confirmacion=y">
                                             <button type="button" class="btn btn-success" id="btn-form">
-                                              Si
+                                              Aceptar
                                             </button>
                   
-                                          </a>
-                                          <a href="indexAcceso.php?IdGrado=<?php echo $_GET['IdGrado']; ?>&IdAsignatura=<?php echo $_GET[$name]; ?>">
-                                            <button type="button" class="btn btn-danger" id="btn-form">
-                                              No
-                                            </button>
                                           </a>
                                         </div>
                                       <?php

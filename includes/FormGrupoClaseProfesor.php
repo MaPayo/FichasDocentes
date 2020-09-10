@@ -22,16 +22,19 @@ class FormGrupoClaseProfesor extends Form
 
 		$html = '<input type="hidden" name="idGrupoClase" value="' . $idGrupoClase . '" required />
 		<input type="hidden" name="idAsignatura" value="' . $idAsignatura . '" required />
-		<input type="hidden" name="idGrado" value="' . $idGrado . '" required />';
+		<input type="hidden" name="idGrado" value="' . $idGrado . '" required />
+
+		<div class="form-row">';
+
 		if(isset($emailProfesor)){
-			$html.='<div class="form-group">
+			$html.='<div class="form-group col-md-9">
 			<label for="emailProfesor">Profesor</label>
 			<input class="form-control" type="text" id="emailProfesor" name="emailProfesor" value="' . $emailProfesor. '" readonly="readonly" />
 			</div>';
 		}else{
-			$html.='<div class="form-group">
+			$html.='<div class="form-group col-md-9">
 			<label for="emailProfesor">Profesor</label>
-			<select class="form-control" id="emailProfesor" name="emailProfesor" >';
+			<select class="form-control" id="emailProfesor" name="emailProfesor" required>';
 			$controller = new ControllerImplements();
 			$context = new Context(FIND_PERMISOS, $idAsignatura);
 			$contextPermisos = $controller->action($context);
@@ -50,27 +53,34 @@ class FormGrupoClaseProfesor extends Form
 			</div>';
 		}
 		$html.='
-		<div class="form-group">
-			<label for="tipo">Tipo</label>
-			<input class="form-control" type="text" id="tipo" name="tipo" value="' . $tipo. '" />
+		<div class="form-group col-md-3">
+		<label for="tipo">Tipo</label>
+		<input class="form-control" type="text" id="tipo" name="tipo" value="' . $tipo. '" required/>
 		</div>
 
-		<div class="form-group">
-			<label for="fecha">Fecha de inicio</label>
-			<input class="form-control" type="date" id="fechaInicio" name="fechaInicio" value="' . $fechaInicio. '" />
 		</div>
 
-		<div class="form-group">
-			<label for="fecha">Fecha fin</label>
-			<input class="form-control" type="date" id="fechaFin" name="fechaFin" value="' . $fechaFin. '" />
+		<div class="form-row">
+
+		<div class="form-group col-md-6">
+		<label for="fecha">Fecha de inicio</label>
+		<input class="form-control" type="date" id="fechaInicio" name="fechaInicio" value="' . $fechaInicio. '" required/>
 		</div>
+
+		<div class="form-group col-md-6">
+		<label for="fecha">Fecha de finalización</label>
+		<input class="form-control" type="date" id="fechaFin" name="fechaFin" value="' . $fechaFin. '" required/>
+		</div>
+
+		</div>
+
 
 		<div class="text-center">
 		<a href="indexAcceso.php?IdGrado='.$idGrado.'&IdAsignatura=' . $idAsignatura . '#nav-grupo-clase">
-            <button type="button" class="btn btn-secondary" id="btn-form">
-                Cancelar
-            </button>
-        </a>
+		<button type="button" class="btn btn-secondary" id="btn-form">
+		Cancelar
+		</button>
+		</a>
 
 		<button type="submit" class="btn btn-success" id="btn-form" name="registrar">Guardar</button>
 		</div>';

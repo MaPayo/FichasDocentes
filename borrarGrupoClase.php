@@ -36,9 +36,9 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                         <div class="col-md-6 col-12">
                             <div class="card ">
                                 <div class="card-header text-center">
-                                    <h2>Borrar borrador de un grupo clase</h2>
+                                    <h2>Borrar un grupo de clase</h2>
                                 </div>
-                                <div class="card-body">
+                                <div class="card-body text-center">
                                     <?php
                                     if (isset($_GET['Confirmacion']) && $_GET['Confirmacion'] === 'y') {
                                         $controller = new es\ucm\ControllerImplements();
@@ -85,19 +85,20 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                         }
                                     } else {
                                         ?>
-                                            ¿Estas seguro de que quieres borrar un grupo de clase?
+                                            ¿Estás seguro de que quieres borrar el grupo de clase?
                                             <div class="text-center">
+                                                 <a href="indexAcceso.php?IdGrado=<?php echo $_GET['IdGrado']; ?>&IdAsignatura=<?php echo $_GET['IdAsignatura']; ?>">
+                                                    <button type="button" class="btn btn-secondary" id="btn-form">
+                                                        Cancelar
+                                                    </button>
+                                                </a>
                                                 <a href="borrarGrupoClase.php?IdGrado=<?php echo $_GET['IdGrado']; ?>&IdAsignatura=<?php echo $_GET['IdAsignatura']; ?>&IdGrupoClase=<?php echo $_GET['IdGrupoClase']; ?>&Confirmacion=y">
                                                     <button type="button" class="btn btn-success" id="btn-form">
-                                                        Si
+                                                        Aceptar
                                                     </button>
 
                                                 </a>
-                                                <a href="indexAcceso.php?IdGrado=<?php echo $_GET['IdGrado']; ?>&IdAsignatura=<?php echo $_GET['IdAsignatura']; ?>">
-                                                    <button type="button" class="btn btn-danger" id="btn-form">
-                                                        No
-                                                    </button>
-                                                </a>
+                                               
                                             </div>
                                         <?php
                                     }

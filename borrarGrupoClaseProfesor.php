@@ -32,13 +32,13 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                 if (isset($_GET['IdGrupoClase']) && isset($_GET['IdAsignatura'])) {
 
                     if ((isset($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET['IdAsignatura']]['coordinacion']) && $_SESSION['asignaturas'][$_GET['IdGrado']][$_GET['IdAsignatura']]['coordinacion'] == true) || (isset($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET['IdAsignatura']]['permisos']) && unserialize($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET['IdAsignatura']]['permisos'])->getPermisoGrupoClase() == true)) {
-            ?>
+                        ?>
                         <div class="col-md-6 col-12">
                             <div class="card ">
                                 <div class="card-header text-center">
-                                    <h2>Borrar profesor de un grupo de clase</h2>
+                                    <h2>Borrar un profesor de un grupo de clase</h2>
                                 </div>
-                                <div class="card-body">
+                                <div class="card-body text-center">
                                     <?php
                                     if (isset($_GET['Confirmacion']) && $_GET['Confirmacion'] === 'y') {
                                         $controller = new es\ucm\ControllerImplements();
@@ -60,22 +60,21 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                             }
                                         }
                                     } else {
-                                    ?>
-                                        ¿Estas seguro de que quieres borrar al profesor del grupo de clase?
+                                        ?>
+                                        ¿Estas seguro de que quieres borrar el profesor del grupo de clase?
                                         <div class="text-center">
+                                            <a href="indexAcceso.php?IdGrado=<?php echo $_GET['IdGrado']; ?>&IdAsignatura=<?php echo $_GET['IdAsignatura']; ?>">
+                                                <button type="button" class="btn btn-secondary" id="btn-form">
+                                                    Cancelar
+                                                </button>
+                                            </a>
                                             <a href="borrarGrupoClaseProfesor.php?IdGrado=<?php echo $_GET['IdGrado']; ?>&IdAsignatura=<?php echo $_GET['IdAsignatura']; ?>&IdGrupoClase=<?php echo $_GET['IdGrupoClase']; ?>&EmailProfesor=<?php echo $_GET['EmailProfesor']; ?>&Confirmacion=y">
                                                 <button type="button" class="btn btn-success" id="btn-form">
-                                                    Si
+                                                    Aceptar
                                                 </button>
-
-                                            </a>
-                                            <a href="indexAcceso.php?IdGrado=<?php echo $_GET['IdGrado']; ?>&IdAsignatura=<?php echo $_GET['IdAsignatura']; ?>">
-                                                <button type="button" class="btn btn-danger" id="btn-form">
-                                                    No
-                                                </button>
-                                            </a>
+                                            </a>  
                                         </div>
-                                    <?php
+                                        <?php
                                     }
 
 
@@ -83,33 +82,33 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                 </div>
                             </div>
                         </div>
-            <?php
+                        <?php
                     } else {
                         echo '
-                   <div class="col-md-6 col-12">
-                   <div class="alert alert-danger" role="alert">
-                   <h2 class="card-title text-center">ACCESO DENEGADO</h2>
-                   <h5 class="text-center">No tienes permisos suficientes para esta apartado</h5>
-                   </div>
-                   </div>';
+                        <div class="col-md-6 col-12">
+                        <div class="alert alert-danger" role="alert">
+                        <h2 class="card-title text-center">ACCESO DENEGADO</h2>
+                        <h5 class="text-center">No tienes permisos suficientes para esta apartado</h5>
+                        </div>
+                        </div>';
                     }
                 } else {
                     echo '
-            <div class="col-md-6 col-12">
-            <div class="alert alert-danger" role="alert">
-            <h2 class="card-title text-center">ACCESO DENEGADO</h2>
-            <h5 class="text-center">No se ha podido obtener la asignatura o el grupo</h5>
-            </div>
-            </div>';
+                    <div class="col-md-6 col-12">
+                    <div class="alert alert-danger" role="alert">
+                    <h2 class="card-title text-center">ACCESO DENEGADO</h2>
+                    <h5 class="text-center">No se ha podido obtener la asignatura o el grupo</h5>
+                    </div>
+                    </div>';
                 }
             } else {
                 echo '
-        <div class="col-md-6 col-12">
-        <div class="alert alert-danger" role="alert">
-        <h2 class="card-title text-center">ACCESO DENEGADO</h2>
-        <h5 class="text-center">Inicia sesión con un usuario que pueda acceder a este contenido</h5>
-        </div>
-        </div>';
+                <div class="col-md-6 col-12">
+                <div class="alert alert-danger" role="alert">
+                <h2 class="card-title text-center">ACCESO DENEGADO</h2>
+                <h5 class="text-center">Inicia sesión con un usuario que pueda acceder a este contenido</h5>
+                </div>
+                </div>';
             }
             ?>
         </div>

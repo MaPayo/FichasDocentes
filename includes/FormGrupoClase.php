@@ -21,22 +21,27 @@ class FormGrupoClase extends Form
 		$html = '<input type="hidden" name="idGrupoClase" value="' . $idGrupoClase . '" required />
 		<input type="hidden" name="idAsignatura" value="' . $idAsignatura . '" required />
 		<input type="hidden" name="idGrado" value="' . $idGrado . '" required />
-		<div class="form-group">
+
+		<div class="form-row">
+
+		<div class="form-group col-md-6">
 		<label for="letra">Letra</label>
 		<input type="text" class="form-control" id="letra"  name="letra" value="' . $letra . '" required/>
 		</div>
 
-		<div class="form-group">
+		<div class="form-group col-md-6">
 		<label for="idioma">Idioma</label>
 		<input type="text" class="form-control" id="idioma"  name="idioma" value="' . $idioma . '" required/>
 		</div>
 
+		</div>
+
 		<div class="text-center">
 		<a href="indexAcceso.php?IdGrado='.$idGrado.'&IdAsignatura=' . $idAsignatura . '#nav-grupo-clase">
-            <button type="button" class="btn btn-secondary" id="btn-form">
-                Cancelar
-            </button>
-        </a>
+		<button type="button" class="btn btn-secondary" id="btn-form">
+		Cancelar
+		</button>
+		</a>
 
 		<button type="submit" class="btn btn-success" id="btn-form" name="registrar">Guardar</button>
 		</div>';

@@ -21,7 +21,7 @@ class FormAddProfesor extends Form
 
         <div class="form-group">
         <label for="email">Correo electrónico completo</label>
-        <input class="form-control" type="email" name="email" id="email" placeholder="ejemplo@ucm.es">
+        <input class="form-control" type="email" name="email" id="email" placeholder="ejemplo@ucm.es" required/>
         </div>
 
         <div class="text-center">

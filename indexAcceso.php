@@ -384,7 +384,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
 
 
                                             <div class="table-responsive text-center">
-                                                <table class="table table-sm table-bordered">
+                                                <table class="table table-sm table-bordered table-add">
                                                     <thead>
                                                         <th scope="col" colspan="4">Información adicional</th>
                                                     </thead>
@@ -393,7 +393,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                             <th scope="col" colspan="2">Estado de la ficha</th>
                                                             <td colspan="2" <?php
                                                             if ($contextAsignatura->getData()->getEstado() == "B") {
-                                                                echo 'class="text-primary">Borrador (Edición permitida)';
+                                                                echo 'class="text-primary"><strong>Borrador (Edición permitida)</strong>';
                                                             } elseif ($contextAsignatura->getData()->getEstado() == "V") {
                                                                 echo 'class="text-primary">Validado (Edición bloqueada)';
                                                             } elseif ($contextAsignatura->getData()->getEstado() == "C") {
@@ -2979,10 +2979,10 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                 <td><?php if($permiso->getPermisoEvaluacion()) echo'✏'; else echo'📄'; ?> </td>
                                                                                 <?php
                                                                                 echo'<td>
-                                                                                <a href="permisos.php?IdGrado='.$contextGrado->getData()->getCodigoGrado().'&IdAsignatura='.$contextAsignatura->getData()->getIdAsignatura().'&EmailProfesor='.$profesor->getData()->getEmail().'"><button type="button" class="btn btn-warning" id="btn-form">Editar</button>
+                                                                                <a href="permisos.php?IdGrado='.$contextGrado->getData()->getCodigoGrado().'&IdAsignatura='.$contextAsignatura->getData()->getIdAsignatura().'&EmailProfesor='.$profesor->getData()->getEmail().'"><button type="button" class="btn btn-warning btn-sm btn-block" id="btn-form">Editar</button>
                                                                                 </a> 
                                                                                 <a href="eliminarProfesor.php?IdGrado='.$contextGrado->getData()->getCodigoGrado().'&IdAsignatura='.$contextAsignatura->getData()->getIdAsignatura().'&EmailProfesor='.$permiso->getEmailProfesor().'">
-                                                                                <button type="button" class="btn btn-danger" id="btn-form">Eliminar</button>
+                                                                                <button type="button" class="btn btn-danger btn-sm btn-block" id="btn-form">Eliminar</button>
                                                                                 </a>
                                                                                 </td>
                                                                                 </tr>';

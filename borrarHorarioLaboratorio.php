@@ -37,13 +37,13 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                         $contextConfiguacion = $controller->action($context);
 
                         if ($contextConfiguacion->getEvent() === FIND_CONFIGURACION_OK && $contextConfiguacion->getData()->getGrupoLaboratorio() == 1) {
-            ?>
+                            ?>
                             <div class="col-md-6 col-12">
                                 <div class="card ">
                                     <div class="card-header text-center">
-                                        <h2>Borrar un horario laboratorio de un grupo de laboratorio</h2>
+                                        <h2>Borrar un horario de un grupo de laboratorio</h2>
                                     </div>
-                                    <div class="card-body">
+                                    <div class="card-body text-center">
                                         <?php
                                         if (isset($_GET['Confirmacion']) && $_GET['Confirmacion'] === 'y') {
                                             if (isset($_GET['IdHorarioLaboratorio'])) {
@@ -60,64 +60,63 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                                 }
                                             }
                                         } else {
-                                        ?>
-                                            ¿Estas seguro de que quieres borrar un horario de laboratorio de un grupo de laboratorio?
+                                            ?>
+                                            ¿Estás seguro de que quieres borrar el horario del grupo de laboratorio?
                                             <div class="text-center">
+                                                <a href="indexAcceso.php?IdGrado=<?php echo $_GET['IdGrado']; ?>&IdAsignatura=<?php echo $_GET['IdAsignatura']; ?>">
+                                                    <button type="button" class="btn btn-secondary" id="btn-form">
+                                                        Cancelar
+                                                    </button>
+                                                </a>
                                                 <a href="borrarHorarioLaboratorio.php?IdGrado=<?php echo $_GET['IdGrado']; ?>&IdAsignatura=<?php echo $_GET['IdAsignatura']; ?>&IdHorarioLaboratorio=<?php echo $_GET['IdHorarioLaboratorio']; ?>&Confirmacion=y">
                                                     <button type="button" class="btn btn-success" id="btn-form">
-                                                        Si
-                                                    </button>
-
-                                                </a>
-                                                <a href="indexAcceso.php?IdGrado=<?php echo $_GET['IdGrado']; ?>&IdAsignatura=<?php echo $_GET['IdAsignatura']; ?>">
-                                                    <button type="button" class="btn btn-danger" id="btn-form">
-                                                        No
+                                                        Aceptar
                                                     </button>
                                                 </a>
                                             </div>
-                                        <?php
+                                            <?php
                                         }
 
                                         ?>
                                     </div>
                                 </div>
                             </div>
-            <?php
+                            <?php
                         } else {
                             echo '
-                   <div class="col-md-6 col-12">
-                   <div class="alert alert-danger" role="alert">
-                   <h2 class="card-title text-center">ACCESO DENEGADO</h2>
-                   <h5 class="text-center">La asignatura seleccionada no ha sido creada correctamente o no contiene este apartado. Contacta con el administrador</h5>
-                   </div>
-                   </div>';
+                            <div class="col-md-6 col-12">
+                            <div class="alert alert-danger" role="alert">
+                            <h2 class="card-title text-center">ACCESO DENEGADO</h2>
+                            <h5 class="text-center">La asignatura seleccionada no ha sido creada correctamente o no contiene este apartado. Contacta con el administrador</h5>
+                            </div>
+                            </div>';
                         }
                     } else {
                         echo '
-               <div class="col-md-6 col-12">
-               <div class="alert alert-danger" role="alert">
-               <h2 class="card-title text-center">ACCESO DENEGADO</h2>
-               <h5 class="text-center">No tienes permisos suficientes para esta apartado</h5>
-               </div>
-               </div>';
+                        <div class="col-md-6 col-12">
+                        <div class="alert alert-danger" role="alert">
+                        <h2 class="card-title text-center">ACCESO DENEGADO</h2>
+                        <h5 class="text-center">No tienes permisos suficientes para esta apartado</h5>
+                        </div>
+                        </div>';
                     }
                 } else {
                     echo '
-        <div class="col-md-6 col-12">
-        <div class="alert alert-danger" role="alert">
-        <h2 class="card-title text-center">ACCESO DENEGADO</h2>
-        <h5 class="text-center">No se ha podido obtener la asignatura</h5>
-        </div>
-        </div>';
+                    <div class="col-md-6 col-12">
+                    <div class="alert alert-danger" role="alert">
+                    <h2 class="card-title text-center">ACCESO DENEGADO</h2>
+                    <h5 class="text-center">No se ha podido obtener la asignatura</h5>
+                    </div>
+                    </div>';
                 }
             } else {
                 echo '
-    <div class="col-md-6 col-12">
-    <div class="alert alert-danger" role="alert">
-    <h2 class="card-title text-center">ACCESO DENEGADO</h2>
-    <h5 class="text-center">Inicia sesión con un usuario que pueda acceder a este contenido</h5>
-    </div>
-    </div>';
+                <div class="col-md-6 col-12">
+                <div class="alert alert-danger" role="alert">
+                <h2 class="card-title text-center">ACCESO DENEGADO</h2>
+                <h5 class="text-center">Inicia sesión con un usuario que pueda acceder a este contenido</h5>
+                </div>
+                </div>';
             }
             ?>
         </div>

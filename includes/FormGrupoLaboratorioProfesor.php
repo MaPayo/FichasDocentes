@@ -31,7 +31,7 @@ class FormGrupoLaboratorioProfesor extends Form
 		}else{
 			$html.='<div class="form-group">
 			<label for="emailProfesor">Profesor</label>
-			<select class="form-control" id="emailProfesor" name="emailProfesor" >';
+			<select class="form-control" id="emailProfesor" name="emailProfesor" required>';
 			$controller = new ControllerImplements();
 			$context = new Context(FIND_PERMISOS, $idAsignatura);
 			$contextPermisos = $controller->action($context);
@@ -50,22 +50,27 @@ class FormGrupoLaboratorioProfesor extends Form
 			</div>';
 		}
 		$html.='
-		<div class="form-group">
-			<label for="fecha">Fecha de inicio</label>
-			<input class="form-control" type="date" id="fechaInicio" name="fechaInicio" value="' . $fechaInicio. '" />
+
+		<div class="form-row">
+
+		<div class="form-group col-md-6">
+		<label for="fecha">Fecha de inicio</label>
+		<input class="form-control" type="date" id="fechaInicio" name="fechaInicio" value="' . $fechaInicio. '" required/>
 		</div>
 
-		<div class="form-group">
-			<label for="fecha">Fecha fin</label>
-			<input class="form-control" type="date" id="fechaFin" name="fechaFin" value="' . $fechaFin. '" />
+		<div class="form-group col-md-6">
+		<label for="fecha">Fecha de finalización</label>
+		<input class="form-control" type="date" id="fechaFin" name="fechaFin" value="' . $fechaFin. '" required/>
+		</div>
+
 		</div>
 
 		<div class="text-center">
 		<a href="indexAcceso.php?IdGrado='.$idGrado.'&IdAsignatura=' . $idAsignatura . '#nav-grupo-laboratorio">
-            <button type="button" class="btn btn-secondary" id="btn-form">
-                Cancelar
-            </button>
-        </a>
+		<button type="button" class="btn btn-secondary" id="btn-form">
+		Cancelar
+		</button>
+		</a>
 
 		<button type="submit" class="btn btn-success" id="btn-form" name="registrar">Guardar</button>
 		</div>';

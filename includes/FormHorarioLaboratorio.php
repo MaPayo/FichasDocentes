@@ -26,14 +26,18 @@ class FormHorarioLaboratorio extends Form
 		<input type="hidden" name="idGrupoLaboratorio" value="' . $idGrupoLaboratorio . '" required />
 		<input type="hidden" name="idAsignatura" value="' . $idAsignatura . '" required />
 		<input type="hidden" name="idGrado" value="' . $idGrado . '" required />
-		<div class="form-group">
+
+		<div class="form-row">
+
+
+		<div class="form-group col-md-6">
 		<label for="laboratorio">Laboratorio</label>
-		<input type="text" class="form-control" id="laboratorio"  name="laboratorio" value="' . $laboratorio . '" />
+		<input type="text" class="form-control" id="laboratorio"  name="laboratorio" value="' . $laboratorio . '" required/>
 		</div>
 
-		<div class="form-group">
-			<label for="dia">Dia</label>
-			<select class="form-control" id="dia" name="dia" >';
+		<div class="form-group col-md-6">
+		<label for="dia">Día</label>
+		<select class="form-control" id="dia" name="dia" required>';
 		foreach ($arrayDias as $valor) {
 			if ($valor == $dia) {
 				$html .= '<option value="' . $dia . '" selected >' . $valor . '</option>';
@@ -44,22 +48,28 @@ class FormHorarioLaboratorio extends Form
 		$html .= '	</select>
 		</div>
 
-		<div class="form-group">
-		<label for="horaInicio">Hora de inicio</label>
-		<input type="time" class="form-control" id="horaInicio"  name="horaInicio" value="' . $horaInicio . '" />
 		</div>
 
-		<div class="form-group">
+		<div class="form-row">
+
+		<div class="form-group col-md-6">
+		<label for="horaInicio">Hora de inicio</label>
+		<input type="time" class="form-control" id="horaInicio"  name="horaInicio" value="' . $horaInicio . '" required/>
+		</div>
+
+		<div class="form-group col-md-6">
 		<label for="horaFin">Hora fin</label>
-		<input type="time" class="form-control" id="horaFin"  name="horaFin" value="' . $horaFin . '" />
+		<input type="time" class="form-control" id="horaFin"  name="horaFin" value="' . $horaFin . '" required/>
+		</div>
+
 		</div>
 
 		<div class="text-center">
 		<a href="indexAcceso.php?IdGrado='.$idGrado.'&IdAsignatura=' . $idAsignatura . '#nav-grupo-laboratorio">
-            <button type="button" class="btn btn-secondary" id="btn-form">
-                Cancelar
-            </button>
-        </a>
+		<button type="button" class="btn btn-secondary" id="btn-form">
+		Cancelar
+		</button>
+		</a>
 
 		<button type="submit" class="btn btn-success" id="btn-form" name="registrar">Guardar</button>
 		</div>';

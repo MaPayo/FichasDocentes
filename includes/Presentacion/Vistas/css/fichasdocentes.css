@@ -45,6 +45,9 @@ h4{
 .table-bordered th{
 	background-color: #f8f9fa;
 }
+.table-add th{
+	background-color: #AED6F1;
+}
 
 #cabecera {
 	padding: 1%;
