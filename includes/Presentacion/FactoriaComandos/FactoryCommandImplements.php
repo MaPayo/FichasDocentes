@@ -118,6 +118,7 @@ require_once('includes/Presentacion/FactoriaComandos/HorarioClase/CommandUpdateM
 require_once('includes/Presentacion/FactoriaComandos/HorarioLaboratorio/CommandCreateHorarioLaboratorio.php');
 require_once('includes/Presentacion/FactoriaComandos/HorarioLaboratorio/CommandDeleteHorarioLaboratorio.php');
 require_once('includes/Presentacion/FactoriaComandos/HorarioLaboratorio/CommandFindHorarioLaboratorio.php');
+require_once('includes/Presentacion/FactoriaComandos/HorarioLaboratorio/CommandFindHorarioLaboratorioGrupoyDia.php');
 require_once('includes/Presentacion/FactoriaComandos/HorarioLaboratorio/CommandListHorarioLaboratorio.php');
 require_once('includes/Presentacion/FactoriaComandos/HorarioLaboratorio/CommandUpdateHorarioLaboratorio.php');
 require_once('includes/Presentacion/FactoriaComandos/HorarioLaboratorio/CommandCreateModHorarioLaboratorio.php');
