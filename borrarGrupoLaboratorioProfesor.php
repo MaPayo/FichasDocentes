@@ -31,7 +31,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
 
                 if (isset($_GET['IdGrupoLaboratorio']) && isset($_GET['IdAsignatura'])) {
 
-                    if ((isset($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET['IdAsignatura']]['coordinacion']) && $_SESSION['asignaturas'][$_GET['IdGrado']][$_GET['IdAsignatura']]['coordinacion'] == true) || (isset($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET['IdAsignatura']]['permisos']) && unserialize($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET['IdAsignatura']]['permisos'])->getPermisoGrupoLaboratorio() ==true)) {
+                    if ((isset($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET['IdAsignatura']]['coordinacion']) && $_SESSION['asignaturas'][$_GET['IdGrado']][$_GET['IdAsignatura']]['coordinacion'] == true) || (isset($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET['IdAsignatura']]['permisos']) && unserialize($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET['IdAsignatura']]['permisos'])->getPermisoGrupoLaboratorio() == true)) {
                         $controller = new es\ucm\ControllerImplements();
                         $context = new es\ucm\Context(FIND_CONFIGURACION, htmlspecialchars(trim(strip_tags($_GET['IdAsignatura']))));
                         $contextConfiguacion = $controller->action($context);
@@ -41,30 +41,49 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                             <div class="col-md-6 col-12">
                                 <div class="card ">
                                     <div class="card-header text-center">
-                                        <h2>Añadir profesor a grupo laboratorio</h2>
+                                        <h2>Borrar profesor de un grupo de laboratorio</h2>
                                     </div>
                                     <div class="card-body">
-                                    <?php
-                                    
-                                    $controller = new es\ucm\ControllerImplements();
-                                    
-                                    if (isset($_GET['IdGrupoLaboratorio']) && isset($_GET['EmailProfesor'])) {
-                                        $arrayGrupoLaboratorioProfesor = array();
-                                        $arrayGrupoLaboratorioProfesor['idGrupoLaboratorio'] = htmlspecialchars(trim(strip_tags($_GET['IdGrupoLaboratorio'])));
-                                        $arrayGrupoLaboratorioProfesor['emailProfesor'] = htmlspecialchars(trim(strip_tags($_GET['EmailProfesor'])));
-                                        $context = new es\ucm\Context(FIND_MODGRUPO_LABORATORIO_PROFESOR, $arrayGrupoLaboratorioProfesor);
-                                        $contextGrupoLaboratorioProfesor = $controller->action($context);
-                                        if ($contextGrupoLaboratorioProfesor->getEvent() === FIND_MODGRUPO_LABORATORIO_PROFESOR_OK) {
-                                            $context = new es\ucm\Context(DELETE_MODGRUPO_LABORATORIO_PROFESOR, $arrayGrupoLaboratorioProfesor);
-                                            $contextGrupoLaboratorioProfesor = $controller->action($context);
-                                            if ($contextGrupoLaboratorioProfesor->getEvent() === DELETE_MODGRUPO_LABORATORIO_PROFESOR_OK) {
-                                                header('Location: indexAcceso.php?IdGrado='.$_GET['IdGrado'].'&IdAsignatura=' . $_GET['IdAsignatura'] . '&eliminado=y');
-                                            } elseif ($contextGrupoLaboratorioProfesor->getEvent() === DELETE_MODGRUPO_LABORATORIO_PROFESOR_FAIL) {
-                                                header('Location: indexAcceso.php?IdGrado='.$_GET['IdGrado'].'&IdAsignatura=' . $_GET['IdAsignatura'] . '&eliminado=n');
+                                        <?php
+                                        if (isset($_GET['Confirmacion']) && $_GET['Confirmacion'] === 'y') {
+                                            $controller = new es\ucm\ControllerImplements();
+
+                                            if (isset($_GET['IdGrupoLaboratorio']) && isset($_GET['EmailProfesor'])) {
+                                                $arrayGrupoLaboratorioProfesor = array();
+                                                $arrayGrupoLaboratorioProfesor['idGrupoLaboratorio'] = htmlspecialchars(trim(strip_tags($_GET['IdGrupoLaboratorio'])));
+                                                $arrayGrupoLaboratorioProfesor['emailProfesor'] = htmlspecialchars(trim(strip_tags($_GET['EmailProfesor'])));
+                                                $context = new es\ucm\Context(FIND_MODGRUPO_LABORATORIO_PROFESOR, $arrayGrupoLaboratorioProfesor);
+                                                $contextGrupoLaboratorioProfesor = $controller->action($context);
+                                                if ($contextGrupoLaboratorioProfesor->getEvent() === FIND_MODGRUPO_LABORATORIO_PROFESOR_OK) {
+                                                    $context = new es\ucm\Context(DELETE_MODGRUPO_LABORATORIO_PROFESOR, $arrayGrupoLaboratorioProfesor);
+                                                    $contextGrupoLaboratorioProfesor = $controller->action($context);
+                                                    if ($contextGrupoLaboratorioProfesor->getEvent() === DELETE_MODGRUPO_LABORATORIO_PROFESOR_OK) {
+                                                        header('Location: indexAcceso.php?IdGrado=' . $_GET['IdGrado'] . '&IdAsignatura=' . $_GET['IdAsignatura'] . '&eliminado=y');
+                                                    } elseif ($contextGrupoLaboratorioProfesor->getEvent() === DELETE_MODGRUPO_LABORATORIO_PROFESOR_FAIL) {
+                                                        header('Location: indexAcceso.php?IdGrado=' . $_GET['IdGrado'] . '&IdAsignatura=' . $_GET['IdAsignatura'] . '&eliminado=n');
+                                                    }
+                                                }
                                             }
+                                        } else {
+                                        ?>
+                                            ¿Estas seguro de que quieres borrar al profesor del grupo de laboratorio?
+                                            <div class="text-center">
+                                                <a href="borrarGrupoLaboratorioProfesor.php?IdGrado=<?php echo $_GET['IdGrado']; ?>&IdAsignatura=<?php echo $_GET['IdAsignatura']; ?>&IdGrupoLaboratorio=<?php echo $_GET['IdGrupoLaboratorio']; ?>&EmailProfesor=<?php echo $_GET['EmailProfesor']; ?>&Confirmacion=y">
+                                                    <button type="button" class="btn btn-success" id="btn-form">
+                                                        Si
+                                                    </button>
+
+                                                </a>
+                                                <a href="indexAcceso.php?IdGrado=<?php echo $_GET['IdGrado']; ?>&IdAsignatura=<?php echo $_GET['IdAsignatura']; ?>">
+                                                    <button type="button" class="btn btn-danger" id="btn-form">
+                                                        No
+                                                    </button>
+                                                </a>
+                                            </div>
+                                        <?php
                                         }
-                                    } 
-                                    ?>
+
+                                        ?>
                                     </div>
                                 </div>
                             </div>

@@ -43,7 +43,7 @@ class FormEvaluacion extends Form
 
 			if ($contextConfiguacion->getData()->getRealizacionExamenes() == 1) {
 				$html .= '<div class="form-group">
-				<label for="pesoExamenes">Peso de los exámenes (porcentaje)</label>
+				<label for="pesoExamenes">Peso de los exámenes (entre ' . $contextVerifica->getData()->getMinimoExamenes() . '% y ' . $contextVerifica->getData()->getMaximoExamenes() . '%)</label>
 				<input class="form-control" type="number" id="pesoExamenes" name="pesoExamenes" min="' . $contextVerifica->getData()->getMinimoExamenes() . '" max="' . $contextVerifica->getData()->getMaximoExamenes() . '" step="1" value="' . $pesoExamenes . '" required />
 				</div>
 
@@ -62,7 +62,7 @@ class FormEvaluacion extends Form
 
 			if ($contextConfiguacion->getData()->getRealizacionActividades() == 1) {
 				$html .= '<div class="form-group">
-				<label for="pesoActividades">Peso de las actividades (porcentaje)</label>
+				<label for="pesoActividades">Peso de las actividades (entre ' . $contextVerifica->getData()->getMinimoActividades() . '% y ' . $contextVerifica->getData()->getMaximoActividades() . '%)</label>
 				<input class="form-control" type="number" id="pesoActividades" name="pesoActividades" min="' . $contextVerifica->getData()->getMinimoActividades() . '" max="' . $contextVerifica->getData()->getMaximoActividades() . '" step="1" value="' . $pesoActividades . '" required />
 				</div>
 
@@ -81,7 +81,7 @@ class FormEvaluacion extends Form
 
 			if ($contextConfiguacion->getData()->getRealizacionLaboratorio() == 1) {
 				$html .= '<div class="form-group">
-				<label for="pesoLaboratorio">Peso del laboratorio (porcentaje)</label>
+				<label for="pesoLaboratorio">Peso del laboratorio (entre ' . $contextVerifica->getData()->getMinimoLaboratorio() . '% y ' . $contextVerifica->getData()->getMaximoLaboratorio() . '%)</label>
 				<input class="form-control" type="number" id="pesoLaboratorio" name="pesoLaboratorio" min="' . $contextVerifica->getData()->getMinimoLaboratorio() . '" max="' . $contextVerifica->getData()->getMaximoLaboratorio() . '" step="1" value="' . $pesoLaboratorio . '" required />
 				</div>
 
@@ -114,7 +114,7 @@ class FormEvaluacion extends Form
 		}
 
 		$html .= '<div class="text-center">
-		<a href="indexAcceso.php?IdGrado=' .$idGrado. '&IdAsignatura=' . $idAsignatura . '#nav-evaluacion">
+		<a href="indexAcceso.php?IdGrado=' . $idGrado . '&IdAsignatura=' . $idAsignatura . '#nav-evaluacion">
 		<button type="button" class="btn btn-secondary" id="btn-form">
 		Cancelar
 		</button>
@@ -216,13 +216,21 @@ class FormEvaluacion extends Form
 					$erroresFormulario[] = "No has introducido la calificación final";
 				}
 
-
-				$calificacionFinalI = self::clean($calificacionFinalI);
-				if (empty($calificacionFinalI)) {
-					$erroresFormulario[] = "No has introducido la calificación final en inglés";
+				if (!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())) {
+					$calificacionFinalI = self::clean($calificacionFinalI);
+					if (empty($calificacionFinalI)) {
+						$erroresFormulario[] = "No has introducido la calificación final en inglés";
+					}
 				}
 			}
 
+			if ($pesoExamenes+$pesoActividades+$pesoLaboratorio>100) {
+				$erroresFormulario[] = "La suma de los porcentajes es mayor del 100%";
+			}
+
+			if ($pesoExamenes+$pesoActividades+$pesoLaboratorio<100) {
+				$erroresFormulario[] = "La suma de los porcentajes es menor del 100%";
+			}
 		}
 
 
@@ -241,7 +249,7 @@ class FormEvaluacion extends Form
 					$modAsignatura = new ModAsignatura($datos['idAsignatura'], date("Y-m-d H:i:s"), $_SESSION['idUsuario'], $datos['idAsignatura']);
 					$context = new Context(UPDATE_MODASIGNATURA, $modAsignatura);
 					$contextModAsignatura = $controller->action($context);
-					$erroresFormulario = "indexAcceso.php?IdGrado=" .$datos['idGrado']. "&IdAsignatura=" . $datos['idAsignatura'] . "&modificado=y#nav-evaluacion";
+					$erroresFormulario = "indexAcceso.php?IdGrado=" . $datos['idGrado'] . "&IdAsignatura=" . $datos['idAsignatura'] . "&modificado=y#nav-evaluacion";
 				} elseif ($contextEvaluacion->getEvent() === UPDATE_MODEVALUACION_FAIL) {
 					$erroresFormulario[] = "No se ha podido modificar la evaluación";
 				}
@@ -256,7 +264,7 @@ class FormEvaluacion extends Form
 					$modAsignatura = new ModAsignatura($datos['idAsignatura'], date("Y-m-d H:i:s"), $_SESSION['idUsuario'], $datos['idAsignatura']);
 					$context = new Context(UPDATE_MODASIGNATURA, $modAsignatura);
 					$contextModAsignatura = $controller->action($context);
-					$erroresFormulario = "indexAcceso.php?IdGrado=" .$datos['idGrado']. "&IdAsignatura=" . $datos['idAsignatura'] . "&anadido=y#nav-evaluacion";
+					$erroresFormulario = "indexAcceso.php?IdGrado=" . $datos['idGrado'] . "&IdAsignatura=" . $datos['idAsignatura'] . "&anadido=y#nav-evaluacion";
 				} elseif ($contextEvaluacion->getEvent() === CREATE_MODEVALUACION_FAIL) {
 					$erroresFormulario[] = "No se ha podido crear la evaluación";
 				}

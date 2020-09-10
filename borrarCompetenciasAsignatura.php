@@ -47,39 +47,59 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                         <div class="col-md-6 col-12">
                             <div class="card ">
                                 <div class="card-header text-center">
-                                    <h2>Crear/Modificar borrador competencias asignatura</h2>
+                                    <h2>Borrar borrador competencias asignatura</h2>
                                 </div>
                                 <div class="card-body">
                                     <?php
+                                    if (isset($_GET['Confirmacion']) && $_GET['Confirmacion'] === 'y') {
+                                        if(isset($_GET['IdAsignatura'])){
+                                            //$context = new es\ucm\Context(FIND_COMPETENCIAS_ASIGNATURA, htmlspecialchars(trim(strip_tags($_GET[$name]))));
+                                            header('Location: indexAcceso.php?IdGrado=' . $_GET['IdGrado'] . '&IdAsignatura=' . $_GET[$name] . '');
+                                        }
+                                        else{
+                                            $context = new es\ucm\Context(FIND_MODCOMPETENCIAS_ASIGNATURA, htmlspecialchars(trim(strip_tags($_GET[$name]))));
+                                        }
+                                        $contextCompetencia = $controller->action($context);
+    
+                                        if($contextCompetencia->getEvent() === FIND_MODCOMPETENCIAS_ASIGNATURA_OK){
+                                            $context = new es\ucm\Context(DELETE_MODCOMPETENCIAS_ASIGNATURA, htmlspecialchars(trim(strip_tags($_GET[$name]))));
+                                            $contextCompetencia = $controller->action($context);
+                                            if($contextCompetencia->getEvent()=== DELETE_MODCOMPETENCIAS_ASIGNATURA_OK){
+                                                header('Location: indexAcceso.php?IdGrado='.$_GET['IdGrado'].'&IdAsignatura='.$_GET[$name].'&eliminado=y');
+                                            }elseif($contextCompetencia->getEvent()=== DELETE_MODCOMPETENCIAS_ASIGNATURA_FAIL){
+                                                header('Location: indexAcceso.php?IdGrado='.$_GET['IdGrado'].'&IdAsignatura='.$_GET[$name].'&eliminado=n');
+                                            }
+                                            
+                                        }
+                                        else if($contextCompetencia->getEvent() === FIND_COMPETENCIAS_ASIGNATURA_OK){
+                                            $context = new es\ucm\Context(DELETE_COMPETENCIAS_ASIGNATURA, htmlspecialchars(trim(strip_tags($_GET[$name]))));
+                                            $contextCompetencia = $controller->action($context);
+                                            if($contextCompetencia->getEvent()=== DELETE_COMPETENCIAS_ASIGNATURA_OK){
+                                                header('Location: indexAcceso.php?IdGrado='.$_GET['IdGrado'].'&IdAsignatura='.$_GET[$name].'&eliminado=y');
+                                            }elseif($contextCompetencia->getEvent()=== DELETE_COMPETENCIAS_ASIGNATURA_FAIL){
+                                                header('Location: indexAcceso.php?IdGrado='.$_GET['IdGrado'].'&IdAsignatura='.$_GET[$name].'&eliminado=n');
+                                            }
+                                       }   
+                                    }else{
+                                        ?>
+                                        ¿Estas seguro de que quieres borrar el borrador de las competencias asignatura?
+                                        <div class="text-center">
+                                          <a href="borrarCompetenciasAsignatura.php?IdGrado=<?php echo $_GET['IdGrado']; ?>&IdModAsignatura=<?php echo $_GET[$name]; ?>&Confirmacion=y">
+                                            <button type="button" class="btn btn-success" id="btn-form">
+                                              Si
+                                            </button>
+                  
+                                          </a>
+                                          <a href="indexAcceso.php?IdGrado=<?php echo $_GET['IdGrado']; ?>&IdAsignatura=<?php echo $_GET[$name]; ?>">
+                                            <button type="button" class="btn btn-danger" id="btn-form">
+                                              No
+                                            </button>
+                                          </a>
+                                        </div>
+                                      <?php
+                                    }
+
                                     
-
-                                    if(isset($_GET['IdAsignatura'])){
-                                        $context = new es\ucm\Context(FIND_COMPETENCIAS_ASIGNATURA, htmlspecialchars(trim(strip_tags($_GET[$name]))));
-                                    }
-                                    else{
-                                        $context = new es\ucm\Context(FIND_MODCOMPETENCIAS_ASIGNATURA, htmlspecialchars(trim(strip_tags($_GET[$name]))));
-                                    }
-                                    $contextCompetencia = $controller->action($context);
-
-                                    if($contextCompetencia->getEvent() === FIND_MODCOMPETENCIAS_ASIGNATURA_OK){
-                                        $context = new es\ucm\Context(DELETE_MODCOMPETENCIAS_ASIGNATURA, htmlspecialchars(trim(strip_tags($_GET[$name]))));
-                                        $contextCompetencia = $controller->action($context);
-                                        if($contextCompetencia->getEvent()=== DELETE_MODCOMPETENCIAS_ASIGNATURA_OK){
-                                            header('Location: indexAcceso.php?IdGrado='.$_GET['IdGrado'].'&IdAsignatura='.$_GET[$name].'&eliminado=y');
-                                        }elseif($contextCompetencia->getEvent()=== DELETE_MODCOMPETENCIAS_ASIGNATURA_FAIL){
-                                            header('Location: indexAcceso.php?IdGrado='.$_GET['IdGrado'].'&IdAsignatura='.$_GET[$name].'&eliminado=n');
-                                        }
-                                        
-                                    }
-                                    else if($contextCompetencia->getEvent() === FIND_COMPETENCIAS_ASIGNATURA_OK){
-                                        $context = new es\ucm\Context(DELETE_COMPETENCIAS_ASIGNATURA, htmlspecialchars(trim(strip_tags($_GET[$name]))));
-                                        $contextCompetencia = $controller->action($context);
-                                        if($contextCompetencia->getEvent()=== DELETE_COMPETENCIAS_ASIGNATURA_OK){
-                                            header('Location: indexAcceso.php?IdGrado='.$_GET['IdGrado'].'&IdAsignatura='.$_GET[$name].'&eliminado=y');
-                                        }elseif($contextCompetencia->getEvent()=== DELETE_COMPETENCIAS_ASIGNATURA_FAIL){
-                                            header('Location: indexAcceso.php?IdGrado='.$_GET['IdGrado'].'&IdAsignatura='.$_GET[$name].'&eliminado=n');
-                                        }
-                                   }   
                                    
                                    ?>
                                </div>

@@ -41,7 +41,13 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                             <div class="col-xl-6 col-lg-8 col-12">
                                 <div class="card ">
                                     <div class="card-header text-center">
-                                        <h2>Añadir profesor a grupo laboratorio</h2>
+                                    <?php
+                                    if (isset($_GET['IdGrupoLaboratorio']) && isset($_GET['EmailProfesor'])){
+                                        echo "<h2>Modificar profesor de un grupo de laboratorio</h2>";
+                                    }elseif (isset($_GET['IdGrupoLaboratorio'])){
+                                        echo "<h2>Añadir profesor a un grupo de laboratorio</h2>";
+                                    }
+                                    ?>
                                     </div>
                                     <div class="card-body">
                                     <?php
@@ -60,13 +66,13 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                             $datosIniciales['fechaFin'] = $contextGrupoLaboratorioProfesor->getData()->getFechaFin();
                                             $datosIniciales['emailProfesor'] = $contextGrupoLaboratorioProfesor->getData()->getEmailProfesor();
                                             $datosIniciales['idAsignatura'] = htmlspecialchars(trim(strip_tags($_GET['IdAsignatura'])));
-                                            $datosIniciales['idGrado'] =$_GET['IdGrado'];
+                                            $datosIniciales['idGrado'] = htmlspecialchars(trim(strip_tags($_GET['IdGrado'])));
                                             $access->gestionaModificacion($datosIniciales);
                                         }
                                     } elseif (isset($_GET['IdGrupoLaboratorio'])) {
                                         $datosIniciales['idGrupoLaboratorio'] = htmlspecialchars(trim(strip_tags($_GET['IdGrupoLaboratorio'])));
                                         $datosIniciales['idAsignatura'] = htmlspecialchars(trim(strip_tags($_GET['IdAsignatura'])));
-                                        $datosIniciales['idGrado'] =$_GET['IdGrado'];
+                                        $datosIniciales['idGrado'] = htmlspecialchars(trim(strip_tags($_GET['IdGrado'])));
                                         $access->gestionaModificacion($datosIniciales);
                                     }
                                     ?>

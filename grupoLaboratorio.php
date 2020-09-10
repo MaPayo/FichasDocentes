@@ -41,7 +41,13 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                 <div class="col-xl-6 col-lg-8 col-12">
                     <div class="card ">
                         <div class="card-header text-center">
-                            <h2>Crear/Modificar borrador grupo laboratorio</h2>
+                            <?php
+                            if (isset($_GET['IdGrupoLaboratorio'])){
+                                echo "<h2>Modificar borrador grupo laboratorio</h2>";
+                            }elseif (isset($_GET['IdAsignatura'])){
+                                echo "<h2>Crear borrador grupo laboratorio</h2>";
+                            }
+                            ?>
                         </div>
                         <div class="card-body">
                             <?php 
@@ -56,12 +62,12 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                     $datosIniciales['letra'] = $contextModGrupoLaboratorio->getData()->getLetra();
                                     $datosIniciales['idioma'] = $contextModGrupoLaboratorio->getData()->getIdioma();
                                     $datosIniciales['idAsignatura'] = $contextModGrupoLaboratorio->getData()->getIdAsignatura();
-                                    $datosIniciales['idGrado'] =$_GET['IdGrado'];
+                                    $datosIniciales['idGrado'] =htmlspecialchars(trim(strip_tags($_GET['IdGrado'])));
                                     $access->gestionaModificacion($datosIniciales);
                                 }
                             } elseif (isset($_GET['IdAsignatura'])) {
                                 $datosIniciales['idAsignatura'] = htmlspecialchars(trim(strip_tags($_GET['IdAsignatura'])));
-                                $datosIniciales['idGrado'] =$_GET['IdGrado'];
+                                $datosIniciales['idGrado'] = htmlspecialchars(trim(strip_tags($_GET['IdGrado'])));
                                 $access->gestionaModificacion($datosIniciales);
                             }
                             ?>

@@ -41,7 +41,14 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                 <div class="col-xl-6 col-lg-8 col-12">
                     <div class="card ">
                         <div class="card-header text-center">
-                            <h2>Crear/Modificar borrador horario laboratorio</h2>
+                        <?php
+                        if (isset($_GET['IdHorarioLaboratorio'])){
+                            echo "<h2>Modificar borrador de un horario de laboratorio</h2>";
+                        }elseif (isset($_GET['IdGrupoLaboratorio'])){
+                            echo "<h2>Crear borrador de un horario de laboratorio</h2>";
+                        }
+                        ?>
+                            
                         </div>
                         <div class="card-body">
                             <?php

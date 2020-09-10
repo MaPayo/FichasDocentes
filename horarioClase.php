@@ -37,7 +37,13 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                         <div class="col-xl-6 col-lg-8 col-12">
                             <div class="card ">
                                 <div class="card-header text-center">
-                                    <h2>Crear/Modificar borrador horario clase</h2>
+                                <?php
+                                if (isset($_GET['IdHorarioClase'])){
+                                    echo "<h2>Modificar borrador de un horario de clase</h2>";
+                                }elseif (isset($_GET['IdGrupoClase'])){
+                                    echo "<h2>Crear borrador de un horario de clase</h2>";
+                                }
+                                ?>
                                 </div>
                                 <div class="card-body">
                                     <?php
@@ -55,13 +61,13 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                             $datosIniciales['horaFin'] = $contextHorarioClase->getData()->getHoraFin();
                                             $datosIniciales['idGrupoClase'] = $contextHorarioClase->getData()->getIdGrupoClase();
                                             $datosIniciales['idAsignatura'] =  htmlspecialchars(trim(strip_tags($_GET['IdAsignatura'])));
-                                            $datosIniciales['idGrado'] =$_GET['IdGrado'];
+                                            $datosIniciales['idGrado'] =htmlspecialchars(trim(strip_tags($_GET['IdGrado'])));
                                             $access->gestionaModificacion($datosIniciales);
                                         }
                                     } elseif (isset($_GET['IdGrupoClase'])) {
                                         $datosIniciales['idAsignatura'] =  htmlspecialchars(trim(strip_tags($_GET['IdAsignatura'])));
                                         $datosIniciales['idGrupoClase'] =  htmlspecialchars(trim(strip_tags($_GET['IdGrupoClase'])));
-                                        $datosIniciales['idGrado'] =$_GET['IdGrado'];
+                                        $datosIniciales['idGrado'] = htmlspecialchars(trim(strip_tags($_GET['IdGrado'])));
                                         $access->gestionaModificacion($datosIniciales);
                                     }
                                     ?>

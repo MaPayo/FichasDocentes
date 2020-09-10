@@ -42,52 +42,72 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                 <div class="col-md-6 col-12">
                     <div class="card ">
                         <div class="card-header text-center">
-                            <h2>Crear/Modificar borrador grupo laboratorio</h2>
+                            <h2>Borrar borrador de un grupo laboratorio</h2>
                         </div>
                         <div class="card-body">
                             <?php 
-                            
-
-                            if (isset($_GET['IdGrupoLaboratorio'])) {
-                                $context = new es\ucm\Context(FIND_MODGRUPO_LABORATORIO, htmlspecialchars(trim(strip_tags($_GET['IdGrupoLaboratorio']))));
-                                    $contextModGrupoLaboratorio = $controller->action($context);
-                                    if ($contextModGrupoLaboratorio->getEvent() === FIND_MODGRUPO_LABORATORIO_OK) {
-                                        $context = new es\ucm\Context(LIST_MODHORARIO_LABORATORIO, htmlspecialchars(trim(strip_tags($_GET['IdGrupoLaboratorio']))));
-                                        $contextHorariosLaboratorio = $controller->action($context);
-                                        if ($contextHorariosLaboratorio->getEvent() === LIST_MODHORARIO_LABORATORIO_OK) {
-                                            foreach($contextHorariosLaboratorio->getData() as $horarioLaboratorio){
-                                                $context = new es\ucm\Context(DELETE_MODHORARIO_LABORATORIO, $horarioLaboratorio->getIdHorarioLab());
-                                                $horarioLaboratorio = $controller->action($context);
-                                            }
-                                        }
-
-                                        $context = new es\ucm\Context(LIST_MODGRUPO_LABORATORIO_PROFESOR, htmlspecialchars(trim(strip_tags($_GET['IdGrupoLaboratorio']))));
-                                        $contextGrupoLaboratorioProfesor = $controller->action($context);
-                                        if ($contextGrupoLaboratorioProfesor->getEvent() === LIST_MODGRUPO_LABORATORIO_PROFESOR_OK) {
-                                            foreach($contextGrupoLaboratorioProfesor->getData() as $grupoLaboratorioProfesor){
-                                                $arrayGrupoLaboratorioProfesor = array();
-                                                $arrayGrupoLaboratorioProfesor['idGrupoLaboratorio'] = $grupoLaboratorioProfesor->getIdGrupoLab();
-                                                $arrayGrupoLaboratorioProfesor['emailProfesor'] = $grupoLaboratorioProfesor->getEmailProfesor();
-                                                $context = new es\ucm\Context(DELETE_MODGRUPO_LABORATORIO_PROFESOR, $arrayGrupoLaboratorioProfesor);
-                                                $grupoLaboratorioProfesor = $controller->action($context);
-                                            }
-                                        }
-
-
-
-                                        $context = new es\ucm\Context(FIND_MODGRUPO_LABORATORIO, htmlspecialchars(trim(strip_tags($_GET['IdGrupoLaboratorio']))));
+                            if (isset($_GET['Confirmacion']) && $_GET['Confirmacion'] === 'y') {
+                                if (isset($_GET['IdGrupoLaboratorio'])) {
+                                    $context = new es\ucm\Context(FIND_MODGRUPO_LABORATORIO, htmlspecialchars(trim(strip_tags($_GET['IdGrupoLaboratorio']))));
                                         $contextModGrupoLaboratorio = $controller->action($context);
                                         if ($contextModGrupoLaboratorio->getEvent() === FIND_MODGRUPO_LABORATORIO_OK) {
-                                            $context = new es\ucm\Context(DELETE_MODGRUPO_LABORATORIO, htmlspecialchars(trim(strip_tags($_GET['IdGrupoLaboratorio']))));
+                                            $context = new es\ucm\Context(LIST_MODHORARIO_LABORATORIO, htmlspecialchars(trim(strip_tags($_GET['IdGrupoLaboratorio']))));
+                                            $contextHorariosLaboratorio = $controller->action($context);
+                                            if ($contextHorariosLaboratorio->getEvent() === LIST_MODHORARIO_LABORATORIO_OK) {
+                                                foreach($contextHorariosLaboratorio->getData() as $horarioLaboratorio){
+                                                    $context = new es\ucm\Context(DELETE_MODHORARIO_LABORATORIO, $horarioLaboratorio->getIdHorarioLab());
+                                                    $horarioLaboratorio = $controller->action($context);
+                                                }
+                                            }
+    
+                                            $context = new es\ucm\Context(LIST_MODGRUPO_LABORATORIO_PROFESOR, htmlspecialchars(trim(strip_tags($_GET['IdGrupoLaboratorio']))));
+                                            $contextGrupoLaboratorioProfesor = $controller->action($context);
+                                            if ($contextGrupoLaboratorioProfesor->getEvent() === LIST_MODGRUPO_LABORATORIO_PROFESOR_OK) {
+                                                foreach($contextGrupoLaboratorioProfesor->getData() as $grupoLaboratorioProfesor){
+                                                    $arrayGrupoLaboratorioProfesor = array();
+                                                    $arrayGrupoLaboratorioProfesor['idGrupoLaboratorio'] = $grupoLaboratorioProfesor->getIdGrupoLab();
+                                                    $arrayGrupoLaboratorioProfesor['emailProfesor'] = $grupoLaboratorioProfesor->getEmailProfesor();
+                                                    $context = new es\ucm\Context(DELETE_MODGRUPO_LABORATORIO_PROFESOR, $arrayGrupoLaboratorioProfesor);
+                                                    $grupoLaboratorioProfesor = $controller->action($context);
+                                                }
+                                            }
+    
+    
+    
+                                            $context = new es\ucm\Context(FIND_MODGRUPO_LABORATORIO, htmlspecialchars(trim(strip_tags($_GET['IdGrupoLaboratorio']))));
                                             $contextModGrupoLaboratorio = $controller->action($context);
-                                            if ($contextModGrupoLaboratorio->getEvent() === DELETE_MODGRUPO_LABORATORIO_OK) {
-                                                header('Location: indexAcceso.php?IdGrado='.$_GET['IdGrado'].'&IdAsignatura=' . $_GET['IdAsignatura'] . '&eliminado=y');
-                                            } elseif ($contextModGrupoLaboratorio->getEvent() === DELETE_MODGRUPO_LABORATORIO_FAIL) {
-                                                header('Location: indexAcceso.php?IdGrado='.$_GET['IdGrado'].'&IdAsignatura=' . $_GET['IdAsignatura'] . '&eliminado=n');
+                                            if ($contextModGrupoLaboratorio->getEvent() === FIND_MODGRUPO_LABORATORIO_OK) {
+                                                $context = new es\ucm\Context(DELETE_MODGRUPO_LABORATORIO, htmlspecialchars(trim(strip_tags($_GET['IdGrupoLaboratorio']))));
+                                                $contextModGrupoLaboratorio = $controller->action($context);
+                                                if ($contextModGrupoLaboratorio->getEvent() === DELETE_MODGRUPO_LABORATORIO_OK) {
+                                                    header('Location: indexAcceso.php?IdGrado='.$_GET['IdGrado'].'&IdAsignatura=' . $_GET['IdAsignatura'] . '&eliminado=y');
+                                                } elseif ($contextModGrupoLaboratorio->getEvent() === DELETE_MODGRUPO_LABORATORIO_FAIL) {
+                                                    header('Location: indexAcceso.php?IdGrado='.$_GET['IdGrado'].'&IdAsignatura=' . $_GET['IdAsignatura'] . '&eliminado=n');
+                                                }
                                             }
                                         }
-                                    }
-                            } 
+                                }
+                            }else{
+                                ?>
+                                ¿Estas seguro de que quieres borrar un grupo de laboratorio?
+                                <div class="text-center">
+                                    <a href="borrarGrupoLaboratorio.php?IdGrado=<?php echo $_GET['IdGrado']; ?>&IdAsignatura=<?php echo $_GET['IdAsignatura']; ?>&IdGrupoLaboratorio=<?php echo $_GET['IdGrupoLaboratorio']; ?>&Confirmacion=y">
+                                        <button type="button" class="btn btn-success" id="btn-form">
+                                            Si
+                                        </button>
+
+                                    </a>
+                                    <a href="indexAcceso.php?IdGrado=<?php echo $_GET['IdGrado']; ?>&IdAsignatura=<?php echo $_GET['IdAsignatura']; ?>">
+                                        <button type="button" class="btn btn-danger" id="btn-form">
+                                            No
+                                        </button>
+                                    </a>
+                                </div>
+                            <?php
+                            }
+
+
+                             
                             ?>
                         </div>
                     </div>

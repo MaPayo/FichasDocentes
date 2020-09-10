@@ -46,36 +46,56 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                             <div class="col-md-6 col-12">
                                 <div class="card">
                                     <div class="card-header text-center">
-                                        <h2>Crear/Modificar borrador evaluación</h2>
+                                        <h2>Borrar borrador evaluación</h2>
                                     </div>
                                     <div class="card-body">
                                         <?php
-
-
-                                        if (isset($_GET['IdAsignatura'])) {
-                                            $context = new es\ucm\Context(FIND_EVALUACION, htmlspecialchars(trim(strip_tags($_GET[$name]))));
-                                        } else {
-                                            $context = new es\ucm\Context(FIND_MODEVALUACION, htmlspecialchars(trim(strip_tags($_GET[$name]))));
-                                        }
-                                        $contextEvaluacion = $controller->action($context);
-
-                                        if ($contextEvaluacion->getEvent() === FIND_MODEVALUACION_OK) {
-                                            $context = new es\ucm\Context(DELETE_MODEVALUACION, htmlspecialchars(trim(strip_tags($_GET[$name]))));
-                                            $contextEvaluacion = $controller->action($context);
-                                            if ($contextEvaluacion->getEvent() === DELETE_MODEVALUACION_OK) {
-                                                header('Location: indexAcceso.php?IdGrado='.$_GET['IdGrado'].'&IdAsignatura=' . $_GET[$name] . '&eliminado=y');
-                                            } elseif ($contextEvaluacion->getEvent() === DELETE_MODEVALUACION_FAIL) {
-                                                header('Location: indexAcceso.php?IdGrado='.$_GET['IdGrado'].'&IdAsignatura=' . $_GET[$name] . '&eliminado=n');
+                                        if (isset($_GET['Confirmacion']) && $_GET['Confirmacion'] === 'y') {
+                                            if (isset($_GET['IdAsignatura'])) {
+                                                //$context = new es\ucm\Context(FIND_EVALUACION, htmlspecialchars(trim(strip_tags($_GET[$name]))));
+                                                header('Location: indexAcceso.php?IdGrado=' . $_GET['IdGrado'] . '&IdAsignatura=' . $_GET[$name] . '');
+                                            } else {
+                                                $context = new es\ucm\Context(FIND_MODEVALUACION, htmlspecialchars(trim(strip_tags($_GET[$name]))));
                                             }
-                                        } elseif ($contextEvaluacion->getEvent() === FIND_EVALUACION_OK) {
-                                            $context = new es\ucm\Context(DELETE_EVALUACION, htmlspecialchars(trim(strip_tags($_GET[$name]))));
                                             $contextEvaluacion = $controller->action($context);
-                                            if ($contextEvaluacion->getEvent() === DELETE_EVALUACION_OK) {
-                                                header('Location: indexAcceso.php?IdGrado='.$_GET['IdGrado'].'&IdAsignatura=' . $_GET[$name] . '&eliminado=y');
-                                            } elseif ($contextEvaluacion->getEvent() === DELETE_EVALUACION_FAIL) {
-                                                header('Location: indexAcceso.php?IdGrado='.$_GET['IdGrado'].'&IdAsignatura=' . $_GET[$name] . '&eliminado=n');
+
+                                            if ($contextEvaluacion->getEvent() === FIND_MODEVALUACION_OK) {
+                                                $context = new es\ucm\Context(DELETE_MODEVALUACION, htmlspecialchars(trim(strip_tags($_GET[$name]))));
+                                                $contextEvaluacion = $controller->action($context);
+                                                if ($contextEvaluacion->getEvent() === DELETE_MODEVALUACION_OK) {
+                                                    header('Location: indexAcceso.php?IdGrado=' . $_GET['IdGrado'] . '&IdAsignatura=' . $_GET[$name] . '&eliminado=y');
+                                                } elseif ($contextEvaluacion->getEvent() === DELETE_MODEVALUACION_FAIL) {
+                                                    header('Location: indexAcceso.php?IdGrado=' . $_GET['IdGrado'] . '&IdAsignatura=' . $_GET[$name] . '&eliminado=n');
+                                                }
+                                            } elseif ($contextEvaluacion->getEvent() === FIND_EVALUACION_OK) {
+                                                $context = new es\ucm\Context(DELETE_EVALUACION, htmlspecialchars(trim(strip_tags($_GET[$name]))));
+                                                $contextEvaluacion = $controller->action($context);
+                                                if ($contextEvaluacion->getEvent() === DELETE_EVALUACION_OK) {
+                                                    header('Location: indexAcceso.php?IdGrado=' . $_GET['IdGrado'] . '&IdAsignatura=' . $_GET[$name] . '&eliminado=y');
+                                                } elseif ($contextEvaluacion->getEvent() === DELETE_EVALUACION_FAIL) {
+                                                    header('Location: indexAcceso.php?IdGrado=' . $_GET['IdGrado'] . '&IdAsignatura=' . $_GET[$name] . '&eliminado=n');
+                                                }
                                             }
+                                        }else{
+                                            ?>
+                                            ¿Estas seguro de que quieres borrar el borrador de la evaluación?
+                                            <div class="text-center">
+                                              <a href="borrarEvaluacion.php?IdGrado=<?php echo $_GET['IdGrado']; ?>&IdModAsignatura=<?php echo $_GET[$name]; ?>&Confirmacion=y">
+                                                <button type="button" class="btn btn-success" id="btn-form">
+                                                  Si
+                                                </button>
+                      
+                                              </a>
+                                              <a href="indexAcceso.php?IdGrado=<?php echo $_GET['IdGrado']; ?>&IdAsignatura=<?php echo $_GET[$name]; ?>">
+                                                <button type="button" class="btn btn-danger" id="btn-form">
+                                                  No
+                                                </button>
+                                              </a>
+                                            </div>
+                                          <?php
                                         }
+
+
                                         ?>
                                     </div>
                                 </div>

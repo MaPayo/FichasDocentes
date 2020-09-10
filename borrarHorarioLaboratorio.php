@@ -26,85 +26,100 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
         require_once('includes/Presentacion/Vistas/html/cabecera.php');
         ?>
         <div class="row justify-content-center align-items-center">
-           <?php
+            <?php
             if (isset($_SESSION['login']) && $_SESSION['login'] === true) {
 
-                if((isset($_GET['IdAsignatura']) && isset($_GET['IdGrupoLaboratorio'])) || (isset($_GET['IdAsignatura']) && isset($_GET['IdHorarioLaboratorio']))){
+                if ((isset($_GET['IdAsignatura']) && isset($_GET['IdGrupoLaboratorio'])) || (isset($_GET['IdAsignatura']) && isset($_GET['IdHorarioLaboratorio']))) {
 
-                    if((isset($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET['IdAsignatura']]['coordinacion']) && $_SESSION['asignaturas'][$_GET['IdGrado']][$_GET['IdAsignatura']]['coordinacion'] == true) || (isset($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET['IdAsignatura']]['permisos']) && unserialize($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET['IdAsignatura']]['permisos'])->getPermisoGrupoLaboratorio() == true)){
-                     $controller = new es\ucm\ControllerImplements();
-                     $context = new es\ucm\Context(FIND_CONFIGURACION, htmlspecialchars(trim(strip_tags($_GET['IdAsignatura']))));
-                     $contextConfiguacion = $controller->action($context);
+                    if ((isset($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET['IdAsignatura']]['coordinacion']) && $_SESSION['asignaturas'][$_GET['IdGrado']][$_GET['IdAsignatura']]['coordinacion'] == true) || (isset($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET['IdAsignatura']]['permisos']) && unserialize($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET['IdAsignatura']]['permisos'])->getPermisoGrupoLaboratorio() == true)) {
+                        $controller = new es\ucm\ControllerImplements();
+                        $context = new es\ucm\Context(FIND_CONFIGURACION, htmlspecialchars(trim(strip_tags($_GET['IdAsignatura']))));
+                        $contextConfiguacion = $controller->action($context);
 
-                     if($contextConfiguacion->getEvent() === FIND_CONFIGURACION_OK && $contextConfiguacion->getData()->getGrupoLaboratorio() == 1){
-                        ?>
-                <div class="col-md-6 col-12">
-                    <div class="card ">
-                        <div class="card-header text-center">
-                            <h2>Crear/Modificar borrador horario laboratorio</h2>
-                        </div>
-                        <div class="card-body">
-                            <?php
-                            
-                            if (isset($_GET['IdHorarioLaboratorio'])) {
-                                $context = new es\ucm\Context(FIND_MODHORARIO_LABORATORIO, htmlspecialchars(trim(strip_tags($_GET['IdHorarioLaboratorio']))));
-                                $contextHorarioLaboratorio = $controller->action($context);
-                                if ($contextHorarioLaboratorio->getEvent() === FIND_MODHORARIO_LABORATORIO_OK) {
-                                        $context = new es\ucm\Context(DELETE_MODHORARIO_LABORATORIO, htmlspecialchars(trim(strip_tags($_GET['IdHorarioLaboratorio']))));
-                                        $contextHorarioLaboratorio = $controller->action($context);
-                                        if ($contextHorarioLaboratorio->getEvent() === DELETE_MODHORARIO_LABORATORIO_OK) {
-                                            header('Location: indexAcceso.php?IdGrado='.$_GET['IdGrado'].'&IdAsignatura=' . $_GET['IdAsignatura'] . '&eliminado=y');
-                                        } elseif ($contextHorarioLaboratorio->getEvent() === DELETE_MODHORARIO_LABORATORIO_FAIL) {
-                                            header('Location: indexAcceso.php?IdGrado='.$_GET['IdGrado'].'&IdAsignatura=' . $_GET['IdAsignatura'] . '&eliminado=n');
+                        if ($contextConfiguacion->getEvent() === FIND_CONFIGURACION_OK && $contextConfiguacion->getData()->getGrupoLaboratorio() == 1) {
+            ?>
+                            <div class="col-md-6 col-12">
+                                <div class="card ">
+                                    <div class="card-header text-center">
+                                        <h2>Borrar un horario laboratorio de un grupo de laboratorio</h2>
+                                    </div>
+                                    <div class="card-body">
+                                        <?php
+                                        if (isset($_GET['Confirmacion']) && $_GET['Confirmacion'] === 'y') {
+                                            if (isset($_GET['IdHorarioLaboratorio'])) {
+                                                $context = new es\ucm\Context(FIND_MODHORARIO_LABORATORIO, htmlspecialchars(trim(strip_tags($_GET['IdHorarioLaboratorio']))));
+                                                $contextHorarioLaboratorio = $controller->action($context);
+                                                if ($contextHorarioLaboratorio->getEvent() === FIND_MODHORARIO_LABORATORIO_OK) {
+                                                    $context = new es\ucm\Context(DELETE_MODHORARIO_LABORATORIO, htmlspecialchars(trim(strip_tags($_GET['IdHorarioLaboratorio']))));
+                                                    $contextHorarioLaboratorio = $controller->action($context);
+                                                    if ($contextHorarioLaboratorio->getEvent() === DELETE_MODHORARIO_LABORATORIO_OK) {
+                                                        header('Location: indexAcceso.php?IdGrado=' . $_GET['IdGrado'] . '&IdAsignatura=' . $_GET['IdAsignatura'] . '&eliminado=y');
+                                                    } elseif ($contextHorarioLaboratorio->getEvent() === DELETE_MODHORARIO_LABORATORIO_FAIL) {
+                                                        header('Location: indexAcceso.php?IdGrado=' . $_GET['IdGrado'] . '&IdAsignatura=' . $_GET['IdAsignatura'] . '&eliminado=n');
+                                                    }
+                                                }
+                                            }
+                                        } else {
+                                        ?>
+                                            ¿Estas seguro de que quieres borrar un horario de laboratorio de un grupo de laboratorio?
+                                            <div class="text-center">
+                                                <a href="borrarHorarioLaboratorio.php?IdGrado=<?php echo $_GET['IdGrado']; ?>&IdAsignatura=<?php echo $_GET['IdAsignatura']; ?>&IdHorarioLaboratorio=<?php echo $_GET['IdHorarioLaboratorio']; ?>&Confirmacion=y">
+                                                    <button type="button" class="btn btn-success" id="btn-form">
+                                                        Si
+                                                    </button>
+
+                                                </a>
+                                                <a href="indexAcceso.php?IdGrado=<?php echo $_GET['IdGrado']; ?>&IdAsignatura=<?php echo $_GET['IdAsignatura']; ?>">
+                                                    <button type="button" class="btn btn-danger" id="btn-form">
+                                                        No
+                                                    </button>
+                                                </a>
+                                            </div>
+                                        <?php
                                         }
-                                }
-                            }
-                            ?>
-                        </div>
-                    </div>
-                </div>
+
+                                        ?>
+                                    </div>
+                                </div>
+                            </div>
             <?php
-                }
-                else{
-                   echo '
+                        } else {
+                            echo '
                    <div class="col-md-6 col-12">
                    <div class="alert alert-danger" role="alert">
                    <h2 class="card-title text-center">ACCESO DENEGADO</h2>
                    <h5 class="text-center">La asignatura seleccionada no ha sido creada correctamente o no contiene este apartado. Contacta con el administrador</h5>
                    </div>
                    </div>';
-               }
-           }
-           else{
-               echo '
+                        }
+                    } else {
+                        echo '
                <div class="col-md-6 col-12">
                <div class="alert alert-danger" role="alert">
                <h2 class="card-title text-center">ACCESO DENEGADO</h2>
                <h5 class="text-center">No tienes permisos suficientes para esta apartado</h5>
                </div>
                </div>';
-           }
-       }
-       else {
-        echo '
+                    }
+                } else {
+                    echo '
         <div class="col-md-6 col-12">
         <div class="alert alert-danger" role="alert">
         <h2 class="card-title text-center">ACCESO DENEGADO</h2>
         <h5 class="text-center">No se ha podido obtener la asignatura</h5>
         </div>
         </div>';
-    }
-}
-else {
-    echo '
+                }
+            } else {
+                echo '
     <div class="col-md-6 col-12">
     <div class="alert alert-danger" role="alert">
     <h2 class="card-title text-center">ACCESO DENEGADO</h2>
     <h5 class="text-center">Inicia sesión con un usuario que pueda acceder a este contenido</h5>
     </div>
     </div>';
-}
-?>
+            }
+            ?>
         </div>
     </div>
     <!-- Optional JavaScript -->
