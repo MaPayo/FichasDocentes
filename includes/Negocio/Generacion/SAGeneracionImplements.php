@@ -7,6 +7,8 @@ class SAGeneracionImplements implements SAGeneracion{
     public static function generacionHTMLSpanish($datos){
 		//obtencion de los datos
 		$factoriesSA = new \es\ucm\FactorySAImplements();
+		//Iniciamos el pandoc
+		$pandoc = new \Pandoc\Pandoc();
 		//Asignatura
 		$sa = $factoriesSA->createSAAsignatura();
 		$n = $sa->findAsignatura($datos[0]);
@@ -107,15 +109,16 @@ class SAGeneracionImplements implements SAGeneracion{
 		$n = $sa->findCompetenciaAsignatura($idAsignatura);
 		$nmod = $samod->findModCompetenciaAsignatura($idAsignatura);
 		if($nmod !== null){
-			$GeneralesHTML = $nmod->getGenerales();
-			$EspecificasHTML = $nmod->getEspecificas();
-			$BasicasYTransversalesHTML =$nmod->getBasicasYTransversales();
-			$ResultadosAprendizajeHTML = $nmod->getResultadosAprendizaje();
+			$GeneralesHTML = $pandoc->convert($nmod->getGenerales(), "markdown_github", "html");
+			$EspecificasHTML = $pandoc->convert($nmod->getEspecificas(), "markdown_github", "html");
+			$BasicasYTransversalesHTML =$pandoc->convert($nmod->getBasicasYTransversales(), "markdown_github", "html");
+			$ResultadosAprendizajeHTML =$pandoc->convert($nmod->getResultadosAprendizaje(), "markdown_github", "html");
 		}else{
-			$GeneralesHTML = $n->getGenerales();
-			$EspecificasHTML = $n->getEspecificas();
-			$BasicasYTransversalesHTML =$n->getBasicasYTransversales();
-			$ResultadosAprendizajeHTML = $n->getResultadosAprendizaje();
+			$GeneralesHTML = $pandoc->convert($n->getGenerales(), "markdown_github", "html");
+			$EspecificasHTML = $pandoc->convert($n->getEspecificas(), "markdown_github", "html");
+			$BasicasYTransversalesHTML =$pandoc->convert($n->getBasicasYTransversales(), "markdown_github", "html");
+			$ResultadosAprendizajeHTML =$pandoc->convert($n->getResultadosAprendizaje(), "markdown_github", "html");
+		
 		}
 		//Programa Asignatura
 		$sa = $factoriesSA->createSAProgramaAsignatura();
@@ -123,18 +126,19 @@ class SAGeneracionImplements implements SAGeneracion{
 		$n = $sa->findProgramaAsignatura($idAsignatura);
 		$nmod = $samod->findModProgramaAsignatura($idAsignatura);
 		if($nmod !== null){
-			$BreveDescripcionHTML = $nmod->getBreveDescripcion();
-			$ConocimientosPreviosHTML = $nmod->getConocimientosPrevios();
-			$ProgramaTeoricoHTML =$nmod->getProgramaTeorico();
-			$ProgramaSeminarioHTML = $nmod->getProgramaSeminarios();
-			$ProgramaLaboratorioHTML = $nmod->getProgramaLaboratorio();
+			$BreveDescripcionHTML = $pandoc->convert($nmod->getBreveDescripcion(), "markdown_github", "html");
+			$ConocimientosPreviosHTML = $pandoc->convert($nmod->getConocimientosPrevios(), "markdown_github", "html");
+			$ProgramaTeoricoHTML =$pandoc->convert($nmod->getProgramaTeorico(), "markdown_github", "html");
+			$ProgramaSeminarioHTML = $pandoc->convert($nmod->getProgramaSeminarios(), "markdown_github", "html");
+			$ProgramaLaboratorioHTML = $pandoc->convert($nmod->getProgramaLaboratorio(), "markdown_github", "html");
 
 		}else{
-			$BreveDescripcionHTML = $n->getBreveDescripcion();
-			$ConocimientosPreviosHTML = $n->getConocimientosPrevios();
-			$ProgramaTeoricoHTML =$n->getProgramaTeorico();
-			$ProgramaSeminarioHTML = $n->getProgramaSeminarios();
-			$ProgramaLaboratorioHTML = $n->getProgramaLaboratorio();
+			
+			$BreveDescripcionHTML = $pandoc->convert($n->getBreveDescripcion(), "markdown_github", "html");
+			$ConocimientosPreviosHTML = $pandoc->convert($n->getConocimientosPrevios(), "markdown_github", "html");
+			$ProgramaTeoricoHTML =$pandoc->convert($n->getProgramaTeorico(), "markdown_github", "html");
+			$ProgramaSeminarioHTML = $pandoc->convert($n->getProgramaSeminarios(), "markdown_github", "html");
+			$ProgramaLaboratorioHTML = $pandoc->convert($n->getProgramaLaboratorio(), "markdown_github", "html");
 		}
 		//Bibliografia
 		$sa = $factoriesSA->createSABibliografia();
@@ -142,11 +146,12 @@ class SAGeneracionImplements implements SAGeneracion{
 		$n = $sa->findBibliografia($idAsignatura);
 		$nmod = $samod->findModBibliografia($idAsignatura);
 		if($nmod !== null){
-			$CitasBibliograficasHTML = $nmod->getCitasBibliograficas();
-			$RecursosInternetHTML = $nmod->getRecursosInternet();
+			$CitasBibliograficasHTML = $pandoc->convert($nmod->getCitasBibliograficas(), "markdown_github", "html");
+			$RecursosInternetHTML = $pandoc->convert($nmod->getRecursosInternet(), "markdown_github", "html");
 		}else{
-			$CitasBibliograficasHTML = $n->getCitasBibliograficas();
-			$RecursosInternetHTML = $n->getRecursosInternet();
+			
+			$CitasBibliograficasHTML = $pandoc->convert($n->getCitasBibliograficas(), "markdown_github", "html");
+			$RecursosInternetHTML = $pandoc->convert($n->getRecursosInternet(), "markdown_github", "html");
 		}
 		//Metodologia
 		$sa = $factoriesSA->createSAMetodologia();
@@ -154,9 +159,9 @@ class SAGeneracionImplements implements SAGeneracion{
 		$n = $sa->findMetodologia($idAsignatura);
 		$nmod = $samod->findModMetodologia($idAsignatura);
 		if($nmod !== null){
-			$MetodologiaHTML = $nmod->getMetodologia();
+			$MetodologiaHTML = $pandoc->convert($nmod->getMetodologia(),"markdown_github","html");
 		}else{
-			$MetodologiaHTML = $n->getMetodologia();
+			$MetodologiaHTML = $pandoc->convert($n->getMetodologia(),"markdown_github","html");
 		}
 		//Evaluacion
 		$sa = $factoriesSA->createSAEvaluacion();
@@ -164,21 +169,22 @@ class SAGeneracionImplements implements SAGeneracion{
 		$n = $sa->findEvaluacion($idAsignatura);
 		$nmod = $samod->findModEvaluacion($idAsignatura);
 		if($nmod !== null){
-			$RealizacionExamenesHTML = $nmod->getRealizacionExamenes();
-			$RealizacionActividadesHTML = $nmod->getRealizacionActividades();
-			$RealizacionLaboratorioHTML = $nmod->getRealizacionLaboratorio();
-			$CalificacionFinalHTML = $nmod->getCalificacionFinal();
-			$PesoExamenesHTML = $nmod->getPesoExamenes();
-			$PesoActividadesHTML = $nmod->getPesoActividades();
-			$PesoLaboratorioHTML = $nmod->getPesoLaboratorio();
+			$RealizacionExamenesHTML = $pandoc->convert($nmod->getRealizacionExamenes(),"markdown_github","html");
+			$RealizacionActividadesHTML = $pandoc->convert($nmod->getRealizacionActividades(),"markdown_github","html");
+			$RealizacionLaboratorioHTML = $pandoc->convert($nmod->getRealizacionLaboratorio(),"markdown_github","html");
+			$CalificacionFinalHTML = $pandoc->convert($nmod->getCalificacionFinal(),"markdown_github","html");
+			$PesoExamenesHTML = $pandoc->convert($nmod->getPesoExamenes(),"markdown_github","html");
+			$PesoActividadesHTML = $pandoc->convert($nmod->getPesoActividades(),"markdown_github","html");
+			$PesoLaboratorioHTML = $pandoc->convert($nmod->getPesoLaboratorio(),"markdown_github","html");
 		}else{
-			$RealizacionExamenesHTML = $n->getRealizacionExamenes();
-			$RealizacionActividadesHTML = $n->getRealizacionActividades();
-			$RealizacionLaboratorioHTML = $n->getRealizacionLaboratorio();
-			$CalificacionFinalHTML = $n->getCalificacionFinal();
-			$PesoExamenesHTML = $n->getPesoExamenes();
-			$PesoActividadesHTML = $n->getPesoActividades();
-			$PesoLaboratorioHTML = $n->getPesoLaboratorio();
+	
+			$RealizacionExamenesHTML = $pandoc->convert($n->getRealizacionExamenes(),"markdown_github","html");
+			$RealizacionActividadesHTML = $pandoc->convert($n->getRealizacionActividades(),"markdown_github","html");
+			$RealizacionLaboratorioHTML = $pandoc->convert($n->getRealizacionLaboratorio(),"markdown_github","html");
+			$CalificacionFinalHTML = $pandoc->convert($n->getCalificacionFinal(),"markdown_github","html");
+			$PesoExamenesHTML = $pandoc->convert($n->getPesoExamenes(),"markdown_github","html");
+			$PesoActividadesHTML = $pandoc->convert($n->getPesoActividades(),"markdown_github","html");
+			$PesoLaboratorioHTML = $pandoc->convert($n->getPesoLaboratorio(),"markdown_github","html");
 		}
 
 
@@ -197,6 +203,7 @@ class SAGeneracionImplements implements SAGeneracion{
 	public static function generacionHTMLEnglish($datos){
 		//obtencion de los datos
 		$factoriesSA = new \es\ucm\FactorySAImplements();
+		$pandoc = new \Pandoc\Pandoc();
 		//Asignatura
 		$sa = $factoriesSA->createSAAsignatura();
 		$n = $sa->findAsignatura($datos[0]);
@@ -297,15 +304,16 @@ class SAGeneracionImplements implements SAGeneracion{
 		$n = $sa->findCompetenciaAsignatura($idAsignatura);
 		$nmod = $samod->findModCompetenciaAsignatura($idAsignatura);
 		if($nmod !== null){
-			$GeneralesHTML = $nmod->getGeneralesI();
-			$EspecificasHTML = $nmod->getEspecificasI();
-			$BasicasYTransversalesHTML =$nmod->getBasicasYTransversalesI();
-			$ResultadosAprendizajeHTML = $nmod->getResultadosAprendizajeI();
+			$GeneralesHTML = $pandoc->convert($nmod->getGeneralesI(), "markdown_github", "html");
+			$EspecificasHTML = $pandoc->convert($nmod->getEspecificasI(), "markdown_github", "html");
+			$BasicasYTransversalesHTML =$pandoc->convert($nmod->getBasicasYTransversalesI(), "markdown_github", "html");
+			$ResultadosAprendizajeHTML =$pandoc->convert($nmod->getResultadosAprendizajeI(), "markdown_github", "html");
 		}else{
-			$GeneralesHTML = $n->getGeneralesI();
-			$EspecificasHTML = $n->getEspecificasI();
-			$BasicasYTransversalesHTML =$n->getBasicasYTransversalesI();
-			$ResultadosAprendizajeHTML = $n->getResultadosAprendizajeI();
+			$GeneralesHTML = $pandoc->convert($n->getGeneralesI(), "markdown_github", "html");
+			$EspecificasHTML = $pandoc->convert($n->getEspecificasI(), "markdown_github", "html");
+			$BasicasYTransversalesHTML =$pandoc->convert($n->getBasicasYTransversalesI(), "markdown_github", "html");
+			$ResultadosAprendizajeHTML =$pandoc->convert($n->getResultadosAprendizajeI(), "markdown_github", "html");
+		
 		}
 		//Programa Asignatura
 		$sa = $factoriesSA->createSAProgramaAsignatura();
@@ -313,18 +321,19 @@ class SAGeneracionImplements implements SAGeneracion{
 		$n = $sa->findProgramaAsignatura($idAsignatura);
 		$nmod = $samod->findModProgramaAsignatura($idAsignatura);
 		if($nmod !== null){
-			$BreveDescripcionHTML = $nmod->getBreveDescripcionI();
-			$ConocimientosPreviosHTML = $nmod->getConocimientosPreviosI();
-			$ProgramaTeoricoHTML =$nmod->getProgramaTeoricoI();
-			$ProgramaSeminarioHTML = $nmod->getProgramaSeminariosI();
-			$ProgramaLaboratorioHTML = $nmod->getProgramaLaboratorioI();
+			$BreveDescripcionHTML = $pandoc->convert($nmod->getBreveDescripcionI(), "markdown_github", "html");
+			$ConocimientosPreviosHTML = $pandoc->convert($nmod->getConocimientosPreviosI(), "markdown_github", "html");
+			$ProgramaTeoricoHTML =$pandoc->convert($nmod->getProgramaTeoricoI(), "markdown_github", "html");
+			$ProgramaSeminarioHTML = $pandoc->convert($nmod->getProgramaSeminariosI(), "markdown_github", "html");
+			$ProgramaLaboratorioHTML = $pandoc->convert($nmod->getProgramaLaboratorioI(), "markdown_github", "html");
 
 		}else{
-			$BreveDescripcionHTML = $n->getBreveDescripcionI();
-			$ConocimientosPreviosHTML = $n->getConocimientosPreviosI();
-			$ProgramaTeoricoHTML =$n->getProgramaTeoricoI();
-			$ProgramaSeminarioHTML = $n->getProgramaSeminariosI();
-			$ProgramaLaboratorioHTML = $n->getProgramaLaboratorioI();
+			
+			$BreveDescripcionHTML = $pandoc->convert($n->getBreveDescripcionI(), "markdown_github", "html");
+			$ConocimientosPreviosHTML = $pandoc->convert($n->getConocimientosPreviosI(), "markdown_github", "html");
+			$ProgramaTeoricoHTML =$pandoc->convert($n->getProgramaTeoricoI(), "markdown_github", "html");
+			$ProgramaSeminarioHTML = $pandoc->convert($n->getProgramaSeminariosI(), "markdown_github", "html");
+			$ProgramaLaboratorioHTML = $pandoc->convert($n->getProgramaLaboratorioI(), "markdown_github", "html");
 		}
 		//Bibliografia
 		$sa = $factoriesSA->createSABibliografia();
@@ -332,11 +341,12 @@ class SAGeneracionImplements implements SAGeneracion{
 		$n = $sa->findBibliografia($idAsignatura);
 		$nmod = $samod->findModBibliografia($idAsignatura);
 		if($nmod !== null){
-			$CitasBibliograficasHTML = $nmod->getCitasBibliograficas();
-			$RecursosInternetHTML = $nmod->getRecursosInternet();
+			$CitasBibliograficasHTML = $pandoc->convert($nmod->getCitasBibliograficas(), "markdown_github", "html");
+			$RecursosInternetHTML = $pandoc->convert($nmod->getRecursosInternet(), "markdown_github", "html");
 		}else{
-			$CitasBibliograficasHTML = $n->getCitasBibliograficas();
-			$RecursosInternetHTML = $n->getRecursosInternet();
+			
+			$CitasBibliograficasHTML = $pandoc->convert($n->getCitasBibliograficas(), "markdown_github", "html");
+			$RecursosInternetHTML = $pandoc->convert($n->getRecursosInternet(), "markdown_github", "html");
 		}
 		//Metodologia
 		$sa = $factoriesSA->createSAMetodologia();
@@ -344,9 +354,9 @@ class SAGeneracionImplements implements SAGeneracion{
 		$n = $sa->findMetodologia($idAsignatura);
 		$nmod = $samod->findModMetodologia($idAsignatura);
 		if($nmod !== null){
-			$MetodologiaHTML = $nmod->getMetodologiaI();
+			$MetodologiaHTML = $pandoc->convert($nmod->getMetodologiaI(),"markdown_github","html");
 		}else{
-			$MetodologiaHTML = $n->getMetodologiaI();
+			$MetodologiaHTML = $pandoc->convert($n->getMetodologiaI(),"markdown_github","html");
 		}
 		//Evaluacion
 		$sa = $factoriesSA->createSAEvaluacion();
@@ -354,21 +364,22 @@ class SAGeneracionImplements implements SAGeneracion{
 		$n = $sa->findEvaluacion($idAsignatura);
 		$nmod = $samod->findModEvaluacion($idAsignatura);
 		if($nmod !== null){
-			$RealizacionExamenesHTML = $nmod->getRealizacionExamenesI();
-			$RealizacionActividadesHTML = $nmod->getRealizacionActividadesI();
-			$RealizacionLaboratorioHTML = $nmod->getRealizacionLaboratorioI();
-			$CalificacionFinalHTML = $nmod->getCalificacionFinalI();
-			$PesoExamenesHTML = $nmod->getPesoExamenes();
-			$PesoActividadesHTML = $nmod->getPesoActividades();
-			$PesoLaboratorioHTML = $nmod->getPesoLaboratorio();
+			$RealizacionExamenesHTML = $pandoc->convert($nmod->getRealizacionExamenesI(),"markdown_github","html");
+			$RealizacionActividadesHTML = $pandoc->convert($nmod->getRealizacionActividadesI(),"markdown_github","html");
+			$RealizacionLaboratorioHTML = $pandoc->convert($nmod->getRealizacionLaboratorioI(),"markdown_github","html");
+			$CalificacionFinalHTML = $pandoc->convert($nmod->getCalificacionFinalI(),"markdown_github","html");
+			$PesoExamenesHTML = $pandoc->convert($nmod->getPesoExamenes(),"markdown_github","html");
+			$PesoActividadesHTML = $pandoc->convert($nmod->getPesoActividades(),"markdown_github","html");
+			$PesoLaboratorioHTML = $pandoc->convert($nmod->getPesoLaboratorio(),"markdown_github","html");
 		}else{
-			$RealizacionExamenesHTML = $n->getRealizacionExamenesI();
-			$RealizacionActividadesHTML = $n->getRealizacionActividadesI();
-			$RealizacionLaboratorioHTML = $n->getRealizacionLaboratorioI();
-			$CalificacionFinalHTML = $n->getCalificacionFinalI();
-			$PesoExamenesHTML = $n->getPesoExamenes();
-			$PesoActividadesHTML = $n->getPesoActividades();
-			$PesoLaboratorioHTML = $n->getPesoLaboratorio();
+	
+			$RealizacionExamenesHTML = $pandoc->convert($n->getRealizacionExamenesI(),"markdown_github","html");
+			$RealizacionActividadesHTML = $pandoc->convert($n->getRealizacionActividadesI(),"markdown_github","html");
+			$RealizacionLaboratorioHTML = $pandoc->convert($n->getRealizacionLaboratorioI(),"markdown_github","html");
+			$CalificacionFinalHTML = $pandoc->convert($n->getCalificacionFinalI(),"markdown_github","html");
+			$PesoExamenesHTML = $pandoc->convert($n->getPesoExamenes(),"markdown_github","html");
+			$PesoActividadesHTML = $pandoc->convert($n->getPesoActividades(),"markdown_github","html");
+			$PesoLaboratorioHTML = $pandoc->convert($n->getPesoLaboratorio(),"markdown_github","html");
 		}
 
 
