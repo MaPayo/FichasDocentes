@@ -7,15 +7,15 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
 <html lang="es">
 
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <?php
-    echo '<link rel="stylesheet" href="' . RUTA_CSS . 'bootstrap.css">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <?php
+  echo '<link rel="stylesheet" href="' . RUTA_CSS . 'bootstrap.css">
     <link rel="stylesheet" href="' . RUTA_CSS . 'fichasdocentes.css">
     <link rel="shortcut icon" type="image/x-icon" href="' . RUTA_IMGS . 'LogoUniversidad.png">
     <script type="text/javascript" src="' . RUTA_JS . 'codigo.js"></script>
     <script src="' . RUTA_JS . 'jquery-3.4.1.min.js" type="text/javascript"></script>';
-    ?>
+  ?>
   <title>Gestión Docente: Panel de control</title>
 </head>
 
@@ -94,7 +94,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
 
                   </nav>
                   <div class="tab-content" id="pills-tabContent">
-                  <div class="tab-pane fade show active text-center" id="nav-info-grado" role="tabpanel" aria-labelledby="nav-info-grado-tab">
+                    <div class="tab-pane fade show active text-center" id="nav-info-grado" role="tabpanel" aria-labelledby="nav-info-grado-tab">
                       <div class="table-responsive text-center">
                         <table class="table table-sm table-bordered">
                           <tbody>
@@ -123,8 +123,9 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                           </a>
                         </div>
                       </div>
+          </div>
                       <div class="tab-pane fade" id="nav-modulos" role="tabpanel" aria-labelledby="nav-modulos-tab">
-                        <?php echo '<div><h5>Modulos del grado' . $contextGrado->getData()->getNombreGrado() . '</h5>
+                        <?php echo '<div><h5>Modulos del grado: ' . $contextGrado->getData()->getNombreGrado() . '</h5>
                           <a href="modulo.php?idGrado=' .  $contextGrado->getData()->getCodigoGrado() . '">
                           <button type="button" class="btn btn-primary" id="btn-form">
                           Añadir Modulo
@@ -151,13 +152,13 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                         }
                         ?>
 
-                      </div>
+                      </div> 
                       <div class="tab-pane fade" id="nav-materias" role="tabpanel" aria-labelledby="nav-materias-tab">
                         <?php
                         if ($modulos->getEvent() === LIST_MODULO_OK)
                           foreach ($modulos->getData() as $modulo) {
                             if ($modulo->getActivo()) {
-                              echo '<div><h5>Materias del Módulo' . $modulo->getNombreModulo() . '</h5>
+                              echo '<div><h5>Materias del módulo: ' . $modulo->getNombreModulo() . '</h5>
                 <a href="materia.php?idGrado=' . $contextGrado->getData()->getCodigoGrado() . '&idModulo=' . $modulo->getIdModulo() . '">
                 <button type="button" class="btn btn-primary" id="btn-form">
                 Añadir Materia
@@ -197,7 +198,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                               if ($materias->getEvent() === LIST_MATERIA_OK) {
                                 foreach ($materias->getData() as $materia) {
                                   if ($materia->getActivo()) {
-                                    echo '<div><h5>Asignaturas de la materia' . $materia->getNombreMateria() . '</h5>
+                                    echo '<div><h5>Asignaturas de la materia: ' . $materia->getNombreMateria() . '</h5>
                                     <a href="asignatura.php?idGrado=' .  $contextGrado->getData()->getCodigoGrado() . '&idMateria=' .  $materia->getIdMateria() . '">
                                     <button type="button" class="btn btn-primary" id="btn-form">
                                     Añadir Asignatura
@@ -227,7 +228,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
 
                     </div>
                   </div>
-                </div>
+                </div>  
               </div>
             </div>
       <?php
