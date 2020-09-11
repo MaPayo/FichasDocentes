@@ -272,10 +272,11 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php'); ?>
           </tr>
           <tr>
             <td rowspan="2" class="bg-info"> <span class="p-1"> Grupo </span> </td>
-            <td colspan="3" class="bg-info"> <span class="p-1"> Horarios clases </span> </td>
+            <td colspan="4" class="bg-info"> <span class="p-1"> Horarios clases </span> </td>
           </tr>
 
           <tr>
+            <td class="bg-info"> <span class="p-1"> Idioma </span> </td>
             <td class="bg-info"> <span class="p-1"> Día </span> </td>
             <td class="bg-info"> <span class="p-1"> Horas </span> </td>
             <td class="bg-info"> <span class="p-1"> Aula </span> </td>
@@ -284,18 +285,20 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php'); ?>
           <?php foreach ($rowsGrupoClaseProfesor as $grupo) {
             $controller = new es\ucm\ControllerImplements();
             $context = new es\ucm\Context(LIST_MODHORARIO_CLASE, $grupo->getIdGrupoClase());
-            echo "<tr><td>" . $grupo->getLetra() . "</td>";
-            $grupos = $controller->action($context);
-            if ($grupos->getEvent() === LIST_MODHORARIO_CLASE_OK)
-              foreach ($grupos as $g) { ?>
-
-              <td><?php echo $g->getDia() ?></td>
-              <td><?php echo $g->getHoraInicio() . " - " . $g->getHoraFinal(); ?></td>
-              <td><?php echo $g->getAula(); ?></td>
-
+            $horarios = $controller->action($context);
+          
+            if ($horarios->getEvent() === LIST_MODHORARIO_CLASE_OK) {
+                foreach ($horarios->getData() as $g) { ?>
+                <tr>
+                <td><?php echo $grupo->getLetra() ?></td>
+                <td><?php echo $grupo->getIdioma() ?></td>
+                <td><?php echo $g->getDia() ?></td>
+                <td><?php echo $g->getHoraInicio() . " - " . $g->getHoraFin(); ?></td>
+                <td><?php echo $g->getAula(); ?></td>
+                </tr>
           <?php }
-          } ?>
-          </tr>
+            }
+            }?>
         </table>
 
       </div>
@@ -355,10 +358,11 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php'); ?>
           </tr>
           <tr>
             <td rowspan="2" class="bg-info"> <span class="p-1"> Grupo </span> </td>
-            <td colspan="3" class="bg-info"> <span class="p-1"> Horarios clases </span> </td>
+            <td colspan="4" class="bg-info"> <span class="p-1"> Horarios laboratorios </span> </td>
           </tr>
 
           <tr>
+            <td class="bg-info"> <span class="p-1"> Idioma </span> </td>
             <td class="bg-info"> <span class="p-1"> Día </span> </td>
             <td class="bg-info"> <span class="p-1"> Horas </span> </td>
             <td class="bg-info"> <span class="p-1"> Aula </span> </td>
@@ -367,17 +371,20 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php'); ?>
           <?php foreach ($rowsGrupoLaboratorioProfesor as $grupo) {
             $controller = new es\ucm\ControllerImplements();
             $context = new es\ucm\Context(LIST_HORARIO_LABORATORIO, $grupo->getIdGrupoLab());
-            echo "<tr><td>" . $grupo->getLetra() . "</td>";
-            $grupos = $controller->action($context);
-            if ($grupos->getEvent() === LIST_HORARIO_LABORATORIO_OK)
-              foreach ($grupos as $g) { ?>
-
-              <td><?php echo $g->getDia() ?></td>
-              <td><?php echo $g->getHoraInicio() . " - " . $g->getHoraFinal(); ?></td>
-              <td><?php echo $g->getAula(); ?></td>
-
+            $horarios = $controller->action($context);
+          
+            if ($horarios->getEvent() === LIST_HORARIO_LABORATORIO_OK) {
+                foreach ($horarios->getData() as $g) { ?>
+                <tr>
+                <td><?php echo $grupo->getLetra() ?></td>
+                <td><?php echo $grupo->getIdioma() ?></td>
+                <td><?php echo $g->getDia() ?></td>
+                <td><?php echo $g->getHoraInicio() . " - " . $g->getHoraFin(); ?></td>
+                <td><?php echo $g->getAula(); ?></td>
+                </tr>
           <?php }
-          } ?>
+            } 
+            }?>
           </tr>
         </table>
 
@@ -432,29 +439,33 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php'); ?>
           </tr>
           <tr>
             <td rowspan="2" class="bg-info"> <span class="p-1"> Grupo </span> </td>
-            <td colspan="3" class="bg-info"> <span class="p-1"> Horarios clases </span> </td>
+            <td colspan="4" class="bg-info"> <span class="p-1"> Horarios laboratorios </span> </td>
           </tr>
 
           <tr>
+            <td class="bg-info"> <span class="p-1"> Idioma </span> </td>
             <td class="bg-info"> <span class="p-1"> Día </span> </td>
             <td class="bg-info"> <span class="p-1"> Horas </span> </td>
             <td class="bg-info"> <span class="p-1"> Aula </span> </td>
           </tr>
 
-          <?php foreach ($rowsGrupoLaboratorioProfesor as $grupo) {
+          <?php  foreach ($rowsGrupoLaboratorioProfesor as $grupo) {
             $controller = new es\ucm\ControllerImplements();
             $context = new es\ucm\Context(LIST_MODHORARIO_LABORATORIO, $grupo->getIdGrupoLab());
-            echo "<tr><td>" . $grupo->getLetra() . "</td>";
-            $grupos = $controller->action($context);
-            if ($grupos->getEvent() === LIST_MODHORARIO_LABORATORIO_OK)
-              foreach ($grupos as $g) { ?>
-
-              <td><?php echo $g->getDia() ?></td>
-              <td><?php echo $g->getHoraInicio() . " - " . $g->getHoraFinal(); ?></td>
-              <td><?php echo $g->getAula(); ?></td>
-
+            $horarios = $controller->action($context);
+          
+            if ($horarios->getEvent() === LIST_MODHORARIO_LABORATORIO_OK) {
+                foreach ($horarios->getData() as $g) { ?>
+                <tr>
+                <td><?php echo $grupo->getLetra() ?></td>
+                <td><?php echo $grupo->getIdioma() ?></td>
+                <td><?php echo $g->getDia() ?></td>
+                <td><?php echo $g->getHoraInicio() . " - " . $g->getHoraFin(); ?></td>
+                <td><?php echo $g->getAula(); ?></td>
+                </tr>
           <?php }
-          } ?>
+            } 
+            }?>
           </tr>
         </table>
 
