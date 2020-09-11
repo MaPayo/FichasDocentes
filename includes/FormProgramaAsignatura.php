@@ -214,44 +214,47 @@ class FormProgramaAsignatura extends Form
 					}
 				}
 			}
-		}
 
+			if (count($erroresFormulario) === 0) {
 
-		if (count($erroresFormulario) === 0) {
+				$context = new Context(FIND_MODPROGRAMA_ASIGNATURA, $datos['idAsignatura']);
+				$contextPrograma = $controller->action($context);
 
-			$context = new Context(FIND_MODPROGRAMA_ASIGNATURA, $datos['idAsignatura']);
-			$contextPrograma = $controller->action($context);
-
-			if ($contextPrograma->getEvent() === FIND_MODPROGRAMA_ASIGNATURA_OK) {
-				if ($conocimientosPrevios === $contextPrograma->getData()->getConocimientosPrevios() && $conocimientosPreviosI === $contextPrograma->getData()->getConocimientosPreviosI() && $breveDescripcion === $contextPrograma->getData()->getBreveDescripcion() && $breveDescripcionI === $contextPrograma->getData()->getBreveDescripcionI() && $programaTeorico === $contextPrograma->getData()->getProgramaTeorico() && $programaTeoricoI === $contextPrograma->getData()->getProgramaTeoricoI() && $programaSeminarios === $contextPrograma->getData()->getProgramaSeminarios() && $programaSeminariosI === $contextPrograma->getData()->getProgramaSeminariosI() && $programaLaboratorio === $contextPrograma->getData()->getProgramaLaboratorio() && $programaLaboratorioI === $contextPrograma->getData()->getProgramaLaboratorioI()) {
-					$erroresFormulario = "indexAcceso.php?IdGrado=" . $datos['idGrado'] . "&IdAsignatura=" . $datos['idAsignatura'] . "&modificado=y#nav-prog-asignatura";
-				} else {
-					$programa = new ModProgramaAsignatura($contextPrograma->getData()->getIdPrograma(), $conocimientosPrevios, $conocimientosPreviosI, $breveDescripcion, $breveDescripcionI, $programaTeorico, $programaTeoricoI, $programaSeminarios, $programaSeminariosI, $programaLaboratorio, $programaLaboratorioI, $datos['idAsignatura']);
-					$context = new Context(UPDATE_MODPROGRAMA_ASIGNATURA, $programa);
+				if ($contextPrograma->getEvent() === FIND_MODPROGRAMA_ASIGNATURA_OK) {
+					if ($conocimientosPrevios === $contextPrograma->getData()->getConocimientosPrevios() && $conocimientosPreviosI === $contextPrograma->getData()->getConocimientosPreviosI() && $breveDescripcion === $contextPrograma->getData()->getBreveDescripcion() && $breveDescripcionI === $contextPrograma->getData()->getBreveDescripcionI() && $programaTeorico === $contextPrograma->getData()->getProgramaTeorico() && $programaTeoricoI === $contextPrograma->getData()->getProgramaTeoricoI() && $programaSeminarios === $contextPrograma->getData()->getProgramaSeminarios() && $programaSeminariosI === $contextPrograma->getData()->getProgramaSeminariosI() && $programaLaboratorio === $contextPrograma->getData()->getProgramaLaboratorio() && $programaLaboratorioI === $contextPrograma->getData()->getProgramaLaboratorioI()) {
+						$erroresFormulario = "indexAcceso.php?IdGrado=" . $datos['idGrado'] . "&IdAsignatura=" . $datos['idAsignatura'] . "&modificado=y#nav-prog-asignatura";
+					} else {
+						$programa = new ModProgramaAsignatura($contextPrograma->getData()->getIdPrograma(), $conocimientosPrevios, $conocimientosPreviosI, $breveDescripcion, $breveDescripcionI, $programaTeorico, $programaTeoricoI, $programaSeminarios, $programaSeminariosI, $programaLaboratorio, $programaLaboratorioI, $datos['idAsignatura']);
+						$context = new Context(UPDATE_MODPROGRAMA_ASIGNATURA, $programa);
+						$contextPrograma = $controller->action($context);
+						if ($contextPrograma->getEvent() === UPDATE_MODPROGRAMA_ASIGNATURA_OK) {
+							$modAsignatura = new ModAsignatura($datos['idAsignatura'], date("Y-m-d H:i:s"), $_SESSION['idUsuario'], $datos['idAsignatura']);
+							$context = new Context(UPDATE_MODASIGNATURA, $modAsignatura);
+							$contextModAsignatura = $controller->action($context);
+							$erroresFormulario = "indexAcceso.php?IdGrado=" . $datos['idGrado'] . "&IdAsignatura=" . $datos['idAsignatura'] . "&modificado=y#nav-prog-asignatura";
+						} elseif ($contextPrograma->getEvent() === UPDATE_MODPROGRAMA_ASIGNATURA_FAIL) {
+							$erroresFormulario[] = "No se ha podido modificar el programa";
+						}
+					}
+				} elseif ($contextPrograma->getEvent() === FIND_MODPROGRAMA_ASIGNATURA_FAIL) {
+					$programa = new ModProgramaAsignatura(null, $conocimientosPrevios, $conocimientosPreviosI, $breveDescripcion, $breveDescripcionI, $programaTeorico, $programaTeoricoI, $programaSeminarios, $programaSeminariosI, $programaLaboratorio, $programaLaboratorioI, $datos['idAsignatura']);
+					$context = new Context(CREATE_MODPROGRAMA_ASIGNATURA, $programa);
 					$contextPrograma = $controller->action($context);
-					if ($contextPrograma->getEvent() === UPDATE_MODPROGRAMA_ASIGNATURA_OK) {
+					if ($contextPrograma->getEvent() === CREATE_MODPROGRAMA_ASIGNATURA_OK) {
 						$modAsignatura = new ModAsignatura($datos['idAsignatura'], date("Y-m-d H:i:s"), $_SESSION['idUsuario'], $datos['idAsignatura']);
 						$context = new Context(UPDATE_MODASIGNATURA, $modAsignatura);
 						$contextModAsignatura = $controller->action($context);
-						$erroresFormulario = "indexAcceso.php?IdGrado=" . $datos['idGrado'] . "&IdAsignatura=" . $datos['idAsignatura'] . "&modificado=y#nav-prog-asignatura";
-					} elseif ($contextPrograma->getEvent() === UPDATE_MODPROGRAMA_ASIGNATURA_FAIL) {
-						$erroresFormulario[] = "No se ha podido modificar el programa";
+						$erroresFormulario = "indexAcceso.php?IdGrado=" . $datos['idGrado'] . "&IdAsignatura=" . $datos['idAsignatura'] . "&anadido=y#nav-prog-asignatura";
+					} elseif ($contextPrograma->getEvent() === CREATE_MODPROGRAMA_ASIGNATURA_FAIL) {
+						$erroresFormulario[] = "No se ha podido crear el programa";
 					}
-				}
-			} elseif ($contextPrograma->getEvent() === FIND_MODPROGRAMA_ASIGNATURA_FAIL) {
-				$programa = new ModProgramaAsignatura(null, $conocimientosPrevios, $conocimientosPreviosI, $breveDescripcion, $breveDescripcionI, $programaTeorico, $programaTeoricoI, $programaSeminarios, $programaSeminariosI, $programaLaboratorio, $programaLaboratorioI, $datos['idAsignatura']);
-				$context = new Context(CREATE_MODPROGRAMA_ASIGNATURA, $programa);
-				$contextPrograma = $controller->action($context);
-				if ($contextPrograma->getEvent() === CREATE_MODPROGRAMA_ASIGNATURA_OK) {
-					$modAsignatura = new ModAsignatura($datos['idAsignatura'], date("Y-m-d H:i:s"), $_SESSION['idUsuario'], $datos['idAsignatura']);
-					$context = new Context(UPDATE_MODASIGNATURA, $modAsignatura);
-					$contextModAsignatura = $controller->action($context);
-					$erroresFormulario = "indexAcceso.php?IdGrado=" . $datos['idGrado'] . "&IdAsignatura=" . $datos['idAsignatura'] . "&anadido=y#nav-prog-asignatura";
-				} elseif ($contextPrograma->getEvent() === CREATE_MODPROGRAMA_ASIGNATURA_FAIL) {
-					$erroresFormulario[] = "No se ha podido crear el programa";
 				}
 			}
 		}
+		else{
+			$erroresFormulario[] = "No existe la configuración de la asignatura";
+		}
+
 		return $erroresFormulario;
 	}
 }

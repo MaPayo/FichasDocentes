@@ -53,6 +53,8 @@ class FormMetodologia extends Form
 	{
 		$erroresFormulario = array();
 		$controller = new ControllerImplements();
+		$context = new Context(FIND_CONFIGURACION, $datos['idAsignatura']);
+		$contextConfiguacion = $controller->action($context);
 		$context = new Context(FIND_ASIGNATURA, $datos['idAsignatura']);
 		$contextAsignatura = $controller->action($context);
 
@@ -61,59 +63,68 @@ class FormMetodologia extends Form
 		$metodologia = isset($datos['metodologia']) ? $datos['metodologia'] : '';
 		$metodologiaI = isset($datos['metodologiaI']) ? $datos['metodologiaI'] : '';
 
-		$metodologia = self::clean($metodologia);
-		if (empty($metodologia)) {
-			$erroresFormulario[] = "No has introducido la metodología";
-		}
+		if ($contextConfiguacion->getEvent() === FIND_CONFIGURACION_OK) {
 
-		if(!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())){
-			$metodologiaI = self::clean($metodologiaI);
-			if (empty($metodologiaI)) {
-				$erroresFormulario[] = "No has introducido la metodología en inglés";
+			if ($contextConfiguacion->getData()->getMetodologia() == 1) {
+				$metodologia = self::clean($metodologia);
+				if (empty($metodologia)) {
+					$erroresFormulario[] = "No has introducido la metodología";
+				}
+
+				if(!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())){
+					$metodologiaI = self::clean($metodologiaI);
+					if (empty($metodologiaI)) {
+						$erroresFormulario[] = "No has introducido la metodología en inglés";
+					}
+				}
 			}
-		}
 
-		if (count($erroresFormulario) === 0) {
-			$context = new Context(FIND_MODMETODOLOGIA, $datos['idAsignatura']);
-			$contextMetodologia = $controller->action($context);
+			if (count($erroresFormulario) === 0) {
+				$context = new Context(FIND_MODMETODOLOGIA, $datos['idAsignatura']);
+				$contextMetodologia = $controller->action($context);
 
-			if($contextMetodologia->getEvent() === FIND_MODMETODOLOGIA_OK){
-				if($metodologia === $contextMetodologia->getData()->getMetodologia() && $metodologiaI === $contextMetodologia->getData()->getMetodologiaI() ){
-					$erroresFormulario = "indexAcceso.php?IdGrado=" .$datos['idGrado']. "&IdAsignatura=".$datos['idAsignatura']."&modificado=y#nav-metodologia";
-				}else{
-					$metodologia = new ModMetodologia($contextMetodologia->getData()->getIdMetodologia(), $metodologia, $metodologiaI, $datos['idAsignatura']);
-					$context = new Context(UPDATE_MODMETODOLOGIA, $metodologia);
+				if($contextMetodologia->getEvent() === FIND_MODMETODOLOGIA_OK){
+					if($metodologia === $contextMetodologia->getData()->getMetodologia() && $metodologiaI === $contextMetodologia->getData()->getMetodologiaI() ){
+						$erroresFormulario = "indexAcceso.php?IdGrado=" .$datos['idGrado']. "&IdAsignatura=".$datos['idAsignatura']."&modificado=y#nav-metodologia";
+					}else{
+						$metodologia = new ModMetodologia($contextMetodologia->getData()->getIdMetodologia(), $metodologia, $metodologiaI, $datos['idAsignatura']);
+						$context = new Context(UPDATE_MODMETODOLOGIA, $metodologia);
+						$contextMetodologia = $controller->action($context);
+
+						if ($contextMetodologia->getEvent() === UPDATE_MODMETODOLOGIA_OK) {
+
+							$modAsignatura=new ModAsignatura($datos['idAsignatura'],date("Y-m-d H:i:s"),$_SESSION['idUsuario'],$datos['idAsignatura']);
+							$context =new Context(UPDATE_MODASIGNATURA,$modAsignatura);
+							$contextModAsignatura = $controller->action($context);
+							$erroresFormulario = "indexAcceso.php?IdGrado=" .$datos['idGrado']. "&IdAsignatura=".$datos['idAsignatura']."&modificado=y#nav-metodologia";
+
+						} elseif ($contextMetodologia->getEvent() === UPDATE_MODMETODOLOGIA_FAIL){
+							$erroresFormulario[] = "No se ha podido modificar la metodología";
+						}
+					}
+
+				}elseif($contextMetodologia->getEvent() === FIND_MODMETODOLOGIA_FAIL){
+
+					$metodologia = new ModMetodologia(null, $metodologia, $metodologiaI, $datos['idAsignatura']);
+					$context = new Context(CREATE_MODMETODOLOGIA, $metodologia);
 					$contextMetodologia = $controller->action($context);
-	
-					if ($contextMetodologia->getEvent() === UPDATE_MODMETODOLOGIA_OK) {
-	
+					if ($contextMetodologia->getEvent() === CREATE_MODMETODOLOGIA_OK) {
+
 						$modAsignatura=new ModAsignatura($datos['idAsignatura'],date("Y-m-d H:i:s"),$_SESSION['idUsuario'],$datos['idAsignatura']);
 						$context =new Context(UPDATE_MODASIGNATURA,$modAsignatura);
 						$contextModAsignatura = $controller->action($context);
-						$erroresFormulario = "indexAcceso.php?IdGrado=" .$datos['idGrado']. "&IdAsignatura=".$datos['idAsignatura']."&modificado=y#nav-metodologia";
-	
-					} elseif ($contextMetodologia->getEvent() === UPDATE_MODMETODOLOGIA_FAIL){
-						$erroresFormulario[] = "No se ha podido modificar la metodología";
+						$erroresFormulario = "indexAcceso.php?IdGrado=" .$datos['idGrado']. "&IdAsignatura=".$datos['idAsignatura']."&anadido=y#nav-metodologia";
+
+					} elseif ($contextMetodologia->getEvent() === CREATE_MODMETODOLOGIA_FAIL) {
+						$erroresFormulario[] = "No se ha podido crear la metodología";
 					}
-				}
-				
-			}elseif($contextMetodologia->getEvent() === FIND_MODMETODOLOGIA_FAIL){
-
-				$metodologia = new ModMetodologia(null, $metodologia, $metodologiaI, $datos['idAsignatura']);
-				$context = new Context(CREATE_MODMETODOLOGIA, $metodologia);
-				$contextMetodologia = $controller->action($context);
-				if ($contextMetodologia->getEvent() === CREATE_MODMETODOLOGIA_OK) {
-
-					$modAsignatura=new ModAsignatura($datos['idAsignatura'],date("Y-m-d H:i:s"),$_SESSION['idUsuario'],$datos['idAsignatura']);
-					$context =new Context(UPDATE_MODASIGNATURA,$modAsignatura);
-					$contextModAsignatura = $controller->action($context);
-					$erroresFormulario = "indexAcceso.php?IdGrado=" .$datos['idGrado']. "&IdAsignatura=".$datos['idAsignatura']."&anadido=y#nav-metodologia";
-					
-				} elseif ($contextMetodologia->getEvent() === CREATE_MODMETODOLOGIA_FAIL) {
-					$erroresFormulario[] = "No se ha podido crear la metodología";
 				}
 			}
 		}
+		else{
+			$erroresFormulario[] = "No existe la configuración de la asignatura";
+		}
+
 		return $erroresFormulario;
 	}
 }

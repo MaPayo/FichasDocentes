@@ -99,7 +99,7 @@ class FormPassword extends Form
 						$erroresFormulario[] = "No se ha podido cambiar la contraseña";
 					}
 				}else{
-					$erroresFormulario[] = "La contraseña actual no es igual a la facilitada";
+					$erroresFormulario[] = "La contraseña actual no es correcta";
 				}
 			}
 		}

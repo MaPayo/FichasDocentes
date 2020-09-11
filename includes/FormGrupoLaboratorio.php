@@ -52,58 +52,68 @@ class FormGrupoLaboratorio extends Form
 	{
 
 		$erroresFormulario = array();
+		$controller = new ControllerImplements();
+		$context = new Context(FIND_CONFIGURACION, $datos['idAsignatura']);
+		$contextConfiguacion = $controller->action($context);
 
-		$letra = isset($datos['letra']) ? $datos['letra'] : null;
-		$letra = self::clean($letra);
-		if (empty($letra)) {
-			$erroresFormulario[] = "No has introducido la letra";
-		}
+		if ($contextConfiguacion->getEvent() === FIND_CONFIGURACION_OK) {
 
-		$idioma = isset($datos['idioma']) ? $datos['idioma'] : null;
-		$idioma = self::clean($idioma);
-		if (empty($idioma)) {
-			$erroresFormulario[] = "No has introducido el idioma";
-		}
+			if ($contextConfiguacion->getData()->getGrupoLaboratorio() == 1) {
+				$letra = isset($datos['letra']) ? $datos['letra'] : null;
+				$letra = self::clean($letra);
+				if (empty($letra)) {
+					$erroresFormulario[] = "No has introducido la letra";
+				}
 
+				$idioma = isset($datos['idioma']) ? $datos['idioma'] : null;
+				$idioma = self::clean($idioma);
+				if (empty($idioma)) {
+					$erroresFormulario[] = "No has introducido el idioma";
+				}
+			}
+			if (count($erroresFormulario) === 0) {
+				$controller = new ControllerImplements();
+				$context = new Context(FIND_MODGRUPO_LABORATORIO, $datos['idGrupoLaboratorio']);
+				$contextGrupoLaboratorio = $controller->action($context);
 
-		if (count($erroresFormulario) === 0) {
-			$controller = new ControllerImplements();
-			$context = new Context(FIND_MODGRUPO_LABORATORIO, $datos['idGrupoLaboratorio']);
-			$contextGrupoLaboratorio = $controller->action($context);
+				if ($contextGrupoLaboratorio->getEvent() === FIND_MODGRUPO_LABORATORIO_OK) {
+					if($letra === $contextGrupoLaboratorio->getData()->getLetra() && $idioma === $contextGrupoLaboratorio->getData()->getIdioma()){
+						$erroresFormulario = "indexAcceso.php?IdGrado=" . $datos['idGrado'] . "&IdAsignatura=" . $datos['idAsignatura'] . "&modificado=y#nav-grupo-laboratorio";
+					}else{
+						$grupoLaboratorio = new ModGrupoLaboratorio($datos['idGrupoLaboratorio'], $letra, $idioma, $datos['idAsignatura']);
+						$context = new Context(UPDATE_MODGRUPO_LABORATORIO, $grupoLaboratorio);
+						$contextGrupoLaboratorio = $controller->action($context);
 
-			if ($contextGrupoLaboratorio->getEvent() === FIND_MODGRUPO_LABORATORIO_OK) {
-				if($letra === $contextGrupoLaboratorio->getData()->getLetra() && $idioma === $contextGrupoLaboratorio->getData()->getIdioma()){
-					$erroresFormulario = "indexAcceso.php?IdGrado=" . $datos['idGrado'] . "&IdAsignatura=" . $datos['idAsignatura'] . "&modificado=y#nav-grupo-laboratorio";
-				}else{
-					$grupoLaboratorio = new ModGrupoLaboratorio($datos['idGrupoLaboratorio'], $letra, $idioma, $datos['idAsignatura']);
-					$context = new Context(UPDATE_MODGRUPO_LABORATORIO, $grupoLaboratorio);
+						if ($contextGrupoLaboratorio->getEvent() === UPDATE_MODGRUPO_LABORATORIO_OK) {
+							$modAsignatura = new ModAsignatura($datos['idAsignatura'], date("Y-m-d H:i:s"), $_SESSION['idUsuario'], $datos['idAsignatura']);
+							$context = new Context(UPDATE_MODASIGNATURA, $modAsignatura);
+							$contextModAsignatura = $controller->action($context);
+							$erroresFormulario = "indexAcceso.php?IdGrado=" . $datos['idGrado'] . "&IdAsignatura=" . $datos['idAsignatura'] . "&modificado=y#nav-grupo-laboratorio";
+						} elseif ($contextGrupoLaboratorio->getEvent() === UPDATE_MODGRUPO_LABORATORIO_FAIL) {
+							$erroresFormulario[] = "No se ha podido modificar el grupo";
+						}
+					}
+
+				} elseif ($contextGrupoLaboratorio->getEvent() === FIND_MODGRUPO_LABORATORIO_FAIL) {
+
+					$grupoLaboratorio = new ModGrupoLaboratorio(null, $letra, $idioma, $datos['idAsignatura']);
+					$context = new Context(CREATE_MODGRUPO_LABORATORIO, $grupoLaboratorio);
 					$contextGrupoLaboratorio = $controller->action($context);
-	
-					if ($contextGrupoLaboratorio->getEvent() === UPDATE_MODGRUPO_LABORATORIO_OK) {
+					if ($contextGrupoLaboratorio->getEvent() === CREATE_MODGRUPO_LABORATORIO_OK) {
 						$modAsignatura = new ModAsignatura($datos['idAsignatura'], date("Y-m-d H:i:s"), $_SESSION['idUsuario'], $datos['idAsignatura']);
 						$context = new Context(UPDATE_MODASIGNATURA, $modAsignatura);
 						$contextModAsignatura = $controller->action($context);
-						$erroresFormulario = "indexAcceso.php?IdGrado=" . $datos['idGrado'] . "&IdAsignatura=" . $datos['idAsignatura'] . "&modificado=y#nav-grupo-laboratorio";
-					} elseif ($contextGrupoLaboratorio->getEvent() === UPDATE_MODGRUPO_LABORATORIO_FAIL) {
-						$erroresFormulario[] = "No se ha podido modificar el grupo";
+						$erroresFormulario = "indexAcceso.php?IdGrado=" . $datos['idGrado'] . "&IdAsignatura=" . $datos['idAsignatura'] . "&anadido=y#nav-grupo-laboratorio";
+					} elseif ($contextGrupoLaboratorio->getEvent() === CREATE_MODGRUPO_LABORATORIO_FAIL) {
+						$erroresFormulario[] = "No se ha podido crear el grupo";
 					}
 				}
-				
-			} elseif ($contextGrupoLaboratorio->getEvent() === FIND_MODGRUPO_LABORATORIO_FAIL) {
-
-				$grupoLaboratorio = new ModGrupoLaboratorio(null, $letra, $idioma, $datos['idAsignatura']);
-				$context = new Context(CREATE_MODGRUPO_LABORATORIO, $grupoLaboratorio);
-				$contextGrupoLaboratorio = $controller->action($context);
-				if ($contextGrupoLaboratorio->getEvent() === CREATE_MODGRUPO_LABORATORIO_OK) {
-					$modAsignatura = new ModAsignatura($datos['idAsignatura'], date("Y-m-d H:i:s"), $_SESSION['idUsuario'], $datos['idAsignatura']);
-					$context = new Context(UPDATE_MODASIGNATURA, $modAsignatura);
-					$contextModAsignatura = $controller->action($context);
-					$erroresFormulario = "indexAcceso.php?IdGrado=" . $datos['idGrado'] . "&IdAsignatura=" . $datos['idAsignatura'] . "&anadido=y#nav-grupo-laboratorio";
-				} elseif ($contextGrupoLaboratorio->getEvent() === CREATE_MODGRUPO_LABORATORIO_FAIL) {
-					$erroresFormulario[] = "No se ha podido crear el grupo";
-				}
-			}
+			}	
 		}
+		else{
+			$erroresFormulario[] = "No existe la configuración de la asignatura";
+		}
+		
 		return $erroresFormulario;
 	}
 }

@@ -180,49 +180,54 @@ class FormCompetenciaAsignatura extends Form
 					}
 				}
 			}
-		}
-		
-		if (count($erroresFormulario) === 0) {
-			$controller = new ControllerImplements();
-			$context = new Context(FIND_MODCOMPETENCIAS_ASIGNATURA, $datos['idAsignatura']);
-			$contextCompetencia = $controller->action($context);
 
-			if ($contextCompetencia->getEvent() === FIND_MODCOMPETENCIAS_ASIGNATURA_OK) {
-				if($generales === $contextCompetencia->getData()->getGenerales() && $generalesI === $contextCompetencia->getData()->getGeneralesI() && $especificas === $contextCompetencia->getData()->getEspecificas() && $especificasI === $contextCompetencia->getData()->getEspecificasI() && $basicasYTransversales === $contextCompetencia->getData()->getBasicasYTransversales() && $basicasYTransversalesI === $contextCompetencia->getData()->getBasicasYTransversalesI() && $resultadosAprendizaje === $contextCompetencia->getData()->getResultadosAprendizaje() && $resultadosAprendizajeI === $contextCompetencia->getData()->getResultadosAprendizajeI()){
-					$erroresFormulario = "indexAcceso.php?IdGrado=" .$datos['idGrado']. "&IdAsignatura=" . $datos['idAsignatura'] . "&modificado=y#nav-comp-asignatura";
-				}else{
-					$competencia = new ModCompetenciaAsignatura($contextCompetencia->getData()->getIdCompetencia(), $generales, $generalesI, $especificas, $especificasI, $basicasYTransversales, $basicasYTransversalesI, $resultadosAprendizaje, $resultadosAprendizajeI, $datos['idAsignatura']);
-					$context = new Context(UPDATE_MODCOMPETENCIAS_ASIGNATURA, $competencia);
+			if (count($erroresFormulario) === 0) {
+				$controller = new ControllerImplements();
+				$context = new Context(FIND_MODCOMPETENCIAS_ASIGNATURA, $datos['idAsignatura']);
+				$contextCompetencia = $controller->action($context);
+
+				if ($contextCompetencia->getEvent() === FIND_MODCOMPETENCIAS_ASIGNATURA_OK) {
+					if($generales === $contextCompetencia->getData()->getGenerales() && $generalesI === $contextCompetencia->getData()->getGeneralesI() && $especificas === $contextCompetencia->getData()->getEspecificas() && $especificasI === $contextCompetencia->getData()->getEspecificasI() && $basicasYTransversales === $contextCompetencia->getData()->getBasicasYTransversales() && $basicasYTransversalesI === $contextCompetencia->getData()->getBasicasYTransversalesI() && $resultadosAprendizaje === $contextCompetencia->getData()->getResultadosAprendizaje() && $resultadosAprendizajeI === $contextCompetencia->getData()->getResultadosAprendizajeI()){
+						$erroresFormulario = "indexAcceso.php?IdGrado=" .$datos['idGrado']. "&IdAsignatura=" . $datos['idAsignatura'] . "&modificado=y#nav-comp-asignatura";
+					}else{
+						$competencia = new ModCompetenciaAsignatura($contextCompetencia->getData()->getIdCompetencia(), $generales, $generalesI, $especificas, $especificasI, $basicasYTransversales, $basicasYTransversalesI, $resultadosAprendizaje, $resultadosAprendizajeI, $datos['idAsignatura']);
+						$context = new Context(UPDATE_MODCOMPETENCIAS_ASIGNATURA, $competencia);
+						$contextCompetencia = $controller->action($context);
+
+						if ($contextCompetencia->getEvent() === UPDATE_MODCOMPETENCIAS_ASIGNATURA_OK) {
+
+							$modAsignatura = new ModAsignatura($datos['idAsignatura'], date("Y-m-d H:i:s"), $_SESSION['idUsuario'], $datos['idAsignatura']);
+							$context = new Context(UPDATE_MODASIGNATURA, $modAsignatura);
+							$contextModAsignatura = $controller->action($context);
+							$erroresFormulario = "indexAcceso.php?IdGrado=" .$datos['idGrado']. "&IdAsignatura=" . $datos['idAsignatura'] . "&modificado=y#nav-comp-asignatura";
+						} elseif ($contextCompetencia->getEvent() === UPDATE_MODCOMPETENCIAS_ASIGNATURA_FAIL) {
+							$erroresFormulario[] = "No se ha podido modificar las competencias";
+						}
+					}
+
+				} elseif ($contextCompetencia->getEvent() === FIND_MODCOMPETENCIAS_ASIGNATURA_FAIL) {
+
+					$competencia = new ModCompetenciaAsignatura(null, $generales, $generalesI, $especificas, $especificasI, $basicasYTransversales, $basicasYTransversalesI, $resultadosAprendizaje, $resultadosAprendizajeI, $datos['idAsignatura']);
+					$context = new Context(CREATE_MODCOMPETENCIAS_ASIGNATURA, $competencia);
 					$contextCompetencia = $controller->action($context);
-	
-					if ($contextCompetencia->getEvent() === UPDATE_MODCOMPETENCIAS_ASIGNATURA_OK) {
-	
+
+					if ($contextCompetencia->getEvent() === CREATE_MODCOMPETENCIAS_ASIGNATURA_OK) {
+
 						$modAsignatura = new ModAsignatura($datos['idAsignatura'], date("Y-m-d H:i:s"), $_SESSION['idUsuario'], $datos['idAsignatura']);
 						$context = new Context(UPDATE_MODASIGNATURA, $modAsignatura);
 						$contextModAsignatura = $controller->action($context);
-						$erroresFormulario = "indexAcceso.php?IdGrado=" .$datos['idGrado']. "&IdAsignatura=" . $datos['idAsignatura'] . "&modificado=y#nav-comp-asignatura";
-					} elseif ($contextCompetencia->getEvent() === UPDATE_MODCOMPETENCIAS_ASIGNATURA_FAIL) {
-						$erroresFormulario[] = "No se ha podido modificar las competencias";
+						$erroresFormulario = "indexAcceso.php?IdGrado=" .$datos['idGrado']. "&IdAsignatura=" . $datos['idAsignatura'] . "&anadido=y#nav-comp-asignatura";
+					} elseif ($contextCompetencia->getEvent() === CREATE_MODCOMPETENCIAS_ASIGNATURA_FAIL) {
+						$erroresFormulario[] = "No se ha podido crear las competencias";
 					}
-				}
-				
-			} elseif ($contextCompetencia->getEvent() === FIND_MODCOMPETENCIAS_ASIGNATURA_FAIL) {
-
-				$competencia = new ModCompetenciaAsignatura(null, $generales, $generalesI, $especificas, $especificasI, $basicasYTransversales, $basicasYTransversalesI, $resultadosAprendizaje, $resultadosAprendizajeI, $datos['idAsignatura']);
-				$context = new Context(CREATE_MODCOMPETENCIAS_ASIGNATURA, $competencia);
-				$contextCompetencia = $controller->action($context);
-
-				if ($contextCompetencia->getEvent() === CREATE_MODCOMPETENCIAS_ASIGNATURA_OK) {
-
-					$modAsignatura = new ModAsignatura($datos['idAsignatura'], date("Y-m-d H:i:s"), $_SESSION['idUsuario'], $datos['idAsignatura']);
-					$context = new Context(UPDATE_MODASIGNATURA, $modAsignatura);
-					$contextModAsignatura = $controller->action($context);
-					$erroresFormulario = "indexAcceso.php?IdGrado=" .$datos['idGrado']. "&IdAsignatura=" . $datos['idAsignatura'] . "&anadido=y#nav-comp-asignatura";
-				} elseif ($contextCompetencia->getEvent() === CREATE_MODCOMPETENCIAS_ASIGNATURA_FAIL) {
-					$erroresFormulario[] = "No se ha podido crear las competencias";
 				}
 			}
 		}
+		else{
+			$erroresFormulario[] = "No existe la configuración de la asignatura";
+		}
+		
+
 		return $erroresFormulario;
 	}
 }

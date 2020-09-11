@@ -81,63 +81,75 @@ class FormGrupoLaboratorioProfesor extends Form
 	{
 
 		$erroresFormulario = array();
+		$controller = new ControllerImplements();
+		$context = new Context(FIND_CONFIGURACION, $datos['idAsignatura']);
+		$contextConfiguacion = $controller->action($context);
 
-		$emailProfesor = isset($datos['emailProfesor']) ? $datos['emailProfesor'] : null;
-		$emailProfesor = self::clean($emailProfesor);
-		if (empty($emailProfesor)) {
-			$erroresFormulario[] = "No has introducido el profesor";
-		}
+		if ($contextConfiguacion->getEvent() === FIND_CONFIGURACION_OK) {
 
-		$fechaInicio = isset($datos['fechaInicio']) ? $datos['fechaInicio'] : null;
-		$fechaInicio = self::clean($fechaInicio);
-		$fechaFin = isset($datos['fechaFin']) ? $datos['fechaFin'] : null;
-		$fechaFin = self::clean($fechaFin);
-		if (empty($fechaInicio) || empty($fechaFin)) {
-			$erroresFormulario[] = "No has introducido alguna de las fechas";
-		}
-		else if($fechaFin <= $fechaInicio){
-			$erroresFormulario[] = "La fecha de inicio es mayor o igual que la fecha fin";
-		}
+			if ($contextConfiguacion->getData()->getGrupoLaboratorio() == 1) {
+				$emailProfesor = isset($datos['emailProfesor']) ? $datos['emailProfesor'] : null;
+				$emailProfesor = self::clean($emailProfesor);
+				if (empty($emailProfesor)) {
+					$erroresFormulario[] = "No has introducido el profesor";
+				}
 
-		if (count($erroresFormulario) === 0) {
-			$controller = new ControllerImplements();
-			$arrayGrupoLaboratorioProfesor=array();
-			$arrayGrupoLaboratorioProfesor['idGrupoLaboratorio']=$datos['idGrupoLaboratorio'];
-			$arrayGrupoLaboratorioProfesor['emailProfesor']=$emailProfesor;
-			$context = new Context(FIND_MODGRUPO_LABORATORIO_PROFESOR, $arrayGrupoLaboratorioProfesor);
-			$contextGrupoLaboratorio = $controller->action($context);
+				$fechaInicio = isset($datos['fechaInicio']) ? $datos['fechaInicio'] : null;
+				$fechaInicio = self::clean($fechaInicio);
+				$fechaFin = isset($datos['fechaFin']) ? $datos['fechaFin'] : null;
+				$fechaFin = self::clean($fechaFin);
+				if (empty($fechaInicio) || empty($fechaFin)) {
+					$erroresFormulario[] = "No has introducido alguna de las fechas";
+				}
+				else if($fechaFin <= $fechaInicio){
+					$erroresFormulario[] = "La fecha de inicio es mayor o igual que la fecha fin";
+				}
+			}
 
-			if ($contextGrupoLaboratorio->getEvent() === FIND_MODGRUPO_LABORATORIO_PROFESOR_OK) {
-				if($fechaInicio === $contextGrupoLaboratorio->getData()->getFechaInicio() && $fechaFin === $contextGrupoLaboratorio->getData()->getFechaFin() && $emailProfesor === $contextGrupoLaboratorio->getData()->getEmailProfesor()){
-					$erroresFormulario = "indexAcceso.php?IdGrado=" . $datos['idGrado'] . "&IdAsignatura=" . $datos['idAsignatura'] . "&modificado=y#nav-grupo-laboratorio";
-				}else{
+			if (count($erroresFormulario) === 0) {
+				$controller = new ControllerImplements();
+				$arrayGrupoLaboratorioProfesor=array();
+				$arrayGrupoLaboratorioProfesor['idGrupoLaboratorio']=$datos['idGrupoLaboratorio'];
+				$arrayGrupoLaboratorioProfesor['emailProfesor']=$emailProfesor;
+				$context = new Context(FIND_MODGRUPO_LABORATORIO_PROFESOR, $arrayGrupoLaboratorioProfesor);
+				$contextGrupoLaboratorio = $controller->action($context);
+
+				if ($contextGrupoLaboratorio->getEvent() === FIND_MODGRUPO_LABORATORIO_PROFESOR_OK) {
+					if($fechaInicio === $contextGrupoLaboratorio->getData()->getFechaInicio() && $fechaFin === $contextGrupoLaboratorio->getData()->getFechaFin() && $emailProfesor === $contextGrupoLaboratorio->getData()->getEmailProfesor()){
+						$erroresFormulario = "indexAcceso.php?IdGrado=" . $datos['idGrado'] . "&IdAsignatura=" . $datos['idAsignatura'] . "&modificado=y#nav-grupo-laboratorio";
+					}else{
+						$grupoLaboratorioProfesor = new ModGrupoLaboratorioProfesor($datos['idGrupoLaboratorio'], $fechaInicio, $fechaFin,$emailProfesor);
+						$context = new Context(UPDATE_MODGRUPO_LABORATORIO_PROFESOR, $grupoLaboratorioProfesor);
+						$contextGrupoLaboratorio = $controller->action($context);
+						if ($contextGrupoLaboratorio->getEvent() === UPDATE_MODGRUPO_LABORATORIO_PROFESOR_OK) {
+							$modAsignatura = new ModAsignatura($datos['idAsignatura'], date("Y-m-d H:i:s"), $_SESSION['idUsuario'], $datos['idAsignatura']);
+							$context = new Context(UPDATE_MODASIGNATURA, $modAsignatura);
+							$contextModAsignatura = $controller->action($context);
+							$erroresFormulario = "indexAcceso.php?IdGrado=" . $datos['idGrado'] . "&IdAsignatura=" . $datos['idAsignatura'] . "&modificado=y#nav-grupo-laboratorio";
+						} elseif ($contextGrupoLaboratorio->getEvent() === UPDATE_MODGRUPO_LABORATORIO_PROFESOR_FAIL) {
+							$erroresFormulario[] = "No se ha podido modificar al profesor en el grupo";
+						}
+					}
+				} elseif ($contextGrupoLaboratorio->getEvent() === FIND_MODGRUPO_LABORATORIO_PROFESOR_FAIL) {
+
 					$grupoLaboratorioProfesor = new ModGrupoLaboratorioProfesor($datos['idGrupoLaboratorio'], $fechaInicio, $fechaFin,$emailProfesor);
-					$context = new Context(UPDATE_MODGRUPO_LABORATORIO_PROFESOR, $grupoLaboratorioProfesor);
+					$context = new Context(CREATE_MODGRUPO_LABORATORIO_PROFESOR, $grupoLaboratorioProfesor);
 					$contextGrupoLaboratorio = $controller->action($context);
-					if ($contextGrupoLaboratorio->getEvent() === UPDATE_MODGRUPO_LABORATORIO_PROFESOR_OK) {
+					if ($contextGrupoLaboratorio->getEvent() === CREATE_MODGRUPO_LABORATORIO_PROFESOR_OK) {
 						$modAsignatura = new ModAsignatura($datos['idAsignatura'], date("Y-m-d H:i:s"), $_SESSION['idUsuario'], $datos['idAsignatura']);
 						$context = new Context(UPDATE_MODASIGNATURA, $modAsignatura);
 						$contextModAsignatura = $controller->action($context);
-						$erroresFormulario = "indexAcceso.php?IdGrado=" . $datos['idGrado'] . "&IdAsignatura=" . $datos['idAsignatura'] . "&modificado=y#nav-grupo-laboratorio";
-					} elseif ($contextGrupoLaboratorio->getEvent() === UPDATE_MODGRUPO_LABORATORIO_PROFESOR_FAIL) {
-						$erroresFormulario[] = "No se ha podido modificar al profesor en el grupo";
+						$erroresFormulario = "indexAcceso.php?IdGrado=" . $datos['idGrado'] . "&IdAsignatura=" . $datos['idAsignatura'] . "&anadido=y#nav-grupo-laboratorio";
+					} elseif ($contextGrupoLaboratorio->getEvent() === CREATE_MODGRUPO_LABORATORIO_PROFESOR_FAIL) {
+						$erroresFormulario[] = "No se ha podido registar al profesor en el grupo";
 					}
-				}
-			} elseif ($contextGrupoLaboratorio->getEvent() === FIND_MODGRUPO_LABORATORIO_PROFESOR_FAIL) {
-
-				$grupoLaboratorioProfesor = new ModGrupoLaboratorioProfesor($datos['idGrupoLaboratorio'], $fechaInicio, $fechaFin,$emailProfesor);
-				$context = new Context(CREATE_MODGRUPO_LABORATORIO_PROFESOR, $grupoLaboratorioProfesor);
-				$contextGrupoLaboratorio = $controller->action($context);
-				if ($contextGrupoLaboratorio->getEvent() === CREATE_MODGRUPO_LABORATORIO_PROFESOR_OK) {
-					$modAsignatura = new ModAsignatura($datos['idAsignatura'], date("Y-m-d H:i:s"), $_SESSION['idUsuario'], $datos['idAsignatura']);
-					$context = new Context(UPDATE_MODASIGNATURA, $modAsignatura);
-					$contextModAsignatura = $controller->action($context);
-					$erroresFormulario = "indexAcceso.php?IdGrado=" . $datos['idGrado'] . "&IdAsignatura=" . $datos['idAsignatura'] . "&anadido=y#nav-grupo-laboratorio";
-				} elseif ($contextGrupoLaboratorio->getEvent() === CREATE_MODGRUPO_LABORATORIO_PROFESOR_FAIL) {
-					$erroresFormulario[] = "No se ha podido registar al profesor en el grupo";
 				}
 			}
 		}
+		else{
+			$erroresFormulario[] = "No existe la configuración de la asignatura";
+		}
+		
 		return $erroresFormulario;
 	}
 }

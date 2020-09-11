@@ -80,69 +80,79 @@ class FormHorarioClase extends Form
 	{
 
 		$erroresFormulario = array();
+		$controller = new ControllerImplements();
+		$context = new Context(FIND_CONFIGURACION, $datos['idAsignatura']);
+		$contextConfiguacion = $controller->action($context);
 
-		$aula = isset($datos['aula']) ? $datos['aula'] : null;
-		$aula = self::clean($aula);
-		if (empty($aula)) {
-			$erroresFormulario[] = "No has introducido el aula";
-		}
+		if ($contextConfiguacion->getEvent() === FIND_CONFIGURACION_OK) {
 
-		$dia = isset($datos['dia']) ? $datos['dia'] : null;
-		$dia = self::clean($dia);
-		if (empty($dia)) {
-			$erroresFormulario[] = "No has introducido el día";
-		}
+			if ($contextConfiguacion->getData()->getGrupoLaboratorio() == 1) {
+				$aula = isset($datos['aula']) ? $datos['aula'] : null;
+				$aula = self::clean($aula);
+				if (empty($aula)) {
+					$erroresFormulario[] = "No has introducido el aula";
+				}
 
-		$horaInicio = isset($datos['horaInicio']) ? $datos['horaInicio'] : null;
-		$horaInicio = self::clean($horaInicio);
-		$horaFin = isset($datos['horaFin']) ? $datos['horaFin'] : null;
-		$horaFin = self::clean($horaFin);
-		if (empty($horaInicio) || empty($horaFin)) {
-			$erroresFormulario[] = "No has introducido alguna de las horas";
-		}
-		else if ($horaFin <= $horaInicio) {
-			$erroresFormulario[] = "La hora de inicio es mayor o igual que la hora fin";
-		}
+				$dia = isset($datos['dia']) ? $datos['dia'] : null;
+				$dia = self::clean($dia);
+				if (empty($dia)) {
+					$erroresFormulario[] = "No has introducido el día";
+				}
 
+				$horaInicio = isset($datos['horaInicio']) ? $datos['horaInicio'] : null;
+				$horaInicio = self::clean($horaInicio);
+				$horaFin = isset($datos['horaFin']) ? $datos['horaFin'] : null;
+				$horaFin = self::clean($horaFin);
+				if (empty($horaInicio) || empty($horaFin)) {
+					$erroresFormulario[] = "No has introducido alguna de las horas";
+				}
+				else if ($horaFin <= $horaInicio) {
+					$erroresFormulario[] = "La hora de inicio es mayor o igual que la hora fin";
+				}
+			}
+			if (count($erroresFormulario) === 0) {
+				$controller = new ControllerImplements();
+				$context = new Context(FIND_MODHORARIO_CLASE, $datos['idHorarioClase']);
+				$contextHorarioClase = $controller->action($context);
 
-		if (count($erroresFormulario) === 0) {
-			$controller = new ControllerImplements();
-			$context = new Context(FIND_MODHORARIO_CLASE, $datos['idHorarioClase']);
-			$contextHorarioClase = $controller->action($context);
+				if ($contextHorarioClase->getEvent() === FIND_MODHORARIO_CLASE_OK) {
+					if($aula === $contextHorarioClase->getData()->getAula() && $dia === $contextHorarioClase->getData()->getDia() && $horaInicio === $contextHorarioClase->getData()->getHoraInicio() && $horaFin === $contextHorarioClase->getData()->getHoraFin()){
+						$erroresFormulario = "indexAcceso.php?IdGrado=" . $datos['idGrado'] . "&IdAsignatura=" . $datos['idAsignatura'] . "&modificado=y#nav-grupo-clase";
+					}else{
+						$horarioClase = new ModHorarioClase($datos['idHorarioClase'], $aula, $dia, $horaInicio, $horaFin, $datos['idGrupoClase']);
+						$context = new Context(UPDATE_MODHORARIO_CLASE, $horarioClase);
+						$contextHorarioClase = $controller->action($context);
 
-			if ($contextHorarioClase->getEvent() === FIND_MODHORARIO_CLASE_OK) {
-				if($aula === $contextHorarioClase->getData()->getAula() && $dia === $contextHorarioClase->getData()->getDia() && $horaInicio === $contextHorarioClase->getData()->getHoraInicio() && $horaFin === $contextHorarioClase->getData()->getHoraFin()){
-					$erroresFormulario = "indexAcceso.php?IdGrado=" . $datos['idGrado'] . "&IdAsignatura=" . $datos['idAsignatura'] . "&modificado=y#nav-grupo-clase";
-				}else{
-					$horarioClase = new ModHorarioClase($datos['idHorarioClase'], $aula, $dia, $horaInicio, $horaFin, $datos['idGrupoClase']);
-					$context = new Context(UPDATE_MODHORARIO_CLASE, $horarioClase);
+						if ($contextHorarioClase->getEvent() === UPDATE_MODHORARIO_CLASE_OK) {
+							$modAsignatura = new ModAsignatura($datos['idAsignatura'], date("Y-m-d H:i:s"), $_SESSION['idUsuario'], $datos['idAsignatura']);
+							$context = new Context(UPDATE_MODASIGNATURA, $modAsignatura);
+							$contextModAsignatura = $controller->action($context);
+							$erroresFormulario = "indexAcceso.php?IdGrado=" . $datos['idGrado'] . "&IdAsignatura=" . $datos['idAsignatura'] . "&modificado=y#nav-grupo-clase";
+						} elseif ($contextHorarioClase->getEvent() === UPDATE_MODHORARIO_CLASE_FAIL) {
+							$erroresFormulario[] = "No se ha podido modificar el horario";
+						}
+					}
+
+				} elseif ($contextHorarioClase->getEvent() === FIND_MODHORARIO_CLASE_FAIL) {
+
+					$horarioClase = new ModHorarioClase(null,  $aula, $dia, $horaInicio, $horaFin, $datos['idGrupoClase']);
+					$context = new Context(CREATE_MODHORARIO_CLASE, $horarioClase);
 					$contextHorarioClase = $controller->action($context);
-	
-					if ($contextHorarioClase->getEvent() === UPDATE_MODHORARIO_CLASE_OK) {
+					if ($contextHorarioClase->getEvent() === CREATE_MODHORARIO_CLASE_OK) {
 						$modAsignatura = new ModAsignatura($datos['idAsignatura'], date("Y-m-d H:i:s"), $_SESSION['idUsuario'], $datos['idAsignatura']);
 						$context = new Context(UPDATE_MODASIGNATURA, $modAsignatura);
 						$contextModAsignatura = $controller->action($context);
-						$erroresFormulario = "indexAcceso.php?IdGrado=" . $datos['idGrado'] . "&IdAsignatura=" . $datos['idAsignatura'] . "&modificado=y#nav-grupo-clase";
-					} elseif ($contextHorarioClase->getEvent() === UPDATE_MODHORARIO_CLASE_FAIL) {
-						$erroresFormulario[] = "No se ha podido modificar el horario";
+						$erroresFormulario = "indexAcceso.php?IdGrado=" . $datos['idGrado'] . "&IdAsignatura=" . $datos['idAsignatura'] . "&anadido=y#nav-grupo-clase";
+					} elseif ($contextHorarioClase->getEvent() === CREATE_MODHORARIO_CLASE_FAIL) {
+						$erroresFormulario[] = "No se ha podido crear el horario";
 					}
-				}
-				
-			} elseif ($contextHorarioClase->getEvent() === FIND_MODHORARIO_CLASE_FAIL) {
-
-				$horarioClase = new ModHorarioClase(null,  $aula, $dia, $horaInicio, $horaFin, $datos['idGrupoClase']);
-				$context = new Context(CREATE_MODHORARIO_CLASE, $horarioClase);
-				$contextHorarioClase = $controller->action($context);
-				if ($contextHorarioClase->getEvent() === CREATE_MODHORARIO_CLASE_OK) {
-					$modAsignatura = new ModAsignatura($datos['idAsignatura'], date("Y-m-d H:i:s"), $_SESSION['idUsuario'], $datos['idAsignatura']);
-					$context = new Context(UPDATE_MODASIGNATURA, $modAsignatura);
-					$contextModAsignatura = $controller->action($context);
-					$erroresFormulario = "indexAcceso.php?IdGrado=" . $datos['idGrado'] . "&IdAsignatura=" . $datos['idAsignatura'] . "&anadido=y#nav-grupo-clase";
-				} elseif ($contextHorarioClase->getEvent() === CREATE_MODHORARIO_CLASE_FAIL) {
-					$erroresFormulario[] = "No se ha podido crear el horario";
 				}
 			}
 		}
+		else{
+			$erroresFormulario[] = "No existe la configuración de la asignatura";
+		}
+
 		return $erroresFormulario;
 	}
 }

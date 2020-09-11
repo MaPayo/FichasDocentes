@@ -79,48 +79,52 @@ class FormBibliografia extends Form
 					$erroresFormulario[] = "No has introducido los recursos en internet";
 				}
 			}
-		}
-		
-		if (count($erroresFormulario) === 0) {
-			$context = new Context(FIND_MODBIBLIOGRAFIA, $datos['idAsignatura']);
-			$contextBibliografia = $controller->action($context);
 
-			if ($contextBibliografia->getEvent() === FIND_MODBIBLIOGRAFIA_OK) {
-				if($citasBibliograficas === $contextBibliografia->getData()->getCitasBibliograficas() && $recursosInternet === $contextBibliografia->getData()->getRecursosInternet()){
-					$erroresFormulario = "indexAcceso.php?IdGrado=" .$datos['idGrado']. "&IdAsignatura=" . $datos['idAsignatura'] . "&modificado=y#nav-bibliografia";
-				}else{
-					$bibliografia = new ModBibliografia($contextBibliografia->getData()->getIdBibliografia(), $citasBibliograficas, $recursosInternet, $datos['idAsignatura']);
-					$context = new Context(UPDATE_MODBIBLIOGRAFIA, $bibliografia);
+			if (count($erroresFormulario) === 0) {
+				$context = new Context(FIND_MODBIBLIOGRAFIA, $datos['idAsignatura']);
+				$contextBibliografia = $controller->action($context);
+
+				if ($contextBibliografia->getEvent() === FIND_MODBIBLIOGRAFIA_OK) {
+					if($citasBibliograficas === $contextBibliografia->getData()->getCitasBibliograficas() && $recursosInternet === $contextBibliografia->getData()->getRecursosInternet()){
+						$erroresFormulario = "indexAcceso.php?IdGrado=" .$datos['idGrado']. "&IdAsignatura=" . $datos['idAsignatura'] . "&modificado=y#nav-bibliografia";
+					}else{
+						$bibliografia = new ModBibliografia($contextBibliografia->getData()->getIdBibliografia(), $citasBibliograficas, $recursosInternet, $datos['idAsignatura']);
+						$context = new Context(UPDATE_MODBIBLIOGRAFIA, $bibliografia);
+						$contextBibliografia = $controller->action($context);
+
+						if ($contextBibliografia->getEvent() === UPDATE_MODBIBLIOGRAFIA_OK) {
+
+							$modAsignatura = new ModAsignatura($datos['idAsignatura'], date("Y-m-d H:i:s"), $_SESSION['idUsuario'], $datos['idAsignatura']);
+							$context = new Context(UPDATE_MODASIGNATURA, $modAsignatura);
+							$contextModAsignatura = $controller->action($context);
+							$erroresFormulario = "indexAcceso.php?IdGrado=" .$datos['idGrado']. "&IdAsignatura=" . $datos['idAsignatura'] . "&modificado=y#nav-bibliografia";
+						} elseif ($contextBibliografia->getEvent() === UPDATE_MODBIBLIOGRAFIA_FAIL) {
+							$erroresFormulario[] = "No se ha podido modificar la bibliografía";
+						}
+					}
+
+				} elseif ($contextBibliografia->getEvent() === FIND_MODBIBLIOGRAFIA_FAIL) {
+
+					$bibliografia = new ModBibliografia(null, $citasBibliograficas, $recursosInternet, $datos['idAsignatura']);
+					$context = new Context(CREATE_MODBIBLIOGRAFIA, $bibliografia);
 					$contextBibliografia = $controller->action($context);
-	
-					if ($contextBibliografia->getEvent() === UPDATE_MODBIBLIOGRAFIA_OK) {
-	
+
+					if ($contextBibliografia->getEvent() === CREATE_MODBIBLIOGRAFIA_OK) {
+
 						$modAsignatura = new ModAsignatura($datos['idAsignatura'], date("Y-m-d H:i:s"), $_SESSION['idUsuario'], $datos['idAsignatura']);
 						$context = new Context(UPDATE_MODASIGNATURA, $modAsignatura);
 						$contextModAsignatura = $controller->action($context);
-						$erroresFormulario = "indexAcceso.php?IdGrado=" .$datos['idGrado']. "&IdAsignatura=" . $datos['idAsignatura'] . "&modificado=y#nav-bibliografia";
-					} elseif ($contextBibliografia->getEvent() === UPDATE_MODBIBLIOGRAFIA_FAIL) {
-						$erroresFormulario[] = "No se ha podido modificar la bibliografía";
+						$erroresFormulario = "indexAcceso.php?IdGrado=" .$datos['idGrado']. "&IdAsignatura=" . $datos['idAsignatura'] . "&anadido=y#nav-bibliografia";
+					} elseif ($contextBibliografia->getEvent() === CREATE_MODBIBLIOGRAFIA_FAIL) {
+						$erroresFormulario[] = "No se ha podido crear la bibliografía";
 					}
-				}
-				
-			} elseif ($contextBibliografia->getEvent() === FIND_MODBIBLIOGRAFIA_FAIL) {
-
-				$bibliografia = new ModBibliografia(null, $citasBibliograficas, $recursosInternet, $datos['idAsignatura']);
-				$context = new Context(CREATE_MODBIBLIOGRAFIA, $bibliografia);
-				$contextBibliografia = $controller->action($context);
-
-				if ($contextBibliografia->getEvent() === CREATE_MODBIBLIOGRAFIA_OK) {
-
-					$modAsignatura = new ModAsignatura($datos['idAsignatura'], date("Y-m-d H:i:s"), $_SESSION['idUsuario'], $datos['idAsignatura']);
-					$context = new Context(UPDATE_MODASIGNATURA, $modAsignatura);
-					$contextModAsignatura = $controller->action($context);
-					$erroresFormulario = "indexAcceso.php?IdGrado=" .$datos['idGrado']. "&IdAsignatura=" . $datos['idAsignatura'] . "&anadido=y#nav-bibliografia";
-				} elseif ($contextBibliografia->getEvent() === CREATE_MODBIBLIOGRAFIA_FAIL) {
-					$erroresFormulario[] = "No se ha podido crear la bibliografia";
 				}
 			}
 		}
+		else{
+			$erroresFormulario[] = "No existe la configuración de la asignatura";
+		}
+
 		return $erroresFormulario;
 	}
 }

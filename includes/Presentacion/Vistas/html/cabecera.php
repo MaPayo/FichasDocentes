@@ -20,7 +20,7 @@
             if (isset($_SESSION['login']) && $_SESSION['login'] === true) {
                 echo'<h4 class="dropdown-header text-primary">'.$_SESSION['idUsuario'].'</h4>';
                 echo '<a class="dropdown-item" href="index.php">Inicio</a>';
-                echo '<a class="dropdown-item" href="perfil.php">Configuración</a>';
+                echo '<a class="dropdown-item" href="perfil.php">Perfil</a>';
                 echo '<a class="dropdown-item" href="generaciondocumentos.php">Generar Fichas</a>';
                 echo '<a class="dropdown-item" href="descargadocumentos.php">Descargar Fichas</a>';
                 echo '<div class="dropdown-divider"></div>';
