@@ -26,8 +26,8 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
         require_once('includes/Presentacion/Vistas/html/cabecera.php');
         ?>
         <div class="row justify-content-center align-items-center">
-           <?php
-           if (isset($_SESSION['login']) && $_SESSION['login'] === true) {
+         <?php
+         if (isset($_SESSION['login']) && $_SESSION['login'] === true) {
 
             if(isset($_GET['IdAsignatura']) && isset($_GET['IdGrado']) && isset($_GET['IdGrupoClase'])){
                 $IdAsignatura = htmlspecialchars(trim(strip_tags($_GET['IdAsignatura'])));
@@ -41,68 +41,69 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                     $datosIniciales = array();
 
                     if (isset($_GET['EmailProfesor'])) {
-                       $EmailProfesor = htmlspecialchars(trim(strip_tags($_GET['EmailProfesor'])));
+                     $EmailProfesor = htmlspecialchars(trim(strip_tags($_GET['EmailProfesor'])));
 
-                       $arrayGrupoClaseProfesor['idGrupoClase'] = $IdGrupoClase;
-                       $arrayGrupoClaseProfesor['emailProfesor'] = $EmailProfesor;
-                       $context = new es\ucm\Context(FIND_MODGRUPO_CLASE_PROFESOR, $arrayGrupoClaseProfesor);
-                       $contextGrupoClaseProfesor = $controller->action($context);
-                       if ($contextGrupoClaseProfesor->getEvent() === FIND_MODGRUPO_CLASE_PROFESOR_OK) {
-                         $datosIniciales['idGrupoClase'] = $contextGrupoClaseProfesor->getData()->getIdGrupoClase();
-                         $datosIniciales['tipo'] = $contextGrupoClaseProfesor->getData()->getTipo();
-                         $datosIniciales['fechaInicio'] = $contextGrupoClaseProfesor->getData()->getFechaInicio();
-                         $datosIniciales['fechaFin'] = $contextGrupoClaseProfesor->getData()->getFechaFin();
-                         $datosIniciales['emailProfesor'] = $contextGrupoClaseProfesor->getData()->getEmailProfesor();
-                         $datosIniciales['idAsignatura'] = $IdAsignatura;
-                         $datosIniciales['idGrado'] = $IdGrado;
-                         ?>
-                         <div class="col-xl-6 col-lg-8 col-12">
-                            <div class="card ">
-                                <div class="card-header text-center">
-                                   <h2>Modificar el profesor de un grupo de clase</h2>
-                               </div>
-                               <div class="card-body">
-                                <?php $access->gestionaModificacion($datosIniciales); ?>
-                            </div>
+                     $arrayGrupoClaseProfesor['idGrupoClase'] = $IdGrupoClase;
+                     $arrayGrupoClaseProfesor['emailProfesor'] = $EmailProfesor;
+                     $context = new es\ucm\Context(FIND_MODGRUPO_CLASE_PROFESOR, $arrayGrupoClaseProfesor);
+                     $contextGrupoClaseProfesor = $controller->action($context);
+                     if ($contextGrupoClaseProfesor->getEvent() === FIND_MODGRUPO_CLASE_PROFESOR_OK) {
+                       $datosIniciales['idGrupoClase'] = $contextGrupoClaseProfesor->getData()->getIdGrupoClase();
+                       $datosIniciales['tipo'] = $contextGrupoClaseProfesor->getData()->getTipo();
+                       $datosIniciales['fechaInicio'] = $contextGrupoClaseProfesor->getData()->getFechaInicio();
+                       $datosIniciales['fechaFin'] = $contextGrupoClaseProfesor->getData()->getFechaFin();
+                       $datosIniciales['emailProfesor'] = $contextGrupoClaseProfesor->getData()->getEmailProfesor();
+                       $datosIniciales['idAsignatura'] = $IdAsignatura;
+                       $datosIniciales['idGrado'] = $IdGrado;
+                       ?>
+                       <div class="col-xl-6 col-lg-8 col-12">
+                        <div class="card ">
+                            <div class="card-header text-center">
+                             <h2>Modificar el profesor de un grupo de clase</h2>
+                         </div>
+                         <div class="card-body">
+                            <?php $access->gestionaModificacion($datosIniciales); ?>
                         </div>
                     </div>
-                    <?php
-                }
-                else{
-                   echo '
-                   <div class="col-md-6 col-12">
-                   <div class="alert alert-danger" role="alert">
-                   <h2 class="card-title text-center">ACCESO DENEGADO</h2>
-                   <h5 class="text-center">No se puede encontrar el profesor</h5>
-                   </div>
-                   </div>';
-               }
-           }
-           else{
-            $datosIniciales['idAsignatura'] = $IdAsignatura;
-            $datosIniciales['idGrado'] = $IdGrado;
-            ?>
-            <div class="col-xl-6 col-lg-8 col-12">
-                <div class="card ">
-                    <div class="card-header text-center">
-                       <h2>Añadir un profesor a un grupo de clase</h2>
-                   </div>
-                   <div class="card-body">
-                    <?php $access->gestionaModificacion($datosIniciales); ?>
                 </div>
+                <?php
+            }
+            else{
+             echo '
+             <div class="col-md-6 col-12">
+             <div class="alert alert-danger" role="alert">
+             <h2 class="card-title text-center">ACCESO DENEGADO</h2>
+             <h5 class="text-center">No se puede encontrar el profesor</h5>
+             </div>
+             </div>';
+         }
+     }
+     else{
+        $datosIniciales['idAsignatura'] = $IdAsignatura;
+        $datosIniciales['idGrado'] = $IdGrado;
+        $datosIniciales['idGrupoClase'] = $IdGrupoClase;
+        ?>
+        <div class="col-xl-6 col-lg-8 col-12">
+            <div class="card ">
+                <div class="card-header text-center">
+                 <h2>Añadir un profesor a un grupo de clase</h2>
+             </div>
+             <div class="card-body">
+                <?php $access->gestionaModificacion($datosIniciales); ?>
             </div>
         </div>
-        <?php
-    }
+    </div>
+    <?php
+}
 }
 else{
- echo '
- <div class="col-md-6 col-12">
- <div class="alert alert-danger" role="alert">
- <h2 class="card-title text-center">ACCESO DENEGADO</h2>
- <h5 class="text-center">No tienes permisos suficientes para esta apartado</h5>
- </div>
- </div>';
+   echo '
+   <div class="col-md-6 col-12">
+   <div class="alert alert-danger" role="alert">
+   <h2 class="card-title text-center">ACCESO DENEGADO</h2>
+   <h5 class="text-center">No tienes permisos suficientes para esta apartado</h5>
+   </div>
+   </div>';
 }
 }
 else {

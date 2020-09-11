@@ -80,6 +80,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
            else{
             $datosIniciales['idAsignatura'] = $IdAsignatura;
             $datosIniciales['idGrado'] = $IdGrado;
+            $datosIniciales['idGrupoLaboratorio'] = $IdGrupoLaboratorio;
             ?>
             <div class="col-xl-6 col-lg-8 col-12">
                 <div class="card ">
