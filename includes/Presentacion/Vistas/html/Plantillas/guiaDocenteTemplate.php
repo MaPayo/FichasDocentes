@@ -280,7 +280,7 @@ if(!isset($rowsGrupoLaboratorioProfesor)){?>
     <div class="fiveFormBox">
         
         <table class="table">
-          <tr><td colspan="4" class="bg-secondary text-center">Profesores de la asignatura</td></tr>
+          <tr><td colspan="4" class="bg-secondary text-center">Profesores del laboratorio</td></tr>
           <tr>
               <td class="bg-info"> <span class="p-1"> Grupo </span> </td>
               <td class="bg-info"> <span class="p-1"> Profesor </span> </td>
@@ -290,7 +290,7 @@ if(!isset($rowsGrupoLaboratorioProfesor)){?>
   <?php
   foreach($rowsGrupoLaboratorioProfesor as $grupo){
     $controller = new es\ucm\ControllerImplements();
-    $context = new es\ucm\Context(LIST_GRUPO_LABORATORIO_PROFESOR, $grupo->getIdGrupoLaboratorio());
+    $context = new es\ucm\Context(LIST_GRUPO_LABORATORIO_PROFESOR, $grupo->getIdGrupoLab());
     $profesores = $controller->action($context);
     echo'<tr>
     <td>'.$grupo->getLetra().'</td>';
@@ -313,7 +313,7 @@ if(!isset($rowsGrupoLaboratorioProfesor)){?>
 <div >
 	
 	<table class="table">
-      <tr><td colspan="5" class="bg-secondary text-center">Horarios de clases</td></tr>
+      <tr><td colspan="5" class="bg-secondary text-center">Horarios de los laboratorios</td></tr>
       <tr>
       	<td rowspan="2" class="bg-info"> <span class="p-1"> Grupo </span> </td>
       	<td colspan="3" class="bg-info"> <span class="p-1"> Horarios clases </span> </td>
@@ -327,7 +327,7 @@ if(!isset($rowsGrupoLaboratorioProfesor)){?>
 
       <?php foreach($rowsGrupoLaboratorioProfesor as $grupo){
     $controller = new es\ucm\ControllerImplements();
-    $context = new es\ucm\Context(LIST_HORARIO_LABORATORIO, $grupo->getIdGrupoLaboratorio());
+    $context = new es\ucm\Context(LIST_HORARIO_LABORATORIO, $grupo->getIdGrupoLab());
     echo "<tr><td>".$grupo->getLetra()."</td>";
     $grupos = $controller->action($context);
     if($grupos->getEvent()===LIST_HORARIO_LABORATORIO_OK)
@@ -348,7 +348,7 @@ if(!isset($rowsGrupoLaboratorioProfesor)){?>
   <div class="fiveFormBox">
         
         <table class="table">
-          <tr><td colspan="4" class="bg-secondary text-center">Profesores de la asignatura</td></tr>
+          <tr><td colspan="4" class="bg-secondary text-center">Profesores del laboratorio</td></tr>
           <tr>
               <td class="bg-info"> <span class="p-1"> Grupo </span> </td>
               <td class="bg-info"> <span class="p-1"> Profesor </span> </td>
@@ -358,7 +358,7 @@ if(!isset($rowsGrupoLaboratorioProfesor)){?>
   <?php
   foreach($rowsGrupoLaboratorioProfesor as $grupo){
     $controller = new es\ucm\ControllerImplements();
-    $context = new es\ucm\Context(LIST_MODGRUPO_LABORATORIO_PROFESOR, $grupo->getIdGrupoLaboratorio());
+    $context = new es\ucm\Context(LIST_MODGRUPO_LABORATORIO_PROFESOR, $grupo->getIdGrupoLab());
     $profesores = $controller->action($context);
     echo'<tr>
     <td>'.$grupo->getLetra().'</td>';
@@ -381,7 +381,7 @@ if(!isset($rowsGrupoLaboratorioProfesor)){?>
 <div >
 	
 	<table class="table">
-      <tr><td colspan="5" class="bg-secondary text-center">Horarios de clases</td></tr>
+      <tr><td colspan="5" class="bg-secondary text-center">Horarios de los laboratorios</td></tr>
       <tr>
       	<td rowspan="2" class="bg-info"> <span class="p-1"> Grupo </span> </td>
       	<td colspan="3" class="bg-info"> <span class="p-1"> Horarios clases </span> </td>
@@ -395,7 +395,7 @@ if(!isset($rowsGrupoLaboratorioProfesor)){?>
 
       <?php foreach($rowsGrupoLaboratorioProfesor as $grupo){
     $controller = new es\ucm\ControllerImplements();
-    $context = new es\ucm\Context(LIST_MODHORARIO_LABORATORIO, $grupo->getIdGrupoLaboratorio());
+    $context = new es\ucm\Context(LIST_MODHORARIO_LABORATORIO, $grupo->getIdGrupoLab());
     echo "<tr><td>".$grupo->getLetra()."</td>";
     $grupos = $controller->action($context);
     if($grupos->getEvent()===LIST_MODHORARIO_LABORATORIO_OK)
