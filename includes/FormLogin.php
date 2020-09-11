@@ -50,8 +50,7 @@ class FormLogin extends Form
 			if ($usuario->getEvent() === FIND_USUARIO_FAIL) {
 				$erroresFormulario[] = "El email o la contraseña no coinciden";
 			} 
-//password_verify($password, $usuario->getData()->getPassword()) CAMBIAR EN LA VERSION FINAL
-			else if ($usuario->getData()->getPassword() === $password) {
+			else if (password_verify($password, $usuario->getData()->getPassword())) {
 				$_SESSION['login'] = true;
 				$_SESSION['idUsuario'] = $usuario->getData()->getEmail();
 
