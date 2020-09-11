@@ -15,7 +15,7 @@
             echo '<button type="button" class="btn btn-outline-danger" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <img class=" text-center img-fluid" src="' . RUTA_IMGS . 'profile.png" width="40" alt="Inicio sesion" />
                 </button>
-                <div class="dropdown-menu dropdown-menu-right">';
+                <div class="dropdown-menu dropdown-menu-right text-center">';
 
             if (isset($_SESSION['login']) && $_SESSION['login'] === true) {
                 echo'<h4 class="dropdown-header text-primary">'.$_SESSION['idUsuario'].'</h4>';
@@ -28,6 +28,7 @@
             } else {
                 echo ' <a class="dropdown-item" href="index.php">Log In</a>';
             }
+            echo '</div>';
             ?>
         </div>
     </div>
