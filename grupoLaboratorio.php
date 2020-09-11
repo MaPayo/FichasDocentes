@@ -34,9 +34,13 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
         $IdGrado = htmlspecialchars(trim(strip_tags($_GET['IdGrado'])));
 
         if((isset($_SESSION['asignaturas'][$IdGrado][$IdAsignatura]['coordinacion']) && $_SESSION['asignaturas'][$IdGrado][$IdAsignatura]['coordinacion'] == true) || (isset($_SESSION['asignaturas'][$IdGrado][$IdAsignatura]['permisos']) && unserialize($_SESSION['asignaturas'][$IdGrado][$IdAsignatura]['permisos'])->getPermisoGrupoLaboratorio() == true)){
+         $controller = new es\ucm\ControllerImplements();
+         $context = new es\ucm\Context(FIND_CONFIGURACION, $IdAsignatura);
+         $contextConfiguacion = $controller->action($context);
+
+         if($contextConfiguacion->getEvent() === FIND_CONFIGURACION_OK && $contextConfiguacion->getData()->getGrupoLaboratorio() == 1){
 
           $access = new es\ucm\FormGrupoLaboratorio('idGrupoLaboratorio');
-          $controller = new es\ucm\ControllerImplements();
           $datosIniciales = array();
 
           if (isset($_GET['IdGrupoLaboratorio'])) {
@@ -88,6 +92,17 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
     </div>
     <?php
   }
+
+}
+else{
+ echo '
+ <div class="col-md-6 col-12">
+ <div class="alert alert-danger" role="alert">
+ <h2 class="card-title text-center">ACCESO DENEGADO</h2>
+ <h5 class="text-center">La asignatura seleccionada no ha sido creada correctamente o no contiene este apartado. Contacta con el administrador</h5>
+ </div>
+ </div>';
+}
 }
 else{
  echo '

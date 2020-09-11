@@ -29,84 +29,104 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
             <?php
             if (isset($_SESSION['login']) && $_SESSION['login'] === true) {
 
-                if((isset($_GET['IdAsignatura']) && isset($_GET['IdGrupoClase'])) || (isset($_GET['IdAsignatura']) && isset($_GET['IdHorarioClase']))){
+                if((isset($_GET['IdAsignatura']) && isset($_GET['IdGrado']) && isset($_GET['IdGrupoClase'])) || (isset($_GET['IdAsignatura']) && isset($_GET['IdGrado']) && isset($_GET['IdHorarioClase']))){
+                    $IdAsignatura = htmlspecialchars(trim(strip_tags($_GET['IdAsignatura'])));
+                    $IdGrado = htmlspecialchars(trim(strip_tags($_GET['IdGrado'])));
+                    
 
-                    if((isset($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET['IdAsignatura']]['coordinacion']) && $_SESSION['asignaturas'][$_GET['IdGrado']][$_GET['IdAsignatura']]['coordinacion'] == true) || (isset($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET['IdAsignatura']]['permisos']) && unserialize($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET['IdAsignatura']]['permisos'])->getPermisoGrupoclase() == true)){
+                    if((isset($_SESSION['asignaturas'][$IdGrado][$IdAsignatura]['coordinacion']) && $_SESSION['asignaturas'][$IdGrado][$IdAsignatura]['coordinacion'] == true) || (isset($_SESSION['asignaturas'][$IdGrado][$IdAsignatura]['permisos']) && unserialize($_SESSION['asignaturas'][$IdGrado][$IdAsignatura]['permisos'])->getPermisoGrupoClase() == true)){
 
+                        $controller = new es\ucm\ControllerImplements();
+                        $access = new es\ucm\FormHorarioClase('idHorarioClase');
+                        $datosIniciales = array();
+
+                        if (isset($_GET['IdHorarioClase'])) {
+                            $IdHorarioClase = htmlspecialchars(trim(strip_tags($_GET['IdHorarioClase'])));
+                            $context = new es\ucm\Context(FIND_MODHORARIO_CLASE, $IdHorarioClase);
+                            $contextHorarioClase = $controller->action($context);
+                            if ($contextHorarioClase->getEvent() === FIND_MODHORARIO_CLASE_OK) {
+                                $datosIniciales['idHorarioClase'] = $contextHorarioClase->getData()->getIdHorarioClase();
+                                $datosIniciales['aula'] = $contextHorarioClase->getData()->getAula();
+                                $datosIniciales['dia'] = $contextHorarioClase->getData()->getDia();
+                                $datosIniciales['horaInicio'] = $contextHorarioClase->getData()->getHoraInicio();
+                                $datosIniciales['horaFin'] = $contextHorarioClase->getData()->getHoraFin();
+                                $datosIniciales['idGrupoClase'] = $contextHorarioClase->getData()->getIdGrupoClase();
+                                $datosIniciales['idAsignatura'] =  $IdAsignatura;
+                                $datosIniciales['idGrado'] =$IdGrado;
+                                ?>
+                                <div class="col-xl-6 col-lg-8 col-12">
+                                    <div class="card ">
+                                        <div class="card-header text-center">
+                                           <h2>Modificar un borrador de un horario de clase</h2>
+                                       </div>
+                                       <div class="card-body">
+                                        <?php $access->gestionaModificacion($datosIniciales); ?>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php
+                        }
+                        else{
+                            echo '
+                            <div class="col-md-6 col-12">
+                            <div class="alert alert-danger" role="alert">
+                            <h2 class="card-title text-center">ACCESO DENEGADO</h2>
+                            <h5 class="text-center">No se puede encontrar el horario</h5>
+                            </div>
+                            </div>';
+                        }
+                    } 
+                    else if (isset($_GET['IdGrupoClase'])) {
+                        $IdGrupoClase = htmlspecialchars(trim(strip_tags($_GET['IdGrupoClase'])));
+                        $datosIniciales['idAsignatura'] =  $IdAsignatura;
+                        $datosIniciales['idGrupoClase'] =  $IdGrupoClase;
+                        $datosIniciales['idGrado'] = $IdGrado;
                         ?>
                         <div class="col-xl-6 col-lg-8 col-12">
                             <div class="card ">
                                 <div class="card-header text-center">
-                                <?php
-                                if (isset($_GET['IdHorarioClase'])){
-                                    echo "<h2>Modificar borrador de un horario de clase</h2>";
-                                }elseif (isset($_GET['IdGrupoClase'])){
-                                    echo "<h2>Crear borrador de un horario de clase</h2>";
-                                }
-                                ?>
-                                </div>
-                                <div class="card-body">
-                                    <?php
-                                    $controller = new es\ucm\ControllerImplements();
-                                    $access = new es\ucm\FormHorarioClase('idHorarioClase');
-                                    $datosIniciales = array();
-                                    if (isset($_GET['IdHorarioClase'])) {
-                                        $context = new es\ucm\Context(FIND_MODHORARIO_CLASE, htmlspecialchars(trim(strip_tags($_GET['IdHorarioClase']))));
-                                        $contextHorarioClase = $controller->action($context);
-                                        if ($contextHorarioClase->getEvent() === FIND_MODHORARIO_CLASE_OK) {
-                                            $datosIniciales['idHorarioClase'] = $contextHorarioClase->getData()->getIdHorarioClase();
-                                            $datosIniciales['aula'] = $contextHorarioClase->getData()->getAula();
-                                            $datosIniciales['dia'] = $contextHorarioClase->getData()->getDia();
-                                            $datosIniciales['horaInicio'] = $contextHorarioClase->getData()->getHoraInicio();
-                                            $datosIniciales['horaFin'] = $contextHorarioClase->getData()->getHoraFin();
-                                            $datosIniciales['idGrupoClase'] = $contextHorarioClase->getData()->getIdGrupoClase();
-                                            $datosIniciales['idAsignatura'] =  htmlspecialchars(trim(strip_tags($_GET['IdAsignatura'])));
-                                            $datosIniciales['idGrado'] =htmlspecialchars(trim(strip_tags($_GET['IdGrado'])));
-                                            $access->gestionaModificacion($datosIniciales);
-                                        }
-                                    } elseif (isset($_GET['IdGrupoClase'])) {
-                                        $datosIniciales['idAsignatura'] =  htmlspecialchars(trim(strip_tags($_GET['IdAsignatura'])));
-                                        $datosIniciales['idGrupoClase'] =  htmlspecialchars(trim(strip_tags($_GET['IdGrupoClase'])));
-                                        $datosIniciales['idGrado'] = htmlspecialchars(trim(strip_tags($_GET['IdGrado'])));
-                                        $access->gestionaModificacion($datosIniciales);
-                                    }
-                                    ?>
-                                </div>
+                                   <h2>Crear un borrador de un horario de clase</h2>
+                               </div>
+                               <div class="card-body">
+                                <?php $access->gestionaModificacion($datosIniciales); ?>
                             </div>
                         </div>
-                        <?php
-                    }
-                    else{
-                     echo '
-                     <div class="col-md-6 col-12">
-                     <div class="alert alert-danger" role="alert">
-                     <h2 class="card-title text-center">ACCESO DENEGADO</h2>
-                     <h5 class="text-center">No tienes permisos suficientes para esta apartado</h5>
-                     </div>
-                     </div>';
-                 }
-             }
-             else {
-                echo '
-                <div class="col-md-6 col-12">
-                <div class="alert alert-danger" role="alert">
-                <h2 class="card-title text-center">ACCESO DENEGADO</h2>
-                <h5 class="text-center">No se ha podido obtener la asignatura o el horario</h5>
-                </div>
-                </div>';
+                    </div>
+                    <?php
+                }
+
             }
-        }
-        else {
-            echo '
-            <div class="col-md-6 col-12">
-            <div class="alert alert-danger" role="alert">
-            <h2 class="card-title text-center">ACCESO DENEGADO</h2>
-            <h5 class="text-center">Inicia sesión con un usuario que pueda acceder a este contenido</h5>
-            </div>
-            </div>';
-        }
-        ?>
+            else{
+               echo '
+               <div class="col-md-6 col-12">
+               <div class="alert alert-danger" role="alert">
+               <h2 class="card-title text-center">ACCESO DENEGADO</h2>
+               <h5 class="text-center">No tienes permisos suficientes para esta apartado</h5>
+               </div>
+               </div>';
+           }
+       }
+       else {
+        echo '
+        <div class="col-md-6 col-12">
+        <div class="alert alert-danger" role="alert">
+        <h2 class="card-title text-center">ACCESO DENEGADO</h2>
+        <h5 class="text-center">No se ha podido obtener el grupo o el horario</h5>
+        </div>
+        </div>';
+    }
+}
+else {
+    echo '
+    <div class="col-md-6 col-12">
+    <div class="alert alert-danger" role="alert">
+    <h2 class="card-title text-center">ACCESO DENEGADO</h2>
+    <h5 class="text-center">Inicia sesión con un usuario que pueda acceder a este contenido</h5>
     </div>
+    </div>';
+}
+?>
+</div>
 </div>
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
