@@ -26,46 +26,37 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
         require_once('includes/Presentacion/Vistas/html/cabecera.php');
         ?>
         <div class="row justify-content-center align-items-center">
-         <?php
-         if (isset($_SESSION['login']) && $_SESSION['login'] === true) {
+           <?php
+           if (isset($_SESSION['login']) && $_SESSION['login'] === true) {
 
-            if(isset($_GET['IdAsignatura']) || (isset($_GET['IdGrupoClase']) && isset($_GET['IdAsignatura']))){
+            if(isset($_GET['IdAsignatura']) && isset($_GET['IdGrado'])){
+                $IdAsignatura = htmlspecialchars(trim(strip_tags($_GET['IdAsignatura'])));
+                $IdGrado = htmlspecialchars(trim(strip_tags($_GET['IdGrado'])));
 
-                if((isset($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET['IdAsignatura']]['coordinacion']) && $_SESSION['asignaturas'][$_GET['IdGrado']][$_GET['IdAsignatura']]['coordinacion'] == true) || (isset($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET['IdAsignatura']]['permisos']) && unserialize($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET['IdAsignatura']]['permisos'])->getPermisoGrupoClase() == true)){
-                    ?>
-                    <div class="col-xl-6 col-lg-8 col-12">
-                        <div class="card ">
-                            <div class="card-header text-center">
-                                <?php
-                                    if(isset($_GET['IdGrupoClase'])){
-                                        echo "<h2>Modificar borrador grupo clase</h2>";
-                                    }elseif (isset($_GET['IdAsignatura'])){
-                                        echo "<h2>Crear borrador grupo clase</h2>";
-                                    }
-                                ?>
-                            </div>
-                            <div class="card-body">
-                                <?php 
-                                $access = new es\ucm\FormGrupoClase('idGrupoClase');
-                                $controller = new es\ucm\ControllerImplements();
-                                $datosIniciales = array();
-                                if (isset($_GET['IdGrupoClase'])) {
-                                    $context = new es\ucm\Context(FIND_MODGRUPO_CLASE, htmlspecialchars(trim(strip_tags($_GET['IdGrupoClase']))));
-                                    $contextModGrupoClase = $controller->action($context);
-                                    if ($contextModGrupoClase->getEvent() === FIND_MODGRUPO_CLASE_OK) {
-                                        $datosIniciales['idGrupoClase'] = $contextModGrupoClase->getData()->getIdGrupoClase();
-                                        $datosIniciales['letra'] = $contextModGrupoClase->getData()->getLetra();
-                                        $datosIniciales['idioma'] = $contextModGrupoClase->getData()->getIdioma();
-                                        $datosIniciales['idAsignatura'] = $contextModGrupoClase->getData()->getIdModAsignatura();
-                                        $datosIniciales['idGrado'] = htmlspecialchars(trim(strip_tags($_GET['IdGrado'])));
-                                        $access->gestionaModificacion($datosIniciales);
-                                    }
-                                } elseif (isset($_GET['IdAsignatura'])) {
-                                    $datosIniciales['idAsignatura'] = htmlspecialchars(trim(strip_tags($_GET['IdAsignatura'])));
-                                    $datosIniciales['idGrado'] = htmlspecialchars(trim(strip_tags($_GET['IdGrado'])));
-                                    $access->gestionaModificacion($datosIniciales);
-                                }
-                                ?>
+                if((isset($_SESSION['asignaturas'][$IdGrado][$IdAsignatura]['coordinacion']) && $_SESSION['asignaturas'][$IdGrado][$IdAsignatura]['coordinacion'] == true) || (isset($_SESSION['asignaturas'][$IdGrado][$IdAsignatura]['permisos']) && unserialize($_SESSION['asignaturas'][$IdGrado][$IdAsignatura]['permisos'])->getPermisoGrupoClase() == true)){
+
+                    $access = new es\ucm\FormGrupoClase('idGrupoClase');
+                    $controller = new es\ucm\ControllerImplements();
+                    $datosIniciales = array();
+
+                    if (isset($_GET['IdGrupoClase'])) {
+                       $IdGrupoClase = htmlspecialchars(trim(strip_tags($_GET['IdGrupoClase'])));
+                       $context = new es\ucm\Context(FIND_MODGRUPO_CLASE, $IdGrupoClase);
+                       $contextModGrupoClase = $controller->action($context);
+                       if ($contextModGrupoClase->getEvent() === FIND_MODGRUPO_CLASE_OK) {
+                        $datosIniciales['idGrupoClase'] = $contextModGrupoClase->getData()->getIdGrupoClase();
+                        $datosIniciales['letra'] = $contextModGrupoClase->getData()->getLetra();
+                        $datosIniciales['idioma'] = $contextModGrupoClase->getData()->getIdioma();
+                        $datosIniciales['idAsignatura'] = $IdAsignatura;
+                        $datosIniciales['idGrado'] = $IdGrado;
+                        ?>
+                        <div class="col-xl-6 col-lg-8 col-12">
+                            <div class="card ">
+                                <div class="card-header text-center">
+                                   <h2>Modificar el borrador de un grupo de clase</h2>
+                               </div>
+                               <div class="card-body">
+                                <?php $access->gestionaModificacion($datosIniciales); ?>
                             </div>
                         </div>
                     </div>
@@ -76,31 +67,58 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                    <div class="col-md-6 col-12">
                    <div class="alert alert-danger" role="alert">
                    <h2 class="card-title text-center">ACCESO DENEGADO</h2>
-                   <h5 class="text-center">No tienes permisos suficientes para esta apartado</h5>
+                   <h5 class="text-center">No se puede encontrar el grupo de clase</h5>
                    </div>
                    </div>';
                }
            }
-           else {
-            echo '
-            <div class="col-md-6 col-12">
-            <div class="alert alert-danger" role="alert">
-            <h2 class="card-title text-center">ACCESO DENEGADO</h2>
-            <h5 class="text-center">No se ha podido obtener la asignatura o el grupo</h5>
+           else{
+            $datosIniciales['idAsignatura'] = $IdAsignatura;
+            $datosIniciales['idGrado'] = $IdGrado;
+            ?>
+            <div class="col-xl-6 col-lg-8 col-12">
+                <div class="card ">
+                    <div class="card-header text-center">
+                       <h2>Crear el borrador de un grupo de clase</h2>
+                   </div>
+                   <div class="card-body">
+                    <?php $access->gestionaModificacion($datosIniciales); ?>
+                </div>
             </div>
-            </div>';
-        }
-    }
-    else {
-        echo '
-        <div class="col-md-6 col-12">
-        <div class="alert alert-danger" role="alert">
-        <h2 class="card-title text-center">ACCESO DENEGADO</h2>
-        <h5 class="text-center">Inicia sesión con un usuario que pueda acceder a este contenido</h5>
         </div>
-        </div>';
+        <?php
     }
-    ?>
+}
+else{
+ echo '
+ <div class="col-md-6 col-12">
+ <div class="alert alert-danger" role="alert">
+ <h2 class="card-title text-center">ACCESO DENEGADO</h2>
+ <h5 class="text-center">No tienes permisos suficientes para esta apartado</h5>
+ </div>
+ </div>';
+}
+}
+else {
+    echo '
+    <div class="col-md-6 col-12">
+    <div class="alert alert-danger" role="alert">
+    <h2 class="card-title text-center">ACCESO DENEGADO</h2>
+    <h5 class="text-center">No se ha podido obtener la asignatura o el grupo</h5>
+    </div>
+    </div>';
+}
+}
+else {
+    echo '
+    <div class="col-md-6 col-12">
+    <div class="alert alert-danger" role="alert">
+    <h2 class="card-title text-center">ACCESO DENEGADO</h2>
+    <h5 class="text-center">Inicia sesión con un usuario que pueda acceder a este contenido</h5>
+    </div>
+    </div>';
+}
+?>
 </div>
 </div>
 <!-- Optional JavaScript -->
