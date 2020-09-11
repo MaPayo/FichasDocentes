@@ -38,7 +38,7 @@ class SAConfiguracionImplements implements SAConfiguracion
             );
         }
         else{
-            $configuracionn=null;
+            $configuracion=null;
         }
         return $configuracion;
     }
