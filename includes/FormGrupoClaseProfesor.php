@@ -124,18 +124,22 @@ class FormGrupoClaseProfesor extends Form
 			$context = new Context(FIND_MODGRUPO_CLASE_PROFESOR, $arrayGrupoClaseProfesor);
 			$contextGrupoClaseProfesor = $controller->action($context);
 			if ($contextGrupoClaseProfesor->getEvent() === FIND_MODGRUPO_CLASE_PROFESOR_OK) {
-
-				$grupoClaseProfesor = new ModGrupoClaseProfesor($datos['idGrupoClase'], $tipo, $fechaInicio,$fechaFin, $emailProfesor);
-				$context = new Context(UPDATE_MODGRUPO_CLASE_PROFESOR, $grupoClaseProfesor);
-				$contextGrupoClaseProfesor = $controller->action($context);
-				if ($contextGrupoClaseProfesor->getEvent() === UPDATE_MODGRUPO_CLASE_PROFESOR_OK) {
-					$modAsignatura = new ModAsignatura($datos['idAsignatura'], date("Y-m-d H:i:s"), $_SESSION['idUsuario'], $datos['idAsignatura']);
-					$context = new Context(UPDATE_MODASIGNATURA, $modAsignatura);
-					$contextModAsignatura = $controller->action($context);
+				if($tipo === $contextGrupoClaseProfesor->getData()->getTipo() && $fechaInicio === $contextGrupoClaseProfesor->getData()->getFechaInicio() && $fechaFin === $contextGrupoClaseProfesor->getData()->getFechaFin() && $emailProfesor === $contextGrupoClaseProfesor->getData()->getEmailProfesor()){
 					$erroresFormulario = "indexAcceso.php?IdGrado=" . $datos['idGrado'] . "&IdAsignatura=" . $datos['idAsignatura'] . "&modificado=y#nav-grupo-clase";
-				} elseif ($contextGrupoClaseProfesor->getEvent() === CREATE_MODGRUPO_CLASE_PROFESOR_FAIL) {
-					$erroresFormulario[] = "No se ha podido modificar al profesor en el grupo";
+				}else{
+					$grupoClaseProfesor = new ModGrupoClaseProfesor($datos['idGrupoClase'], $tipo, $fechaInicio,$fechaFin, $emailProfesor);
+					$context = new Context(UPDATE_MODGRUPO_CLASE_PROFESOR, $grupoClaseProfesor);
+					$contextGrupoClaseProfesor = $controller->action($context);
+					if ($contextGrupoClaseProfesor->getEvent() === UPDATE_MODGRUPO_CLASE_PROFESOR_OK) {
+						$modAsignatura = new ModAsignatura($datos['idAsignatura'], date("Y-m-d H:i:s"), $_SESSION['idUsuario'], $datos['idAsignatura']);
+						$context = new Context(UPDATE_MODASIGNATURA, $modAsignatura);
+						$contextModAsignatura = $controller->action($context);
+						$erroresFormulario = "indexAcceso.php?IdGrado=" . $datos['idGrado'] . "&IdAsignatura=" . $datos['idAsignatura'] . "&modificado=y#nav-grupo-clase";
+					} elseif ($contextGrupoClaseProfesor->getEvent() === CREATE_MODGRUPO_CLASE_PROFESOR_FAIL) {
+						$erroresFormulario[] = "No se ha podido modificar al profesor en el grupo";
+					}
 				}
+				
 
 			} elseif ($contextGrupoClaseProfesor->getEvent() === FIND_MODGRUPO_CLASE_PROFESOR_FAIL) {
 				$grupoClaseProfesor = new ModGrupoClaseProfesor($datos['idGrupoClase'], $tipo, $fechaInicio,$fechaFin, $emailProfesor);

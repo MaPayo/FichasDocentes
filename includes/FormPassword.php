@@ -16,21 +16,21 @@ class FormPassword extends Form
 
 
 		$html = 
-		'<input type="hidden" name="Email" value="' . $Email . '" required/>
+		'<input type="hidden" name="Email" value="' . $Email . '" required />
 
 		<div class="form-group">
 		<label for="Password">Contraseña actual</label>
-		<input type="password" class="form-control" id="Password"  name="Password" required/>
+		<input type="password" class="form-control" id="Password"  name="Password" required />
 		</div>
 
 		<div class="form-group">
 		<label for="NewPassword">Nueva contraseña</label>
-		<input type="password"  minlength="8" class="form-control" id="NewPassword"  name="NewPassword" required/>
+		<input type="password"  minlength="8" class="form-control" id="NewPassword"  name="NewPassword" required />
 		</div>
 
 		<div class="form-group">
 		<label for="ConfirmNewPassword">Confirmar nueva contraseña</label>
-		<input type="password"  minlength="8" class="form-control" id="ConfirmNewPassword"  name="ConfirmNewPassword" required/>
+		<input type="password"  minlength="8" class="form-control" id="ConfirmNewPassword"  name="ConfirmNewPassword" required />
 		</div>
 
 		<div class="text-center">
@@ -75,11 +75,15 @@ class FormPassword extends Form
 				$erroresFormulario[] = "No has confirmado la nueva contraseña";
 			}
 
+			if($NewPassword != $ConfirmNewPassword){
+				$erroresFormulario[] = "La nueva contraseña no es igual a la de confirmación";
+			}
+
 			if (count($erroresFormulario) === 0) {
-				if (password_verify($Password, $contextUsuario->getData()->getEmail()) && $Password == $NewPassword && $NewPassword == $ConfirmNewPassword) {
+				if (password_verify($Password, $contextUsuario->getData()->getPassword()) && $Password === $NewPassword) {
 					$erroresFormulario = "perfil.php?modificado=y";
 				}
-				else if(password_verify($Password, $contextUsuario->getData()->getEmail()) && $Password != $NewPassword && $NewPassword == $ConfirmNewPassword){
+				else if(password_verify($Password, $contextUsuario->getData()->getPassword()) && $Password != $NewPassword){
 					$NewPassword = password_hash($NewPassword, PASSWORD_BCRYPT);
 					$usuario = new Usuario(
 						$Email,
@@ -94,6 +98,8 @@ class FormPassword extends Form
 					else{
 						$erroresFormulario[] = "No se ha podido cambiar la contraseña";
 					}
+				}else{
+					$erroresFormulario[] = "La contraseña actual no es igual a la facilitada";
 				}
 			}
 		}

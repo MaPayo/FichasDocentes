@@ -239,20 +239,24 @@ class FormEvaluacion extends Form
 			$contextEvaluacion = $controller->action($context);
 
 			if ($contextEvaluacion->getEvent() === FIND_MODEVALUACION_OK) {
-
-				$evaluacion = new ModEvaluacion($contextEvaluacion->getData()->getIdEvaluacion(), $realizacionExamenes, $realizacionExamenesI, $pesoExamenes, $realizacionActividades, $realizacionActividadesI, $pesoActividades, $realizacionLaboratorio, $realizacionLaboratorioI, $pesoLaboratorio, $calificacionFinal, $calificacionFinalI, $datos['idAsignatura']);
-				$context = new Context(UPDATE_MODEVALUACION, $evaluacion);
-				$contextEvaluacion = $controller->action($context);
-
-				if ($contextEvaluacion->getEvent() === UPDATE_MODEVALUACION_OK) {
-
-					$modAsignatura = new ModAsignatura($datos['idAsignatura'], date("Y-m-d H:i:s"), $_SESSION['idUsuario'], $datos['idAsignatura']);
-					$context = new Context(UPDATE_MODASIGNATURA, $modAsignatura);
-					$contextModAsignatura = $controller->action($context);
+				if($realizacionActividades === $contextEvaluacion->getData()->getRealizacionActividades() && $realizacionActividadesI === $contextEvaluacion->getData()->getRealizacionActividadesI() && $realizacionExamenes === $contextEvaluacion->getData()->getRealizacionExamenes() && $realizacionExamenesI === $contextEvaluacion->getData()->getRealizacionExamenesI() && $realizacionLaboratorio === $contextEvaluacion->getData()->getRealizacionLaboratorio() && $realizacionLaboratorioI === $contextEvaluacion->getData()->getRealizacionLaboratorioI() && $calificacionFinal === $contextEvaluacion->getData()->getCalificacionFinal() && $calificacionFinalI === $contextEvaluacion->getData()->getCalificacionFinalI() && $pesoActividades === $contextEvaluacion->getData()->getPesoActividades() && $pesoLaboratorio === $contextEvaluacion->getData()->getPesoLaboratorio() && $pesoExamenes === $contextEvaluacion->getData()->getPesoExamenes()){
 					$erroresFormulario = "indexAcceso.php?IdGrado=" . $datos['idGrado'] . "&IdAsignatura=" . $datos['idAsignatura'] . "&modificado=y#nav-evaluacion";
-				} elseif ($contextEvaluacion->getEvent() === UPDATE_MODEVALUACION_FAIL) {
-					$erroresFormulario[] = "No se ha podido modificar la evaluación";
+				}else{
+					$evaluacion = new ModEvaluacion($contextEvaluacion->getData()->getIdEvaluacion(), $realizacionExamenes, $realizacionExamenesI, $pesoExamenes, $realizacionActividades, $realizacionActividadesI, $pesoActividades, $realizacionLaboratorio, $realizacionLaboratorioI, $pesoLaboratorio, $calificacionFinal, $calificacionFinalI, $datos['idAsignatura']);
+					$context = new Context(UPDATE_MODEVALUACION, $evaluacion);
+					$contextEvaluacion = $controller->action($context);
+	
+					if ($contextEvaluacion->getEvent() === UPDATE_MODEVALUACION_OK) {
+	
+						$modAsignatura = new ModAsignatura($datos['idAsignatura'], date("Y-m-d H:i:s"), $_SESSION['idUsuario'], $datos['idAsignatura']);
+						$context = new Context(UPDATE_MODASIGNATURA, $modAsignatura);
+						$contextModAsignatura = $controller->action($context);
+						$erroresFormulario = "indexAcceso.php?IdGrado=" . $datos['idGrado'] . "&IdAsignatura=" . $datos['idAsignatura'] . "&modificado=y#nav-evaluacion";
+					} elseif ($contextEvaluacion->getEvent() === UPDATE_MODEVALUACION_FAIL) {
+						$erroresFormulario[] = "No se ha podido modificar la evaluación";
+					}
 				}
+				
 			} elseif ($contextEvaluacion->getEvent() === FIND_MODEVALUACION_FAIL) {
 
 				$evaluacion = new ModEvaluacion(null, $realizacionExamenes, $realizacionExamenesI, $pesoExamenes, $realizacionActividades, $realizacionActividadesI, $pesoActividades, $realizacionLaboratorio, $realizacionLaboratorioI, $pesoLaboratorio, $calificacionFinal, $calificacionFinalI, $datos['idAsignatura']);

@@ -111,19 +111,23 @@ class FormHorarioClase extends Form
 			$contextHorarioClase = $controller->action($context);
 
 			if ($contextHorarioClase->getEvent() === FIND_MODHORARIO_CLASE_OK) {
-
-				$horarioClase = new ModHorarioClase($datos['idHorarioClase'], $aula, $dia, $horaInicio, $horaFin, $datos['idGrupoClase']);
-				$context = new Context(UPDATE_MODHORARIO_CLASE, $horarioClase);
-				$contextHorarioClase = $controller->action($context);
-
-				if ($contextHorarioClase->getEvent() === UPDATE_MODHORARIO_CLASE_OK) {
-					$modAsignatura = new ModAsignatura($datos['idAsignatura'], date("Y-m-d H:i:s"), $_SESSION['idUsuario'], $datos['idAsignatura']);
-					$context = new Context(UPDATE_MODASIGNATURA, $modAsignatura);
-					$contextModAsignatura = $controller->action($context);
+				if($aula === $contextHorarioClase->getData()->getAula() && $dia === $contextHorarioClase->getData()->getDia() && $horaInicio === $contextHorarioClase->getData()->getHoraInicio() && $horaFin === $contextHorarioClase->getData()->getHoraFin()){
 					$erroresFormulario = "indexAcceso.php?IdGrado=" . $datos['idGrado'] . "&IdAsignatura=" . $datos['idAsignatura'] . "&modificado=y#nav-grupo-clase";
-				} elseif ($contextHorarioClase->getEvent() === UPDATE_MODHORARIO_CLASE_FAIL) {
-					$erroresFormulario[] = "No se ha podido modificar el horario";
+				}else{
+					$horarioClase = new ModHorarioClase($datos['idHorarioClase'], $aula, $dia, $horaInicio, $horaFin, $datos['idGrupoClase']);
+					$context = new Context(UPDATE_MODHORARIO_CLASE, $horarioClase);
+					$contextHorarioClase = $controller->action($context);
+	
+					if ($contextHorarioClase->getEvent() === UPDATE_MODHORARIO_CLASE_OK) {
+						$modAsignatura = new ModAsignatura($datos['idAsignatura'], date("Y-m-d H:i:s"), $_SESSION['idUsuario'], $datos['idAsignatura']);
+						$context = new Context(UPDATE_MODASIGNATURA, $modAsignatura);
+						$contextModAsignatura = $controller->action($context);
+						$erroresFormulario = "indexAcceso.php?IdGrado=" . $datos['idGrado'] . "&IdAsignatura=" . $datos['idAsignatura'] . "&modificado=y#nav-grupo-clase";
+					} elseif ($contextHorarioClase->getEvent() === UPDATE_MODHORARIO_CLASE_FAIL) {
+						$erroresFormulario[] = "No se ha podido modificar el horario";
+					}
 				}
+				
 			} elseif ($contextHorarioClase->getEvent() === FIND_MODHORARIO_CLASE_FAIL) {
 
 				$horarioClase = new ModHorarioClase(null,  $aula, $dia, $horaInicio, $horaFin, $datos['idGrupoClase']);

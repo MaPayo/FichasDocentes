@@ -86,20 +86,24 @@ class FormBibliografia extends Form
 			$contextBibliografia = $controller->action($context);
 
 			if ($contextBibliografia->getEvent() === FIND_MODBIBLIOGRAFIA_OK) {
-
-				$bibliografia = new ModBibliografia($contextBibliografia->getData()->getIdBibliografia(), $citasBibliograficas, $recursosInternet, $datos['idAsignatura']);
-				$context = new Context(UPDATE_MODBIBLIOGRAFIA, $bibliografia);
-				$contextBibliografia = $controller->action($context);
-
-				if ($contextBibliografia->getEvent() === UPDATE_MODBIBLIOGRAFIA_OK) {
-
-					$modAsignatura = new ModAsignatura($datos['idAsignatura'], date("Y-m-d H:i:s"), $_SESSION['idUsuario'], $datos['idAsignatura']);
-					$context = new Context(UPDATE_MODASIGNATURA, $modAsignatura);
-					$contextModAsignatura = $controller->action($context);
+				if($citasBibliograficas === $contextBibliografia->getData()->getCitasBibliograficas() && $recursosInternet === $contextBibliografia->getData()->getRecursosInternet()){
 					$erroresFormulario = "indexAcceso.php?IdGrado=" .$datos['idGrado']. "&IdAsignatura=" . $datos['idAsignatura'] . "&modificado=y#nav-bibliografia";
-				} elseif ($contextBibliografia->getEvent() === UPDATE_MODBIBLIOGRAFIA_FAIL) {
-					$erroresFormulario[] = "No se ha podido modificar la bibliografía";
+				}else{
+					$bibliografia = new ModBibliografia($contextBibliografia->getData()->getIdBibliografia(), $citasBibliograficas, $recursosInternet, $datos['idAsignatura']);
+					$context = new Context(UPDATE_MODBIBLIOGRAFIA, $bibliografia);
+					$contextBibliografia = $controller->action($context);
+	
+					if ($contextBibliografia->getEvent() === UPDATE_MODBIBLIOGRAFIA_OK) {
+	
+						$modAsignatura = new ModAsignatura($datos['idAsignatura'], date("Y-m-d H:i:s"), $_SESSION['idUsuario'], $datos['idAsignatura']);
+						$context = new Context(UPDATE_MODASIGNATURA, $modAsignatura);
+						$contextModAsignatura = $controller->action($context);
+						$erroresFormulario = "indexAcceso.php?IdGrado=" .$datos['idGrado']. "&IdAsignatura=" . $datos['idAsignatura'] . "&modificado=y#nav-bibliografia";
+					} elseif ($contextBibliografia->getEvent() === UPDATE_MODBIBLIOGRAFIA_FAIL) {
+						$erroresFormulario[] = "No se ha podido modificar la bibliografía";
+					}
 				}
+				
 			} elseif ($contextBibliografia->getEvent() === FIND_MODBIBLIOGRAFIA_FAIL) {
 
 				$bibliografia = new ModBibliografia(null, $citasBibliograficas, $recursosInternet, $datos['idAsignatura']);

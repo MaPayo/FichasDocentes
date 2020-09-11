@@ -26,7 +26,7 @@ class FormProgramaAsignatura extends Form
 		$programaLaboratorioI = isset($datosIniciales['programaLaboratorioI']) ? $datosIniciales['programaLaboratorioI'] : null;
 		$idAsignatura = isset($datosIniciales['idAsignatura']) ? $datosIniciales['idAsignatura'] : null;
 		$idGrado = isset($datosIniciales['idGrado']) ? $datosIniciales['idGrado'] : null;
-		
+
 		$controller = new ControllerImplements();
 		$context = new Context(FIND_CONFIGURACION, $idAsignatura);
 		$contextConfiguacion = $controller->action($context);
@@ -45,7 +45,7 @@ class FormProgramaAsignatura extends Form
 				<textarea class="form-control" id="conocimientosPrevios" rows="10" name="conocimientosPrevios" required>' . $conocimientosPrevios . '</textarea>
 				</div>';
 
-				if(!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())){
+				if (!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())) {
 					$html .= '<div class="form-group">
 					<label for="conocimientosPreviosI">Conocimientos previos (Inglés)</label>
 					<textarea class="form-control" id="conocimientosPreviosI" rows="10" name="conocimientosPreviosI" required>' . $conocimientosPreviosI . '</textarea>
@@ -59,7 +59,7 @@ class FormProgramaAsignatura extends Form
 				<textarea class="form-control" id="breveDescripcion" rows="10" name="breveDescripcion" required>' . $breveDescripcion . '</textarea>
 				</div>';
 
-				if(!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())){
+				if (!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())) {
 					$html .= '<div class="form-group">
 					<label for="breveDescripcionI">Breve descripción (Inglés)</label>
 					<textarea class="form-control" id="breveDescripcionI" rows="10" name="breveDescripcionI" required>' . $breveDescripcionI . '</textarea>
@@ -73,7 +73,7 @@ class FormProgramaAsignatura extends Form
 				<textarea class="form-control" id="programaTeorico" rows="10" name="programaTeorico" required>' . $programaTeorico . '</textarea>
 				</div>';
 
-				if(!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())){
+				if (!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())) {
 					$html .= '<div class="form-group">
 					<label for="programaTeoricoI">Programa teórico (Inglés)</label>
 					<textarea class="form-control" id="programaTeoricoI" rows="10" name="programaTeoricoI" required>' . $programaTeoricoI . '</textarea>
@@ -87,7 +87,7 @@ class FormProgramaAsignatura extends Form
 				<textarea class="form-control" id="programaTeorico" rows="10" name="programaSeminarios" required>' . $programaSeminarios . '</textarea>
 				</div>';
 
-				if(!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())){
+				if (!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())) {
 					$html .= '<div class="form-group">
 					<label for="programaSeminariosI">Programa de seminarios (Inglés)</label>
 					<textarea class="form-control" id="programaSeminariosI" rows="10" name="programaSeminariosI" required>' . $programaSeminariosI . '</textarea>
@@ -101,18 +101,17 @@ class FormProgramaAsignatura extends Form
 				<textarea class="form-control" id="programaLaboratorio" rows="10" name="programaLaboratorio" required>' . $programaLaboratorio . '</textarea>
 				</div>';
 
-				if(!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())){
+				if (!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())) {
 					$html .= '<div class="form-group">
 					<label for="programaLaboratorioI">Programa de laboratorio (Inglés)</label>
 					<textarea class="form-control" id="programaLaboratorioI" rows="10" name="programaLaboratorioI" required>' . $programaLaboratorioI . '</textarea>
 					</div>';
 				}
 			}
-			
 		}
 
 		$html .= '<div class="text-center">
-		<a href="indexAcceso.php?IdGrado=' .$idGrado. '&IdAsignatura=' . $idAsignatura . '#nav-prog-asignatura">
+		<a href="indexAcceso.php?IdGrado=' . $idGrado . '&IdAsignatura=' . $idAsignatura . '#nav-prog-asignatura">
 		<button type="button" class="btn btn-secondary" id="btn-form">
 		Cancelar
 		</button>
@@ -144,7 +143,7 @@ class FormProgramaAsignatura extends Form
 		$programaLaboratorio = isset($datos['programaLaboratorio']) ? $datos['programaLaboratorio'] : '';
 		$programaLaboratorioI = isset($datos['programaLaboratorioI']) ? $datos['programaLaboratorioI'] : '';
 
-		if ($contextConfiguacion->getEvent() === FIND_CONFIGURACION_OK){
+		if ($contextConfiguacion->getEvent() === FIND_CONFIGURACION_OK) {
 
 			if ($contextConfiguacion->getData()->getConocimientosPrevios() == 1) {
 				$conocimientosPrevios = self::clean($conocimientosPrevios);
@@ -152,7 +151,7 @@ class FormProgramaAsignatura extends Form
 					$erroresFormulario[] = "No has introducido los conocimientos previos";
 				}
 
-				if(!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())){
+				if (!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())) {
 					$conocimientosPreviosI = self::clean($conocimientosPreviosI);
 					if (empty($conocimientosPreviosI)) {
 						$erroresFormulario[] = "No has introducido los conocimientos previos en inglés";
@@ -166,7 +165,7 @@ class FormProgramaAsignatura extends Form
 					$erroresFormulario[] = "No has introducido la breve descripción";
 				}
 
-				if(!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())){
+				if (!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())) {
 					$breveDescripcionI = self::clean($breveDescripcionI);
 					if (empty($breveDescripcionI)) {
 						$erroresFormulario[] = "No has introducido la breve descripción en inglés";
@@ -180,7 +179,7 @@ class FormProgramaAsignatura extends Form
 					$erroresFormulario[] = "No has introducido el programa teórico";
 				}
 
-				if(!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())){
+				if (!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())) {
 					$programaTeoricoI = self::clean($programaTeoricoI);
 					if (empty($programaTeoricoI)) {
 						$erroresFormulario[] = "No has introducido el programa teórico en inglés";
@@ -194,7 +193,7 @@ class FormProgramaAsignatura extends Form
 					$erroresFormulario[] = "No has introducido el programa de seminarios";
 				}
 
-				if(!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())){
+				if (!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())) {
 					$programaSeminariosI = self::clean($programaSeminariosI);
 					if (empty($programaSeminariosI)) {
 						$erroresFormulario[] = "No has introducido el programa de seminarios en inglés";
@@ -208,7 +207,7 @@ class FormProgramaAsignatura extends Form
 					$erroresFormulario[] = "No has introducido el programa de laboratorio";
 				}
 
-				if(!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())){
+				if (!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())) {
 					$programaLaboratorioI = self::clean($programaLaboratorioI);
 					if (empty($programaLaboratorioI)) {
 						$erroresFormulario[] = "No has introducido el programa de laboratorio en inglés";
@@ -216,7 +215,7 @@ class FormProgramaAsignatura extends Form
 				}
 			}
 		}
-		
+
 
 		if (count($erroresFormulario) === 0) {
 
@@ -224,31 +223,30 @@ class FormProgramaAsignatura extends Form
 			$contextPrograma = $controller->action($context);
 
 			if ($contextPrograma->getEvent() === FIND_MODPROGRAMA_ASIGNATURA_OK) {
-
-				$programa = new ModProgramaAsignatura($contextPrograma->getData()->getIdPrograma(), $conocimientosPrevios, $conocimientosPreviosI, $breveDescripcion, $breveDescripcionI, $programaTeorico, $programaTeoricoI, $programaSeminarios, $programaSeminariosI, $programaLaboratorio, $programaLaboratorioI, $datos['idAsignatura']);
-				$context = new Context(UPDATE_MODPROGRAMA_ASIGNATURA, $programa);
-				$contextPrograma = $controller->action($context);
-
-				if ($contextPrograma->getEvent() === UPDATE_MODPROGRAMA_ASIGNATURA_OK) {
-
-					$modAsignatura = new ModAsignatura($datos['idAsignatura'], date("Y-m-d H:i:s"), $_SESSION['idUsuario'], $datos['idAsignatura']);
-					$context = new Context(UPDATE_MODASIGNATURA, $modAsignatura);
-					$contextModAsignatura = $controller->action($context);
-					$erroresFormulario = "indexAcceso.php?IdGrado=" .$datos['idGrado']. "&IdAsignatura=" . $datos['idAsignatura'] . "&modificado=y#nav-prog-asignatura";
-				} elseif ($contextPrograma->getEvent() === UPDATE_MODPROGRAMA_ASIGNATURA_FAIL) {
-					$erroresFormulario[] = "No se ha podido modificar el programa";
+				if ($conocimientosPrevios === $contextPrograma->getData()->getConocimientosPrevios() && $conocimientosPreviosI === $contextPrograma->getData()->getConocimientosPreviosI() && $breveDescripcion === $contextPrograma->getData()->getBreveDescripcion() && $breveDescripcionI === $contextPrograma->getData()->getBreveDescripcionI() && $programaTeorico === $contextPrograma->getData()->getProgramaTeorico() && $programaTeoricoI === $contextPrograma->getData()->getProgramaTeoricoI() && $programaSeminarios === $contextPrograma->getData()->getProgramaSeminarios() && $programaSeminariosI === $contextPrograma->getData()->getProgramaSeminariosI() && $programaLaboratorio === $contextPrograma->getData()->getProgramaLaboratorio() && $programaLaboratorioI === $contextPrograma->getData()->getProgramaLaboratorioI()) {
+					$erroresFormulario = "indexAcceso.php?IdGrado=" . $datos['idGrado'] . "&IdAsignatura=" . $datos['idAsignatura'] . "&modificado=y#nav-prog-asignatura";
+				} else {
+					$programa = new ModProgramaAsignatura($contextPrograma->getData()->getIdPrograma(), $conocimientosPrevios, $conocimientosPreviosI, $breveDescripcion, $breveDescripcionI, $programaTeorico, $programaTeoricoI, $programaSeminarios, $programaSeminariosI, $programaLaboratorio, $programaLaboratorioI, $datos['idAsignatura']);
+					$context = new Context(UPDATE_MODPROGRAMA_ASIGNATURA, $programa);
+					$contextPrograma = $controller->action($context);
+					if ($contextPrograma->getEvent() === UPDATE_MODPROGRAMA_ASIGNATURA_OK) {
+						$modAsignatura = new ModAsignatura($datos['idAsignatura'], date("Y-m-d H:i:s"), $_SESSION['idUsuario'], $datos['idAsignatura']);
+						$context = new Context(UPDATE_MODASIGNATURA, $modAsignatura);
+						$contextModAsignatura = $controller->action($context);
+						$erroresFormulario = "indexAcceso.php?IdGrado=" . $datos['idGrado'] . "&IdAsignatura=" . $datos['idAsignatura'] . "&modificado=y#nav-prog-asignatura";
+					} elseif ($contextPrograma->getEvent() === UPDATE_MODPROGRAMA_ASIGNATURA_FAIL) {
+						$erroresFormulario[] = "No se ha podido modificar el programa";
+					}
 				}
 			} elseif ($contextPrograma->getEvent() === FIND_MODPROGRAMA_ASIGNATURA_FAIL) {
 				$programa = new ModProgramaAsignatura(null, $conocimientosPrevios, $conocimientosPreviosI, $breveDescripcion, $breveDescripcionI, $programaTeorico, $programaTeoricoI, $programaSeminarios, $programaSeminariosI, $programaLaboratorio, $programaLaboratorioI, $datos['idAsignatura']);
 				$context = new Context(CREATE_MODPROGRAMA_ASIGNATURA, $programa);
 				$contextPrograma = $controller->action($context);
-				
 				if ($contextPrograma->getEvent() === CREATE_MODPROGRAMA_ASIGNATURA_OK) {
-
 					$modAsignatura = new ModAsignatura($datos['idAsignatura'], date("Y-m-d H:i:s"), $_SESSION['idUsuario'], $datos['idAsignatura']);
 					$context = new Context(UPDATE_MODASIGNATURA, $modAsignatura);
 					$contextModAsignatura = $controller->action($context);
-					$erroresFormulario = "indexAcceso.php?IdGrado=" .$datos['idGrado']. "&IdAsignatura=" . $datos['idAsignatura'] . "&anadido=y#nav-prog-asignatura";
+					$erroresFormulario = "indexAcceso.php?IdGrado=" . $datos['idGrado'] . "&IdAsignatura=" . $datos['idAsignatura'] . "&anadido=y#nav-prog-asignatura";
 				} elseif ($contextPrograma->getEvent() === CREATE_MODPROGRAMA_ASIGNATURA_FAIL) {
 					$erroresFormulario[] = "No se ha podido crear el programa";
 				}

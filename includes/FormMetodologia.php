@@ -78,21 +78,25 @@ class FormMetodologia extends Form
 			$contextMetodologia = $controller->action($context);
 
 			if($contextMetodologia->getEvent() === FIND_MODMETODOLOGIA_OK){
-
-				$metodologia = new ModMetodologia($contextMetodologia->getData()->getIdMetodologia(), $metodologia, $metodologiaI, $datos['idAsignatura']);
-				$context = new Context(UPDATE_MODMETODOLOGIA, $metodologia);
-				$contextMetodologia = $controller->action($context);
-
-				if ($contextMetodologia->getEvent() === UPDATE_MODMETODOLOGIA_OK) {
-
-					$modAsignatura=new ModAsignatura($datos['idAsignatura'],date("Y-m-d H:i:s"),$_SESSION['idUsuario'],$datos['idAsignatura']);
-					$context =new Context(UPDATE_MODASIGNATURA,$modAsignatura);
-					$contextModAsignatura = $controller->action($context);
+				if($metodologia === $contextMetodologia->getData()->getMetodologia() && $metodologiaI === $contextMetodologia->getData()->getMetodologiaI() ){
 					$erroresFormulario = "indexAcceso.php?IdGrado=" .$datos['idGrado']. "&IdAsignatura=".$datos['idAsignatura']."&modificado=y#nav-metodologia";
-
-				} elseif ($contextMetodologia->getEvent() === UPDATE_MODMETODOLOGIA_FAIL){
-					$erroresFormulario[] = "No se ha podido modificar la metodología";
+				}else{
+					$metodologia = new ModMetodologia($contextMetodologia->getData()->getIdMetodologia(), $metodologia, $metodologiaI, $datos['idAsignatura']);
+					$context = new Context(UPDATE_MODMETODOLOGIA, $metodologia);
+					$contextMetodologia = $controller->action($context);
+	
+					if ($contextMetodologia->getEvent() === UPDATE_MODMETODOLOGIA_OK) {
+	
+						$modAsignatura=new ModAsignatura($datos['idAsignatura'],date("Y-m-d H:i:s"),$_SESSION['idUsuario'],$datos['idAsignatura']);
+						$context =new Context(UPDATE_MODASIGNATURA,$modAsignatura);
+						$contextModAsignatura = $controller->action($context);
+						$erroresFormulario = "indexAcceso.php?IdGrado=" .$datos['idGrado']. "&IdAsignatura=".$datos['idAsignatura']."&modificado=y#nav-metodologia";
+	
+					} elseif ($contextMetodologia->getEvent() === UPDATE_MODMETODOLOGIA_FAIL){
+						$erroresFormulario[] = "No se ha podido modificar la metodología";
+					}
 				}
+				
 			}elseif($contextMetodologia->getEvent() === FIND_MODMETODOLOGIA_FAIL){
 
 				$metodologia = new ModMetodologia(null, $metodologia, $metodologiaI, $datos['idAsignatura']);

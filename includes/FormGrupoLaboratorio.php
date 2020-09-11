@@ -72,19 +72,23 @@ class FormGrupoLaboratorio extends Form
 			$contextGrupoLaboratorio = $controller->action($context);
 
 			if ($contextGrupoLaboratorio->getEvent() === FIND_MODGRUPO_LABORATORIO_OK) {
-
-				$grupoLaboratorio = new ModGrupoLaboratorio($datos['idGrupoLaboratorio'], $letra, $idioma, $datos['idAsignatura']);
-				$context = new Context(UPDATE_MODGRUPO_LABORATORIO, $grupoLaboratorio);
-				$contextGrupoLaboratorio = $controller->action($context);
-
-				if ($contextGrupoLaboratorio->getEvent() === UPDATE_MODGRUPO_LABORATORIO_OK) {
-					$modAsignatura = new ModAsignatura($datos['idAsignatura'], date("Y-m-d H:i:s"), $_SESSION['idUsuario'], $datos['idAsignatura']);
-					$context = new Context(UPDATE_MODASIGNATURA, $modAsignatura);
-					$contextModAsignatura = $controller->action($context);
+				if($letra === $contextGrupoLaboratorio->getData()->getLetra() && $idioma === $contextGrupoLaboratorio->getData()->getIdioma()){
 					$erroresFormulario = "indexAcceso.php?IdGrado=" . $datos['idGrado'] . "&IdAsignatura=" . $datos['idAsignatura'] . "&modificado=y#nav-grupo-laboratorio";
-				} elseif ($contextGrupoLaboratorio->getEvent() === UPDATE_MODGRUPO_LABORATORIO_FAIL) {
-					$erroresFormulario[] = "No se ha podido modificar el grupo";
+				}else{
+					$grupoLaboratorio = new ModGrupoLaboratorio($datos['idGrupoLaboratorio'], $letra, $idioma, $datos['idAsignatura']);
+					$context = new Context(UPDATE_MODGRUPO_LABORATORIO, $grupoLaboratorio);
+					$contextGrupoLaboratorio = $controller->action($context);
+	
+					if ($contextGrupoLaboratorio->getEvent() === UPDATE_MODGRUPO_LABORATORIO_OK) {
+						$modAsignatura = new ModAsignatura($datos['idAsignatura'], date("Y-m-d H:i:s"), $_SESSION['idUsuario'], $datos['idAsignatura']);
+						$context = new Context(UPDATE_MODASIGNATURA, $modAsignatura);
+						$contextModAsignatura = $controller->action($context);
+						$erroresFormulario = "indexAcceso.php?IdGrado=" . $datos['idGrado'] . "&IdAsignatura=" . $datos['idAsignatura'] . "&modificado=y#nav-grupo-laboratorio";
+					} elseif ($contextGrupoLaboratorio->getEvent() === UPDATE_MODGRUPO_LABORATORIO_FAIL) {
+						$erroresFormulario[] = "No se ha podido modificar el grupo";
+					}
 				}
+				
 			} elseif ($contextGrupoLaboratorio->getEvent() === FIND_MODGRUPO_LABORATORIO_FAIL) {
 
 				$grupoLaboratorio = new ModGrupoLaboratorio(null, $letra, $idioma, $datos['idAsignatura']);

@@ -72,19 +72,23 @@ class FormGrupoClase extends Form
 			$contextGrupoClase = $controller->action($context);
 
 			if ($contextGrupoClase->getEvent() === FIND_MODGRUPO_CLASE_OK) {
-
-				$grupoClase = new ModGrupoClase($datos['idGrupoClase'], $letra, $idioma, $datos['idAsignatura']);
-				$context = new Context(UPDATE_MODGRUPO_CLASE, $grupoClase);
-				$contextGrupoClase = $controller->action($context);
-
-				if ($contextGrupoClase->getEvent() === UPDATE_MODGRUPO_CLASE_OK) {
-					$modAsignatura = new ModAsignatura($datos['idAsignatura'], date("Y-m-d H:i:s"), $_SESSION['idUsuario'], $datos['idAsignatura']);
-					$context = new Context(UPDATE_MODASIGNATURA, $modAsignatura);
-					$contextModAsignatura = $controller->action($context);
+				if($letra === $contextGrupoClase->getData()->getLetra() && $idioma === $contextGrupoClase->getData()->getIdioma() ){
 					$erroresFormulario = "indexAcceso.php?IdGrado=" . $datos['idGrado'] . "&IdAsignatura=" . $datos['idAsignatura'] . "&modificado=y#nav-grupo-clase";
-				} elseif ($contextGrupoClase->getEvent() === UPDATE_MODGRUPO_CLASE_FAIL) {
-					$erroresFormulario[] = "No se ha podido modificar el grupo";
+				}else{
+					$grupoClase = new ModGrupoClase($datos['idGrupoClase'], $letra, $idioma, $datos['idAsignatura']);
+					$context = new Context(UPDATE_MODGRUPO_CLASE, $grupoClase);
+					$contextGrupoClase = $controller->action($context);
+	
+					if ($contextGrupoClase->getEvent() === UPDATE_MODGRUPO_CLASE_OK) {
+						$modAsignatura = new ModAsignatura($datos['idAsignatura'], date("Y-m-d H:i:s"), $_SESSION['idUsuario'], $datos['idAsignatura']);
+						$context = new Context(UPDATE_MODASIGNATURA, $modAsignatura);
+						$contextModAsignatura = $controller->action($context);
+						$erroresFormulario = "indexAcceso.php?IdGrado=" . $datos['idGrado'] . "&IdAsignatura=" . $datos['idAsignatura'] . "&modificado=y#nav-grupo-clase";
+					} elseif ($contextGrupoClase->getEvent() === UPDATE_MODGRUPO_CLASE_FAIL) {
+						$erroresFormulario[] = "No se ha podido modificar el grupo";
+					}
 				}
+				
 			} elseif ($contextGrupoClase->getEvent() === FIND_MODGRUPO_CLASE_FAIL) {
 
 				$grupoClase = new ModGrupoClase(null, $letra, $idioma, $datos['idAsignatura']);
