@@ -29,16 +29,13 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
             <?php
             if (isset($_SESSION['login']) && $_SESSION['login'] === true) {
 
-                if (isset($_GET['IdAsignatura']) || isset($_GET['IdModAsignatura'])) {
-                    if (isset($_GET['IdAsignatura'])) {
-                        $name = 'IdAsignatura';
-                    } else {
-                        $name = 'IdModAsignatura';
-                    }
+                if (isset($_GET['IdModAsignatura']) && isset($_GET['IdGrado'])) {
+                    $IdAsignatura = htmlspecialchars(trim(strip_tags($_GET['IdModAsignatura'])));
+                    $IdGrado = htmlspecialchars(trim(strip_tags($_GET['IdGrado'])));
 
-                    if ((isset($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET[$name]]['coordinacion']) && $_SESSION['asignaturas'][$_GET['IdGrado']][$_GET[$name]]['coordinacion'] == true) || (isset($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET[$name]]['permisos']) && unserialize($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET[$name]]['permisos'])->getPermisoMetodologia() == true)) {
+                    if ((isset($_SESSION['asignaturas'][$IdGrado][$IdAsignatura]['coordinacion']) && $_SESSION['asignaturas'][$IdGrado][$IdAsignatura]['coordinacion'] == true) || (isset($_SESSION['asignaturas'][$IdGrado][$IdAsignatura]['permisos']) && unserialize($_SESSION['asignaturas'][$IdGrado][$IdAsignatura]['permisos'])->getPermisoMetodologia() == true)) {
                         $controller = new es\ucm\ControllerImplements();
-                        $context = new es\ucm\Context(FIND_CONFIGURACION, htmlspecialchars(trim(strip_tags($_GET[$name]))));
+                        $context = new es\ucm\Context(FIND_CONFIGURACION, $IdAsignatura);
                         $contextConfiguacion = $controller->action($context);
 
                         if ($contextConfiguacion->getEvent() === FIND_CONFIGURACION_OK && $contextConfiguacion->getData()->getMetodologia() == 1) {
@@ -51,41 +48,29 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                     <div class="card-body text-center">
                                         <?php
                                         if (isset($_GET['Confirmacion']) && $_GET['Confirmacion'] === 'y') {
-                                            if (isset($_GET['IdAsignatura'])) {
-                                                //$context = new es\ucm\Context(FIND_METODOLOGIA, htmlspecialchars(trim(strip_tags($_GET[$name]))));
-                                                header('Location: indexAcceso.php?IdGrado=' . $_GET['IdGrado'] . '&IdAsignatura=' . $_GET[$name] . '');
-                                            } else {
-                                                $context = new es\ucm\Context(FIND_MODMETODOLOGIA, htmlspecialchars(trim(strip_tags($_GET[$name]))));
-                                            }
+                                            
+                                            $context = new es\ucm\Context(FIND_MODMETODOLOGIA, $IdAsignatura);
                                             $contextMetodologia = $controller->action($context);
 
                                             if ($contextMetodologia->getEvent() === FIND_MODMETODOLOGIA_OK) {
-                                                $context = new es\ucm\Context(DELETE_MODMETODOLOGIA, htmlspecialchars(trim(strip_tags($_GET[$name]))));
+                                                $context = new es\ucm\Context(DELETE_MODMETODOLOGIA, $IdAsignatura);
                                                 $contextMetodologia = $controller->action($context);
                                                 if ($contextMetodologia->getEvent() === DELETE_MODMETODOLOGIA_OK) {
-                                                    header('Location: indexAcceso.php?IdGrado=' . $_GET['IdGrado'] . '&IdAsignatura=' . $_GET[$name] . '&eliminado=y');
+                                                    header('Location: indexAcceso.php?IdGrado=' . $IdGrado . '&IdAsignatura=' . $IdAsignatura . '&eliminado=y');
                                                 } elseif ($contextMetodologia->getEvent() === DELETE_MODMETODOLOGIA_FAIL) {
-                                                    header('Location: indexAcceso.php?IdGrado=' . $_GET['IdGrado'] . '&IdAsignatura=' . $_GET[$name] . '&eliminado=n');
-                                                }
-                                            } elseif ($contextMetodologia->getEvent() === FIND_METODOLOGIA_OK) {
-                                                $context = new es\ucm\Context(DELETE_METODOLOGIA, htmlspecialchars(trim(strip_tags($_GET[$name]))));
-                                                $contextMetodologia = $controller->action($context);
-                                                if ($contextMetodologia->getEvent() === DELETE_METODOLOGIA_OK) {
-                                                    header('Location: indexAcceso.php?IdGrado=' . $_GET['IdGrado'] . '&IdAsignatura=' . $_GET[$name] . '&eliminado=y');
-                                                } elseif ($contextMetodologia->getEvent() === DELETE_METODOLOGIA_FAIL) {
-                                                    header('Location: indexAcceso.php?IdGrado=' . $_GET['IdGrado'] . '&IdAsignatura=' . $_GET[$name] . '&eliminado=n');
+                                                    header('Location: indexAcceso.php?IdGrado=' . $IdGrado . '&IdAsignatura=' . $IdAsignatura . '&eliminado=n');
                                                 }
                                             }
                                         } else {
                                             ?>
                                             ¿Estás seguro de que quieres borrar el borrador de la metodología?
                                             <div class="text-center">
-                                              <a href="indexAcceso.php?IdGrado=<?php echo $_GET['IdGrado'] ; ?>&IdAsignatura=<?php echo $_GET[$name]; ?>">
+                                              <a href="indexAcceso.php?IdGrado=<?php echo $IdGrado ; ?>&IdAsignatura=<?php echo $IdAsignatura; ?>">
                                                 <button type="button" class="btn btn-secondary" id="btn-form">
                                                     Cancelar
                                                 </button>
                                             </a>
-                                            <a href="borrarMetodologia.php?IdGrado=<?php echo $_GET['IdGrado']; ?>&IdModAsignatura=<?php echo $_GET[$name]; ?>&Confirmacion=y">
+                                            <a href="borrarMetodologia.php?IdGrado=<?php echo $IdGrado; ?>&IdModAsignatura=<?php echo $IdAsignatura; ?>&Confirmacion=y">
                                                 <button type="button" class="btn btn-success" id="btn-form">
                                                     Aceptar
                                                 </button>

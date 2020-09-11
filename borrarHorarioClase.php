@@ -29,9 +29,12 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
             <?php
             if (isset($_SESSION['login']) && $_SESSION['login'] === true) {
 
-                if ((isset($_GET['IdAsignatura']) && isset($_GET['IdGrupoClase'])) || (isset($_GET['IdAsignatura']) && isset($_GET['IdHorarioClase']))) {
+                if (isset($_GET['IdGrado']) && isset($_GET['IdAsignatura']) && isset($_GET['IdHorarioClase'])) {
 
-                    if ((isset($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET['IdAsignatura']]['coordinacion']) && $_SESSION['asignaturas'][$_GET['IdGrado']][$_GET['IdAsignatura']]['coordinacion'] == true) || (isset($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET['IdAsignatura']]['permisos']) && unserialize($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET['IdAsignatura']]['permisos'])->getPermisoGrupoclase() == true)) {
+                    $IdAsignatura = htmlspecialchars(trim(strip_tags($_GET['IdAsignatura'])));
+                    $IdGrado = htmlspecialchars(trim(strip_tags($_GET['IdGrado'])));
+                    $IdHorarioClase = htmlspecialchars(trim(strip_tags($_GET['IdHorarioClase'])));
+                    if ((isset($_SESSION['asignaturas'][$IdGrado][$IdAsignatura]['coordinacion']) && $_SESSION['asignaturas'][$IdGrado][$IdAsignatura]['coordinacion'] == true) || (isset($_SESSION['asignaturas'][$IdGrado][$IdAsignatura]['permisos']) && unserialize($_SESSION['asignaturas'][$IdGrado][$IdAsignatura]['permisos'])->getPermisoGrupoclase() == true)) {
 
                         ?>
                         <div class="col-md-6 col-12">
@@ -44,29 +47,29 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                     if (isset($_GET['Confirmacion']) && $_GET['Confirmacion'] === 'y') {
                                         $controller = new es\ucm\ControllerImplements();
 
-                                        if (isset($_GET['IdHorarioClase'])) {
-                                            $context = new es\ucm\Context(FIND_MODHORARIO_CLASE, htmlspecialchars(trim(strip_tags($_GET['IdHorarioClase']))));
+                                        
+                                            $context = new es\ucm\Context(FIND_MODHORARIO_CLASE, $IdHorarioClase);
                                             $contextHorarioClase = $controller->action($context);
                                             if ($contextHorarioClase->getEvent() === FIND_MODHORARIO_CLASE_OK) {
-                                                $context = new es\ucm\Context(DELETE_MODHORARIO_CLASE, htmlspecialchars(trim(strip_tags($_GET['IdHorarioClase']))));
+                                                $context = new es\ucm\Context(DELETE_MODHORARIO_CLASE, $IdHorarioClase);
                                                 $contextHorarioClase = $controller->action($context);
                                                 if ($contextHorarioClase->getEvent() === DELETE_MODHORARIO_CLASE_OK) {
-                                                    header('Location: indexAcceso.php?IdGrado=' . $_GET['IdGrado'] . '&IdAsignatura=' . $_GET['IdAsignatura'] . '&eliminado=y');
+                                                    header('Location: indexAcceso.php?IdGrado=' . $IdGrado . '&IdAsignatura=' . $IdAsignatura . '&eliminado=y');
                                                 } elseif ($contextHorarioClase->getEvent() === DELETE_MODHORARIO_CLASE_FAIL) {
-                                                    header('Location: indexAcceso.php?IdGrado=' . $_GET['IdGrado'] . '&IdAsignatura=' . $_GET['IdAsignatura'] . '&eliminado=n');
+                                                    header('Location: indexAcceso.php?IdGrado=' . $IdGrado . '&IdAsignatura=' . $IdAsignatura . '&eliminado=n');
                                                 }
                                             }
-                                        }
+                                        
                                     } else {
                                         ?>
                                         ¿Estás seguro de que quieres borrar el horario del grupo de clase?
                                         <div class="text-center">
-                                           <a href="indexAcceso.php?IdGrado=<?php echo $_GET['IdGrado']; ?>&IdAsignatura=<?php echo $_GET['IdAsignatura']; ?>">
+                                           <a href="indexAcceso.php?IdGrado=<?php echo $IdGrado; ?>&IdAsignatura=<?php echo $IdAsignatura; ?>">
                                             <button type="button" class="btn btn-secondary" id="btn-form">
                                                 Cancelar
                                             </button>
                                         </a>
-                                        <a href="borrarHorarioClase.php?IdGrado=<?php echo $_GET['IdGrado']; ?>&IdAsignatura=<?php echo $_GET['IdAsignatura']; ?>&IdHorarioClase=<?php echo $_GET['IdHorarioClase']; ?>&Confirmacion=y">
+                                        <a href="borrarHorarioClase.php?IdGrado=<?php echo $IdGrado; ?>&IdAsignatura=<?php echo $IdAsignatura; ?>&IdHorarioClase=<?php echo $IdHorarioClase; ?>&Confirmacion=y">
                                             <button type="button" class="btn btn-success" id="btn-form">
                                                 Aceptar
                                             </button>

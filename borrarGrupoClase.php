@@ -29,9 +29,12 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
             <?php
             if (isset($_SESSION['login']) && $_SESSION['login'] === true) {
 
-                if (isset($_GET['IdAsignatura']) || (isset($_GET['IdGrupoClase']) && isset($_GET['IdAsignatura']))) {
+                if (isset($_GET['IdGrado']) && isset($_GET['IdGrupoClase']) && isset($_GET['IdAsignatura'])) {
 
-                    if ((isset($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET['IdAsignatura']]['coordinacion']) && $_SESSION['asignaturas'][$_GET['IdGrado']][$_GET['IdAsignatura']]['coordinacion'] == true) || (isset($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET['IdAsignatura']]['permisos']) && unserialize($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET['IdAsignatura']]['permisos'])->getPermisoGrupoClase() == true)) {
+                    $IdAsignatura = htmlspecialchars(trim(strip_tags($_GET['IdAsignatura'])));
+                    $IdGrado = htmlspecialchars(trim(strip_tags($_GET['IdGrado'])));
+                    $IdGrupoClase = htmlspecialchars(trim(strip_tags($_GET['IdGrupoClase'])));
+                    if ((isset($_SESSION['asignaturas'][$IdGrado][$IdAsignatura]['coordinacion']) && $_SESSION['asignaturas'][$IdGrado][$IdAsignatura]['coordinacion'] == true) || (isset($_SESSION['asignaturas'][$IdGrado][$IdAsignatura]['permisos']) && unserialize($_SESSION['asignaturas'][$IdGrado][$IdAsignatura]['permisos'])->getPermisoGrupoClase() == true)) {
             ?>
                         <div class="col-md-6 col-12">
                             <div class="card ">
@@ -43,64 +46,62 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                     if (isset($_GET['Confirmacion']) && $_GET['Confirmacion'] === 'y') {
                                         $controller = new es\ucm\ControllerImplements();
 
-                                        if (isset($_GET['IdGrupoClase'])) {
-                                            $context = new es\ucm\Context(FIND_MODGRUPO_CLASE, htmlspecialchars(trim(strip_tags($_GET['IdGrupoClase']))));
+                                        $context = new es\ucm\Context(FIND_MODGRUPO_CLASE, $IdGrupoClase);
+                                        $contextModGrupoClase = $controller->action($context);
+                                        if ($contextModGrupoClase->getEvent() === FIND_MODGRUPO_CLASE_OK) {
+                                            $context = new es\ucm\Context(LIST_MODHORARIO_CLASE, $IdGrupoClase);
+                                            $contextHorariosClase = $controller->action($context);
+                                            if ($contextHorariosClase->getEvent() === LIST_MODHORARIO_CLASE_OK) {
+                                                foreach ($contextHorariosClase->getData() as $horarioClase) {
+                                                    $context = new es\ucm\Context(DELETE_MODHORARIO_CLASE, $horarioClase->getIdHorarioClase());
+                                                    $horarioClase = $controller->action($context);
+                                                }
+                                            }
+
+                                            $context = new es\ucm\Context(LIST_MODGRUPO_CLASE_PROFESOR, $IdGrupoClase);
+                                            $contextGrupoClaseProfesor = $controller->action($context);
+                                            if ($contextGrupoClaseProfesor->getEvent() === LIST_MODGRUPO_CLASE_PROFESOR_OK) {
+                                                foreach ($contextGrupoClaseProfesor->getData() as $grupoClaseProfesor) {
+                                                    $arrayGrupoClaseProfesor = array();
+                                                    $arrayGrupoClaseProfesor['idGrupoClase'] = $grupoClaseProfesor->getIdGrupoClase();
+                                                    $arrayGrupoClaseProfesor['emailProfesor'] = $grupoClaseProfesor->getEmailProfesor();
+                                                    $context = new es\ucm\Context(DELETE_MODGRUPO_CLASE_PROFESOR, $arrayGrupoClaseProfesor);
+                                                    $contextHorarioClase = $controller->action($context);
+                                                }
+                                            }
+
+
+
+                                            $context = new es\ucm\Context(FIND_MODGRUPO_CLASE, $IdGrupoClase);
                                             $contextModGrupoClase = $controller->action($context);
                                             if ($contextModGrupoClase->getEvent() === FIND_MODGRUPO_CLASE_OK) {
-                                                $context = new es\ucm\Context(LIST_MODHORARIO_CLASE, htmlspecialchars(trim(strip_tags($_GET['IdGrupoClase']))));
-                                                $contextHorariosClase = $controller->action($context);
-                                                if ($contextHorariosClase->getEvent() === LIST_MODHORARIO_CLASE_OK) {
-                                                    foreach ($contextHorariosClase->getData() as $horarioClase) {
-                                                        $context = new es\ucm\Context(DELETE_MODHORARIO_CLASE, $horarioClase->getIdHorarioClase());
-                                                        $horarioClase = $controller->action($context);
-                                                    }
-                                                }
-
-                                                $context = new es\ucm\Context(LIST_MODGRUPO_CLASE_PROFESOR, htmlspecialchars(trim(strip_tags($_GET['IdGrupoClase']))));
-                                                $contextGrupoClaseProfesor = $controller->action($context);
-                                                if ($contextGrupoClaseProfesor->getEvent() === LIST_MODGRUPO_CLASE_PROFESOR_OK) {
-                                                    foreach ($contextGrupoClaseProfesor->getData() as $grupoClaseProfesor) {
-                                                        $arrayGrupoClaseProfesor = array();
-                                                        $arrayGrupoClaseProfesor['idGrupoClase'] = $grupoClaseProfesor->getIdGrupoClase();
-                                                        $arrayGrupoClaseProfesor['emailProfesor'] = $grupoClaseProfesor->getEmailProfesor();
-                                                        $context = new es\ucm\Context(DELETE_MODGRUPO_CLASE_PROFESOR, $arrayGrupoClaseProfesor);
-                                                        $contextHorarioClase = $controller->action($context);
-                                                    }
-                                                }
-
-
-
-                                                $context = new es\ucm\Context(FIND_MODGRUPO_CLASE, htmlspecialchars(trim(strip_tags($_GET['IdGrupoClase']))));
+                                                $context = new es\ucm\Context(DELETE_MODGRUPO_CLASE, $IdGrupoClase);
                                                 $contextModGrupoClase = $controller->action($context);
-                                                if ($contextModGrupoClase->getEvent() === FIND_MODGRUPO_CLASE_OK) {
-                                                    $context = new es\ucm\Context(DELETE_MODGRUPO_CLASE, htmlspecialchars(trim(strip_tags($_GET['IdGrupoClase']))));
-                                                    $contextModGrupoClase = $controller->action($context);
-                                                    if ($contextModGrupoClase->getEvent() === DELETE_MODGRUPO_CLASE_OK) {
-                                                        header('Location: indexAcceso.php?IdGrado=' . $_GET['IdGrado'] . '&IdAsignatura=' . $_GET['IdAsignatura'] . '&eliminado=y');
-                                                    } elseif ($contextModGrupoClase->getEvent() === DELETE_MODGRUPO_CLASE_FAIL) {
-                                                        header('Location: indexAcceso.php?IdGrado=' . $_GET['IdGrado'] . '&IdAsignatura=' . $_GET['IdAsignatura'] . '&eliminado=n');
-                                                    }
+                                                if ($contextModGrupoClase->getEvent() === DELETE_MODGRUPO_CLASE_OK) {
+                                                    header('Location: indexAcceso.php?IdGrado=' . $IdGrado . '&IdAsignatura=' . $IdAsignatura . '&eliminado=y');
+                                                } elseif ($contextModGrupoClase->getEvent() === DELETE_MODGRUPO_CLASE_FAIL) {
+                                                    header('Location: indexAcceso.php?IdGrado=' . $IdGrado . '&IdAsignatura=' . $IdAsignatura . '&eliminado=n');
                                                 }
                                             }
                                         }
                                     } else {
-                                        ?>
-                                            ¿Estás seguro de que quieres borrar el grupo de clase?
-                                            <div class="text-center">
-                                                 <a href="indexAcceso.php?IdGrado=<?php echo $_GET['IdGrado']; ?>&IdAsignatura=<?php echo $_GET['IdAsignatura']; ?>">
-                                                    <button type="button" class="btn btn-secondary" id="btn-form">
-                                                        Cancelar
-                                                    </button>
-                                                </a>
-                                                <a href="borrarGrupoClase.php?IdGrado=<?php echo $_GET['IdGrado']; ?>&IdAsignatura=<?php echo $_GET['IdAsignatura']; ?>&IdGrupoClase=<?php echo $_GET['IdGrupoClase']; ?>&Confirmacion=y">
-                                                    <button type="button" class="btn btn-success" id="btn-form">
-                                                        Aceptar
-                                                    </button>
+                                    ?>
+                                        ¿Estás seguro de que quieres borrar el grupo de clase?
+                                        <div class="text-center">
+                                            <a href="indexAcceso.php?IdGrado=<?php echo $IdGrado; ?>&IdAsignatura=<?php echo $IdAsignatura; ?>">
+                                                <button type="button" class="btn btn-secondary" id="btn-form">
+                                                    Cancelar
+                                                </button>
+                                            </a>
+                                            <a href="borrarGrupoClase.php?IdGrado=<?php echo $IdGrado; ?>&IdAsignatura=<?php echo $IdAsignatura; ?>&IdGrupoClase=<?php echo $IdGrupoClase; ?>&Confirmacion=y">
+                                                <button type="button" class="btn btn-success" id="btn-form">
+                                                    Aceptar
+                                                </button>
 
-                                                </a>
-                                               
-                                            </div>
-                                        <?php
+                                            </a>
+
+                                        </div>
+                                    <?php
                                     }
 
                                     ?>

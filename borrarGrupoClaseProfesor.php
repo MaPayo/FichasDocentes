@@ -29,10 +29,15 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
             <?php
             if (isset($_SESSION['login']) && $_SESSION['login'] === true) {
 
-                if (isset($_GET['IdGrupoClase']) && isset($_GET['IdAsignatura'])) {
+                if (isset($_GET['IdGrupoClase']) && isset($_GET['IdGrado']) && isset($_GET['IdAsignatura']) && isset($_GET['EmailProfesor'])) {
 
-                    if ((isset($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET['IdAsignatura']]['coordinacion']) && $_SESSION['asignaturas'][$_GET['IdGrado']][$_GET['IdAsignatura']]['coordinacion'] == true) || (isset($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET['IdAsignatura']]['permisos']) && unserialize($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET['IdAsignatura']]['permisos'])->getPermisoGrupoClase() == true)) {
-                        ?>
+                    $IdAsignatura = htmlspecialchars(trim(strip_tags($_GET['IdAsignatura'])));
+                    $IdGrado = htmlspecialchars(trim(strip_tags($_GET['IdGrado'])));
+                    $IdGrupoClase = htmlspecialchars(trim(strip_tags($_GET['IdGrupoClase'])));
+                    $EmailProfesor = htmlspecialchars(trim(strip_tags($_GET['EmailProfesor'])));
+
+                    if ((isset($_SESSION['asignaturas'][$IdGrado][$IdAsignatura]['coordinacion']) && $_SESSION['asignaturas'][$IdGrado][$IdAsignatura]['coordinacion'] == true) || (isset($_SESSION['asignaturas'][$IdGrado][$IdAsignatura]['permisos']) && unserialize($_SESSION['asignaturas'][$IdGrado][$IdAsignatura]['permisos'])->getPermisoGrupoClase() == true)) {
+            ?>
                         <div class="col-md-6 col-12">
                             <div class="card ">
                                 <div class="card-header text-center">
@@ -42,39 +47,36 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                     <?php
                                     if (isset($_GET['Confirmacion']) && $_GET['Confirmacion'] === 'y') {
                                         $controller = new es\ucm\ControllerImplements();
-
-                                        if (isset($_GET['IdGrupoClase']) && isset($_GET['EmailProfesor'])) {
-                                            $arrayGrupoClaseProfesor = array();
-                                            $arrayGrupoClaseProfesor['idGrupoClase'] = htmlspecialchars(trim(strip_tags($_GET['IdGrupoClase'])));
-                                            $arrayGrupoClaseProfesor['emailProfesor'] = htmlspecialchars(trim(strip_tags($_GET['EmailProfesor'])));
-                                            $context = new es\ucm\Context(FIND_MODGRUPO_CLASE_PROFESOR, $arrayGrupoClaseProfesor);
+                                        $arrayGrupoClaseProfesor = array();
+                                        $arrayGrupoClaseProfesor['idGrupoClase'] = $IdGrupoClase;
+                                        $arrayGrupoClaseProfesor['emailProfesor'] = $EmailProfesor;
+                                        $context = new es\ucm\Context(FIND_MODGRUPO_CLASE_PROFESOR, $arrayGrupoClaseProfesor);
+                                        $contextGrupoClaseProfesor = $controller->action($context);
+                                        if ($contextGrupoClaseProfesor->getEvent() === FIND_MODGRUPO_CLASE_PROFESOR_OK) {
+                                            $context = new es\ucm\Context(DELETE_MODGRUPO_CLASE_PROFESOR, $arrayGrupoClaseProfesor);
                                             $contextGrupoClaseProfesor = $controller->action($context);
-                                            if ($contextGrupoClaseProfesor->getEvent() === FIND_MODGRUPO_CLASE_PROFESOR_OK) {
-                                                $context = new es\ucm\Context(DELETE_MODGRUPO_CLASE_PROFESOR, $arrayGrupoClaseProfesor);
-                                                $contextGrupoClaseProfesor = $controller->action($context);
-                                                if ($contextGrupoClaseProfesor->getEvent() === DELETE_MODGRUPO_CLASE_PROFESOR_OK) {
-                                                    header('Location: indexAcceso.php?IdGrado=' . $_GET['IdGrado'] . '&IdAsignatura=' . $_GET['IdAsignatura'] . '&eliminado=y');
-                                                } elseif ($contextGrupoClaseProfesor->getEvent() === DELETE_MODGRUPO_CLASE_PROFESOR_FAIL) {
-                                                    header('Location: indexAcceso.php?IdGrado=' . $_GET['IdGrado'] . '&IdAsignatura=' . $_GET['IdAsignatura'] . '&eliminado=n');
-                                                }
+                                            if ($contextGrupoClaseProfesor->getEvent() === DELETE_MODGRUPO_CLASE_PROFESOR_OK) {
+                                                header('Location: indexAcceso.php?IdGrado=' . $IdGrado . '&IdAsignatura=' . $IdAsignatura . '&eliminado=y');
+                                            } elseif ($contextGrupoClaseProfesor->getEvent() === DELETE_MODGRUPO_CLASE_PROFESOR_FAIL) {
+                                                header('Location: indexAcceso.php?IdGrado=' . $IdGrado . '&IdAsignatura=' . $IdAsignatura . '&eliminado=n');
                                             }
                                         }
                                     } else {
-                                        ?>
+                                    ?>
                                         ¿Estas seguro de que quieres borrar el profesor del grupo de clase?
                                         <div class="text-center">
-                                            <a href="indexAcceso.php?IdGrado=<?php echo $_GET['IdGrado']; ?>&IdAsignatura=<?php echo $_GET['IdAsignatura']; ?>">
+                                            <a href="indexAcceso.php?IdGrado=<?php echo $IdGrado; ?>&IdAsignatura=<?php echo $IdAsignatura; ?>">
                                                 <button type="button" class="btn btn-secondary" id="btn-form">
                                                     Cancelar
                                                 </button>
                                             </a>
-                                            <a href="borrarGrupoClaseProfesor.php?IdGrado=<?php echo $_GET['IdGrado']; ?>&IdAsignatura=<?php echo $_GET['IdAsignatura']; ?>&IdGrupoClase=<?php echo $_GET['IdGrupoClase']; ?>&EmailProfesor=<?php echo $_GET['EmailProfesor']; ?>&Confirmacion=y">
+                                            <a href="borrarGrupoClaseProfesor.php?IdGrado=<?php echo $IdGrado; ?>&IdAsignatura=<?php echo $IdAsignatura; ?>&IdGrupoClase=<?php echo $IdGrupoClase; ?>&EmailProfesor=<?php echo $EmailProfesor; ?>&Confirmacion=y">
                                                 <button type="button" class="btn btn-success" id="btn-form">
                                                     Aceptar
                                                 </button>
-                                            </a>  
+                                            </a>
                                         </div>
-                                        <?php
+                                    <?php
                                     }
 
 
@@ -82,7 +84,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                 </div>
                             </div>
                         </div>
-                        <?php
+            <?php
                     } else {
                         echo '
                         <div class="col-md-6 col-12">
