@@ -1840,7 +1840,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                                             echo '<tr scope="row">
                                                                                                             <td>' . $horario->getLaboratorio() . '</td>
                                                                                                             <td>' . $horario->getDia() . '</td>
-                                                                                                            <td>' . $horario->getHoraInicio() . '-' . $horario->getHoraFin() . '</td>';
+                                                                                                            <td>' . date("H:i", strtotime($horario->getHoraInicio())) . ' - ' . date("H:i", strtotime($horario->getHoraFin())) . '</td>';
 
                                                                                                             if ($contextAsignatura->getData()->getEstado() === "B" && ($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['coordinacion'] == true || unserialize($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['permisos'])->getPermisoGrupoLaboratorio() == true)) {
                                                                                                                 echo '<td> <a href="horarioLaboratorio.php?IdGrado=' . $contextGrado->getData()->getCodigoGrado() . '&IdHorarioLaboratorio=' . $horario->getIdHorarioLab() . '&IdAsignatura=' . $grupo->getIdAsignatura() . '">
@@ -1941,7 +1941,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                                                     echo '<tr scope="row">
                                                                                                                     <td>' . $horario->getLaboratorio() . '</td>
                                                                                                                     <td>' . $horario->getDia() . '</td>
-                                                                                                                    <td>' . $horario->getHoraInicio() . '-' . $horario->getHoraFin() . '</td>
+                                                                                                                    <td>' . date("H:i", strtotime($horario->getHoraInicio())) . ' - ' . date("H:i", strtotime($horario->getHoraFin())) . '</td>
 
                                                                                                                     </tr>';
                                                                                                                 }
@@ -2094,7 +2094,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                                                         echo '<tr scope="row">
                                                                                                                         <td>' . $horario->getAula() . '</td>
                                                                                                                         <td>' . $horario->getDia() . '</td>
-                                                                                                                        <td>' . $horario->getHoraInicio() . '-' . $horario->getHoraFin() . '</td>';
+                                                                                                                        <td>' . date("H:i", strtotime($horario->getHoraInicio())) . ' - ' . date("H:i", strtotime($horario->getHoraFin())) . '</td>';
                                                                                                                         if ($contextAsignatura->getData()->getEstado() === "B" && ($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['coordinacion'] == true || unserialize($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['permisos'])->getPermisoGrupoClase() == true)) {
                                                                                                                             echo '<td> <a href="horarioClase.php?IdGrado=' . $contextGrado->getData()->getCodigoGrado() . '&IdHorarioClase=' . $horario->getIdHorarioClase() . '&IdAsignatura=' . $contextAsignatura->getData()->getIdAsignatura() . '">
                                                                                                                             <button type="button" class="btn btn-warning btn-sm" id="btn-form">
@@ -2198,7 +2198,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                                                                 echo '<tr scope="row">
                                                                                                                                 <td>' . $horario->getAula() . '</td>
                                                                                                                                 <td>' . $horario->getDia() . '</td>
-                                                                                                                                <td>' . $horario->getHoraInicio() . '-' . $horario->getHoraFin() . '</td>
+                                                                                                                                <td>' . date("H:i", strtotime($horario->getHoraInicio())) . ' - ' . date("H:i", strtotime($horario->getHoraFin())) . '</td>
                                                                                                                                 </tr>';
                                                                                                                             }
                                                                                                                             ?>
