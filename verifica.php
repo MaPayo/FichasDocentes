@@ -30,12 +30,15 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
       <?php
       if (isset($_SESSION['login']) && $_SESSION['login'] === true) {
         if (isset($_GET['IdGrado']) && isset($_GET['IdAsignatura'])) {
-          if($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET['IdAsignatura']]['coordinacion'] == true){
+          $IdAsignatura = htmlspecialchars(trim(strip_tags($_GET['IdAsignatura'])));
+          $IdGrado = htmlspecialchars(trim(strip_tags($_GET['IdGrado'])));
+          
+          if(isset($_SESSION['asignaturas'][$IdGrado][$IdAsignatura]['coordinacion']) && $_SESSION['asignaturas'][$IdGrado][$IdAsignatura]['coordinacion'] == true){
 
            $controller = new es\ucm\ControllerImplements();
-           $context = new es\ucm\Context(FIND_ASIGNATURA, htmlspecialchars(trim(strip_tags($_GET['IdAsignatura']))));
+           $context = new es\ucm\Context(FIND_ASIGNATURA, $IdAsignatura);
            $asignatura = $controller->action($context);
-           $context = new es\ucm\Context(FIND_VERIFICA, htmlspecialchars(trim(strip_tags($_GET['IdAsignatura']))));
+           $context = new es\ucm\Context(FIND_VERIFICA, $IdAsignatura);
            $contextVerifica = $controller->action($context);
 
            if($contextVerifica->getEvent() === FIND_VERIFICA_OK){
@@ -56,10 +59,10 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                   $datosIniciales['minimoActividades'] = $contextVerifica->getData()->getMinimoActividades();
                   $datosIniciales['maximoLaboratorio'] = $contextVerifica->getData()->getMaximoLaboratorio();
                   $datosIniciales['minimoLaboratorio'] = $contextVerifica->getData()->getMinimoLaboratorio();
-                  $datosIniciales['IdAsignatura']=  htmlspecialchars(trim(strip_tags($_GET['IdAsignatura'])));
-                  $datosIniciales['IdGrado']=  htmlspecialchars(trim(strip_tags($_GET['IdGrado'])));
+                  $datosIniciales['IdAsignatura']=  $IdAsignatura;
+                  $datosIniciales['IdGrado']=  $IdGrado;
                   $access->gestionaModificacion($datosIniciales);
-           } //Find ok
+           }
 
            ?>
          </div>

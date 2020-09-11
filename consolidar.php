@@ -34,13 +34,15 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
       <?php
       if (isset($_SESSION['login']) && $_SESSION['login'] === true) {
         if (isset($_GET['IdAsignatura']) && isset($_GET['IdGrado'])) {
+          $IdAsignatura = htmlspecialchars(trim(strip_tags($_GET['IdAsignatura'])));
+          $IdGrado = htmlspecialchars(trim(strip_tags($_GET['IdGrado'])));
+
           $controller = new ControllerImplements();
-          $context = new Context(FIND_ASIGNATURA, $_GET['IdAsignatura']);
+          $context = new Context(FIND_ASIGNATURA, $IdAsignatura);
           $contextAsignatura = $controller->action($context);
 
-          if ($contextAsignatura->getEvent() === FIND_ASIGNATURA_OK && isset($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET['IdAsignatura']]['coordinacion']) && $_SESSION['asignaturas'][$_GET['IdGrado']][$_GET['IdAsignatura']]['coordinacion'] == true) {
+          if ($contextAsignatura->getEvent() === FIND_ASIGNATURA_OK && isset($_SESSION['asignaturas'][$IdGrado][$IdAsignatura]['coordinacion']) && $_SESSION['asignaturas'][$IdGrado][$IdAsignatura]['coordinacion'] == true) {
 
-            $IdAsignatura = htmlspecialchars(trim(strip_tags($_GET['IdAsignatura'])));
 
             $context = new Context(FIND_MODPROGRAMA_ASIGNATURA, $IdAsignatura);
             $contextModPrograma = $controller->action($context);
@@ -331,36 +333,36 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
             $res = $controller->action($context);
 
             if ($res->getEvent() === UPDATE_ASIGNATURA_OK) {
-              header('Location: indexAcceso.php?IdGrado=' . $_GET['IdGrado'] . '&IdAsignatura=' . $_GET['IdAsignatura'] . '&modificado=y');
+              header('Location: indexAcceso.php?IdGrado=' . $IdGrado . '&IdAsignatura=' . $IdAsignatura . '&modificado=y');
             } else {
-              header('Location: indexAcceso.php?IdGrado=' . $_GET['IdGrado'] . '&IdAsignatura=' . $_GET['IdAsignatura'] . '&modificado=n');
+              header('Location: indexAcceso.php?IdGrado=' . $IdGrado . '&IdAsignatura=' . $IdAsignatura . '&modificado=n');
             }
           } else {
             echo '
- <div class="col-md-6 col-12">
- <div class="alert alert-danger" role="alert">
- <h2 class="card-title text-center">ACCESO DENEGADO</h2>
- <h5 class="text-center">No tienes permisos suficientes para esta apartado</h5>
- </div>
- </div>';
+            <div class="col-md-6 col-12">
+            <div class="alert alert-danger" role="alert">
+            <h2 class="card-title text-center">ACCESO DENEGADO</h2>
+            <h5 class="text-center">No tienes permisos suficientes para esta apartado</h5>
+            </div>
+            </div>';
           }
         } else {
           echo '
-  <div class="col-md-6 col-12">
-  <div class="alert alert-danger" role="alert">
-  <h2 class="card-title text-center">ACCESO DENEGADO</h2>
-  <h5 class="text-center">No se ha podido obtener la información necesaria para realizar la operación</h5>
-  </div>
-  </div>';
+          <div class="col-md-6 col-12">
+          <div class="alert alert-danger" role="alert">
+          <h2 class="card-title text-center">ACCESO DENEGADO</h2>
+          <h5 class="text-center">No se ha podido obtener la información necesaria para realizar la operación</h5>
+          </div>
+          </div>';
         }
       } else {
         echo '
-  <div class="col-md-6 col-12">
-  <div class="alert alert-danger" role="alert">
-  <h2 class="card-title text-center">ACCESO DENEGADO</h2>
-  <h5 class="text-center">Inicia sesión con un usuario que pueda acceder a este contenido</h5>
-  </div>
-  </div>';
+        <div class="col-md-6 col-12">
+        <div class="alert alert-danger" role="alert">
+        <h2 class="card-title text-center">ACCESO DENEGADO</h2>
+        <h5 class="text-center">Inicia sesión con un usuario que pueda acceder a este contenido</h5>
+        </div>
+        </div>';
       }
       ?>
     </div>

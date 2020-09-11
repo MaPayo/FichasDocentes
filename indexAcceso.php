@@ -65,7 +65,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                     foreach ($_SESSION['asignaturas'][$codGrado] as $codAsig => $asignatura) {
                                         $context = new es\ucm\Context(FIND_ASIGNATURA, $codAsig);
                                         $as = $controller->action($context);
-                                        if ($codAsig == $_GET['IdAsignatura']) {
+                                        if (isset($_GET['IdAsignatura']) && $codAsig == htmlspecialchars(trim(strip_tags($_GET['IdAsignatura'])))) {
                                             $card = $card . '<p><a class="text-primary" href="indexAcceso.php?IdGrado=' . $codGrado . '&IdAsignatura=' . $codAsig . '">' . $as->getData()->getNombreAsignatura() . '</a></p>';
                                         } else {
                                             $card = $card . '<p><a href="indexAcceso.php?IdGrado=' . $codGrado . '&IdAsignatura=' . $codAsig . '">' . $as->getData()->getNombreAsignatura() . '</a></p>';
@@ -84,7 +84,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                 </div>
 
                 <?php
-                if (isset($_GET['IdAsignatura']) && isset($_GET['IdGrado']) && isset($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET['IdAsignatura']])) {
+                if (isset($_GET['IdAsignatura']) && isset($_GET['IdGrado']) && isset($_SESSION['asignaturas'][htmlspecialchars(trim(strip_tags($_GET['IdGrado'])))][htmlspecialchars(trim(strip_tags($_GET['IdAsignatura'])))])) {
                     $controller = new es\ucm\ControllerImplements();
 
                     $context = new es\ucm\Context(FIND_ASIGNATURA, htmlspecialchars(trim(strip_tags($_GET['IdAsignatura']))));

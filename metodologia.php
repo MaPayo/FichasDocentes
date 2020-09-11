@@ -29,105 +29,107 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
             <?php
             if (isset($_SESSION['login']) && $_SESSION['login'] === true) {
 
-                if(isset($_GET['IdAsignatura']) || isset($_GET['IdModAsignatura'])){
-                    if(isset($_GET['IdAsignatura'])){
-                        $name ='IdAsignatura';
-                    }
-                    else{
-                        $name = 'IdModAsignatura';
-                    }
+               if((isset($_GET['IdAsignatura']) || isset($_GET['IdModAsignatura'])) && isset($_GET['IdGrado'])){
+                  if(isset($_GET['IdAsignatura'])){
+                    $name ='IdAsignatura';
+                    $IdAsignatura = htmlspecialchars(trim(strip_tags($_GET['IdAsignatura'])));
+                }
+                else{
+                    $name = 'IdModAsignatura';
+                    $IdAsignatura = htmlspecialchars(trim(strip_tags($_GET['IdModAsignatura'])));
+                }
+                $IdGrado = htmlspecialchars(trim(strip_tags($_GET['IdGrado'])));
+                if((isset($_SESSION['asignaturas'][$IdGrado][$IdAsignatura]['coordinacion']) && $_SESSION['asignaturas'][$IdGrado][$IdAsignatura]['coordinacion'] == true) || (isset($_SESSION['asignaturas'][$IdGrado][$IdAsignatura]['permisos']) && unserialize($_SESSION['asignaturas'][$IdGrado][$IdAsignatura]['permisos'])->getPermisoMetodologia() == true)){
+                   $controller = new es\ucm\ControllerImplements();
+                   $context = new es\ucm\Context(FIND_CONFIGURACION, $IdAsignatura);
+                   $contextConfiguacion = $controller->action($context);
 
-                    if((isset($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET[$name]]['coordinacion']) && $_SESSION['asignaturas'][$_GET['IdGrado']][$_GET[$name]]['coordinacion'] == true) || (isset($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET[$name]]['permisos']) && unserialize($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET[$name]]['permisos'])->getPermisoMetodologia() == true)){
-                     $controller = new es\ucm\ControllerImplements();
-                     $context = new es\ucm\Context(FIND_CONFIGURACION, htmlspecialchars(trim(strip_tags($_GET[$name]))));
-                     $contextConfiguacion = $controller->action($context);
-
-                     if($contextConfiguacion->getEvent() === FIND_CONFIGURACION_OK && $contextConfiguacion->getData()->getMetodologia() == 1){
+                   if($contextConfiguacion->getEvent() === FIND_CONFIGURACION_OK && $contextConfiguacion->getData()->getMetodologia() == 1){
+                    ?>
+                    <div class="col-xl-6 col-lg-8 col-12">
+                        <div class="card ">
+                            <div class="card-header text-center">
+                             <?php if($name == "IdAsignatura"){
+                               echo'<h2>Crear el borrador de la metodología</h2>';
+                           }
+                           else{
+                            echo '<h2>Modificar el borrador de la metodología</h2>';
+                        }
                         ?>
-                        <div class="col-xl-6 col-lg-8 col-12">
-                            <div class="card ">
-                                <div class="card-header text-center">
-                                   <?php if($name == "IdAsignatura"){
-                                             echo'<h2>Crear el borrador de la metodología</h2>';
-                                        }
-                                        else{
-                                            echo '<h2>Modificar el borrador de la metodología</h2>';
-                                        }
-                                       ?>
-                                </div>
-                                <div class="card-body">
-                                    <?php
-                                    $access = new es\ucm\FormMetodologia('idMetodologia');
-                                    $datosIniciales= array();
-
-                                    if($name == "IdAsignatura"){
-                                        $context = new es\ucm\Context(FIND_METODOLOGIA, htmlspecialchars(trim(strip_tags($_GET[$name]))));
-                                    }else{
-                                        $context = new es\ucm\Context(FIND_MODMETODOLOGIA, htmlspecialchars(trim(strip_tags($_GET[$name]))));
-                                    }
-                                    $contextMetodologia = $controller->action($context);
-                                    
-                                    if($contextMetodologia->getEvent() === FIND_METODOLOGIA_OK || $contextMetodologia->getEvent() === FIND_MODMETODOLOGIA_OK){
-                                        if($contextMetodologia->getEvent() === FIND_MODMETODOLOGIA_OK){
-                                            $datosIniciales['idMetodologia']=$contextMetodologia->getData()->getIdMetodologia();
-                                        }
-                                        $datosIniciales['metodologia']=$contextMetodologia->getData()->getMetodologia();
-                                        $datosIniciales['metodologiaI']=$contextMetodologia->getData()->getMetodologiaI();
-                                        $datosIniciales['idAsignatura']=$_GET[$name];
-                                        $datosIniciales['idGrado'] =$_GET['IdGrado'];
-                                        $access->gestionaModificacion($datosIniciales);
-                                    }
-                                    else{
-                                        $datosIniciales['idAsignatura']=$_GET[$name];
-                                        $datosIniciales['idGrado'] =$_GET['IdGrado'];
-                                        $access->gestionaModificacion($datosIniciales);
-                                    }
-                                    ?>
-                                </div>
-                            </div>
-                        </div>
+                    </div>
+                    <div class="card-body">
                         <?php
-                    }
-                    else{
-                     echo '
-                     <div class="col-md-6 col-12">
-                     <div class="alert alert-danger" role="alert">
-                     <h2 class="card-title text-center">ACCESO DENEGADO</h2>
-                     <h5 class="text-center">La asignatura seleccionada no ha sido creada correctamente o no contiene este apartado. Contacta con el administrador</h5>
-                     </div>
-                     </div>';
-                 }
-             }
-             else{
-                 echo '
-                 <div class="col-md-6 col-12">
-                 <div class="alert alert-danger" role="alert">
-                 <h2 class="card-title text-center">ACCESO DENEGADO</h2>
-                 <h5 class="text-center">No tienes permisos suficientes para esta apartado</h5>
-                 </div>
-                 </div>';
-             }
-         }
-         else {
-            echo '
-            <div class="col-md-6 col-12">
-            <div class="alert alert-danger" role="alert">
-            <h2 class="card-title text-center">ACCESO DENEGADO</h2>
-            <h5 class="text-center">No se ha podido obtener la asignatura</h5>
+                        $access = new es\ucm\FormMetodologia('idMetodologia');
+                        $datosIniciales= array();
+
+                        if($name == "IdAsignatura"){
+                            $context = new es\ucm\Context(FIND_METODOLOGIA, $IdAsignatura);
+                        }else{
+                            $context = new es\ucm\Context(FIND_MODMETODOLOGIA, $IdAsignatura);
+                        }
+                        $contextMetodologia = $controller->action($context);
+                        
+                        if($contextMetodologia->getEvent() === FIND_METODOLOGIA_OK || $contextMetodologia->getEvent() === FIND_MODMETODOLOGIA_OK){
+                            if($contextMetodologia->getEvent() === FIND_MODMETODOLOGIA_OK){
+                                $datosIniciales['idMetodologia']=$contextMetodologia->getData()->getIdMetodologia();
+                            }
+                            $datosIniciales['metodologia']=$contextMetodologia->getData()->getMetodologia();
+                            $datosIniciales['metodologiaI']=$contextMetodologia->getData()->getMetodologiaI();
+                            $datosIniciales['idAsignatura']=$IdAsignatura;
+                            $datosIniciales['idGrado'] =$IdGrado;
+                            $access->gestionaModificacion($datosIniciales);
+                        }
+                        else{
+                            $datosIniciales['idAsignatura']=$IdAsignatura;
+                            $datosIniciales['idGrado'] =$IdGrado;
+                            $access->gestionaModificacion($datosIniciales);
+                        }
+                        ?>
+                    </div>
+                </div>
             </div>
-            </div>';
+            <?php
         }
-    }
-    else {
-        echo '
-        <div class="col-md-6 col-12">
-        <div class="alert alert-danger" role="alert">
-        <h2 class="card-title text-center">ACCESO DENEGADO</h2>
-        <h5 class="text-center">Inicia sesión con un usuario que pueda acceder a este contenido</h5>
-        </div>
-        </div>';
-    }
-    ?>
+        else{
+           echo '
+           <div class="col-md-6 col-12">
+           <div class="alert alert-danger" role="alert">
+           <h2 class="card-title text-center">ACCESO DENEGADO</h2>
+           <h5 class="text-center">La asignatura seleccionada no ha sido creada correctamente o no contiene este apartado. Contacta con el administrador</h5>
+           </div>
+           </div>';
+       }
+   }
+   else{
+       echo '
+       <div class="col-md-6 col-12">
+       <div class="alert alert-danger" role="alert">
+       <h2 class="card-title text-center">ACCESO DENEGADO</h2>
+       <h5 class="text-center">No tienes permisos suficientes para esta apartado</h5>
+       </div>
+       </div>';
+   }
+}
+else {
+    echo '
+    <div class="col-md-6 col-12">
+    <div class="alert alert-danger" role="alert">
+    <h2 class="card-title text-center">ACCESO DENEGADO</h2>
+    <h5 class="text-center">No se ha podido obtener la asignatura</h5>
+    </div>
+    </div>';
+}
+}
+else {
+    echo '
+    <div class="col-md-6 col-12">
+    <div class="alert alert-danger" role="alert">
+    <h2 class="card-title text-center">ACCESO DENEGADO</h2>
+    <h5 class="text-center">Inicia sesión con un usuario que pueda acceder a este contenido</h5>
+    </div>
+    </div>';
+}
+?>
 </div>
 </div>
 <!-- Optional JavaScript -->

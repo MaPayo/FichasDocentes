@@ -30,14 +30,18 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
       <?php
       if (isset($_SESSION['login']) && $_SESSION['login'] === true) {
         if(isset($_GET['IdAsignatura']) && isset($_GET['IdGrado']) && isset($_GET['EmailProfesor'])){
-          if(isset($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET['IdAsignatura']]['coordinacion']) && $_SESSION['asignaturas'][$_GET['IdGrado']][$_GET['IdAsignatura']]['coordinacion'] == true){
+          $IdAsignatura = htmlspecialchars(trim(strip_tags($_GET['IdAsignatura'])));
+          $IdGrado = htmlspecialchars(trim(strip_tags($_GET['IdGrado'])));
+          $EmailProfesor = htmlspecialchars(trim(strip_tags($_GET['EmailProfesor'])));
+          
+          if(isset($_SESSION['asignaturas'][$IdGrado][$IdAsignatura]['coordinacion']) && $_SESSION['asignaturas'][$IdGrado][$IdAsignatura]['coordinacion'] == true){
 
-            $info['email'] = htmlspecialchars(trim(strip_tags($_GET['EmailProfesor'])));
-            $info['asignatura'] = htmlspecialchars(trim(strip_tags($_GET['IdAsignatura'])));
+            $info['email'] = $EmailProfesor;
+            $info['asignatura'] = $IdAsignatura;
             $controller = new es\ucm\ControllerImplements();
             $context = new es\ucm\Context(FIND_PERMISOS_POR_PROFESOR_Y_ASIGNATURA,$info);
             $permisos = $controller->action($context);
-            $context = new es\ucm\Context(FIND_PROFESOR, htmlspecialchars(trim(strip_tags($_GET['EmailProfesor']))));
+            $context = new es\ucm\Context(FIND_PROFESOR, $EmailProfesor);
             $profesor = $controller->action($context);
 
             if($permisos->getEvent() === FIND_PERMISOS_POR_PROFESOR_Y_ASIGNATURA_OK){
@@ -62,7 +66,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                     $datosIniciales['PermisoEvaluacion'] = $permisos->getData()->getPermisoEvaluacion();
                     $datosIniciales['IdAsignatura'] = $permisos->getData()->getIdAsignatura();
                     $datosIniciales['EmailProfesor'] = $permisos->getData()->getEmailProfesor();
-                    $datosIniciales['IdGrado'] =$_GET['IdGrado'];
+                    $datosIniciales['IdGrado'] =$IdGrado;
                     $access->gestionaModificacion($datosIniciales); 
                     ?>
                   </div>

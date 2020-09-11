@@ -30,12 +30,15 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
       <?php
       if (isset($_SESSION['login']) && $_SESSION['login'] === true) {
         if (isset($_GET['IdGrado']) && isset($_GET['IdAsignatura'])) {
-          if(isset($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET['IdAsignatura']]['coordinacion']) && $_SESSION['asignaturas'][$_GET['IdGrado']][$_GET['IdAsignatura']]['coordinacion'] == true){
+          $IdAsignatura = htmlspecialchars(trim(strip_tags($_GET['IdAsignatura'])));
+          $IdGrado = htmlspecialchars(trim(strip_tags($_GET['IdGrado'])));
+          
+          if(isset($_SESSION['asignaturas'][$IdGrado][$IdAsignatura]['coordinacion']) && $_SESSION['asignaturas'][$IdGrado][$IdAsignatura]['coordinacion'] == true){
 
            $controller = new es\ucm\ControllerImplements();
-           $context = new es\ucm\Context(FIND_ASIGNATURA, htmlspecialchars(trim(strip_tags($_GET['IdAsignatura']))));
+           $context = new es\ucm\Context(FIND_ASIGNATURA, $IdAsignatura);
            $asignatura = $controller->action($context);
-           $context = new es\ucm\Context(FIND_CONFIGURACION, htmlspecialchars(trim(strip_tags($_GET['IdAsignatura']))));
+           $context = new es\ucm\Context(FIND_CONFIGURACION, $IdAsignatura);
            $contextConfiguracion = $controller->action($context);
 
            if($contextConfiguracion->getEvent() === FIND_CONFIGURACION_OK){
@@ -50,8 +53,8 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                   $access = new es\ucm\FormConfiguracion('idConfiguracion');
                   $datosIniciales= array();
                   $datosIniciales['IdConfiguracion'] = $contextConfiguracion->getData()->getIdConfiguracion();
-                  $datosIniciales['IdAsignatura']=  htmlspecialchars(trim(strip_tags($_GET['IdAsignatura'])));
-                  $datosIniciales['IdGrado']=  htmlspecialchars(trim(strip_tags($_GET['IdGrado'])));
+                  $datosIniciales['IdAsignatura']=  $IdAsignatura;
+                  $datosIniciales['IdGrado']=  $IdGrado;
                   $access->gestionaModificacion($datosIniciales);
                   ?>
                 </div>

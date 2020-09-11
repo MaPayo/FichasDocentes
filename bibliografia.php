@@ -29,17 +29,20 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
       <?php
       if (isset($_SESSION['login']) && $_SESSION['login'] === true) {
 
-        if(isset($_GET['IdAsignatura']) || isset($_GET['IdModAsignatura'])){
+        if((isset($_GET['IdAsignatura']) || isset($_GET['IdModAsignatura'])) && isset($_GET['IdGrado'])){
           if(isset($_GET['IdAsignatura'])){
             $name ='IdAsignatura';
+            $IdAsignatura = htmlspecialchars(trim(strip_tags($_GET['IdAsignatura'])));
           }
           else{
             $name = 'IdModAsignatura';
+            $IdAsignatura = htmlspecialchars(trim(strip_tags($_GET['IdModAsignatura'])));
           }
+          $IdGrado = htmlspecialchars(trim(strip_tags($_GET['IdGrado'])));
 
-          if((isset($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET[$name]]['coordinacion']) && $_SESSION['asignaturas'][$_GET['IdGrado']][$_GET[$name]]['coordinacion'] == true) || (isset($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET[$name]]['permisos']) && unserialize($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET[$name]]['permisos'])->getPermisoBibliografia() == true)){
+          if((isset($_SESSION['asignaturas'][$IdGrado][$IdAsignatura]['coordinacion']) && $_SESSION['asignaturas'][$IdGrado][$IdAsignatura]['coordinacion'] == true) || (isset($_SESSION['asignaturas'][$IdGrado][$IdAsignatura]['permisos']) && unserialize($_SESSION['asignaturas'][$IdGrado][$IdAsignatura]['permisos'])->getPermisoBibliografia() == true)){
            $controller = new es\ucm\ControllerImplements();
-           $context = new es\ucm\Context(FIND_CONFIGURACION, htmlspecialchars(trim(strip_tags($_GET[$name]))));
+           $context = new es\ucm\Context(FIND_CONFIGURACION, $IdAsignatura);
            $contextConfiguacion = $controller->action($context);
 
            if($contextConfiguacion->getEvent() === FIND_CONFIGURACION_OK && ($contextConfiguacion->getData()->getCitasBibliograficas() == 1 || $contextConfiguacion->getData()->getRecursosInternet() == 1)){
@@ -61,9 +64,9 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                 $datosIniciales= array();
 
                 if($name == "IdAsignatura"){
-                  $context = new es\ucm\Context(FIND_BIBLIOGRAFIA, htmlspecialchars(trim(strip_tags($_GET[$name]))));
+                  $context = new es\ucm\Context(FIND_BIBLIOGRAFIA, $IdAsignatura);
                 }else{
-                  $context = new es\ucm\Context(FIND_MODBIBLIOGRAFIA, htmlspecialchars(trim(strip_tags($_GET[$name]))));
+                  $context = new es\ucm\Context(FIND_MODBIBLIOGRAFIA, $IdAsignatura);
                 }
                 $contextBibliografia = $controller->action($context);
 
@@ -73,13 +76,13 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                   }
                   $datosIniciales['citasBibliograficas']=$contextBibliografia->getData()->getCitasBibliograficas();
                   $datosIniciales['recursosInternet']=$contextBibliografia->getData()->getRecursosInternet();
-                  $datosIniciales['idAsignatura']=$_GET[$name];
-                  $datosIniciales['idGrado'] =$_GET['IdGrado'];
+                  $datosIniciales['idAsignatura']=$IdAsignatura;
+                  $datosIniciales['idGrado'] =$IdGrado;
                   $access->gestionaModificacion($datosIniciales);
                 }
                 else{
-                  $datosIniciales['idAsignatura']=$_GET[$name];
-                  $datosIniciales['idGrado'] =$_GET['IdGrado'];
+                  $datosIniciales['idAsignatura']=$IdAsignatura;
+                  $datosIniciales['idGrado'] =$IdGrado;
                   $access->gestionaModificacion($datosIniciales); 
                 } 
                 ?>

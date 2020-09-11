@@ -1,12 +1,12 @@
-<?php
-require_once('includes/config.php');
-require_once('includes/Presentacion/Controlador/Context.php');
-require_once('includes/Presentacion/Controlador/ControllerImplements.php');
-?>
-<!DOCTYPE html>
-<html lang="es">
+ <?php
+ require_once('includes/config.php');
+ require_once('includes/Presentacion/Controlador/Context.php');
+ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
+ ?>
+ <!DOCTYPE html>
+ <html lang="es">
 
-<head>
+ <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <?php
@@ -30,10 +30,13 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
       <?php
       if (isset($_SESSION['login']) && $_SESSION['login'] === true) {
         if(isset($_GET['IdAsignatura']) && isset($_GET['IdGrado'])){
-          if(isset($_SESSION['asignaturas'][$_GET['IdGrado']][$_GET['IdAsignatura']]['coordinacion']) && $_SESSION['asignaturas'][$_GET['IdGrado']][$_GET['IdAsignatura']]['coordinacion'] == true){
+          $IdAsignatura = htmlspecialchars(trim(strip_tags($_GET['IdAsignatura'])));
+          $IdGrado = htmlspecialchars(trim(strip_tags($_GET['IdGrado'])));
+          
+          if(isset($_SESSION['asignaturas'][$IdGrado][$IdAsignatura]['coordinacion']) && $_SESSION['asignaturas'][$IdGrado][$IdAsignatura]['coordinacion'] == true){
 
             $controller = new es\ucm\ControllerImplements();
-            $context = new es\ucm\Context(FIND_ASIGNATURA, htmlspecialchars(trim(strip_tags($_GET['IdAsignatura']))));
+            $context = new es\ucm\Context(FIND_ASIGNATURA, $IdAsignatura);
             $asignatura = $controller->action($context);
             ?>
             <div class="col-xl-6 col-lg-8 col-12">
@@ -46,8 +49,8 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                   $access = new es\ucm\FormAddProfesor('idAsignatura');
                   $datosIniciales= array();
 
-                  $datosIniciales['IdAsignatura'] =  htmlspecialchars(trim(strip_tags($_GET['IdAsignatura'])));
-                  $datosIniciales['IdGrado'] =  htmlspecialchars(trim(strip_tags($_GET['IdGrado'])));
+                  $datosIniciales['IdAsignatura'] =  $IdAsignatura;
+                  $datosIniciales['IdGrado'] =  $IdGrado;
 
                   $access->gestionaModificacion($datosIniciales);
                   ?>

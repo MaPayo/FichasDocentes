@@ -32,8 +32,11 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
       <?php
       if (isset($_SESSION['login']) && $_SESSION['login'] === true) {
         if(isset($_GET['IdAsignatura']) && isset($_GET['IdGrado'])){
+          $IdAsignatura = htmlspecialchars(trim(strip_tags($_GET['IdAsignatura'])));
+          $IdGrado = htmlspecialchars(trim(strip_tags($_GET['IdGrado'])));
+          
           $controller = new ControllerImplements();
-          $context = new Context(FIND_ASIGNATURA,$_GET['IdAsignatura']);
+          $context = new Context(FIND_ASIGNATURA,$IdAsignatura);
           $contextAsignatura = $controller->action($context);
 
           if($contextAsignatura->getEvent() === FIND_ASIGNATURA_OK && $contextAsignatura->getData()->getCoordinadorAsignatura() == $_SESSION['idUsuario']){
@@ -55,8 +58,8 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
             $context = new Context(UPDATE_ASIGNATURA,$asignatura);
             $res = $controller->action($context);
 
-            if($res->getEvent() === UPDATE_ASIGNATURA_OK) header('Location: indexAcceso.php?IdGrado='.$_GET['IdGrado'].'&IdAsignatura='.$_GET['IdAsignatura'].'&modificado=y');
-            else  header('Location: indexAcceso.php?IdGrado='.$_GET['IdGrado'].'&IdAsignatura='.$_GET['IdAsignatura'].'&modificado=n');
+            if($res->getEvent() === UPDATE_ASIGNATURA_OK) header('Location: indexAcceso.php?IdGrado='.$IdGrado.'&IdAsignatura='.$IdAsignatura.'&modificado=y');
+            else  header('Location: indexAcceso.php?IdGrado='.$IdGrado.'&IdAsignatura='.$IdAsignatura.'&modificado=n');
           }
           else{
            echo '
