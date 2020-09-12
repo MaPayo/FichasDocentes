@@ -74,9 +74,7 @@ CREATE TABLE `bibliografia` (
   `IdAsignatura` int(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Volcado de datos para la tabla `bibliografia`
---
+
 
 -- --------------------------------------------------------
 
@@ -464,9 +462,6 @@ CREATE TABLE `modprogramaasignatura` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
-INSERT INTO `modprogramaasignatura` (`IdPrograma`, `ConocimientosPrevios`, `ConocimientosPreviosi`, `BreveDescripcion`, `BreveDescripcioni`, `ProgramaTeorico`, `ProgramaTeoricoi`, `ProgramaSeminarios`, `ProgramaSeminariosi`, `ProgramaLaboratorio`, `ProgramaLaboratorioi`, `IdModAsignatura`) VALUES
-(16, 'hola don pepito', 'Loreisi.', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna al', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliq', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip e', 'Lorem ipsum dolet iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.', '', '', '', '', 804562),
-(18, 'erfews', 'jkllkjdsfsdf', 'kjlds', 'ddf', 'jkl', 'lkj', 'ljk', 'jkl', 'ljk', 'jlk', 800490);
 
 -- --------------------------------------------------------
 
@@ -530,9 +525,6 @@ CREATE TABLE `profesor` (
   `Facultad` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Volcado de datos para la tabla `profesor`
---
 
 
 -- --------------------------------------------------------
