@@ -77,7 +77,7 @@ class FormGrado extends Form
             $context = new Context(FIND_GRADO, $codigo);
             $contextGrado = $controller->action($context);
             if ($contextGrado->getEvent() === FIND_GRADO_OK) {
-                $grado = new Grado($contextGrado->getData()->getIdGrado(), $nombre, $coordinador, $contextGrado->getData()->getActivo(), $horas);
+                $grado = new Grado($contextGrado->getData()->getCodigoGrado(), $nombre, $coordinador, $contextGrado->getData()->getActivo(), $horas);
                 $context = new Context(UPDATE_GRADO, $grado);
                 $contextUA = $controller->action($context);
                 if ($contextUA->getEvent() === UPDATE_GRADO_OK) {
