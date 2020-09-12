@@ -1,5 +1,5 @@
 {
-    "name": "marina/gestion_docente",
+    "name": "tfg/gestion_docente",
     "require": {
         "ryakad/pandoc-php": "^1.0",
         "dompdf/dompdf": "^0.8.5",
