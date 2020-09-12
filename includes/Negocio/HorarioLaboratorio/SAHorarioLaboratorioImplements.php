@@ -63,7 +63,7 @@ class SAHorarioLaboratorioImplements implements SAHorarioLaboratorio
             );
         }
         else{
-         $horarioLaboratorio   =null;
+         $horarioLaboratorio =null;
         }
         return $horarioLaboratorio;
     }

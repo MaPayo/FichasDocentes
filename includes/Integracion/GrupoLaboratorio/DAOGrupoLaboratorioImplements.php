@@ -29,8 +29,8 @@ class DAOGrupoLaboratorioImplements implements DAOGrupoLaboratorio
     {
         $singletonDataSource = new SingletonDataSource();
         $dataSource = $singletonDataSource->getInstance();
-        $sql = "SELECT * FROM grupolaboratorio WHERE IdAsignatura = :idGrupoLab AND Letra = :letra";
-        $values = array(':idGrupoLab' => $comparacion[0], ':letra'=>$comparacion[1]);
+        $sql = "SELECT * FROM grupolaboratorio WHERE IdAsignatura = :idAsignatura AND Letra = :letra";
+        $values = array(':idAsignatura' => $comparacion[0], ':letra'=>$comparacion[1]);
         $results = $dataSource->executeQuery($sql, $values);
         return $results;
     }

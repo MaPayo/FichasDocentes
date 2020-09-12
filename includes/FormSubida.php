@@ -222,35 +222,39 @@ class FormSubida extends Form
                                                 $context = new Context(UPDATE_GRUPO_LABORATORIO, $grupoLaboratorio);
                                                 $contextGL = $controller->action($context);
                                             }
+                                            
                                             $comparacion = array(0 => $codigo_asignatura, 1 => $grupo_letra);
+                                           
                                             $context = new Context(FIND_GRUPO_LABORATORIO_LETRA, $comparacion);
                                             $contextGL = $controller->action($context);
-
+                                           
                                             $data = array("idGrupoLaboratorio" => $contextGL->getData()->getIdGrupoLab(), "emailProfesor" => $email_profesor);
                                             $context = new Context(FIND_GRUPO_LABORATORIO_PROFESOR, $data);
                                             $contextGCP = $controller->action($context);
                                             if ($contextGCP->getEvent() === FIND_GRUPO_LABORATORIO_PROFESOR_FAIL) {
-                                                $grupoLaboratorioP = new GrupoLaboratorioProfesor($contextGL->getData()->getIdGrupoLab(), " ", date("Y-m-d H:i:s"), date("Y-m-d H:i:s"), $email_profesor);
+                                                $grupoLaboratorioP = new GrupoLaboratorioProfesor($contextGL->getData()->getIdGrupoLab(), date("Y-m-d H:i:s"), date("Y-m-d H:i:s"), $email_profesor);
                                                 $context = new Context(CREATE_GRUPO_LABORATORIO_PROFESOR, $grupoLaboratorioP);
                                                 $contextGCP = $controller->action($context);
                                             } else {
-                                                $grupoLaboratorioP = new GrupoLaboratorioProfesor($contextGL->getData()->getIdGrupoLab(), "", date("Y-m-d H:i:s"), date("Y-m-d H:i:s"), $email_profesor);
+                                                $grupoLaboratorioP = new GrupoLaboratorioProfesor($contextGL->getData()->getIdGrupoLab(), date("Y-m-d H:i:s"), date("Y-m-d H:i:s"), $email_profesor);
                                                 $context = new Context(UPDATE_GRUPO_LABORATORIO_PROFESOR, $grupoLaboratorioP);
                                                 $contextGCP = $controller->action($context);
                                             }
                                             $comparacion = array(0 => $contextGL->getData()->getIdGrupoLab(), 1 => $dia);
                                             $context = new Context(FIND_HORARIO_LABORATORIO_GRUPO_DIA, $comparacion);
-                                            $contextGCD = $controller->action($context);
+                                            $contextLGD = $controller->action($context);
                                             $horario = new HorarioLaboratorio(null, $aula, $dia, date("Y-m-d H:i:s", strtotime($hora_inicio)), date("Y-m-d H:i:s", strtotime($hora_fin)), $contextGL->getData()->getIdGrupoLab());
-                                            if ($contextGCD->getEvent() === FIND_HORARIO_LABORATORIO_GRUPO_DIA_FAIL) {
+                                            if ($contextLGD->getEvent() === FIND_HORARIO_LABORATORIO_GRUPO_DIA_FAIL) {
                                                 $context = new Context(CREATE_HORARIO_LABORATORIO, $horario);
                                                 $contextGCD = $controller->action($context);
-                                            } elseif ($contextGCD->getEvent() === FIND_HORARIO_LABORATORIO_GRUPO_DIA_OK) {
-                                                $horario->setIdHorarioLab($contextGCD->getData()->getIdHorarioLaboratorio());
+                                            } elseif ($contextLGD->getEvent() === FIND_HORARIO_LABORATORIO_GRUPO_DIA_OK) {
+                                                $horario->setIdHorarioLab($contextLGD->getData()->getIdHorarioLab());
                                                 $context = new Context(UPDATE_HORARIO_LABORATORIO, $horario);
                                                 $contextGCD = $controller->action($context);
                                             }
+                                            
                                         }
+                                    
                                     } //null
                                 } else {
                                     error_log(date("Y-m-d H:i:s") . " La asignatura que intenta añadir no existe \r\n", 3, LOGS . "/log_errores.txt");

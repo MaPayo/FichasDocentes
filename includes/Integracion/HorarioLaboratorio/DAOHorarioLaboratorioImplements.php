@@ -20,8 +20,8 @@ class DAOHorarioLaboratorioImplements implements DAOHorarioLaboratorio
     {
         $singletonDataSource = new SingletonDataSource();
         $dataSource = $singletonDataSource->getInstance();
-        $sql = "SELECT * FROM horariolaboratorio WHERE IdGrupoClase = :idGrupoClase AND Dia = :dia";
-        $values = array(':idGrupoClase' => $comparacion[0], ':dia' => $comparacion[1]);
+        $sql = "SELECT * FROM horariolaboratorio WHERE IdGrupoLab = :idGrupoLab AND Dia = :dia";
+        $values = array(':idGrupoLab' => $comparacion[0], ':dia' => $comparacion[1]);
         $results = $dataSource->executeQuery($sql, $values);
         return $results;
     }
