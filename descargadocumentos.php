@@ -27,18 +27,18 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
     ?>
     <div class="row justify-content-center align-items-center">
       <?php
-      if (isset($_SESSION['login']) && $_SESSION['login'] === true) {
+      if (isset($_SESSION['login']) && $_SESSION['login'] === true && isset($_SESSION['admin']) && $_SESSION['admin'] == false) {
 
-            $controller = new es\ucm\ControllerImplements();
-           
-            ?>
-            <div class="col-md-6 col-12">
-              <div class="card">
-                <div class="card-header text-center">
-                  <h2>Descargar archivos generados de <?php echo $_SESSION['idUsuario'];?></h2>
-                </div>
-                <div class="card-body">
-                  <?php
+        $controller = new es\ucm\ControllerImplements();
+
+        ?>
+        <div class="col-xl-6 col-lg-8 col-12">
+          <div class="card">
+            <div class="card-header text-center">
+              <h2>Descargar archivos generados</h2>
+            </div>
+            <div class="card-body text-center">
+              <?php
                 $folder = STORAGE.'/'.$_SESSION['idUsuario']; //CAMBIAR
                   if(is_dir($folder)){//Si se ha creado algun archivo
                     $ficheros = array_diff(scandir($folder), array('..', '.'));
@@ -48,53 +48,51 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                         $idAsignatura = explode('-', $ficheros[$i]);
                         $context = new es\ucm\Context(FIND_ASIGNATURA, $idAsignatura[3]);
                         $asignatura = $controller->action($context);
-                        echo "<a href='download.php?file=$ficheros[$i]'>".$asignatura->getData()->getNombreAsignatura()."(".$idAsignatura[2].") HTML</a><br>";
+                        echo "<p><a href='download.php?file=$ficheros[$i]'>".$asignatura->getData()->getNombreAsignatura()."(".$idAsignatura[2].") HTML</a></p>";
                       } else{
                         $idAsignatura = explode('-',$ficheros[$i]);
                         $context = new es\ucm\Context(FIND_ASIGNATURA, $idAsignatura[3]);
                         $asignatura = $controller->action($context);
-                        echo "<a href='download.php?file=$ficheros[$i]'>".$asignatura->getData()->getNombreAsignatura()."(".$idAsignatura[2].") PDF</a><br>";
+                        echo "<p><a href='download.php?file=$ficheros[$i]'>".$asignatura->getData()->getNombreAsignatura()."(".$idAsignatura[2].") PDF</a></p>";
                       }
                     }
                   }else{
                     echo '
-    <div class="col-md-6 col-12">
-    <div class="alert alert-warning" role="alert">
-    <h2 class="card-title text-center">No se han encontrado archivos</h2>
-    <h5 class="text-center">No hay ningun archivo generado en este momento</h5>
-    </div>
-    </div>';
+                    <div class="alert alert-warning" role="alert">
+                    <h2 class="card-title text-center">No se han encontrado archivos</h2>
+                    <h5 class="text-center">No hay ningún archivo generado en este momento</h5>
+                    </div>';
                   }
                   echo '<a href="index.php">
                   <button type="button" class="btn btn-secondary" id="btn-form">
-                      Volver al inicio
+                  Volver a Inicio
                   </button>
-              </a>';
+                  </a>';
                   ?>
                 </div>
               </div>
             </div>
             <?php
-      }
+          }
 
-  else {
-    echo '
-    <div class="col-md-6 col-12">
-    <div class="alert alert-danger" role="alert">
-    <h2 class="card-title text-center">ACCESO DENEGADO</h2>
-    <h5 class="text-center">Inicia sesión con un usuario que pueda acceder a este contenido</h5>
-    </div>
-    </div>';
-  }
-  ?>
-</div>
-</div>
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+          else {
+            echo '
+            <div class="col-md-6 col-12">
+            <div class="alert alert-danger" role="alert">
+            <h2 class="card-title text-center">ACCESO DENEGADO</h2>
+            <h5 class="text-center">Inicia sesión con un usuario que pueda acceder a este contenido</h5>
+            </div>
+            </div>';
+          }
+          ?>
+        </div>
+      </div>
+      <!-- Optional JavaScript -->
+      <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
-</body>
+    </body>
 
-</html>
+    </html>

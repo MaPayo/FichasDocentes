@@ -35,7 +35,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
         <div class="row justify-content-center">
             <?php
 
-            if (isset($_SESSION['login']) && $_SESSION['login'] == true && $_SESSION['admin'] == false) {
+            if (isset($_SESSION['login']) && $_SESSION['login'] === true && isset($_SESSION['admin']) && $_SESSION['admin'] == false) {
                 ?>
                 <div class="col-xl-3 col-lg-4 col-12">
                     <div class="card">
@@ -370,7 +370,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                 <td><?php echo $CoordinadorAsignatura->getData()->getFacultad(); ?></td>
                                                                 <th scope="col">Despacho</th>
                                                                 <td><?php echo $CoordinadorAsignatura->getData()->getDespacho(); ?></td>
-                                                                <th scope="col">Email</th>
+                                                                <th scope="col">Correo electrónico</th>
                                                                 <td><?php echo $CoordinadorAsignatura->getData()->getEmail(); ?></td>
                                                             </tr>
                                                         </tbody>
@@ -395,9 +395,9 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                             if ($contextAsignatura->getData()->getEstado() == "B") {
                                                                 echo 'class="text-primary"><strong>Borrador (Edición permitida)</strong>';
                                                             } elseif ($contextAsignatura->getData()->getEstado() == "V") {
-                                                                echo 'class="text-primary">Validado (Edición bloqueada)';
+                                                                echo 'class="text-primary"><strong>Validado (Edición bloqueada)</strong>';
                                                             } elseif ($contextAsignatura->getData()->getEstado() == "C") {
-                                                                echo 'class="text-success">Consolidado (Información actualizada)';
+                                                                echo 'class="text-success"><strong>Consolidado (Información actualizada)</strong>';
                                                             }
                                                             ?> </td> 
                                                         </tr>
@@ -849,11 +849,11 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                     <h2 class="mb-0">
                                                                         <?php if ($contextComparacion->getData()['ProgramaSeminariosI']) { ?>
                                                                             <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseEightProg" aria-expanded="true" aria-controls="collapseEight">
-                                                                                Programa seminarios (Inglés)
+                                                                                Programa de seminarios (Inglés)
                                                                             </button>
                                                                         <?php } else { ?>
                                                                             <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseEightProg" aria-expanded="false" aria-controls="collapseEight">
-                                                                                Programa seminarios (Inglés)
+                                                                                Programa de seminarios (Inglés)
                                                                             </button>
                                                                         <?php } ?>
                                                                     </h2>
@@ -950,11 +950,11 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                     <h2 class="mb-0">
                                                                         <?php if ($contextComparacion->getData()['ProgramaLaboratorioI']) { ?>
                                                                             <button class="btn btn-link text-danger collapsed" type="button" data-toggle="collapse" data-target="#collapseTenProg" aria-expanded="true" aria-controls="collapseTen">
-                                                                                Programa laboratorio (Inglés)
+                                                                                Programa de laboratorio (Inglés)
                                                                             </button>
                                                                         <?php } else { ?>
                                                                             <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseTenProg" aria-expanded="false" aria-controls="collapseTen">
-                                                                                Programa laboratorio (Inglés)
+                                                                                Programa de laboratorio (Inglés)
                                                                             </button>
                                                                         <?php } ?>
                                                                     </h2>
@@ -1012,7 +1012,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                             </a>
                                                             <a href="borrarProgramaAsignatura.php?IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdModAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
                                                                 <button type="button" class="btn btn-warning btn-danger" id="btn-form">
-                                                                    Borrar Borrador
+                                                                    Eliminar Borrador
                                                                 </button>
                                                             </a>
                                                         <?php } ?>
@@ -1454,7 +1454,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                             </a>
                                                             <a href="borrarCompetenciasAsignatura.php?IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdModAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
                                                                 <button type="button" class="btn btn-danger" id="btn-form">
-                                                                    Borrar Borrador
+                                                                    Eliminar Borrador
                                                                 </button>
                                                             </a>
                                                         <?php } ?>
@@ -1586,7 +1586,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                             </a>
                                                             <a href="borrarMetodologia.php?IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdModAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
                                                                 <button type="button" class="btn btn-danger" id="btn-form">
-                                                                    Borrar Borrador
+                                                                    Eliminar Borrador
                                                                 </button>
                                                             </a>
                                                         <?php } ?>
@@ -1720,7 +1720,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                             </a>
                                                             <a href="borrarBibliografia.php?IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdModAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
                                                                 <button type="button" class="btn btn-danger" id="btn-form">
-                                                                    Borrar Borrador
+                                                                    Eliminar Borrador
                                                                 </button>
                                                             </a>
                                                         <?php } ?>
@@ -1763,7 +1763,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                             </a>
                                                                                             <a href="borrarGrupoLaboratorio.php?IdGrupoLaboratorio=<?php echo $grupo->getIdGrupoLab(); ?>&IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
                                                                                                 <button type="button" class="btn btn-danger btn-sm" id="btn-form">
-                                                                                                    Borrar Grupo
+                                                                                                    Eliminar Grupo
                                                                                                 </button>
                                                                                             </a>
 
@@ -1821,7 +1821,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                                                         </a>
                                                                                                                         <a href="borrarGrupoLaboratorioProfesor.php?IdGrado=' . $contextGrado->getData()->getCodigoGrado() . '&EmailProfesor=' . $modGrupoLaboratorioProfesor->getEmailProfesor() . '&IdAsignatura=' . $contextAsignatura->getData()->getIdAsignatura() . '&IdGrupoLaboratorio=' . $grupo->getIdGrupoLab() . '">
                                                                                                                         <button type="button" class="btn btn-danger btn-sm" id="btn-form">
-                                                                                                                        Borrar Profesor
+                                                                                                                        Eliminar Profesor
                                                                                                                         </button>
                                                                                                                         </a></td>';
                                                                                                                     }
@@ -1850,7 +1850,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                                                 </a>
                                                                                                                 <a href="borrarHorarioLaboratorio.php?IdGrado=' . $contextGrado->getData()->getCodigoGrado() . '&IdHorarioLaboratorio=' . $horario->getIdHorarioLab() . '&IdAsignatura=' . $grupo->getIdAsignatura() . '">
                                                                                                                 <button type="button" class="btn btn-danger btn-sm" id="btn-form">
-                                                                                                                Borrar Horario
+                                                                                                                Eliminar Horario
                                                                                                                 </button>
                                                                                                                 </a></td>';
                                                                                                             }
@@ -1900,7 +1900,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                             $contextHorarioLaboratorio = $controller->action($context);
                                                                                             if ($contextHorarioLaboratorio->getEvent() === LIST_HORARIO_LABORATORIO_OK) { ?>
                                                                                                 <div class="table-responsive text-center">
-                                                                                                    <table class="table table-sm table-hover table-bordered">
+                                                                                                    <table class="table table-sm  table-bordered">
                                                                                                         <!--<thead>-->
                                                                                                             <tr>
                                                                                                                 <th scope="col">Laboratorio</th>
@@ -1974,7 +1974,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                         <?php } ?>
                                                                         <a href="grupoLaboratorio.php?IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
                                                                             <button type="button" class="btn btn-success" id="btn-form">
-                                                                                Crear Nuevo Borrador Grupo
+                                                                                Crear Nuevo Grupo
                                                                             </button>
                                                                         </a>
 
@@ -2016,7 +2016,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                                         </a>
                                                                                                         <a href="borrarGrupoClase.php?IdGrupoClase=<?php echo $grupo->getIdGrupoClase(); ?>&IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
                                                                                                             <button type="button" class="btn btn-danger btn-sm" id="btn-form">
-                                                                                                                Borrar Grupo
+                                                                                                                Eliminar Grupo
                                                                                                             </button>
                                                                                                         </a>
 
@@ -2075,7 +2075,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                                                                     </a>
                                                                                                                                     <a href="borrarGrupoClaseProfesor.php?IdGrado=' . $contextGrado->getData()->getCodigoGrado() . '&EmailProfesor=' . $modGrupoClaseProfesor->getEmailProfesor() . '&IdAsignatura=' . $contextAsignatura->getData()->getIdAsignatura() . '&IdGrupoClase=' . $grupo->getIdGrupoClase() . '">
                                                                                                                                     <button type="button" class="btn btn-danger btn-sm" id="btn-form">
-                                                                                                                                    Borrar Profesor
+                                                                                                                                    Eliminar Profesor
                                                                                                                                     </button>
                                                                                                                                     </a></td>';
                                                                                                                                 }
@@ -2103,7 +2103,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                                                             </a>
                                                                                                                             <a href="borrarHorarioClase.php?IdGrado=' . $contextGrado->getData()->getCodigoGrado() . '&IdHorarioClase=' . $horario->getIdHorarioClase() . '&IdAsignatura=' . $contextAsignatura->getData()->getIdAsignatura() . '">
                                                                                                                             <button type="button" class="btn btn-danger btn-sm" id="btn-form">
-                                                                                                                            Borrar Horario
+                                                                                                                            Eliminar Horario
                                                                                                                             </button>
                                                                                                                             </a></td>';
                                                                                                                         }
@@ -2230,7 +2230,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                     <?php } ?>
                                                                                     <a href="grupoClase.php?IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
                                                                                         <button type="button" class="btn btn-success" id="btn-form">
-                                                                                            Crear Nuevo Borrador Grupo
+                                                                                            Crear Nuevo Grupo
                                                                                         </button>
                                                                                     </a>
 
@@ -2721,7 +2721,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                             </a>
                                                             <a href="borrarEvaluacion.php?IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdModAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
                                                                 <button type="button" class="btn btn-danger" id="btn-form">
-                                                                    Borrar Borrador
+                                                                    Eliminar Borrador
                                                                 </button>
                                                             </a>
                                                         <?php } ?>
@@ -2740,7 +2740,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                         <div class="card-header" id="headingOne">
                                                             <h2 class="mb-0">
                                                                 <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseOneCor" aria-expanded="false" aria-controls="collapseOne">
-                                                                    Configuración
+                                                                    Configuración de los apartados
                                                                 </button>
                                                             </h2>
                                                         </div>

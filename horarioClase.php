@@ -57,7 +57,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                 <div class="col-xl-6 col-lg-8 col-12">
                                     <div class="card ">
                                         <div class="card-header text-center">
-                                           <h2>Modificar un borrador de un horario de clase</h2>
+                                           <h2>Modificar un horario de clase</h2>
                                        </div>
                                        <div class="card-body">
                                         <?php $access->gestionaModificacion($datosIniciales); ?>
@@ -85,7 +85,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                         <div class="col-xl-6 col-lg-8 col-12">
                             <div class="card ">
                                 <div class="card-header text-center">
-                                   <h2>Crear un borrador de un horario de clase</h2>
+                                   <h2>Crear un horario de clase</h2>
                                </div>
                                <div class="card-body">
                                 <?php $access->gestionaModificacion($datosIniciales); ?>

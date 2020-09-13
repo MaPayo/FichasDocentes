@@ -118,7 +118,7 @@ class FormGrupoClaseProfesor extends Form
 		if (empty($fechaInicio) || empty($fechaFin)) {
 			$erroresFormulario[] = "No has introducido alguna de las fechas";
 		} else if ($fechaFin <= $fechaInicio) {
-			$erroresFormulario[] = "La fecha de inicio es mayor o igual que la fecha fin";
+			$erroresFormulario[] = "La fecha de inicio es mayor o igual que la fecha de finalización";
 		}
 
 

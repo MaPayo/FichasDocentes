@@ -41,7 +41,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                         <div class="col-md-6 col-12">
                             <div class="card ">
                                 <div class="card-header text-center">
-                                    <h2>Borrar un profesor de un grupo de clase</h2>
+                                    <h2>Eliminar un profesor de un grupo de clase</h2>
                                 </div>
                                 <div class="card-body text-center">
                                     <?php
@@ -63,7 +63,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                         }
                                     } else {
                                     ?>
-                                        ¿Estas seguro de que quieres borrar el profesor del grupo de clase?
+                                        ¿Estas seguro de que quieres eliminar el profesor del grupo de clase?
                                         <div class="text-center">
                                             <a href="indexAcceso.php?IdGrado=<?php echo $IdGrado; ?>&IdAsignatura=<?php echo $IdAsignatura; ?>">
                                                 <button type="button" class="btn btn-secondary" id="btn-form">

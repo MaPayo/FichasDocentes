@@ -16,12 +16,21 @@ class FormGeneracion extends Form
         $controller = new ControllerImplements();
 
         $html = '<input type="hidden" name="idAsignatura" value="' . $idAsignatura . '" required />
-		<input type="hidden" name="email" value="' . $email . '" required />';
-        $html .= 'Introduce el curso actual: 20<input name="actual" required>/<input name="siguiente" required><br>';
+        <input type="hidden" name="email" value="' . $email . '" required />
+        
+        
+        
+        <div class="form-group row">
+        <label class="col-md-6 col-form-label col-form-label-lg" for="actual">Año de inicio del curso</label>
+        <div class="col-md-4">
+        <input class="form-control form-control-lg" type="number"  id="actual" name="actual" placeholder="2020" required>
+        </div>
+        </div>
+        ';
         foreach ($_SESSION['asignaturas'] as $codGrado => $grado) {
             $context = new Context(FIND_GRADO, $codGrado);
             $grad = $controller->action($context);
-            $html .= '<h3>' . $grad->getData()->getNombreGrado() . '</h3>';
+            $html .= '<h4>' . $grad->getData()->getNombreGrado() . '</h3>';
             foreach ($_SESSION['asignaturas'][$codGrado] as $codAsig => $asignatura) {
                 $context = new Context(FIND_ASIGNATURA, $codAsig);
                 $as = $controller->action($context);
@@ -46,11 +55,11 @@ class FormGeneracion extends Form
 
         $html .= '<div class="text-center">
         <a href="index.php">
-                  <button type="button" class="btn btn-secondary" id="btn-form">
-                      Volver al índice
-                  </button>
-              </a>
-        <button type="submit" class="btn btn-secondary" id="btn-form"111 name="GenerarSelecionadas">Generar seleccionadas</button>
+        <button type="button" class="btn btn-secondary" id="btn-form">
+        Volver a Inicio
+        </button>
+        </a>
+        <button type="submit" class="btn btn-success" id="btn-form" name="GenerarSelecionadas">Generar Seleccionadas</button>
         </div>';
         return $html;
     }
@@ -59,7 +68,7 @@ class FormGeneracion extends Form
         $erroresFormulario = array();
         $controller = new ControllerImplements();
         $actual = $datos['actual'];
-        $siguiente = $datos['siguiente'];
+        $siguiente = $datos['actual']+1;
         $curso = "20$actual/$siguiente";
         //$folder = /tmp/storage/output
         $folder = STORAGE . '/' . $datos['email']; //Ruta donde se almacenan los datos CAMBIAR
@@ -72,10 +81,10 @@ class FormGeneracion extends Form
                 //Para cada una de las asignaturas marcadas recogemos su id y creamos el nombre de archivo
                 $context = new Context(FIND_ASIGNATURA, $idAsignatura);
                 $asignatura = $controller->action($context);
-                $filehtml = "20$actual-20$siguiente-español-$idAsignatura.html";
-                $filepdf = "20$actual-20$siguiente-español-$idAsignatura.pdf";
-                $filehtmlI = "20$actual-20$siguiente-english-$idAsignatura.html";
-                $filepdfI = "20$actual-20$siguiente-english-$idAsignatura.pdf";
+                $filehtml = "$actual-$siguiente-español-$idAsignatura.html";
+                $filepdf = "$actual-$siguiente-español-$idAsignatura.pdf";
+                $filehtmlI = "$actual-$siguiente-english-$idAsignatura.html";
+                $filepdfI = "$actual-$siguiente-english-$idAsignatura.pdf";
                 $rutehtml = "$folder/$filehtml";
                 $rutepdf = "$folder/$filepdf";
                 $rutehtmlI = "$folder/$filehtmlI";
@@ -111,12 +120,12 @@ class FormGeneracion extends Form
                     }
                 }
             }
-        else {
-            $erroresFormulario[] = "No has seleccionado asignaturas";
+            else {
+                $erroresFormulario[] = "No has seleccionado asignaturas";
+            }
+            if (count($erroresFormulario) === 0) {
+                $erroresFormulario = "descargadocumentos.php";
+            }
+            return $erroresFormulario;
         }
-        if (count($erroresFormulario) === 0) {
-            $erroresFormulario = "descargadocumentos.php";
-        }
-        return $erroresFormulario;
     }
-}

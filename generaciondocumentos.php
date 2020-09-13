@@ -28,14 +28,14 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
         ?>
         <div class="row justify-content-center align-items-center">
             <?php
-            if (isset($_SESSION['login']) && $_SESSION['login'] === true) {
+            if (isset($_SESSION['login']) && $_SESSION['login'] === true && isset($_SESSION['admin']) && $_SESSION['admin'] == false) {
             ?>
                     <div class="col-xl-6 col-lg-8 col-12">
                         <div class="card">
                             <div class="card-header text-center">
                                 <h2>Generación de las fichas docentes</h2>
                             </div>
-                            <div class="card-body">
+                            <div class="card-body text-center">
 
                                 <?php 
                                 $access = new es\ucm\FormGeneracion('idGeneracion');

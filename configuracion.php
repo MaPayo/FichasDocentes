@@ -46,7 +46,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
             <div class="col-xl-6 col-lg-8 col-12">
               <div class="card">
                 <div class="card-header text-center">
-                  <h2>Configuración de <?php echo $asignatura->getData()->getNombreAsignatura();?></h2>
+                  <h2>Configuración de <strong><?php echo $asignatura->getData()->getNombreAsignatura();?></strong></h2>
                 </div>
                 <div class="card-body">
                   <?php

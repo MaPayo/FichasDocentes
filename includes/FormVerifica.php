@@ -119,15 +119,15 @@ class FormVerifica extends Form
             $IdAsignatura = $datos['IdAsignatura'];
 
             if ($MaximoExamenes<$MinimoExamenes) {
-                $erroresFormulario[] = "El porcentaje del máximo de exámenes en menor que el de mínimo de exámenes";
+                $erroresFormulario[] = "El porcentaje máximo de exámenes es menor que el mínimo";
             }
 
             if ($MaximoActividades<$MinimoActividades) {
-                $erroresFormulario[] = "El porcentaje del máximo de actividades en menor que el de mínimo de actividades";
+                $erroresFormulario[] = "El porcentaje máximo de actividades es menor que el mínimo";
             }
 
             if ($MaximoLaboratorio<$MinimoLaboratorio) {
-                $erroresFormulario[] = "El porcentaje del máximo de laboratorio en menor que el de mínimo de laboratorio";
+                $erroresFormulario[] = "El porcentaje máximo de laboratorio es menor que el mínimo";
             }
 
             if (count($erroresFormulario) === 0) {

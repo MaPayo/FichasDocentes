@@ -57,7 +57,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
             <div class="col-xl-6 col-lg-8 col-12">
               <div class="card ">
                 <div class="card-header text-center">
-                 <h2>Modificar el borrador de un grupo de laboratorio</h2>
+                 <h2>Modificar un grupo de laboratorio</h2>
                </div>
                <div class="card-body">
                 <?php $access->gestionaModificacion($datosIniciales); ?>
@@ -83,7 +83,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
       <div class="col-xl-6 col-lg-8 col-12">
         <div class="card ">
           <div class="card-header text-center">
-           <h2>Crear el borrador de un grupo de laboratorio</h2>
+           <h2>Crear un grupo de laboratorio</h2>
          </div>
          <div class="card-body">
           <?php $access->gestionaModificacion($datosIniciales); ?>

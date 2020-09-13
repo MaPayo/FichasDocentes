@@ -44,7 +44,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                             <div class="col-md-6 col-12">
                                 <div class="card ">
                                     <div class="card-header text-center">
-                                        <h2>Borrar el borrador de las competencias</h2>
+                                        <h2>Eliminar el borrador de las competencias</h2>
                                     </div>
                                     <div class="card-body text-center">
                                         <?php
@@ -64,7 +64,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                                             }
                                         } else {
                                         ?>
-                                            ¿Estás seguro de que quieres borrar el borrador de las competencias?
+                                            ¿Estás seguro de que quieres eliminar el borrador de las competencias?
                                             <div class="text-center">
                                                 <a href="indexAcceso.php?IdGrado=<?php echo $IdGrado; ?>&IdAsignatura=<?php echo $IdAsignatura; ?>">
                                                     <button type="button" class="btn btn-secondary" id="btn-form">

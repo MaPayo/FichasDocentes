@@ -25,7 +25,10 @@ class FormPassword extends Form
 
 		<div class="form-group">
 		<label for="NewPassword">Nueva contraseña</label>
-		<input type="password"  minlength="8" class="form-control" id="NewPassword"  name="NewPassword" required />
+		<input type="password"  minlength="8" class="form-control" id="NewPassword"  name="NewPassword" aria-describedby="help" required />
+		<small id="help" class="form-text text-muted">
+		La contraseña debe tener una longitud mayor o igual a 8 caracteres
+		</small>
 		</div>
 
 		<div class="form-group">

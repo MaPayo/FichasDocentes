@@ -40,9 +40,6 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                         </div>
                         <div class="card-body text-center">
                             <?php
-
-                            //password_verify($password, $usuario->getData()->getPassword())
-
                             $access = new es\ucm\FormPassword('Email');
                             $datosIniciales = array();
                             $datosIniciales['Email'] = $contextUsuario->getData()->getEmail();

@@ -58,7 +58,7 @@ class FormHorarioLaboratorio extends Form
 		</div>
 
 		<div class="form-group col-md-6">
-		<label for="horaFin">Hora fin</label>
+		<label for="horaFin">Hora de finalización</label>
 		<input type="time" class="form-control" id="horaFin"  name="horaFin" value="' . $horaFin . '" required/>
 		</div>
 
@@ -108,7 +108,7 @@ class FormHorarioLaboratorio extends Form
 					$erroresFormulario[] = "No has introducido alguna de las horas";
 				}
 				else if ($horaFin <= $horaInicio) {
-					$erroresFormulario[] = "La hora de inicio es mayor o igual que la hora fin";
+					$erroresFormulario[] = "La hora de inicio es mayor o igual que la hora de finalización";
 				}
 			}
 
