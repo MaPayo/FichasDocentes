@@ -29,10 +29,21 @@ class FormGrupoLaboratorio extends Form
 		<input type="text" class="form-control" id="letra"  name="letra" value="' . $letra . '" required/>
 		</div>
 
-		<div class="form-group col-md-6">
-		<label for="idioma">Idioma</label>
-		<input type="text" class="form-control" id="idioma"  name="idioma" value="' . $idioma . '" required/>
-		</div>
+			<div class="form-group col-md-6">
+				<label for="idioma">Idioma</label>
+				<select class="form-control" id="idioma" name="idioma" required>';
+				if ($idioma === "español") {
+					$html .= '<option value="español" selected>español</option>';
+				} else {
+					$html .= '<option value="español">español</option>';
+				}
+				if ($idioma === "inglés") {
+					$html .= '<option value="inglés" selected>inglés</option>';
+				} else {
+					$html .= '<option value="inglés">inglés</option>';
+				}
+	$html .= '</select>
+			</div>
 
 		</div>
 

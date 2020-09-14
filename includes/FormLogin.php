@@ -49,8 +49,7 @@ class FormLogin extends Form
 			$usuario = $controller->action($context);
 			if ($usuario->getEvent() === FIND_USUARIO_FAIL) {
 				$erroresFormulario[] = "El email o la contraseña no coinciden";
-			} 
-			else if (password_verify($password, $usuario->getData()->getPassword())) {
+			} else if (password_verify($password, $usuario->getData()->getPassword())) {
 				$_SESSION['login'] = true;
 				$_SESSION['idUsuario'] = $usuario->getData()->getEmail();
 
@@ -119,8 +118,16 @@ class FormLogin extends Form
 
 					if (!is_null($idAsignatura)) {
 						$erroresFormulario = 'indexAcceso.php?IdGrado=' . $idGrado . '&IdAsignatura=' . $idAsignatura;
-					} else $erroresFormulario[] = 'el usuario con rol profesor no tiene ninguna asignatura asociada';
+					} else {
+						unset($_SESSION);
+						session_destroy();
+						session_start();
+						$erroresFormulario[] = 'el usuario con rol profesor no tiene ninguna asignatura asociada';
+					}
 				} else {
+					unset($_SESSION);
+					session_destroy();
+					session_start();
 					$erroresFormulario[] = "No se ha encontrado rol para el usuario";
 				}
 			} else {
