@@ -1783,12 +1783,12 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                     $context = new es\ucm\Context(LIST_MODHORARIO_LABORATORIO, $grupo->getIdGrupoLab());
                                                                                     $contextModHorarioLaboratorio = $controller->action($context);
                                                                                     if ($contextModHorarioLaboratorio->getEvent() === LIST_MODHORARIO_LABORATORIO_OK) { ?>
-                                                                                        <div class="table-responsive text-center">
+                                                                                        <div class="table-responsive-md text-center">
                                                                                             <table class="table table-sm table-bordered">
                                                                                                 <!--<thead>-->
                                                                                                     <tr>
                                                                                                         <th scope="col">Laboratorio</th>
-                                                                                                        <th scope="col">Dia</th>
+                                                                                                        <th scope="col">Día</th>
                                                                                                         <th scope="col">Hora Inicio</th>
 
                                                                                                         <th scope="col">Opciones</th>
@@ -1815,13 +1815,13 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                                                     <td>' . date_format(date_create($modGrupoLaboratorioProfesor->getFechaFin()),"d-m-Y") . '</td>';
                                                                                                                     if ($contextAsignatura->getData()->getEstado() === "B" && ($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['coordinacion'] == true || unserialize($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['permisos'])->getPermisoGrupoClase() == true)) {
                                                                                                                         echo '<td> <a href="grupoLaboratorioProfesor.php?IdGrado=' . $contextGrado->getData()->getCodigoGrado() . '&EmailProfesor=' . $modGrupoLaboratorioProfesor->getEmailProfesor() . '&IdAsignatura=' . $contextAsignatura->getData()->getIdAsignatura() . '&IdGrupoLaboratorio=' . $grupo->getIdGrupoLab() . '">
-                                                                                                                        <button type="button" class="btn btn-warning btn-sm" id="btn-form">
-                                                                                                                        Modificar Profesor
+                                                                                                                        <button type="button" class="btn btn-warning btn-sm btn-block" id="btn-form">
+                                                                                                                        Modificar
                                                                                                                         </button>
                                                                                                                         </a>
                                                                                                                         <a href="borrarGrupoLaboratorioProfesor.php?IdGrado=' . $contextGrado->getData()->getCodigoGrado() . '&EmailProfesor=' . $modGrupoLaboratorioProfesor->getEmailProfesor() . '&IdAsignatura=' . $contextAsignatura->getData()->getIdAsignatura() . '&IdGrupoLaboratorio=' . $grupo->getIdGrupoLab() . '">
-                                                                                                                        <button type="button" class="btn btn-danger btn-sm" id="btn-form">
-                                                                                                                        Eliminar Profesor
+                                                                                                                        <button type="button" class="btn btn-danger btn-sm btn-block" id="btn-form">
+                                                                                                                        Eliminar
                                                                                                                         </button>
                                                                                                                         </a></td>';
                                                                                                                     }
@@ -1844,13 +1844,13 @@ use Jfcherng\Diff\Renderer\RendererConstant;
 
                                                                                                             if ($contextAsignatura->getData()->getEstado() === "B" && ($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['coordinacion'] == true || unserialize($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['permisos'])->getPermisoGrupoLaboratorio() == true)) {
                                                                                                                 echo '<td> <a href="horarioLaboratorio.php?IdGrado=' . $contextGrado->getData()->getCodigoGrado() . '&IdHorarioLaboratorio=' . $horario->getIdHorarioLab() . '&IdAsignatura=' . $grupo->getIdAsignatura() . '">
-                                                                                                                <button type="button" class="btn btn-warning btn-sm" id="btn-form">
-                                                                                                                Modificar Horario
+                                                                                                                <button type="button" class="btn btn-warning btn-sm btn-block" id="btn-form">
+                                                                                                                Modificar
                                                                                                                 </button>
                                                                                                                 </a>
                                                                                                                 <a href="borrarHorarioLaboratorio.php?IdGrado=' . $contextGrado->getData()->getCodigoGrado() . '&IdHorarioLaboratorio=' . $horario->getIdHorarioLab() . '&IdAsignatura=' . $grupo->getIdAsignatura() . '">
-                                                                                                                <button type="button" class="btn btn-danger btn-sm" id="btn-form">
-                                                                                                                Eliminar Horario
+                                                                                                                <button type="button" class="btn btn-danger btn-sm btn-block" id="btn-form">
+                                                                                                                Eliminar
                                                                                                                 </button>
                                                                                                                 </a></td>';
                                                                                                             }
@@ -1885,7 +1885,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                     <div class="card-header" id="heading<?php echo $grupo->getIdGrupoLab() ?>">
                                                                                         <h2 class="mb-0">
                                                                                             <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapse<?php echo $grupo->getIdGrupoLab() ?>" aria-expanded="true" aria-controls="collapse<?php echo $grupo->getIdGrupoLab() ?>">
-                                                                                                <?php echo $grupo->getLetra() ?>
+                                                                                                <?php echo 'Grupo: '.$grupo->getLetra().'' ?>
                                                                                             </button>
                                                                                         </h2>
                                                                                     </div>
@@ -1899,12 +1899,12 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                             $context = new es\ucm\Context(LIST_HORARIO_LABORATORIO, $grupo->getIdGrupoLab());
                                                                                             $contextHorarioLaboratorio = $controller->action($context);
                                                                                             if ($contextHorarioLaboratorio->getEvent() === LIST_HORARIO_LABORATORIO_OK) { ?>
-                                                                                                <div class="table-responsive text-center">
+                                                                                                <div class="table-responsive-md text-center">
                                                                                                     <table class="table table-sm  table-bordered">
                                                                                                         <!--<thead>-->
                                                                                                             <tr>
                                                                                                                 <th scope="col">Laboratorio</th>
-                                                                                                                <th scope="col">Dia</th>
+                                                                                                                <th scope="col">Día</th>
                                                                                                                 <th scope="col">Hora</th>
                                                                                                                 <?php
                                                                                                                 $numeroHorarios = count($contextHorarioLaboratorio->getData()) + 1;
@@ -2036,12 +2036,12 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                                 $context = new es\ucm\Context(LIST_MODHORARIO_CLASE, $grupo->getIdGrupoClase());
                                                                                                 $contextModHorarioClase = $controller->action($context);
                                                                                                 if ($contextModHorarioClase->getEvent() === LIST_MODHORARIO_CLASE_OK) { ?>
-                                                                                                    <div class="table-responsive text-center">
+                                                                                                    <div class="table-responsive-md text-center">
                                                                                                         <table class="table table-sm table-bordered">
                                                                                                             <!--<thead>-->
                                                                                                                 <tr>
                                                                                                                     <th scope="col">Aula</th>
-                                                                                                                    <th scope="col">Dia</th>
+                                                                                                                    <th scope="col">Día</th>
                                                                                                                     <th scope="col">Hora</th>
                                                                                                                     <th scope="col">Opciones</th>
                                                                                                                     <?php
@@ -2069,13 +2069,13 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                                                                 <td>' . date_format(date_create($modGrupoClaseProfesor->getFechaFin()),"d-m-Y") . '</td>';
                                                                                                                                 if ($contextAsignatura->getData()->getEstado() === "B" && ($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['coordinacion'] == true || unserialize($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['permisos'])->getPermisoGrupoClase() == true)) {
                                                                                                                                     echo '<td> <a href="grupoClaseProfesor.php?IdGrado=' . $contextGrado->getData()->getCodigoGrado() . '&EmailProfesor=' . $modGrupoClaseProfesor->getEmailProfesor() . '&IdAsignatura=' . $contextAsignatura->getData()->getIdAsignatura() . '&IdGrupoClase=' . $grupo->getIdGrupoClase() . '">
-                                                                                                                                    <button type="button" class="btn btn-warning btn-sm" id="btn-form">
-                                                                                                                                    Modificar Profesor
+                                                                                                                                    <button type="button" class="btn btn-warning btn-sm btn-block" id="btn-form">
+                                                                                                                                    Modificar
                                                                                                                                     </button>
                                                                                                                                     </a>
                                                                                                                                     <a href="borrarGrupoClaseProfesor.php?IdGrado=' . $contextGrado->getData()->getCodigoGrado() . '&EmailProfesor=' . $modGrupoClaseProfesor->getEmailProfesor() . '&IdAsignatura=' . $contextAsignatura->getData()->getIdAsignatura() . '&IdGrupoClase=' . $grupo->getIdGrupoClase() . '">
-                                                                                                                                    <button type="button" class="btn btn-danger btn-sm" id="btn-form">
-                                                                                                                                    Eliminar Profesor
+                                                                                                                                    <button type="button" class="btn btn-danger btn-sm btn-block" id="btn-form">
+                                                                                                                                    Eliminar
                                                                                                                                     </button>
                                                                                                                                     </a></td>';
                                                                                                                                 }
@@ -2097,13 +2097,13 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                                                         <td>' . date("H:i", strtotime($horario->getHoraInicio())) . ' - ' . date("H:i", strtotime($horario->getHoraFin())) . '</td>';
                                                                                                                         if ($contextAsignatura->getData()->getEstado() === "B" && ($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['coordinacion'] == true || unserialize($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['permisos'])->getPermisoGrupoClase() == true)) {
                                                                                                                             echo '<td> <a href="horarioClase.php?IdGrado=' . $contextGrado->getData()->getCodigoGrado() . '&IdHorarioClase=' . $horario->getIdHorarioClase() . '&IdAsignatura=' . $contextAsignatura->getData()->getIdAsignatura() . '">
-                                                                                                                            <button type="button" class="btn btn-warning btn-sm" id="btn-form">
-                                                                                                                            Modificar Horario
+                                                                                                                            <button type="button" class="btn btn-warning btn-sm btn-block" id="btn-form">
+                                                                                                                            Modificar
                                                                                                                             </button>
                                                                                                                             </a>
                                                                                                                             <a href="borrarHorarioClase.php?IdGrado=' . $contextGrado->getData()->getCodigoGrado() . '&IdHorarioClase=' . $horario->getIdHorarioClase() . '&IdAsignatura=' . $contextAsignatura->getData()->getIdAsignatura() . '">
-                                                                                                                            <button type="button" class="btn btn-danger btn-sm" id="btn-form">
-                                                                                                                            Eliminar Horario
+                                                                                                                            <button type="button" class="btn btn-danger btn-sm btn-block" id="btn-form">
+                                                                                                                            Eliminar
                                                                                                                             </button>
                                                                                                                             </a></td>';
                                                                                                                         }
@@ -2138,7 +2138,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                                 <div class="card-header" id="heading<?php echo $grupo->getIdGrupoClase() ?>">
                                                                                                     <h2 class="mb-0">
                                                                                                         <button class="btn btn-link text-dark collapsed" type="button" data-toggle="collapse" data-target="#collapse<?php echo $grupo->getIdGrupoClase() ?>" aria-expanded="true" aria-controls="collapse<?php echo $grupo->getIdGrupoClase() ?>">
-                                                                                                            <?php echo $grupo->getLetra() ?>
+                                                                                                            <?php echo 'Grupo: '.$grupo->getLetra().'' ?>
                                                                                                         </button>
                                                                                                     </h2>
                                                                                                 </div>
@@ -2152,12 +2152,12 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                                         $context = new es\ucm\Context(LIST_HORARIO_CLASE, $grupo->getIdGrupoClase());
                                                                                                         $contextHorarioClase = $controller->action($context);
                                                                                                         if ($contextHorarioClase->getEvent() === LIST_HORARIO_CLASE_OK) { ?>
-                                                                                                            <div class="table-responsive text-center">
+                                                                                                            <div class="table-responsive-md text-center">
                                                                                                                 <table class="table table-sm table-bordered">
                                                                                                                     <!--<thead> -->
                                                                                                                         <tr>
                                                                                                                             <th scope="col">Aula</th>
-                                                                                                                            <th scope="col">Dia</th>
+                                                                                                                            <th scope="col">Día</th>
                                                                                                                             <th scope="col">Hora</th>
                                                                                                                             <?php
                                                                                                                             $numeroHorarios = count($contextHorarioClase->getData()) + 1;
