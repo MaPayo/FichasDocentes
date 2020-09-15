@@ -389,13 +389,31 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                         <th scope="col" colspan="4">Información adicional</th>
                                                     </thead>
                                                     <tbody>
+                                                         <tr>
+                                                            <th scope="col" colspan="1">Ficha en inglés</th>
+                                                            <td colspan="1"> <?php
+                                                            if (empty($contextAsignatura->getData()->getNombreAsignaturaIngles())) {
+                                                                echo 'No';
+                                                            } else {
+                                                                echo 'Sí';
+                                                            }
+                                                            ?> </td> 
+                                                            <th scope="col" colspan="1">Nombre</th>
+                                                            <td colspan="1"> <?php
+                                                            if (empty($contextAsignatura->getData()->getNombreAsignaturaIngles())) {
+                                                                echo '-';
+                                                            } else {
+                                                                echo $contextAsignatura->getData()->getNombreAsignaturaIngles();
+                                                            }
+                                                            ?> </td> 
+                                                        </tr>
                                                         <tr>
                                                             <th scope="col" colspan="2">Estado de la ficha</th>
                                                             <td colspan="2" <?php
                                                             if ($contextAsignatura->getData()->getEstado() == "B") {
-                                                                echo 'class="text-primary"><strong>Borrador (Edición permitida)</strong>';
+                                                                echo 'class="text-info"><strong>Borrador (Edición permitida)</strong>';
                                                             } elseif ($contextAsignatura->getData()->getEstado() == "V") {
-                                                                echo 'class="text-primary"><strong>Validado (Edición bloqueada)</strong>';
+                                                                echo 'class="text-info"><strong>Validado (Edición bloqueada)</strong>';
                                                             } elseif ($contextAsignatura->getData()->getEstado() == "C") {
                                                                 echo 'class="text-success"><strong>Consolidado (Información actualizada)</strong>';
                                                             }
@@ -1783,7 +1801,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                     $context = new es\ucm\Context(LIST_MODHORARIO_LABORATORIO, $grupo->getIdGrupoLab());
                                                                                     $contextModHorarioLaboratorio = $controller->action($context);
                                                                                     if ($contextModHorarioLaboratorio->getEvent() === LIST_MODHORARIO_LABORATORIO_OK) { ?>
-                                                                                        <div class="table-responsive-md text-center">
+                                                                                        <div class="table-responsive text-center">
                                                                                             <table class="table table-sm table-bordered">
                                                                                                 <!--<thead>-->
                                                                                                     <tr>
@@ -1899,7 +1917,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                             $context = new es\ucm\Context(LIST_HORARIO_LABORATORIO, $grupo->getIdGrupoLab());
                                                                                             $contextHorarioLaboratorio = $controller->action($context);
                                                                                             if ($contextHorarioLaboratorio->getEvent() === LIST_HORARIO_LABORATORIO_OK) { ?>
-                                                                                                <div class="table-responsive-md text-center">
+                                                                                                <div class="table-responsive text-center">
                                                                                                     <table class="table table-sm  table-bordered">
                                                                                                         <!--<thead>-->
                                                                                                             <tr>
@@ -2036,7 +2054,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                                 $context = new es\ucm\Context(LIST_MODHORARIO_CLASE, $grupo->getIdGrupoClase());
                                                                                                 $contextModHorarioClase = $controller->action($context);
                                                                                                 if ($contextModHorarioClase->getEvent() === LIST_MODHORARIO_CLASE_OK) { ?>
-                                                                                                    <div class="table-responsive-md text-center">
+                                                                                                    <div class="table-responsive text-center">
                                                                                                         <table class="table table-sm table-bordered">
                                                                                                             <!--<thead>-->
                                                                                                                 <tr>
@@ -2152,7 +2170,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                                         $context = new es\ucm\Context(LIST_HORARIO_CLASE, $grupo->getIdGrupoClase());
                                                                                                         $contextHorarioClase = $controller->action($context);
                                                                                                         if ($contextHorarioClase->getEvent() === LIST_HORARIO_CLASE_OK) { ?>
-                                                                                                            <div class="table-responsive-md text-center">
+                                                                                                            <div class="table-responsive text-center">
                                                                                                                 <table class="table table-sm table-bordered">
                                                                                                                     <!--<thead> -->
                                                                                                                         <tr>
