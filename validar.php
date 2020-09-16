@@ -38,8 +38,10 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
           $controller = new ControllerImplements();
           $context = new Context(FIND_ASIGNATURA,$IdAsignatura);
           $contextAsignatura = $controller->action($context);
+          $context = new Context(FIND_GRADO,$IdGrado);
+          $contextGrado = $controller->action($context);
 
-          if($contextAsignatura->getEvent() === FIND_ASIGNATURA_OK && $contextAsignatura->getData()->getCoordinadorAsignatura() == $_SESSION['idUsuario']){
+          if(($contextAsignatura->getEvent() === FIND_ASIGNATURA_OK && $contextAsignatura->getData()->getCoordinadorAsignatura() == $_SESSION['idUsuario'])||($contextGrado->getEvent() === FIND_GRADO_OK && $contextGrado->getData()->getCoordinadorGrado() == $_SESSION['idUsuario'])){
 
             $asignatura = new Asignatura(
              $contextAsignatura->getData()->getIdAsignatura(),

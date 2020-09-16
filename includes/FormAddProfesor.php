@@ -53,7 +53,13 @@ class FormAddProfesor extends Form
          $contextPYA = $controller->action($context);
 
          if ($contextPYA->getEvent() === FIND_PERMISOS_POR_PROFESOR_Y_ASIGNATURA_FAIL) {
-            $permisos = new Permisos(null, 0, 0, 0, 0, 0, 0, 0,  $datos['IdAsignatura'], $datos['email']);
+            $context = new Context(FIND_ASIGNATURA, $datos['IdAsignatura']);
+            $contextAsignatura = $controller->action($context);
+            if($contextAsignatura->getData()->getCoordinadorAsignatura()=== $datos['email']){
+                $permisos = new Permisos(null, 1, 0, 0, 1, 1, 1, 1,  $datos['IdAsignatura'], $datos['email']);
+            }else{
+                $permisos = new Permisos(null, 1, 0, 0, 1, 0, 0, 1,  $datos['IdAsignatura'], $datos['email']);
+            }
             $context = new Context(CREATE_PERMISOS, $permisos);
             $contextPermisos = $controller->action($context);
 

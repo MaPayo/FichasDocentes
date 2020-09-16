@@ -45,7 +45,7 @@ class FormCompetenciaAsignatura extends Form
 				if(!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())){
 					$html .= '<div class="form-group">
 					<label for="generalesI">Generales (Inglés)</label>
-					<textarea class="form-control" id="generalesI" rows="10" name="generalesI" required>' . $generalesI . '</textarea>
+					<textarea class="form-control" id="generalesI" rows="10" name="generalesI" >' . $generalesI . '</textarea>
 					</div>';
 				}
 			}
@@ -59,7 +59,7 @@ class FormCompetenciaAsignatura extends Form
 				if(!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())){
 					$html .= '<div class="form-group">
 					<label for="especificasI">Específicas (Inglés)</label>
-					<textarea class="form-control" id="especificasI" rows="10" name="especificasI" required>' . $especificasI . '</textarea>
+					<textarea class="form-control" id="especificasI" rows="10" name="especificasI" >' . $especificasI . '</textarea>
 					</div>';
 				}
 			}
@@ -73,7 +73,7 @@ class FormCompetenciaAsignatura extends Form
 				if(!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())){
 					$html .= '<div class="form-group">
 					<label for="basicasYTransversalesI">Básicas y transversales (Inglés)</label>
-					<textarea class="form-control" id="basicasYTransversalesI" rows="10" name="basicasYTransversalesI" required>' . $basicasYTransversalesI . '</textarea>
+					<textarea class="form-control" id="basicasYTransversalesI" rows="10" name="basicasYTransversalesI" >' . $basicasYTransversalesI . '</textarea>
 					</div>';
 				}
 			}
@@ -87,7 +87,7 @@ class FormCompetenciaAsignatura extends Form
 				if(!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())){
 					$html .= '<div class="form-group">
 					<label for="resultadosAprendizajeI">Resultados del aprendizaje (Inglés)</label>
-					<textarea class="form-control" id="resultadosAprendizajeI" rows="10" name="resultadosAprendizajeI" required>' . $resultadosAprendizajeI . '</textarea>
+					<textarea class="form-control" id="resultadosAprendizajeI" rows="10" name="resultadosAprendizajeI" >' . $resultadosAprendizajeI . '</textarea>
 					</div>';
 				}
 			}
@@ -133,9 +133,9 @@ class FormCompetenciaAsignatura extends Form
 
 				if(!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())){
 					$generalesI = self::clean($generalesI);
-					if (empty($generalesI)) {
+					/*if (empty($generalesI)) {
 						$erroresFormulario[] = "No has introducido las competencias generales en inglés";
-					}
+					}*/
 				}
 			}
 
@@ -147,9 +147,9 @@ class FormCompetenciaAsignatura extends Form
 
 				if(!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())){
 					$especificasI = self::clean($especificasI);
-					if (empty($especificasI)) {
+					/*if (empty($especificasI)) {
 						$erroresFormulario[] = "No has introducido las competencias específicas en inglés";
-					}
+					}*/
 				}
 			}
 
@@ -161,9 +161,9 @@ class FormCompetenciaAsignatura extends Form
 
 				if(!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())){
 					$basicasYTransversalesI = self::clean($basicasYTransversalesI);
-					if (empty($basicasYTransversalesI)) {
+					/*if (empty($basicasYTransversalesI)) {
 						$erroresFormulario[] = "No has introducido las competencias básicas y trasnversales en inglés";
-					}
+					}*/
 				}
 			}
 
@@ -175,9 +175,9 @@ class FormCompetenciaAsignatura extends Form
 
 				if(!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())){
 					$resultadosAprendizajeI = self::clean($resultadosAprendizajeI);
-					if (empty($resultadosAprendizajeI)) {
+					/*if (empty($resultadosAprendizajeI)) {
 						$erroresFormulario[] = "No has introducido los resultados del aprendizaje en inglés";
-					}
+					}*/
 				}
 			}
 

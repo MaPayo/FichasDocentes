@@ -48,7 +48,7 @@ class FormProgramaAsignatura extends Form
 				if (!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())) {
 					$html .= '<div class="form-group">
 					<label for="conocimientosPreviosI">Conocimientos previos (Inglés)</label>
-					<textarea class="form-control" id="conocimientosPreviosI" rows="10" name="conocimientosPreviosI" required>' . $conocimientosPreviosI . '</textarea>
+					<textarea class="form-control" id="conocimientosPreviosI" rows="10" name="conocimientosPreviosI" >' . $conocimientosPreviosI . '</textarea>
 					</div>';
 				}
 			}
@@ -62,7 +62,7 @@ class FormProgramaAsignatura extends Form
 				if (!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())) {
 					$html .= '<div class="form-group">
 					<label for="breveDescripcionI">Breve descripción (Inglés)</label>
-					<textarea class="form-control" id="breveDescripcionI" rows="10" name="breveDescripcionI" required>' . $breveDescripcionI . '</textarea>
+					<textarea class="form-control" id="breveDescripcionI" rows="10" name="breveDescripcionI" >' . $breveDescripcionI . '</textarea>
 					</div>';
 				}
 			}
@@ -76,7 +76,7 @@ class FormProgramaAsignatura extends Form
 				if (!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())) {
 					$html .= '<div class="form-group">
 					<label for="programaTeoricoI">Programa teórico (Inglés)</label>
-					<textarea class="form-control" id="programaTeoricoI" rows="10" name="programaTeoricoI" required>' . $programaTeoricoI . '</textarea>
+					<textarea class="form-control" id="programaTeoricoI" rows="10" name="programaTeoricoI" >' . $programaTeoricoI . '</textarea>
 					</div>';
 				}
 			}
@@ -90,7 +90,7 @@ class FormProgramaAsignatura extends Form
 				if (!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())) {
 					$html .= '<div class="form-group">
 					<label for="programaSeminariosI">Programa de seminarios (Inglés)</label>
-					<textarea class="form-control" id="programaSeminariosI" rows="10" name="programaSeminariosI" required>' . $programaSeminariosI . '</textarea>
+					<textarea class="form-control" id="programaSeminariosI" rows="10" name="programaSeminariosI" >' . $programaSeminariosI . '</textarea>
 					</div>';
 				}
 			}
@@ -104,7 +104,7 @@ class FormProgramaAsignatura extends Form
 				if (!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())) {
 					$html .= '<div class="form-group">
 					<label for="programaLaboratorioI">Programa de laboratorio (Inglés)</label>
-					<textarea class="form-control" id="programaLaboratorioI" rows="10" name="programaLaboratorioI" required>' . $programaLaboratorioI . '</textarea>
+					<textarea class="form-control" id="programaLaboratorioI" rows="10" name="programaLaboratorioI" >' . $programaLaboratorioI . '</textarea>
 					</div>';
 				}
 			}
@@ -153,9 +153,9 @@ class FormProgramaAsignatura extends Form
 
 				if (!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())) {
 					$conocimientosPreviosI = self::clean($conocimientosPreviosI);
-					if (empty($conocimientosPreviosI)) {
+					/*if (empty($conocimientosPreviosI)) {
 						$erroresFormulario[] = "No has introducido los conocimientos previos en inglés";
-					}
+					}*/
 				}
 			}
 
@@ -167,9 +167,9 @@ class FormProgramaAsignatura extends Form
 
 				if (!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())) {
 					$breveDescripcionI = self::clean($breveDescripcionI);
-					if (empty($breveDescripcionI)) {
+					/*if (empty($breveDescripcionI)) {
 						$erroresFormulario[] = "No has introducido la breve descripción en inglés";
-					}
+					}*/
 				}
 			}
 
@@ -181,9 +181,9 @@ class FormProgramaAsignatura extends Form
 
 				if (!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())) {
 					$programaTeoricoI = self::clean($programaTeoricoI);
-					if (empty($programaTeoricoI)) {
+					/*if (empty($programaTeoricoI)) {
 						$erroresFormulario[] = "No has introducido el programa teórico en inglés";
-					}
+					}*/
 				}
 			}
 
@@ -195,9 +195,9 @@ class FormProgramaAsignatura extends Form
 
 				if (!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())) {
 					$programaSeminariosI = self::clean($programaSeminariosI);
-					if (empty($programaSeminariosI)) {
+					/*if (empty($programaSeminariosI)) {
 						$erroresFormulario[] = "No has introducido el programa de seminarios en inglés";
-					}
+					}*/
 				}
 			}
 
@@ -209,9 +209,9 @@ class FormProgramaAsignatura extends Form
 
 				if (!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())) {
 					$programaLaboratorioI = self::clean($programaLaboratorioI);
-					if (empty($programaLaboratorioI)) {
+					/*if (empty($programaLaboratorioI)) {
 						$erroresFormulario[] = "No has introducido el programa de laboratorio en inglés";
-					}
+					}*/
 				}
 			}
 

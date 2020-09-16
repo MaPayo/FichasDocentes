@@ -33,7 +33,7 @@ class FormMetodologia extends Form
 		if(!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())){
 			$html .= '<div class="form-group">
 			<label for="metodologiaI">Metodología (Inglés)</label>
-			<textarea class="form-control" id="metodologiaI" rows="10" name="metodologiaI" required>' . $metodologiaI . '</textarea>
+			<textarea class="form-control" id="metodologiaI" rows="10" name="metodologiaI" >' . $metodologiaI . '</textarea>
 			</div>';
 		}
 
@@ -73,9 +73,9 @@ class FormMetodologia extends Form
 
 				if(!is_null($contextAsignatura->getData()->getNombreAsignaturaIngles())){
 					$metodologiaI = self::clean($metodologiaI);
-					if (empty($metodologiaI)) {
+					/*if (empty($metodologiaI)) {
 						$erroresFormulario[] = "No has introducido la metodología en inglés";
-					}
+					}*/
 				}
 			}
 

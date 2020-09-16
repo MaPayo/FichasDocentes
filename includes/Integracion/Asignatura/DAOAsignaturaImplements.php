@@ -76,7 +76,7 @@ class DAOAsignaturaImplements implements DAOAsignatura
     {
         $singletonDataSource = new SingletonDataSource();
         $dataSource = $singletonDataSource->getInstance();
-        $sql = "SELECT * FROM asignatura WHERE IdMateria = :idMateria";
+        $sql = "SELECT * FROM asignatura WHERE IdMateria = :idMateria ORDER BY NombreAsignatura";
         $values = array(':idMateria' => $idMateria);
         $results = $dataSource->executeQuery($sql, $values);
         return $results;

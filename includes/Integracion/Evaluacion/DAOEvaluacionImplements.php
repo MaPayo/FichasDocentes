@@ -45,7 +45,19 @@ class DAOEvaluacionImplements implements DAOEvaluacion
     {
         $singletonDataSource = new SingletonDataSource();
         $dataSource = $singletonDataSource->getInstance();
-        $sql = "UPDATE evaluacion SET IdEvaluacion = :idEvaluacion, RealizacionExamenes = :realizacionExamenes,RealizacionExamenesi = :realizacionExamenesI, PesoExamenes = :pesoExamenes,RealizacionActividades = :realizacionActividades,RealizacionActividadesi = :realizacionActividadesI,PesoActividades = :pesoActividades,RealizacionLaboratorio = :RealizacionLaboratorio,RealizacionLaboratorioi = :realizacionLaboratorioI,PesoLaboratorio = :pesoLaboratorio,CalificacionFinal = :calificacionFinal,CalificacionFinali = :calificacionFinalI,IdAsignatura = :idAsignatura WHERE IdAsignatura = :idAsignatura";
+        $sql = "UPDATE evaluacion SET IdEvaluacion = :idEvaluacion,
+        RealizacionExamenes = :realizacionExamenes,
+        RealizacionExamenesi = :realizacionExamenesI,
+        PesoExamenes = :pesoExamenes,
+        RealizacionActividades = :realizacionActividades,
+        RealizacionActividadesi = :realizacionActividadesI,
+        PesoActividades = :pesoActividades,
+        RealizacionLaboratorio = :realizacionLaboratorio,
+        RealizacionLaboratorioi = :realizacionLaboratorioI,
+        PesoLaboratorio = :pesoLaboratorio,
+        CalificacionFinal = :calificacionFinal,
+        CalificacionFinali = :calificacionFinalI,
+        IdAsignatura = :idAsignatura WHERE IdAsignatura = :idAsignatura";
         $values = array(
             ':idEvaluacion' => $evaluacion->getIdEvaluacion(),
             ':realizacionExamenes' => $evaluacion->getRealizacionExamenes(),
@@ -55,7 +67,7 @@ class DAOEvaluacionImplements implements DAOEvaluacion
             ':realizacionActividadesI' => $evaluacion->getRealizacionActividadesI(),
             ':pesoActividades' => $evaluacion->getPesoActividades(),
             ':realizacionLaboratorio' => $evaluacion->getRealizacionLaboratorio(),
-            ':realizacionLaboratorio' => $evaluacion->getRealizacionLaboratorioI(),
+            ':realizacionLaboratorioI' => $evaluacion->getRealizacionLaboratorioI(),
             ':pesoLaboratorio' => $evaluacion->getPesolaboratorio(),
             ':calificacionFinal' => $evaluacion->getCalificacionFinal(),
             ':calificacionFinalI' => $evaluacion->getCalificacionFinalI(),
