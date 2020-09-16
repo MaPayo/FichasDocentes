@@ -71,20 +71,28 @@ class FormGeneracion extends Form
         $siguiente = $datos['actual']+1;
         $curso = "20$actual/$siguiente";
         //$folder = /tmp/storage/output
-        $folder = STORAGE . '/' . $datos['email']; //Ruta donde se almacenan los datos CAMBIAR
+        $folder = STORAGE . '/' . $_SESSION['idUsuario']; //Ruta donde se almacenan los datos CAMBIAR
         if (!is_dir($folder)) {
             mkdir($folder);
+        } else {
+            $files = array_diff(scandir($folder), array('.', '..'));
+            var_dump($files);
+            foreach ($files as $file) {
+                unlink("$folder/$file");
+            }
+            rmdir($folder);
+            mkdir($folder);
         }
-        var_dump($folder);
         if (!empty($_POST['asignaturas']))
             foreach ($_POST['asignaturas'] as $idAsignatura) {
                 //Para cada una de las asignaturas marcadas recogemos su id y creamos el nombre de archivo
                 $context = new Context(FIND_ASIGNATURA, $idAsignatura);
                 $asignatura = $controller->action($context);
-                $filehtml = "$actual-$siguiente-español-$idAsignatura.html";
-                $filepdf = "$actual-$siguiente-español-$idAsignatura.pdf";
-                $filehtmlI = "$actual-$siguiente-english-$idAsignatura.html";
-                $filepdfI = "$actual-$siguiente-english-$idAsignatura.pdf";
+                $estado = $asignatura->getData()->getEstado();
+                $filehtml = "$actual-$siguiente-español-$idAsignatura-$estado.html";
+                $filepdf = "$actual-$siguiente-español-$idAsignatura-$estado.pdf";
+                $filehtmlI = "$actual-$siguiente-english-$idAsignatura-$estado.html";
+                $filepdfI = "$actual-$siguiente-english-$idAsignatura-$estado.pdf";
                 $rutehtml = "$folder/$filehtml";
                 $rutepdf = "$folder/$filepdf";
                 $rutehtmlI = "$folder/$filehtmlI";

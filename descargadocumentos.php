@@ -45,29 +45,29 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                     for ($i=2; $i < count($ficheros)+2; $i++) { 
                       //Si i es par, es html
                       if($i%2===0){
-                        $idAsignatura = explode('-', $ficheros[$i]);
-                        $context = new es\ucm\Context(FIND_ASIGNATURA, $idAsignatura[3]);
+                        $datostitulo = explode('-', $ficheros[$i]);
+                        $context = new es\ucm\Context(FIND_ASIGNATURA, $datostitulo[3]);
                         $asignatura = $controller->action($context);
-                        echo "<p><a href='download.php?file=$ficheros[$i]'>".$asignatura->getData()->getNombreAsignatura()."(".$idAsignatura[2].") HTML</a></p>";
+                        echo "<p><a href='download.php?file=$ficheros[$i]'>".$datostitulo[0]."- ".$datostitulo[1]." ".$asignatura->getData()->getNombreAsignatura()."(".$datostitulo[2].") HTML</a></p>";
                       } else{
-                        $idAsignatura = explode('-',$ficheros[$i]);
-                        $context = new es\ucm\Context(FIND_ASIGNATURA, $idAsignatura[3]);
+                        $datostitulo = explode('-',$ficheros[$i]);
+                        $context = new es\ucm\Context(FIND_ASIGNATURA, $datostitulo[3]);
                         $asignatura = $controller->action($context);
-                        echo "<p><a href='download.php?file=$ficheros[$i]'>".$asignatura->getData()->getNombreAsignatura()."(".$idAsignatura[2].") PDF</a></p>";
+                        echo "<p><a href='download.php?file=$ficheros[$i]'>".$datostitulo[0]."- ".$datostitulo[1]." ".$asignatura->getData()->getNombreAsignatura()."(".$datostitulo[2].") PDF</a></p>";
                       }
                     }
-                  }else{
-                    echo '
-                    <div class="alert alert-warning" role="alert">
-                    <h2 class="card-title text-center">No se han encontrado archivos</h2>
-                    <h5 class="text-center">No hay ningún archivo generado en este momento</h5>
-                    </div>';
                   }
-                  echo '<a href="index.php">
+                  echo '<div><a href="index.php">
                   <button type="button" class="btn btn-secondary" id="btn-form">
                   Volver a Inicio
                   </button>
-                  </a>';
+                  </a>
+                  <a href="downloadzip.php">
+                  <button type="button" class="btn btn-secondary" id="btn-form">
+                  Descargar zip con todas las fichas generadas.
+                  </button>
+                  </a>
+                  </div>';
                   ?>
                 </div>
               </div>
