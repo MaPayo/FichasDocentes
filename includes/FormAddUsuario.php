@@ -13,7 +13,9 @@ class FormAddUsuario extends Form
     {
     
         
-        $html = ' <p>Introduce el email del usuario que quieres añadir <input name="emailUsuario"></p>';
+        $html = ' <p>Email del usuario <input name="emailUsuario" required></p>
+        <p>Nombre del usuario <input name="nombreUsuario" required></p>
+        <p>Facultad del usuario <input name="facultadUsuario"></p>';
        // $html .= '<input type="text" name="EmailProfesor value="'.$email.'" hidden>';
 
         $html .= '<div class="text-center">
@@ -34,6 +36,8 @@ class FormAddUsuario extends Form
         $erroresFormulario = array();
         $controller = new ControllerImplements();
         $EmailUsuario = $datos['emailUsuario'];
+        $NombreUsuario = $datos['nombreUsuario'];
+        $facultadUsuario =  isset($datos['facultadUsuario']) ? $datos['facultadUsuario'] : "";
 
         
         $context = new Context(FIND_USUARIO, $EmailUsuario);
@@ -48,7 +52,7 @@ class FormAddUsuario extends Form
             $contextCU = $controller->action($context);
             if($contextCU->getEvent()===CREATE_USUARIO_OK){
             //Creamos un profesor asociado
-            $profesor = new Profesor($EmailUsuario,"","","","","");
+            $profesor = new Profesor($EmailUsuario,$NombreUsuario,"","","",$facultadUsuario);
             $context = new Context(FIND_PROFESOR, $EmailUsuario);
             $contextFP = $controller->action($context);
             if($contextFP->getEvent()===FIND_PROFESOR_OK){
