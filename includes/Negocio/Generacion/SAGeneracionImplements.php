@@ -396,13 +396,23 @@ class SAGeneracionImplements implements SAGeneracion{
 	}
 	public static function generacionPDF($datos)
 	{
+		
 		$dompdf= new \Dompdf\Dompdf();
 		$content = file_get_contents($datos[2]);
 		var_dump($content);
+
+		$content = str_replace("page-break-before: always;","", $content);
+		$content = str_replace("age-break-after: avoid;","", $content);
+		$content .= "<style>
+		html, body {width:100% !important}
+		</style>";
+		
 		// instantiate and use the dompdf class
 		$dompdf->loadHtml($content);
 
-		$dompdf->setPaper('A4', 'portrait');
+		$dompdf->setPaper('A3', 'landscape');
+
+		
 		//$dompdf->setPaper(array(0,0,821.86,756.00),'executive'); //x inicio, y inicio, ancho final, alto final
 		//$dompdf->set_option('defaultFont', 'Courier');
 		// Render the HTML as PDF
