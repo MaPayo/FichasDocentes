@@ -357,7 +357,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                     <table class="table table-sm table-bordered">
                                                         <thead>
                                                             <tr>
-                                                                <th scope="col" colspan="6">Coordinador/a de Grado/Máster</th>
+                                                                <th scope="col" colspan="6">Coordinador/a de la asignatura</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
