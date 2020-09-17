@@ -88,9 +88,8 @@ class SAGeneracionImplements implements SAGeneracion{
 		//Comprobamos si existe mod
 		$sa = $factoriesSA->createSAModGrupoClase();
 		$nmod = $sa->listModGrupoClase($idAsignatura);
-		if($nmod !== null){
-			$rowsGrupoClaseProfesorMod = $nmod;
-		}
+		$rowsGrupoClaseProfesorMod = $nmod;
+		
 		//Profesores del laboratorio
 		$sa = $factoriesSA->createSAGrupoLaboratorio();
 		$n = $sa->listGrupoLaboratorio($idAsignatura);
@@ -98,9 +97,8 @@ class SAGeneracionImplements implements SAGeneracion{
 		//Comprobamos si existe mod
 		$sa = $factoriesSA->createSAModGrupoLaboratorio();
 		$nmod = $sa->listModGrupoLaboratorio($idAsignatura);
-		if($nmod !== null){
 			$rowsGrupoLaboratorioProfesorMod = $nmod;
-		}
+		
 		//Empezamos con los textos tochos y los mods
 		//Por ahora sin pandoc para poder probarlo
 		//Competencia Asignatura
@@ -283,9 +281,8 @@ class SAGeneracionImplements implements SAGeneracion{
 		//Comprobamos si existe mod
 		$sa = $factoriesSA->createSAModGrupoClase();
 		$nmod = $sa->listModGrupoClase($idAsignatura);
-		if($nmod !== null){
-			$rowsGrupoClaseProfesorMod = $nmod;
-		}
+		$rowsGrupoClaseProfesorMod = $nmod;
+		
 		//Profesores del laboratorio
 		$sa = $factoriesSA->createSAGrupoLaboratorio();
 		$n = $sa->listGrupoLaboratorio($idAsignatura);
@@ -293,9 +290,8 @@ class SAGeneracionImplements implements SAGeneracion{
 		//Comprobamos si existe mod
 		$sa = $factoriesSA->createSAModGrupoLaboratorio();
 		$nmod = $sa->listModGrupoLaboratorio($idAsignatura);
-		if($nmod !== null){
-			$rowsGrupoLaboratorioProfesorMod = $nmod;
-		}
+		$rowsGrupoLaboratorioProfesorMod = $nmod;
+
 		//Empezamos con los textos tochos y los mods
 		//Por ahora sin pandoc para poder probarlo
 		//Competencia Asignatura
@@ -386,7 +382,7 @@ class SAGeneracionImplements implements SAGeneracion{
         ob_clean();
 		ob_start();
 
-		require('includes/Presentacion/Vistas/html/Plantillas/guiaDocenteTemplate.php');
+		require('includes/Presentacion/Vistas/html/Plantillas/guiaDocenteTemplateIngles.php');
 		
 		$content = ob_get_contents();
 		ob_clean();
@@ -396,7 +392,6 @@ class SAGeneracionImplements implements SAGeneracion{
 	}
 	public static function generacionPDF($datos)
 	{
-		
 		$dompdf= new \Dompdf\Dompdf();
 		$content = file_get_contents($datos[2]);
 		var_dump($content);
