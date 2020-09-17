@@ -3137,7 +3137,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                 <p class="card-text">
                                                                                     <?php
                                                                                     if ($contextEvaluacion->getEvent() === FIND_EVALUACION_OK) {
-                                                                                        $html=  $pandoc->convert($contextModEvaluacion->getData()->getCalificacionFinalI(), "markdown_github", "html");
+                                                                                        $html=  $pandoc->convert($contextEvaluacion->getData()->getCalificacionFinalI(), "markdown_github", "html");
                                                                                         echo $html;
                                                                                     }
                                                                                     ?>

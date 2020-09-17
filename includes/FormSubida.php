@@ -159,7 +159,13 @@ class FormSubida extends Form
                                         $context = new Context(FIND_PERMISOS_POR_PROFESOR_Y_ASIGNATURA, $comparacion);
                                         $contextPermisos = $controller->action($context);
                                         if ($contextPermisos->getEvent() === FIND_PERMISOS_POR_PROFESOR_Y_ASIGNATURA_FAIL) {
-                                            $permisos = new Permisos(null, 0, 0, 0, 0, 0, 0, 0, $codigo_asignatura, $email_profesor);
+                                            if($as->getData()->getCoordinadorAsignatura() === $email_profesor){
+                                            $permisos = new Permisos(null, 1, 0, 0, 1, 1, 1, 1, $codigo_asignatura, $email_profesor);
+
+                                            }
+                                            else{
+                                            $permisos = new Permisos(null, 1, 0, 0, 1, 0, 0, 1, $codigo_asignatura, $email_profesor);
+                                            }
                                             $context = new Context(CREATE_PERMISOS, $permisos);
                                             $contextProfesor = $controller->action($context);
                                             if ($contextProfesor->getEvent() === CREATE_PERMISOS_FAIL) {
