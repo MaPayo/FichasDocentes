@@ -183,8 +183,8 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                   foreach ($updatehor->getData() as $hor) {
                     $context = new Context(CREATE_HORARIO_LABORATORIO, $hor);
                     $update = $controller->action($context);
-                    $context = new Context(DELETE_MODHORARIO_LABORATORIO, $hor->getIdHorarioLab());
-                    $delete = $controller->action($context);
+                    /*$context = new Context(DELETE_MODHORARIO_LABORATORIO, $hor->getIdHorarioLab());
+                    $delete = $controller->action($context);*/
                   }
                 }
 
@@ -194,16 +194,16 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                   foreach ($updateprof->getData() as $prof) {
                     $context = new Context(CREATE_GRUPO_LABORATORIO_PROFESOR, $prof);
                     $update = $controller->action($context);
-                    $arrayGrupoLaboratorioProfesor = array();
+                    /*$arrayGrupoLaboratorioProfesor = array();
                     $arrayGrupoLaboratorioProfesor['idGrupoLaboratorio'] = $prof->getIdGrupoLab();
                     $arrayGrupoLaboratorioProfesor['emailProfesor'] = $prof->getEmailProfesor();
                     $context = new Context(DELETE_MODGRUPO_LABORATORIO_PROFESOR, $arrayGrupoLaboratorioProfesor);
-                    $delete = $controller->action($context);
+                    $delete = $controller->action($context);*/
                   }
                 }
 
-                $context = new Context(DELETE_MODGRUPO_LABORATORIO, $modlab->getIdGrupoLab());
-                $delete = $controller->action($context);
+                /*$context = new Context(DELETE_MODGRUPO_LABORATORIO, $modlab->getIdGrupoLab());
+                $delete = $controller->action($context);*/
               }
             }
 
@@ -262,8 +262,8 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                   foreach ($updatehor->getData() as $hor) {
                     $context = new Context(CREATE_HORARIO_CLASE, $hor);
                     $update = $controller->action($context);
-                    $context = new Context(DELETE_MODHORARIO_CLASE, $hor->getIdHorarioClase());
-                    $delete = $controller->action($context);
+                    /*$context = new Context(DELETE_MODHORARIO_CLASE, $hor->getIdHorarioClase());
+                    $delete = $controller->action($context);*/
                   }
                 }
 
@@ -273,16 +273,16 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                   foreach ($updateprof->getData() as $prof) {
                     $context = new Context(CREATE_GRUPO_CLASE_PROFESOR, $prof);
                     $update = $controller->action($context);
-                    $arrayGrupoClaseProfesor = array();
+                    /*$arrayGrupoClaseProfesor = array();
                     $arrayGrupoClaseProfesor['idGrupoClase'] = $prof->getIdGrupoClase();
                     $arrayGrupoClaseProfesor['emailProfesor'] = $prof->getEmailProfesor();
                     $context = new Context(DELETE_MODGRUPO_CLASE_PROFESOR, $arrayGrupoClaseProfesor);
-                    $delete = $controller->action($context);
+                    $delete = $controller->action($context);*/
                   }
                 }
 
-                $context = new Context(DELETE_MODGRUPO_CLASE, $modclase->getIdGrupoClase());
-                $delete = $controller->action($context);
+                /*$context = new Context(DELETE_MODGRUPO_CLASE, $modclase->getIdGrupoClase());
+                $delete = $controller->action($context);*/
               }
             }
 

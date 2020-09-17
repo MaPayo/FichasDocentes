@@ -71,12 +71,12 @@ class FormGrupoClaseProfesor extends Form
 
 		<div class="form-group col-md-6">
 		<label for="fecha">Fecha de inicio</label>
-		<input class="form-control" type="date" id="fechaInicio" name="fechaInicio" value="' . $fechaInicio . '" required/>
+		<input class="form-control" type="date" id="fechaInicio" name="fechaInicio" value="' . $fechaInicio . '"/>
 		</div>
 
 		<div class="form-group col-md-6">
 		<label for="fecha">Fecha de finalización</label>
-		<input class="form-control" type="date" id="fechaFin" name="fechaFin" value="' . $fechaFin . '" required/>
+		<input class="form-control" type="date" id="fechaFin" name="fechaFin" value="' . $fechaFin . '"/>
 		</div>
 
 		</div>
@@ -115,10 +115,18 @@ class FormGrupoClaseProfesor extends Form
 		$fechaInicio = self::clean($fechaInicio);
 		$fechaFin = isset($datos['fechaFin']) ? $datos['fechaFin'] : null;
 		$fechaFin = self::clean($fechaFin);
-		if (empty($fechaInicio) || empty($fechaFin)) {
+		/*if (empty($fechaInicio) || empty($fechaFin)) {
 			$erroresFormulario[] = "No has introducido alguna de las fechas";
 		} else if ($fechaFin <= $fechaInicio) {
 			$erroresFormulario[] = "La fecha de inicio es mayor o igual que la fecha de finalización";
+		}*/
+
+		if (!empty($fechaInicio) || !empty($fechaFin)) {
+			if (empty($fechaInicio) || empty($fechaFin)) {
+				$erroresFormulario[] = "No has introducido alguna de las fechas";
+			} else if ($fechaFin <= $fechaInicio) {
+				$erroresFormulario[] = "La fecha de inicio es mayor o igual que la fecha de finalización";
+			}
 		}
 
 

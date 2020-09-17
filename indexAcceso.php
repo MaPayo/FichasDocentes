@@ -527,7 +527,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                             <p class="card-text">
                                                                                 <?php
                                                                                 if ($contextModPrograma->getEvent() === FIND_MODPROGRAMA_ASIGNATURA_OK) {
-                                                                                  $html=  $pandoc->convert($contextModPrograma->getData()->getConocimientosPrevios(), "markdown_github", "html");
+                                                                                    $html =  $pandoc->convert($contextModPrograma->getData()->getConocimientosPrevios(), "markdown_github", "html");
                                                                                     echo $html;
                                                                                 }
                                                                                 ?>
@@ -540,7 +540,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                             <p class="card-text">
                                                                                 <?php
                                                                                 if ($contextPrograma->getEvent() === FIND_PROGRAMA_ASIGNATURA_OK) {
-                                                                                    $html=  $pandoc->convert($contextPrograma->getData()->getConocimientosPrevios(), "markdown_github", "html");
+                                                                                    $html =  $pandoc->convert($contextPrograma->getData()->getConocimientosPrevios(), "markdown_github", "html");
                                                                                     echo $html;
                                                                                 }
                                                                                 ?>
@@ -591,7 +591,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                 <p class="card-text">
                                                                                     <?php
                                                                                     if ($contextModPrograma->getEvent() === FIND_MODPROGRAMA_ASIGNATURA_OK) {
-                                                                                        $html=  $pandoc->convert($contextModPrograma->getData()->getConocimientosPreviosI, "markdown_github", "html");
+                                                                                        $html =  $pandoc->convert($contextModPrograma->getData()->getConocimientosPreviosI, "markdown_github", "html");
                                                                                         echo $html;
                                                                                     }
                                                                                     ?>
@@ -604,7 +604,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                 <p class="card-text">
                                                                                     <?php
                                                                                     if ($contextPrograma->getEvent() === FIND_PROGRAMA_ASIGNATURA_OK) {
-                                                                                        $html=  $pandoc->convert($contextPrograma->getData()->getConocimientosPreviosI, "markdown_github", "html");
+                                                                                        $html =  $pandoc->convert($contextPrograma->getData()->getConocimientosPreviosI, "markdown_github", "html");
                                                                                         echo $html;
                                                                                     }
                                                                                     ?>
@@ -652,15 +652,14 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                             </div>
                                                             <div id="collapseThreeProg" class="collapse" aria-labelledby="headingThree" data-parent="#accordionProgram">
                                                                 <div class="card-body">
-                                                                <div class="card">
+                                                                    <div class="card">
                                                                         <div class="card-body">
                                                                             <h4 class="card-title">Borrador</h4>
                                                                             <p class="card-text">
                                                                                 <?php
                                                                                 if ($contextModPrograma->getEvent() === FIND_MODPROGRAMA_ASIGNATURA_OK) {
-                                                                                    $html=  $pandoc->convert($contextModPrograma->getData()->getBreveDescripcion(), "markdown_github", "html");
+                                                                                    $html =  $pandoc->convert($contextModPrograma->getData()->getBreveDescripcion(), "markdown_github", "html");
                                                                                     echo $html;
-                                                                                    
                                                                                 }
                                                                                 ?>
                                                                             </p>
@@ -672,7 +671,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                             <p class="card-text">
                                                                                 <?php
                                                                                 if ($contextPrograma->getEvent() === FIND_PROGRAMA_ASIGNATURA_OK) {
-                                                                                    $html=  $pandoc->convert($contextPrograma->getData()->getBreveDescripcion(), "markdown_github", "html");
+                                                                                    $html =  $pandoc->convert($contextPrograma->getData()->getBreveDescripcion(), "markdown_github", "html");
                                                                                     echo $html;
                                                                                 }
                                                                                 ?>
@@ -717,14 +716,14 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                 </div>
                                                                 <div id="collapseFourProg" class="collapse" aria-labelledby="headingFour" data-parent="#accordionProgram">
                                                                     <div class="card-body">
-                                                                    <div class="card">
+                                                                        <div class="card">
                                                                             <div class="card-body">
                                                                                 <h4 class="card-title">Borrador</h4>
                                                                                 <p class="card-text">
                                                                                     <?php
                                                                                     if ($contextModPrograma->getEvent() === FIND_MODPROGRAMA_ASIGNATURA_OK) {
-                                                                                        $html=  $pandoc->convert($contextModPrograma->getData()->getBreveDescripcionI(), "markdown_github", "html");
-                                                                                    echo $html;
+                                                                                        $html =  $pandoc->convert($contextModPrograma->getData()->getBreveDescripcionI(), "markdown_github", "html");
+                                                                                        echo $html;
                                                                                     }
                                                                                     ?>
                                                                                 </p>
@@ -736,8 +735,8 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                 <p class="card-text">
                                                                                     <?php
                                                                                     if ($contextPrograma->getEvent() === FIND_PROGRAMA_ASIGNATURA_OK) {
-                                                                                        $html=  $pandoc->convert($contextPrograma->getData()->getBreveDescripcionI(), "markdown_github", "html");
-                                                                                    echo $html;
+                                                                                        $html =  $pandoc->convert($contextPrograma->getData()->getBreveDescripcionI(), "markdown_github", "html");
+                                                                                        echo $html;
                                                                                     }
                                                                                     ?>
                                                                                 </p>
@@ -783,13 +782,13 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                             </div>
                                                             <div id="collapseFiveProg" class="collapse" aria-labelledby="headingFive" data-parent="#accordionProgram">
                                                                 <div class="card-body">
-                                                                <div class="card">
+                                                                    <div class="card">
                                                                         <div class="card-body">
                                                                             <h4 class="card-title">Borrador</h4>
                                                                             <p class="card-text">
                                                                                 <?php
                                                                                 if ($contextModPrograma->getEvent() === FIND_MODPROGRAMA_ASIGNATURA_OK) {
-                                                                                    $html=  $pandoc->convert($contextModPrograma->getData()->getProgramaTeorico(), "markdown_github", "html");
+                                                                                    $html =  $pandoc->convert($contextModPrograma->getData()->getProgramaTeorico(), "markdown_github", "html");
                                                                                     echo $html;
                                                                                 }
                                                                                 ?>
@@ -802,7 +801,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                             <p class="card-text">
                                                                                 <?php
                                                                                 if ($contextPrograma->getEvent() === FIND_PROGRAMA_ASIGNATURA_OK) {
-                                                                                    $html=  $pandoc->convert($contextPrograma->getData()->getProgramaTeorico(), "markdown_github", "html");
+                                                                                    $html =  $pandoc->convert($contextPrograma->getData()->getProgramaTeorico(), "markdown_github", "html");
                                                                                     echo $html;
                                                                                 }
                                                                                 ?>
@@ -847,14 +846,14 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                 </div>
                                                                 <div id="collapseSixProg" class="collapse" aria-labelledby="headingSix" data-parent="#accordionProgram">
                                                                     <div class="card-body">
-                                                                    <div class="card">
+                                                                        <div class="card">
                                                                             <div class="card-body">
                                                                                 <h4 class="card-title">Borrador</h4>
                                                                                 <p class="card-text">
                                                                                     <?php
                                                                                     if ($contextModPrograma->getEvent() === FIND_MODPROGRAMA_ASIGNATURA_OK) {
-                                                                                        $html=  $pandoc->convert($contextModPrograma->getData()->getProgramaTeoricoI(), "markdown_github", "html");
-                                                                                    echo $html;
+                                                                                        $html =  $pandoc->convert($contextModPrograma->getData()->getProgramaTeoricoI(), "markdown_github", "html");
+                                                                                        echo $html;
                                                                                     }
                                                                                     ?>
                                                                                 </p>
@@ -866,7 +865,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                 <p class="card-text">
                                                                                     <?php
                                                                                     if ($contextPrograma->getEvent() === FIND_PROGRAMA_ASIGNATURA_OK) {
-                                                                                        $html=  $pandoc->convert($contextPrograma->getData()->getProgramaTeoricoI(), "markdown_github", "html");
+                                                                                        $html =  $pandoc->convert($contextPrograma->getData()->getProgramaTeoricoI(), "markdown_github", "html");
                                                                                         echo $html;
                                                                                     }
                                                                                     ?>
@@ -913,13 +912,13 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                             </div>
                                                             <div id="collapseSevenProg" class="collapse" aria-labelledby="headingSeven" data-parent="#accordionProgram">
                                                                 <div class="card-body">
-                                                                <div class="card">
+                                                                    <div class="card">
                                                                         <div class="card-body">
                                                                             <h4 class="card-title">Borrador</h4>
                                                                             <p class="card-text">
                                                                                 <?php
                                                                                 if ($contextModPrograma->getEvent() === FIND_MODPROGRAMA_ASIGNATURA_OK) {
-                                                                                    $html=  $pandoc->convert($contextModPrograma->getData()->getProgramaSeminarios(), "markdown_github", "html");
+                                                                                    $html =  $pandoc->convert($contextModPrograma->getData()->getProgramaSeminarios(), "markdown_github", "html");
                                                                                     echo $html;
                                                                                 }
                                                                                 ?>
@@ -932,7 +931,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                             <p class="card-text">
                                                                                 <?php
                                                                                 if ($contextPrograma->getEvent() === FIND_PROGRAMA_ASIGNATURA_OK) {
-                                                                                    $html=  $pandoc->convert($contextPrograma->getData()->getProgramaSeminarios(), "markdown_github", "html");
+                                                                                    $html =  $pandoc->convert($contextPrograma->getData()->getProgramaSeminarios(), "markdown_github", "html");
                                                                                     echo $html;
                                                                                 }
                                                                                 ?>
@@ -977,13 +976,13 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                 </div>
                                                                 <div id="collapseEightProg" class="collapse" aria-labelledby="headingEight" data-parent="#accordionProgram">
                                                                     <div class="card-body">
-                                                                    <div class="card">
+                                                                        <div class="card">
                                                                             <div class="card-body">
                                                                                 <h4 class="card-title">Borrador</h4>
                                                                                 <p class="card-text">
                                                                                     <?php
                                                                                     if ($contextModPrograma->getEvent() === FIND_MODPROGRAMA_ASIGNATURA_OK) {
-                                                                                        $html=  $pandoc->convert($contextModPrograma->getData()->getProgramaSeminariosI(), "markdown_github", "html");
+                                                                                        $html =  $pandoc->convert($contextModPrograma->getData()->getProgramaSeminariosI(), "markdown_github", "html");
                                                                                         echo $html;
                                                                                     }
                                                                                     ?>
@@ -996,7 +995,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                 <p class="card-text">
                                                                                     <?php
                                                                                     if ($contextPrograma->getEvent() === FIND_PROGRAMA_ASIGNATURA_OK) {
-                                                                                        $html=  $pandoc->convert($contextPrograma->getData()->getProgramaSeminariosI(), "markdown_github", "html");
+                                                                                        $html =  $pandoc->convert($contextPrograma->getData()->getProgramaSeminariosI(), "markdown_github", "html");
                                                                                         echo $html;
                                                                                     }
                                                                                     ?>
@@ -1042,15 +1041,14 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                             </div>
                                                             <div id="collapseNineProg" class="collapse" aria-labelledby="headingNine" data-parent="#accordionProgram">
                                                                 <div class="card-body">
-                                                                <div class="card">
+                                                                    <div class="card">
                                                                         <div class="card-body">
                                                                             <h4 class="card-title">Borrador</h4>
                                                                             <p class="card-text">
                                                                                 <?php
                                                                                 if ($contextModPrograma->getEvent() === FIND_MODPROGRAMA_ASIGNATURA_OK) {
-                                                                                    $html=  $pandoc->convert($contextModPrograma->getData()->getProgramaLaboratorio(), "markdown_github", "html");
-                                                                                        echo $html;
-                                                                                  
+                                                                                    $html =  $pandoc->convert($contextModPrograma->getData()->getProgramaLaboratorio(), "markdown_github", "html");
+                                                                                    echo $html;
                                                                                 }
                                                                                 ?>
                                                                             </p>
@@ -1062,7 +1060,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                             <p class="card-text">
                                                                                 <?php
                                                                                 if ($contextPrograma->getEvent() === FIND_PROGRAMA_ASIGNATURA_OK) {
-                                                                                    $html=  $pandoc->convert($contextPrograma->getData()->getProgramaLaboratorio(), "markdown_github", "html");
+                                                                                    $html =  $pandoc->convert($contextPrograma->getData()->getProgramaLaboratorio(), "markdown_github", "html");
                                                                                     echo $html;
                                                                                 }
                                                                                 ?>
@@ -1107,13 +1105,13 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                 </div>
                                                                 <div id="collapseTenProg" class="collapse" aria-labelledby="headingTen" data-parent="#accordionProgram">
                                                                     <div class="card-body">
-                                                                    <div class="card">
+                                                                        <div class="card">
                                                                             <div class="card-body">
                                                                                 <h4 class="card-title">Borrador</h4>
                                                                                 <p class="card-text">
                                                                                     <?php
                                                                                     if ($contextModPrograma->getEvent() === FIND_MODPROGRAMA_ASIGNATURA_OK) {
-                                                                                        $html=  $pandoc->convert($contextModPrograma->getData()->getProgramaLaboratorioI(), "markdown_github", "html");
+                                                                                        $html =  $pandoc->convert($contextModPrograma->getData()->getProgramaLaboratorioI(), "markdown_github", "html");
                                                                                         echo $html;
                                                                                     }
                                                                                     ?>
@@ -1126,7 +1124,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                 <p class="card-text">
                                                                                     <?php
                                                                                     if ($contextPrograma->getEvent() === FIND_PROGRAMA_ASIGNATURA_OK) {
-                                                                                        $html=  $pandoc->convert($contextPrograma->getData()->getProgramaLaboratorioI(), "markdown_github", "html");
+                                                                                        $html =  $pandoc->convert($contextPrograma->getData()->getProgramaLaboratorioI(), "markdown_github", "html");
                                                                                         echo $html;
                                                                                     }
                                                                                     ?>
@@ -1158,12 +1156,13 @@ use Jfcherng\Diff\Renderer\RendererConstant;
 
                                                 <?php if ($contextAsignatura->getData()->getEstado() === "B" && ($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['coordinacion'] == true || unserialize($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['permisos'])->getPermisoPrograma() == true)) { ?>
                                                     <div class="text-center">
-
-                                                        <a href="programaAsignatura.php?IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
-                                                            <button type="button" class="btn btn-success" id="btn-form">
-                                                                Crear Nuevo Borrador
-                                                            </button>
-                                                        </a>
+                                                        <?php if ($contextModPrograma->getEvent() === FIND_MODPROGRAMA_ASIGNATURA_FAIL) { ?>
+                                                            <a href="programaAsignatura.php?IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
+                                                                <button type="button" class="btn btn-success" id="btn-form">
+                                                                    Crear Nuevo Borrador
+                                                                </button>
+                                                            </a>
+                                                        <?php } ?>
                                                         <?php if ($contextModPrograma->getEvent() === FIND_MODPROGRAMA_ASIGNATURA_OK) { ?>
                                                             <a href="programaAsignatura.php?IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdModAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
                                                                 <button type="button" class="btn btn-warning" id="btn-form">
@@ -1205,13 +1204,13 @@ use Jfcherng\Diff\Renderer\RendererConstant;
 
                                                             <div id="collapseOneComp" class="collapse" aria-labelledby="headingOne" data-parent="#accordionCompetencia">
                                                                 <div class="card-body">
-                                                                <div class="card">
+                                                                    <div class="card">
                                                                         <div class="card-body">
                                                                             <h4 class="card-title">Borrador</h4>
                                                                             <p class="card-text">
                                                                                 <?php
                                                                                 if ($contextModCompetencias->getEvent() === FIND_MODCOMPETENCIAS_ASIGNATURA_OK) {
-                                                                                    $html=  $pandoc->convert($contextModCompetencias->getData()->getGenerales(), "markdown_github", "html");
+                                                                                    $html =  $pandoc->convert($contextModCompetencias->getData()->getGenerales(), "markdown_github", "html");
                                                                                     echo $html;
                                                                                 }
                                                                                 ?>
@@ -1224,7 +1223,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                             <p class="card-text">
                                                                                 <?php
                                                                                 if ($contextCompetencias->getEvent() === FIND_COMPETENCIAS_ASIGNATURA_OK) {
-                                                                                    $html=  $pandoc->convert($contextCompetencias->getData()->getGenerales(), "markdown_github", "html");
+                                                                                    $html =  $pandoc->convert($contextCompetencias->getData()->getGenerales(), "markdown_github", "html");
                                                                                     echo $html;
                                                                                 }
                                                                                 ?>
@@ -1269,13 +1268,13 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                 </div>
                                                                 <div id="collapseTwoComp" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionCompetencia">
                                                                     <div class="card-body">
-                                                                    <div class="card">
+                                                                        <div class="card">
                                                                             <div class="card-body">
                                                                                 <h4 class="card-title">Borrador</h4>
                                                                                 <p class="card-text">
                                                                                     <?php
                                                                                     if ($contextModCompetencias->getEvent() === FIND_MODCOMPETENCIAS_ASIGNATURA_OK) {
-                                                                                        $html=  $pandoc->convert($contextModCompetencias->getData()->getGeneralesI(), "markdown_github", "html");
+                                                                                        $html =  $pandoc->convert($contextModCompetencias->getData()->getGeneralesI(), "markdown_github", "html");
                                                                                         echo $html;
                                                                                     }
                                                                                     ?>
@@ -1288,7 +1287,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                 <p class="card-text">
                                                                                     <?php
                                                                                     if ($contextCompetencias->getEvent() === FIND_COMPETENCIAS_ASIGNATURA_OK) {
-                                                                                        $html=  $pandoc->convert($contextCompetencias->getData()->getGeneralesI(), "markdown_github", "html");
+                                                                                        $html =  $pandoc->convert($contextCompetencias->getData()->getGeneralesI(), "markdown_github", "html");
                                                                                         echo $html;
                                                                                     }
                                                                                     ?>
@@ -1335,14 +1334,14 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                             </div>
                                                             <div id="collapseThreeComp" class="collapse" aria-labelledby="headingThree" data-parent="#accordionCompetencia">
                                                                 <div class="card-body">
-                                                                <div class="card">
+                                                                    <div class="card">
                                                                         <div class="card-body">
                                                                             <h4 class="card-title">Borrador</h4>
                                                                             <p class="card-text">
                                                                                 <?php
                                                                                 if ($contextModCompetencias->getEvent() === FIND_MODCOMPETENCIAS_ASIGNATURA_OK) {
-                                                                                    $html=  $pandoc->convert($contextModCompetencias->getData()->getEspecificas(), "markdown_github", "html");
-                                                                                        echo $html;
+                                                                                    $html =  $pandoc->convert($contextModCompetencias->getData()->getEspecificas(), "markdown_github", "html");
+                                                                                    echo $html;
                                                                                 }
                                                                                 ?>
                                                                             </p>
@@ -1354,7 +1353,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                             <p class="card-text">
                                                                                 <?php
                                                                                 if ($contextCompetencias->getEvent() === FIND_COMPETENCIAS_ASIGNATURA_OK) {
-                                                                                    $html=  $pandoc->convert($contextCompetencias->getData()->getEspecificas(), "markdown_github", "html");
+                                                                                    $html =  $pandoc->convert($contextCompetencias->getData()->getEspecificas(), "markdown_github", "html");
                                                                                     echo $html;
                                                                                 }
                                                                                 ?>
@@ -1399,13 +1398,13 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                 </div>
                                                                 <div id="collapseFourComp" class="collapse" aria-labelledby="headingFour" data-parent="#accordionCompetencia">
                                                                     <div class="card-body">
-                                                                    <div class="card">
+                                                                        <div class="card">
                                                                             <div class="card-body">
                                                                                 <h4 class="card-title">Borrador</h4>
                                                                                 <p class="card-text">
                                                                                     <?php
                                                                                     if ($contextModCompetencias->getEvent() === FIND_MODCOMPETENCIAS_ASIGNATURA_OK) {
-                                                                                        $html=  $pandoc->convert($contextModCompetencias->getData()->getEspecificasI(), "markdown_github", "html");
+                                                                                        $html =  $pandoc->convert($contextModCompetencias->getData()->getEspecificasI(), "markdown_github", "html");
                                                                                         echo $html;
                                                                                     }
                                                                                     ?>
@@ -1418,7 +1417,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                 <p class="card-text">
                                                                                     <?php
                                                                                     if ($contextCompetencias->getEvent() === FIND_COMPETENCIAS_ASIGNATURA_OK) {
-                                                                                        $html=  $pandoc->convert($contextCompetencias->getData()->getEspecificasI(), "markdown_github", "html");
+                                                                                        $html =  $pandoc->convert($contextCompetencias->getData()->getEspecificasI(), "markdown_github", "html");
                                                                                         echo $html;
                                                                                     }
                                                                                     ?>
@@ -1465,15 +1464,14 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                             </div>
                                                             <div id="collapseFiveComp" class="collapse" aria-labelledby="headingFive" data-parent="#accordionCompetencia">
                                                                 <div class="card-body">
-                                                                <div class="card">
+                                                                    <div class="card">
                                                                         <div class="card-body">
                                                                             <h4 class="card-title">Borrador</h4>
                                                                             <p class="card-text">
                                                                                 <?php
                                                                                 if ($contextModCompetencias->getEvent() === FIND_MODCOMPETENCIAS_ASIGNATURA_OK) {
-                                                                                    $html=  $pandoc->convert($contextModCompetencias->getData()->getBasicasYTransversales(), "markdown_github", "html");
-                                                                                        echo $html;
-                                                                                  
+                                                                                    $html =  $pandoc->convert($contextModCompetencias->getData()->getBasicasYTransversales(), "markdown_github", "html");
+                                                                                    echo $html;
                                                                                 }
                                                                                 ?>
                                                                             </p>
@@ -1485,7 +1483,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                             <p class="card-text">
                                                                                 <?php
                                                                                 if ($contextCompetencias->getEvent() === FIND_COMPETENCIAS_ASIGNATURA_OK) {
-                                                                                    $html=  $pandoc->convert($contextCompetencias->getData()->getBasicasYTransversales(), "markdown_github", "html");
+                                                                                    $html =  $pandoc->convert($contextCompetencias->getData()->getBasicasYTransversales(), "markdown_github", "html");
                                                                                     echo $html;
                                                                                 }
                                                                                 ?>
@@ -1530,13 +1528,13 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                 </div>
                                                                 <div id="collapseSixComp" class="collapse" aria-labelledby="headingSix" data-parent="#accordionCompetencia">
                                                                     <div class="card-body">
-                                                                    <div class="card">
+                                                                        <div class="card">
                                                                             <div class="card-body">
                                                                                 <h4 class="card-title">Borrador</h4>
                                                                                 <p class="card-text">
                                                                                     <?php
                                                                                     if ($contextModCompetencias->getEvent() === FIND_MODCOMPETENCIAS_ASIGNATURA_OK) {
-                                                                                        $html=  $pandoc->convert($contextModCompetencias->getData()->getBasicasYTransversalesI(), "markdown_github", "html");
+                                                                                        $html =  $pandoc->convert($contextModCompetencias->getData()->getBasicasYTransversalesI(), "markdown_github", "html");
                                                                                         echo $html;
                                                                                     }
                                                                                     ?>
@@ -1549,7 +1547,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                 <p class="card-text">
                                                                                     <?php
                                                                                     if ($contextCompetencias->getEvent() === FIND_COMPETENCIAS_ASIGNATURA_OK) {
-                                                                                        $html=  $pandoc->convert($contextCompetencias->getData()->getBasicasYTransversalesI(), "markdown_github", "html");
+                                                                                        $html =  $pandoc->convert($contextCompetencias->getData()->getBasicasYTransversalesI(), "markdown_github", "html");
                                                                                         echo $html;
                                                                                     }
                                                                                     ?>
@@ -1597,13 +1595,13 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                             </div>
                                                             <div id="collapseSevenComp" class="collapse" aria-labelledby="headingSeven" data-parent="#accordionCompetencia">
                                                                 <div class="card-body">
-                                                                <div class="card">
+                                                                    <div class="card">
                                                                         <div class="card-body">
                                                                             <h4 class="card-title">Borrador</h4>
                                                                             <p class="card-text">
                                                                                 <?php
                                                                                 if ($contextModCompetencias->getEvent() === FIND_MODCOMPETENCIAS_ASIGNATURA_OK) {
-                                                                                    $html=  $pandoc->convert($contextModCompetencias->getData()->getResultadosAprendizaje(), "markdown_github", "html");
+                                                                                    $html =  $pandoc->convert($contextModCompetencias->getData()->getResultadosAprendizaje(), "markdown_github", "html");
                                                                                     echo $html;
                                                                                 }
                                                                                 ?>
@@ -1616,7 +1614,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                             <p class="card-text">
                                                                                 <?php
                                                                                 if ($contextCompetencias->getEvent() === FIND_COMPETENCIAS_ASIGNATURA_OK) {
-                                                                                    $html=  $pandoc->convert($contextCompetencias->getData()->getResultadosAprendizaje(), "markdown_github", "html");
+                                                                                    $html =  $pandoc->convert($contextCompetencias->getData()->getResultadosAprendizaje(), "markdown_github", "html");
                                                                                     echo $html;
                                                                                 }
                                                                                 ?>
@@ -1662,14 +1660,14 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                 </div>
                                                                 <div id="collapseEightComp" class="collapse" aria-labelledby="headingEight" data-parent="#accordionCompetencia">
                                                                     <div class="card-body">
-                                                                    <div class="card">
+                                                                        <div class="card">
                                                                             <div class="card-body">
                                                                                 <h4 class="card-title">Borrador</h4>
                                                                                 <p class="card-text">
                                                                                     <?php
                                                                                     if ($contextModCompetencias->getEvent() === FIND_MODCOMPETENCIAS_ASIGNATURA_OK) {
-                                                                                        $html=  $pandoc->convert($contextModCompetencias->getData()->getResultadosAprendizajeI(), "markdown_github", "html");
-                                                                                    echo $html;
+                                                                                        $html =  $pandoc->convert($contextModCompetencias->getData()->getResultadosAprendizajeI(), "markdown_github", "html");
+                                                                                        echo $html;
                                                                                     }
                                                                                     ?>
                                                                                 </p>
@@ -1681,7 +1679,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                 <p class="card-text">
                                                                                     <?php
                                                                                     if ($contextCompetencias->getEvent() === FIND_COMPETENCIAS_ASIGNATURA_OK) {
-                                                                                        $html=  $pandoc->convert($contextCompetencias->getData()->getResultadosAprendizajeI(), "markdown_github", "html");
+                                                                                        $html =  $pandoc->convert($contextCompetencias->getData()->getResultadosAprendizajeI(), "markdown_github", "html");
                                                                                         echo $html;
                                                                                     }
                                                                                     ?>
@@ -1713,12 +1711,13 @@ use Jfcherng\Diff\Renderer\RendererConstant;
 
                                                 <?php if ($contextAsignatura->getData()->getEstado() === "B" && ($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['coordinacion'] == true || unserialize($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['permisos'])->getPermisoCompetencias() == true)) { ?>
                                                     <div class="text-center">
-
-                                                        <a href="competenciasAsignatura.php?IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
-                                                            <button type="button" class="btn btn-success" id="btn-form">
-                                                                Crear Nuevo Borrador
-                                                            </button>
-                                                        </a>
+                                                        <?php if ($contextModCompetencias->getEvent() === FIND_MODCOMPETENCIAS_ASIGNATURA_FAIL) { ?>
+                                                            <a href="competenciasAsignatura.php?IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
+                                                                <button type="button" class="btn btn-success" id="btn-form">
+                                                                    Crear Nuevo Borrador
+                                                                </button>
+                                                            </a>
+                                                        <?php } ?>
                                                         <?php if ($contextModCompetencias->getEvent() === FIND_MODCOMPETENCIAS_ASIGNATURA_OK) { ?>
                                                             <a href="competenciasAsignatura.php?IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdModAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
                                                                 <button type="button" class="btn btn-warning" id="btn-form">
@@ -1759,13 +1758,13 @@ use Jfcherng\Diff\Renderer\RendererConstant;
 
                                                         <div id="collapseOneMet" class="collapse" aria-labelledby="headingOne" data-parent="#accordionMetodologia">
                                                             <div class="card-body">
-                                                            <div class="card">
+                                                                <div class="card">
                                                                     <div class="card-body">
                                                                         <h4 class="card-title">Borrador</h4>
                                                                         <p class="card-text">
                                                                             <?php
                                                                             if ($contextModMetodologia->getEvent() === FIND_MODMETODOLOGIA_OK) {
-                                                                                $html=  $pandoc->convert($contextModMetodologia->getData()->getMetodologia(), "markdown_github", "html");
+                                                                                $html =  $pandoc->convert($contextModMetodologia->getData()->getMetodologia(), "markdown_github", "html");
                                                                                 echo $html;
                                                                             }
                                                                             ?>
@@ -1778,7 +1777,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                         <p class="card-text">
                                                                             <?php
                                                                             if ($contextMetodologia->getEvent() === FIND_METODOLOGIA_OK) {
-                                                                                $html=  $pandoc->convert($contextMetodologia->getData()->getMetodologia(), "markdown_github", "html");
+                                                                                $html =  $pandoc->convert($contextMetodologia->getData()->getMetodologia(), "markdown_github", "html");
                                                                                 echo $html;
                                                                             }
                                                                             ?>
@@ -1823,13 +1822,13 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                             </div>
                                                             <div id="collapseTwoMet" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionMetodologia">
                                                                 <div class="card-body">
-                                                                <div class="card">
+                                                                    <div class="card">
                                                                         <div class="card-body">
                                                                             <h4 class="card-title">Borrador</h4>
                                                                             <p class="card-text">
                                                                                 <?php
                                                                                 if ($contextModMetodologia->getEvent() === FIND_MODMETODOLOGIA_OK) {
-                                                                                    $html=  $pandoc->convert($contextModMetodologia->getData()->getMetodologiaI(), "markdown_github", "html");
+                                                                                    $html =  $pandoc->convert($contextModMetodologia->getData()->getMetodologiaI(), "markdown_github", "html");
                                                                                     echo $html;
                                                                                 }
                                                                                 ?>
@@ -1842,7 +1841,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                             <p class="card-text">
                                                                                 <?php
                                                                                 if ($contextMetodologia->getEvent() === FIND_METODOLOGIA_OK) {
-                                                                                    $html=  $pandoc->convert($contextMetodologia->getData()->getMetodologiaI(), "markdown_github", "html");
+                                                                                    $html =  $pandoc->convert($contextMetodologia->getData()->getMetodologiaI(), "markdown_github", "html");
                                                                                     echo $html;
                                                                                 }
                                                                                 ?>
@@ -1873,12 +1872,13 @@ use Jfcherng\Diff\Renderer\RendererConstant;
 
                                                 <?php if ($contextAsignatura->getData()->getEstado() === "B" && ($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['coordinacion'] == true || unserialize($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['permisos'])->getPermisoMetodologia() == true)) { ?>
                                                     <div class="text-center">
-
-                                                        <a href="metodologia.php?IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
-                                                            <button type="button" class="btn btn-success" id="btn-form">
-                                                                Crear Nuevo Borrador
-                                                            </button>
-                                                        </a>
+                                                        <?php if ($contextModMetodologia->getEvent() === FIND_MODMETODOLOGIA_FAIL) { ?>
+                                                            <a href="metodologia.php?IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
+                                                                <button type="button" class="btn btn-success" id="btn-form">
+                                                                    Crear Nuevo Borrador
+                                                                </button>
+                                                            </a>
+                                                        <?php } ?>
                                                         <?php if ($contextModMetodologia->getEvent() === FIND_MODMETODOLOGIA_OK) { ?>
                                                             <a href="metodologia.php?IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdModAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
                                                                 <button type="button" class="btn btn-warning" id="btn-form">
@@ -1920,13 +1920,13 @@ use Jfcherng\Diff\Renderer\RendererConstant;
 
                                                             <div id="collapseOneBib" class="collapse" aria-labelledby="headingOne" data-parent="#accordionBibliografia">
                                                                 <div class="card-body">
-                                                                <div class="card">
+                                                                    <div class="card">
                                                                         <div class="card-body">
                                                                             <h4 class="card-title">Borrador</h4>
                                                                             <p class="card-text">
                                                                                 <?php
                                                                                 if ($contextModBibliografia->getEvent() === FIND_MODBIBLIOGRAFIA_OK) {
-                                                                                    $html=  $pandoc->convert($contextModBibliografia->getData()->getCitasBibliograficas(), "markdown_github", "html");
+                                                                                    $html =  $pandoc->convert($contextModBibliografia->getData()->getCitasBibliograficas(), "markdown_github", "html");
                                                                                     echo $html;
                                                                                 }
                                                                                 ?>
@@ -1939,7 +1939,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                             <p class="card-text">
                                                                                 <?php
                                                                                 if ($contextBibliografia->getEvent() === FIND_BIBLIOGRAFIA_OK) {
-                                                                                    $html=  $pandoc->convert($contextBibliografia->getData()->getCitasBibliograficas(), "markdown_github", "html");
+                                                                                    $html =  $pandoc->convert($contextBibliografia->getData()->getCitasBibliograficas(), "markdown_github", "html");
                                                                                     echo $html;
                                                                                 }
                                                                                 ?>
@@ -1985,13 +1985,13 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                             </div>
                                                             <div id="collapseTwoBib" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionBibliografia">
                                                                 <div class="card-body">
-                                                                <div class="card">
+                                                                    <div class="card">
                                                                         <div class="card-body">
                                                                             <h4 class="card-title">Borrador</h4>
                                                                             <p class="card-text">
                                                                                 <?php
                                                                                 if ($contextModBibliografia->getEvent() === FIND_MODBIBLIOGRAFIA_OK) {
-                                                                                    $html=  $pandoc->convert($contextModBibliografia->getData()->getRecursosInternet(), "markdown_github", "html");
+                                                                                    $html =  $pandoc->convert($contextModBibliografia->getData()->getRecursosInternet(), "markdown_github", "html");
                                                                                     echo $html;
                                                                                 }
                                                                                 ?>
@@ -2004,7 +2004,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                             <p class="card-text">
                                                                                 <?php
                                                                                 if ($contextBibliografia->getEvent() === FIND_BIBLIOGRAFIA_OK) {
-                                                                                    $html=  $pandoc->convert($contextBibliografia->getData()->getRecursosInternet(), "markdown_github", "html");
+                                                                                    $html =  $pandoc->convert($contextBibliografia->getData()->getRecursosInternet(), "markdown_github", "html");
                                                                                     echo $html;
                                                                                 }
                                                                                 ?>
@@ -2035,12 +2035,13 @@ use Jfcherng\Diff\Renderer\RendererConstant;
 
                                                 <?php if ($contextAsignatura->getData()->getEstado() === "B" && ($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['coordinacion'] == true || unserialize($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['permisos'])->getPermisoBibliografia() == true)) { ?>
                                                     <div class="text-center">
-
-                                                        <a href="bibliografia.php?IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
-                                                            <button type="button" class="btn btn-success" id="btn-form">
-                                                                Crear Nuevo Borrador
-                                                            </button>
-                                                        </a>
+                                                        <?php if ($contextModBibliografia->getEvent() === FIND_MODBIBLIOGRAFIA_FAIL) { ?>
+                                                            <a href="bibliografia.php?IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
+                                                                <button type="button" class="btn btn-success" id="btn-form">
+                                                                    Crear Nuevo Borrador
+                                                                </button>
+                                                            </a>
+                                                        <?php } ?>
                                                         <?php if ($contextModBibliografia->getEvent() === FIND_MODBIBLIOGRAFIA_OK) { ?>
                                                             <a href="bibliografia.php?IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdModAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
                                                                 <button type="button" class="btn btn-warning" id="btn-form">
@@ -2303,7 +2304,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                         <?php } ?>
                                                         <a href="grupoLaboratorio.php?IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
                                                             <button type="button" class="btn btn-success" id="btn-form">
-                                                                Crear Nuevo Grupo
+                                                                Crear Nuevo Borrador Grupo
                                                             </button>
                                                         </a>
 
@@ -2559,7 +2560,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                     <?php } ?>
                                                     <a href="grupoClase.php?IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
                                                         <button type="button" class="btn btn-success" id="btn-form">
-                                                            Crear Nuevo Grupo
+                                                            Crear Nuevo Borrador Grupo
                                                         </button>
                                                     </a>
 
@@ -2591,13 +2592,13 @@ use Jfcherng\Diff\Renderer\RendererConstant;
 
                                                             <div id="collapseOneEv" class="collapse" aria-labelledby="headingOne" data-parent="#accordionEvaluacion">
                                                                 <div class="card-body">
-                                                                <div class="card">
+                                                                    <div class="card">
                                                                         <div class="card-body">
                                                                             <h4 class="card-title">Borrador</h4>
                                                                             <p class="card-text">
                                                                                 <?php
                                                                                 if ($contextModEvaluacion->getEvent() === FIND_MODEVALUACION_OK) {
-                                                                                    $html=  $pandoc->convert($contextModEvaluacion->getData()->getRealizacionExamenes(), "markdown_github", "html");
+                                                                                    $html =  $pandoc->convert($contextModEvaluacion->getData()->getRealizacionExamenes(), "markdown_github", "html");
                                                                                     echo $html;
                                                                                 }
                                                                                 ?>
@@ -2617,7 +2618,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                             <p class="card-text">
                                                                                 <?php
                                                                                 if ($contextEvaluacion->getEvent() === FIND_EVALUACION_OK) {
-                                                                                    $html=  $pandoc->convert($contextEvaluacion->getData()->getRealizacionExamenes(), "markdown_github", "html");
+                                                                                    $html =  $pandoc->convert($contextEvaluacion->getData()->getRealizacionExamenes(), "markdown_github", "html");
                                                                                     echo $html;
                                                                                 }
                                                                                 ?>
@@ -2678,13 +2679,13 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                 </div>
                                                                 <div id="collapseTwoEv" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionEvaluacion">
                                                                     <div class="card-body">
-                                                                    <div class="card">
+                                                                        <div class="card">
                                                                             <div class="card-body">
                                                                                 <h4 class="card-title">Borrador</h4>
                                                                                 <p class="card-text">
                                                                                     <?php
                                                                                     if ($contextModEvaluacion->getEvent() === FIND_MODEVALUACION_OK) {
-                                                                                        $html=  $pandoc->convert($contextModEvaluacion->getData()->getRealizacionExamenesI(), "markdown_github", "html");
+                                                                                        $html =  $pandoc->convert($contextModEvaluacion->getData()->getRealizacionExamenesI(), "markdown_github", "html");
                                                                                         echo $html;
                                                                                     }
                                                                                     ?>
@@ -2697,7 +2698,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                 <p class="card-text">
                                                                                     <?php
                                                                                     if ($contextEvaluacion->getEvent() === FIND_EVALUACION_OK) {
-                                                                                        $html=  $pandoc->convert($contextEvaluacion->getData()->getRealizacionExamenesI(), "markdown_github", "html");
+                                                                                        $html =  $pandoc->convert($contextEvaluacion->getData()->getRealizacionExamenesI(), "markdown_github", "html");
                                                                                         echo $html;
                                                                                     }
                                                                                     ?>
@@ -2744,13 +2745,13 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                             </div>
                                                             <div id="collapseThreeEv" class="collapse" aria-labelledby="headingThree" data-parent="#accordionEvaluacion">
                                                                 <div class="card-body">
-                                                                <div class="card">
+                                                                    <div class="card">
                                                                         <div class="card-body">
                                                                             <h4 class="card-title">Borrador</h4>
                                                                             <p class="card-text">
                                                                                 <?php
                                                                                 if ($contextModEvaluacion->getEvent() === FIND_MODEVALUACION_OK) {
-                                                                                    $html=  $pandoc->convert($contextModEvaluacion->getData()->getRealizacionActividades(), "markdown_github", "html");
+                                                                                    $html =  $pandoc->convert($contextModEvaluacion->getData()->getRealizacionActividades(), "markdown_github", "html");
                                                                                     echo $html;
                                                                                 }
                                                                                 ?>
@@ -2770,7 +2771,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                             <p class="card-text">
                                                                                 <?php
                                                                                 if ($contextEvaluacion->getEvent() === FIND_EVALUACION_OK) {
-                                                                                    $html=  $pandoc->convert($contextEvaluacion->getData()->getRealizacionActividades(), "markdown_github", "html");
+                                                                                    $html =  $pandoc->convert($contextEvaluacion->getData()->getRealizacionActividades(), "markdown_github", "html");
                                                                                     echo $html;
                                                                                 }
                                                                                 ?>
@@ -2833,14 +2834,14 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                 </div>
                                                                 <div id="collapseFourEv" class="collapse" aria-labelledby="headingFour" data-parent="#accordionEvaluacion">
                                                                     <div class="card-body">
-                                                                    <div class="card">
+                                                                        <div class="card">
                                                                             <div class="card-body">
                                                                                 <h4 class="card-title">Borrador</h4>
                                                                                 <p class="card-text">
                                                                                     <?php
                                                                                     if ($contextModEvaluacion->getEvent() === FIND_MODEVALUACION_OK) {
-                                                                                        $html=  $pandoc->convert($contextModEvaluacion->getData()->getRealizacionActividadesI(), "markdown_github", "html");
-                                                                                    echo $html;
+                                                                                        $html =  $pandoc->convert($contextModEvaluacion->getData()->getRealizacionActividadesI(), "markdown_github", "html");
+                                                                                        echo $html;
                                                                                     }
                                                                                     ?>
                                                                                 </p>
@@ -2852,8 +2853,8 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                 <p class="card-text">
                                                                                     <?php
                                                                                     if ($contextEvaluacion->getEvent() === FIND_EVALUACION_OK) {
-                                                                                        $html=  $pandoc->convert($contextEvaluacion->getData()->getRealizacionActividadesI(), "markdown_github", "html");
-                                                                                    echo $html;
+                                                                                        $html =  $pandoc->convert($contextEvaluacion->getData()->getRealizacionActividadesI(), "markdown_github", "html");
+                                                                                        echo $html;
                                                                                     }
                                                                                     ?>
                                                                                 </p>
@@ -2899,13 +2900,13 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                             </div>
                                                             <div id="collapseFiveEv" class="collapse" aria-labelledby="headingFive" data-parent="#accordionEvaluacion">
                                                                 <div class="card-body">
-                                                                <div class="card">
+                                                                    <div class="card">
                                                                         <div class="card-body">
                                                                             <h4 class="card-title">Borrador</h4>
                                                                             <p class="card-text">
                                                                                 <?php
                                                                                 if ($contextModEvaluacion->getEvent() === FIND_MODEVALUACION_OK) {
-                                                                                    $html=  $pandoc->convert($contextModEvaluacion->getData()->getRealizacionLaboratorio(), "markdown_github", "html");
+                                                                                    $html =  $pandoc->convert($contextModEvaluacion->getData()->getRealizacionLaboratorio(), "markdown_github", "html");
                                                                                     echo $html;
                                                                                 }
                                                                                 ?>
@@ -2925,7 +2926,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                             <p class="card-text">
                                                                                 <?php
                                                                                 if ($contextEvaluacion->getEvent() === FIND_EVALUACION_OK) {
-                                                                                    $html=  $pandoc->convert($contextEvaluacion->getData()->getRealizacionLaboratorio(), "markdown_github", "html");
+                                                                                    $html =  $pandoc->convert($contextEvaluacion->getData()->getRealizacionLaboratorio(), "markdown_github", "html");
                                                                                     echo $html;
                                                                                 }
                                                                                 ?>
@@ -2988,14 +2989,14 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                 </div>
                                                                 <div id="collapseSixEv" class="collapse" aria-labelledby="headingSix" data-parent="#accordionEvaluacion">
                                                                     <div class="card-body">
-                                                                    <div class="card">
+                                                                        <div class="card">
                                                                             <div class="card-body">
                                                                                 <h4 class="card-title">Borrador</h4>
                                                                                 <p class="card-text">
                                                                                     <?php
                                                                                     if ($contextModEvaluacion->getEvent() === FIND_MODEVALUACION_OK) {
-                                                                                    $html=  $pandoc->convert($contextModEvaluacion->getData()->getRealizacionLaboratorioI(), "markdown_github", "html");
-                                                                                    echo $html;
+                                                                                        $html =  $pandoc->convert($contextModEvaluacion->getData()->getRealizacionLaboratorioI(), "markdown_github", "html");
+                                                                                        echo $html;
                                                                                     }
                                                                                     ?>
                                                                                 </p>
@@ -3007,7 +3008,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                 <p class="card-text">
                                                                                     <?php
                                                                                     if ($contextEvaluacion->getEvent() === FIND_EVALUACION_OK) {
-                                                                                        $html=  $pandoc->convert($contextEvaluacion->getData()->getRealizacionLaboratorioI(), "markdown_github", "html");
+                                                                                        $html =  $pandoc->convert($contextEvaluacion->getData()->getRealizacionLaboratorioI(), "markdown_github", "html");
                                                                                         echo $html;
                                                                                     }
                                                                                     ?>
@@ -3054,13 +3055,13 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                             </div>
                                                             <div id="collapseSevenEv" class="collapse" aria-labelledby="headingSeven" data-parent="#accordionEvaluacion">
                                                                 <div class="card-body">
-                                                                <div class="card">
+                                                                    <div class="card">
                                                                         <div class="card-body">
                                                                             <h4 class="card-title">Borrador</h4>
                                                                             <p class="card-text">
                                                                                 <?php
                                                                                 if ($contextModEvaluacion->getEvent() === FIND_MODEVALUACION_OK) {
-                                                                                    $html=  $pandoc->convert($contextModEvaluacion->getData()->getCalificacionFinal(), "markdown_github", "html");
+                                                                                    $html =  $pandoc->convert($contextModEvaluacion->getData()->getCalificacionFinal(), "markdown_github", "html");
                                                                                     echo $html;
                                                                                 }
                                                                                 ?>
@@ -3073,7 +3074,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                             <p class="card-text">
                                                                                 <?php
                                                                                 if ($contextEvaluacion->getEvent() === FIND_EVALUACION_OK) {
-                                                                                    $html=  $pandoc->convert($contextEvaluacion->getData()->getCalificacionFinal(), "markdown_github", "html");
+                                                                                    $html =  $pandoc->convert($contextEvaluacion->getData()->getCalificacionFinal(), "markdown_github", "html");
                                                                                     echo $html;
                                                                                 }
                                                                                 ?>
@@ -3124,7 +3125,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                 <p class="card-text">
                                                                                     <?php
                                                                                     if ($contextModEvaluacion->getEvent() === FIND_MODEVALUACION_OK) {
-                                                                                        $html=  $pandoc->convert($contextModEvaluacion->getData()->getCalificacionFinalI(), "markdown_github", "html");
+                                                                                        $html =  $pandoc->convert($contextModEvaluacion->getData()->getCalificacionFinalI(), "markdown_github", "html");
                                                                                         echo $html;
                                                                                     }
                                                                                     ?>
@@ -3137,7 +3138,7 @@ use Jfcherng\Diff\Renderer\RendererConstant;
                                                                                 <p class="card-text">
                                                                                     <?php
                                                                                     if ($contextEvaluacion->getEvent() === FIND_EVALUACION_OK) {
-                                                                                        $html=  $pandoc->convert($contextEvaluacion->getData()->getCalificacionFinalI(), "markdown_github", "html");
+                                                                                        $html =  $pandoc->convert($contextEvaluacion->getData()->getCalificacionFinalI(), "markdown_github", "html");
                                                                                         echo $html;
                                                                                     }
                                                                                     ?>
@@ -3169,12 +3170,13 @@ use Jfcherng\Diff\Renderer\RendererConstant;
 
                                                 <?php if ($contextAsignatura->getData()->getEstado() === "B" && ($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['coordinacion'] == true || unserialize($_SESSION['asignaturas'][$contextGrado->getData()->getCodigoGrado()][$contextAsignatura->getData()->getIdAsignatura()]['permisos'])->getPermisoEvaluacion() == true)) { ?>
                                                     <div class="text-center">
-
-                                                        <a href="evaluacion.php?IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
-                                                            <button type="button" class="btn btn-success" id="btn-form">
-                                                                Crear Nuevo Borrador
-                                                            </button>
-                                                        </a>
+                                                        <?php if ($contextModEvaluacion->getEvent() === FIND_MODEVALUACION_FAIL) { ?>
+                                                            <a href="evaluacion.php?IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
+                                                                <button type="button" class="btn btn-success" id="btn-form">
+                                                                    Crear Nuevo Borrador
+                                                                </button>
+                                                            </a>
+                                                        <?php } ?>
                                                         <?php if ($contextModEvaluacion->getEvent() === FIND_MODEVALUACION_OK) { ?>
                                                             <a href="evaluacion.php?IdGrado=<?php echo $contextGrado->getData()->getCodigoGrado(); ?>&IdModAsignatura=<?php echo $contextAsignatura->getData()->getIdAsignatura(); ?>">
                                                                 <button type="button" class="btn btn-warning" id="btn-form">
