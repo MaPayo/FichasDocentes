@@ -150,16 +150,16 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php'); ?>
     <td class="bg-info"> <span class="p-1"> Email </span> </td>
   </tr>
           <?php
-          foreach ($rowsGrupoClaseProfesor as $grupo) {
+          foreach ($rowsGrupoClaseProfesorMod as $grupo) {
             $controller = new es\ucm\ControllerImplements();
             $context = new es\ucm\Context(LIST_MODGRUPO_CLASE_PROFESOR, $grupo->getIdGrupoClase());
             $grupoClaseProfesor = $controller->action($context);
-
-
+        
+        
             if ($grupoClaseProfesor->getEvent() === LIST_MODGRUPO_CLASE_PROFESOR_OK)
               foreach ($grupoClaseProfesor->getData() as $profesores) {
                 echo '<tr>
-      <td>' . $grupo->getLetra() . '</td>';
+        <td>' . $grupo->getLetra() . '</td>';
                 $context = new es\ucm\Context(FIND_PROFESOR, $profesores->getEmailProfesor());
                 $contextProfesor = $controller->action($context);
                 if ($contextProfesor->getEvent() == FIND_PROFESOR_OK) {
@@ -196,23 +196,23 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php'); ?>
     <td class="bg-info"> <span class="p-1"> Class </span> </td>
   </tr>
 
-          <?php foreach ($rowsGrupoClaseProfesor as $grupo) {
-            $controller = new es\ucm\ControllerImplements();
-            $context = new es\ucm\Context(LIST_MODHORARIO_CLASE, $grupo->getIdGrupoClase());
-            $horarios = $controller->action($context);
-          
-            if ($horarios->getEvent() === LIST_MODHORARIO_CLASE_OK) {
-                foreach ($horarios->getData() as $g) { ?>
-                <tr>
-                <td><?php echo $grupo->getLetra() ?></td>
-                <td><?php echo $grupo->getIdioma() ?></td>
-                <td><?php echo $g->getDia() ?></td>
-                <td><?php echo $g->getHoraInicio() . " - " . $g->getHoraFin(); ?></td>
-                <td><?php echo $g->getAula(); ?></td>
-                </tr>
-          <?php }
-            }
-            }?>
+          <?php  foreach ($rowsGrupoClaseProfesorMod as $grupo) {
+    $controller = new es\ucm\ControllerImplements();
+    $context = new es\ucm\Context(LIST_MODHORARIO_CLASE, $grupo->getIdGrupoClase());
+    $horarios = $controller->action($context);
+  
+    if ($horarios->getEvent() === LIST_MODHORARIO_CLASE_OK) {
+        foreach ($horarios->getData() as $g) { ?>
+        <tr>
+        <td><?php echo $grupo->getLetra() ?></td>
+        <td><?php echo $grupo->getIdioma() ?></td>
+        <td><?php echo $g->getDia() ?></td>
+        <td><?php echo $g->getHoraInicio() . " - " . $g->getHoraFin(); ?></td>
+        <td><?php echo $g->getAula(); ?></td>
+        </tr>
+  <?php }
+    }
+  } ?>
         </table>
 
       </div>
@@ -320,20 +320,23 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php'); ?>
       $controller = new es\ucm\ControllerImplements();
       $context = new es\ucm\Context(LIST_MODGRUPO_LABORATORIO_PROFESOR, $grupo->getIdGrupoLab());
       $profesores = $controller->action($context);
-      if ($profesores->getEvent() === LIST_MODGRUPO_LABORATORIO_PROFESOR_OK)
+      
+      if ($profesores->getEvent() === LIST_MODGRUPO_LABORATORIO_PROFESOR_OK){
       foreach ($profesores->getData() as $profesor) {
         echo '<tr>
-<td>' . $grupo->getLetra() . '</td>';
+        <td>' . $grupo->getLetra() . '</td>';
         $context = new es\ucm\Context(FIND_PROFESOR, $profesor->getEmailProfesor());
         $contextProfesor = $controller->action($context);
         if ($contextProfesor->getEvent() == FIND_PROFESOR_OK) {
           echo '<td>' . $contextProfesor->getData()->getNombre() . '</td>
-<td>' . $contextProfesor->getData()->getDepartamento() . '</td>
-<td>' . $profesor->getEmailProfesor() . '</td>';
+        <td>' . $contextProfesor->getData()->getDepartamento() . '</td>
+        <td>' . $profesor->getEmailProfesor() . '</td>';
         }
         echo '</tr>';
       }
+    }
   }
+
 
   ?>
 </table>
@@ -361,23 +364,23 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php'); ?>
         <td class="bg-info"> <span class="p-1"> Laboratory </span> </td>
       </tr>
 
-  <?php  foreach ($rowsGrupoLaboratorioProfesorMod as $grupo) {
-    $controller = new es\ucm\ControllerImplements();
-    $context = new es\ucm\Context(LIST_MODHORARIO_LABORATORIO, $grupo->getIdGrupoLab());
-    $horarios = $controller->action($context);
-  
-    if ($horarios->getEvent() === LIST_MODHORARIO_LABORATORIO_OK) {
-        foreach ($horarios->getData() as $g) { ?>
-        <tr>
-        <td><?php echo $grupo->getLetra() ?></td>
-        <td><?php echo $grupo->getIdioma() ?></td>
-        <td><?php echo $g->getDia() ?></td>
-        <td><?php echo $g->getHoraInicio() . " - " . $g->getHoraFin(); ?></td>
-        <td><?php echo $g->getLaboratorio(); ?></td>
-        </tr>
-  <?php }
-    } 
-    }?>
+  <?php foreach ($rowsGrupoLaboratorioProfesorMod as $grupo) {
+        $controller = new es\ucm\ControllerImplements();
+        $context = new es\ucm\Context(LIST_MODHORARIO_LABORATORIO, $grupo->getIdGrupoLab());
+        $horarios = $controller->action($context);
+      
+        if ($horarios->getEvent() === LIST_MODHORARIO_LABORATORIO_OK) {
+            foreach ($horarios->getData() as $g) { ?>
+            <tr>
+            <td><?php echo $grupo->getLetra() ?></td>
+            <td><?php echo $grupo->getIdioma() ?></td>
+            <td><?php echo $g->getDia() ?></td>
+            <td><?php echo $g->getHoraInicio() . " - " . $g->getHoraFin(); ?></td>
+            <td><?php echo $g->getLaboratorio(); ?></td>
+            </tr>
+      <?php }
+        } 
+        }?>
   </tr>
 </table>
 

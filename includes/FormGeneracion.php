@@ -69,7 +69,7 @@ class FormGeneracion extends Form
         $controller = new ControllerImplements();
         $actual = $datos['actual'];
         $siguiente = $datos['actual']+1;
-        $curso = "20$actual/$siguiente";
+        $curso = "$actual/$siguiente";
         //$folder = /tmp/storage/output
         $folder = STORAGE . '/' . $_SESSION['idUsuario']; //Ruta donde se almacenan los datos CAMBIAR
         if (!is_dir($folder)) {
