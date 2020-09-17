@@ -57,6 +57,13 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                       }
                     }
                   }
+                }else{
+                  echo '
+                  <div class="alert alert-warning" role="alert">
+                  <h2 class="card-title text-center">No se han encontrado archivos</h2>
+                  <h5 class="text-center">No hay ningún archivo generado en este momento</h5>
+                  </div>';
+                }
                   echo '<div><a href="index.php">
                   <button type="button" class="btn btn-secondary" id="btn-form">
                   Volver a Inicio
