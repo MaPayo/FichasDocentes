@@ -427,7 +427,7 @@ class FormSubida extends Form
 
 
                                     if ($icampo == 8)
-                                        $nombre_asignatura = "## " . utf8_encode(trim($data[$icampo])); //varchar
+                                        $nombre_asignatura = utf8_encode(trim($data[$icampo])); //varchar
 
                                     if ($icampo == 9)
                                         $nombre_asignatura_ingles = utf8_encode(trim($data[$icampo])); //varchar
@@ -512,7 +512,7 @@ class FormSubida extends Form
                                         if ($contextGrado->getEvent() === UPDATE_GRADO_FAIL) {
                                             $huboerror = true;
                                             //throw new \PDOException($e->getMessage(), (int)$e->getCode());						
-                                            error_log(date("Y-m-d H:i:s") . " No pudo actualizarse el grado" . $nombre_grado . "\r\n", 3, LOGS . "/log_errores.txt");
+                                            //error_log(date("Y-m-d H:i:s") . " No pudo actualizarse el grado" . $nombre_grado . "\r\n", 3, LOGS . "/log_errores.txt");
                                         }
                                     } elseif ($contextGrado->getEvent() === FIND_GRADO_FAIL) {
                                         $context = new Context(CREATE_GRADO, $grado);
@@ -532,7 +532,7 @@ class FormSubida extends Form
                                         if ($contextModulo->getEvent() === UPDATE_MODULO_FAIL) {
                                             $huboerror = true;
                                             //throw new \PDOException($e->getMessage(), (int)$e->getCode());						
-                                            error_log(date("Y-m-d H:i:s") . " No pudo actualizarse el modulo" . $nombre_modulo . "\r\n", 3, LOGS . "/log_errores.txt");
+                                            //error_log(date("Y-m-d H:i:s") . " No pudo actualizarse el modulo" . $nombre_modulo . "\r\n", 3, LOGS . "/log_errores.txt");
                                         }
                                     } elseif ($contextModulo->getEvent() === FIND_MODULO_FAIL) {
                                         $context = new Context(CREATE_MODULO, $modulo);
@@ -552,7 +552,7 @@ class FormSubida extends Form
                                         if ($contextMateria->getEvent() === UPDATE_MATERIA_FAIL) {
                                             $huboerror = true;
                                             //throw new \PDOException($e->getMessage(), (int)$e->getCode());						
-                                            error_log(date("Y-m-d H:i:s") . " No pudo actualizarse la materia " . $nombre_materia . "\r\n", 3, LOGS . "/log_errores.txt");
+                                            //error_log(date("Y-m-d H:i:s") . " No pudo actualizarse la materia " . $nombre_materia . "\r\n", 3, LOGS . "/log_errores.txt");
                                         }
                                     } elseif ($contextMateria->getEvent() === FIND_MATERIA_FAIL) {
                                         $context = new Context(CREATE_MATERIA, $materia);
@@ -564,7 +564,7 @@ class FormSubida extends Form
                                         }
                                     } //Materia
 
-                                    $context = new Context(FIND_ASIGNATURA, $id_materia);
+                                    $context = new Context(FIND_ASIGNATURA, $codigo_asignatura);
                                     $contextAsignatura = $controller->action($context);
 
                                     //echo $t . $p.$l;
@@ -573,13 +573,16 @@ class FormSubida extends Form
                                     $teorico = new Teorico(null, $t, $porciento_t, $codigo_asignatura);
                                     $laboratorio = new Laboratorio(null, $l, $porciento_l, $codigo_asignatura);
                                     $problema = new Problema(null, $p, $porciento_p, $codigo_asignatura);
-
+                                    //echo "hola fuera";
+                                    //echo $nombre_asignatura;
                                     if ($contextAsignatura->getEvent() === FIND_ASIGNATURA_OK) {
+                                        //echo "hola";
                                         $context = new Context(UPDATE_ASIGNATURA, $asignatura);
                                         $contextAsignatura = $controller->action($context);
 
                                         if ($contextAsignatura->getEvent() === UPDATE_ASIGNATURA_FAIL) {
                                             $huboerror = true;
+                                            //echo "hola error";
                                             //throw new \PDOException($e->getMessage(), (int)$e->getCode());						
                                             error_log(date("Y-m-d H:i:s") . " No pudo actualizarse la asignatura " . $nombre_asignatura . "\r\n", 3, LOGS . "/log_errores.txt");
                                         } else {
@@ -650,12 +653,13 @@ class FormSubida extends Form
                                             }
                                         }
                                     } elseif ($contextAsignatura->getEvent() === FIND_ASIGNATURA_FAIL) {
+                                        //echo "hola fail";
                                         $context = new Context(CREATE_ASIGNATURA, $asignatura);
                                         $contextAsignatura = $controller->action($context);
                                         if ($contextAsignatura->getEvent() === CREATE_ASIGNATURA_FAIL) {
                                             $huboerror = true;
                                             //throw new \PDOException($e->getMessage(), (int)$e->getCode());						
-                                            error_log(date("Y-m-d H:i:s") . " No pudo crearse la asignatura " . $nombre_asignatura . "\r\n", 3, LOGS . "/log_errores.txt");
+                                            //error_log(date("Y-m-d H:i:s") . " No pudo crearse la asignatura " . $nombre_asignatura . "\r\n", 3, LOGS . "/log_errores.txt");
                                         } else {
                                             //Creamos su Mod asignatura
                                             $modAsignatura = new ModAsignatura($codigo_asignatura, date("Y-m-d H:i:s"), null, $codigo_asignatura);

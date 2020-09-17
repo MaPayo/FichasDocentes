@@ -44,7 +44,8 @@ class DAOAsignaturaImplements implements DAOAsignatura
     {       
         $singletonDataSource = new SingletonDataSource();
         $dataSource = $singletonDataSource->getInstance();
-        $sql = "UPDATE asignatura SET IdAsignatura = :idAsignatura, NombreAsignatura = :nombreAsignatura, Abreviatura = :abreviatura, Curso = :curso, Semestre = :semestre, NombreAsignaturaIngles = :nombreAsignaturaIngles, Creditos = :creditos, CoordinadorAsignatura = :coordinadorAsignatura, Estado = :estado, Activo = :activo, IdMateria = :idMateria WHERE IdAsignatura = :idAsignatura";
+        //$sql = "UPDATE asignatura SET IdAsignatura = :idAsignatura, NombreAsignatura = :nombreAsignatura, Abreviatura = :abreviatura, Curso = :curso, Semestre = :semestre, NombreAsignaturaIngles = :nombreAsignaturaIngles, Creditos = :creditos, CoordinadorAsignatura = :coordinadorAsignatura, Estado = :estado, Activo = :activo, IdMateria = :idMateria WHERE IdAsignatura = :idAsignatura";
+        $sql = "UPDATE asignatura SET NombreAsignatura = :nombreAsignatura, Abreviatura = :abreviatura, Curso = :curso, Semestre = :semestre, NombreAsignaturaIngles = :nombreAsignaturaIngles, Creditos = :creditos, CoordinadorAsignatura = :coordinadorAsignatura, Estado = :estado, Activo = :activo, IdMateria = :idMateria WHERE IdAsignatura = :idAsignatura";
         $values = array(
             ':idAsignatura' => $asignatura->getIdAsignatura(),
             ':nombreAsignatura' => $asignatura->getNombreAsignatura(),
@@ -76,7 +77,7 @@ class DAOAsignaturaImplements implements DAOAsignatura
     {
         $singletonDataSource = new SingletonDataSource();
         $dataSource = $singletonDataSource->getInstance();
-        $sql = "SELECT * FROM asignatura WHERE IdMateria = :idMateria ORDER BY NombreAsignatura";
+        $sql = "SELECT * FROM asignatura WHERE IdMateria = :idMateria";
         $values = array(':idMateria' => $idMateria);
         $results = $dataSource->executeQuery($sql, $values);
         return $results;

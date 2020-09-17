@@ -17,9 +17,9 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php'); ?>
 <body>
   <?php
   if ($estado === 'B')
-    echo '<h1<center>Borrador</center></h1>';
+    echo '<h1>BORRADOR</h1>';
   if ($estado === 'V')
-    echo '<h1><center>Verificado</center></h1>';
+    echo '<h1>VERIFICADO</h1>';
   ?>
 
   <div class="container">
@@ -135,94 +135,8 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php'); ?>
 
     </div>
     <!-- Third Form End -->
-
-    <?php
-    if ($rowsGrupoClaseProfesor !== null)
-      if (!isset($rowsGrupoClaseProfesorMod)) { ?>
-      <!-- Four Form Box  Start -->
-      <div class="fourFormBox">
-
-        <table class="table">
-          <tr>
-            <td colspan="4" class="bg-secondary text-center">Profesores de la asignatura</td>
-          </tr>
-          <tr>
-            <td class="bg-info"> <span class="p-1"> Grupo </span> </td>
-            <td class="bg-info"> <span class="p-1"> Profesor </span> </td>
-            <td class="bg-info"> <span class="p-1"> Dpto </span> </td>
-            <td class="bg-info"> <span class="p-1"> email </span> </td>
-          </tr>
-          <?php
-          foreach ($rowsGrupoClaseProfesor as $grupo) {
-            $controller = new es\ucm\ControllerImplements();
-            $context = new es\ucm\Context(LIST_GRUPO_CLASE_PROFESOR, $grupo->getIdGrupoClase());
-            $grupoClaseProfesor = $controller->action($context);
-
-
-            if ($grupoClaseProfesor->getEvent() === LIST_GRUPO_CLASE_PROFESOR_OK)
-              foreach ($grupoClaseProfesor->getData() as $profesores) {
-                echo '<tr>
-      <td>' . $grupo->getLetra() . '</td>';
-                $context = new es\ucm\Context(FIND_PROFESOR, $profesores->getEmailProfesor());
-                $contextProfesor = $controller->action($context);
-                if ($contextProfesor->getEvent() == FIND_PROFESOR_OK) {
-                  echo '<td>' . $contextProfesor->getData()->getNombre() . '</td>
-        <td>' . $contextProfesor->getData()->getDepartamento() . '</td>
-        <td>' . $profesores->getEmailProfesor() . '</td>';
-                }
-                echo '</tr>';
-              }
-          }
-          ?>
-        </table>
-      </div>
-      <!-- Four Form Box End -->
-
-
-      <!-- Five No Form Box  Start -->
-
-      <div>
-
-        <table class="table">
-          <tr>
-            <td colspan="5" class="bg-secondary text-center">Horarios de clases</td>
-          </tr>
-          <tr>
-            <td rowspan="2" class="bg-info"> <span class="p-1"> Grupo </span> </td>
-            <td colspan="4" class="bg-info"> <span class="p-1"> Horarios clases </span> </td>
-          </tr>
-
-          <tr>
-            <td class="bg-info"> <span class="p-1"> Idioma </span> </td>
-            <td class="bg-info"> <span class="p-1"> Día </span> </td>
-            <td class="bg-info"> <span class="p-1"> Horas </span> </td>
-            <td class="bg-info"> <span class="p-1"> Aula </span> </td>
-          </tr>
-
-          <?php
-          foreach ($rowsGrupoClaseProfesor as $grupo) {
-            $controller = new es\ucm\ControllerImplements();
-            $context = new es\ucm\Context(LIST_HORARIO_CLASE, $grupo->getIdGrupoClase());
-            $horarios = $controller->action($context);
-          
-            if ($horarios->getEvent() === LIST_HORARIO_CLASE_OK) {
-                foreach ($horarios->getData() as $g) { ?>
-                <tr>
-                <td><?php echo $grupo->getLetra() ?></td>
-                <td><?php echo $grupo->getIdioma() ?></td>
-                <td><?php echo $g->getDia() ?></td>
-                <td><?php echo $g->getHoraInicio() . " - " . $g->getHoraFin(); ?></td>
-                <td><?php echo $g->getAula(); ?></td>
-                </tr>
-          <?php }
-            }
-          } ?>
-          
-        </table>
-
-      </div>
-    <?php } else { ?>
-      <!-- Four Form Box  Start -->
+ 
+    <?php if(isset($rowsGrupoClaseProfesorMod)){?>
       <div class="fourFormBox">
 
         <table class="table">
@@ -302,177 +216,257 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php'); ?>
         </table>
 
       </div>
+    <?php }//fin issetProfes
+    elseif($rowsGrupoClaseProfesor!==null){?>
+     <div class="fourFormBox">
+
+<table class="table">
+  <tr>
+    <td colspan="4" class="bg-secondary text-center">Profesores de la asignatura</td>
+  </tr>
+  <tr>
+    <td class="bg-info"> <span class="p-1"> Grupo </span> </td>
+    <td class="bg-info"> <span class="p-1"> Profesor </span> </td>
+    <td class="bg-info"> <span class="p-1"> Dpto </span> </td>
+    <td class="bg-info"> <span class="p-1"> email </span> </td>
+  </tr>
+  <?php
+  foreach ($rowsGrupoClaseProfesor as $grupo) {
+    $controller = new es\ucm\ControllerImplements();
+    $context = new es\ucm\Context(LIST_GRUPO_CLASE_PROFESOR, $grupo->getIdGrupoClase());
+    $grupoClaseProfesor = $controller->action($context);
+
+
+    if ($grupoClaseProfesor->getEvent() === LIST_GRUPO_CLASE_PROFESOR_OK)
+      foreach ($grupoClaseProfesor->getData() as $profesores) {
+        echo '<tr>
+<td>' . $grupo->getLetra() . '</td>';
+        $context = new es\ucm\Context(FIND_PROFESOR, $profesores->getEmailProfesor());
+        $contextProfesor = $controller->action($context);
+        if ($contextProfesor->getEvent() == FIND_PROFESOR_OK) {
+          echo '<td>' . $contextProfesor->getData()->getNombre() . '</td>
+<td>' . $contextProfesor->getData()->getDepartamento() . '</td>
+<td>' . $profesores->getEmailProfesor() . '</td>';
+        }
+        echo '</tr>';
+      }
+  }
+  ?>
+</table>
+</div>
+<!-- Four Form Box End -->
+
+
+<!-- Five No Form Box  Start -->
+
+<div>
+
+<table class="table">
+  <tr>
+    <td colspan="5" class="bg-secondary text-center">Horarios de clases</td>
+  </tr>
+  <tr>
+    <td rowspan="2" class="bg-info"> <span class="p-1"> Grupo </span> </td>
+    <td colspan="4" class="bg-info"> <span class="p-1"> Horarios clases </span> </td>
+  </tr>
+
+  <tr>
+    <td class="bg-info"> <span class="p-1"> Idioma </span> </td>
+    <td class="bg-info"> <span class="p-1"> Día </span> </td>
+    <td class="bg-info"> <span class="p-1"> Horas </span> </td>
+    <td class="bg-info"> <span class="p-1"> Aula </span> </td>
+  </tr>
+
+  <?php
+  foreach ($rowsGrupoClaseProfesor as $grupo) {
+    $controller = new es\ucm\ControllerImplements();
+    $context = new es\ucm\Context(LIST_HORARIO_CLASE, $grupo->getIdGrupoClase());
+    $horarios = $controller->action($context);
+  
+    if ($horarios->getEvent() === LIST_HORARIO_CLASE_OK) {
+        foreach ($horarios->getData() as $g) { ?>
+        <tr>
+        <td><?php echo $grupo->getLetra() ?></td>
+        <td><?php echo $grupo->getIdioma() ?></td>
+        <td><?php echo $g->getDia() ?></td>
+        <td><?php echo $g->getHoraInicio() . " - " . $g->getHoraFin(); ?></td>
+        <td><?php echo $g->getAula(); ?></td>
+        </tr>
+  <?php }
+    }
+  } ?>
+  
+</table>
+
+</div>
     <?php } ?>
+<?php
+
+  if(isset($rowsGrupoLaboratorioProfesorMod)){?>
+    <div class="fiveFormBox">
+
+<table class="table">
+  <tr>
+    <td colspan="4" class="bg-secondary text-center">Profesores del laboratorio</td>
+  </tr>
+  <tr>
+    <td class="bg-info"> <span class="p-1"> Grupo </span> </td>
+    <td class="bg-info"> <span class="p-1"> Profesor </span> </td>
+    <td class="bg-info"> <span class="p-1"> Dpto </span> </td>
+    <td class="bg-info"> <span class="p-1"> email </span> </td>
+  </tr>
+  <?php
+     foreach ($rowsGrupoLaboratorioProfesorMod as $grupo) {
+      $controller = new es\ucm\ControllerImplements();
+      $context = new es\ucm\Context(LIST_MODGRUPO_LABORATORIO_PROFESOR, $grupo->getIdGrupoLab());
+      $profesores = $controller->action($context);
+      if ($profesores->getEvent() === LIST_MODGRUPO_LABORATORIO_PROFESOR_OK)
+      foreach ($profesores->getData() as $profesor) {
+        echo '<tr>
+<td>' . $grupo->getLetra() . '</td>';
+        $context = new es\ucm\Context(FIND_PROFESOR, $profesor->getEmailProfesor());
+        $contextProfesor = $controller->action($context);
+        if ($contextProfesor->getEvent() == FIND_PROFESOR_OK) {
+          echo '<td>' . $contextProfesor->getData()->getNombre() . '</td>
+<td>' . $contextProfesor->getData()->getDepartamento() . '</td>
+<td>' . $profesor->getEmailProfesor() . '</td>';
+        }
+        echo '</tr>';
+      }
+  }
+
+  ?>
+</table>
+</div>
+<!-- Four Form Box End -->
 
 
-    <!-- Five Form Box End -->
+<!-- Five No Form Box  Start -->
 
-    <!-- Last Form Box  Start -->
-    <?php if ($rowsGrupoLaboratorioProfesor !== null)
-      if (!isset($rowsGrupoLaboratorioProfesorMod)) { ?>
-      <!-- Four Form Box  Start -->
-      <div class="fiveFormBox">
+<div>
 
-        <table class="table">
-          <tr>
-            <td colspan="4" class="bg-secondary text-center">Profesores del laboratorio</td>
-          </tr>
-          <tr>
-            <td class="bg-info"> <span class="p-1"> Grupo </span> </td>
-            <td class="bg-info"> <span class="p-1"> Profesor </span> </td>
-            <td class="bg-info"> <span class="p-1"> Dpto </span> </td>
-            <td class="bg-info"> <span class="p-1"> email </span> </td>
-          </tr>
-          <?php
-          foreach ($rowsGrupoLaboratorioProfesor as $grupo) {
-            $controller = new es\ucm\ControllerImplements();
-            $context = new es\ucm\Context(LIST_GRUPO_LABORATORIO_PROFESOR, $grupo->getIdGrupoLab());
-            $profesores = $controller->action($context);
-            
-            if ($profesores->getEvent() === LIST_GRUPO_LABORATORIO_PROFESOR_OK){
-            foreach ($profesores->getData() as $profesor) {
-              echo '<tr>
-              <td>' . $grupo->getLetra() . '</td>';
-              $context = new es\ucm\Context(FIND_PROFESOR, $profesor->getEmailProfesor());
-              $contextProfesor = $controller->action($context);
-              if ($contextProfesor->getEvent() == FIND_PROFESOR_OK) {
-                echo '<td>' . $contextProfesor->getData()->getNombre() . '</td>
-              <td>' . $contextProfesor->getData()->getDepartamento() . '</td>
-              <td>' . $profesor->getEmailProfesor() . '</td>';
-              }
-              echo '</tr>';
-            }
+<table class="table">
+  <tr>
+    <td colspan="5" class="bg-secondary text-center">Horarios de los laboratorios</td>
+  </tr>
+  <tr>
+    <td rowspan="2" class="bg-info"> <span class="p-1"> Grupo </span> </td>
+    <td colspan="4" class="bg-info"> <span class="p-1"> Horarios laboratorios </span> </td>
+  </tr>
+
+  <tr>
+    <td class="bg-info"> <span class="p-1"> Idioma </span> </td>
+    <td class="bg-info"> <span class="p-1"> Día </span> </td>
+    <td class="bg-info"> <span class="p-1"> Horas </span> </td>
+    <td class="bg-info"> <span class="p-1"> Aula </span> </td>
+  </tr>
+
+  <?php  foreach ($rowsGrupoLaboratorioProfesorMod as $grupo) {
+    $controller = new es\ucm\ControllerImplements();
+    $context = new es\ucm\Context(LIST_MODHORARIO_LABORATORIO, $grupo->getIdGrupoLab());
+    $horarios = $controller->action($context);
+  
+    if ($horarios->getEvent() === LIST_MODHORARIO_LABORATORIO_OK) {
+        foreach ($horarios->getData() as $g) { ?>
+        <tr>
+        <td><?php echo $grupo->getLetra() ?></td>
+        <td><?php echo $grupo->getIdioma() ?></td>
+        <td><?php echo $g->getDia() ?></td>
+        <td><?php echo $g->getHoraInicio() . " - " . $g->getHoraFin(); ?></td>
+        <td><?php echo $g->getLaboratorio(); ?></td>
+        </tr>
+  <?php }
+    } 
+    }?>
+  </tr>
+</table>
+
+</div>
+  <?php } //Fin issetMod
+  elseif($rowsGrupoLaboratorioProfesor !== null){//Si no existe Mood pero si existe consolidado ?>
+    <div class="fiveFormBox">
+
+    <table class="table">
+      <tr>
+        <td colspan="4" class="bg-secondary text-center">Profesores del laboratorio</td>
+      </tr>
+      <tr>
+        <td class="bg-info"> <span class="p-1"> Grupo </span> </td>
+        <td class="bg-info"> <span class="p-1"> Profesor </span> </td>
+        <td class="bg-info"> <span class="p-1"> Dpto </span> </td>
+        <td class="bg-info"> <span class="p-1"> email </span> </td>
+      </tr>
+      <?php
+      foreach ($rowsGrupoLaboratorioProfesor as $grupo) {
+        $controller = new es\ucm\ControllerImplements();
+        $context = new es\ucm\Context(LIST_GRUPO_LABORATORIO_PROFESOR, $grupo->getIdGrupoLab());
+        $profesores = $controller->action($context);
+        
+        if ($profesores->getEvent() === LIST_GRUPO_LABORATORIO_PROFESOR_OK){
+        foreach ($profesores->getData() as $profesor) {
+          echo '<tr>
+          <td>' . $grupo->getLetra() . '</td>';
+          $context = new es\ucm\Context(FIND_PROFESOR, $profesor->getEmailProfesor());
+          $contextProfesor = $controller->action($context);
+          if ($contextProfesor->getEvent() == FIND_PROFESOR_OK) {
+            echo '<td>' . $contextProfesor->getData()->getNombre() . '</td>
+          <td>' . $contextProfesor->getData()->getDepartamento() . '</td>
+          <td>' . $profesor->getEmailProfesor() . '</td>';
           }
+          echo '</tr>';
+        }
+      }
+    } 
+      ?>
+    </table>
+  </div>
+  <!-- Four Form Box End -->
+
+
+  <!-- Five No Form Box  Start -->
+
+  <div>
+
+    <table class="table">
+      <tr>
+        <td colspan="5" class="bg-secondary text-center">Horarios de los laboratorios</td>
+      </tr>
+      <tr>
+        <td rowspan="2" class="bg-info"> <span class="p-1"> Grupo </span> </td>
+        <td colspan="4" class="bg-info"> <span class="p-1"> Horarios laboratorios </span> </td>
+      </tr>
+
+      <tr>
+        <td class="bg-info"> <span class="p-1"> Idioma </span> </td>
+        <td class="bg-info"> <span class="p-1"> Día </span> </td>
+        <td class="bg-info"> <span class="p-1"> Horas </span> </td>
+        <td class="bg-info"> <span class="p-1"> Aula </span> </td>
+      </tr>
+
+      <?php foreach ($rowsGrupoLaboratorioProfesor as $grupo) {
+        $controller = new es\ucm\ControllerImplements();
+        $context = new es\ucm\Context(LIST_HORARIO_LABORATORIO, $grupo->getIdGrupoLab());
+        $horarios = $controller->action($context);
+      
+        if ($horarios->getEvent() === LIST_HORARIO_LABORATORIO_OK) {
+            foreach ($horarios->getData() as $g) { ?>
+            <tr>
+            <td><?php echo $grupo->getLetra() ?></td>
+            <td><?php echo $grupo->getIdioma() ?></td>
+            <td><?php echo $g->getDia() ?></td>
+            <td><?php echo $g->getHoraInicio() . " - " . $g->getHoraFin(); ?></td>
+            <td><?php echo $g->getLaboratorio(); ?></td>
+            </tr>
+      <?php }
         } 
-          ?>
-        </table>
-      </div>
-      <!-- Four Form Box End -->
+        }?>
+      </tr>
+    </table>
 
+  </div>
+<?php 
+  }?>
 
-      <!-- Five No Form Box  Start -->
-
-      <div>
-
-        <table class="table">
-          <tr>
-            <td colspan="5" class="bg-secondary text-center">Horarios de los laboratorios</td>
-          </tr>
-          <tr>
-            <td rowspan="2" class="bg-info"> <span class="p-1"> Grupo </span> </td>
-            <td colspan="4" class="bg-info"> <span class="p-1"> Horarios laboratorios </span> </td>
-          </tr>
-
-          <tr>
-            <td class="bg-info"> <span class="p-1"> Idioma </span> </td>
-            <td class="bg-info"> <span class="p-1"> Día </span> </td>
-            <td class="bg-info"> <span class="p-1"> Horas </span> </td>
-            <td class="bg-info"> <span class="p-1"> Aula </span> </td>
-          </tr>
-
-          <?php foreach ($rowsGrupoLaboratorioProfesor as $grupo) {
-            $controller = new es\ucm\ControllerImplements();
-            $context = new es\ucm\Context(LIST_HORARIO_LABORATORIO, $grupo->getIdGrupoLab());
-            $horarios = $controller->action($context);
-          
-            if ($horarios->getEvent() === LIST_HORARIO_LABORATORIO_OK) {
-                foreach ($horarios->getData() as $g) { ?>
-                <tr>
-                <td><?php echo $grupo->getLetra() ?></td>
-                <td><?php echo $grupo->getIdioma() ?></td>
-                <td><?php echo $g->getDia() ?></td>
-                <td><?php echo $g->getHoraInicio() . " - " . $g->getHoraFin(); ?></td>
-                <td><?php echo $g->getLaboratorio(); ?></td>
-                </tr>
-          <?php }
-            } 
-            }?>
-          </tr>
-        </table>
-
-      </div>
-    <?php } else { ?>
-      <!-- Four Form Box  Start -->
-      <div class="fiveFormBox">
-
-        <table class="table">
-          <tr>
-            <td colspan="4" class="bg-secondary text-center">Profesores del laboratorio</td>
-          </tr>
-          <tr>
-            <td class="bg-info"> <span class="p-1"> Grupo </span> </td>
-            <td class="bg-info"> <span class="p-1"> Profesor </span> </td>
-            <td class="bg-info"> <span class="p-1"> Dpto </span> </td>
-            <td class="bg-info"> <span class="p-1"> email </span> </td>
-          </tr>
-          <?php
-             foreach ($rowsGrupoLaboratorioProfesorMod as $grupo) {
-              $controller = new es\ucm\ControllerImplements();
-              $context = new es\ucm\Context(LIST_MODGRUPO_LABORATORIO_PROFESOR, $grupo->getIdGrupoLab());
-              $profesores = $controller->action($context);
-              if ($profesores->getEvent() === LIST_MODGRUPO_LABORATORIO_PROFESOR_OK)
-              foreach ($profesores->getData() as $profesor) {
-                echo '<tr>
-      <td>' . $grupo->getLetra() . '</td>';
-                $context = new es\ucm\Context(FIND_PROFESOR, $profesor->getEmailProfesor());
-                $contextProfesor = $controller->action($context);
-                if ($contextProfesor->getEvent() == FIND_PROFESOR_OK) {
-                  echo '<td>' . $contextProfesor->getData()->getNombre() . '</td>
-        <td>' . $contextProfesor->getData()->getDepartamento() . '</td>
-        <td>' . $profesor->getEmailProfesor() . '</td>';
-                }
-                echo '</tr>';
-              }
-          }
-    
-          ?>
-        </table>
-      </div>
-      <!-- Four Form Box End -->
-
-
-      <!-- Five No Form Box  Start -->
-
-      <div>
-
-        <table class="table">
-          <tr>
-            <td colspan="5" class="bg-secondary text-center">Horarios de los laboratorios</td>
-          </tr>
-          <tr>
-            <td rowspan="2" class="bg-info"> <span class="p-1"> Grupo </span> </td>
-            <td colspan="4" class="bg-info"> <span class="p-1"> Horarios laboratorios </span> </td>
-          </tr>
-
-          <tr>
-            <td class="bg-info"> <span class="p-1"> Idioma </span> </td>
-            <td class="bg-info"> <span class="p-1"> Día </span> </td>
-            <td class="bg-info"> <span class="p-1"> Horas </span> </td>
-            <td class="bg-info"> <span class="p-1"> Aula </span> </td>
-          </tr>
-
-          <?php  foreach ($rowsGrupoLaboratorioProfesorMod as $grupo) {
-            $controller = new es\ucm\ControllerImplements();
-            $context = new es\ucm\Context(LIST_MODHORARIO_LABORATORIO, $grupo->getIdGrupoLab());
-            $horarios = $controller->action($context);
-          
-            if ($horarios->getEvent() === LIST_MODHORARIO_LABORATORIO_OK) {
-                foreach ($horarios->getData() as $g) { ?>
-                <tr>
-                <td><?php echo $grupo->getLetra() ?></td>
-                <td><?php echo $grupo->getIdioma() ?></td>
-                <td><?php echo $g->getDia() ?></td>
-                <td><?php echo $g->getHoraInicio() . " - " . $g->getHoraFin(); ?></td>
-                <td><?php echo $g->getLaboratorio(); ?></td>
-                </tr>
-          <?php }
-            } 
-            }?>
-          </tr>
-        </table>
-
-      </div>
-    <?php } ?>
     <!-- Last Form Box End -->
     <?php if (!empty($GeneralesHTML) || !empty($EspecificasHTML) || !empty($BasicasYTransversalesHTML) || !empty($ResultadosAprendizajeHTML)) : ?>
       <div class="contenedor">
