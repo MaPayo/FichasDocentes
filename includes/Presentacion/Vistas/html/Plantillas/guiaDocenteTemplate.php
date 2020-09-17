@@ -358,7 +358,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php'); ?>
     <td class="bg-info"> <span class="p-1"> Idioma </span> </td>
     <td class="bg-info"> <span class="p-1"> Día </span> </td>
     <td class="bg-info"> <span class="p-1"> Horas </span> </td>
-    <td class="bg-info"> <span class="p-1"> Aula </span> </td>
+    <td class="bg-info"> <span class="p-1"> Laboratorio </span> </td>
   </tr>
 
   <?php  foreach ($rowsGrupoLaboratorioProfesorMod as $grupo) {
@@ -440,7 +440,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php'); ?>
         <td class="bg-info"> <span class="p-1"> Idioma </span> </td>
         <td class="bg-info"> <span class="p-1"> Día </span> </td>
         <td class="bg-info"> <span class="p-1"> Horas </span> </td>
-        <td class="bg-info"> <span class="p-1"> Aula </span> </td>
+        <td class="bg-info"> <span class="p-1"> Laboratorio </span> </td>
       </tr>
 
       <?php foreach ($rowsGrupoLaboratorioProfesor as $grupo) {
