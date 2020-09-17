@@ -70,7 +70,7 @@ require_once('includes/Presentacion/Controlador/ControllerImplements.php');
                             ';
                                 ?>
                                 <div class="text-center">
-                                    <a href="Index.php"><button class="btn btn-secondary" id="btn-form" type="button">Volver a Inicio</button></a>
+                                    <a href="index.php"><button class="btn btn-secondary" id="btn-form" type="button">Volver a Inicio</button></a>
                                     <a href="info.php"><button class="btn btn-primary" id="btn-form" type="button">Cambiar Información</button></a>
                                     <a href="password.php"><button class="btn btn-primary" id="btn-form" type="button">Cambiar Contraseña</button></a>
 
