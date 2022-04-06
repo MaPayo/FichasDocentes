@@ -2,7 +2,7 @@
     "name": "tfg/gestion_docente",
     "require": {
         "ryakad/pandoc-php": "^1.0",
-        "dompdf/dompdf": "^0.8.5",
+        "dompdf/dompdf": "^1.2.1",
         "jfcherng/php-diff": "^6.7"
     },
     "autoload": {
